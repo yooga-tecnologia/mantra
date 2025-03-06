@@ -9,15 +9,15 @@
 
 | Property        | Attribute        | Description | Type                                                                                          | Default     |
 | --------------- | ---------------- | ----------- | --------------------------------------------------------------------------------------------- | ----------- |
-| `block`         | `block`          |             | `boolean`                                                                                     | `false`     |
-| `color`         | `color`          |             | `"critical" \| "neutral" \| "primary" \| "secondary" \| "success" \| "tertiary" \| "warning"` | `"primary"` |
+| `color`         | `color`          |             | `"critical" \| "neutral" \| "primary" \| "secondary" \| "success" \| "tertiary" \| "warning"` | `'primary'` |
 | `disabled`      | `disabled`       |             | `boolean`                                                                                     | `false`     |
+| `fullWidth`     | `full-width`     |             | `boolean`                                                                                     | `false`     |
 | `iconAnimation` | `icon-animation` |             | `any`                                                                                         | `undefined` |
 | `iconLeft`      | `icon-left`      |             | `string`                                                                                      | `undefined` |
 | `iconRight`     | `icon-right`     |             | `string`                                                                                      | `undefined` |
 | `label`         | `label`          |             | `string`                                                                                      | `undefined` |
-| `size`          | `size`           |             | `"large" \| "medium" \| "small"`                                                              | `"medium"`  |
-| `variant`       | `variant`        |             | `"emphasis" \| "plain" \| "regular" \| "stroke"`                                              | `"regular"` |
+| `size`          | `size`           |             | `"large" \| "medium" \| "small"`                                                              | `'medium'`  |
+| `variant`       | `variant`        |             | `"emphasis" \| "plain" \| "regular" \| "stroke"`                                              | `'regular'` |
 
 
 ## Shadow Parts

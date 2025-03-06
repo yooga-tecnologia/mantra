@@ -1,12 +1,10 @@
 @use '../../shared/theme/tokens/primitives' as primitives;
 @use '../../shared/theme/tokens/sizing' as sizing;
 
-.input {
+.input-group {
   .label-wrapper {
     display: flex;
     align-items: center;
-    gap: map-get(sizing.$spaces, 'xxxs');
-    margin-bottom: map-get(sizing.$spaces, 'xxxs');
     height: map-get(sizing.$spaces, 'sm');
   }
 
@@ -21,32 +19,48 @@
     }
   }
 
-  &:not(.switch)>label,
-  &:not(.switch)>span {
+  &:not(.switch) > label,
+  &:not(.switch) > span {
     display: block;
     margin-bottom: map-get(sizing.$spaces, 'xxxs');
     margin-top: map-get(sizing.$spaces, 'xxxs');
   }
 
+  .field-wrapper {
+    position: relative;
+  }
+
+  .input-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .trailing-icon {
+    position: absolute;
+    top: 50%;
+    right: map-get(sizing.$spaces, 'xxs');
+    transform: translateY(-50%);
+    height: fit-content;
+    width: fit-content;
+  }
+
   input,
   select {
     font-size: 14px;
-  }
-
-  input {
     width: 100%;
     padding: map-get(sizing.$spaces, 'xxs');
     border-width: map-get(sizing.$border-width, 'small');
     border-style: solid;
-    border-color: map-get(primitives.$blue-palette, 600);
+    border-color: map-get(primitives.$grey-palette, 200);
     outline-color: map-get(primitives.$blue-palette, 600);
     background: transparent;
     border-radius: map-get(sizing.$border-radius, 'medium');
     color: map-get(primitives.$grey-palette, 600);
     transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+    box-sizing: border-box;
 
     &:hover {
-      border-color: #818A8F; // TODO: Olhar esse hexadecimal, pois não achei o token dele
+      border-color: #818A8F; // TODO: Não achei no tokens
     }
 
     &:focus-visible,
@@ -65,37 +79,9 @@
     &[disabled],
     &:disabled {
       background-color: map-get(primitives.$grey-palette, 50);
-
       &:hover {
         cursor: not-allowed;
       }
     }
-  }
-
-  input.ng-touched {
-    &.ng-invalid {
-      border-color: map-get(primitives.$red-palette, 700);
-      outline-color: map-get(primitives.$red-palette, 700);
-    }
-
-    &.ng-valid {
-      border-color: map-get(primitives.$green-palette, 700);
-      outline-color: map-get(primitives.$green-palette, 700);
-    }
-  }
-
-  .field-wrapper {
-    position: relative;
-  }
-
-  .trailing-icon {
-    position: absolute;
-    height: fit-content;
-    width: fit-content;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    right: map-get(sizing.$spaces, 'xs');
-    left: auto;
   }
 }

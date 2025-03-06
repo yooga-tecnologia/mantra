@@ -4,8 +4,11 @@
 
 @import './styles/index.scss';
 
-.block {
+.button-full-width {
+  display: flex;
   width: 100%;
+  justify-content: center;
+  align-items: center;   
 }
 
 .button-medium {

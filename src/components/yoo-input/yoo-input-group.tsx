@@ -1,11 +1,11 @@
 import { Component, Host, Prop, h } from "@stencil/core";
 
 @Component({
-  tag: "yoo-input",
-  styleUrl: "yoo-input.scss",
+  tag: "yoo-input-group",
+  styleUrl: "yoo-input-group.scss",
   shadow: false,
 })
-export class YooInput {
+export class YooInputGroup {
   @Prop() inputName: string;
   @Prop() label: string;
   @Prop() placeholder?: string;
@@ -14,7 +14,7 @@ export class YooInput {
   @Prop() trailingIcon: boolean = false;
 
   private get inputClass() {
-    const classes = ["input"];
+    const classes = ["input-group"];
 
     if (this.condition) {
       classes.push("input-condition");
@@ -37,30 +37,20 @@ export class YooInput {
           </label>
           <slot name="helperText" />
         </div>
-  
+
         <div class="field-wrapper">
           <div class="input-container">
-            <input
-              id={this.inputName}
-              name={this.inputName}
-              placeholder={this.placeholder}
-              required={this.isRequired}
-              disabled={this.condition}
-            />
+            <slot name="input" />
             {this.trailingIcon && (
               <span class="trailing-icon">
-                <slot name="actions">
-                  <span>🔍</span>
-                </slot>
+                <slot name="icon"></slot>
               </span>
             )}
           </div>
         </div>
-  
+
         <slot />
       </Host>
     );
   }
-  
 }
-

@@ -12,13 +12,6 @@
 </head>
 
 <body>
-  <!-- MyComponent Example -->
-  <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component>
-
-  <!-- MyButton Example -->
-  <my-button label="Primary" variant="primary"></my-button>
-  <my-button label="Secondary" variant="secondary"></my-button>
-
   <!-- YooButton Examples -->
   <yoo-button>Default</yoo-button>
   <yoo-button variant="regular">Regular</yoo-button>
@@ -31,20 +24,34 @@
   <yoo-button size="large">large</yoo-button>
 
   <!-- YooInput Component Example -->
-  <div style="width: 1000px;">
+  <div style="padding: 16px;">
 
-    <yoo-input inputName="username" label="Username" placeholder="Enter your username" isRequired="true"
-      condition="false" trailing-icon="true"></yoo-input>
+    <yoo-input-group inputName="username" label="Username" placeholder="Enter your username" is-required="true"
+      condition="false" trailing-icon="true">
+      <input maxlength="10" />
+    </yoo-input-group>
 
-    <yoo-input inputName="email" label="Email" placeholder="Enter your email" isRequired="false" condition="false"
-      trailing-icon="true"></yoo-input>
+    <yoo-input-group inputName="email" label="Email" placeholder="Enter your email" is-required="false" condition="false"
+      trailing-icon="true">
+      <input maxlength="10" />
+    </yoo-input-group>
 
-    <yoo-input inputName="name" label="name" placeholder="Enter your name" isRequired="true"
-      condition="true"></yoo-input>
-    <yoo-input inputName="password" label="Password" placeholder="Enter your password" isRequired="true"
-      trailingIcon="true"></yoo-input>
+    <yoo-input-group inputName="name" label="name" placeholder="Enter your name" is-required="true" condition="true">
+      <input maxlength="10" />
+    </yoo-input-group>
+    
+    <yoo-input-group inputName="password" label="Password" placeholder="Enter your password" is-required="true"
+      trailing-icon="true">
+      <input maxlength="10" />
+    </yoo-input-group>
   </div>
 
+  <div style="display: inline-flex; flex-direction: row;">
+    <!-- YooIcon Component Example -->
+    <yoo-icon icon="caret-right" size="small" color="black"></yoo-icon>
+    <yoo-icon icon="caret-right" size="medium" color="black"></yoo-icon>
+    <yoo-icon icon="caret-right" size="large" color="white" background="black"></yoo-icon>
+    <yoo-icon icon="caret-right" size="doubleLarge" color="white" background="black"></yoo-icon>
   </div>
 
 </body>

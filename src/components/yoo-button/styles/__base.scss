@@ -27,8 +27,8 @@ $border-radius-medium: map.get(sizing.$border-radius, "medium");
 @each $size, $configs in $button-size-configs {
   $size-map: map-get($button-size-configs, $size);
 
-  a.button-block,
-  button.button-block {
+  a.button-full-width,
+  button.button-full-width {
     width: 100%;
   }
 

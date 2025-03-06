@@ -35,18 +35,3 @@ Primary.args = {
   size: 'medium',
   disabled: false,
 };
-/* 
-export const Secondary = Template.bind({});
-Secondary.args = {
-  label: 'Secondary',
-  variant: 'secondary',
-  disabled: false,
-};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  label: 'Disabled',
-  variant: 'primary',
-  disabled: true,
-};
- */
