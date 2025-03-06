@@ -1,18 +1,17 @@
 {
-  "name": "@biancardii/study",
-  "version": "0.1.10",
-  "description": "Stencil Component Starter",
+  "name": "@yooga-tecnologia/mantra",
+  "version": "0.1.2",
+  "description": "Biblioteca de componentes web desenvolvida com StencilJS para criar interfaces reutilizáveis e performáticas em diferentes frameworks e projetos.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/study/study.esm.js",
-  "type": "module",
+  "unpkg": "dist/mantra/mantra.esm.js",
   "exports": {
     ".": {
-      "import": "./dist/study/study.esm.js",
-      "require": "./dist/study/study.cjs.js"
+      "import": "./dist/mantra/mantra.esm.js",
+      "require": "./dist/mantra/mantra.cjs.js"
     },
     "./my-component": {
       "import": "./dist/components/my-component.js",
@@ -24,10 +23,13 @@
       "types": "./loader/index.d.ts"
     }
   },
-  "style": "dist/study/study.css",
+  "style": "dist/mantra/mantra.css",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ionic-team/stencil-component-starter.git"
+    "url": "https://github.com/yooga-tecnologia/mantra.git"
+  },
+  "publishConfig": {
+     "registry": "https://npm.pkg.github.com/"
   },
   "files": [
     "dist/",
@@ -36,8 +38,6 @@
   "scripts": {
     "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
-    "format": "prettier --write .",
-    "lint": "eslint --fix .",
     "test": "stencil test --spec --coverage",
     "test.watch": "stencil test --spec  --watchAll",
     "test:e2e": "stencil test --spec --e2e",
@@ -45,12 +45,12 @@
     "generate": "stencil generate",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky install"
+    "cache-clear": "rm -rf ./node_modules ./dist/ ./.stencil/ ./storybook-static/ ./www ./loader/"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.4",
-    "@stencil/core": "^4.25.1",
     "@stencil/sass": "^3.0.12",
+    "@stencil/core": "^4.25.1",
     "@storybook/addon-essentials": "^8.5.2",
     "@storybook/addon-interactions": "^8.5.2",
     "@storybook/addon-webpack5-compiler-swc": "^2.0.0",
@@ -60,22 +60,13 @@
     "@storybook/test": "^8.5.2",
     "@types/jest": "^29.5.6",
     "@types/node": "^16.18.11",
-    "@typescript-eslint/eslint-plugin": "^8.24.0",
-    "@typescript-eslint/parser": "^8.24.0",
-    "eslint": "^9.20.1",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-plugin-prettier": "^5.2.3",
-    "husky": "^8.0.3",
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
-    "lint-staged": "^15.4.3",
     "lit-html": "^3.2.1",
-    "prettier": "^3.5.1",
     "puppeteer": "^21.9.0",
     "sass": "^1.83.4",
     "sass-loader": "^16.0.4",
-    "storybook": "^8.5.2",
-    "typescript": "^5.7.3"
+    "storybook": "^8.5.2"
   },
   "license": "MIT"
 }

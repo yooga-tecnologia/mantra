@@ -2,7 +2,7 @@ import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
 
 export const config: Config = {
-  namespace: 'study',
+  namespace: 'mantra',
   globalStyle: './src/_common-variables.scss',
   outputTargets: [
     {

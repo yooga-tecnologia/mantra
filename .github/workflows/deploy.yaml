@@ -1,34 +1,41 @@
-name: Deploy Storybook to GitHub Pages
+name: Publish to GitHub Packages
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*'  # Executa o workflow ao criar um novo tag (ex: v1.0.0)
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout do código
         uses: actions/checkout@v4
 
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.11.0 
+          node-version: 22.11.0
           cache: 'npm'
+          registry-url: https://npm.pkg.github.com/
+          scope: '@yooga-tecnologia'
 
-      - name: Install dependencies
+      - name: Instalar dependências
         run: npm install
 
-      - name: Rodar build do projeto
+      - name: Construir o pacote
         run: npm run build
 
-      - name: Build Storybook
+      - name: Build do Storybook
         run: npm run build-storybook
 
-      - name: Deploy to GitHub Pages
+      - name: Publicar no GitHub Packages
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publicar documentação no GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
