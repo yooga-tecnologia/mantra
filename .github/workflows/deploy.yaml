@@ -27,6 +27,8 @@ jobs:
         with:
           node-version: 22.11.0
           cache: 'npm'
+          registry-url: https://npm.pkg.github.com/
+          scope: '@yooga-tecnologia'
 
       - name: Instalar dependências
         run: npm install
