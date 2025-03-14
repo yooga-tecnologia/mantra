@@ -30,8 +30,16 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: '@yooga-tecnologia'
 
-      - name: Instalar dependências
-        run: npm install
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm  # Stores npm cache directory
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Install dependencies
+        run: npm ci  # More reliable for builds
 
       - name: Construir o pacote
         run: npm run build
@@ -47,6 +55,9 @@ jobs:
         with:
           source: ./
           destination: ./_site
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
 
   deploy:
     runs-on: ubuntu-latest
