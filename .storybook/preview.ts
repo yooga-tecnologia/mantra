@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/html';
-import { defineCustomElements } from '@yooga-tecnologia/mantra/loader';
+import { defineCustomElements } from '../loader';
 import '../src/_common-variables.scss';
 
 defineCustomElements();
