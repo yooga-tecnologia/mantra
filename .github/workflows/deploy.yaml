@@ -2,8 +2,8 @@ name: Publish to GitHub Packages
 
 on:
   push:
-    tags:
-      - 'v*'  # Executa o workflow ao criar um novo tag (ex: v1.0.0)
+    branches:
+      - main
 
 jobs:
   publish:
