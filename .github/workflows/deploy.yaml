@@ -33,6 +33,9 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
+      - name: Construir o pacote
+        run: npm run build
+
       - name: Build do Storybook
         run: npm run build-storybook
 
