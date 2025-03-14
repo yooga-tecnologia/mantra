@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/html';
-import { defineCustomElements } from '../loader';
-import '../src/_common-variables.scss'
+import { defineCustomElements } from '@yooga-tecnologia/mantra/loader';
+import '../src/_common-variables.scss';
 
 defineCustomElements();
 
@@ -14,7 +14,7 @@ const preview: Preview = {
     },
   },
 
-  tags: ['autodocs']
+  tags: ['autodocs'],
 };
 
 export default preview;
