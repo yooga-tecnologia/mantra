@@ -39,7 +39,7 @@ jobs:
             ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: npm ci  # More reliable for builds
+        run: npm install  # More reliable for builds
 
       - name: Construir o pacote
         run: npm run build
