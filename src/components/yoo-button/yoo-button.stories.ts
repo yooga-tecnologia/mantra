@@ -1,5 +1,5 @@
-import type { Meta } from "@storybook/html";
-import { ButtonProps } from "./yoo-button";
+import type { Meta } from '@storybook/html';
+import { ButtonProps } from './yoo-button';
 import { buttonStyleArray } from './yoo-button.types';
 import { sizeVariantsArray, themePaletteArray } from '../../shared/theme/theme.types';
 
@@ -17,7 +17,7 @@ const meta: Meta<ButtonProps> = {
 
 export default meta;
 
-const Template = (args) => `
+const Template = args => `
   <yoo-button
     label="${args.label}"
     variant="${args.variant}"
@@ -29,7 +29,7 @@ const Template = (args) => `
 
 export const Primary = Template.bind({});
 Primary.args = {
-  label: 'Primary',
+  label: 'Test pipeline Github',
   variant: 'emphasis',
   color: 'primary',
   size: 'medium',
