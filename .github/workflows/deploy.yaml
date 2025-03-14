@@ -1,14 +1,23 @@
-name: Publish to GitHub Packages
+name: Deploy Jekyll and Storybook to GitHub Pages
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
@@ -18,25 +27,36 @@ jobs:
         with:
           node-version: 22.11.0
           cache: 'npm'
-          registry-url: https://npm.pkg.github.com/
-          scope: '@yooga-tecnologia'
 
       - name: Instalar dependências
         run: npm install
 
-      - name: Construir o pacote
-        run: npm run build
-
       - name: Build do Storybook
         run: npm run build-storybook
 
-      - name: Publicar no GitHub Packages
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-      - name: Publicar documentação no GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Build com Jekyll
+        uses: actions/jekyll-build-pages@v1
         with:
-          branch: main
-          folder: storybook-static
+          source: ./
+          destination: ./_site
+
+      - name: Upload artifact para GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: |
+            ./_site
+            storybook-static
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy para GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
