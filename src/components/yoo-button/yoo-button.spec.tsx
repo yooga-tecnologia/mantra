@@ -1,5 +1,5 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { YooButton } from '../yoo-button';
+import { YooButton } from './yoo-button';
 
 describe('yoo-button', () => {
   it('renders correctly with default props', async () => {
