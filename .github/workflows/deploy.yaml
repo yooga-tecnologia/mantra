@@ -10,6 +10,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  packages: write
 
 concurrency:
   group: "pages"
@@ -58,6 +59,11 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
+    
+      - name: Publicar no GitHub Packages
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy:
     runs-on: ubuntu-latest
