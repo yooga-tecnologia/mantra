@@ -4,6 +4,11 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [0.3.0]
+### Adicionado
+- Adicionado novo ícone(signIn);
+- Corrigido cor do ícone(currencyDollarCircle) de black para inherit
+
 ## [0.2.1]
 ### Corrigido
 - Corrigido texto da label no storybook do componente YooButton
