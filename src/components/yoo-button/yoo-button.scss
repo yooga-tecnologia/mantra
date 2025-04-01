@@ -2,13 +2,13 @@
 @use '../../shared/theme/core/typography' as typography;
 @use '../../shared/theme/tokens/sizing' as sizing;
 
-@import './styles/index.scss';
+@forward './styles/index.scss';
 
 .button-full-width {
   display: flex;
   width: 100%;
   justify-content: center;
-  align-items: center;   
+  align-items: center;
 }
 
 .button-medium {

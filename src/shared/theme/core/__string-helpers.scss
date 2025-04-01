@@ -16,13 +16,13 @@
 ///
 @function str-split($string, $separator) {
   $split-arr: ();
-  $index : str-index($string, $separator);
+  $index: string.index($string, $separator);
 
   @while $index != null {
-    $item: str-slice($string, 1, $index - 1);
+    $item: string.slice($string, 1, $index - 1);
     $split-arr: append($split-arr, $item);
-    $string: str-slice($string, $index + 1);
-    $index : str-index($string, $separator);
+    $string: string.slice($string, $index + 1);
+    $index: string.index($string, $separator);
   }
   // add the remaining string to list (the last item)
   $split-arr: append($split-arr, $string);
@@ -41,8 +41,8 @@
 ///   // Returns: "Hello"
 ///
 @function to-capitalize($text) {
-  $s1: string.to-upper-case(str-slice($text, 1, 1));
-  $s2: str-slice($text, 2);
+  $s1: string.to-upper-case(string.slice($text, 1, 1));
+  $s2: string.slice($text, 2);
 
   @return $s1 + $s2;
 }
@@ -65,7 +65,7 @@
   }
 
   @else {
-    $list: str-split($text, '-');
+    $list: string.split($text, '-');
     $length: list.length($list);
     $str: "";
 
