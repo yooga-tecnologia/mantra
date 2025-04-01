@@ -21,11 +21,11 @@ $button-size-configs: (
   ),
 );
 
-$size-map-small: map-get($button-size-configs, "small");
+$size-map-small: map.get($button-size-configs, "small");
 $border-radius-medium: map.get(sizing.$border-radius, "medium");
 
 @each $size, $configs in $button-size-configs {
-  $size-map: map-get($button-size-configs, $size);
+  $size-map: map.get($button-size-configs, $size);
 
   a.button-full-width,
   button.button-full-width {
@@ -39,19 +39,28 @@ $border-radius-medium: map.get(sizing.$border-radius, "medium");
 
   button[class^="button-#{$size}"],
   .button-#{$size} {
-    font-size: map-get($size-map, "font-size");
-    padding: map-get($size-map, "padding");
-    height: map-get($size-map, "height");
+    padding: map.get($size-map, "padding");
+    height: map.get($size-map, "height");
     border-radius: $border-radius-medium;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    font-weight: 500;
     gap: 8px;
 
+    &:not(:disabled):hover,
+    &:not(.button-disabled):hover {
+      cursor: pointer;
+    }
+
     &,
-    &:hover {
+    &:hover,
+    &:focus {
       transition: all ease-in-out .2s;
+    }
+
+    span {
+      font-size: map.get($size-map, "font-size");
+      font-weight: 500;
     }
 
     yoo-icon {
@@ -59,8 +68,8 @@ $border-radius-medium: map.get(sizing.$border-radius, "medium");
       align-items: center;
 
       svg {
-        height: map-get($size-map, "font-size");
-        width: map-get($size-map, "font-size");
+        height: map.get($size-map, "font-size");
+        width: map.get($size-map, "font-size");
       }
     }
   }

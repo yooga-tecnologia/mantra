@@ -52,15 +52,15 @@ div.row {
 @function get-scale-value($index) {
   $map-keys: map-keys(primitives.$scale);
   $key: nth($map-keys, $index);
-  @return map-get(primitives.$scale, $key);
+  @return map.get(primitives.$scale, $key);
 }
 
 @mixin set-spacing($type-key, $key: null, $value, $axis: false) {
-  $type: map-get(primitives.$spacing-types, $type-key);
+  $type: map.get(primitives.$spacing-types, $type-key);
   $scale-value: get-scale-value($value);
 
   @if $axis {
-    $prop: map-get(primitives.$axis-directions, $key);
+    $prop: map.get(primitives.$axis-directions, $key);
 
      .#{$type}#{$key}-#{$value} {
       @each $item in $prop {
@@ -72,7 +72,7 @@ div.row {
       #{$type-key}: #{$scale-value * primitives.$base-grid} !important;
     }
   } @else {
-    $direction: map-get(primitives.$directions, $key);
+    $direction: map.get(primitives.$directions, $key);
 
      .#{$type}#{$key}-#{$value} {
       #{$type-key}-#{$direction}: #{$scale-value * primitives.$base-grid} !important;

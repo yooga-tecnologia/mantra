@@ -3,7 +3,7 @@
 @use "../tokens/primitives";
 @use "../tokens/sizing";
 
-@import "./animations";
+@forward "./animations";
 
 $theme-map: (
   primary:    primitives.$blue-palette,
