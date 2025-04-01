@@ -4,10 +4,22 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [0.3.2]
+
+- **Corrigido**
+  - Arquivos scss com warnings de "deprecated" para:
+
+  | deprecated  | recommended  |
+  | ----------  | -----------  |
+  | str-index   | str.index    |
+  | str-slice   | str.slice    |
+  | map-get     | map.get      |
+  | @import     | @forward     |
+
 ## [0.3.1]
 
 - **Corrigido**
-  - Atualização do script `npm run dev`: remoção de flag ".watch" de `npm:build` que estava causando warning ao executar.
+  - Atualização do script `npm run dev`: remoção de flag ".watch" de `npm:build` que estava causando warning ao executar
 
 ## [0.3.0]
 
