@@ -36,7 +36,7 @@
     "loader/"
   ],
   "scripts": {
-    "dev": "concurrently \"npm:build.watch\" \"npm:storybook\"",
+    "dev": "concurrently \"npm:build\" \"npm:storybook\"",
     "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --coverage",
