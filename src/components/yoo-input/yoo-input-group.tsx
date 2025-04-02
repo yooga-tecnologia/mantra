@@ -31,7 +31,7 @@ export class YooInputGroup {
     return (
       <Host class={this.inputClass}>
         <div class="label-wrapper">
-          <label htmlFor={this.inputName} class="label-medium">
+          <label htmlFor={this.inputName} class="label-medium-medium">
             {this.label}
             {this.isRequired && <strong>*</strong>}
           </label>

@@ -1,6 +1,7 @@
 import { Component, Host, Prop, h } from '@stencil/core';
 
 import { SizeVariants, ThemePalette } from '@theme/theme.types';
+// import { IconComponent } from '../yoo-icon/yoo-icon';
 import { ButtonStyle } from './yoo-button.types';
 
 export type ButtonProps = {
@@ -48,7 +49,17 @@ export class YooButton {
       return (
         <Host>
           <button class={this.buttonClass} disabled={this.disabled} part="button">
-            <span>{this.label}</span>
+            {this.iconLeft && (
+              <yoo-icon icon={this.iconLeft}></yoo-icon>
+            )}
+
+            <span>
+              {this.label}
+            </span>
+
+            {this.iconRight && (
+              <yoo-icon icon={this.iconRight}></yoo-icon>
+            )}
           </button>
         </Host>
       );
