@@ -13,3 +13,7 @@
 }
 
 @include typography.set-typography();
+
+body * {
+  font-family: "Poppins";
+}

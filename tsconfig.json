@@ -19,7 +19,8 @@
     "types": [ "node", "jest" ],
     "baseUrl": "./",
     "paths": {
-      "@theme/*": ["src/shared/theme/*"]
+      "@theme/*": ["src/shared/theme/*"],
+      "@assets/*": ["src/shared/assets/fonts/*"],
     }
   },
   "include": [

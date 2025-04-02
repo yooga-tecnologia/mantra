@@ -32,7 +32,6 @@ $scale: (
 //  Grid
 
 $base-grid: 8px;
-$base-font-size: 16px;
 
 $column-ratio: math.div(100%, 12);
 $columns: 12;
@@ -63,72 +62,6 @@ $axis-directions: (
 $elevation-map: (
   none: 'none',
   low: (0px 0px 1px 0px rgba(0, 0, 0, 0.05), 0px 2px 4px 0px rgba(0, 0, 0, 0.05)),
-);
-
-// Typography
-
-$heading-font-family: "Poppins";
-$body-font-family: "Poppins";
-$typography-variants-list: (
-  display: (
-    weight: 600,
-    sizes: (
-      default: 2.625,
-    ),
-  ),
-  heading: (
-    weight: 600,
-    sizes: (
-      large: 2.25,
-      medium: 2.00,
-      small: 1.75,
-    )
-  ),
-  title: (
-    weight: 600,
-    sizes: (
-      large: 1.5,
-      medium: 1.25,
-      small: 1.125,
-    ),
-  ),
-  subtitle: (
-    weight: 400,
-    color: #5F676C,
-    sizes: (
-      default: 1,
-    ),
-  ),
-  label: (
-    weight: 600,
-    color: #5F676C,
-    sizes: (
-      small: 0.75,
-      medium: 1.00,
-      large: 1.125,
-    ),
-  ),
-  body: (
-    weight: 400,
-    color: #5F676C,
-    sizes: (
-      small: 0.75,
-      medium: 1.00,
-      large: 1.125,
-    ),
-  ),
-  caption: (
-    weight: 400,
-    sizes: (
-      default: 0.75,
-    ),
-  ),
-);
-
-$typography-weight-map: (
-  regular: 400,
-  medium: 500,
-  semi-bold: 600,
 );
 
 //
@@ -331,5 +264,145 @@ $purple-palette: (
     900: $light-primary-text,
     950: $light-primary-text,
     1000: $light-primary-text,
+  ),
+);
+
+//
+// 3. Typography
+//
+
+$base-font-size: 16px;
+
+$heading-font-family: "Poppins";
+$body-font-family: "Poppins";
+
+$typography-weight-map: (
+  regular: 400,
+  medium: 500,
+  semi-bold: 600,
+);
+
+$typography-variants-list: (
+  display: (
+    weight: 600,
+    color: map.get($grey-palette, 900),
+    desktop: (
+      large: 5.5,
+      medium: 4.5,
+      small: 3.5,
+    ),
+    mobile: (
+      large: 2.625,
+      medium: 2.25,
+      small: 2,
+    ),
+  ),
+  heading: (
+    weight: 600,
+    color: map.get($grey-palette, 900),
+    desktop: (
+      large: 2.875,
+      medium: 2.25,
+      small: 1.875,
+      tiny: 1.75,
+    ),
+    mobile: (
+      large: 1.75,
+      medium: 1.5,
+      small: 1.25,
+      tiny: 1.275,
+    ),
+  ),
+  title: (
+    weight: 600,
+    color: map.get($grey-palette, 950),
+    desktop: (
+      large: 1.5,
+      medium: 1.125,
+      small: 1,
+    ),
+    mobile: (
+      large: 1.125,
+      medium: 1,
+      small: 0.875,
+    ),
+  ),
+  subtitle: (
+    weight: 400,
+    color: map.get($grey-palette, 600),
+    // TODO
+    desktop: (
+      large: 1.5,
+      medium: 1.125,
+      small: 1,
+    ),
+    // TODO
+    mobile: (
+      large: 1.125,
+      medium: 1,
+      small: 0.875,
+    ),
+  ),
+  body: (
+    weight: 400,
+    color: map.get($grey-palette, 900),
+    desktop: (
+      large: 1.125,
+      medium: 1.00,
+      small: 0.75,
+    ),
+    mobile: (
+      large: 1,
+      medium: 0.875,
+      small: 0.75,
+    ),
+  ),
+  label: (
+    weight: 600,
+    color: #5F676C,
+    desktop: (
+      tiny: 0.6875,
+      small: 0.75,
+      medium: 0.875,
+      large: 1.00,
+    ),
+    mobile: (
+      tiny: 0.6875,
+      small: 0.75,
+      medium: 0.875,
+      large: 1.00,
+    ),
+  ),
+  label-regular: (
+    weight: 400,
+    color: #5F676C,
+    desktop: (
+      tiny: 0.6875,
+      small: 0.75,
+      medium: 0.875,
+      large: 1.00,
+    ),
+    mobile: (
+      tiny: 0.6875,
+      small: 0.75,
+      medium: 0.875,
+      large: 1.00,
+    ),
+  ),
+  label-medium: (
+    weight: 500,
+    color: #5F676C,
+    desktop: (
+      tiny: 0.6875,
+      small: 0.75,
+      medium: 0.875,
+      large: 1.00,
+    ),
+    mobile: (
+      tiny: 0.6875,
+      small: 0.75,
+      medium: 0.875,
+      large: 1.00,
+    ),
   ),
 );

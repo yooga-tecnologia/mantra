@@ -1,33 +1,28 @@
+@use "sass:map";
 @use "sass:math";
 @use "sass:string";
 
-@use '../tokens/primitives';
+@use '../tokens/primitives' as primitives;
 @use './__string-helpers' as string-helper;
+
+// $storybook: true !default;
+$storybook: false !default;
 
 $base-grid: primitives.$base-grid;
 
-/// Retrieves the font size for a given typography variant and size.
+/// Retrieves the font size for a given typography variant, size, and device.
+/// Ensures it exists before calculation.
 ///
 /// @param {String} $variant - The typography variant (e.g., 'heading', 'body').
-/// @param {String} [$size='default'] - The size for the variant (e.g., 'large', 'medium', 'small').
-/// @return {Number|null} - The calculated font size in pixels, or null if the variant or size is not found.
-///
-@function get-font-size($variant, $size: 'default') {
-  @if map-has-key(primitives.$typography-variants-list, $variant) {
-    $variant-map: map-get(primitives.$typography-variants-list, $variant);
-    $sizing: map-get($variant-map, 'sizes');
+/// @param {String} [$device='desktop'] - The device type ('desktop' or 'mobile').
+/// @param {String} [$size='medium'] - The size for the variant (e.g., 'large', 'medium', 'small').
+/// @return {Number|null} - The calculated font size in pixels, or null if not found.
+@function get-font-size($variant, $device: 'desktop', $size: 'medium') {
+  $variant-map: map.get(primitives.$typography-variants-list, $variant);
+  $device-map: if($variant-map, map.get($variant-map, $device), null);
+  $font-size: if($device-map, map.get($device-map, $size), null);
 
-    @if map-has-key($sizing, $size) {
-      $s: ensure-minimum-font-size(map-get($sizing, $size) * primitives.$base-font-size);
-      @return $s;
-    } @else {
-      @return null;
-    }
-  } @else {
-    @warn "Variant `#{$variant}` not found.";
-  }
-
-  @return null;
+  @return if($font-size, $font-size * primitives.$base-font-size, null);
 }
 
 /// Ensures the font size meets the minimum threshold of 14px.
@@ -70,40 +65,65 @@ $base-grid: primitives.$base-grid;
   );
 }
 
+/// Sets the font-face for a given weight.
+///
+/// @param {String} $weight - The font weight.
 @mixin set-font-face($weight) {
   $w: string-helper.to-pascal-case($weight);
 
   font-family: primitives.$heading-font-family;
   font-style: normal;
-  font-weight: map-get(primitives.$typography-weight-map, $weight);
+  font-weight: map.get(primitives.$typography-weight-map, $weight);
   font-display: swap;
-  src: url(../assets/Poppins-#{$w}.woff2) format("woff2");
+  @if $storybook {
+    src: url('/static/media/dist-custom-elements/fonts/Poppins-#{$w}.woff2') format("woff2");
+  } @else {
+    src: url('/fonts/Poppins-#{$w}.woff2') format("woff2");
+  }
+  // src: url('/fonts/Poppins-#{$w}.woff2') format("woff2"); // Assim funciona apenas no stencil, nao no sb
 }
 
+/// Generates font-face definitions for each weight.
 @each $weight, $specs in primitives.$typography-weight-map {
   @font-face {
     @include set-font-face($weight);
   }
 }
 
+/// Sets the typography properties dynamically.
+///
+/// @param {String} $variant - The typography variant.
+/// @param {String} $size - The size.
+/// @param {String} $device - The device type.
+/// @param {Color} [$color=#000] - The default text color.
+/// @param {Number} [$margin=0] - The default margin.
 @mixin set-font-properties($variant, $size: 'default', $color: #000, $margin: 0) {
   font-size: get-font-size($variant, $size);
   line-height: get-line-height($variant, $size);
-  font-weight: map-get(map-get(primitives.$typography-variants-list, $variant), 'weight');
-  color: map-get(map-get(primitives.$typography-variants-list, $variant), 'color') or $color;
-  margin: map-get(map-get(primitives.$typography-variants-list, $variant), 'margin') or $margin;
+  font-weight: map.get(map.get(primitives.$typography-variants-list, $variant), 'weight');
+  color: map.get(map.get(primitives.$typography-variants-list, $variant), 'color') or $color;
+  margin: map.get(map.get(primitives.$typography-variants-list, $variant), 'margin') or $margin;
 }
 
 @mixin set-typography() {
-  @each $variant, $configs in primitives.$typography-variants-list {
-    @each $key, $value in map-get($configs, 'sizes') {
-      @if($key == 'default') {
-        *.#{$variant} {
-          @include set-font-properties($variant, $key);
-        }
-      } @else {
-        *.#{$variant}-#{$key} {
-          @include set-font-properties($variant, $key);
+  @each $variant, $settings in primitives.$typography-variants-list {
+    @each $device, $config in $settings {
+      @if $device == 'desktop' or $device == 'mobile' {
+        @each $size-key, $size-value in $config {
+          $selector: "*.#{$variant}-#{$size-key}";
+          $media: if($device == 'mobile', "(max-width: 991px)", null);
+
+          @if $media {
+            @media screen and #{$media} {
+              #{$selector} {
+                @include set-font-properties($variant, $size-key, $device);
+              }
+            }
+          } @else {
+            #{$selector} {
+              @include set-font-properties($variant, $size-key, 'desktop');
+            }
+          }
         }
       }
     }
