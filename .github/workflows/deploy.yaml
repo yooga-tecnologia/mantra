@@ -23,10 +23,13 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
 
+      - name: Ler versão do Node do .nvmrc
+        run: echo "NODE_VERSION=$(cat .nvmrc | sed 's/^v//')" >> $GITHUB_ENV
+
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.11.0
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
           registry-url: https://npm.pkg.github.com/
           scope: '@yooga-tecnologia'
@@ -59,7 +62,7 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
-    
+
       - name: Publicar no GitHub Packages
         run: npm publish
         env:
