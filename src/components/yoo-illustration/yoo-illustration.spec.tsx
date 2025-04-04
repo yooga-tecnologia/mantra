@@ -2,14 +2,12 @@ import { newSpecPage } from '@stencil/core/testing';
 import { IllustrationComponent } from './yoo-illustration';
 import { ILLUSTRATIONS } from './yoo-illustration-base';
 
-// Helper to create an SVG <g> element with the provided content
 function createSvgGElement(content: string): SVGElement {
   const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   g.innerHTML = content;
   return g;
 }
 
-// Normalize the SVG markup by replacing multiple whitespaces with a single space
 function normalizeSVG(svg: string): string {
   return svg.replace(/\s+/g, ' ').trim();
 }
@@ -48,7 +46,6 @@ describe('yoo-illustration', () => {
       html: `<yoo-illustration name="crying"></yoo-illustration>`,
     });
 
-    // Change the "name" attribute to "happy"
     page.root.setAttribute('name', 'happy');
     await page.waitForChanges();
 
