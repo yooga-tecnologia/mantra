@@ -1,6 +1,6 @@
 {
   "name": "@yooga-tecnologia/mantra",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Biblioteca de componentes web desenvolvida com StencilJS para criar interfaces reutilizáveis e performáticas em diferentes frameworks e projetos.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -60,6 +60,7 @@
     "@storybook/html-webpack5": "^8.5.2",
     "@storybook/test": "^8.5.2",
     "@types/jest": "^29.5.6",
+    "@types/marked": "^5.0.2",
     "@types/node": "^16.18.11",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
@@ -73,6 +74,7 @@
     "jest-cli": "^29.7.0",
     "lint-staged": "^15.5.0",
     "lit-html": "^3.2.1",
+    "marked": "^15.0.8",
     "prettier": "^3.5.3",
     "puppeteer": "^24.5.0",
     "sass": "^1.83.4",
