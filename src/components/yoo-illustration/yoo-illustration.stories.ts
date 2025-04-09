@@ -27,14 +27,14 @@ const DefaultTemplate = (args: IllustrationProps) => `
 
 export const Default = DefaultTemplate.bind({});
 Default.args = {
-  name: 'crying',
+  name: 'burger',
   width: 140,
   height: 140,
-};
+} as IllustrationProps;
 
 export const LargeIllustration = DefaultTemplate.bind({});
 LargeIllustration.args = {
-  name: 'crying',
+  name: 'burger',
   width: 200,
   height: 200,
-};
+} as IllustrationProps;

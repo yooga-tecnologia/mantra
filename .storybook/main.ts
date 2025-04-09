@@ -28,31 +28,24 @@ const CONFIG_FONTS = {
 
 const CONFIG_SCSS = {
   test: /\.scss$/,
-  use: [
-    'style-loader',
-    'css-loader',
-    'sass-loader',
-  ],
+  use: ['style-loader', 'css-loader', 'sass-loader'],
   include: path.resolve(__dirname, '../src'),
-}
+};
+
+const CONFIG_RAW = {
+  test: /\.md$/,
+  type: 'asset/source',
+};
 
 const config: StorybookConfig = {
-  stories: [
-    '../src/**/*.mdx',
-    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
-  ],
-  addons: [
-    '@storybook/addon-webpack5-compiler-swc',
-    '@storybook/addon-essentials',
-    '@chromatic-com/storybook',
-    '@storybook/addon-interactions',
-  ],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  addons: ['@storybook/addon-webpack5-compiler-swc', '@storybook/addon-essentials', '@chromatic-com/storybook', '@storybook/addon-interactions'],
   framework: {
     name: '@storybook/html-webpack5',
     options: {},
   },
   docs: {},
-  webpackFinal: async (config) => {
+  webpackFinal: async config => {
     config.resolve = {
       ...config.resolve,
       alias: {
@@ -63,10 +56,7 @@ const config: StorybookConfig = {
       },
     };
 
-    config.module?.rules?.push(
-      CONFIG_FONTS,
-      CONFIG_SCSS
-    );
+    config.module?.rules?.push(CONFIG_FONTS, CONFIG_SCSS, CONFIG_RAW);
 
     return config;
   },

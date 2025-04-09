@@ -1,5 +1,6 @@
 import { Component, Prop, State, h, Watch, Element } from '@stencil/core';
 import { ILLUSTRATIONS } from './yoo-illustration-base';
+import type { IllustrationProps } from './yoo-illustration.types';
 
 @Component({
   tag: 'yoo-illustration',
@@ -9,9 +10,9 @@ import { ILLUSTRATIONS } from './yoo-illustration-base';
 export class IllustrationComponent {
   @Element() el!: HTMLElement;
 
-  @Prop() name!: string;
-  @Prop() width: number = 140;
-  @Prop() height: number = 140;
+  @Prop() name!: IllustrationProps['name'];
+  @Prop() width: IllustrationProps['width'] = 140;
+  @Prop() height: IllustrationProps['height'] = 140;
   @State() svgIllustration: string = '';
 
   private gRef!: SVGElement;
