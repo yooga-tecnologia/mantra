@@ -1,6 +1,7 @@
 import { Component, Prop, h, Element } from '@stencil/core';
 import { ICONS } from './yoo-icon-base';
-import type { IconName, IconAnimation, IconSize } from './yoo-icon.types';
+import { directionTransformMap } from './yoo-icon.constants';
+import { type Direction, type IconProps, iconSizes } from './yoo-icon.types';
 
 @Component({
   tag: 'yoo-icon',
@@ -10,19 +11,17 @@ import type { IconName, IconAnimation, IconSize } from './yoo-icon.types';
 export class IconComponent {
   @Element() el!: HTMLElement;
 
-  @Prop() icon!: IconName;
-  @Prop() size: number | IconSize = 'medium';
-  @Prop() color: string = 'currentColor';
-  @Prop() background?: string;
-  @Prop() animation?: IconAnimation;
+  @Prop() icon!: IconProps['icon'];
+  @Prop() size: IconProps['size'] = 'medium';
+  @Prop() color: IconProps['color'] = 'currentColor';
+  @Prop() background?: IconProps['background'];
+  @Prop() animation?: IconProps['animation'];
 
-  svgIcon!: string;
   iconSize!: string;
-  bgSize!: string;
+  bgSize?: string;
   transform!: string;
-  animate!: string;
-  baseIconName: string;
-  backgroundElRef!: HTMLSpanElement;
+  baseIconName!: string;
+  backgroundElRef?: HTMLSpanElement;
 
   componentWillLoad() {
     this.calculateSizes();
@@ -35,89 +34,63 @@ export class IconComponent {
     this.updateIcon();
   }
 
-  updateIcon() {
-    const wrapper = this.el.firstElementChild;
+  private updateIcon() {
+    const container = this.el.querySelector('#icon-container');
     const baseIconName = this.getBaseIconName(this.icon);
-    const container = wrapper.firstElementChild;
 
-    container.firstElementChild.innerHTML = ICONS[baseIconName];
+    if (container) {
+      container.innerHTML = ICONS[baseIconName];
+    }
   }
 
-  getBaseIconName(iconName: string): string {
-    const directionPattern = /-(up|down|right|left)$/;
+  private getBaseIconName(iconName: string): string {
+    return iconName.replace(/-(up|down|right|left)$/, '');
+  }
 
-    if(!directionPattern) {
-      return iconName
+  private calculateSizes() {
+    const baseSize = typeof this.size === 'number' ? this.size : iconSizes[this.size];
+
+    if (this.background && baseSize > iconSizes.medium) {
+      this.bgSize = `${baseSize}px`;
+      this.iconSize = `${baseSize - iconSizes.small}px`;
     } else {
-      return iconName.replace(directionPattern, '');
+      this.iconSize = `${baseSize}px`;
+      this.bgSize = undefined;
     }
   }
 
-  calculateSizes() {
-    const sizeMap: Record<string, number> = {
-      small: 16,
-      medium: 24,
-      large: 32,
-      doubleLarge: 64,
-    };
-
-    const baseSize = typeof this.size === "number"
-      ? this.size
-      : sizeMap[this.size];
-
-    this.bgSize = (this.background && baseSize > sizeMap.medium) ? `${baseSize}px` : undefined;
-    this.iconSize = this.bgSize ? `${baseSize - sizeMap.small}px` : `${baseSize}px`;
+  private getTransform(iconName: string): string {
+    const match = iconName.match(/-(up|down|left|right)$/);
+    if (match) {
+      const direction = match[1] as Direction;
+      return directionTransformMap[direction];
+    }
+    return 'rotate(0)';
   }
 
-  /**
-   * @todo Melhorar type em vez de string para ['up', 'down', 'right', 'left']
-   **/
-  getTransform(iconName: string): string {
-    if (iconName.includes('-up')) {
-      return 'rotate(0)'; // Nenhuma rotação necessária para cima
-    } else if (iconName.includes('-down')) {
-      return 'rotate(180 0 0)'; // Rotação de 180 graus
-    } else if (iconName.includes('-right')) {
-      return 'rotate(90 0 0)'; // Rotação de 90 graus no sentido horário
-    } else if (iconName.includes('-left')) {
-      return 'rotate(-90 0 0)'; // Rotação de 90 graus no sentido anti-horário
+  private setBackgroundProperties(): void {
+    const targetSize = this.background ? this.bgSize : this.iconSize;
+    if (targetSize) {
+      this.el.style.width = targetSize;
+      this.el.style.height = targetSize;
     }
 
-    return 'rotate(0)'; // Nenhuma rotação necessária para cima (-up) ou sem a prop rotate
-  }
-
-  setBackgroundProperties(): void {
-    if (!this.background) {
-      this.el.setAttribute("style", `width: ${this.iconSize}; height: ${this.iconSize}`);
-      return
+    if (this.background && this.bgSize && this.backgroundElRef) {
+      this.backgroundElRef.classList.add('icon-bg', 'border-circle');
+      this.backgroundElRef.style.backgroundColor = this.background;
+      this.backgroundElRef.style.width = this.bgSize;
+      this.backgroundElRef.style.height = this.bgSize;
     }
-
-    this.el.setAttribute("style", `width: ${this.bgSize}; height: ${this.bgSize}`);
-    this.backgroundElRef = this.el.querySelector("span");
-    this.backgroundElRef.classList.add("icon-bg", "border-circle");
-    this.backgroundElRef.style.backgroundColor = this.background;
-    this.backgroundElRef.style.width = this.bgSize;
-    this.backgroundElRef.style.height = this.bgSize;
   }
 
   render() {
     return (
       <div class="icon-wrapper">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width={this.iconSize}
-          height={this.iconSize}
-          fill={this.color}
-          transform={this.transform}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={this.iconSize} height={this.iconSize} fill={this.color} transform={this.transform}>
           <g id="icon-container"></g>
         </svg>
 
-        {this.background && (
-          <span></span>
-        )}
-
+        {this.background && <span ref={el => (this.backgroundElRef = el)}></span>}
       </div>
     );
   }

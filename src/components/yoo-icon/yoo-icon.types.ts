@@ -1,15 +1,24 @@
 import { ICONS } from './yoo-icon-base';
 
-export const iconSizeArray = ["small", "medium", "large", "doubleLarge"] as const;
+export const iconSizes = {
+  small: 16,
+  medium: 24,
+  large: 32,
+  doubleLarge: 64,
+} as const;
 
 export type IconName = keyof typeof ICONS;
+export type Direction = 'up' | 'down' | 'left' | 'right';
 export type IconAnimation = 'rotation' | undefined;
-export type Background = string[];
-export type IconSize = typeof iconSizeArray[number]
+export type IconSize = keyof typeof iconSizes;
+
+type DirectionalSuffix = `-${Direction}`;
+export type ExtendedIconName = IconName | `${IconName}${DirectionalSuffix}`;
 
 export type IconProps = {
-  icon: IconName,
-  size: IconSize,
-  color: string,
-  background?: string,
-}
+  icon: ExtendedIconName;
+  size?: number | IconSize;
+  color?: string;
+  background?: string;
+  animation?: IconAnimation;
+};

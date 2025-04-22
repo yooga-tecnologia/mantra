@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/html';
-import { IconProps, iconSizeArray } from './yoo-icon.types';
+import { iconSizes, type IconProps } from './yoo-icon.types';
 import { ICONS } from './yoo-icon-base';
 
 const meta: Meta<IconProps> = {
@@ -12,14 +12,20 @@ const meta: Meta<IconProps> = {
     },
     size: {
       control: 'select',
-      options: iconSizeArray,
+      options: Object.keys(iconSizes),
+    },
+    color: {
+      control: 'color',
+    },
+    background: {
+      control: 'color',
     },
   },
 };
 
 export default meta;
 
-const DefaultTemplate = args => `
+const DefaultTemplate = (args: IconProps) => `
 <yoo-icon
   icon="${args.icon}"
   size="${args.size}"
@@ -33,29 +39,19 @@ Default.args = {
   icon: 'caret',
   size: 'large',
   color: 'black',
-  background: 'transparent',
-};
+} as IconProps;
 
 export const RotationTemplate = DefaultTemplate.bind({});
 RotationTemplate.args = {
   icon: 'caret-left',
   size: 'large',
   color: 'black',
-};
+} as IconProps;
 
-const BackgroundTemplate = args => `
-<yoo-icon
-  icon="${args.icon}"
-  size="${args.size}"
-  color="${args.color}"
-  background="${args.background}"
-></yoo-icon>
-`;
-
-export const WithBackground = BackgroundTemplate.bind({});
+export const WithBackground = DefaultTemplate.bind({});
 WithBackground.args = {
   icon: 'caret-right',
   size: 'large',
   color: 'white',
   background: 'black',
-};
+} as IconProps;

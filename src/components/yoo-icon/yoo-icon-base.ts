@@ -1,5 +1,5 @@
 // Adicione mais ícones conforme necessário
-export const ICONS: Record<string, string> = {
+export const ICONS = {
   /**
    * UI Actions
    */

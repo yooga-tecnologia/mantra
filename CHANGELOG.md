@@ -4,6 +4,23 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [1.3.0] - 2024-07-22
+
+### 🚀 Adicionado
+- Suporte a sufixos de direção (`-left`, `-right`, `-up`, `-down`) para o componente `yoo-icon`, permitindo rotação dinâmica do SVG via nome.
+- Novo tipo `ExtendedIconName` e mapa `directionTransformMap` para melhorar a legibilidade e reutilização.
+- Estrutura `iconSizes` criada para padronizar tamanhos e eliminar valores soltos.
+
+### ♻️ Refatorado
+- Lógica de rotação movida para mapa externo reutilizável.
+- `calculateSizes()` e `setBackgroundProperties()` reorganizados para maior clareza.
+- Substituído `querySelector` por `ref` no `span` de background.
+- Imports de tipos atualizados com `import type` para melhor tree-shaking e legibilidade.
+
+### ✅ Corrigido
+- Autocompletar de props do componente `yoo-icon` no Storybook agora funciona corretamente.
+- Estrutura do `argTypes` padronizada para exibir descrições e controles corretamente.
+
 ## [1.2.0]
 
 - **Adicionado**
