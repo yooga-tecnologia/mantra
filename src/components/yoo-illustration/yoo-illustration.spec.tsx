@@ -1,5 +1,5 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { IllustrationComponent } from './yoo-illustration';
+import { YooIllustration } from './yoo-illustration';
 import { ILLUSTRATIONS } from './yoo-illustration-base';
 
 function createSvgGElement(content: string): SVGElement {
@@ -15,7 +15,7 @@ function normalizeSVG(svg: string): string {
 describe('yoo-illustration', () => {
   it('should render the component', async () => {
     const page = await newSpecPage({
-      components: [IllustrationComponent],
+      components: [YooIllustration],
       html: `<yoo-illustration name="crying"></yoo-illustration>`,
     });
     expect(page.root).toBeTruthy();
@@ -27,7 +27,7 @@ describe('yoo-illustration', () => {
   it('should inject the SVG content into the <g> element', async () => {
     const illustrationContent = ILLUSTRATIONS['crying'] || '';
     const page = await newSpecPage({
-      components: [IllustrationComponent],
+      components: [YooIllustration],
       html: `<yoo-illustration name="crying"></yoo-illustration>`,
     });
 
@@ -42,7 +42,7 @@ describe('yoo-illustration', () => {
 
   it('should update the illustration when the "name" property is changed', async () => {
     const page = await newSpecPage({
-      components: [IllustrationComponent],
+      components: [YooIllustration],
       html: `<yoo-illustration name="crying"></yoo-illustration>`,
     });
 

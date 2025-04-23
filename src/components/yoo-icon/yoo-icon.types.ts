@@ -1,4 +1,5 @@
 import { ICONS } from './yoo-icon-base';
+import { ICON_DIRECTIONS, ICON_ANIMATION_ARRAY } from './yoo-icon.constants';
 
 export const iconSizes = {
   small: 16,
@@ -8,8 +9,8 @@ export const iconSizes = {
 } as const;
 
 export type IconName = keyof typeof ICONS;
-export type Direction = 'up' | 'down' | 'left' | 'right';
-export type IconAnimation = 'rotation' | undefined;
+export type Direction = (typeof ICON_DIRECTIONS)[number];
+export type IconAnimation = (typeof ICON_ANIMATION_ARRAY)[number];
 export type IconSize = keyof typeof iconSizes;
 
 type DirectionalSuffix = `-${Direction}`;

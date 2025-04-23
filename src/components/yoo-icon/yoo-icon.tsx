@@ -1,6 +1,6 @@
 import { Component, Prop, h, Element } from '@stencil/core';
 import { ICONS } from './yoo-icon-base';
-import { directionTransformMap } from './yoo-icon.constants';
+import { directionTransformMap, ICON_DIRECTION_SUFFIX_REGEX } from './yoo-icon.constants';
 import { type Direction, type IconProps, iconSizes } from './yoo-icon.types';
 
 @Component({
@@ -8,7 +8,7 @@ import { type Direction, type IconProps, iconSizes } from './yoo-icon.types';
   styleUrl: 'yoo-icon.scss',
   shadow: false,
 })
-export class IconComponent {
+export class YooIcon {
   @Element() el!: HTMLElement;
 
   @Prop() icon!: IconProps['icon'];
@@ -44,7 +44,7 @@ export class IconComponent {
   }
 
   private getBaseIconName(iconName: string): string {
-    return iconName.replace(/-(up|down|right|left)$/, '');
+    return iconName.replace(ICON_DIRECTION_SUFFIX_REGEX, '');
   }
 
   private calculateSizes() {
@@ -60,7 +60,7 @@ export class IconComponent {
   }
 
   private getTransform(iconName: string): string {
-    const match = iconName.match(/-(up|down|left|right)$/);
+    const match = ICON_DIRECTION_SUFFIX_REGEX.exec(iconName);
     if (match) {
       const direction = match[1] as Direction;
       return directionTransformMap[direction];
