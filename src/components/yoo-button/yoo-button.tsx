@@ -1,17 +1,5 @@
 import { Component, Host, Prop, h } from '@stencil/core';
-
-import { SizeVariants, ThemePalette } from '@theme/theme.types';
-// import { IconComponent } from '../yoo-icon/yoo-icon';
-import { ButtonStyle } from './yoo-button.types';
-
-export type ButtonProps = {
-  label: string;
-  size: SizeVariants;
-  color: ThemePalette;
-  variant: ButtonStyle;
-  fullWidth: boolean;
-  disabled: boolean;
-};
+import type { ButtonProps } from './yoo-button.types';
 
 @Component({
   tag: 'yoo-button',
@@ -20,19 +8,19 @@ export type ButtonProps = {
 })
 export class YooButton {
   // Base styles
-  @Prop() size: SizeVariants = 'medium';
-  @Prop() color: ThemePalette = 'primary';
-  @Prop() variant: ButtonStyle = 'regular';
-  @Prop() fullWidth: boolean = false;
+  @Prop() size: ButtonProps['size'] = 'medium';
+  @Prop() color: ButtonProps['color'] = 'primary';
+  @Prop() variant: ButtonProps['variant'] = 'regular';
+  @Prop() fullWidth: ButtonProps['fullWidth'] = false;
 
   // Structure
-  @Prop() label?: string | undefined = undefined;
-  @Prop() iconRight?: string | undefined = undefined;
-  @Prop() iconLeft?: string | undefined = undefined;
-  @Prop() iconAnimation?: any = undefined; // TODO: Adicionar um type
+  @Prop() label?: ButtonProps['label'];
+  @Prop() iconLeft?: ButtonProps['iconLeft'];
+  @Prop() iconRight?: ButtonProps['iconRight'];
+  @Prop() iconAnimation?: ButtonProps['iconAnimation'];
 
   // States
-  @Prop() disabled?: boolean = false;
+  @Prop() disabled: ButtonProps['disabled'] = false;
 
   get buttonClass() {
     const sizeClass = `button-${this.size}`;
@@ -45,30 +33,18 @@ export class YooButton {
   }
 
   render() {
-    if (this.label) {
-      return (
-        <Host>
-          <button class={this.buttonClass} disabled={this.disabled} part="button">
-            {this.iconLeft && (
-              <yoo-icon icon={this.iconLeft}></yoo-icon>
-            )}
-
-            <span>
-              {this.label}
-            </span>
-
-            {this.iconRight && (
-              <yoo-icon icon={this.iconRight}></yoo-icon>
-            )}
-          </button>
-        </Host>
-      );
-    }
+    const hasIcon = this.iconLeft || this.iconRight;
 
     return (
       <Host>
         <button class={this.buttonClass} disabled={this.disabled} part="button">
-          <slot />
+          {this.iconLeft && <yoo-icon icon={this.iconLeft} animation={this.iconAnimation} class="icon-left" />}
+
+          {this.label && <span class="label">{this.label}</span>}
+
+          {this.iconRight && <yoo-icon icon={this.iconRight} animation={this.iconAnimation} class="icon-right" />}
+
+          {!this.label && !hasIcon && <slot />}
         </button>
       </Host>
     );

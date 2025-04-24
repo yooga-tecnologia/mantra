@@ -5,35 +5,35 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-import { SizeVariants, ThemePalette } from './shared/theme/theme.types';
-import { ButtonStyle } from './components/yoo-button/yoo-button.types';
-import { IconAnimation, IconName, IconSize } from './components/yoo-icon/yoo-icon.types';
-export { SizeVariants, ThemePalette } from './shared/theme/theme.types';
-export { ButtonStyle } from './components/yoo-button/yoo-button.types';
-export { IconAnimation, IconName, IconSize } from './components/yoo-icon/yoo-icon.types';
+import { ButtonProps } from './components/yoo-button/yoo-button.types';
+import { IconProps } from './components/yoo-icon/yoo-icon.types';
+import { IllustrationProps } from './components/yoo-illustration/yoo-illustration.types';
+export { ButtonProps } from './components/yoo-button/yoo-button.types';
+export { IconProps } from './components/yoo-icon/yoo-icon.types';
+export { IllustrationProps } from './components/yoo-illustration/yoo-illustration.types';
 export namespace Components {
   interface YooButton {
-    color: ThemePalette;
-    disabled?: boolean;
-    fullWidth: boolean;
-    iconAnimation?: any;
-    iconLeft?: string | undefined;
-    iconRight?: string | undefined;
-    label?: string | undefined;
-    size: SizeVariants;
-    variant: ButtonStyle;
+    color: ButtonProps['color'];
+    disabled: ButtonProps['disabled'];
+    fullWidth: ButtonProps['fullWidth'];
+    iconAnimation?: ButtonProps['iconAnimation'];
+    iconLeft?: ButtonProps['iconLeft'];
+    iconRight?: ButtonProps['iconRight'];
+    label?: ButtonProps['label'];
+    size: ButtonProps['size'];
+    variant: ButtonProps['variant'];
   }
   interface YooIcon {
-    animation?: IconAnimation;
-    background?: string;
-    color: string;
-    icon: IconName;
-    size: number | IconSize;
+    animation?: IconProps['animation'];
+    background?: IconProps['background'];
+    color: IconProps['color'];
+    icon: IconProps['icon'];
+    size: IconProps['size'];
   }
   interface YooIllustration {
-    height: number;
-    name: string;
-    width: number;
+    height: IllustrationProps['height'];
+    name: IllustrationProps['name'];
+    width: IllustrationProps['width'];
   }
   interface YooInputGroup {
     condition: boolean;
@@ -74,27 +74,27 @@ declare global {
 }
 declare namespace LocalJSX {
   interface YooButton {
-    color?: ThemePalette;
-    disabled?: boolean;
-    fullWidth?: boolean;
-    iconAnimation?: any;
-    iconLeft?: string | undefined;
-    iconRight?: string | undefined;
-    label?: string | undefined;
-    size?: SizeVariants;
-    variant?: ButtonStyle;
+    color?: ButtonProps['color'];
+    disabled?: ButtonProps['disabled'];
+    fullWidth?: ButtonProps['fullWidth'];
+    iconAnimation?: ButtonProps['iconAnimation'];
+    iconLeft?: ButtonProps['iconLeft'];
+    iconRight?: ButtonProps['iconRight'];
+    label?: ButtonProps['label'];
+    size?: ButtonProps['size'];
+    variant?: ButtonProps['variant'];
   }
   interface YooIcon {
-    animation?: IconAnimation;
-    background?: string;
-    color?: string;
-    icon: IconName;
-    size?: number | IconSize;
+    animation?: IconProps['animation'];
+    background?: IconProps['background'];
+    color?: IconProps['color'];
+    icon: IconProps['icon'];
+    size?: IconProps['size'];
   }
   interface YooIllustration {
-    height?: number;
-    name: string;
-    width?: number;
+    height?: IllustrationProps['height'];
+    name: IllustrationProps['name'];
+    width?: IllustrationProps['width'];
   }
   interface YooInputGroup {
     condition?: boolean;

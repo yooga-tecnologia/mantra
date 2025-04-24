@@ -1,15 +1,25 @@
 import { ICONS } from './yoo-icon-base';
+import { ICON_DIRECTIONS, ICON_ANIMATION_ARRAY } from './yoo-icon.constants';
 
-export const iconSizeArray = ["small", "medium", "large", "doubleLarge"] as const;
+export const iconSizes = {
+  small: 16,
+  medium: 24,
+  large: 32,
+  doubleLarge: 64,
+} as const;
 
 export type IconName = keyof typeof ICONS;
-export type IconAnimation = 'rotation' | undefined;
-export type Background = string[];
-export type IconSize = typeof iconSizeArray[number]
+export type Direction = (typeof ICON_DIRECTIONS)[number];
+export type IconAnimation = (typeof ICON_ANIMATION_ARRAY)[number];
+export type IconSize = keyof typeof iconSizes;
+
+type DirectionalSuffix = `-${Direction}`;
+export type ExtendedIconName = IconName | `${IconName}${DirectionalSuffix}`;
 
 export type IconProps = {
-  icon: IconName,
-  size: IconSize,
-  color: string,
-  background?: string,
-}
+  icon: ExtendedIconName;
+  size?: number | IconSize;
+  color?: string;
+  background?: string;
+  animation?: IconAnimation;
+};

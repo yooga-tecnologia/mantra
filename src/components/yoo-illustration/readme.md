@@ -7,11 +7,11 @@
 
 ## Properties
 
-| Property            | Attribute | Description | Type     | Default     |
-| ------------------- | --------- | ----------- | -------- | ----------- |
-| `height`            | `height`  |             | `number` | `140`       |
-| `name` _(required)_ | `name`    |             | `string` | `undefined` |
-| `width`             | `width`   |             | `number` | `140`       |
+| Property            | Attribute | Description | Type                                                                                                                                                                                                                        | Default     |
+| ------------------- | --------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `height`            | `height`  |             | `number`                                                                                                                                                                                                                    | `140`       |
+| `name` _(required)_ | `name`    |             | `"burger" \| "glasses" \| "goalWithBoy" \| "goalWithGirl" \| "happy" \| "happyCheck" \| "happyWithCoin" \| "happyWithCrying" \| "heart" \| "inLove" \| "maintenance" \| "sad" \| "sadWithCoin" \| "search" \| "sunglasses"` | `undefined` |
+| `width`             | `width`   |             | `number`                                                                                                                                                                                                                    | `140`       |
 
 
 ----------------------------------------------
