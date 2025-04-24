@@ -1,10 +1,10 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { IconComponent } from './yoo-icon';
+import { YooIcon } from './yoo-icon';
 
 describe('yoo-icon', () => {
   it('renders correctly with default props (without background)', async () => {
     const page = await newSpecPage({
-      components: [IconComponent],
+      components: [YooIcon],
       html: `<yoo-icon icon="search"></yoo-icon>`,
     });
 
@@ -30,7 +30,7 @@ describe('yoo-icon', () => {
 
     for (const { icon, expectedTransform, expectedBase } of testCases) {
       const page = await newSpecPage({
-        components: [IconComponent],
+        components: [YooIcon],
         html: `<yoo-icon icon="${icon}"></yoo-icon>`,
       });
 
@@ -42,7 +42,7 @@ describe('yoo-icon', () => {
 
   it('applies the correct transformation for a directional icon', async () => {
     const page = await newSpecPage({
-      components: [IconComponent],
+      components: [YooIcon],
       html: `<yoo-icon icon="arrow-down"></yoo-icon>`,
     });
 
@@ -53,7 +53,7 @@ describe('yoo-icon', () => {
 
   it('renders with background and adjusts sizes correctly', async () => {
     const page = await newSpecPage({
-      components: [IconComponent],
+      components: [YooIcon],
       html: `<yoo-icon icon="search" size="large" background="red"></yoo-icon>`,
     });
 
@@ -71,5 +71,22 @@ describe('yoo-icon', () => {
     const svg = page.root.querySelector('svg');
     expect(svg.getAttribute('width')).toBe('16px');
     expect(svg.getAttribute('height')).toBe('16px');
+  });
+
+  it('respects numeric size prop', async () => {
+    const page = await newSpecPage({
+      components: [YooIcon],
+      html: `<yoo-icon icon="search" size=50></yoo-icon>`,
+    });
+
+    page.rootInstance.size = 50;
+
+    page.rootInstance.componentWillLoad();
+    page.rootInstance.componentDidLoad();
+    await page.waitForChanges();
+
+    const svg = page.root.querySelector('svg')!;
+    expect(svg.getAttribute('width')).toBe('50px');
+    expect(svg.getAttribute('height')).toBe('50px');
   });
 });

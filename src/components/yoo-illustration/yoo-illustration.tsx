@@ -7,7 +7,7 @@ import type { IllustrationProps } from './yoo-illustration.types';
   styleUrl: 'yoo-illustration.scss',
   shadow: false,
 })
-export class IllustrationComponent {
+export class YooIllustration {
   @Element() el!: HTMLElement;
 
   @Prop() name!: IllustrationProps['name'];
