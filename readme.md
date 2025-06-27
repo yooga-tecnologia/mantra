@@ -48,7 +48,7 @@ Se estiver utilizando um framework como React ou Angular, verifique a documenta�
 
 Para mais detalhes sobre cada componente e suas propriedades, consulte a documentação oficial no Storybook:
 
-📚 Mantra UI Storybook
+📚 [Mantra UI Storybook](https://yooga-tecnologia.github.io/mantra/storybook-static/)
 
 📜 Scripts Disponíveis
 
