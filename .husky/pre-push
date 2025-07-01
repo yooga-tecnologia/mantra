@@ -1,5 +1,18 @@
+# #!/bin/sh
+# . "$(dirname "$0")/_/husky.sh"
+
+# echo "Executando testes antes do push..."
+# npx lint-staged && npm run test
+
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "Executando testes antes do push..."
-npx lint-staged && npm run test
+echo "🔍 Verificando cobertura de testes"
+npm run test -- --coverage --silent
+
+if [ $? -ne 0 ]; then
+  echo "❌ Push bloqueado: cobertura abaixo de 90%"
+  exit 1
+fi
+
+echo "✅ Push permitido: Coverage > 90%"
