@@ -4,6 +4,21 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [1.5.0] – 2025-07-08
+
+### 🚀 Adicionado
+
+- Novo componente `yoo-tooltip`, um tooltip customizado com suporte às posições `top`, `bottom`, `left` e `right`.
+- Suporte ao slot `trigger`, permitindo customização do elemento que aciona a tooltip.
+- Prop `text` para exibição do conteúdo textual da tooltip.
+- Acessibilidade via foco do teclado (`focusin` e `focusout`) ativada por padrão.
+- ID dinâmico aplicado ao `role="tooltip"` para associação futura com `aria-describedby`.
+
+### ✅ Testado
+
+- Cobertura de testes unitários para `mouseenter`, `mouseleave`, `focusin`, `focusout` e aplicação dinâmica das classes de posição (`top`, `bottom`, `left`, `right`).
+- Cobertura total de 100% de statements, branches, functions e lines.
+
 ## [1.4.0] – 2025-04-23
 
 ### 🚀 Adicionado
