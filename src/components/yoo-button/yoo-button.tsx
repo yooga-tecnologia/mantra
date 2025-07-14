@@ -1,4 +1,4 @@
-import { Component, Host, Prop, h } from '@stencil/core';
+import { Component, Host, Prop, Event, EventEmitter, h } from '@stencil/core';
 import type { ButtonProps } from './yoo-button.types';
 
 @Component({
@@ -22,6 +22,20 @@ export class YooButton {
   // States
   @Prop() disabled: ButtonProps['disabled'] = false;
 
+  // Events
+  @Event() onClick: EventEmitter<MouseEvent>;
+
+  // Methods
+  private handleClick(event: MouseEvent) {
+    if (this.disabled) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
+    this.onClick.emit(event);
+  }
+
   get buttonClass() {
     const sizeClass = `button-${this.size}`;
     const variantClass = `button-${this.variant}`;
@@ -33,18 +47,39 @@ export class YooButton {
   }
 
   render() {
-    const hasIcon = this.iconLeft || this.iconRight;
-
     return (
       <Host>
-        <button class={this.buttonClass} disabled={this.disabled} part="button">
-          {this.iconLeft && <yoo-icon icon={this.iconLeft} animation={this.iconAnimation} class="icon-left" />}
+        <button
+          class={this.buttonClass}
+          disabled={this.disabled}
+          onClick={(event) => this.handleClick(event)}
+          part="button"
+        >
+          {this.iconLeft && (
+            <yoo-icon
+              icon={this.iconLeft}
+              animation={this.iconAnimation}
+              class="icon-left"
+            />
+          )}
 
-          {this.label && <span class="label">{this.label}</span>}
+          {this.label ? (
+            <span class="label">
+              {this.label}
+            </span>
+          ) : (
+            <span class="label">
+              <slot></slot>
+            </span>
+          )}
 
-          {this.iconRight && <yoo-icon icon={this.iconRight} animation={this.iconAnimation} class="icon-right" />}
-
-          {!this.label && !hasIcon && <slot />}
+          {this.iconRight && (
+            <yoo-icon
+              icon={this.iconRight}
+              animation={this.iconAnimation}
+              class="icon-right"
+            />
+          )}
         </button>
       </Host>
     );

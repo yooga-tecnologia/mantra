@@ -1,6 +1,14 @@
+/**
+* This file is a barrel file for the styles of the YooButton component.
+*
+* WARNING: Do not add CSS rules directly to the file src/components/yoo-button/yoo-button.scss.
+*
+* Use the variant files (_variant-emphasis.scss, _variant-stroke.scss, etc.) to define specific styles.
+**/
+
 @use "sass:map";
 
-@forward "./__base";
+@forward "./__base"; // Base styles for the button component 
 
 @use "./_variant-emphasis" as button-emphasis;
 @use "./_variant-stroke" as button-stroke;

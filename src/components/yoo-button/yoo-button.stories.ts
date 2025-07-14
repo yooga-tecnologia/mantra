@@ -1,22 +1,60 @@
 import type { Meta } from '@storybook/html';
-import { buttonStyleArray, type ButtonProps } from './yoo-button.types';
+
 import { sizeVariantsArray, themePaletteArray } from '../../shared/theme/theme.types';
-import { ICONS } from '../yoo-icon/yoo-icon-base';
-import { ICON_ANIMATION_ARRAY } from '../yoo-icon/yoo-icon.constants';
+import { ICON_OPTIONS } from '../yoo-icon/yoo-icon.constants';
+
+import { buttonStyleArray, type ButtonProps } from './yoo-button.types';
+
+const SB_TABLE_ICON = {
+  type: {
+    summary: ICON_OPTIONS.join(' | '),
+  },
+}
 
 const meta: Meta<ButtonProps> = {
   title: 'Components/Button',
   component: 'yoo-button',
   argTypes: {
     label: { control: 'text' },
-    iconLeft: { control: 'select', options: Object.keys(ICONS) },
-    iconRight: { control: 'select', options: Object.keys(ICONS) },
-    iconAnimation: { control: 'select', options: ICON_ANIMATION_ARRAY },
-    variant: { control: 'select', options: buttonStyleArray },
-    color: { control: 'select', options: themePaletteArray },
-    size: { control: 'select', options: sizeVariantsArray },
-    disabled: { control: 'boolean' },
-    fullWidth: { control: 'boolean' },
+    size: {
+      control: 'select', options: sizeVariantsArray,
+      table: { defaultValue: { summary: 'medium' } },
+    },
+    disabled: {
+      control: 'boolean',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    fullWidth: {
+      control: 'boolean',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    color: {
+      control: 'select',
+      options: themePaletteArray,
+      table: {
+        defaultValue: { summary: 'primary' },
+        type: { summary: themePaletteArray.join(' | ') },
+      }
+    },
+    variant: {
+      control: 'select',
+      options: buttonStyleArray,
+      description: 'Variantes de estilo',
+      table: {
+        defaultValue: { summary: 'emphasis' },
+        type: { summary: buttonStyleArray.join(' | ') },
+      }
+    },
+    iconLeft: {
+      control: 'select',
+      options: ICON_OPTIONS,
+      table: SB_TABLE_ICON,
+    },
+    iconRight: {
+      control: 'select',
+      options: ICON_OPTIONS,
+      table: SB_TABLE_ICON,
+    },
   },
 };
 
@@ -27,7 +65,6 @@ const Template = (args: ButtonProps) => `
     label="${args.label ?? ''}"
     icon-left="${args.iconLeft ?? ''}"
     icon-right="${args.iconRight ?? ''}"
-    icon-animation="${args.iconAnimation ?? ''}"
     variant="${args.variant}"
     color="${args.color}"
     size="${args.size}"
@@ -35,9 +72,10 @@ const Template = (args: ButtonProps) => `
     full-width="${args.fullWidth}"
   ></yoo-button>
 `;
-export const Primary = Template.bind({});
-Primary.args = {
-  label: 'Primary',
+
+export const Playground = Template.bind({});
+Playground.args = {
+  label: 'Playground',
   variant: 'emphasis',
   color: 'primary',
   size: 'medium',

@@ -1,5 +1,7 @@
+import { ICONS } from './yoo-icon-base';
 import type { Direction } from './yoo-icon.types';
 
+export const ICON_OPTIONS: readonly string[] = [undefined, ...Object.keys(ICONS)];
 export const ICON_ANIMATION_ARRAY: readonly ['rotation', undefined] = ['rotation', undefined];
 
 export const ICON_DIRECTIONS = ['up', 'down', 'left', 'right'] as const;

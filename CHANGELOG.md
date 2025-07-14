@@ -4,6 +4,23 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [1.5.1] – 2025-07-14
+
+### 🚀 Adicionado
+
+- **Suporte ao evento `onClick` no componente YooButton:** Agora é possível emitir eventos personalizados ao clicar no botão, permitindo maior flexibilidade para integração com diferentes fluxos de aplicação.
+- **Melhorias no Storybook:** Ajustes nos controles (argTypes) para exibir corretamente os valores predefinidos (como `variant`, `color`, `size`, `iconLeft` e `iconRight`) sem simplificar os tipos para "string".
+
+### ♻️ Refatorado
+
+- **Estrutura de testes unitários:** Reorganização dos testes para cobrir cenários adicionais, como o comportamento do evento `onClick` e validação de atributos como `disabled` e `fullWidth`;
+- **Estilos do componente YooButton:** Centralização de estilos base e variantes em arquivos separados (`__base.scss` e `_variant-*.scss`), garantindo maior modularidade e consistência.
+
+### ✅ Corrigido
+
+- **Comportamento do evento `onClick`:** Ajuste para garantir que funções definidas no atributo `onClick` sejam executadas corretamente, tanto no navegador quanto nos testes unitários.
+- **Tamanho de ícones do botão:** Ajuste para aplicar tamanhos corretos dos ícones dos botões.
+
 ## [1.5.0] – 2025-07-08
 
 ### 🚀 Adicionado
