@@ -23,7 +23,7 @@ export class YooButton {
   @Prop() disabled: ButtonProps['disabled'] = false;
 
   // Events
-  @Event() onClick: EventEmitter<MouseEvent>;
+  @Event() buttonClick: EventEmitter<MouseEvent>;
 
   // Methods
   private handleClick(event: MouseEvent) {
@@ -33,7 +33,7 @@ export class YooButton {
       return;
     }
 
-    this.onClick.emit(event);
+    this.buttonClick.emit(event);
   }
 
   get buttonClass() {

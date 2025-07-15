@@ -4,6 +4,12 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [1.5.2] – 2025-07-15
+
+### ✅ Corrigido
+
+- **Nome do evento click no componente YooButton**: O evento decorado com `@Event()` foi renomeado de `onClick` para `buttonClick` para evitar conflitos com o evento nativo do DOM `click`/`onClick`. Essa mudança elimina o aviso de build e garante que o evento personalizado seja emitido corretamente sem interferir nos eventos nativos.
+
 ## [1.5.1] – 2025-07-14
 
 ### 🚀 Adicionado
