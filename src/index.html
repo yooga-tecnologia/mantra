@@ -19,15 +19,75 @@
   <span class="title-large">Large</span>
 
   <!-- YooButton Examples -->
-  <yoo-button>Default</yoo-button>
-  <yoo-button variant="regular">Regular</yoo-button>
-  <yoo-button variant="stroke">Stroke</yoo-button>
-  <yoo-button variant="plain">Plain</yoo-button>
-  <yoo-button variant="emphasis">Emphasis</yoo-button>
+  <h2>Buttons</h2>
 
-  <yoo-button size="small">small</yoo-button>
-  <yoo-button size="medium">medium</yoo-button>
-  <yoo-button size="large">large</yoo-button>
+  <h3>Default</h3>
+
+  <yoo-button
+    label="Default"
+    disabled
+  ></yoo-button>
+
+  <yoo-button
+    label="Default"
+    onClick="alert('Button clicked!')"
+  ></yoo-button>
+
+  <yoo-button
+    icon-left="plus"
+    icon-right="plus"
+  >
+    Exemplo de botão utilizando
+    <strong>slot</strong>
+  </yoo-button>
+
+  <yoo-button
+    label="Default with icons"
+    icon-left="plus"
+    icon-right="plus"
+  ></yoo-button>
+
+  <yoo-button
+    label="Default with icons"
+    icon-right="plus"
+  ></yoo-button>
+
+  <yoo-button
+    label="Default with icons"
+    icon-left="plus"
+  ></yoo-button>
+
+  <h3>Regular</h3>
+  <yoo-button
+    variant="regular"
+    label="Regular"
+    icon-left="signalingCheckCircle"
+    icon-right="signalingCheckCircle"
+    color="primary"
+    size="large"
+    disabled="false"
+    full-width="false"
+  ></yoo-button>
+  <yoo-button
+    variant="regular"
+    label="Regular"
+    icon-left="signalingCheckCircle"
+    icon-right="signalingCheckCircle"
+    color="primary"
+    size="medium"
+    disabled="false"
+    full-width="false"
+  ></yoo-button>
+  <yoo-button
+    variant="regular"
+    label="Regular"
+    icon-left="signalingCheckCircle"
+    icon-right="signalingCheckCircle"
+    color="primary"
+    size="small"
+    disabled="false"
+    full-width="false"
+  ></yoo-button>
 
   <!-- YooInput Component Example -->
   <div style="padding: 16px;">
@@ -56,6 +116,8 @@
     <!-- YooIcon Component Example -->
     <yoo-icon icon="caret-right" size="small" color="black"></yoo-icon>
     <yoo-icon icon="caret-right" size="medium" color="black"></yoo-icon>
+    <yoo-icon icon="caret-right" size="large" color="black"></yoo-icon>
+
     <yoo-icon icon="caret-right" size="large" color="white" background="black"></yoo-icon>
     <yoo-icon icon="caret-right" size="doubleLarge" color="white" background="black"></yoo-icon>
   </div>

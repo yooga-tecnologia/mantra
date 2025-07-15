@@ -1,16 +1,12 @@
+/**
+  * This file is a barrel file for the styles of the YooButton component.
+  *
+  * WARNING: Please do not add any CSS rules directly to this file!
+  * Check [index.scss](./styles/index.scss) to know how to organize component's stylesheets
+  **/
+
 @use '../../shared/theme/core/theme' as theme;
 @use '../../shared/theme/core/typography' as typography;
 @use '../../shared/theme/tokens/sizing' as sizing;
 
 @forward './styles/index.scss';
-
-.button-full-width {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
-.button-medium {
-  padding: 12px;
-}
