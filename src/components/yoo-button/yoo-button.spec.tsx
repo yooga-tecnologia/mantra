@@ -110,13 +110,12 @@ describe('<yoo-button>', () => {
 
   describe('Events', () => {
     it('SHOULD emit click event WHEN button is clicked', async () => {
-      const spy = jest.fn();
-
       // SETUP
       const page = await createButtonComponent(`<yoo-button label="${DEFAULT_LABEL}"></yoo-button>`);
       const button = getButtonElement(page);
       
-      page.root.addEventListener('onClick', spy);
+      const spy = jest.fn();
+      page.root.addEventListener('buttonClick', spy);
 
       // ACTION
       button.click();
@@ -131,7 +130,7 @@ describe('<yoo-button>', () => {
       const button = getButtonElement(page);
 
       const spy = jest.fn();
-      page.root.addEventListener('onClick', spy);
+      page.root.addEventListener('buttonClick', spy);
 
       // ACTION
       button.click();

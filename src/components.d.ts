@@ -8,9 +8,11 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ButtonProps } from "./components/yoo-button/yoo-button.types";
 import { IconProps } from "./components/yoo-icon/yoo-icon.types";
 import { IllustrationProps } from "./components/yoo-illustration/yoo-illustration.types";
+import { TooltipProps } from "./components/yoo-tooltip/yoo-tooltip.types";
 export { ButtonProps } from "./components/yoo-button/yoo-button.types";
 export { IconProps } from "./components/yoo-icon/yoo-icon.types";
 export { IllustrationProps } from "./components/yoo-illustration/yoo-illustration.types";
+export { TooltipProps } from "./components/yoo-tooltip/yoo-tooltip.types";
 export namespace Components {
     interface YooButton {
         "color": ButtonProps['color'];
@@ -43,6 +45,10 @@ export namespace Components {
         "placeholder"?: string;
         "trailingIcon": boolean;
     }
+    interface YooTooltip {
+        "position": TooltipProps['position'];
+        "text": TooltipProps['text'];
+    }
 }
 export interface YooButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -50,7 +56,7 @@ export interface YooButtonCustomEvent<T> extends CustomEvent<T> {
 }
 declare global {
     interface HTMLYooButtonElementEventMap {
-        "onClick": MouseEvent;
+        "buttonClick": MouseEvent;
     }
     interface HTMLYooButtonElement extends Components.YooButton, HTMLStencilElement {
         addEventListener<K extends keyof HTMLYooButtonElementEventMap>(type: K, listener: (this: HTMLYooButtonElement, ev: YooButtonCustomEvent<HTMLYooButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -84,11 +90,18 @@ declare global {
         prototype: HTMLYooInputGroupElement;
         new (): HTMLYooInputGroupElement;
     };
+    interface HTMLYooTooltipElement extends Components.YooTooltip, HTMLStencilElement {
+    }
+    var HTMLYooTooltipElement: {
+        prototype: HTMLYooTooltipElement;
+        new (): HTMLYooTooltipElement;
+    };
     interface HTMLElementTagNameMap {
         "yoo-button": HTMLYooButtonElement;
         "yoo-icon": HTMLYooIconElement;
         "yoo-illustration": HTMLYooIllustrationElement;
         "yoo-input-group": HTMLYooInputGroupElement;
+        "yoo-tooltip": HTMLYooTooltipElement;
     }
 }
 declare namespace LocalJSX {
@@ -100,7 +113,7 @@ declare namespace LocalJSX {
         "iconLeft"?: ButtonProps['iconLeft'];
         "iconRight"?: ButtonProps['iconRight'];
         "label"?: ButtonProps['label'];
-        "onOnClick"?: (event: YooButtonCustomEvent<MouseEvent>) => void;
+        "onButtonClick"?: (event: YooButtonCustomEvent<MouseEvent>) => void;
         "size"?: ButtonProps['size'];
         "variant"?: ButtonProps['variant'];
     }
@@ -124,11 +137,16 @@ declare namespace LocalJSX {
         "placeholder"?: string;
         "trailingIcon"?: boolean;
     }
+    interface YooTooltip {
+        "position"?: TooltipProps['position'];
+        "text"?: TooltipProps['text'];
+    }
     interface IntrinsicElements {
         "yoo-button": YooButton;
         "yoo-icon": YooIcon;
         "yoo-illustration": YooIllustration;
         "yoo-input-group": YooInputGroup;
+        "yoo-tooltip": YooTooltip;
     }
 }
 export { LocalJSX as JSX };
@@ -139,6 +157,7 @@ declare module "@stencil/core" {
             "yoo-icon": LocalJSX.YooIcon & JSXBase.HTMLAttributes<HTMLYooIconElement>;
             "yoo-illustration": LocalJSX.YooIllustration & JSXBase.HTMLAttributes<HTMLYooIllustrationElement>;
             "yoo-input-group": LocalJSX.YooInputGroup & JSXBase.HTMLAttributes<HTMLYooInputGroupElement>;
+            "yoo-tooltip": LocalJSX.YooTooltip & JSXBase.HTMLAttributes<HTMLYooTooltipElement>;
         }
     }
 }
