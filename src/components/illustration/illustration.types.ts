@@ -1,4 +1,4 @@
-import { ILLUSTRATIONS } from './yoo-illustration-base';
+import { ILLUSTRATIONS } from './illustration-base';
 
 export type IllustrationProps = {
   name: keyof typeof ILLUSTRATIONS;

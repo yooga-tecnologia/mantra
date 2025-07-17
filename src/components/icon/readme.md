@@ -20,13 +20,13 @@
 
 ### Used by
 
- - [yoo-button](../yoo-button)
+ - [mnt-button](../button)
 
 ### Graph
 ```mermaid
 graph TD;
-  yoo-button --> yoo-icon
-  style yoo-icon fill:#f9f,stroke:#333,stroke-width:4px
+  mnt-button --> mnt-icon
+  style mnt-icon fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

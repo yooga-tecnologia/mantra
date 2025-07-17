@@ -1,13 +1,18 @@
 import { Component, Prop, State, h, Watch, Element } from '@stencil/core';
-import { ILLUSTRATIONS } from './yoo-illustration-base';
-import type { IllustrationProps } from './yoo-illustration.types';
+
+import { getLibPrefix } from 'src/utils/utils';
+
+import { ILLUSTRATIONS } from './illustration-base';
+import type { IllustrationProps } from './illustration.types';
+
+const LIB_PREFIX = getLibPrefix();
 
 @Component({
-  tag: 'yoo-illustration',
-  styleUrl: 'yoo-illustration.scss',
+  tag: 'mnt-illustration',
+  styleUrl: 'illustration.scss',
   shadow: false,
 })
-export class YooIllustration {
+export class Illustration {
   @Element() el!: HTMLElement;
 
   @Prop() name!: IllustrationProps['name'];
@@ -44,9 +49,13 @@ export class YooIllustration {
     }
   }
 
+  private getIllustrationClass(): string {
+    return `${LIB_PREFIX}illustration-wrapper`;
+  }
+
   render() {
     return (
-      <div class="illustration-wrapper">
+      <div class={this.getIllustrationClass()}>
         <svg class="d-flex" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width={this.width} height={this.height}>
           <g ref={el => (this.gRef = el)}></g>
         </svg>

@@ -7,11 +7,11 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ButtonProps } from "./components/button/button.types";
 import { IconProps } from "./components/icon/icon.types";
-import { IllustrationProps } from "./components/yoo-illustration/yoo-illustration.types";
+import { IllustrationProps } from "./components/illustration/illustration.types";
 import { TooltipProps } from "./components/yoo-tooltip/yoo-tooltip.types";
 export { ButtonProps } from "./components/button/button.types";
 export { IconProps } from "./components/icon/icon.types";
-export { IllustrationProps } from "./components/yoo-illustration/yoo-illustration.types";
+export { IllustrationProps } from "./components/illustration/illustration.types";
 export { TooltipProps } from "./components/yoo-tooltip/yoo-tooltip.types";
 export namespace Components {
     interface MntButton {
@@ -32,7 +32,7 @@ export namespace Components {
         "icon": IconProps['icon'];
         "size": IconProps['size'];
     }
-    interface YooIllustration {
+    interface MntIllustration {
         "height": IllustrationProps['height'];
         "name": IllustrationProps['name'];
         "width": IllustrationProps['width'];
@@ -78,11 +78,11 @@ declare global {
         prototype: HTMLMntIconElement;
         new (): HTMLMntIconElement;
     };
-    interface HTMLYooIllustrationElement extends Components.YooIllustration, HTMLStencilElement {
+    interface HTMLMntIllustrationElement extends Components.MntIllustration, HTMLStencilElement {
     }
-    var HTMLYooIllustrationElement: {
-        prototype: HTMLYooIllustrationElement;
-        new (): HTMLYooIllustrationElement;
+    var HTMLMntIllustrationElement: {
+        prototype: HTMLMntIllustrationElement;
+        new (): HTMLMntIllustrationElement;
     };
     interface HTMLYooInputGroupElement extends Components.YooInputGroup, HTMLStencilElement {
     }
@@ -99,7 +99,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "mnt-button": HTMLMntButtonElement;
         "mnt-icon": HTMLMntIconElement;
-        "yoo-illustration": HTMLYooIllustrationElement;
+        "mnt-illustration": HTMLMntIllustrationElement;
         "yoo-input-group": HTMLYooInputGroupElement;
         "yoo-tooltip": HTMLYooTooltipElement;
     }
@@ -124,7 +124,7 @@ declare namespace LocalJSX {
         "icon": IconProps['icon'];
         "size"?: IconProps['size'];
     }
-    interface YooIllustration {
+    interface MntIllustration {
         "height"?: IllustrationProps['height'];
         "name": IllustrationProps['name'];
         "width"?: IllustrationProps['width'];
@@ -144,7 +144,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "mnt-button": MntButton;
         "mnt-icon": MntIcon;
-        "yoo-illustration": YooIllustration;
+        "mnt-illustration": MntIllustration;
         "yoo-input-group": YooInputGroup;
         "yoo-tooltip": YooTooltip;
     }
@@ -155,7 +155,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "mnt-button": LocalJSX.MntButton & JSXBase.HTMLAttributes<HTMLMntButtonElement>;
             "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;
-            "yoo-illustration": LocalJSX.YooIllustration & JSXBase.HTMLAttributes<HTMLYooIllustrationElement>;
+            "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
             "yoo-input-group": LocalJSX.YooInputGroup & JSXBase.HTMLAttributes<HTMLYooInputGroupElement>;
             "yoo-tooltip": LocalJSX.YooTooltip & JSXBase.HTMLAttributes<HTMLYooTooltipElement>;
         }

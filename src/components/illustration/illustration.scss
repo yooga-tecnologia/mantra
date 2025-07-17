@@ -1,6 +1,9 @@
 @forward "../../shared/theme/core/animations";
+@use "../../shared/theme/core/theme" as theme;
 
-.icon-wrapper {
+$lib-prefix: theme.get-prefix();
+
+.#{$lib-prefix}illustration-wrapper {
   position: relative;
   display: flex;
   align-items: center;
@@ -9,16 +12,5 @@
   svg {
     position: relative;
     z-index: 1;
-  }
-
-  .icon-bg {
-    position: absolute;
-    z-index: 0;
-    display: block;
-    top: 0;
-
-    &.border-circle {
-      border-radius: 50%;
-    }
   }
 }

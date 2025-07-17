@@ -1,10 +1,10 @@
 import type { Meta } from '@storybook/html';
-import type { IllustrationProps } from './yoo-illustration.types';
-import { ILLUSTRATIONS } from './yoo-illustration-base';
+import type { IllustrationProps } from './illustration.types';
+import { ILLUSTRATIONS } from './illustration-base';
 
 const meta: Meta<IllustrationProps> = {
   title: 'Components/Illustration',
-  component: 'yoo-illustration',
+  component: 'mnt-illustration',
   argTypes: {
     name: {
       control: 'select',
@@ -18,11 +18,11 @@ const meta: Meta<IllustrationProps> = {
 export default meta;
 
 const DefaultTemplate = (args: IllustrationProps) => `
-<yoo-illustration
+<mnt-illustration
   name="${args.name}"
   width="${args.width}"
   height="${args.height}"
-></yoo-illustration>
+></mnt-illustration>
 `;
 
 export const Default = DefaultTemplate.bind({});

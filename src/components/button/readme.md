@@ -22,9 +22,9 @@
 
 ## Events
 
-| Event     | Description | Type                      |
-| --------- | ----------- | ------------------------- |
-| `onClick` |             | `CustomEvent<MouseEvent>` |
+| Event         | Description | Type                      |
+| ------------- | ----------- | ------------------------- |
+| `buttonClick` |             | `CustomEvent<MouseEvent>` |
 
 
 ## Shadow Parts
@@ -38,13 +38,13 @@
 
 ### Depends on
 
-- [yoo-icon](../yoo-icon)
+- [mnt-icon](../icon)
 
 ### Graph
 ```mermaid
 graph TD;
-  yoo-button --> yoo-icon
-  style yoo-button fill:#f9f,stroke:#333,stroke-width:4px
+  mnt-button --> mnt-icon
+  style mnt-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
