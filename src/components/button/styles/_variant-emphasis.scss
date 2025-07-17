@@ -7,12 +7,13 @@
 /// Button Emphasis Theme
 ///
 
+$lib-prefix: theme.get-prefix();
 $color-opacity-black-5: rgba(0, 0, 0, 0.05);
 
 @mixin set-button-styles() {
   @each $theme, $specs in action-tokens.$emphasis-theme-map {
-    button.button-emphasis.button-#{$theme},
-    .button-emphasis.button-#{$theme} {
+    button.#{$lib-prefix}button-emphasis.#{$lib-prefix}button-#{$theme},
+    .#{$lib-prefix}button-emphasis.#{$lib-prefix}button-#{$theme} {
       box-shadow:
         0px 4px 6px 0px $color-opacity-black-5,
         0px 2px 4px 0px $color-opacity-black-5,

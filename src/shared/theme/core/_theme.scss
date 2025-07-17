@@ -5,6 +5,8 @@
 
 @forward "./animations";
 
+$component-name-prefix: 'mnt-';
+
 $theme-map: (
   primary:    primitives.$blue-palette,
   secondary:  primitives.$magenta-palette,
@@ -15,6 +17,10 @@ $theme-map: (
   warning:    primitives.$yellow-palette,
   critical:   primitives.$red-palette,
 );
+
+@function get-prefix() {
+  @return $component-name-prefix;
+}
 
 @function get-color($color) {
   @return (map.get($theme-map, $color));

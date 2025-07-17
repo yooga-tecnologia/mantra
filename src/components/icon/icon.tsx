@@ -1,14 +1,15 @@
 import { Component, Prop, h, Element } from '@stencil/core';
-import { ICONS } from './yoo-icon-base';
-import { directionTransformMap, ICON_DIRECTION_SUFFIX_REGEX } from './yoo-icon.constants';
-import { type Direction, type IconProps, iconSizes } from './yoo-icon.types';
+
+import { ICONS } from './icon-base';
+import { directionTransformMap, ICON_DIRECTION_SUFFIX_REGEX } from './icon.constants';
+import { type Direction, type IconProps, iconSizes } from './icon.types';
 
 @Component({
-  tag: 'yoo-icon',
-  styleUrl: 'yoo-icon.scss',
+  tag: 'mnt-icon',
+  styleUrl: 'icon.scss',
   shadow: false,
 })
-export class YooIcon {
+export class Icon {
   @Element() el!: HTMLElement;
 
   @Prop() icon!: IconProps['icon'];

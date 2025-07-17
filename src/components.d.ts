@@ -5,16 +5,16 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ButtonProps } from "./components/yoo-button/yoo-button.types";
-import { IconProps } from "./components/yoo-icon/yoo-icon.types";
+import { ButtonProps } from "./components/button/button.types";
+import { IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/yoo-illustration/yoo-illustration.types";
 import { TooltipProps } from "./components/yoo-tooltip/yoo-tooltip.types";
-export { ButtonProps } from "./components/yoo-button/yoo-button.types";
-export { IconProps } from "./components/yoo-icon/yoo-icon.types";
+export { ButtonProps } from "./components/button/button.types";
+export { IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/yoo-illustration/yoo-illustration.types";
 export { TooltipProps } from "./components/yoo-tooltip/yoo-tooltip.types";
 export namespace Components {
-    interface YooButton {
+    interface MntButton {
         "color": ButtonProps['color'];
         "disabled": ButtonProps['disabled'];
         "fullWidth": ButtonProps['fullWidth'];
@@ -25,7 +25,7 @@ export namespace Components {
         "size": ButtonProps['size'];
         "variant": ButtonProps['variant'];
     }
-    interface YooIcon {
+    interface MntIcon {
         "animation"?: IconProps['animation'];
         "background"?: IconProps['background'];
         "color": IconProps['color'];
@@ -50,33 +50,33 @@ export namespace Components {
         "text": TooltipProps['text'];
     }
 }
-export interface YooButtonCustomEvent<T> extends CustomEvent<T> {
+export interface MntButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLYooButtonElement;
+    target: HTMLMntButtonElement;
 }
 declare global {
-    interface HTMLYooButtonElementEventMap {
+    interface HTMLMntButtonElementEventMap {
         "buttonClick": MouseEvent;
     }
-    interface HTMLYooButtonElement extends Components.YooButton, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLYooButtonElementEventMap>(type: K, listener: (this: HTMLYooButtonElement, ev: YooButtonCustomEvent<HTMLYooButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+    interface HTMLMntButtonElement extends Components.MntButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntButtonElementEventMap>(type: K, listener: (this: HTMLMntButtonElement, ev: MntButtonCustomEvent<HTMLMntButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLYooButtonElementEventMap>(type: K, listener: (this: HTMLYooButtonElement, ev: YooButtonCustomEvent<HTMLYooButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntButtonElementEventMap>(type: K, listener: (this: HTMLMntButtonElement, ev: MntButtonCustomEvent<HTMLMntButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
-    var HTMLYooButtonElement: {
-        prototype: HTMLYooButtonElement;
-        new (): HTMLYooButtonElement;
+    var HTMLMntButtonElement: {
+        prototype: HTMLMntButtonElement;
+        new (): HTMLMntButtonElement;
     };
-    interface HTMLYooIconElement extends Components.YooIcon, HTMLStencilElement {
+    interface HTMLMntIconElement extends Components.MntIcon, HTMLStencilElement {
     }
-    var HTMLYooIconElement: {
-        prototype: HTMLYooIconElement;
-        new (): HTMLYooIconElement;
+    var HTMLMntIconElement: {
+        prototype: HTMLMntIconElement;
+        new (): HTMLMntIconElement;
     };
     interface HTMLYooIllustrationElement extends Components.YooIllustration, HTMLStencilElement {
     }
@@ -97,15 +97,15 @@ declare global {
         new (): HTMLYooTooltipElement;
     };
     interface HTMLElementTagNameMap {
-        "yoo-button": HTMLYooButtonElement;
-        "yoo-icon": HTMLYooIconElement;
+        "mnt-button": HTMLMntButtonElement;
+        "mnt-icon": HTMLMntIconElement;
         "yoo-illustration": HTMLYooIllustrationElement;
         "yoo-input-group": HTMLYooInputGroupElement;
         "yoo-tooltip": HTMLYooTooltipElement;
     }
 }
 declare namespace LocalJSX {
-    interface YooButton {
+    interface MntButton {
         "color"?: ButtonProps['color'];
         "disabled"?: ButtonProps['disabled'];
         "fullWidth"?: ButtonProps['fullWidth'];
@@ -113,11 +113,11 @@ declare namespace LocalJSX {
         "iconLeft"?: ButtonProps['iconLeft'];
         "iconRight"?: ButtonProps['iconRight'];
         "label"?: ButtonProps['label'];
-        "onButtonClick"?: (event: YooButtonCustomEvent<MouseEvent>) => void;
+        "onButtonClick"?: (event: MntButtonCustomEvent<MouseEvent>) => void;
         "size"?: ButtonProps['size'];
         "variant"?: ButtonProps['variant'];
     }
-    interface YooIcon {
+    interface MntIcon {
         "animation"?: IconProps['animation'];
         "background"?: IconProps['background'];
         "color"?: IconProps['color'];
@@ -142,8 +142,8 @@ declare namespace LocalJSX {
         "text"?: TooltipProps['text'];
     }
     interface IntrinsicElements {
-        "yoo-button": YooButton;
-        "yoo-icon": YooIcon;
+        "mnt-button": MntButton;
+        "mnt-icon": MntIcon;
         "yoo-illustration": YooIllustration;
         "yoo-input-group": YooInputGroup;
         "yoo-tooltip": YooTooltip;
@@ -153,8 +153,8 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "yoo-button": LocalJSX.YooButton & JSXBase.HTMLAttributes<HTMLYooButtonElement>;
-            "yoo-icon": LocalJSX.YooIcon & JSXBase.HTMLAttributes<HTMLYooIconElement>;
+            "mnt-button": LocalJSX.MntButton & JSXBase.HTMLAttributes<HTMLMntButtonElement>;
+            "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;
             "yoo-illustration": LocalJSX.YooIllustration & JSXBase.HTMLAttributes<HTMLYooIllustrationElement>;
             "yoo-input-group": LocalJSX.YooInputGroup & JSXBase.HTMLAttributes<HTMLYooInputGroupElement>;
             "yoo-tooltip": LocalJSX.YooTooltip & JSXBase.HTMLAttributes<HTMLYooTooltipElement>;

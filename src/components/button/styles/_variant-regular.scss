@@ -5,25 +5,21 @@
 @use "../../../shared/theme/core/theme" as theme;
 
 ///
-/// Button Stroke Theme
+/// Button Regular Theme
 ///
 
-@mixin set-button-styles() {
-  @each $theme, $states in action-tokens.$stroke-theme-map {
-    .button-stroke.button-#{$theme} {
-      border-style: solid;
-      border-width: 1px;
+$lib-prefix: theme.get-prefix();
 
-      & {
-        @include theme.set-colors(
-          map.get($states, "default", "text-color"),
-          map.get($states, "default", "bg-color"),
-          map.get(action-tokens.$stroke-borders-map, "default")
-        );
-      }
+@mixin set-button-styles() {
+  @each $theme, $states in action-tokens.$regular-theme-map {
+    .#{$lib-prefix}button-regular.#{$lib-prefix}button-#{$theme} {
+      @include theme.set-colors(
+        map.get($states, "default", "text-color"),
+        map.get($states, "default", "bg-color"),
+        transparent,
+      );
 
       &:hover {
-        border-color: map.get(action-tokens.$stroke-borders-map, "hover");
         @include theme.set-colors(
           map.get($states, "hover", "text-color"),
           map.get($states, "hover", "bg-color")
@@ -31,7 +27,6 @@
       }
 
       &:focus {
-        border-color: map.get(action-tokens.$stroke-borders-map, "focus");
         @include theme.set-colors(
           map.get($states, "focus", "text-color"),
           map.get($states, "focus", "bg-color")
@@ -39,7 +34,6 @@
       }
 
       &:disabled {
-        border-color: map.get(action-tokens.$stroke-borders-map, "disabled");
         @include theme.set-colors(
           map.get(
             action-tokens.$stroke-theme-map,

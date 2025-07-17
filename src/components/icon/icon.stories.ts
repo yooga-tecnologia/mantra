@@ -1,11 +1,12 @@
 import type { Meta } from '@storybook/html';
-import { iconSizes, type IconProps } from './yoo-icon.types';
-import { ICONS } from './yoo-icon-base';
-import { ICON_ANIMATION_ARRAY } from './yoo-icon.constants';
+
+import { iconSizes, type IconProps } from './icon.types';
+import { ICONS } from './icon-base';
+import { ICON_ANIMATION_ARRAY } from './icon.constants';
 
 const meta: Meta<IconProps> = {
   title: 'Components/Icon',
-  component: 'yoo-icon',
+  component: 'mnt-icon',
   argTypes: {
     icon: { control: 'select', options: Object.keys(ICONS) },
     size: { control: 'select', options: Object.keys(iconSizes) },
@@ -18,13 +19,13 @@ const meta: Meta<IconProps> = {
 export default meta;
 
 const DefaultTemplate = (args: IconProps) => `
-<yoo-icon
+<mnt-icon
   icon="${args.icon}"
   size="${args.size}"
   color="${args.color}"
   background="${args.background ?? ''}"
   animation="${args.animation ?? ''}"
-></yoo-icon>
+></mnt-icon>
 `;
 
 export const Default = DefaultTemplate.bind({});

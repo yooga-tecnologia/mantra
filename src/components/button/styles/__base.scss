@@ -1,5 +1,8 @@
 @use "sass:map";
+@use "../../../shared/theme/core/theme" as theme;
 @use "../../../shared/theme/tokens/sizing" as sizing;
+
+$lib-prefix: theme.get-prefix();
 
 // Sizes
 
@@ -30,18 +33,18 @@ $border-radius-medium: map.get(sizing.$border-radius, "medium");
 @each $size, $configs in $button-size-configs {
   $size-map: map.get($button-size-configs, $size);
 
-  a.button-full-width,
-  button.button-full-width {
+  a.#{$lib-prefix}button-full-width,
+  button.#{$lib-prefix}button-full-width {
     width: 100%;
   }
 
-  .button-disabled:hover {
+  .#{$lib-prefix}button-disabled:hover {
     pointer-events: none;
     cursor: not-allowed;
   }
 
-  button[class^="button-#{$size}"],
-  .button-#{$size} {
+  button[class^="#{$lib-prefix}button-#{$size}"],
+  .#{$lib-prefix}button-#{$size} {
     padding: map.get($size-map, "padding");
     height: map.get($size-map, "height");
     border-radius: $border-radius-medium;
@@ -66,7 +69,7 @@ $border-radius-medium: map.get(sizing.$border-radius, "medium");
       font-weight: 500;
     }
 
-    yoo-icon {
+    mnt-icon {
       display: inline-flex;
       align-items: center;
 
@@ -78,7 +81,7 @@ $border-radius-medium: map.get(sizing.$border-radius, "medium");
   }
 }
 
-.button-full-width {
+.#{$lib-prefix}button-full-width {
   display: flex;
   width: 100%;
   justify-content: center;

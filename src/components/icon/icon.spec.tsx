@@ -1,11 +1,11 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { YooIcon } from './yoo-icon';
+import { Icon } from './icon';
 
-describe('yoo-icon', () => {
+describe('icon', () => {
   it('renders correctly with default props (without background)', async () => {
     const page = await newSpecPage({
-      components: [YooIcon],
-      html: `<yoo-icon icon="search"></yoo-icon>`,
+      components: [Icon],
+      html: `<mnt-icon icon="search"></mnt-icon>`,
     });
 
     const svg = page.root.querySelector('svg');
@@ -30,8 +30,8 @@ describe('yoo-icon', () => {
 
     for (const { icon, expectedTransform, expectedBase } of testCases) {
       const page = await newSpecPage({
-        components: [YooIcon],
-        html: `<yoo-icon icon="${icon}"></yoo-icon>`,
+        components: [Icon],
+        html: `<mnt-icon icon="${icon}"></mnt-icon>`,
       });
 
       const svg = page.root.querySelector('svg');
@@ -42,8 +42,8 @@ describe('yoo-icon', () => {
 
   it('applies the correct transformation for a directional icon', async () => {
     const page = await newSpecPage({
-      components: [YooIcon],
-      html: `<yoo-icon icon="arrow-down"></yoo-icon>`,
+      components: [Icon],
+      html: `<mnt-icon icon="arrow-down"></mnt-icon>`,
     });
 
     const svg = page.root.querySelector('svg');
@@ -53,8 +53,8 @@ describe('yoo-icon', () => {
 
   it('renders with background and adjusts sizes correctly', async () => {
     const page = await newSpecPage({
-      components: [YooIcon],
-      html: `<yoo-icon icon="search" size="large" background="red"></yoo-icon>`,
+      components: [Icon],
+      html: `<mnt-icon icon="search" size="large" background="red"></mnt-icon>`,
     });
 
     expect(page.root.getAttribute('style')).toContain('width: 32px');
@@ -75,8 +75,8 @@ describe('yoo-icon', () => {
 
   it('respects numeric size prop', async () => {
     const page = await newSpecPage({
-      components: [YooIcon],
-      html: `<yoo-icon icon="search" size=50></yoo-icon>`,
+      components: [Icon],
+      html: `<mnt-icon icon="search" size=50></mnt-icon>`,
     });
 
     page.rootInstance.size = 50;

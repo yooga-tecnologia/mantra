@@ -8,9 +8,11 @@
 /// Button Plain Theme
 ///
 
+$lib-prefix: theme.get-prefix();
+
 @mixin set-button-styles() {
   @each $theme, $states in action-tokens.$plain-theme-map {
-    .button-plain.button-#{$theme} {
+    .#{$lib-prefix}button-plain.#{$lib-prefix}button-#{$theme} {
 
       @include theme.set-colors(
         map.get($states, "default", "text-color"),

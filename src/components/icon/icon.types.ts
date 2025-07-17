@@ -1,5 +1,5 @@
-import { ICONS } from './yoo-icon-base';
-import { ICON_DIRECTIONS, ICON_ANIMATION_ARRAY } from './yoo-icon.constants';
+import { ICONS } from './icon-base';
+import { ICON_DIRECTIONS, ICON_ANIMATION_ARRAY } from './icon.constants';
 
 export const iconSizes = {
   small: 16,

@@ -1,9 +1,9 @@
 import type { Meta } from '@storybook/html';
 
 import { sizeVariantsArray, themePaletteArray } from '../../shared/theme/theme.types';
-import { ICON_OPTIONS } from '../yoo-icon/yoo-icon.constants';
+import { ICON_OPTIONS } from '../icon/icon.constants';
 
-import { buttonStyleArray, type ButtonProps } from './yoo-button.types';
+import { buttonStyleArray, type ButtonProps } from './button.types';
 
 const SB_TABLE_ICON = {
   type: {
@@ -13,7 +13,7 @@ const SB_TABLE_ICON = {
 
 const meta: Meta<ButtonProps> = {
   title: 'Components/Button',
-  component: 'yoo-button',
+  component: 'mnt-button',
   argTypes: {
     label: { control: 'text' },
     size: {
@@ -61,7 +61,7 @@ const meta: Meta<ButtonProps> = {
 export default meta;
 
 const Template = (args: ButtonProps) => `
-  <yoo-button
+  <mnt-button
     label="${args.label ?? ''}"
     icon-left="${args.iconLeft ?? ''}"
     icon-right="${args.iconRight ?? ''}"
@@ -70,7 +70,7 @@ const Template = (args: ButtonProps) => `
     size="${args.size}"
     disabled="${args.disabled}"
     full-width="${args.fullWidth}"
-  ></yoo-button>
+  ></mnt-button>
 `;
 
 export const Playground = Template.bind({});

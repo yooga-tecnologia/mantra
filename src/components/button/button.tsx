@@ -1,12 +1,16 @@
 import { Component, Host, Prop, Event, EventEmitter, h } from '@stencil/core';
-import type { ButtonProps } from './yoo-button.types';
+
+import { getLibPrefix } from '../../utils/utils';
+import type { ButtonProps } from './button.types';
+
+const LIB_PREFIX = getLibPrefix();
 
 @Component({
-  tag: 'yoo-button',
-  styleUrl: 'yoo-button.scss',
+  tag: 'mnt-button',
+  styleUrl: 'button.scss',
   shadow: false,
 })
-export class YooButton {
+export class Button {
   // Base styles
   @Prop() size: ButtonProps['size'] = 'medium';
   @Prop() color: ButtonProps['color'] = 'primary';
@@ -37,11 +41,19 @@ export class YooButton {
   }
 
   get buttonClass() {
-    const sizeClass = `button-${this.size}`;
-    const variantClass = `button-${this.variant}`;
-    const colorClass = `button-${this.color}`;
-    const disabledClass = this.disabled ? 'button-disabled' : '';
-    const fullWidthClass = this.fullWidth ? 'button-full-width' : '';
+    let colorClass = '';
+
+    if (this.variant === 'emphasis' && this.color === 'neutral') {
+      console.warn('[MANTRA] The "neutral" color is not supported for the "emphasis" variant. Please use a different color.');
+      colorClass = `${LIB_PREFIX}button-primary`;
+    } else {
+      colorClass = `${LIB_PREFIX}button-${this.color}`;
+    }
+
+    const sizeClass = `${LIB_PREFIX}button-${this.size}`;
+    const variantClass = `${LIB_PREFIX}button-${this.variant}`;
+    const disabledClass = this.disabled ? `${LIB_PREFIX}button-disabled` : '';
+    const fullWidthClass = this.fullWidth ? `${LIB_PREFIX}button-full-width` : '';
 
     return `${fullWidthClass} ${variantClass} ${sizeClass} ${colorClass} ${disabledClass}`;
   }
@@ -56,7 +68,7 @@ export class YooButton {
           part="button"
         >
           {this.iconLeft && (
-            <yoo-icon
+            <mnt-icon
               icon={this.iconLeft}
               animation={this.iconAnimation}
               class="icon-left"
@@ -74,7 +86,7 @@ export class YooButton {
           )}
 
           {this.iconRight && (
-            <yoo-icon
+            <mnt-icon
               icon={this.iconRight}
               animation={this.iconAnimation}
               class="icon-right"

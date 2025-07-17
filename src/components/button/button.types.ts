@@ -1,5 +1,5 @@
 import type { SizeVariants, ThemePalette } from '@theme/theme.types';
-import type { ExtendedIconName, IconAnimation } from '../yoo-icon/yoo-icon.types';
+import type { ExtendedIconName, IconAnimation } from '../icon/icon.types';
 
 /** Possible button style variants */
 export const buttonStyleArray = ['regular', 'emphasis', 'stroke', 'plain'] as const;
