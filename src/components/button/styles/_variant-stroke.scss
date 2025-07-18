@@ -1,0 +1,62 @@
+@use "sass:map";
+@use "sass:color";
+
+@use "../../../shared/theme/tokens/actions/index.scss" as action-tokens;
+@use "../../../shared/theme/core/theme" as theme;
+
+///
+/// Button Stroke Theme
+///
+
+$lib-prefix: theme.get-prefix();
+
+@mixin set-button-styles() {
+  @each $theme, $states in action-tokens.$stroke-theme-map {
+    .#{$lib-prefix}button-stroke.#{$lib-prefix}button-#{$theme} {
+      border-style: solid;
+      border-width: 1px;
+
+      & {
+        @include theme.set-colors(
+          map.get($states, "default", "text-color"),
+          map.get($states, "default", "bg-color"),
+          map.get(action-tokens.$stroke-borders-map, "default")
+        );
+      }
+
+      &:hover {
+        border-color: map.get(action-tokens.$stroke-borders-map, "hover");
+        @include theme.set-colors(
+          map.get($states, "hover", "text-color"),
+          map.get($states, "hover", "bg-color")
+        );
+      }
+
+      &:focus {
+        border-color: map.get(action-tokens.$stroke-borders-map, "focus");
+        @include theme.set-colors(
+          map.get($states, "focus", "text-color"),
+          map.get($states, "focus", "bg-color")
+        );
+      }
+
+      &:disabled {
+        border-color: map.get(action-tokens.$stroke-borders-map, "disabled");
+        @include theme.set-colors(
+          map.get(
+            action-tokens.$stroke-theme-map,
+            "disabled",
+            "default",
+            "text-color"
+          ),
+          map.get(
+            action-tokens.$stroke-theme-map,
+            "disabled",
+            "default",
+            "bg-color"
+          )
+        );
+      }
+    }
+  }
+}

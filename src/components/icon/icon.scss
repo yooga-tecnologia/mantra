@@ -1,0 +1,31 @@
+@forward "../../shared/theme/core/animations";
+
+mnt-icon {
+  display: inline-block;
+
+  .icon-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      position: absolute;
+      z-index: 1;
+    }
+
+    .icon-bg {
+      display: block;
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 0;
+
+      &.border-circle  {
+        border-radius: 50%;
+      }
+    }
+  }
+}

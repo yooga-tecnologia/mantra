@@ -1,0 +1,16 @@
+@forward "../../shared/theme/core/animations";
+@use "../../shared/theme/core/theme" as theme;
+
+$lib-prefix: theme.get-prefix();
+
+.#{$lib-prefix}illustration-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    position: relative;
+    z-index: 1;
+  }
+}

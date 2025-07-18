@@ -1,0 +1,54 @@
+@use "sass:map";
+@use "sass:color";
+
+@use "../../../shared/theme/tokens/actions/index.scss" as action-tokens;
+@use "../../../shared/theme/core/theme" as theme;
+
+///
+/// Button Regular Theme
+///
+
+$lib-prefix: theme.get-prefix();
+
+@mixin set-button-styles() {
+  @each $theme, $states in action-tokens.$regular-theme-map {
+    .#{$lib-prefix}button-regular.#{$lib-prefix}button-#{$theme} {
+      @include theme.set-colors(
+        map.get($states, "default", "text-color"),
+        map.get($states, "default", "bg-color"),
+        transparent,
+      );
+
+      &:hover {
+        @include theme.set-colors(
+          map.get($states, "hover", "text-color"),
+          map.get($states, "hover", "bg-color")
+        );
+      }
+
+      &:focus {
+        @include theme.set-colors(
+          map.get($states, "focus", "text-color"),
+          map.get($states, "focus", "bg-color")
+        );
+      }
+
+      &:disabled {
+        @include theme.set-colors(
+          map.get(
+            action-tokens.$stroke-theme-map,
+            "disabled",
+            "default",
+            "text-color"
+          ),
+          map.get(
+            action-tokens.$stroke-theme-map,
+            "disabled",
+            "default",
+            "bg-color"
+          )
+        );
+      }
+    }
+  }
+}

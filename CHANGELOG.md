@@ -4,6 +4,16 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.0.0] – 2025-07-18
+
+### ⚙️ Refatorado
+
+Refatoração de todos os componentes com o objetivo de viabilizar compatibilidade em projetos com elementos homônimos.
+
+- Revisão e padronização de classes CSS em todos os componentes para evitar conflitos e melhorar a manutenção.
+- Atualização de testes unitários para cobrir cenários adicionais, como o comportamento de slots e atributos.
+- Atualização da documentação no Storybook para refletir as mudanças realizadas.
+
 ## [1.5.2] – 2025-07-15
 
 ### ✅ Corrigido

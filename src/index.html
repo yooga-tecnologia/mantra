@@ -23,112 +23,99 @@
 
   <h3>Default</h3>
 
-  <yoo-button
+  <mnt-button
     label="Default"
     disabled
-  ></yoo-button>
+  ></mnt-button>
 
-  <yoo-button
+  <mnt-button
     label="Default"
     onClick="alert('Button clicked!')"
-  ></yoo-button>
+  ></mnt-button>
 
-  <yoo-button
+  <mnt-button
     icon-left="plus"
     icon-right="plus"
   >
     Exemplo de botão utilizando
     <strong>slot</strong>
-  </yoo-button>
+  </mnt-button>
 
-  <yoo-button
+  <mnt-button
     label="Default with icons"
     icon-left="plus"
     icon-right="plus"
-  ></yoo-button>
+  ></mnt-button>
 
-  <yoo-button
+  <mnt-button
     label="Default with icons"
     icon-right="plus"
-  ></yoo-button>
+  ></mnt-button>
 
-  <yoo-button
+  <mnt-button
     label="Default with icons"
     icon-left="plus"
-  ></yoo-button>
+  ></mnt-button>
 
   <h3>Regular</h3>
-  <yoo-button
-    variant="regular"
-    label="Regular"
+  <mnt-button
+    variant="emphasis"
+    label="emphasis"
     icon-left="signalingCheckCircle"
     icon-right="signalingCheckCircle"
-    color="primary"
+    color="neutral"
     size="large"
     disabled="false"
     full-width="false"
-  ></yoo-button>
-  <yoo-button
-    variant="regular"
-    label="Regular"
+  ></mnt-button>
+  <mnt-button
+    variant="emphasis"
+    label="emphasis"
     icon-left="signalingCheckCircle"
     icon-right="signalingCheckCircle"
-    color="primary"
+    color="neutral"
     size="medium"
     disabled="false"
     full-width="false"
-  ></yoo-button>
-  <yoo-button
-    variant="regular"
-    label="Regular"
+  ></mnt-button>
+  <mnt-button
+    variant="emphasis"
+    label="emphasis"
     icon-left="signalingCheckCircle"
     icon-right="signalingCheckCircle"
-    color="primary"
+    color="neutral"
     size="small"
     disabled="false"
     full-width="false"
-  ></yoo-button>
-
+  ></mnt-button>
   <!-- YooInput Component Example -->
   <div style="padding: 16px;">
 
-    <yoo-input-group inputName="username" label="Username" placeholder="Enter your username" is-required="true"
-      condition="false" trailing-icon="true">
-      <input maxlength="10" />
-    </yoo-input-group>
-
-    <yoo-input-group inputName="email" label="Email" placeholder="Enter your email" is-required="false" condition="false"
-      trailing-icon="true">
-      <input maxlength="10" />
-    </yoo-input-group>
-
-    <yoo-input-group inputName="name" label="name" placeholder="Enter your name" is-required="true" condition="true">
-      <input maxlength="10" />
-    </yoo-input-group>
-    
-    <yoo-input-group inputName="password" label="Password" placeholder="Enter your password" is-required="true"
-      trailing-icon="true">
-      <input maxlength="10" />
-    </yoo-input-group>
-  </div>
-
-  <div style="display: inline-flex; flex-direction: row;">
-    <!-- YooIcon Component Example -->
-    <yoo-icon icon="caret-right" size="small" color="black"></yoo-icon>
-    <yoo-icon icon="caret-right" size="medium" color="black"></yoo-icon>
-    <yoo-icon icon="caret-right" size="large" color="black"></yoo-icon>
-
-    <yoo-icon icon="caret-right" size="large" color="white" background="black"></yoo-icon>
-    <yoo-icon icon="caret-right" size="doubleLarge" color="white" background="black"></yoo-icon>
-  </div>
+    <mnt-input-group
+      inputName="username"
+      label="Username"
+      placeholder="Enter your username"
+      is-required="true"
+      condition="false"
+      trailing-icon="true"
+    >
+      <input maxlength="10" id="teste" />
+      <div slot="helper-text">
+        ashdiodsjofjidsjf
+      </div>
+      <div slot="icon">
+        <mnt-icon icon="signalingCheckCircle" size="small" color="black"></mnt-icon>
+      </div>
+    </mnt-input-group>
+  </div>œ
 
   <div>
-    <yoo-illustration name="happyWithCheckGreen" height="250px"></yoo-illustration></yoo-illustration>
+    <mnt-illustration name="burger" height="250px"></mnt-illustration>
   </div>
 
-  <yoo-tooltip text="Texto tooltip" position="right">
-    <yoo-icon icon="info" slot="trigger"></yoo-icon>
-  </yoo-tooltip>
+  <mnt-tooltip text="Texto tooltip" position="right">
+    <mnt-icon icon="signalingCheckCircle" size="small" color="black"></mnt-icon>
+  </mnt-tooltip>
 
 </body>
 
