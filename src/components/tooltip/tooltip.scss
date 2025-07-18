@@ -1,8 +1,8 @@
-.tooltip-wrapper {
+.mnt-tooltip-container {
   position: relative;
   display: inline-block;
 
-  .tooltip-content {
+  .mnt-tooltip-content {
     position: absolute;
     opacity: 0;
     visibility: hidden;
@@ -89,12 +89,12 @@
     }
   }
 
-  &.visible .tooltip-content {
+  &.visible .mnt-tooltip-content {
     visibility: visible;
     opacity: 1;
   }
 
-  &.hidden .tooltip-content {
+  &.hidden .mnt-tooltip-content {
     visibility: hidden;
     opacity: 0;
   }

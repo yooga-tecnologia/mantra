@@ -1,12 +1,14 @@
 import { Component, h, Prop, State, Element, Listen, Host } from '@stencil/core';
-import { TooltipProps } from './yoo-tooltip.types';
+
+import { TooltipProps } from './tooltip.types';
+import { getLibPrefix } from 'src/utils/utils';
 
 @Component({
-  tag: 'yoo-tooltip',
-  styleUrl: 'yoo-tooltip.scss',
+  tag: 'mnt-tooltip',
+  styleUrl: 'tooltip.scss',
   shadow: false,
 })
-export class YooTooltip {
+export class Tooltip {
   @Element() el: HTMLElement;
 
   @Prop() text: TooltipProps['text'];
@@ -14,7 +16,9 @@ export class YooTooltip {
 
   @State() isVisible: boolean = false;
 
-  private tooltipId = `tooltip-${Math.random().toString(36).substring(2, 8)}`;
+  private readonly libPrefix = getLibPrefix();
+  private readonly componentPrefix = `${this.libPrefix}tooltip-`;
+  private readonly tooltipId = `${this.libPrefix}tooltip-${Math.random().toString(36).substring(2, 8)}`;
 
   @Listen('mouseenter')
   handleMouseEnter() {
@@ -41,7 +45,7 @@ export class YooTooltip {
       <Host>
         <div
           class={{
-            'tooltip-wrapper': true,
+            [this.componentPrefix + 'container']: true,
             'visible': this.isVisible,
             'hidden': !this.isVisible,
           }}
@@ -50,7 +54,7 @@ export class YooTooltip {
           <span
             id={this.tooltipId}
             class={{
-              'tooltip-content': true,
+              [this.componentPrefix + 'content']: true,
               [this.position]: true,
             }}
             role="tooltip"

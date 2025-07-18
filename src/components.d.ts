@@ -8,11 +8,11 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ButtonProps } from "./components/button/button.types";
 import { IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
-import { TooltipProps } from "./components/yoo-tooltip/yoo-tooltip.types";
+import { TooltipProps } from "./components/tooltip/tooltip.types";
 export { ButtonProps } from "./components/button/button.types";
 export { IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
-export { TooltipProps } from "./components/yoo-tooltip/yoo-tooltip.types";
+export { TooltipProps } from "./components/tooltip/tooltip.types";
 export namespace Components {
     interface MntButton {
         "color": ButtonProps['color'];
@@ -45,7 +45,7 @@ export namespace Components {
         "placeholder"?: string;
         "trailingIcon": boolean;
     }
-    interface YooTooltip {
+    interface MntTooltip {
         "position": TooltipProps['position'];
         "text": TooltipProps['text'];
     }
@@ -90,18 +90,18 @@ declare global {
         prototype: HTMLMntInputGroupElement;
         new (): HTMLMntInputGroupElement;
     };
-    interface HTMLYooTooltipElement extends Components.YooTooltip, HTMLStencilElement {
+    interface HTMLMntTooltipElement extends Components.MntTooltip, HTMLStencilElement {
     }
-    var HTMLYooTooltipElement: {
-        prototype: HTMLYooTooltipElement;
-        new (): HTMLYooTooltipElement;
+    var HTMLMntTooltipElement: {
+        prototype: HTMLMntTooltipElement;
+        new (): HTMLMntTooltipElement;
     };
     interface HTMLElementTagNameMap {
         "mnt-button": HTMLMntButtonElement;
         "mnt-icon": HTMLMntIconElement;
         "mnt-illustration": HTMLMntIllustrationElement;
         "mnt-input-group": HTMLMntInputGroupElement;
-        "yoo-tooltip": HTMLYooTooltipElement;
+        "mnt-tooltip": HTMLMntTooltipElement;
     }
 }
 declare namespace LocalJSX {
@@ -137,7 +137,7 @@ declare namespace LocalJSX {
         "placeholder"?: string;
         "trailingIcon"?: boolean;
     }
-    interface YooTooltip {
+    interface MntTooltip {
         "position"?: TooltipProps['position'];
         "text"?: TooltipProps['text'];
     }
@@ -146,7 +146,7 @@ declare namespace LocalJSX {
         "mnt-icon": MntIcon;
         "mnt-illustration": MntIllustration;
         "mnt-input-group": MntInputGroup;
-        "yoo-tooltip": YooTooltip;
+        "mnt-tooltip": MntTooltip;
     }
 }
 export { LocalJSX as JSX };
@@ -157,7 +157,7 @@ declare module "@stencil/core" {
             "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;
             "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
             "mnt-input-group": LocalJSX.MntInputGroup & JSXBase.HTMLAttributes<HTMLMntInputGroupElement>;
-            "yoo-tooltip": LocalJSX.YooTooltip & JSXBase.HTMLAttributes<HTMLYooTooltipElement>;
+            "mnt-tooltip": LocalJSX.MntTooltip & JSXBase.HTMLAttributes<HTMLMntTooltipElement>;
         }
     }
 }
