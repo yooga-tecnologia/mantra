@@ -142,12 +142,24 @@
   <!-- YooInput Component Example -->
   <div style="padding: 16px;">
 
-    <yoo-input-group inputName="username" label="Username" placeholder="Enter your username" is-required="true"
-      condition="false" trailing-icon="true">
-      <input maxlength="10" />
-    </yoo-input-group>
+    <mnt-input-group
+      inputName="username"
+      label="Username"
+      placeholder="Enter your username"
+      is-required="true"
+      condition="false"
+      trailing-icon="true"
+    >
+      <input maxlength="10" id="teste" />
+      <div slot="helper-text">
+        ashdiodsjofjidsjf
+      </div>
+      <div slot="icon">
+        <mnt-icon icon="signalingCheckCircle" size="small" color="black"></mnt-icon>
+      </div>
+    </mnt-input-group>
 
-    <yoo-input-group inputName="email" label="Email" placeholder="Enter your email" is-required="false" condition="false"
+    <!-- <yoo-input-group inputName="email" label="Email" placeholder="Enter your email" is-required="false" condition="false"
       trailing-icon="true">
       <input maxlength="10" />
     </yoo-input-group>
@@ -159,7 +171,7 @@
     <yoo-input-group inputName="password" label="Password" placeholder="Enter your password" is-required="true"
       trailing-icon="true">
       <input maxlength="10" />
-    </yoo-input-group>
+    </yoo-input-group> -->
   </div>
 
   <div style="display: inline-flex; flex-direction: row;">

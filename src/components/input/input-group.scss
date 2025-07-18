@@ -1,9 +1,12 @@
 @use 'sass:map';
 
+@use '../../shared/theme/core/theme' as theme;
 @use '../../shared/theme/tokens/primitives' as primitives;
 @use '../../shared/theme/tokens/sizing' as sizing;
 
-.input-group {
+$lib-prefix: theme.get-prefix();
+
+.#{$lib-prefix}input-group {
   .label-wrapper {
     display: flex;
     align-items: center;

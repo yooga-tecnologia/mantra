@@ -1,11 +1,11 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { YooInputGroup } from './yoo-input-group';
+import { InputGroup } from './input-group';
 
-describe('yoo-input-group', () => {
+describe('mnt-input-group', () => {
   it('renders correctly with default props', async () => {
     const page = await newSpecPage({
-      components: [YooInputGroup],
-      html: `<yoo-input-group input-name="test" label="Test Label"></yoo-input-group>`,
+      components: [InputGroup],
+      html: `<mnt-input-group input-name="test" label="Test Label"></mnt-input-group>`,
     });
 
     expect(page.root).toMatchSnapshot();
@@ -15,10 +15,10 @@ describe('yoo-input-group', () => {
 
   it('applies the required attribute correctly', async () => {
     const page = await newSpecPage({
-      components: [YooInputGroup],
-      html: `<yoo-input-group input-name="test" label="Test Label" is-required>
+      components: [InputGroup],
+      html: `<mnt-input-group input-name="test" label="Test Label" is-required>
                <input  />
-             </yoo-input-group>`,
+             </mnt-input-group>`,
     });
 
     expect(page.rootInstance.isRequired).toBeTruthy();
@@ -27,10 +27,10 @@ describe('yoo-input-group', () => {
 
   it('disables input when condition is true', async () => {
     const page = await newSpecPage({
-      components: [YooInputGroup],
-      html: `<yoo-input-group input-name="test" label="Test Label" condition>
+      components: [InputGroup],
+      html: `<mnt-input-group input-name="test" label="Test Label" condition>
                <input />
-             </yoo-input-group>`,
+             </mnt-input-group>`,
     });
 
     expect(page.rootInstance.condition).toBeTruthy();
@@ -38,10 +38,10 @@ describe('yoo-input-group', () => {
 
   it('renders with a placeholder', async () => {
     const page = await newSpecPage({
-      components: [YooInputGroup],
-      html: `<yoo-input-group input-name="test" label="Test Label" placeholder="Enter value">
+      components: [InputGroup],
+      html: `<mnt-input-group input-name="test" label="Test Label" placeholder="Enter value">
                <input placeholder="Enter value" />
-             </yoo-input-group>`,
+             </mnt-input-group>`,
     });
 
     expect(page.rootInstance.placeholder).toBe('Enter value');
@@ -49,10 +49,10 @@ describe('yoo-input-group', () => {
 
   it('renders with trailing icon slot', async () => {
     const page = await newSpecPage({
-      components: [YooInputGroup],
-      html: `<yoo-input-group input-name="test" label="Test Label" trailing-icon>
+      components: [InputGroup],
+      html: `<mnt-input-group input-name="test" label="Test Label" trailing-icon>
              <span slot="actions">🔍</span>
-           </yoo-input-group>`,
+           </mnt-input-group>`,
     });
 
     const trailingIcon = page.root.querySelector("[slot='actions']");
@@ -63,11 +63,11 @@ describe('yoo-input-group', () => {
 
   it('matches full coverage with all props enabled', async () => {
     const page = await newSpecPage({
-      components: [YooInputGroup],
-      html: `<yoo-input-group input-name="test" label="Test Label" is-required condition trailing-icon placeholder="Enter value">
+      components: [InputGroup],
+      html: `<mnt-input-group input-name="test" label="Test Label" is-required condition trailing-icon placeholder="Enter value">
                <input slot="input" />
                <span slot="actions">🔍</span>
-             </yoo-input-group>`,
+             </mnt-input-group>`,
     });
 
     expect(page.rootInstance.inputName).toBe('test');

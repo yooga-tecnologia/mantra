@@ -37,7 +37,7 @@ export namespace Components {
         "name": IllustrationProps['name'];
         "width": IllustrationProps['width'];
     }
-    interface YooInputGroup {
+    interface MntInputGroup {
         "condition": boolean;
         "inputName": string;
         "isRequired": boolean;
@@ -84,11 +84,11 @@ declare global {
         prototype: HTMLMntIllustrationElement;
         new (): HTMLMntIllustrationElement;
     };
-    interface HTMLYooInputGroupElement extends Components.YooInputGroup, HTMLStencilElement {
+    interface HTMLMntInputGroupElement extends Components.MntInputGroup, HTMLStencilElement {
     }
-    var HTMLYooInputGroupElement: {
-        prototype: HTMLYooInputGroupElement;
-        new (): HTMLYooInputGroupElement;
+    var HTMLMntInputGroupElement: {
+        prototype: HTMLMntInputGroupElement;
+        new (): HTMLMntInputGroupElement;
     };
     interface HTMLYooTooltipElement extends Components.YooTooltip, HTMLStencilElement {
     }
@@ -100,7 +100,7 @@ declare global {
         "mnt-button": HTMLMntButtonElement;
         "mnt-icon": HTMLMntIconElement;
         "mnt-illustration": HTMLMntIllustrationElement;
-        "yoo-input-group": HTMLYooInputGroupElement;
+        "mnt-input-group": HTMLMntInputGroupElement;
         "yoo-tooltip": HTMLYooTooltipElement;
     }
 }
@@ -129,7 +129,7 @@ declare namespace LocalJSX {
         "name": IllustrationProps['name'];
         "width"?: IllustrationProps['width'];
     }
-    interface YooInputGroup {
+    interface MntInputGroup {
         "condition"?: boolean;
         "inputName"?: string;
         "isRequired"?: boolean;
@@ -145,7 +145,7 @@ declare namespace LocalJSX {
         "mnt-button": MntButton;
         "mnt-icon": MntIcon;
         "mnt-illustration": MntIllustration;
-        "yoo-input-group": YooInputGroup;
+        "mnt-input-group": MntInputGroup;
         "yoo-tooltip": YooTooltip;
     }
 }
@@ -156,7 +156,7 @@ declare module "@stencil/core" {
             "mnt-button": LocalJSX.MntButton & JSXBase.HTMLAttributes<HTMLMntButtonElement>;
             "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;
             "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
-            "yoo-input-group": LocalJSX.YooInputGroup & JSXBase.HTMLAttributes<HTMLYooInputGroupElement>;
+            "mnt-input-group": LocalJSX.MntInputGroup & JSXBase.HTMLAttributes<HTMLMntInputGroupElement>;
             "yoo-tooltip": LocalJSX.YooTooltip & JSXBase.HTMLAttributes<HTMLYooTooltipElement>;
         }
     }

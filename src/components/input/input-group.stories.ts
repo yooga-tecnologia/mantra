@@ -1,6 +1,6 @@
 export default {
   title: 'Components/InputGroup',
-  component: 'yoo-input-group',
+  component: 'mnt-input-group',
   argTypes: {
     inputName: { control: 'text' },
     label: { control: 'text' },
@@ -13,7 +13,7 @@ export default {
 
 const Template = args => `
   <div style="width: 500px">
-    <yoo-input-group
+    <mnt-input-group
       inputName="${args.inputName}"
       label="${args.label}"
       placeholder="${args.placeholder}"
@@ -25,7 +25,7 @@ const Template = args => `
       <span slot="helperText">Helper Text</span>
       <input slot="input" />
       ${args.trailingIcon ? '<span slot="actions">🔍</span>' : ''}
-    </yoo-input-group>
+    </mnt-input-group>
   </div>
 `;
 
