@@ -45,6 +45,33 @@ $action-text-map: (
     hover: theme.get-tone-from-palette(900, "warning"),
     pressed: theme.get-tone-from-palette(950, "warning"),
   ),
+  surface: (
+    primary: (
+      default: theme.get-tone-from-palette(300, "primary"),
+      hover: theme.get-tone-from-palette(200, "primary"),
+      pressed: theme.get-tone-from-palette(400, "primary"),
+    ),
+    secondary: (
+      default: theme.get-tone-from-palette(300, "secondary"),
+      hover: theme.get-tone-from-palette(200, "secondary"),
+      pressed: theme.get-tone-from-palette(400, "secondary"),
+    ),
+    critical: (
+      default: theme.get-tone-from-palette(300, "critical"),
+      hover: theme.get-tone-from-palette(200, "critical"),
+      pressed: theme.get-tone-from-palette(400, "critical"),
+    ),
+    success: (
+      default: theme.get-tone-from-palette(300, "success"),
+      hover: theme.get-tone-from-palette(200, "success"),
+      pressed: theme.get-tone-from-palette(400, "success"),
+    ),
+    warning: (
+      default: theme.get-tone-from-palette(300, "warning"),
+      hover: theme.get-tone-from-palette(200, "warning"),
+      pressed: theme.get-tone-from-palette(400, "warning"),
+    ),
+  ),
   on: (
     primary: (
       default: theme.get-tone-from-palette(800, "primary"),
