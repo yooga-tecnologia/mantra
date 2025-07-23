@@ -4,9 +4,19 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.0.1] – 2025-07-23
+
+### ♻️ Refatorado
+
+- Esquema de cores utilizados em botões para refletir atualizações do Figma;
+
+### 🚀 Adicionado
+
+- Button: Variante "warning";
+
 ## [2.0.0] – 2025-07-18
 
-### ⚙️ Refatorado
+### ♻️ Refatorado
 
 Refatoração de todos os componentes com o objetivo de viabilizar compatibilidade em projetos com elementos homônimos.
 

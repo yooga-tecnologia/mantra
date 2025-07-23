@@ -4,9 +4,8 @@
 $surface-action-plain-hover: theme.get-tone-from-palette(50, "neutral");
 $surface-action-plain-pressed: theme.get-tone-from-palette(100, "neutral");
 
-/**
- * @TODO: utilizar tokens de texto ($action-text-map)
- */
+// @todo - Improvements - use text tokens ($action-text-map)
+
 $plain-theme-map: (
   common-states: (
     selected: (

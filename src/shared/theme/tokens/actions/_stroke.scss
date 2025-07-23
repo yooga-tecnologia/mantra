@@ -9,9 +9,7 @@ $stroke-borders-map: (
   selected: theme.get-tone-from-palette(600, "primary"),
 );
 
-/**
- * @TODO: utilizar tokens de texto ($action-text-map)
- */
+// @todo - Improvements - use text tokens ($action-text-map)
 $stroke-theme-map: (
   disabled: (
     default: (
@@ -72,6 +70,20 @@ $stroke-theme-map: (
     ),
     pressed: (
       "text-color": theme.get-tone-from-palette(950, "success"),
+      "bg-color": theme.get-tone-from-palette(100, "neutral"),
+    ),
+  ),
+  warning: (
+    default: (
+      "text-color": theme.get-tone-from-palette(700, "warning"),
+      "bg-color": transparent,
+    ),
+    hover: (
+      "text-color": theme.get-tone-from-palette(900, "warning"),
+      "bg-color": theme.get-tone-from-palette(50, "neutral"),
+    ),
+    pressed: (
+      "text-color": theme.get-tone-from-palette(950, "warning"),
       "bg-color": theme.get-tone-from-palette(100, "neutral"),
     ),
   ),
