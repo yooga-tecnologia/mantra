@@ -2,6 +2,7 @@ import { ICONS } from './icon-base';
 import { ICON_DIRECTIONS, ICON_ANIMATION_ARRAY } from './icon.constants';
 
 export const iconSizes = {
+  tiny: 12,
   small: 16,
   medium: 24,
   large: 32,

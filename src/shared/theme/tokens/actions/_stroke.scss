@@ -9,7 +9,7 @@ $stroke-borders-map: (
   selected: theme.get-tone-from-palette(600, "primary"),
 );
 
-// @todo - Improvements - use text tokens ($action-text-map)
+// FIXME - use text tokens ($action-text-map)
 $stroke-theme-map: (
   disabled: (
     default: (

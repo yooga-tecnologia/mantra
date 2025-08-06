@@ -42,6 +42,7 @@ export class Button {
 
   get buttonClass() {
     let colorClass = '';
+    let sizeClass = '';
 
     if (this.variant === 'emphasis' && this.color === 'neutral') {
       console.warn('[MANTRA] The "neutral" color is not supported for the "emphasis" variant. Please use a different color.');
@@ -50,7 +51,13 @@ export class Button {
       colorClass = `${LIB_PREFIX}button-${this.color}`;
     }
 
-    const sizeClass = `${LIB_PREFIX}button-${this.size}`;
+    if (this.size === 'tiny') {
+      console.warn('[MANTRA] The "tiny" size is not supported for this type of button. Please use a different value.');
+      sizeClass = `${LIB_PREFIX}button-small`;
+    } else {
+      sizeClass = `${LIB_PREFIX}button-${this.size}`;
+    }
+
     const variantClass = `${LIB_PREFIX}button-${this.variant}`;
     const disabledClass = this.disabled ? `${LIB_PREFIX}button-disabled` : '';
     const fullWidthClass = this.fullWidth ? `${LIB_PREFIX}button-full-width` : '';
@@ -71,6 +78,7 @@ export class Button {
             <mnt-icon
               icon={this.iconLeft}
               animation={this.iconAnimation}
+              size={this.size}
               class="icon-left"
             />
           )}
@@ -89,6 +97,7 @@ export class Button {
             <mnt-icon
               icon={this.iconRight}
               animation={this.iconAnimation}
+              size={this.size}
               class="icon-right"
             />
           )}

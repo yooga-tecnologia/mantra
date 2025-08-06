@@ -7,7 +7,7 @@ $surface-action-regular: (
   pressed: theme.get-tone-from-palette(200, "neutral"),
 );
 
-// @todo - Improvements - use text tokens ($action-text-map)
+// FIXME - use text tokens ($action-text-map)
 $regular-theme-map: (
   common-states: (
     selected: (

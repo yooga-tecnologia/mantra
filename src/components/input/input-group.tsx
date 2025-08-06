@@ -1,7 +1,7 @@
 import { Component, Host, Prop, h } from "@stencil/core";
 import { getLibPrefix } from 'src/utils/utils';
 
-// @todo - Review / Improve component classes and styles following https://m3.material.io/components/text-fields/specs guidelines
+// BUG - Review / Improve component classes and styles following https://m3.material.io/components/text-fields/specs guidelines
 
 @Component({
   tag: "mnt-input-group",
@@ -14,7 +14,7 @@ export class InputGroup {
   @Prop() placeholder?: string;
   @Prop() isRequired: boolean = false;
 
-  // @todo - Review behavior / styles (the component isnt rendering it properly)
+  // BUG - Review behavior / styles (the component isnt rendering it properly)
   @Prop() condition: boolean = false;
   @Prop() trailingIcon: boolean = false;
 

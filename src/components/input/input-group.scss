@@ -65,7 +65,7 @@ $lib-prefix: theme.get-prefix();
     box-sizing: border-box;
 
     &:hover {
-      border-color: #818A8F; // TODO: Não achei no tokens
+      border-color: #818A8F; // FIXME - replace with a theme token
     }
 
     &:focus-visible,

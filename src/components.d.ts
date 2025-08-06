@@ -5,11 +5,11 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ButtonProps } from "./components/button/button.types";
+import { ButtonIconProps, ButtonProps } from "./components/button/button.types";
 import { IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
 import { TooltipProps } from "./components/tooltip/tooltip.types";
-export { ButtonProps } from "./components/button/button.types";
+export { ButtonIconProps, ButtonProps } from "./components/button/button.types";
 export { IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
 export { TooltipProps } from "./components/tooltip/tooltip.types";
@@ -24,6 +24,13 @@ export namespace Components {
         "label"?: ButtonProps['label'];
         "size": ButtonProps['size'];
         "variant": ButtonProps['variant'];
+    }
+    interface MntButtonIcon {
+        "color": ButtonIconProps['color'];
+        "disabled": ButtonIconProps['disabled'];
+        "icon"?: ButtonIconProps['icon'];
+        "size": ButtonIconProps['size'];
+        "variant": ButtonIconProps['variant'];
     }
     interface MntIcon {
         "animation"?: IconProps['animation'];
@@ -54,6 +61,10 @@ export interface MntButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntButtonElement;
 }
+export interface MntButtonIconCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntButtonIconElement;
+}
 declare global {
     interface HTMLMntButtonElementEventMap {
         "buttonClick": MouseEvent;
@@ -71,6 +82,23 @@ declare global {
     var HTMLMntButtonElement: {
         prototype: HTMLMntButtonElement;
         new (): HTMLMntButtonElement;
+    };
+    interface HTMLMntButtonIconElementEventMap {
+        "buttonClick": MouseEvent;
+    }
+    interface HTMLMntButtonIconElement extends Components.MntButtonIcon, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntButtonIconElementEventMap>(type: K, listener: (this: HTMLMntButtonIconElement, ev: MntButtonIconCustomEvent<HTMLMntButtonIconElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntButtonIconElementEventMap>(type: K, listener: (this: HTMLMntButtonIconElement, ev: MntButtonIconCustomEvent<HTMLMntButtonIconElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntButtonIconElement: {
+        prototype: HTMLMntButtonIconElement;
+        new (): HTMLMntButtonIconElement;
     };
     interface HTMLMntIconElement extends Components.MntIcon, HTMLStencilElement {
     }
@@ -98,6 +126,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "mnt-button": HTMLMntButtonElement;
+        "mnt-button-icon": HTMLMntButtonIconElement;
         "mnt-icon": HTMLMntIconElement;
         "mnt-illustration": HTMLMntIllustrationElement;
         "mnt-input-group": HTMLMntInputGroupElement;
@@ -116,6 +145,14 @@ declare namespace LocalJSX {
         "onButtonClick"?: (event: MntButtonCustomEvent<MouseEvent>) => void;
         "size"?: ButtonProps['size'];
         "variant"?: ButtonProps['variant'];
+    }
+    interface MntButtonIcon {
+        "color"?: ButtonIconProps['color'];
+        "disabled"?: ButtonIconProps['disabled'];
+        "icon"?: ButtonIconProps['icon'];
+        "onButtonClick"?: (event: MntButtonIconCustomEvent<MouseEvent>) => void;
+        "size"?: ButtonIconProps['size'];
+        "variant"?: ButtonIconProps['variant'];
     }
     interface MntIcon {
         "animation"?: IconProps['animation'];
@@ -143,6 +180,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "mnt-button": MntButton;
+        "mnt-button-icon": MntButtonIcon;
         "mnt-icon": MntIcon;
         "mnt-illustration": MntIllustration;
         "mnt-input-group": MntInputGroup;
@@ -154,6 +192,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "mnt-button": LocalJSX.MntButton & JSXBase.HTMLAttributes<HTMLMntButtonElement>;
+            "mnt-button-icon": LocalJSX.MntButtonIcon & JSXBase.HTMLAttributes<HTMLMntButtonIconElement>;
             "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;
             "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
             "mnt-input-group": LocalJSX.MntInputGroup & JSXBase.HTMLAttributes<HTMLMntInputGroupElement>;
