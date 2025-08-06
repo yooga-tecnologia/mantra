@@ -12,7 +12,7 @@ const SB_TABLE_ICON = {
 }
 
 const meta: Meta<ButtonProps> = {
-  title: 'Components/Button',
+  title: 'Components/Button/Default',
   component: 'mnt-button',
   argTypes: {
     label: { control: 'text' },

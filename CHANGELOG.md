@@ -4,6 +4,12 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.1.0] – 2025-08-06
+
+### 🚀 Adicionado
+
+- ButtonIcon;
+
 ## [2.0.1] – 2025-07-23
 
 ### ♻️ Refatorado

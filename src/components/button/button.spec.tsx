@@ -54,7 +54,7 @@ describe('<mnt-button>', () => {
         <mnt-button
           size="large"
           color="secondary"
-          variant="outlined"
+          variant="stroke"
           label="${DEFAULT_LABEL}"
         ></mnt-button>
       `);
@@ -63,7 +63,7 @@ describe('<mnt-button>', () => {
       // ASSERTION
       expect(button).toHaveClass(`${LIB_PREFIX}button-large`);
       expect(button).toHaveClass(`${LIB_PREFIX}button-secondary`);
-      expect(button).toHaveClass(`${LIB_PREFIX}button-outlined`);
+      expect(button).toHaveClass(`${LIB_PREFIX}button-stroke`);
     });
 
     it('SHOULD disable the button WHEN disabled attribute is provided', async () => {
@@ -71,8 +71,6 @@ describe('<mnt-button>', () => {
       const page = await createButtonComponent(`<mnt-button disabled="true" label="${DEFAULT_LABEL}"></mnt-button>`);
       const button = getButtonElement(page);
 
-      console.log(button)
-      
       // ASSERTION
       expect(button).toHaveAttribute('disabled');
       expect(button).toHaveClass(`${LIB_PREFIX}button-disabled`);

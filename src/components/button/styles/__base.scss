@@ -7,32 +7,34 @@ $lib-prefix: theme.get-prefix();
 // Sizes
 
 $button-size-configs: (
+  "tiny": (
+    font-size: 12px,
+    padding: 8px,
+    height: 24px,
+  ),
   "small": (
     font-size: 12px,
-    icon-size: 14px,
     padding: 8px,
     height: 32px,
   ),
   "medium": (
     font-size: 14px,
-    icon-size: 16px,
     padding: 12px 16px,
     height: 48px,
   ),
   "large": (
     font-size: 16px,
-    icon-size: 24px,
     padding: 16px 24px,
     height: 56px,
   ),
 );
 
-$size-map-small: map.get($button-size-configs, "small");
 $border-radius-medium: map.get(sizing.$border-radius, "medium");
 
 @each $size, $configs in $button-size-configs {
   $size-map: map.get($button-size-configs, $size);
 
+  // TODO - Check if it overrides the L85 rule
   a.#{$lib-prefix}button-full-width,
   button.#{$lib-prefix}button-full-width {
     width: 100%;
@@ -69,14 +71,9 @@ $border-radius-medium: map.get(sizing.$border-radius, "medium");
       font-weight: 500;
     }
 
-    mnt-icon {
-      display: inline-flex;
-      align-items: center;
-
-      svg {
-        height: map.get($size-map, "icon-size");
-        width: map.get($size-map, "icon-size");
-      }
+    &.#{$lib-prefix}button-icon {
+      height: map.get($size-map, "height");
+      width: map.get($size-map, "height");
     }
   }
 }

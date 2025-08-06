@@ -4,7 +4,7 @@
 $surface-action-plain-hover: theme.get-tone-from-palette(50, "neutral");
 $surface-action-plain-pressed: theme.get-tone-from-palette(100, "neutral");
 
-// @todo - Improvements - use text tokens ($action-text-map)
+// FIXME - use text tokens ($action-text-map)
 
 $plain-theme-map: (
   common-states: (
