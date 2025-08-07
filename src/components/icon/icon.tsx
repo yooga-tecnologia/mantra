@@ -2,7 +2,9 @@ import { Component, Prop, h, Element } from '@stencil/core';
 
 import { ICONS } from './icon-base';
 import { directionTransformMap, ICON_DIRECTION_SUFFIX_REGEX } from './icon.constants';
-import { type Direction, type IconProps, iconSizes } from './icon.types';
+
+import { iconSizes } from './icon.types';
+import type { Direction, IconProps } from './icon.types';
 
 @Component({
   tag: 'mnt-icon',

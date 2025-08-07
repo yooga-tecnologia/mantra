@@ -1,7 +1,9 @@
 import { Component, Host, Prop, Event, EventEmitter, h } from '@stencil/core';
 
 import { setComponentClass } from '../../utils/utils';
-import { componentPrefix, type ButtonIconProps } from './button.types';
+import { componentPrefix } from './button.types';
+
+import type { ButtonIconProps } from './button.types';
 
 // TODO - Button - Keep in track stencil's inheritance issues with the `@Component` decorator. https://github.com/stenciljs/core/issues/2844
 @Component({

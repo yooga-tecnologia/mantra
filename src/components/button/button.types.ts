@@ -1,4 +1,4 @@
-import { type SizeVariants, type ThemePalette } from '@theme/theme.types';
+import type { SizeVariants, ThemePalette } from '@theme/theme.types';
 import type { ExtendedIconName, IconAnimation } from '../icon/icon.types';
 
 export const componentPrefix = 'button';

@@ -4,6 +4,12 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.1.1] – 2025-08-07
+
+### ✅ Corrigido
+
+- A forma de importação de tipos estava quebrando a execução de aplicações Angular(v12.2.17)
+
 ## [2.1.0] – 2025-08-06
 
 ### 🚀 Adicionado
