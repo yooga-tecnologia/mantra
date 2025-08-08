@@ -20,12 +20,14 @@
 
 ### Used by
 
+ - [mnt-badge](../badge)
  - [mnt-button](../button)
  - [mnt-button-icon](../button)
 
 ### Graph
 ```mermaid
 graph TD;
+  mnt-badge --> mnt-icon
   mnt-button --> mnt-icon
   mnt-button-icon --> mnt-icon
   style mnt-icon fill:#f9f,stroke:#333,stroke-width:4px

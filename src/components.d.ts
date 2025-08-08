@@ -5,15 +5,24 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { BadgeBaseProps } from "./components/badge/badge.types";
 import { ButtonIconProps, ButtonProps } from "./components/button/button.types";
 import { IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
 import { TooltipProps } from "./components/tooltip/tooltip.types";
+export { BadgeBaseProps } from "./components/badge/badge.types";
 export { ButtonIconProps, ButtonProps } from "./components/button/button.types";
 export { IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
 export { TooltipProps } from "./components/tooltip/tooltip.types";
 export namespace Components {
+    interface MntBadge {
+        "color"?: BadgeBaseProps['color'];
+        "icon"?: BadgeBaseProps['icon'];
+        "label": BadgeBaseProps['label'];
+        "size"?: BadgeBaseProps['size'];
+        "tone"?: BadgeBaseProps['tone'];
+    }
     interface MntButton {
         "color": ButtonProps['color'];
         "disabled": ButtonProps['disabled'];
@@ -66,6 +75,12 @@ export interface MntButtonIconCustomEvent<T> extends CustomEvent<T> {
     target: HTMLMntButtonIconElement;
 }
 declare global {
+    interface HTMLMntBadgeElement extends Components.MntBadge, HTMLStencilElement {
+    }
+    var HTMLMntBadgeElement: {
+        prototype: HTMLMntBadgeElement;
+        new (): HTMLMntBadgeElement;
+    };
     interface HTMLMntButtonElementEventMap {
         "buttonClick": MouseEvent;
     }
@@ -125,6 +140,7 @@ declare global {
         new (): HTMLMntTooltipElement;
     };
     interface HTMLElementTagNameMap {
+        "mnt-badge": HTMLMntBadgeElement;
         "mnt-button": HTMLMntButtonElement;
         "mnt-button-icon": HTMLMntButtonIconElement;
         "mnt-icon": HTMLMntIconElement;
@@ -134,6 +150,13 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface MntBadge {
+        "color"?: BadgeBaseProps['color'];
+        "icon"?: BadgeBaseProps['icon'];
+        "label"?: BadgeBaseProps['label'];
+        "size"?: BadgeBaseProps['size'];
+        "tone"?: BadgeBaseProps['tone'];
+    }
     interface MntButton {
         "color"?: ButtonProps['color'];
         "disabled"?: ButtonProps['disabled'];
@@ -179,6 +202,7 @@ declare namespace LocalJSX {
         "text"?: TooltipProps['text'];
     }
     interface IntrinsicElements {
+        "mnt-badge": MntBadge;
         "mnt-button": MntButton;
         "mnt-button-icon": MntButtonIcon;
         "mnt-icon": MntIcon;
@@ -191,6 +215,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "mnt-badge": LocalJSX.MntBadge & JSXBase.HTMLAttributes<HTMLMntBadgeElement>;
             "mnt-button": LocalJSX.MntButton & JSXBase.HTMLAttributes<HTMLMntButtonElement>;
             "mnt-button-icon": LocalJSX.MntButtonIcon & JSXBase.HTMLAttributes<HTMLMntButtonIconElement>;
             "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;

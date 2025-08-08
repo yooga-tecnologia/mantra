@@ -5,21 +5,30 @@
 
 @forward "./animations";
 
-$component-name-prefix: 'mnt-';
+$lib-prefix: 'mnt-';
 
 $theme-map: (
   primary:    primitives.$blue-palette,
   secondary:  primitives.$magenta-palette,
   tertiary:   primitives.$purple-palette,
   neutral:    primitives.$grey-palette,
-  info:       primitives.$blue-palette,
   success:    primitives.$green-palette,
   warning:    primitives.$yellow-palette,
   critical:   primitives.$red-palette,
 );
 
-@function get-prefix() {
-  @return $component-name-prefix;
+$tone-map: (
+  'default',
+  'highlight',
+  'emphasis',
+);
+
+@function get-prefix($componentName: '') {
+  @if $componentName != '' {
+    @return '#{$lib-prefix}#{$componentName}';
+  }
+
+  @return $lib-prefix;
 }
 
 @function get-color($color) {
@@ -46,7 +55,6 @@ $theme-map: (
 ) {
   color: $text-color;
   background-color: $bg-color;
-  border-radius: map.get(sizing.$border-radius, "medium");
 
   svg g {
     fill: $text-color;
@@ -56,5 +64,14 @@ $theme-map: (
     border-width: 1px;
     border-style: solid;
     border-color: $border-color;
+  }
+}
+
+@mixin set-box-sizing($box-sizing: border-box) {
+  box-sizing: $box-sizing;
+  display: inline-block;
+
+  & > * {
+    box-sizing: inherit;
   }
 }

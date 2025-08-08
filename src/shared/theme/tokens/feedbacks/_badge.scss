@@ -1,104 +1,104 @@
 @use "sass:map";
 @use "../../core/_theme" as theme;
 
-@use "./__text" as text;
+// @use "./__text" as text;
 
 // Colors
 $badge-theme-map: (
   primary: (
-    light: (
-      bg-color: theme.get-tone-from-palette(50, "primary"),
-      text-color: theme.get-tone-from-palette(800, "primary"),
-    ),
     default: (
-      bg-color: theme.get-tone-from-palette(200, "primary"),
-      text-color: theme.get-tone-from-palette(900, "primary"),
+      bg-color: theme.get-tone-from-palette(100, "primary"),
+      text-color: theme.get-tone-from-palette(700, "primary"),
     ),
     highlight: (
+      bg-color: theme.get-tone-from-palette(200, "primary"),
+      text-color: theme.get-tone-from-palette(800, "primary"),
+    ),
+    emphasis: (
       bg-color: theme.get-tone-from-palette(300, "primary"),
       text-color: theme.get-tone-from-palette(950, "primary"),
     ),
   ),
   secondary: (
-    light: (
-      bg-color: theme.get-tone-from-palette(50, "secondary"),
-      text-color: theme.get-tone-from-palette(800, "secondary"),
-    ),
     default: (
-      bg-color: theme.get-tone-from-palette(200, "secondary"),
-      text-color: theme.get-tone-from-palette(900, "secondary"),
+      bg-color: theme.get-tone-from-palette(100, "secondary"),
+      text-color: theme.get-tone-from-palette(700, "secondary"),
     ),
     highlight: (
+      bg-color: theme.get-tone-from-palette(200, "secondary"),
+      text-color: theme.get-tone-from-palette(800, "secondary"),
+    ),
+    emphasis: (
       bg-color: theme.get-tone-from-palette(300, "secondary"),
       text-color: theme.get-tone-from-palette(950, "secondary"),
     ),
   ),
   tertiary: (
-    light: (
-      bg-color: theme.get-tone-from-palette(50, "tertiary"),
-      text-color: theme.get-tone-from-palette(800, "tertiary"),
-    ),
     default: (
-      bg-color: theme.get-tone-from-palette(200, "tertiary"),
-      text-color: theme.get-tone-from-palette(900, "tertiary"),
+      bg-color: theme.get-tone-from-palette(100, "tertiary"),
+      text-color: theme.get-tone-from-palette(700, "tertiary"),
     ),
     highlight: (
+      bg-color: theme.get-tone-from-palette(200, "tertiary"),
+      text-color: theme.get-tone-from-palette(800, "tertiary"),
+    ),
+    emphasis: (
       bg-color: theme.get-tone-from-palette(300, "tertiary"),
       text-color: theme.get-tone-from-palette(950, "tertiary"),
     ),
   ),
   neutral: (
-    light: (
-      bg-color: theme.get-tone-from-palette(50, "neutral"),
-      text-color: theme.get-tone-from-palette(800, "neutral"),
-    ),
     default: (
-      bg-color: theme.get-tone-from-palette(200, "neutral"),
-      text-color: theme.get-tone-from-palette(900, "neutral"),
+      bg-color: theme.get-tone-from-palette(100, "neutral"),
+      text-color: theme.get-tone-from-palette(700, "neutral"),
     ),
     highlight: (
+      bg-color: theme.get-tone-from-palette(200, "neutral"),
+      text-color: theme.get-tone-from-palette(800, "neutral"),
+    ),
+    emphasis: (
       bg-color: theme.get-tone-from-palette(300, "neutral"),
       text-color: theme.get-tone-from-palette(1000, "neutral"),
     ),
   ),
   success: (
-    light: (
-      bg-color: theme.get-tone-from-palette(50, "success"),
-      text-color: theme.get-tone-from-palette(800, "success"),
-    ),
     default: (
-      bg-color: theme.get-tone-from-palette(200, "success"),
-      text-color: theme.get-tone-from-palette(900, "success"),
+      bg-color: theme.get-tone-from-palette(100, "success"),
+      text-color: theme.get-tone-from-palette(700, "success"),
     ),
     highlight: (
+      bg-color: theme.get-tone-from-palette(200, "success"),
+      text-color: theme.get-tone-from-palette(800, "success"),
+    ),
+    emphasis: (
       bg-color: theme.get-tone-from-palette(300, "success"),
       text-color: theme.get-tone-from-palette(950, "success"),
     ),
   ),
   warning: (
-    light: (
-      bg-color: theme.get-tone-from-palette(50, "warning"),
-      text-color: theme.get-tone-from-palette(800, "warning"),
-    ),
     default: (
-      bg-color: theme.get-tone-from-palette(200, "warning"),
-      text-color: theme.get-tone-from-palette(900, "warning"),
+      bg-color: theme.get-tone-from-palette(100, "warning"),
+      text-color: theme.get-tone-from-palette(700, "warning"),
     ),
     highlight: (
+      bg-color: theme.get-tone-from-palette(200, "warning"),
+      text-color: theme.get-tone-from-palette(800, "warning"),
+    ),
+    emphasis: (
       bg-color: theme.get-tone-from-palette(300, "warning"),
       text-color: theme.get-tone-from-palette(950, "warning"),
     ),
   ),
   critical: (
-    light: (
-      bg-color: theme.get-tone-from-palette(50, "critical"),
-      text-color: theme.get-tone-from-palette(800, "critical"),
-    ),
     default: (
-      bg-color: theme.get-tone-from-palette(200, "critical"),
-      text-color: theme.get-tone-from-palette(900, "critical"),
+      bg-color: theme.get-tone-from-palette(100, "critical"),
+      text-color: theme.get-tone-from-palette(700, "critical"),
     ),
     highlight: (
+      bg-color: theme.get-tone-from-palette(200, "critical"),
+      text-color: theme.get-tone-from-palette(800, "critical"),
+    ),
+    emphasis: (
       bg-color: theme.get-tone-from-palette(300, "critical"),
       text-color: theme.get-tone-from-palette(950, "critical"),
     ),

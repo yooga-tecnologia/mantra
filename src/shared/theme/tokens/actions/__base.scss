@@ -25,11 +25,6 @@ $action-text-map: (
     hover: theme.get-tone-from-palette(800, "neutral"),
     pressed: theme.get-tone-from-palette(1000, "neutral"),
   ),
-  info: (
-    default: theme.get-tone-from-palette(600, "info"),
-    hover: theme.get-tone-from-palette(800, "info"),
-    pressed: theme.get-tone-from-palette(1000, "info"),
-  ),
   critical: (
     default: theme.get-tone-from-palette(700, "critical"),
     hover: theme.get-tone-from-palette(900, "critical"),
@@ -87,11 +82,6 @@ $action-text-map: (
       default: theme.get-tone-from-palette(800, "neutral"),
       hover: theme.get-tone-from-palette(800, "neutral"),
       pressed: theme.get-tone-from-palette(950, "neutral"),
-    ),
-    info: (
-      default: theme.get-tone-from-palette(800, "info"),
-      hover: theme.get-tone-from-palette(800, "info"),
-      pressed: theme.get-tone-from-palette(950, "info"),
     ),
     critical: (
       default: theme.get-tone-from-palette(800, "critical"),

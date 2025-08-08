@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/html';
 
-import { sizeVariantsArray, ThemePalette, themePaletteArray } from '../../shared/theme/theme.types';
+import { sizeVariantsArray, ThemePalette, themePalettesArray } from '../../shared/theme/theme.types';
 import { ICON_OPTIONS } from '../icon/icon.constants';
 
 import { type ButtonIconProps, buttonStyleArray } from './button.types';
@@ -28,10 +28,10 @@ const meta: Meta<ButtonIconProps> = {
     },
     color: {
       control: 'select',
-      options: themePaletteArray,
+      options: themePalettesArray,
       table: {
         defaultValue: { summary: 'primary' },
-        type: { summary: themePaletteArray.join(' | ') },
+        type: { summary: themePalettesArray.join(' | ') },
       }
     },
     variant: {
@@ -88,7 +88,7 @@ Default.args = {
 
 export const Examples: StoryFn<typeof ButtonIcon> = () => {
   const buttonVariants: HTMLString[] = [];
-  themePaletteArray.forEach((color) => {
+  themePalettesArray.forEach((color) => {
     buttonVariants.push(getColorVariants(color));
   })
 

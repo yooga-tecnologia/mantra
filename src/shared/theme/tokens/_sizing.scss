@@ -9,7 +9,7 @@ $scale: primitives.$scale;
 // 1. Borders
 //
 
-$border-radius: (
+$border-radius-map: (
   small:  $base-grid * map.get($scale, "0_25x"),
   medium: $base-grid * map.get($scale, "1_5x"),
   large:  $base-grid * map.get($scale, "2_5x"),
@@ -17,7 +17,7 @@ $border-radius: (
   circle: 50%,
 );
 
-$border-width: (
+$border-width-map: (
   small: 1px,
   medium: 2px,
   none: none,

@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/html';
 
-import { sizeVariantsArray, themePaletteArray } from '../../shared/theme/theme.types';
+import { sizeVariantsArray, themePalettesArray } from '../../shared/theme/theme.types';
 import { ICON_OPTIONS } from '../icon/icon.constants';
 
 import { buttonStyleArray, type ButtonProps } from './button.types';
@@ -30,10 +30,10 @@ const meta: Meta<ButtonProps> = {
     },
     color: {
       control: 'select',
-      options: themePaletteArray,
+      options: themePalettesArray,
       table: {
         defaultValue: { summary: 'primary' },
-        type: { summary: themePaletteArray.join(' | ') },
+        type: { summary: themePalettesArray.join(' | ') },
       }
     },
     variant: {
