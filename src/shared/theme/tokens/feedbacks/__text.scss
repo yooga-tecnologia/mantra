@@ -1,7 +1,0 @@
-@use "sass:map";
-@use '../actions/_text' as actions-text;
-
-$custom-map: ();
-
-// It has the same text color-scheme as action
-$feedback-text-map: map.merge(actions-text.$action-text-map, $custom-map);

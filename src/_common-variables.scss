@@ -1,19 +1,31 @@
 @use './shared/theme/core/typography' as typography;
 
-:root {
-  --color-primary: #007bff;
-  --color-primary-hover: #0056b3;
-  --color-secondary: #6c757d;
-  --color-secondary-hover: #545b62;
-  --color-disabled: #e0e0e0;
-  --color-text-light: #fff;
-  --font-size-base: 1rem;
-  --border-radius: 8px;
-  --padding-base: 0.75rem 1.5rem;
-}
+// :root {
+//   --color-primary: #007bff;
+//   --color-primary-hover: #0056b3;
+//   --color-secondary: #6c757d;
+//   --color-secondary-hover: #545b62;
+//   --color-disabled: #e0e0e0;
+//   --color-text-light: #fff;
+//   --font-size-base: 1rem;
+//   --border-radius: 8px;
+//   --padding-base: 0.75rem 1.5rem;
+// }
 
 @include typography.set-typography();
 
 body * {
   font-family: "Poppins";
+}
+
+// STORYBOOK ONLY
+.sb-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 4px;
+  grid-row-gap: 4px;
+  align-items: center;
+  justify-items: start;
+  justify-content: center;
 }

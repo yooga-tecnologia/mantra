@@ -1,0 +1,52 @@
+@use "sass:map";
+@use "../../../shared/theme/core/theme" as theme;
+@use "../../../shared/theme/tokens/_sizing" as sizing;
+
+$component-prefix: theme.get-prefix('badge');
+
+// Sizes
+
+$badge-size-configs: (
+  "tiny": (
+    font-size: 12px,
+    padding: 4px 8px,
+    height: 24px,
+    gap: 4px,
+  ),
+  "small": (
+    font-size: 12px,
+    padding: 8px,
+    height: 32px,
+    gap: 8px,
+  ),
+  "medium": (
+    font-size: 14px,
+    padding: 12px 16px,
+    height: 48px,
+    gap: 8px,
+  ),
+);
+
+@each $size, $configs in $badge-size-configs {
+  $size-map: map.get($badge-size-configs, $size);
+
+  #{$component-prefix} {
+    @include theme.set-box-sizing(border-box);
+  }
+
+  div.#{$component-prefix}-#{$size} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: map.get($size-map, "gap");
+    padding: map.get($size-map, "padding");
+    height: map.get($size-map, "height");
+    border-radius: map.get(sizing.$border-radius-map, "circular");
+
+    span.#{$component-prefix}-label {
+      font-size: map.get($size-map, "font-size");
+      line-height: map.get($size-map, "height");
+      text-wrap-mode: nowrap;
+    }
+  }
+}
