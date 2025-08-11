@@ -44,6 +44,7 @@ $badge-size-configs: (
     border-radius: map.get(sizing.$border-radius-map, "circular");
 
     span.#{$component-prefix}-label {
+      font-weight: 500;
       font-size: map.get($size-map, "font-size");
       line-height: map.get($size-map, "height");
       text-wrap-mode: nowrap;

@@ -4,6 +4,12 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.2.2] – 2025-08-11
+
+### ✅ Corrigido
+
+- Adiciona propriedade de font-weight correta ao label do componente badge;
+
 ## [2.2.1] – 2025-08-11
 
 ### 🚀 Adicionado
