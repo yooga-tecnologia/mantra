@@ -39,6 +39,7 @@ $border-radius-medium: map.get(sizing.$border-radius-map, "medium");
   }
 
   // TODO - Check if it overrides the L85 rule
+  #{$component-prefix}[full-width="true"],
   a.#{$component-prefix}-full-width,
   button.#{$component-prefix}-full-width {
     width: 100%;
