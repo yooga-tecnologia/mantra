@@ -5,7 +5,6 @@ export const config: Config = {
   namespace: 'mantra',
   globalStyle: './src/_common-variables.scss',
   outputTargets: [
-
     /**
      * Distribution Output Target
      * @see https://stenciljs.com/docs/distribution
@@ -20,7 +19,7 @@ export const config: Config = {
           // Copia para dist/assets
           src: 'shared/assets/fonts',
           dest: 'fonts',
-        }
+        },
       ],
     },
 
@@ -38,7 +37,7 @@ export const config: Config = {
           src: 'shared/assets/fonts',
           dest: 'dist-custom-elements/fonts',
         },
-      ]
+      ],
     },
 
     /**
@@ -53,7 +52,7 @@ export const config: Config = {
         {
           src: 'shared/assets/fonts',
           dest: 'fonts',
-        }
+        },
       ],
     },
 
@@ -62,9 +61,7 @@ export const config: Config = {
     },
   ],
   testing: {
-    browserHeadless: "shell",
+    browserHeadless: 'shell',
   },
-  plugins: [
-    sass()
-  ]
+  plugins: [sass()],
 };

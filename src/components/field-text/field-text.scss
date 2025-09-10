@@ -1,0 +1,237 @@
+@use 'sass:map';
+
+@use '../../shared/theme/core/theme' as theme;
+@use '../../shared/theme/tokens/primitives' as primitives;
+
+// 1. MAPPERS, FUNCTIONS & VARIABLES
+
+$component-prefix: theme.get-prefix('field-text');
+$field-text-size-configs: (
+  small: (
+    font-size: 12px,
+    icon-size: 16px,
+    icon-gap: 8px,
+    padding: 4px 8px,
+    gap: 4px,
+  ),
+  medium: (
+    font-size: 14px,
+    icon-size: 20px,
+    icon-gap: 12px,
+    padding: 12px 16px,
+    gap: 6px,
+  ),
+  large: (
+    font-size: 16px,
+    icon-size: 24px,
+    icon-gap: 16px,
+    padding: 16px,
+    gap: 8px,
+  ),
+);
+
+$field-text-color-scheme: (
+  neutral: (
+    icon-color: #4B5053,
+    text-color: #242628,
+    placeholder-color: #818A8F,
+    background-color: transparent,
+    inline-message-color: #818A8F,
+    border-color: #CED2D3,
+    border-color-on-hover: #818A8F,
+    border-color-on-focus: #0B7CBE,
+  ),
+  error: (
+    icon-color: #C01615,
+    text-color: #242628,
+    placeholder-color: #818A8F,
+    background-color: transparent,
+    inline-message-color: #C01615,
+    border-color: #E41F1E,
+    border-color-on-hover: #818A8F,
+    border-color-on-focus: #0B7CBE,
+  ),
+  success: (
+    icon-color: #16653C,
+    text-color: #242628,
+    placeholder-color: #818A8F,
+    background-color: transparent,
+    inline-message-color: #16653C,
+    border-color: #15A459,
+    border-color-on-hover: #818A8F,
+    border-color-on-focus: #0B7CBE,
+  ),
+);
+
+@mixin field-text-size($size-map) {
+  font-size: map.get($size-map, font-size);
+  gap: map.get($size-map, gap);
+}
+
+// 2. BASE STYLES
+
+.text-color-primary {
+  color: #0A639A;
+}
+
+.#{$component-prefix} {
+  display: inline-flex;
+  flex-direction: column;
+
+  &,
+  input,
+  label,
+  span {
+    font-family: primitives.$body-font-family;
+  }
+
+  &-label {
+    font-weight: 500;
+    color: #4B5053;
+    display: flex;
+    flex-direction: row;
+  }
+
+  &-input {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    input {
+      width: 100%;
+      border: 1px solid #D1D5DB;
+      border-radius: 6px;
+      font-weight: 400;
+      color: #242628;
+
+      &::placeholder {
+        color: #818A8F;
+      }
+    }
+
+    mnt-icon {
+      position: absolute;
+      pointer-events: none;
+    }
+    .icon-left,
+    .icon-right {
+      color: unset !important;
+    }
+  }
+
+  &-inline-message {
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    color: #818A8F;
+
+    mnt-icon {
+      color: #818A8F;
+    }
+  }
+}
+
+// 3. SIZING
+
+@each $size, $configs in $field-text-size-configs {
+  $size-map: map.get($field-text-size-configs, $size);
+  $icon-gap: map.get($size-map, icon-size) + map.get($size-map, gap) + map.get($size-map, icon-gap);
+
+  .#{$component-prefix}-#{$size} {
+    &,
+    & > .#{$component-prefix}-label,
+    & > .#{$component-prefix}-inline-message,
+    & > .#{$component-prefix}-input input {
+      @include field-text-size($size-map);
+    }
+
+    &.#{$component-prefix}-error,
+    &.#{$component-prefix}-success {
+      .#{$component-prefix}-input.#{$component-prefix}-icon-right {
+        input {
+          padding-right: $icon-gap * 1.5 !important;
+        }
+
+        mnt-icon.icon-state {
+          right: map.get($size-map, icon-gap) * 3;
+        }
+      }
+
+      .#{$component-prefix}-input:not(#{$component-prefix}-icon-right) {
+        input { padding-right: $icon-gap !important; }
+
+        mnt-icon.icon-state {
+          right: map.get($size-map, icon-gap);
+        }
+      }
+    }
+
+    .#{$component-prefix}-input {
+      // ICON RIGHT
+      &[class*="-icon-right"] input { padding-right: $icon-gap !important; }
+      & > .icon-right { right: map.get($size-map, icon-gap); }
+      // ICON LEFT
+      &[class*="-icon-left"] input { padding-left: $icon-gap !important; }
+      & > .icon-left { left: map.get($size-map, icon-gap); }
+
+      input {
+        padding: map.get($size-map, padding);
+      }
+    }
+  }
+}
+
+// 4. COLOR SCHEMES
+
+@each $color, $color-scheme in $field-text-color-scheme {
+  .#{$component-prefix}-#{$color} {
+    .#{$component-prefix}-input {
+      mnt-icon.icon-left,
+      mnt-icon.icon-right {
+        color: unset !important;
+      }
+
+      mnt-icon:not(.icon-left):not(.icon-right):not(.icon-state) {
+        color: map.get($color-scheme, icon-color);
+      }
+
+      mnt-icon.icon-state {
+        color: map.get($color-scheme, icon-color);
+      }
+
+      input {
+        color: map.get($color-scheme, text-color);
+        border-color: map.get($color-scheme, border-color);
+        background-color: map.get($color-scheme, background-color);
+
+        &::placeholder {
+          color: map.get($color-scheme, placeholder-color);
+        }
+
+        &:hover {
+          border-color: map.get($color-scheme, border-color-on-hover);
+          background-color: map.get($color-scheme, background-color);
+        }
+
+        &:focus {
+          border-color: map.get($color-scheme, border-color-on-focus);
+          outline: 1px solid map.get($color-scheme, border-color-on-focus);
+        }
+
+        &,
+        &:hover,
+        &:focus {
+          transition: all ease-in-out .2s;
+        }
+      }
+    }
+
+    .#{$component-prefix}-inline-message {
+      color: map.get($color-scheme, inline-message-color);
+
+      mnt-icon {
+        color: map.get($color-scheme, inline-message-color);
+      }
+    }
+  }
+}

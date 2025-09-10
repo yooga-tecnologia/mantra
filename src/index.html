@@ -195,7 +195,63 @@
   <!-- YooInput Component Example -->
   <div style="padding: 16px;">
 
-    <mnt-input-group
+    <mnt-field-text
+      input-name="exampleInput"
+      placeholder="Enter text here"
+      label-text="Label Example"
+      required
+    ></mnt-field-text>
+
+    <mnt-field-text
+      label-text="Label Example"
+      state="error"
+      variant="default"
+      size="large"
+      icon-right="minus"
+      placeholder="Enter text here"
+      required
+      input-name="exampleInput"
+      inline-message="This is an inline message"
+      has-action-button
+      has-info-button
+    >
+      <div slot="action-button">
+        <mnt-button-icon
+          variant="emphasis"
+          color="primary"
+          icon="plus"
+          size="tiny"
+        ></mnt-button-icon>
+      </div>
+
+      <div slot="info-button">
+        <mnt-button-icon
+          variant="emphasis"
+          color="primary"
+          icon="plus"
+          size="tiny"
+        ></mnt-button-icon>
+      </div>
+    </mnt-field-text>
+<!-- 
+    <mnt-field-text
+      label-text="Label Example"
+      state="success"
+      size="medium"
+      icon-left="plus"
+
+      inline-message="This is an inline message"
+    ></mnt-field-text>
+
+    <mnt-field-text
+      label-text="Label Example"
+      size="small"
+      icon-left="plus"
+      icon-right="minus"
+      inline-message="This is an inline message"
+    ></mnt-field-text> -->
+
+    <!-- <mnt-input-group
       inputName="username"
       label="Username"
       placeholder="Enter your username"
@@ -210,7 +266,7 @@
       <div slot="icon">
         <mnt-icon icon="signalingCheckCircle" size="small" color="black"></mnt-icon>
       </div>
-    </mnt-input-group>
+    </mnt-input-group> -->
   </div>
 
   <div>

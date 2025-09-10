@@ -8,7 +8,7 @@
 
 @use "sass:map";
 
-@forward "./__base"; // Base styles for the button component 
+@forward "./__base"; // Base styles for the button component
 
 @use "./_variant-emphasis" as button-emphasis;
 @use "./_variant-stroke" as button-stroke;
