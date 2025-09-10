@@ -7,11 +7,13 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { BadgeBaseProps } from "./components/badge/badge.types";
 import { ButtonIconProps, ButtonProps } from "./components/button/button.types";
+import { FieldTextProps } from "./components/field-text/field-text.types";
 import { IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
 import { TooltipProps } from "./components/tooltip/tooltip.types";
 export { BadgeBaseProps } from "./components/badge/badge.types";
 export { ButtonIconProps, ButtonProps } from "./components/button/button.types";
+export { FieldTextProps } from "./components/field-text/field-text.types";
 export { IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
 export { TooltipProps } from "./components/tooltip/tooltip.types";
@@ -41,6 +43,20 @@ export namespace Components {
         "size": ButtonIconProps['size'];
         "variant": ButtonIconProps['variant'];
     }
+    interface MntFieldText {
+        "disabled"?: FieldTextProps['disabled'];
+        "hasActionButton"?: FieldTextProps['hasActionButton'];
+        "hasInfoButton"?: FieldTextProps['hasInfoButton'];
+        "iconLeft"?: FieldTextProps['iconLeft'];
+        "iconRight"?: FieldTextProps['iconRight'];
+        "inlineMessage"?: FieldTextProps['inlineMessage'];
+        "inputName": string;
+        "labelText"?: FieldTextProps['labelText'];
+        "placeholder"?: FieldTextProps['placeholder'];
+        "required"?: FieldTextProps['required'];
+        "size"?: FieldTextProps['size'];
+        "state"?: FieldTextProps['state'];
+    }
     interface MntIcon {
         "animation"?: IconProps['animation'];
         "background"?: IconProps['background'];
@@ -52,14 +68,6 @@ export namespace Components {
         "height": IllustrationProps['height'];
         "name": IllustrationProps['name'];
         "width": IllustrationProps['width'];
-    }
-    interface MntInputGroup {
-        "condition": boolean;
-        "inputName": string;
-        "isRequired": boolean;
-        "label": string;
-        "placeholder"?: string;
-        "trailingIcon": boolean;
     }
     interface MntTooltip {
         "position": TooltipProps['position'];
@@ -115,6 +123,12 @@ declare global {
         prototype: HTMLMntButtonIconElement;
         new (): HTMLMntButtonIconElement;
     };
+    interface HTMLMntFieldTextElement extends Components.MntFieldText, HTMLStencilElement {
+    }
+    var HTMLMntFieldTextElement: {
+        prototype: HTMLMntFieldTextElement;
+        new (): HTMLMntFieldTextElement;
+    };
     interface HTMLMntIconElement extends Components.MntIcon, HTMLStencilElement {
     }
     var HTMLMntIconElement: {
@@ -127,12 +141,6 @@ declare global {
         prototype: HTMLMntIllustrationElement;
         new (): HTMLMntIllustrationElement;
     };
-    interface HTMLMntInputGroupElement extends Components.MntInputGroup, HTMLStencilElement {
-    }
-    var HTMLMntInputGroupElement: {
-        prototype: HTMLMntInputGroupElement;
-        new (): HTMLMntInputGroupElement;
-    };
     interface HTMLMntTooltipElement extends Components.MntTooltip, HTMLStencilElement {
     }
     var HTMLMntTooltipElement: {
@@ -143,9 +151,9 @@ declare global {
         "mnt-badge": HTMLMntBadgeElement;
         "mnt-button": HTMLMntButtonElement;
         "mnt-button-icon": HTMLMntButtonIconElement;
+        "mnt-field-text": HTMLMntFieldTextElement;
         "mnt-icon": HTMLMntIconElement;
         "mnt-illustration": HTMLMntIllustrationElement;
-        "mnt-input-group": HTMLMntInputGroupElement;
         "mnt-tooltip": HTMLMntTooltipElement;
     }
 }
@@ -177,6 +185,20 @@ declare namespace LocalJSX {
         "size"?: ButtonIconProps['size'];
         "variant"?: ButtonIconProps['variant'];
     }
+    interface MntFieldText {
+        "disabled"?: FieldTextProps['disabled'];
+        "hasActionButton"?: FieldTextProps['hasActionButton'];
+        "hasInfoButton"?: FieldTextProps['hasInfoButton'];
+        "iconLeft"?: FieldTextProps['iconLeft'];
+        "iconRight"?: FieldTextProps['iconRight'];
+        "inlineMessage"?: FieldTextProps['inlineMessage'];
+        "inputName"?: string;
+        "labelText"?: FieldTextProps['labelText'];
+        "placeholder"?: FieldTextProps['placeholder'];
+        "required"?: FieldTextProps['required'];
+        "size"?: FieldTextProps['size'];
+        "state"?: FieldTextProps['state'];
+    }
     interface MntIcon {
         "animation"?: IconProps['animation'];
         "background"?: IconProps['background'];
@@ -189,14 +211,6 @@ declare namespace LocalJSX {
         "name": IllustrationProps['name'];
         "width"?: IllustrationProps['width'];
     }
-    interface MntInputGroup {
-        "condition"?: boolean;
-        "inputName"?: string;
-        "isRequired"?: boolean;
-        "label"?: string;
-        "placeholder"?: string;
-        "trailingIcon"?: boolean;
-    }
     interface MntTooltip {
         "position"?: TooltipProps['position'];
         "text"?: TooltipProps['text'];
@@ -205,9 +219,9 @@ declare namespace LocalJSX {
         "mnt-badge": MntBadge;
         "mnt-button": MntButton;
         "mnt-button-icon": MntButtonIcon;
+        "mnt-field-text": MntFieldText;
         "mnt-icon": MntIcon;
         "mnt-illustration": MntIllustration;
-        "mnt-input-group": MntInputGroup;
         "mnt-tooltip": MntTooltip;
     }
 }
@@ -218,9 +232,9 @@ declare module "@stencil/core" {
             "mnt-badge": LocalJSX.MntBadge & JSXBase.HTMLAttributes<HTMLMntBadgeElement>;
             "mnt-button": LocalJSX.MntButton & JSXBase.HTMLAttributes<HTMLMntButtonElement>;
             "mnt-button-icon": LocalJSX.MntButtonIcon & JSXBase.HTMLAttributes<HTMLMntButtonIconElement>;
+            "mnt-field-text": LocalJSX.MntFieldText & JSXBase.HTMLAttributes<HTMLMntFieldTextElement>;
             "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;
             "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
-            "mnt-input-group": LocalJSX.MntInputGroup & JSXBase.HTMLAttributes<HTMLMntInputGroupElement>;
             "mnt-tooltip": LocalJSX.MntTooltip & JSXBase.HTMLAttributes<HTMLMntTooltipElement>;
         }
     }

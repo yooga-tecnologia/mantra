@@ -1,6 +1,11 @@
 import type { Meta, StoryFn } from '@storybook/html';
 
-import { colorTonesArray, sizeVariantsArray, ThemePalette, themePalettesArray } from '../../shared/theme/theme.types';
+import {
+  colorTonesArray,
+  sizeVariantsArray,
+  ThemePalette,
+  themePalettesArray,
+} from '../../shared/theme/theme.types';
 import { ICON_OPTIONS } from '../icon/icon.constants';
 
 import { BadgeBaseProps } from './badge.types';
@@ -12,9 +17,9 @@ const SB_TABLE_ICON = {
   type: {
     summary: ICON_OPTIONS.join(' | '),
   },
-}
+};
 
-const filteredSizeVariantsArray = sizeVariantsArray.filter(size => size !== 'large');
+const filteredSizeVariantsArray = sizeVariantsArray.filter((size) => size !== 'large');
 
 const meta: Meta<BadgeBaseProps> = {
   title: 'Components/Badge/Default',
@@ -25,7 +30,8 @@ const meta: Meta<BadgeBaseProps> = {
       description: 'Texto exibido dentro da Badge',
     },
     size: {
-      control: 'select', options: filteredSizeVariantsArray,
+      control: 'select',
+      options: filteredSizeVariantsArray,
       table: {
         defaultValue: { summary: 'medium' },
         type: { summary: filteredSizeVariantsArray.join(' | ') },
@@ -37,15 +43,16 @@ const meta: Meta<BadgeBaseProps> = {
       table: {
         defaultValue: { summary: 'primary' },
         type: { summary: themePalettesArray.join(' | ') },
-      }
+      },
     },
     tone: {
-      control: 'select', options: colorTonesArray,
+      control: 'select',
+      options: colorTonesArray,
       description: 'Variação de tonalidade, baseado na cor selecionada',
       table: {
         defaultValue: { summary: 'default' },
         type: { summary: colorTonesArray.join(' | ') },
-    } ,
+      },
     },
     icon: {
       control: 'select',
@@ -90,19 +97,18 @@ const getColorVariants = (color: ThemePalette): HTMLString => {
 <div class="sb-grid-3">
   ${badgeVariants.join('')}
 </div>`;
-}
+};
 
 export const Examples: StoryFn<typeof Badge> = () => {
   const badgeVariants: HTMLString[] = [];
   themePalettesArray.forEach((color) => {
     badgeVariants.push(getColorVariants(color));
   });
-  return (
-`<div>
+  return `<div>
   <h3>Color Variants</h3>
   ${badgeVariants.join('')}
 </div>
-`);
+`;
 };
 
 Examples.parameters = {

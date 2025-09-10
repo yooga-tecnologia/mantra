@@ -24,7 +24,9 @@ describe('<mnt-button>', () => {
   describe('Rendering', () => {
     it('SHOULD render correctly WHEN has default props', async () => {
       // SETUP
-      const page = await createButtonComponent(`<mnt-button label="${DEFAULT_LABEL}"></mnt-button>`);
+      const page = await createButtonComponent(
+        `<mnt-button label="${DEFAULT_LABEL}"></mnt-button>`,
+      );
       const button = getButtonElement(page);
       const span = button.querySelector('span');
 
@@ -68,7 +70,9 @@ describe('<mnt-button>', () => {
 
     it('SHOULD disable the button WHEN disabled attribute is provided', async () => {
       // SETUP
-      const page = await createButtonComponent(`<mnt-button disabled="true" label="${DEFAULT_LABEL}"></mnt-button>`);
+      const page = await createButtonComponent(
+        `<mnt-button disabled="true" label="${DEFAULT_LABEL}"></mnt-button>`,
+      );
       const button = getButtonElement(page);
 
       // ASSERTION
@@ -78,7 +82,9 @@ describe('<mnt-button>', () => {
 
     it('SHOULD apply class button-full-width WHEN full-width attribute is set', async () => {
       // SETUP
-      const page = await createButtonComponent(`<mnt-button full-width="true" label="${DEFAULT_LABEL}"></mnt-button>`);
+      const page = await createButtonComponent(
+        `<mnt-button full-width="true" label="${DEFAULT_LABEL}"></mnt-button>`,
+      );
       const button = getButtonElement(page);
 
       // ASSERTION
@@ -89,7 +95,9 @@ describe('<mnt-button>', () => {
   describe('Icons', () => {
     it('SHOULD render an mnt-icon on the left WHEN icon-left is provided', async () => {
       // SETUP
-      const page = await createButtonComponent(`<mnt-button icon-left="${ICON_LEFT}" label="${DEFAULT_LABEL}"></mnt-button>`);
+      const page = await createButtonComponent(
+        `<mnt-button icon-left="${ICON_LEFT}" label="${DEFAULT_LABEL}"></mnt-button>`,
+      );
       const icon = page.root.querySelector('.icon-left');
 
       // ASSERTION
@@ -100,7 +108,9 @@ describe('<mnt-button>', () => {
 
     it('SHOULD render an mnt-icon on the right WHEN icon-right is provided', async () => {
       // SETUP
-      const page = await createButtonComponent(`<mnt-button icon-right="${ICON_RIGHT}" label="${DEFAULT_LABEL}"></mnt-button>`);
+      const page = await createButtonComponent(
+        `<mnt-button icon-right="${ICON_RIGHT}" label="${DEFAULT_LABEL}"></mnt-button>`,
+      );
       const icon = page.root.querySelector('.icon-right');
 
       // ASSERTION
@@ -113,9 +123,11 @@ describe('<mnt-button>', () => {
   describe('Events', () => {
     it('SHOULD emit click event WHEN button is clicked', async () => {
       // SETUP
-      const page = await createButtonComponent(`<mnt-button label="${DEFAULT_LABEL}"></mnt-button>`);
+      const page = await createButtonComponent(
+        `<mnt-button label="${DEFAULT_LABEL}"></mnt-button>`,
+      );
       const button = getButtonElement(page);
-      
+
       const spy = jest.fn();
       page.root.addEventListener('buttonClick', spy);
 
@@ -128,7 +140,9 @@ describe('<mnt-button>', () => {
 
     it('SHOULD NOT emit click event WHEN button is disabled', async () => {
       // SETUP
-      const page = await createButtonComponent(`<mnt-button disabled="true" label="${DEFAULT_LABEL}"></mnt-button>`);
+      const page = await createButtonComponent(
+        `<mnt-button disabled="true" label="${DEFAULT_LABEL}"></mnt-button>`,
+      );
       const button = getButtonElement(page);
 
       const spy = jest.fn();

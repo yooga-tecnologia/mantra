@@ -1,0 +1,8 @@
+{
+  // Faz a extensão Jest Orta usar o runner do Stencil (npm run test)
+  "jest.jestCommandLine": "npm run test --",
+  // Opcional: desabilite o coverage automático
+  "jest.coverageEnabled": false,
+  // Opcional: desabilite o auto-run se preferir rodar só manualmente
+  // "jest.autoRun": false
+}
