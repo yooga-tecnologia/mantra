@@ -61,7 +61,7 @@ const meta: Meta<FieldTextProps> = {
     docs: {
       description: {
         component:
-          'O componente <mnt-field-text> é um campo de texto flexível e personalizável. Sua estrutura e aparência mudam dinamicamente conforme as props fornecidas, permitindo exibição de ícones, mensagens, botões de ação/info, estados visuais e mais.',
+          'O componente <mnt-field-text> é um campo de texto flexível e personalizável. Além das props visuais, ele aceita atributos nativos do input (como maxLength, minLength, max, min, value) e propaga eventos nativos (onInput, onChange, etc.), permitindo integração total com formulários e validações.',
       },
     },
   },
@@ -105,7 +105,6 @@ Playground.args = {
   hasInfoButton: false,
 } as unknown as FieldTextProps;
 
-// Exemplo de variantes de estilo
 const getAllVariants = (): HTMLString => {
   let html = '';
   sizeVariants.forEach((size) => {

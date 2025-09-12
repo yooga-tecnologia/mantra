@@ -4,6 +4,31 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.3.1] – 2025-09-11
+
+### 🚀 Adicionado
+
+- TextField:
+  - Suporte a atributos nativos do input: maxLength, minLength, max, min, value
+  - Suporte à prop mask com opção de máscara de moeda (currency)
+  - Emissão de dois eventos:
+    - valueChange (valor formatado)
+    - rawValueChange (valor numérico sem formatação, útil para integrações e validações)
+  - Documentação e exemplos no Storybook atualizados para destacar:
+    - Integração com formulários nativos
+    - Propagação de eventos nativos (onInput, onChange, etc.)
+    - Uso de atributos nativos e máscaras
+    - Tipos e documentação do componente atualizados para refletir as novas props e eventos
+
+- Icon:
+  - Criação de categorias para facilitar visualização no Storybook
+  - Atualização de documentação: Visualização de grid de todos os ícones disponíveis para uso
+  - Novas variantes adicionadas à icon-base:
+    - pix
+    - pencil
+    - pencilSimple
+    - pencilNote (Substitui "Edit")
+
 ## [2.3.0] – 2025-09-10
 
 ### 🚀 Adicionado

@@ -52,10 +52,16 @@ export namespace Components {
         "inlineMessage"?: FieldTextProps['inlineMessage'];
         "inputName": string;
         "labelText"?: FieldTextProps['labelText'];
+        "mask"?: 'currency' | 'custom';
+        "max"?: number;
+        "maxLength"?: number;
+        "min"?: number;
+        "minLength"?: number;
         "placeholder"?: FieldTextProps['placeholder'];
         "required"?: FieldTextProps['required'];
         "size"?: FieldTextProps['size'];
         "state"?: FieldTextProps['state'];
+        "value"?: string;
     }
     interface MntIcon {
         "animation"?: IconProps['animation'];
@@ -81,6 +87,10 @@ export interface MntButtonCustomEvent<T> extends CustomEvent<T> {
 export interface MntButtonIconCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntButtonIconElement;
+}
+export interface MntFieldTextCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntFieldTextElement;
 }
 declare global {
     interface HTMLMntBadgeElement extends Components.MntBadge, HTMLStencilElement {
@@ -123,7 +133,19 @@ declare global {
         prototype: HTMLMntButtonIconElement;
         new (): HTMLMntButtonIconElement;
     };
+    interface HTMLMntFieldTextElementEventMap {
+        "valueChange": string;
+        "rawValueChange": string;
+    }
     interface HTMLMntFieldTextElement extends Components.MntFieldText, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntFieldTextElementEventMap>(type: K, listener: (this: HTMLMntFieldTextElement, ev: MntFieldTextCustomEvent<HTMLMntFieldTextElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntFieldTextElementEventMap>(type: K, listener: (this: HTMLMntFieldTextElement, ev: MntFieldTextCustomEvent<HTMLMntFieldTextElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLMntFieldTextElement: {
         prototype: HTMLMntFieldTextElement;
@@ -194,10 +216,21 @@ declare namespace LocalJSX {
         "inlineMessage"?: FieldTextProps['inlineMessage'];
         "inputName"?: string;
         "labelText"?: FieldTextProps['labelText'];
+        "mask"?: 'currency' | 'custom';
+        "max"?: number;
+        "maxLength"?: number;
+        "min"?: number;
+        "minLength"?: number;
+        /**
+          * Evento emitido com o valor numérico (sem formatação) quando o campo é alterado
+         */
+        "onRawValueChange"?: (event: MntFieldTextCustomEvent<string>) => void;
+        "onValueChange"?: (event: MntFieldTextCustomEvent<string>) => void;
         "placeholder"?: FieldTextProps['placeholder'];
         "required"?: FieldTextProps['required'];
         "size"?: FieldTextProps['size'];
         "state"?: FieldTextProps['state'];
+        "value"?: string;
     }
     interface MntIcon {
         "animation"?: IconProps['animation'];
