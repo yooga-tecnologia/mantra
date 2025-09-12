@@ -76,9 +76,7 @@ describe('mnt-field-text', () => {
     it('SHOULD render all sizes correctly', async () => {
       const sizes = ['small', 'medium', 'large'];
       for (const size of sizes) {
-        const page = await createFieldTextComponent(
-          `<mnt-field-text input-name="exampleInput" size="${size}"></mnt-field-text>`,
-        );
+        const page = await createFieldTextComponent(`<mnt-field-text input-name="exampleInput" size="${size}"></mnt-field-text>`);
         expect(page.root).toHaveClass(`mnt-field-text-${size}`);
       }
     });
@@ -87,18 +85,14 @@ describe('mnt-field-text', () => {
   describe('Props and Attributes', () => {
     describe('State', () => {
       it('SHOULD render error state icon and class WHEN state is error', async () => {
-        const page = await createFieldTextComponent(
-          `<mnt-field-text input-name="exampleInput" state="error"></mnt-field-text>`,
-        );
+        const page = await createFieldTextComponent(`<mnt-field-text input-name="exampleInput" state="error"></mnt-field-text>`);
         const iconState = page.root.querySelector('.icon-state');
         expect(iconState).not.toBeNull();
         expect(iconState.getAttribute('icon')).toBe('signalingErrorCircle');
         expect(page.root).toHaveClass('mnt-field-text-error');
       });
       it('SHOULD render success state icon and class WHEN state is success', async () => {
-        const page = await createFieldTextComponent(
-          `<mnt-field-text input-name="exampleInput" state="success"></mnt-field-text>`,
-        );
+        const page = await createFieldTextComponent(`<mnt-field-text input-name="exampleInput" state="success"></mnt-field-text>`);
         const iconState = page.root.querySelector('.icon-state');
         expect(iconState).not.toBeNull();
         expect(iconState.getAttribute('icon')).toBe('signalingCheckCircle');
@@ -108,17 +102,13 @@ describe('mnt-field-text', () => {
 
     describe('Icons', () => {
       it('SHOULD render right icon WHEN icon-right prop is provided', async () => {
-        const page = await createFieldTextComponent(
-          `<mnt-field-text input-name="exampleInput" icon-right="plus"></mnt-field-text>`,
-        );
+        const page = await createFieldTextComponent(`<mnt-field-text input-name="exampleInput" icon-right="plus"></mnt-field-text>`);
         const iconRight = page.root.querySelector('.icon-right');
         expect(iconRight).not.toBeNull();
         expect(iconRight.getAttribute('icon')).toBe('plus');
       });
       it('SHOULD render left icon WHEN icon-left prop is provided', async () => {
-        const page = await createFieldTextComponent(
-          `<mnt-field-text input-name="exampleInput" icon-left="minus"></mnt-field-text>`,
-        );
+        const page = await createFieldTextComponent(`<mnt-field-text input-name="exampleInput" icon-left="minus"></mnt-field-text>`);
         const iconLeft = page.root.querySelector('.icon-left');
         expect(iconLeft).not.toBeNull();
         expect(iconLeft.getAttribute('icon')).toBe('minus');
@@ -151,9 +141,7 @@ describe('mnt-field-text', () => {
     describe('Inline Message', () => {
       it('SHOULD render inline message WHEN inline-message is provided', async () => {
         const msg = 'Mensagem de erro';
-        const page = await createFieldTextComponent(
-          `<mnt-field-text input-name="exampleInput" inline-message="${msg}" state="error"></mnt-field-text>`,
-        );
+        const page = await createFieldTextComponent(`<mnt-field-text input-name="exampleInput" inline-message="${msg}" state="error"></mnt-field-text>`);
         const inlineMsg = page.root.querySelector('.mnt-field-text-inline-message');
         expect(inlineMsg).not.toBeNull();
         expect(inlineMsg.textContent).toContain(msg);
@@ -162,4 +150,39 @@ describe('mnt-field-text', () => {
   });
   describe('Events', () => {});
   describe('Methods', () => {});
+
+  describe('Native input attributes and events', () => {
+    it('SHOULD propagate maxLength, minLength, max, min, value to input', async () => {
+      const page = await createFieldTextComponent(`
+        <mnt-field-text
+          input-name="nativeTest"
+          max-length="10"
+          min-length="2"
+          max="100"
+          min="10"
+          value="abc"
+        ></mnt-field-text>
+      `);
+      const input = getInputElement(page);
+      expect(input.maxLength).toBe(10);
+      expect(input.minLength).toBe(2);
+      expect(input.max).toBe('100');
+      expect(input.min).toBe('10');
+      expect(input.value).toBe('abc');
+    });
+
+    it('SHOULD emit valueChange event and update value on input', async () => {
+      const page = await createFieldTextComponent(`
+        <mnt-field-text input-name="eventTest"></mnt-field-text>
+      `);
+      const input = getInputElement(page);
+      const spy = jest.fn();
+      page.root.addEventListener('valueChange', spy);
+      input.value = 'novo valor';
+      input.dispatchEvent(new Event('input'));
+      await page.waitForChanges();
+      expect(spy).toHaveBeenCalled();
+      expect(spy.mock.calls[0][0].detail).toBe('novo valor');
+    });
+  });
 });
