@@ -17,11 +17,16 @@ $base-grid: primitives.$base-grid;
 /// @param {String} [$device='desktop'] - The device type ('desktop' or 'mobile').
 /// @param {String} [$size='medium'] - The size for the variant (e.g., 'large', 'medium', 'small').
 /// @return {Number|null} - The calculated font size in pixels, or null if not found.
-@function get-font-size($variant, $device: 'desktop', $size: 'medium') {
+@function get-font-size($variant, $device, $size) {
   $variant-map: map.get(primitives.$typography-variants-list, $variant);
   $device-map: if($variant-map, map.get($variant-map, $device), null);
   $font-size: if($device-map, map.get($device-map, $size), null);
 
+  @if($device == null) {
+    $device-map: map.get($variant-map, 'desktop');
+  } @else {
+    $device-map: map.get($variant-map, $device);
+  }
   @return if($font-size, $font-size * primitives.$base-font-size, null);
 }
 
@@ -46,11 +51,12 @@ $base-grid: primitives.$base-grid;
 /// ensuring it is divisible by the base grid size.
 ///
 /// @param {String} $variant - The typography variant (e.g., 'heading', 'body').
+/// @param {String} $device - The device type (e.g., 'desktop', 'mobile').
 /// @param {String} [$size='default'] - The size for the variant (e.g., 'large', 'medium', 'small').
 /// @return {Number|null} - The calculated line height in pixels, or null if the variant or size is not found.
 ///
-@function get-line-height($variant, $size: 'default') {
-  $font-size: get-font-size($variant, $size);
+@function get-line-height($variant, $device, $size: 'default') {
+  $font-size: get-font-size($variant, $device, $size);
 
   @if $font-size == null {
     @return null;
@@ -98,8 +104,8 @@ $base-grid: primitives.$base-grid;
 /// @param {Color} [$color=#000] - The default text color.
 /// @param {Number} [$margin=0] - The default margin.
 @mixin set-font-properties($variant, $size: 'default', $color: #000, $margin: 0) {
-  font-size: get-font-size($variant, $size);
-  line-height: get-line-height($variant, $size);
+  font-size: get-font-size($variant, 'desktop', $size);
+  line-height: get-line-height($variant, 'desktop', $size);
   font-weight: map.get(map.get(primitives.$typography-variants-list, $variant), 'weight');
   color: map.get(map.get(primitives.$typography-variants-list, $variant), 'color') or $color;
   margin: map.get(map.get(primitives.$typography-variants-list, $variant), 'margin') or $margin;

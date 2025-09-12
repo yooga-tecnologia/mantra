@@ -4,8 +4,12 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.3.1] – 2025-09-11
+
 ### 🚀 Adicionado
 
+- Criação de categorias de ícones para facilitar visualização no Storybook
+- Visualização de grid dos ícones
 - Variantes de Icon:
   - pix
   - pencil

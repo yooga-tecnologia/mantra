@@ -19,13 +19,48 @@ body * {
 }
 
 // STORYBOOK ONLY
-.sb-grid-3 {
+.sb-category-section {
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #eee;
+
+  h3 {
+    margin: 0 0 16px 0;
+  }
+}
+
+div[class^="sb-grid-"] {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 4px;
-  grid-row-gap: 4px;
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
   align-items: center;
   justify-items: start;
   justify-content: center;
+
+  &.sb-grid-stretch {
+    align-items: center;
+    justify-items: stretch;
+    justify-content: center;
+  }
+}
+
+.sb-grid-6 {
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+}
+
+.sb-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.sb-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: 1px dashed #ccc;
+  padding: 12px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
 }
