@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/html';
 
 import { sizeVariantsArray, themePalettesArray } from '../../shared/theme/theme.types';
-import { ICON_OPTIONS } from '../icon/icon.constants';
+import { ICON_OPTIONS } from '../icon/icon.utils';
 
 import { buttonStyleArray, type ButtonProps } from './button.types';
 
@@ -9,7 +9,7 @@ const SB_TABLE_ICON = {
   type: {
     summary: ICON_OPTIONS.join(' | '),
   },
-}
+};
 
 const meta: Meta<ButtonProps> = {
   title: 'Components/Button/Default',
@@ -17,7 +17,8 @@ const meta: Meta<ButtonProps> = {
   argTypes: {
     label: { control: 'text' },
     size: {
-      control: 'select', options: sizeVariantsArray,
+      control: 'select',
+      options: sizeVariantsArray,
       table: { defaultValue: { summary: 'medium' } },
     },
     disabled: {
@@ -34,7 +35,7 @@ const meta: Meta<ButtonProps> = {
       table: {
         defaultValue: { summary: 'primary' },
         type: { summary: themePalettesArray.join(' | ') },
-      }
+      },
     },
     variant: {
       control: 'select',
@@ -43,7 +44,7 @@ const meta: Meta<ButtonProps> = {
       table: {
         defaultValue: { summary: 'emphasis' },
         type: { summary: buttonStyleArray.join(' | ') },
-      }
+      },
     },
     iconLeft: {
       control: 'select',

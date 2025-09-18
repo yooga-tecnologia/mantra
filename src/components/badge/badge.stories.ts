@@ -1,12 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/html';
 
-import {
-  colorTonesArray,
-  sizeVariantsArray,
-  ThemePalette,
-  themePalettesArray,
-} from '../../shared/theme/theme.types';
-import { ICON_OPTIONS } from '../icon/icon.constants';
+import { colorTonesArray, sizeVariantsArray, ThemePalette, themePalettesArray } from '../../shared/theme/theme.types';
+import { ICON_OPTIONS } from '../icon/icon.utils';
 
 import { BadgeBaseProps } from './badge.types';
 import { Badge } from './badge';

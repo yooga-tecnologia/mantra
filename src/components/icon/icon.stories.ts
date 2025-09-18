@@ -3,13 +3,15 @@ import type { Meta, StoryFn } from '@storybook/html';
 import { iconSizes, type IconProps } from './icon.types';
 import * as ICONS from './icon-base';
 import { ICON_ANIMATION_ARRAY } from './icon.constants';
+import { ICON_OPTIONS } from './icon.utils';
+
 type HTMLString = string;
 
 const meta: Meta<IconProps> = {
   title: 'Components/Icon',
   component: 'mnt-icon',
   argTypes: {
-    icon: { control: 'select', options: Object.keys(ICONS) },
+    icon: { control: 'select', options: ICON_OPTIONS },
     size: { control: 'select', options: Object.keys(iconSizes) },
     color: { control: 'color' },
     background: { control: 'color' },

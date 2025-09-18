@@ -1,10 +1,10 @@
-import { Component, Prop, h, Element } from '@stencil/core';
+import { Component, Prop, h, Element, JSX } from '@stencil/core';
 
-import { ICONS } from './icon-base';
 import { directionTransformMap, ICON_DIRECTION_SUFFIX_REGEX } from './icon.constants';
 
 import { iconSizes } from './icon.types';
 import type { Direction, IconProps } from './icon.types';
+import { getIconSvgByName } from './icon.utils';
 
 @Component({
   tag: 'mnt-icon',
@@ -41,8 +41,9 @@ export class Icon {
     const container = this.el.querySelector('#icon-container');
     const baseIconName = this.getBaseIconName(this.icon);
 
-    if (container) {
-      container.innerHTML = ICONS[baseIconName];
+    const svg = getIconSvgByName(baseIconName);
+    if (container && svg) {
+      container.innerHTML = svg;
     }
   }
 
@@ -50,7 +51,7 @@ export class Icon {
     return iconName.replace(ICON_DIRECTION_SUFFIX_REGEX, '');
   }
 
-  private calculateSizes() {
+  private calculateSizes(): void {
     const baseSize = typeof this.size === 'number' ? this.size : iconSizes[this.size];
 
     if (this.background && baseSize > iconSizes.medium) {
@@ -86,14 +87,21 @@ export class Icon {
     }
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <div class="icon-wrapper">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={this.iconSize} height={this.iconSize} fill={this.color} transform={this.transform}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width={this.iconSize}
+          height={this.iconSize}
+          fill={this.color}
+          transform={this.transform}
+        >
           <g id="icon-container"></g>
         </svg>
 
-        {this.background && <span ref={el => (this.backgroundElRef = el)}></span>}
+        {this.background && <span ref={(el) => (this.backgroundElRef = el)}></span>}
       </div>
     );
   }

@@ -1,5 +1,5 @@
-import { ICONS } from './icon-base';
 import { ICON_DIRECTIONS, ICON_ANIMATION_ARRAY } from './icon.constants';
+import { ICON_OPTIONS } from './icon.utils';
 
 export const iconSizes = {
   tiny: 12,
@@ -9,7 +9,7 @@ export const iconSizes = {
   doubleLarge: 64,
 } as const;
 
-export type IconName = keyof typeof ICONS;
+export type IconName = (typeof ICON_OPTIONS)[number];
 export type Direction = (typeof ICON_DIRECTIONS)[number];
 export type IconAnimation = (typeof ICON_ANIMATION_ARRAY)[number];
 export type IconSize = keyof typeof iconSizes;
