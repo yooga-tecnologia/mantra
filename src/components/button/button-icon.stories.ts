@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/html';
 
 import { sizeVariantsArray, ThemePalette, themePalettesArray } from '../../shared/theme/theme.types';
-import { ICON_OPTIONS } from '../icon/icon.constants';
+import { ICON_OPTIONS } from '../icon/icon.utils';
 
 import { type ButtonIconProps, buttonStyleArray } from './button.types';
 import { ButtonIcon } from './button-icon';

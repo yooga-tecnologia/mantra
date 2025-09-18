@@ -62,7 +62,10 @@ export class ButtonIcon {
           onClick={(event) => this.handleClick(event)}
           part="button"
         >
-          <mnt-icon size={this.size} icon={this.icon} />
+          <mnt-icon
+            size={this.size}
+            icon={this.icon}
+          />
         </button>
       </Host>
     );

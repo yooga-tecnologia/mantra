@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/html';
 import { FieldTextProps } from './field-text.types';
-import { ICON_OPTIONS } from '../icon/icon.constants';
+import { ICON_OPTIONS } from '../icon/icon.utils';
 
 type HTMLString = string;
 
