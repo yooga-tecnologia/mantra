@@ -2,11 +2,10 @@ import type { Meta, StoryFn } from '@storybook/html';
 
 import { colorTonesArray, sizeVariantsArray, ThemePalette, themePalettesArray } from '../../shared/theme/theme.types';
 import { ICON_OPTIONS } from '../icon/icon.utils';
+import { HTMLString } from 'src/utils/utils';
 
 import { BadgeBaseProps } from './badge.types';
 import { Badge } from './badge';
-
-type HTMLString = string;
 
 const SB_TABLE_ICON = {
   type: {
@@ -69,8 +68,8 @@ const DefaultTemplate = (args: BadgeBaseProps): HTMLString => `
   ></mnt-badge>
 `;
 
-export const Default = DefaultTemplate.bind({});
-Default.args = {
+export const Example = DefaultTemplate.bind({});
+Example.args = {
   color: 'primary',
   size: 'tiny',
   icon: 'plus',
@@ -82,30 +81,33 @@ const getColorVariants = (color: ThemePalette): HTMLString => {
   const badgeVariants: HTMLString[] = [];
 
   colorTonesArray.map((tone) => {
+    badgeVariants.push(`<span>${tone}</span>`);
     filteredSizeVariantsArray.map((size) => {
       const label = `${tone} ${size}`;
       badgeVariants.push(DefaultTemplate({ color, tone, size, icon: 'clock', label }));
     });
   });
   return `
-<h4>${color}</h4>
-<div class="sb-grid-3">
-  ${badgeVariants.join('')}
+<div class="sb-section-box">
+  <h4>${color}</h4>
+  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
+    ${badgeVariants.join('')}
+  </div>
 </div>`;
 };
 
-export const Examples: StoryFn<typeof Badge> = () => {
+export const AllVariants: StoryFn<typeof Badge> = () => {
   const badgeVariants: HTMLString[] = [];
   themePalettesArray.forEach((color) => {
     badgeVariants.push(getColorVariants(color));
   });
-  return `<div>
-  <h3>Color Variants</h3>
+  return `
+<div>
   ${badgeVariants.join('')}
 </div>
 `;
 };
 
-Examples.parameters = {
+AllVariants.parameters = {
   controls: { disable: true },
 };

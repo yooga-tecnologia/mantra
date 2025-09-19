@@ -31,6 +31,7 @@ body * {
 
 div[class^="sb-grid-"] {
   display: grid;
+  max-width: 1200px;
   grid-column-gap: 8px;
   grid-row-gap: 8px;
   align-items: center;
@@ -42,16 +43,50 @@ div[class^="sb-grid-"] {
     justify-items: stretch;
     justify-content: center;
   }
+
+  &.sb-grid-row-divider {
+    grid-row-gap: 0px;
+    grid-column-gap: 0px;
+
+    & > * {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 12px;
+      border-bottom: 1px dashed #ccc;
+    }
+  }
+}
+
+.sb-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+}
+
+.sb-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+
+  &.sb-grid-row-title {
+  grid-template-columns: 160px repeat(3, 1fr);
+}
+}
+
+.sb-grid-5 {
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
+
+  &.sb-grid-row-title {
+    grid-template-columns: 160px repeat(4, 1fr);
+  }
 }
 
 .sb-grid-6 {
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(1, 1fr);
-}
-
-.sb-grid-3 {
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
 }
 
 .sb-box {
@@ -63,4 +98,15 @@ div[class^="sb-grid-"] {
   padding: 12px;
   border-radius: 4px;
   background-color: #f9f9f9;
+}
+
+.sb-section-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  margin-bottom: 36px;
+  border-radius: 8px;
+  background-color: #fff;
+  border: 2px solid #eee;
 }

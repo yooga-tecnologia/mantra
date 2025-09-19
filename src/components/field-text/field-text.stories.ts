@@ -89,8 +89,8 @@ const DefaultTemplate = (args: FieldTextProps): HTMLString => `
   </mnt-field-text>
 `;
 
-export const Playground = DefaultTemplate.bind({});
-Playground.args = {
+export const Example = DefaultTemplate.bind({});
+Example.args = {
   inputName: 'input',
   labelText: 'Label',
   placeholder: 'Digite algo',
@@ -108,24 +108,30 @@ Playground.args = {
 const getAllVariants = (): HTMLString => {
   let html = '';
   sizeVariants.forEach((size) => {
+    html += `<h4>${size}</h4>`;
     stateVariants.forEach((state) => {
-      html += DefaultTemplate({
-        inputName: `${size}-${state}`,
-        labelText: `${size} ${state}`,
-        size,
-        state,
-        iconLeft: 'plus',
-        iconRight: 'minus',
-        inlineMessage: state !== 'default' ? `Mensagem [${state}]` : '',
-        required: state === 'error',
-        hasActionButton: true,
-        hasInfoButton: true,
-      });
+      html += `<div>
+        ${DefaultTemplate({
+          inputName: `${size}-${state}`,
+          labelText: `Label [${state}]`,
+          size,
+          state,
+          iconLeft: 'plus',
+          iconRight: 'minus',
+          inlineMessage: state !== 'default' ? `Mensagem [${state}]` : '',
+          required: state === 'error',
+          hasActionButton: true,
+          hasInfoButton: true,
+        })}
+      </div>`;
     });
   });
+  // <h4>${color}</h4>
   return `
-<div class="sb-grid-3">
-  ${html}
+<div class="sb-section-box">
+  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
+    ${html}
+  </div>
 </div>
   `;
 };

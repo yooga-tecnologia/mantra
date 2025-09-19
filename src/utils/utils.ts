@@ -43,3 +43,5 @@ export function setComponentClass(componentTag: string, variant?: string): strin
 export function classNames(...args: (string | false | undefined)[]): string {
   return args.filter(Boolean).join(' ');
 }
+
+export type HTMLString = string;

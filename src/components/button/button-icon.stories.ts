@@ -2,11 +2,10 @@ import type { Meta, StoryFn } from '@storybook/html';
 
 import { sizeVariantsArray, ThemePalette, themePalettesArray } from '../../shared/theme/theme.types';
 import { ICON_OPTIONS } from '../icon/icon.utils';
+import { HTMLString } from 'src/utils/utils';
 
 import { type ButtonIconProps, buttonStyleArray } from './button.types';
 import { ButtonIcon } from './button-icon';
-
-type HTMLString = string;
 
 const SB_TABLE_ICON = {
   type: {
@@ -21,7 +20,10 @@ const meta: Meta<ButtonIconProps> = {
     size: {
       control: 'select',
       options: sizeVariantsArray,
-      table: { defaultValue: { summary: 'medium' } },
+      table: {
+        defaultValue: { summary: 'medium' },
+        type: { summary: sizeVariantsArray.join(' | ') },
+      },
     },
     disabled: {
       control: 'boolean',
@@ -67,19 +69,23 @@ const getColorVariants = (color: ThemePalette): HTMLString => {
   const buttonVariants: HTMLString[] = [];
 
   buttonStyleArray.map((variant) => {
+    buttonVariants.push(`<span>${variant}</span>`);
     sizeVariantsArray.map((size) => {
       buttonVariants.push(DefaultTemplate({ color, variant, size, icon: 'plus' }));
     });
   });
   return `
-<div style="margin: 32px 0;">
+<div class="sb-section-box">
   <h4>${color}</h4>
-  ${buttonVariants.join('')}
-</div>`;
+  <div class="sb-grid-5 sb-grid-row-divider sb-grid-row-title">
+    ${buttonVariants.join('')}
+  </div>
+</div>
+`;
 };
 
-export const Default = DefaultTemplate.bind({});
-Default.args = {
+export const Example = DefaultTemplate.bind({});
+Example.args = {
   variant: 'regular',
   color: 'primary',
   size: 'tiny',
@@ -87,14 +93,14 @@ Default.args = {
   disabled: false,
 } as ButtonIconProps;
 
-export const Examples: StoryFn<typeof ButtonIcon> = () => {
+export const AllVariants: StoryFn<typeof ButtonIcon> = () => {
   const buttonVariants: HTMLString[] = [];
   themePalettesArray.forEach((color) => {
     buttonVariants.push(getColorVariants(color));
   });
 
-  return `<div>
-  <h3>Color Variants</h3>
+  return `
+<div>
   ${buttonVariants.join('')}
 </div>
 `;
