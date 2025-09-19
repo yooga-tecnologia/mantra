@@ -8,7 +8,7 @@ import { ICON_OPTIONS } from './icon.utils';
 type HTMLString = string;
 
 const meta: Meta<IconProps> = {
-  title: 'Components/Icon',
+  title: 'Assets/Icon',
   component: 'mnt-icon',
   argTypes: {
     icon: { control: 'select', options: ICON_OPTIONS },
@@ -51,13 +51,14 @@ Default.args = {
   animation: undefined,
 } as IconProps;
 
-export const RotationTemplate = DefaultTemplate.bind({});
-RotationTemplate.args = {
-  icon: 'caret-left',
-  size: 'large',
-  color: 'black',
-  animation: undefined,
-} as IconProps;
+// TODO: Melhorar documentacão desta funcionalidade
+// export const RotationTemplate = DefaultTemplate.bind({});
+// RotationTemplate.args = {
+//   icon: 'caret-left',
+//   size: 'large',
+//   color: 'black',
+//   animation: undefined,
+// } as IconProps;
 
 export const WithBackground = DefaultTemplate.bind({});
 WithBackground.args = {
@@ -132,5 +133,10 @@ const renderAllIcons = (): HTMLString => {
 
 export const AllIcons: StoryFn = () => renderAllIcons();
 AllIcons.parameters = {
+  docs: {
+    description: {
+      story: 'Listagem completa de todos os ícones disponíveis no sistema.',
+    },
+  },
   controls: { disable: true },
 };

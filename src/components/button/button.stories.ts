@@ -1,9 +1,11 @@
-import type { Meta } from '@storybook/html';
+import type { Meta, StoryFn } from '@storybook/html';
 
-import { sizeVariantsArray, themePalettesArray } from '../../shared/theme/theme.types';
+import { sizeVariantsArray, ThemePalette, themePalettesArray } from '../../shared/theme/theme.types';
 import { ICON_OPTIONS } from '../icon/icon.utils';
 
 import { buttonStyleArray, type ButtonProps } from './button.types';
+import { Button } from './button';
+import { HTMLString } from 'src/utils/utils';
 
 const SB_TABLE_ICON = {
   type: {
@@ -61,22 +63,52 @@ const meta: Meta<ButtonProps> = {
 
 export default meta;
 
-const Template = (args: ButtonProps) => `
+const DefaultTemplate = (args: ButtonProps): HTMLString => `
   <mnt-button
     label="${args.label ?? ''}"
     icon-left="${args.iconLeft ?? ''}"
     icon-right="${args.iconRight ?? ''}"
-    variant="${args.variant}"
-    color="${args.color}"
-    size="${args.size}"
-    disabled="${args.disabled}"
     full-width="${args.fullWidth}"
+    disabled="${args.disabled}"
+    variant=${args.variant}
+    color=${args.color}
+    size=${args.size}
   ></mnt-button>
 `;
 
-export const Playground = Template.bind({});
-Playground.args = {
-  label: 'Playground',
+const getColorVariants = (color: ThemePalette): HTMLString => {
+  const buttonVariants: HTMLString[] = [];
+
+  buttonStyleArray.map((variant) => {
+    buttonVariants.push(`<span>${variant}</span>`);
+    sizeVariantsArray.map((size) => {
+      buttonVariants.push(
+        DefaultTemplate({
+          color: color,
+          variant: variant,
+          size: size,
+          iconLeft: 'plus',
+          iconRight: 'plus',
+          label: 'Label',
+          disabled: false,
+          fullWidth: false,
+        }),
+      );
+    });
+  });
+  return `
+<div class="sb-section-box">
+  <h4>${color}</h4>
+  <div class="sb-grid-5 sb-grid-row-divider sb-grid-row-title">
+    ${buttonVariants.join('')}
+  </div>
+</div>
+`;
+};
+
+export const Example = DefaultTemplate.bind({});
+Example.args = {
+  label: 'Label',
   variant: 'emphasis',
   color: 'primary',
   size: 'medium',
@@ -85,3 +117,19 @@ Playground.args = {
   iconLeft: undefined,
   iconRight: undefined,
 } as ButtonProps;
+
+export const AllVariants: StoryFn<typeof Button> = () => {
+  const buttonVariants: HTMLString[] = [];
+  themePalettesArray.forEach((color) => {
+    buttonVariants.push(getColorVariants(color));
+  });
+  return `
+<div>
+  ${buttonVariants.join('')}
+</div>
+`;
+};
+
+AllVariants.parameters = {
+  controls: { disable: true },
+};
