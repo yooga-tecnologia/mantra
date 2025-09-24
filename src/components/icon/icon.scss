@@ -1,29 +1,36 @@
 @forward "../../shared/theme/core/animations";
 
-mnt-icon {
+mnt-icon,
+mnt-icon-large {
   display: inline-block;
+  vertical-align: middle;
+  line-height: 0; // Remove whitespace below the icon
+  font-size: 0; // Remove any inherited font size
+}
 
-  .icon-wrapper {
+
+mnt-icon {
+  .mnt-icon-with-background {
     position: relative;
+    display: flex;
     height: 100%;
     width: 100%;
-    display: flex;
     align-items: center;
     justify-content: center;
 
     svg {
-      position: absolute;
+      position: relative;
       z-index: 1;
     }
 
-    .icon-bg {
+    .mnt-icon-bg {
       display: block;
       position: absolute;
       z-index: 0;
       top: 0;
       left: 0;
 
-      &.border-circle  {
+      &.mnt-border-circle  {
         border-radius: 50%;
       }
     }

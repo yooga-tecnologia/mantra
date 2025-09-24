@@ -4,6 +4,71 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.4.0] – 2025-09-24
+
+### 🚀 Adicionado
+
+- **IconLarge**: Novo componente para ícones de maior complexidade visual
+  - Suporte a tamanhos específicos para ilustrações detalhadas (32px-128px)
+  - ViewBox otimizado (64x64) para melhor qualidade em tamanhos maiores
+  - Biblioteca de ícones complexos: `placeholder`, `gear`, `store`, `box`, `fastFood`
+  - Documentação completa no Storybook com recomendações de uso
+
+### ✨ Melhorado
+
+- **Icon**: Aprimoramentos substanciais no componente principal
+  - Suporte a tamanhos numéricos além dos pré-definidos (ex: `size="50"`)
+  - Sistema de fallback robusto para tamanhos inválidos (fallback para `medium`)
+  - Avisos UX no console para uso inadequado de `background` em tamanhos pequenos
+  - Melhor estrutura de classes CSS com prefixos consistentes (`mnt-icon-*`)
+  - Renderização condicional otimizada (sem wrapper desnecessário quando sem background)
+
+### 🧪 Testes
+
+- **Cobertura completa (100%)** para componentes Icon e IconLarge
+- Testes abrangentes para todos os cenários:
+  - Validação de tamanhos (pré-definidos, numéricos, inválidos)
+  - Sistema de avisos de console
+  - Comportamento de background e fallbacks
+  - Propriedades de cor e transformações
+  - Edge cases e tratamento de erros
+
+### 🔧 Configuração
+
+- **ESLint**: Configuração global para ignorar variáveis Stencil (`h`, `Fragment`)
+  - Elimina warnings desnecessários em todos os componentes
+  - Melhora experiência de desenvolvimento
+  - Configuração centralizada em `eslint.config.js`
+
+### 📚 Documentação
+
+- **Storybook**: Melhorias significativas na documentação
+  - Separação clara entre `Icon` e `IconLarge` com explicações de quando usar cada um
+  - Exemplos práticos e recomendações de tamanhos
+  - Playground interativo para ambos componentes
+  - Listagem categorizada de todos os ícones disponíveis
+
+### ♻️ Refatoração
+
+- **Tipos TypeScript**: Estrutura melhorada e mais consistente
+  - Interfaces `IconBaseProps`, `IconProps` e `IconLargeProps` bem definidas
+  - Tipos de tamanho específicos para cada componente
+  - Melhor inferência de tipos e autocompletar no IDE
+- **Utilitários**: Funções reorganizadas para suportar ambos tipos de ícone
+  - `getIconSvgByName()` com suporte a flag `isLarge`
+  - Constantes organizadas por categoria de ícone
+
+### 🐛 Correções
+
+- **Size handling**: Correção do bug que causava "undefinedpx" para tamanhos inválidos
+- **Background behavior**: Esclarecimento sobre quando spans de background são criados
+- **CSS classes**: Padronização de nomenclatura com prefixos `mnt-*`
+- **Documentation**: READMEs gerados automaticamente atualizados e consistentes
+
+---
+
+**BREAKING CHANGE**: Introdução do componente `IconLarge` com mapeamento de tamanhos diferentes do componente `Icon` padrão.
+
 ## [2.3.2] – 2025-09-18
 
 ### ✅ Corrigido

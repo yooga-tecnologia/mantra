@@ -8,6 +8,8 @@ import {
   MAPS_AND_TRANSPORTATION_ICONS,
 } from './icon-base';
 
+import { ICON_LARGE } from './icon-large-base';
+
 export const ICON_CATEGORIES = [
   UI_ACTIONS_ICONS,
   COMMUNICATION_ICONS,
@@ -27,10 +29,15 @@ export const ICON_OPTIONS = [
   ...Object.keys(HARDWARE_ICONS),
   ...Object.keys(MAPS_AND_TRANSPORTATION_ICONS),
 ];
+export const ICON_LARGE_OPTIONS = [...Object.keys(ICON_LARGE)];
 
-export function getIconSvgByName(name: string): string | undefined {
-  for (const category of ICON_CATEGORIES) {
-    if (category[name]) return category[name];
+export function getIconSvgByName(name: string, isLarge?: boolean): string | undefined {
+  if (isLarge) {
+    return ICON_LARGE[name];
+  } else {
+    for (const category of ICON_CATEGORIES) {
+      if (category[name]) return category[name];
+    }
   }
   return undefined;
 }

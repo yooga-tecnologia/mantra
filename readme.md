@@ -50,10 +50,9 @@ Para mais detalhes sobre cada componente e suas propriedades, consulte a documen
 
 📚 [Mantra UI Storybook](https://yooga-tecnologia.github.io/mantra/storybook-static/)
 
-📜 Scripts Disponíveis
+## 📜 Scripts Disponíveis
 
-O projeto inclui diversos comandos para facilitar o desenvolvimento e testes:
-
+### Desenvolvimento e Testes
 ```bash
 npm run build           # Compila os componentes
 npm run start           # Inicia o servidor de desenvolvimento
@@ -62,6 +61,14 @@ npm run test:e2e        # Executa os testes end-to-end
 npm run storybook       # Inicia o Storybook para visualizar os componentes
 npm run build-storybook # Gera a versão estática do Storybook
 ```
+
+### Release e Publicação
+```bash
+npm run release         # Script interativo para preparar releases
+npm run pre-commit      # Executa testes e build (verificação pré-commit)
+```
+
+> **📋 Processo de Release:** O release é feito via Pull Request para `main`. Após o merge, o GitHub Actions automaticamente publica no GitHub Packages e faz deploy do Storybook. Veja [RELEASE_PROCESS.md](./RELEASE_PROCESS.md) para detalhes.
 
 ## 🛠 Tecnologias Utilizadas
 

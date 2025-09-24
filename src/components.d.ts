@@ -8,13 +8,13 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { BadgeBaseProps } from "./components/badge/badge.types";
 import { ButtonIconProps, ButtonProps } from "./components/button/button.types";
 import { FieldTextProps } from "./components/field-text/field-text.types";
-import { IconProps } from "./components/icon/icon.types";
+import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
 import { TooltipProps } from "./components/tooltip/tooltip.types";
 export { BadgeBaseProps } from "./components/badge/badge.types";
 export { ButtonIconProps, ButtonProps } from "./components/button/button.types";
 export { FieldTextProps } from "./components/field-text/field-text.types";
-export { IconProps } from "./components/icon/icon.types";
+export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
 export { TooltipProps } from "./components/tooltip/tooltip.types";
 export namespace Components {
@@ -69,6 +69,11 @@ export namespace Components {
         "color": IconProps['color'];
         "icon": IconProps['icon'];
         "size": IconProps['size'];
+    }
+    interface MntIconLarge {
+        "color": IconLargeProps['color'];
+        "icon": string;
+        "size": IconLargeProps['size'];
     }
     interface MntIllustration {
         "height": IllustrationProps['height'];
@@ -157,6 +162,12 @@ declare global {
         prototype: HTMLMntIconElement;
         new (): HTMLMntIconElement;
     };
+    interface HTMLMntIconLargeElement extends Components.MntIconLarge, HTMLStencilElement {
+    }
+    var HTMLMntIconLargeElement: {
+        prototype: HTMLMntIconLargeElement;
+        new (): HTMLMntIconLargeElement;
+    };
     interface HTMLMntIllustrationElement extends Components.MntIllustration, HTMLStencilElement {
     }
     var HTMLMntIllustrationElement: {
@@ -175,6 +186,7 @@ declare global {
         "mnt-button-icon": HTMLMntButtonIconElement;
         "mnt-field-text": HTMLMntFieldTextElement;
         "mnt-icon": HTMLMntIconElement;
+        "mnt-icon-large": HTMLMntIconLargeElement;
         "mnt-illustration": HTMLMntIllustrationElement;
         "mnt-tooltip": HTMLMntTooltipElement;
     }
@@ -239,6 +251,11 @@ declare namespace LocalJSX {
         "icon": IconProps['icon'];
         "size"?: IconProps['size'];
     }
+    interface MntIconLarge {
+        "color"?: IconLargeProps['color'];
+        "icon": string;
+        "size"?: IconLargeProps['size'];
+    }
     interface MntIllustration {
         "height"?: IllustrationProps['height'];
         "name": IllustrationProps['name'];
@@ -254,6 +271,7 @@ declare namespace LocalJSX {
         "mnt-button-icon": MntButtonIcon;
         "mnt-field-text": MntFieldText;
         "mnt-icon": MntIcon;
+        "mnt-icon-large": MntIconLarge;
         "mnt-illustration": MntIllustration;
         "mnt-tooltip": MntTooltip;
     }
@@ -267,6 +285,7 @@ declare module "@stencil/core" {
             "mnt-button-icon": LocalJSX.MntButtonIcon & JSXBase.HTMLAttributes<HTMLMntButtonIconElement>;
             "mnt-field-text": LocalJSX.MntFieldText & JSXBase.HTMLAttributes<HTMLMntFieldTextElement>;
             "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;
+            "mnt-icon-large": LocalJSX.MntIconLarge & JSXBase.HTMLAttributes<HTMLMntIconLargeElement>;
             "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
             "mnt-tooltip": LocalJSX.MntTooltip & JSXBase.HTMLAttributes<HTMLMntTooltipElement>;
         }
