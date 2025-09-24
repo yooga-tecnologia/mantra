@@ -84,9 +84,7 @@ export class Button {
           )}
 
           {this.label ? (
-            <span class="label">
-              {this.label}
-            </span>
+            <span class="label">{this.label}</span>
           ) : (
             <span class="label">
               <slot></slot>

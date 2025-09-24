@@ -22,8 +22,8 @@ export interface ButtonProps extends ButtonBaseProps {
   iconLeft?: ExtendedIconName;
   iconRight?: ExtendedIconName;
   iconAnimation?: IconAnimation;
-};
+}
 
 export interface ButtonIconProps extends ButtonBaseProps {
   icon?: ExtendedIconName;
-};
+}
