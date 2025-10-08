@@ -1,0 +1,167 @@
+name: 🐛 Debug Release Automation
+
+on:
+  push:
+    branches:
+      - test/workflow-debug  # Só roda nesta branch
+  workflow_dispatch:        # Permite execução manual
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  packages: write
+  pull-requests: read
+
+jobs:
+  debug-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🔍 Debug - Informações do Git
+        run: |
+          echo "=== GIT INFO ==="
+          echo "Current branch: $(git rev-parse --abbrev-ref HEAD)"
+          echo "Latest commits:"
+          git log --oneline -5
+          echo ""
+          echo "=== MERGE COMMITS ==="
+          git log --merges -3 --pretty=format:"Hash: %H | Subject: %s | Date: %ad" --date=short
+
+      - name: 🔍 Debug - Simular Detecção de Versão
+        id: check-version
+        run: |
+          echo "=== VERSION CHECK ==="
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "Current version: $CURRENT_VERSION"
+          
+          # Simular versão anterior (para debug)
+          PREVIOUS_VERSION="2.4.0"
+          echo "Simulated previous version: $PREVIOUS_VERSION"
+          
+          # Forçar detecção de mudança para teste
+          echo "changed=true" >> $GITHUB_OUTPUT
+          echo "new-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          echo "🚀 Debug: Simulating version change from $PREVIOUS_VERSION to $CURRENT_VERSION"
+
+      - name: 🔍 Debug - Informações do último merge
+        id: get-merge-info
+        run: |
+          echo "=== MERGE INFO DEBUG ==="
+          MERGE_COMMIT=$(git log --merges -1 --pretty=format:"%H")
+          
+          if [ -n "$MERGE_COMMIT" ]; then
+            echo "Merge commit found: $MERGE_COMMIT"
+            
+            FULL_SUBJECT=$(git log -1 --pretty=format:"%s" $MERGE_COMMIT)
+            echo "Full subject: $FULL_SUBJECT"
+            
+            PR_NUMBER=$(echo "$FULL_SUBJECT" | grep -oE '#[0-9]+' | sed 's/#//' || echo "")
+            echo "Extracted PR number: $PR_NUMBER"
+            
+            MERGE_TITLE=$(echo "$FULL_SUBJECT" | sed 's/ (#[0-9]*)$//')
+            echo "Extracted title: $MERGE_TITLE"
+            
+            echo "pr-number=$PR_NUMBER" >> $GITHUB_OUTPUT
+            echo "merge-title=$MERGE_TITLE" >> $GITHUB_OUTPUT
+          else
+            echo "⚠️ No merge commit found"
+            # Para debug, simular dados
+            echo "pr-number=123" >> $GITHUB_OUTPUT
+            echo "merge-title=Debug: Test Release Automation" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🔍 Debug - Simular Obtenção do PR
+        if: steps.get-merge-info.outputs.pr-number != ''
+        run: |
+          echo "=== PR INFO DEBUG ==="
+          PR_NUMBER="${{ steps.get-merge-info.outputs.pr-number }}"
+          echo "Testing PR number: $PR_NUMBER"
+          
+          # Simular descrição do PR para debug
+          cat > pr_description.txt << 'EOF'
+          ## 🐛 Debug Release Automation
+
+          Este é um teste do sistema de release automatizado.
+
+          ### Mudanças
+          - Implementação do workflow de release automático
+          - Detecção de versão automática
+          - Criação de release notes
+          - Atualização do changelog
+
+          ### Testes realizados
+          - ✅ Detecção de merge commits
+          - ✅ Extração de informações do PR
+          - ✅ Formatação de release notes
+          EOF
+          
+          echo "📄 Debug PR description created"
+          echo "Content:"
+          cat pr_description.txt
+
+      - name: 🔍 Debug - Simular Release Notes
+        run: |
+          echo "=== RELEASE NOTES DEBUG ==="
+          VERSION="${{ steps.check-version.outputs.new-version }}"
+          PR_NUMBER="${{ steps.get-merge-info.outputs.pr-number }}"
+          MERGE_TITLE="${{ steps.get-merge-info.outputs.merge-title }}"
+          
+          RELEASE_NAME="v$VERSION"
+          echo "Release name: $RELEASE_NAME"
+          echo "PR number: $PR_NUMBER"
+          echo "Merge title: $MERGE_TITLE"
+          
+          # Mostrar como ficaria o corpo da release
+          echo ""
+          echo "=== RELEASE BODY PREVIEW ==="
+          echo "## 🚀 $MERGE_TITLE"
+          echo ""
+          if [ -f "pr_description.txt" ]; then
+            cat pr_description.txt
+          fi
+          echo ""
+          echo "---"
+          echo "**Release Date:** $(date +'%Y-%m-%d')"
+          echo "**Version:** $VERSION"
+          echo "**PR:** #$PR_NUMBER"
+
+      - name: 🔍 Debug - Simular Changelog Update
+        run: |
+          echo "=== CHANGELOG DEBUG ==="
+          VERSION="${{ steps.check-version.outputs.new-version }}"
+          MERGE_TITLE="${{ steps.get-merge-info.outputs.merge-title }}"
+          PR_NUMBER="${{ steps.get-merge-info.outputs.pr-number }}"
+          DATE=$(date +'%Y-%m-%d')
+          
+          echo "Would update changelog with:"
+          echo "Version: $VERSION"
+          echo "Date: $DATE"
+          echo "Title: $MERGE_TITLE"
+          echo "PR: $PR_NUMBER"
+          
+          echo ""
+          echo "=== CHANGELOG ENTRY PREVIEW ==="
+          echo "## [$VERSION] – $DATE"
+          echo ""
+          echo "### 📋 $MERGE_TITLE"
+          echo "- **Release Notes:** [$VERSION Release Notes](https://github.com/yooga-tecnologia/mantra/releases/tag/v$VERSION)"
+          echo "- **Pull Request:** [#$PR_NUMBER](https://github.com/yooga-tecnologia/mantra/pull/$PR_NUMBER)"
+
+      - name: ✅ Debug Summary
+        run: |
+          echo "=== DEBUG SUMMARY ==="
+          echo "✅ Git info extraction: OK"
+          echo "✅ Version detection: OK"
+          echo "✅ Merge commit parsing: OK"
+          echo "✅ PR info simulation: OK"
+          echo "✅ Release notes formatting: OK"
+          echo "✅ Changelog formatting: OK"
+          echo ""
+          echo "🎉 Debug workflow completed successfully!"
+          echo "Ready to test with real data!"
