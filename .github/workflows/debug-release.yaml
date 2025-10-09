@@ -64,17 +64,30 @@ jobs:
             PR_NUMBER=$(echo "$FULL_SUBJECT" | grep -oE '#[0-9]+' | sed 's/#//' || echo "")
             echo "Extracted PR number: $PR_NUMBER"
             
-            MERGE_TITLE=$(echo "$FULL_SUBJECT" | sed 's/ (#[0-9]*)$//')
-            echo "Extracted title: $MERGE_TITLE"
+            # Tentar obter título do PR via API
+            if [ -n "$PR_NUMBER" ]; then
+              echo "🔍 Fetching PR title from GitHub API..."
+              PR_TITLE=$(gh pr view $PR_NUMBER --json title --jq '.title' 2>/dev/null || echo "")
+              if [ -n "$PR_TITLE" ]; then
+                echo "✅ PR Title from API: $PR_TITLE"
+                echo "merge-title=$PR_TITLE" >> $GITHUB_OUTPUT
+              else
+                echo "⚠️ API failed, using merge title fallback"
+                MERGE_TITLE=$(echo "$FULL_SUBJECT" | sed 's/ (#[0-9]*)$//')
+                echo "Fallback title: $MERGE_TITLE"
+                echo "merge-title=$MERGE_TITLE" >> $GITHUB_OUTPUT
+              fi
+            fi
             
             echo "pr-number=$PR_NUMBER" >> $GITHUB_OUTPUT
-            echo "merge-title=$MERGE_TITLE" >> $GITHUB_OUTPUT
           else
             echo "⚠️ No merge commit found"
             # Para debug, simular dados
             echo "pr-number=123" >> $GITHUB_OUTPUT
-            echo "merge-title=Debug: Test Release Automation" >> $GITHUB_OUTPUT
+            echo "merge-title=feat(Icon): add house simple" >> $GITHUB_OUTPUT
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🔍 Debug - Simular Obtenção do PR
         if: steps.get-merge-info.outputs.pr-number != ''
@@ -115,7 +128,7 @@ jobs:
           RELEASE_NAME="v$VERSION"
           echo "Release name: $RELEASE_NAME"
           echo "PR number: $PR_NUMBER"
-          echo "Merge title: $MERGE_TITLE"
+          echo "PR title: $MERGE_TITLE"
           
           # Mostrar como ficaria o corpo da release
           echo ""
@@ -130,6 +143,9 @@ jobs:
           echo "**Release Date:** $(date +'%Y-%m-%d')"
           echo "**Version:** $VERSION"
           echo "**PR:** #$PR_NUMBER"
+          echo ""
+          echo "🏷️ Note: GitHub will create tag v$VERSION automatically"
+          echo "🔗 Release URL will be: https://github.com/yooga-tecnologia/mantra/releases/tag/v$VERSION"
 
       - name: 🔍 Debug - Simular Changelog Update
         run: |

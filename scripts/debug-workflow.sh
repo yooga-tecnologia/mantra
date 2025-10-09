@@ -27,12 +27,27 @@ if [ -n "$MERGE_COMMIT" ]; then
     PR_NUMBER=$(echo "$FULL_SUBJECT" | grep -oE '#[0-9]+' | sed 's/#//' || echo "")
     echo "🔗 PR number: $PR_NUMBER"
     
-    MERGE_TITLE=$(echo "$FULL_SUBJECT" | sed 's/ (#[0-9]*)$//')
-    echo "📌 Title: $MERGE_TITLE"
+    # Tentar buscar título original do PR
+    if [ -n "$PR_NUMBER" ] && command -v gh >/dev/null 2>&1; then
+        echo "🔍 Trying to fetch PR title from GitHub API..."
+        PR_TITLE=$(gh pr view $PR_NUMBER --json title --jq '.title' 2>/dev/null || echo "")
+        if [ -n "$PR_TITLE" ]; then
+            echo "✅ PR Title from API: $PR_TITLE"
+            MERGE_TITLE="$PR_TITLE"
+        else
+            echo "⚠️ API failed, using merge title fallback"
+            MERGE_TITLE=$(echo "$FULL_SUBJECT" | sed 's/ (#[0-9]*)$//')
+            echo "📌 Fallback title: $MERGE_TITLE"
+        fi
+    else
+        echo "⚠️ GitHub CLI not available or no PR number, using merge title"
+        MERGE_TITLE=$(echo "$FULL_SUBJECT" | sed 's/ (#[0-9]*)$//')
+        echo "📌 Title: $MERGE_TITLE"
+    fi
 else
     echo "⚠️  No merge commit found - will use fallback"
     PR_NUMBER="debug-123"
-    MERGE_TITLE="Debug Test Release"
+    MERGE_TITLE="feat(Icon): add house simple"
 fi
 
 # Testar script de changelog

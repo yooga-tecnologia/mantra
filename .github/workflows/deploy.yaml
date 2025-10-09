@@ -115,18 +115,31 @@ jobs:
           MERGE_COMMIT=$(git log --merges -1 --pretty=format:"%H")
           
           if [ -n "$MERGE_COMMIT" ]; then
+            # Extrair número do PR do merge commit
             PR_NUMBER=$(git log -1 --pretty=format:"%s" $MERGE_COMMIT | grep -oE '#[0-9]+' | sed 's/#//')
             echo "pr-number=$PR_NUMBER" >> $GITHUB_OUTPUT
             
-            MERGE_TITLE=$(git log -1 --pretty=format:"%s" $MERGE_COMMIT | sed 's/ (#[0-9]*)$//')
-            echo "merge-title=$MERGE_TITLE" >> $GITHUB_OUTPUT
-            
             echo "🔗 Found merge commit: $MERGE_COMMIT"
             echo "📋 PR Number: $PR_NUMBER"
-            echo "📝 Merge Title: $MERGE_TITLE"
+            
+            # Buscar título original do PR via GitHub API se temos o número
+            if [ -n "$PR_NUMBER" ]; then
+              PR_TITLE=$(gh pr view $PR_NUMBER --json title --jq '.title' 2>/dev/null || echo "")
+              if [ -n "$PR_TITLE" ]; then
+                echo "merge-title=$PR_TITLE" >> $GITHUB_OUTPUT
+                echo "📝 PR Title (from API): $PR_TITLE"
+              else
+                # Fallback para título do merge se API falhar
+                MERGE_TITLE=$(git log -1 --pretty=format:"%s" $MERGE_COMMIT | sed 's/ (#[0-9]*)$//')
+                echo "merge-title=$MERGE_TITLE" >> $GITHUB_OUTPUT
+                echo "📝 Fallback to merge title: $MERGE_TITLE"
+              fi
+            fi
           else
             echo "⚠️ No merge commit found"
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Obter descrição do PR
         if: steps.get-merge-info.outputs.pr-number != ''
@@ -165,10 +178,12 @@ jobs:
             RELEASE_BODY="$RELEASE_BODY"$'\n'"**PR:** #$PR_NUMBER"
           fi
           
+          # Criar release (GitHub cria automaticamente uma tag se não existir)
           gh release create "$RELEASE_NAME" \
             --title "$RELEASE_NAME" \
             --notes "$RELEASE_BODY" \
-            --latest
+            --latest \
+            --generate-notes
           
           RELEASE_URL=$(gh release view "$RELEASE_NAME" --json url --jq '.url')
           
@@ -177,6 +192,7 @@ jobs:
           
           echo "✅ Release $RELEASE_NAME created successfully"
           echo "🔗 Release URL: $RELEASE_URL"
+          echo "🏷️ Tag v$VERSION created automatically by GitHub"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
