@@ -4,6 +4,12 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.4.3] – 2025-10-02
+
+### 🐛 Correções
+
+- **Tooltip**: Correção do problema do tooltip não ajustar com o tamanho do texto
+
 ## [2.4.1] – 2025-10-02
 
 ### 🚀 Adicionado
