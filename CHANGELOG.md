@@ -4,6 +4,13 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.4.4] – 2025-10-10
+
+### 🚀 Adicionado
+
+- Variantes de Icon:
+  - Calculator
+
 ## [2.4.3] – 2025-10-02
 
 ### 🐛 Correções
