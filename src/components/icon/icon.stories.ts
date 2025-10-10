@@ -11,7 +11,7 @@ const meta: Meta<IconProps> = {
   title: 'Assets/Icon/Icon',
   component: 'mnt-icon',
   argTypes: {
-    icon: { control: 'select', options: ICON_OPTIONS },
+    icon: { control: 'select', options: ICON_OPTIONS.sort() },
     size: { control: 'select', options: Object.keys(iconSizes) },
     color: { control: 'color' },
     background: { control: 'color' },
@@ -97,8 +97,8 @@ const IconsByCategory = [
     icons: ICONS.UI_ACTIONS_ICONS,
   },
   {
-    label: 'Communication',
-    icons: ICONS.COMMUNICATION_ICONS,
+    label: 'Communication and Social',
+    icons: ICONS.COMMUNICATION_AND_SOCIAL_ICONS,
   },
   {
     label: 'Common Actions',
@@ -139,6 +139,7 @@ const renderAllIcons = (): HTMLString => {
         <h3>${category.label}</h3>
         <div class="sb-grid-6 sb-grid-stretch">
           ${Object.keys(category.icons)
+            .sort()
             .map((iconName) => renderIconBox(iconName))
             .join('')}
         </div>

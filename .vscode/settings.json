@@ -3,6 +3,9 @@
   "jest.jestCommandLine": "npm run test --",
   // Opcional: desabilite o coverage automático
   "jest.coverageEnabled": false,
+  "conventionalCommits.scopes": [
+    "icon"
+  ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false
 }
