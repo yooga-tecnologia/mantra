@@ -4,7 +4,8 @@
   // Opcional: desabilite o coverage automático
   "jest.coverageEnabled": false,
   "conventionalCommits.scopes": [
-    "icon"
+    "icon",
+    "brand"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false
