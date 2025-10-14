@@ -1,25 +1,24 @@
 import { Component, Prop, State, h, Watch, Element } from '@stencil/core';
 
 import { getLibPrefix } from 'src/utils/utils';
-
-import { ILLUSTRATIONS } from './illustration-base';
-import type { IllustrationProps } from './illustration.types';
+import { BRANDS } from './brand-base';
+import { BrandProps } from './brand.types';
 
 const LIB_PREFIX = getLibPrefix();
 
 @Component({
-  tag: 'mnt-illustration',
-  styleUrl: 'illustration.scss',
+  tag: 'mnt-brand',
   shadow: false,
 })
-export class Illustration {
+export class Brand {
   @Element() el!: HTMLElement;
 
-  @Prop() name!: IllustrationProps['name'];
-  @Prop() width: IllustrationProps['width'] = 140;
-  @Prop() height: IllustrationProps['height'] = 140;
+  @Prop() name!: BrandProps['name'];
+  @Prop() color: BrandProps['color'];
+  @Prop() height: BrandProps['height'] = 35;
   @State() svgIllustration: string = '';
 
+  private svgViewbox;
   private gRef!: SVGElement;
 
   componentWillLoad() {
@@ -40,7 +39,14 @@ export class Illustration {
   }
 
   private updateIllustration(): void {
-    this.svgIllustration = ILLUSTRATIONS[this.name] || '';
+    if (BRANDS[this.name]) {
+      this.svgIllustration = BRANDS[this.name].svg;
+      this.color = this.color || BRANDS[this.name].color;
+      this.svgViewbox = `0 0 ${BRANDS[this.name].size[0]} ${BRANDS[this.name].size[1]}`;
+      console.log(this.svgViewbox);
+    } else {
+      console.log(`[Mantra]: Illustration with name "${this.name}" does not exist.`);
+    }
   }
 
   private updateSVGContent(): void {
@@ -59,9 +65,9 @@ export class Illustration {
         <svg
           class="d-flex"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 160 160"
-          width={this.width}
+          viewBox={this.svgViewbox}
           height={this.height}
+          fill={this.color}
         >
           <g ref={(el) => (this.gRef = el)}></g>
         </svg>

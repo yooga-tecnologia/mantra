@@ -4,6 +4,12 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.5.0] – 2025-10-13
+
+### 🚀 Adicionado
+
+- **Brand**: Componente responsável por exibir logotipos e identidades visuais de marcas parceiras e do próprio sistema
+
 ## [2.4.4] – 2025-10-10
 
 ### 🚀 Adicionado
