@@ -1,0 +1,138 @@
+@use 'sass:map';
+
+@use '../../shared/theme/core/theme' as theme;
+
+// 1. MAPPERS, FUNCTIONS & VARIABLES
+
+$component-prefix: theme.get-prefix('field-number');
+$field-number-color-scheme: (
+  neutral: (
+    text-color: #242628,
+    placeholder-color: #818A8F,
+    background-color: transparent,
+    border-color: #CED2D3,
+    border-color-on-hover: #818A8F,
+    border-color-on-focus: #0B7CBE,
+  ),
+);
+
+@mixin set-fill-available {
+  width: 100%;
+  width: -moz-available;          /* WebKit-based browsers will ignore this. */
+  width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  width: stretch;
+}
+
+// 2. BASE STYLES
+
+.text-color-primary {
+  color: #0A639A;
+}
+
+mnt-field-number {
+  display: inline-block;
+
+  input[type='number'] {
+    border: 1px solid map.get($field-number-color-scheme, neutral, border-color);
+    border-radius: 12px;
+    background-color: map.get($field-number-color-scheme, neutral, background-color);
+    color: map.get($field-number-color-scheme, neutral, text-color);
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      appearance: none;
+      margin: 0;
+    }
+
+    &,
+    &:hover,
+    &:focus {
+      transition: all ease-in-out 0.2s;
+    }
+
+    &:hover {
+      border-color: map.get($field-number-color-scheme, neutral, border-color-on-hover);
+    }
+
+    &:focus {
+      border-color: map.get($field-number-color-scheme, neutral, border-color-on-focus);
+      outline: 1px solid map.get($field-number-color-scheme, neutral, border-color-on-focus);
+    }
+  }
+
+  .#{$component-prefix} {
+    &-label {
+      font-weight: 500;
+      color: #4B5053;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    &-input-container {
+      position: relative;
+    }
+
+    &-actions {
+      position: absolute;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+    }
+  }
+
+  .#{$component-prefix}-default {
+    position: relative;
+
+    input {
+      @include set-fill-available;
+      padding: 16px 18px;
+    }
+
+    .#{$component-prefix}-input-container {
+      min-width: 160px;
+    }
+
+    .#{$component-prefix}-actions {
+      right: 12px;
+      gap: 4px;
+    }
+  }
+
+  // TODO: definir o estilo do variant simple
+  // .#{$component-prefix}-simple {
+  //   border: 2px solid yellow;
+  // }
+
+  .#{$component-prefix}-plain {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    input {
+      padding: 12px;
+      text-align: center;
+    }
+
+    .#{$component-prefix}-input-container {
+      min-width: 80px;
+    }
+
+    .#{$component-prefix}-actions {
+      @include set-fill-available;
+      padding: 8px;
+      justify-content: space-between;
+      pointer-events: none;
+
+      & > mnt-button-icon {
+        pointer-events: all;
+      }
+    }
+  }
+}

@@ -14,7 +14,7 @@ const SB_TABLE_ICON = {
 };
 
 const meta: Meta<FieldTextProps> = {
-  title: 'Components/FieldText',
+  title: 'Forms/FieldText',
   component: 'mnt-field-text',
   argTypes: {
     inputName: { control: 'text', description: 'Nome do input' },

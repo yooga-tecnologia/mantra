@@ -132,8 +132,8 @@ export class FieldText {
         )}
 
         <input
-          id={this.inputName}
           type="text"
+          id={this.inputName}
           placeholder={this.placeholder}
           required={this.required}
           maxLength={this.maxLength}

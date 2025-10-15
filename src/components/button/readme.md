@@ -32,6 +32,10 @@
 
 ## Dependencies
 
+### Used by
+
+ - [mnt-field-number](../field-number)
+
 ### Depends on
 
 - [mnt-icon](../icon)
@@ -40,6 +44,7 @@
 ```mermaid
 graph TD;
   mnt-button-icon --> mnt-icon
+  mnt-field-number --> mnt-button-icon
   style mnt-button-icon fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
