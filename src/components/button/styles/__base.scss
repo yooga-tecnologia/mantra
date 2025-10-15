@@ -75,6 +75,7 @@ $border-radius-medium: map.get(sizing.$border-radius-map, "medium");
     span {
       font-size: map.get($size-map, "font-size");
       font-weight: 500;
+      text-wrap: nowrap;
     }
 
     &.#{$component-prefix}-icon {

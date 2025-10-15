@@ -40,6 +40,26 @@ export class Button {
     this.buttonClick.emit(event);
   }
 
+  get iconSize(): number {
+    let iconSize = 16;
+
+    switch (this.size) {
+      case 'small':
+        iconSize = 16;
+        break;
+      case 'medium':
+        iconSize = 20;
+        break;
+      case 'large':
+        iconSize = 24;
+        break;
+      default:
+        iconSize = 16;
+    }
+
+    return iconSize;
+  }
+
   get buttonClass() {
     let colorClass = '';
     let sizeClass = '';
@@ -78,7 +98,7 @@ export class Button {
             <mnt-icon
               icon={this.iconLeft}
               animation={this.iconAnimation}
-              size={this.size}
+              size={this.iconSize}
               class="icon-left"
             />
           )}
@@ -95,7 +115,7 @@ export class Button {
             <mnt-icon
               icon={this.iconRight}
               animation={this.iconAnimation}
-              size={this.size}
+              size={this.iconSize}
               class="icon-right"
             />
           )}
