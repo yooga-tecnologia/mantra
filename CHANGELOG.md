@@ -4,6 +4,15 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.5.2] – 2025-01-15
+
+### 🐛 Correções
+
+- **Button**: Aprimoramento no sistema de ícones
+  - Implementação de getter `iconSize` para cálculo dinâmico de tamanhos de ícones baseado no tamanho do botão
+  - Mapeamento correto de tamanhos: small (16px), medium (20px), large (24px)
+  - Adição de `text-wrap: nowrap` para evitar quebra de texto em labels
+
 ## [2.5.1] – 2025-01-13
 
 ### 🚀 Adicionado

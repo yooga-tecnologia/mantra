@@ -110,16 +110,13 @@ export class FieldNumber {
   }
 
   private renderDefaultVariant() {
-    return (
-      <>
-        {this.renderLabel()}
-
-        <div class="mnt-field-number-input-container">
-          {this.renderInput()}
-          {this.renderActionButtons()}
-        </div>
-      </>
-    );
+    return [
+      this.renderLabel(),
+      <div class="mnt-field-number-input-container">
+        {this.renderInput()}
+        {this.renderActionButtons()}
+      </div>,
+    ];
   }
 
   // TODO: implementar o variant simple

@@ -6,7 +6,8 @@
   "conventionalCommits.scopes": [
     "icon",
     "brand",
-    "field-number"
+    "field-number",
+    "button"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false
