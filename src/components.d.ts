@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { BadgeBaseProps } from "./components/badge/badge.types";
 import { BrandProps } from "./components/brand/brand.types";
 import { ButtonIconProps, ButtonProps } from "./components/button/button.types";
+import { FieldNumberProps } from "./components/field-number/field-number.types";
 import { FieldTextProps } from "./components/field-text/field-text.types";
 import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
@@ -15,300 +16,353 @@ import { TooltipProps } from "./components/tooltip/tooltip.types";
 export { BadgeBaseProps } from "./components/badge/badge.types";
 export { BrandProps } from "./components/brand/brand.types";
 export { ButtonIconProps, ButtonProps } from "./components/button/button.types";
+export { FieldNumberProps } from "./components/field-number/field-number.types";
 export { FieldTextProps } from "./components/field-text/field-text.types";
 export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
 export { TooltipProps } from "./components/tooltip/tooltip.types";
 export namespace Components {
-  interface MntBadge {
-    "color"?: BadgeBaseProps['color'];
-    "icon"?: BadgeBaseProps['icon'];
-    "label": BadgeBaseProps['label'];
-    "size"?: BadgeBaseProps['size'];
-    "tone"?: BadgeBaseProps['tone'];
-  }
-  interface MntBrand {
-    "color": BrandProps['color'];
-    "height": BrandProps['height'];
-    "name": BrandProps['name'];
-  }
-  interface MntButton {
-    "color": ButtonProps['color'];
-    "disabled": ButtonProps['disabled'];
-    "fullWidth": ButtonProps['fullWidth'];
-    "iconAnimation"?: ButtonProps['iconAnimation'];
-    "iconLeft"?: ButtonProps['iconLeft'];
-    "iconRight"?: ButtonProps['iconRight'];
-    "label"?: ButtonProps['label'];
-    "size": ButtonProps['size'];
-    "variant": ButtonProps['variant'];
-  }
-  interface MntButtonIcon {
-    "color": ButtonIconProps['color'];
-    "disabled": ButtonIconProps['disabled'];
-    "icon"?: ButtonIconProps['icon'];
-    "size": ButtonIconProps['size'];
-    "variant": ButtonIconProps['variant'];
-  }
-  interface MntFieldText {
-    "disabled"?: FieldTextProps['disabled'];
-    "hasActionButton"?: FieldTextProps['hasActionButton'];
-    "hasInfoButton"?: FieldTextProps['hasInfoButton'];
-    "iconLeft"?: FieldTextProps['iconLeft'];
-    "iconRight"?: FieldTextProps['iconRight'];
-    "inlineMessage"?: FieldTextProps['inlineMessage'];
-    "inputName": string;
-    "labelText"?: FieldTextProps['labelText'];
-    "mask"?: 'currency' | 'custom';
-    "max"?: number;
-    "maxLength"?: number;
-    "min"?: number;
-    "minLength"?: number;
-    "placeholder"?: FieldTextProps['placeholder'];
-    "required"?: FieldTextProps['required'];
-    "size"?: FieldTextProps['size'];
-    "state"?: FieldTextProps['state'];
-    "value"?: string;
-  }
-  interface MntIcon {
-    "animation"?: IconProps['animation'];
-    "background"?: IconProps['background'];
-    "color": IconProps['color'];
-    "icon": IconProps['icon'];
-    "size": IconProps['size'];
-  }
-  interface MntIconLarge {
-    "color": IconLargeProps['color'];
-    "icon": string;
-    "size": IconLargeProps['size'];
-  }
-  interface MntIllustration {
-    "height": IllustrationProps['height'];
-    "name": IllustrationProps['name'];
-    "width": IllustrationProps['width'];
-  }
-  interface MntTooltip {
-    "position": TooltipProps['position'];
-    "text": TooltipProps['text'];
-  }
+    interface MntBadge {
+        "color"?: BadgeBaseProps['color'];
+        "icon"?: BadgeBaseProps['icon'];
+        "label": BadgeBaseProps['label'];
+        "size"?: BadgeBaseProps['size'];
+        "tone"?: BadgeBaseProps['tone'];
+    }
+    interface MntBrand {
+        "color": BrandProps['color'];
+        "height": BrandProps['height'];
+        "name": BrandProps['name'];
+    }
+    interface MntButton {
+        "color": ButtonProps['color'];
+        "disabled": ButtonProps['disabled'];
+        "fullWidth": ButtonProps['fullWidth'];
+        "iconAnimation"?: ButtonProps['iconAnimation'];
+        "iconLeft"?: ButtonProps['iconLeft'];
+        "iconRight"?: ButtonProps['iconRight'];
+        "label"?: ButtonProps['label'];
+        "size": ButtonProps['size'];
+        "variant": ButtonProps['variant'];
+    }
+    interface MntButtonIcon {
+        "color": ButtonIconProps['color'];
+        "disabled": ButtonIconProps['disabled'];
+        "icon"?: ButtonIconProps['icon'];
+        "size": ButtonIconProps['size'];
+        "variant": ButtonIconProps['variant'];
+    }
+    interface MntFieldNumber {
+        "inputName": string;
+        "label"?: FieldNumberProps['label'];
+        "max"?: number;
+        "min"?: number;
+        "required": boolean;
+        "step"?: number;
+        "toFixed"?: number | undefined;
+        "value": number | string;
+        "variant": FieldNumberProps['variant'];
+    }
+    interface MntFieldText {
+        "disabled"?: FieldTextProps['disabled'];
+        "hasActionButton"?: FieldTextProps['hasActionButton'];
+        "hasInfoButton"?: FieldTextProps['hasInfoButton'];
+        "iconLeft"?: FieldTextProps['iconLeft'];
+        "iconRight"?: FieldTextProps['iconRight'];
+        "inlineMessage"?: FieldTextProps['inlineMessage'];
+        "inputName": string;
+        "labelText"?: FieldTextProps['labelText'];
+        "mask"?: 'currency' | 'custom';
+        "max"?: number;
+        "maxLength"?: number;
+        "min"?: number;
+        "minLength"?: number;
+        "placeholder"?: FieldTextProps['placeholder'];
+        "required"?: FieldTextProps['required'];
+        "size"?: FieldTextProps['size'];
+        "state"?: FieldTextProps['state'];
+        "value"?: string;
+    }
+    interface MntIcon {
+        "animation"?: IconProps['animation'];
+        "background"?: IconProps['background'];
+        "color": IconProps['color'];
+        "icon": IconProps['icon'];
+        "size": IconProps['size'];
+    }
+    interface MntIconLarge {
+        "color": IconLargeProps['color'];
+        "icon": string;
+        "size": IconLargeProps['size'];
+    }
+    interface MntIllustration {
+        "height": IllustrationProps['height'];
+        "name": IllustrationProps['name'];
+        "width": IllustrationProps['width'];
+    }
+    interface MntTooltip {
+        "position": TooltipProps['position'];
+        "text": TooltipProps['text'];
+    }
 }
 export interface MntButtonCustomEvent<T> extends CustomEvent<T> {
-  detail: T;
-  target: HTMLMntButtonElement;
+    detail: T;
+    target: HTMLMntButtonElement;
 }
 export interface MntButtonIconCustomEvent<T> extends CustomEvent<T> {
-  detail: T;
-  target: HTMLMntButtonIconElement;
+    detail: T;
+    target: HTMLMntButtonIconElement;
+}
+export interface MntFieldNumberCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntFieldNumberElement;
 }
 export interface MntFieldTextCustomEvent<T> extends CustomEvent<T> {
-  detail: T;
-  target: HTMLMntFieldTextElement;
+    detail: T;
+    target: HTMLMntFieldTextElement;
 }
 declare global {
-  interface HTMLMntBadgeElement extends Components.MntBadge, HTMLStencilElement {
-  }
-  var HTMLMntBadgeElement: {
-    prototype: HTMLMntBadgeElement;
-    new(): HTMLMntBadgeElement;
-  };
-  interface HTMLMntBrandElement extends Components.MntBrand, HTMLStencilElement {
-  }
-  var HTMLMntBrandElement: {
-    prototype: HTMLMntBrandElement;
-    new(): HTMLMntBrandElement;
-  };
-  interface HTMLMntButtonElementEventMap {
-    "buttonClick": MouseEvent;
-  }
-  interface HTMLMntButtonElement extends Components.MntButton, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLMntButtonElementEventMap>(type: K, listener: (this: HTMLMntButtonElement, ev: MntButtonCustomEvent<HTMLMntButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-    addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-    addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-    addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-    removeEventListener<K extends keyof HTMLMntButtonElementEventMap>(type: K, listener: (this: HTMLMntButtonElement, ev: MntButtonCustomEvent<HTMLMntButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-    removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-    removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-    removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-  }
-  var HTMLMntButtonElement: {
-    prototype: HTMLMntButtonElement;
-    new(): HTMLMntButtonElement;
-  };
-  interface HTMLMntButtonIconElementEventMap {
-    "buttonClick": MouseEvent;
-  }
-  interface HTMLMntButtonIconElement extends Components.MntButtonIcon, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLMntButtonIconElementEventMap>(type: K, listener: (this: HTMLMntButtonIconElement, ev: MntButtonIconCustomEvent<HTMLMntButtonIconElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-    addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-    addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-    addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-    removeEventListener<K extends keyof HTMLMntButtonIconElementEventMap>(type: K, listener: (this: HTMLMntButtonIconElement, ev: MntButtonIconCustomEvent<HTMLMntButtonIconElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-    removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-    removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-    removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-  }
-  var HTMLMntButtonIconElement: {
-    prototype: HTMLMntButtonIconElement;
-    new(): HTMLMntButtonIconElement;
-  };
-  interface HTMLMntFieldTextElementEventMap {
-    "valueChange": string;
-    "rawValueChange": string;
-  }
-  interface HTMLMntFieldTextElement extends Components.MntFieldText, HTMLStencilElement {
-    addEventListener<K extends keyof HTMLMntFieldTextElementEventMap>(type: K, listener: (this: HTMLMntFieldTextElement, ev: MntFieldTextCustomEvent<HTMLMntFieldTextElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-    addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-    addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-    addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-    removeEventListener<K extends keyof HTMLMntFieldTextElementEventMap>(type: K, listener: (this: HTMLMntFieldTextElement, ev: MntFieldTextCustomEvent<HTMLMntFieldTextElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-    removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-    removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-    removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-  }
-  var HTMLMntFieldTextElement: {
-    prototype: HTMLMntFieldTextElement;
-    new(): HTMLMntFieldTextElement;
-  };
-  interface HTMLMntIconElement extends Components.MntIcon, HTMLStencilElement {
-  }
-  var HTMLMntIconElement: {
-    prototype: HTMLMntIconElement;
-    new(): HTMLMntIconElement;
-  };
-  interface HTMLMntIconLargeElement extends Components.MntIconLarge, HTMLStencilElement {
-  }
-  var HTMLMntIconLargeElement: {
-    prototype: HTMLMntIconLargeElement;
-    new(): HTMLMntIconLargeElement;
-  };
-  interface HTMLMntIllustrationElement extends Components.MntIllustration, HTMLStencilElement {
-  }
-  var HTMLMntIllustrationElement: {
-    prototype: HTMLMntIllustrationElement;
-    new(): HTMLMntIllustrationElement;
-  };
-  interface HTMLMntTooltipElement extends Components.MntTooltip, HTMLStencilElement {
-  }
-  var HTMLMntTooltipElement: {
-    prototype: HTMLMntTooltipElement;
-    new(): HTMLMntTooltipElement;
-  };
-  interface HTMLElementTagNameMap {
-    "mnt-badge": HTMLMntBadgeElement;
-    "mnt-brand": HTMLMntBrandElement;
-    "mnt-button": HTMLMntButtonElement;
-    "mnt-button-icon": HTMLMntButtonIconElement;
-    "mnt-field-text": HTMLMntFieldTextElement;
-    "mnt-icon": HTMLMntIconElement;
-    "mnt-icon-large": HTMLMntIconLargeElement;
-    "mnt-illustration": HTMLMntIllustrationElement;
-    "mnt-tooltip": HTMLMntTooltipElement;
-  }
+    interface HTMLMntBadgeElement extends Components.MntBadge, HTMLStencilElement {
+    }
+    var HTMLMntBadgeElement: {
+        prototype: HTMLMntBadgeElement;
+        new (): HTMLMntBadgeElement;
+    };
+    interface HTMLMntBrandElement extends Components.MntBrand, HTMLStencilElement {
+    }
+    var HTMLMntBrandElement: {
+        prototype: HTMLMntBrandElement;
+        new (): HTMLMntBrandElement;
+    };
+    interface HTMLMntButtonElementEventMap {
+        "buttonClick": MouseEvent;
+    }
+    interface HTMLMntButtonElement extends Components.MntButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntButtonElementEventMap>(type: K, listener: (this: HTMLMntButtonElement, ev: MntButtonCustomEvent<HTMLMntButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntButtonElementEventMap>(type: K, listener: (this: HTMLMntButtonElement, ev: MntButtonCustomEvent<HTMLMntButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntButtonElement: {
+        prototype: HTMLMntButtonElement;
+        new (): HTMLMntButtonElement;
+    };
+    interface HTMLMntButtonIconElementEventMap {
+        "buttonClick": MouseEvent;
+    }
+    interface HTMLMntButtonIconElement extends Components.MntButtonIcon, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntButtonIconElementEventMap>(type: K, listener: (this: HTMLMntButtonIconElement, ev: MntButtonIconCustomEvent<HTMLMntButtonIconElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntButtonIconElementEventMap>(type: K, listener: (this: HTMLMntButtonIconElement, ev: MntButtonIconCustomEvent<HTMLMntButtonIconElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntButtonIconElement: {
+        prototype: HTMLMntButtonIconElement;
+        new (): HTMLMntButtonIconElement;
+    };
+    interface HTMLMntFieldNumberElementEventMap {
+        "valueChange": string;
+        "rawValueChange": string;
+    }
+    interface HTMLMntFieldNumberElement extends Components.MntFieldNumber, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntFieldNumberElementEventMap>(type: K, listener: (this: HTMLMntFieldNumberElement, ev: MntFieldNumberCustomEvent<HTMLMntFieldNumberElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntFieldNumberElementEventMap>(type: K, listener: (this: HTMLMntFieldNumberElement, ev: MntFieldNumberCustomEvent<HTMLMntFieldNumberElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntFieldNumberElement: {
+        prototype: HTMLMntFieldNumberElement;
+        new (): HTMLMntFieldNumberElement;
+    };
+    interface HTMLMntFieldTextElementEventMap {
+        "valueChange": string;
+        "rawValueChange": string;
+    }
+    interface HTMLMntFieldTextElement extends Components.MntFieldText, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntFieldTextElementEventMap>(type: K, listener: (this: HTMLMntFieldTextElement, ev: MntFieldTextCustomEvent<HTMLMntFieldTextElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntFieldTextElementEventMap>(type: K, listener: (this: HTMLMntFieldTextElement, ev: MntFieldTextCustomEvent<HTMLMntFieldTextElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntFieldTextElement: {
+        prototype: HTMLMntFieldTextElement;
+        new (): HTMLMntFieldTextElement;
+    };
+    interface HTMLMntIconElement extends Components.MntIcon, HTMLStencilElement {
+    }
+    var HTMLMntIconElement: {
+        prototype: HTMLMntIconElement;
+        new (): HTMLMntIconElement;
+    };
+    interface HTMLMntIconLargeElement extends Components.MntIconLarge, HTMLStencilElement {
+    }
+    var HTMLMntIconLargeElement: {
+        prototype: HTMLMntIconLargeElement;
+        new (): HTMLMntIconLargeElement;
+    };
+    interface HTMLMntIllustrationElement extends Components.MntIllustration, HTMLStencilElement {
+    }
+    var HTMLMntIllustrationElement: {
+        prototype: HTMLMntIllustrationElement;
+        new (): HTMLMntIllustrationElement;
+    };
+    interface HTMLMntTooltipElement extends Components.MntTooltip, HTMLStencilElement {
+    }
+    var HTMLMntTooltipElement: {
+        prototype: HTMLMntTooltipElement;
+        new (): HTMLMntTooltipElement;
+    };
+    interface HTMLElementTagNameMap {
+        "mnt-badge": HTMLMntBadgeElement;
+        "mnt-brand": HTMLMntBrandElement;
+        "mnt-button": HTMLMntButtonElement;
+        "mnt-button-icon": HTMLMntButtonIconElement;
+        "mnt-field-number": HTMLMntFieldNumberElement;
+        "mnt-field-text": HTMLMntFieldTextElement;
+        "mnt-icon": HTMLMntIconElement;
+        "mnt-icon-large": HTMLMntIconLargeElement;
+        "mnt-illustration": HTMLMntIllustrationElement;
+        "mnt-tooltip": HTMLMntTooltipElement;
+    }
 }
 declare namespace LocalJSX {
-  interface MntBadge {
-    "color"?: BadgeBaseProps['color'];
-    "icon"?: BadgeBaseProps['icon'];
-    "label"?: BadgeBaseProps['label'];
-    "size"?: BadgeBaseProps['size'];
-    "tone"?: BadgeBaseProps['tone'];
-  }
-  interface MntBrand {
-    "color"?: BrandProps['color'];
-    "height"?: BrandProps['height'];
-    "name": BrandProps['name'];
-  }
-  interface MntButton {
-    "color"?: ButtonProps['color'];
-    "disabled"?: ButtonProps['disabled'];
-    "fullWidth"?: ButtonProps['fullWidth'];
-    "iconAnimation"?: ButtonProps['iconAnimation'];
-    "iconLeft"?: ButtonProps['iconLeft'];
-    "iconRight"?: ButtonProps['iconRight'];
-    "label"?: ButtonProps['label'];
-    "onButtonClick"?: (event: MntButtonCustomEvent<MouseEvent>) => void;
-    "size"?: ButtonProps['size'];
-    "variant"?: ButtonProps['variant'];
-  }
-  interface MntButtonIcon {
-    "color"?: ButtonIconProps['color'];
-    "disabled"?: ButtonIconProps['disabled'];
-    "icon"?: ButtonIconProps['icon'];
-    "onButtonClick"?: (event: MntButtonIconCustomEvent<MouseEvent>) => void;
-    "size"?: ButtonIconProps['size'];
-    "variant"?: ButtonIconProps['variant'];
-  }
-  interface MntFieldText {
-    "disabled"?: FieldTextProps['disabled'];
-    "hasActionButton"?: FieldTextProps['hasActionButton'];
-    "hasInfoButton"?: FieldTextProps['hasInfoButton'];
-    "iconLeft"?: FieldTextProps['iconLeft'];
-    "iconRight"?: FieldTextProps['iconRight'];
-    "inlineMessage"?: FieldTextProps['inlineMessage'];
-    "inputName"?: string;
-    "labelText"?: FieldTextProps['labelText'];
-    "mask"?: 'currency' | 'custom';
-    "max"?: number;
-    "maxLength"?: number;
-    "min"?: number;
-    "minLength"?: number;
-    /**
-      * Evento emitido com o valor numérico (sem formatação) quando o campo é alterado
-     */
-    "onRawValueChange"?: (event: MntFieldTextCustomEvent<string>) => void;
-    "onValueChange"?: (event: MntFieldTextCustomEvent<string>) => void;
-    "placeholder"?: FieldTextProps['placeholder'];
-    "required"?: FieldTextProps['required'];
-    "size"?: FieldTextProps['size'];
-    "state"?: FieldTextProps['state'];
-    "value"?: string;
-  }
-  interface MntIcon {
-    "animation"?: IconProps['animation'];
-    "background"?: IconProps['background'];
-    "color"?: IconProps['color'];
-    "icon": IconProps['icon'];
-    "size"?: IconProps['size'];
-  }
-  interface MntIconLarge {
-    "color"?: IconLargeProps['color'];
-    "icon": string;
-    "size"?: IconLargeProps['size'];
-  }
-  interface MntIllustration {
-    "height"?: IllustrationProps['height'];
-    "name": IllustrationProps['name'];
-    "width"?: IllustrationProps['width'];
-  }
-  interface MntTooltip {
-    "position"?: TooltipProps['position'];
-    "text"?: TooltipProps['text'];
-  }
-  interface IntrinsicElements {
-    "mnt-badge": MntBadge;
-    "mnt-brand": MntBrand;
-    "mnt-button": MntButton;
-    "mnt-button-icon": MntButtonIcon;
-    "mnt-field-text": MntFieldText;
-    "mnt-icon": MntIcon;
-    "mnt-icon-large": MntIconLarge;
-    "mnt-illustration": MntIllustration;
-    "mnt-tooltip": MntTooltip;
-  }
+    interface MntBadge {
+        "color"?: BadgeBaseProps['color'];
+        "icon"?: BadgeBaseProps['icon'];
+        "label"?: BadgeBaseProps['label'];
+        "size"?: BadgeBaseProps['size'];
+        "tone"?: BadgeBaseProps['tone'];
+    }
+    interface MntBrand {
+        "color"?: BrandProps['color'];
+        "height"?: BrandProps['height'];
+        "name": BrandProps['name'];
+    }
+    interface MntButton {
+        "color"?: ButtonProps['color'];
+        "disabled"?: ButtonProps['disabled'];
+        "fullWidth"?: ButtonProps['fullWidth'];
+        "iconAnimation"?: ButtonProps['iconAnimation'];
+        "iconLeft"?: ButtonProps['iconLeft'];
+        "iconRight"?: ButtonProps['iconRight'];
+        "label"?: ButtonProps['label'];
+        "onButtonClick"?: (event: MntButtonCustomEvent<MouseEvent>) => void;
+        "size"?: ButtonProps['size'];
+        "variant"?: ButtonProps['variant'];
+    }
+    interface MntButtonIcon {
+        "color"?: ButtonIconProps['color'];
+        "disabled"?: ButtonIconProps['disabled'];
+        "icon"?: ButtonIconProps['icon'];
+        "onButtonClick"?: (event: MntButtonIconCustomEvent<MouseEvent>) => void;
+        "size"?: ButtonIconProps['size'];
+        "variant"?: ButtonIconProps['variant'];
+    }
+    interface MntFieldNumber {
+        "inputName": string;
+        "label"?: FieldNumberProps['label'];
+        "max"?: number;
+        "min"?: number;
+        /**
+          * Evento emitido com o valor numérico (sem formatação) quando o campo é alterado
+         */
+        "onRawValueChange"?: (event: MntFieldNumberCustomEvent<string>) => void;
+        "onValueChange"?: (event: MntFieldNumberCustomEvent<string>) => void;
+        "required"?: boolean;
+        "step"?: number;
+        "toFixed"?: number | undefined;
+        "value"?: number | string;
+        "variant"?: FieldNumberProps['variant'];
+    }
+    interface MntFieldText {
+        "disabled"?: FieldTextProps['disabled'];
+        "hasActionButton"?: FieldTextProps['hasActionButton'];
+        "hasInfoButton"?: FieldTextProps['hasInfoButton'];
+        "iconLeft"?: FieldTextProps['iconLeft'];
+        "iconRight"?: FieldTextProps['iconRight'];
+        "inlineMessage"?: FieldTextProps['inlineMessage'];
+        "inputName"?: string;
+        "labelText"?: FieldTextProps['labelText'];
+        "mask"?: 'currency' | 'custom';
+        "max"?: number;
+        "maxLength"?: number;
+        "min"?: number;
+        "minLength"?: number;
+        /**
+          * Evento emitido com o valor numérico (sem formatação) quando o campo é alterado
+         */
+        "onRawValueChange"?: (event: MntFieldTextCustomEvent<string>) => void;
+        "onValueChange"?: (event: MntFieldTextCustomEvent<string>) => void;
+        "placeholder"?: FieldTextProps['placeholder'];
+        "required"?: FieldTextProps['required'];
+        "size"?: FieldTextProps['size'];
+        "state"?: FieldTextProps['state'];
+        "value"?: string;
+    }
+    interface MntIcon {
+        "animation"?: IconProps['animation'];
+        "background"?: IconProps['background'];
+        "color"?: IconProps['color'];
+        "icon": IconProps['icon'];
+        "size"?: IconProps['size'];
+    }
+    interface MntIconLarge {
+        "color"?: IconLargeProps['color'];
+        "icon": string;
+        "size"?: IconLargeProps['size'];
+    }
+    interface MntIllustration {
+        "height"?: IllustrationProps['height'];
+        "name": IllustrationProps['name'];
+        "width"?: IllustrationProps['width'];
+    }
+    interface MntTooltip {
+        "position"?: TooltipProps['position'];
+        "text"?: TooltipProps['text'];
+    }
+    interface IntrinsicElements {
+        "mnt-badge": MntBadge;
+        "mnt-brand": MntBrand;
+        "mnt-button": MntButton;
+        "mnt-button-icon": MntButtonIcon;
+        "mnt-field-number": MntFieldNumber;
+        "mnt-field-text": MntFieldText;
+        "mnt-icon": MntIcon;
+        "mnt-icon-large": MntIconLarge;
+        "mnt-illustration": MntIllustration;
+        "mnt-tooltip": MntTooltip;
+    }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
-  export namespace JSX {
-    interface IntrinsicElements {
-      "mnt-badge": LocalJSX.MntBadge & JSXBase.HTMLAttributes<HTMLMntBadgeElement>;
-      "mnt-brand": LocalJSX.MntBrand & JSXBase.HTMLAttributes<HTMLMntBrandElement>;
-      "mnt-button": LocalJSX.MntButton & JSXBase.HTMLAttributes<HTMLMntButtonElement>;
-      "mnt-button-icon": LocalJSX.MntButtonIcon & JSXBase.HTMLAttributes<HTMLMntButtonIconElement>;
-      "mnt-field-text": LocalJSX.MntFieldText & JSXBase.HTMLAttributes<HTMLMntFieldTextElement>;
-      "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;
-      "mnt-icon-large": LocalJSX.MntIconLarge & JSXBase.HTMLAttributes<HTMLMntIconLargeElement>;
-      "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
-      "mnt-tooltip": LocalJSX.MntTooltip & JSXBase.HTMLAttributes<HTMLMntTooltipElement>;
+    export namespace JSX {
+        interface IntrinsicElements {
+            "mnt-badge": LocalJSX.MntBadge & JSXBase.HTMLAttributes<HTMLMntBadgeElement>;
+            "mnt-brand": LocalJSX.MntBrand & JSXBase.HTMLAttributes<HTMLMntBrandElement>;
+            "mnt-button": LocalJSX.MntButton & JSXBase.HTMLAttributes<HTMLMntButtonElement>;
+            "mnt-button-icon": LocalJSX.MntButtonIcon & JSXBase.HTMLAttributes<HTMLMntButtonIconElement>;
+            "mnt-field-number": LocalJSX.MntFieldNumber & JSXBase.HTMLAttributes<HTMLMntFieldNumberElement>;
+            "mnt-field-text": LocalJSX.MntFieldText & JSXBase.HTMLAttributes<HTMLMntFieldTextElement>;
+            "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;
+            "mnt-icon-large": LocalJSX.MntIconLarge & JSXBase.HTMLAttributes<HTMLMntIconLargeElement>;
+            "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
+            "mnt-tooltip": LocalJSX.MntTooltip & JSXBase.HTMLAttributes<HTMLMntTooltipElement>;
+        }
     }
-  }
 }

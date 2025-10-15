@@ -4,6 +4,21 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.5.1] – 2025-01-13
+
+### 🚀 Adicionado
+
+- **FieldNumber**: Campo de entrada numérica com funcionalidades avançadas de incremento e decremento. Oferece diferentes variantes visuais e controles intuitivos para manipulação de valores numéricos
+  - Variantes: `default` e `plain`
+
+### 📖 Documentação
+
+- **FieldNumber**: Criação de documentação completa no Storybook
+  - Múltiplos exemplos práticos de uso do componente
+  - Demonstração de todas as variantes e configurações
+  - Exemplos com valores decimais, limites e formatação
+  - Casos de uso para formulários complexos
+
 ## [2.5.0] – 2025-10-13
 
 ### 🚀 Adicionado

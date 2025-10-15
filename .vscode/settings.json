@@ -5,7 +5,8 @@
   "jest.coverageEnabled": false,
   "conventionalCommits.scopes": [
     "icon",
-    "brand"
+    "brand",
+    "field-number"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false
