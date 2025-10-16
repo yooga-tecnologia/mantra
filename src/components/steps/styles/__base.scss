@@ -40,7 +40,7 @@ $component-prefix: theme.get-prefix('steps');
   background-color: #83cef6;
   
   .#{$component-prefix}-icon {
-    color: #ffffff;
+    color: #0b7cbe;
   }
 }
 
@@ -61,6 +61,28 @@ $component-prefix: theme.get-prefix('steps');
   .#{$component-prefix}-icon {
     color: #9ca3a8;
   }
+}
+
+// Número dentro do círculo
+.#{$component-prefix}-number {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: inherit;
+}
+
+// Ajustar cor do número para cada estado
+.#{$component-prefix}-circle-completed .#{$component-prefix}-number {
+  color: #0b7cbe;
+}
+
+.#{$component-prefix}-circle-active .#{$component-prefix}-number {
+  color: #0b7cbe;
+}
+
+.#{$component-prefix}-circle-disabled .#{$component-prefix}-number {
+  color: #9ca3a8;
 }
 
 // Label container
