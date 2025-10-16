@@ -1,0 +1,109 @@
+@use "sass:map";
+@use "../../../shared/theme/core/theme" as theme;
+@use "../../../shared/theme/tokens/_sizing" as sizing;
+
+$component-prefix: theme.get-prefix('steps');
+
+// Container base styles
+.#{$component-prefix}-container {
+  display: flex;
+  background-color: #ffffff;
+  padding: 32px;
+  border-radius: 6px;
+  box-shadow: 
+    0px 0px 1px 0px rgba(0, 0, 0, 0.03),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.03);
+  box-sizing: border-box;
+}
+
+// Individual step
+.#{$component-prefix}-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// Step circle
+.#{$component-prefix}-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+// Completed state
+.#{$component-prefix}-circle-completed {
+  background-color: #83cef6;
+  
+  .#{$component-prefix}-icon {
+    color: #ffffff;
+  }
+}
+
+// Active state
+.#{$component-prefix}-circle-active {
+  background-color: #e1f1fd;
+  border: 2px solid #0b7cbe;
+  
+  .#{$component-prefix}-icon {
+    color: #0b7cbe;
+  }
+}
+
+// Disabled state
+.#{$component-prefix}-circle-disabled {
+  background-color: #f5f6f6;
+  
+  .#{$component-prefix}-icon {
+    color: #9ca3a8;
+  }
+}
+
+// Label container
+.#{$component-prefix}-label-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+// Active label container
+.#{$component-prefix}-label-container-active {
+  background-color: #e1f1fd;
+  border: 2px solid #0b7cbe;
+}
+
+// Label text
+.#{$component-prefix}-label {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  color: #4b5053;
+}
+
+// Active label color
+.#{$component-prefix}-label-container-active .#{$component-prefix}-label {
+  color: #0d547f;
+}
+
+// Divider
+.#{$component-prefix}-divider {
+  flex-shrink: 0;
+  position: relative;
+}
+
+.#{$component-prefix}-divider::after {
+  content: '';
+  position: absolute;
+  background-color: #e0e3e5;
+}
+
