@@ -122,3 +122,34 @@ AllStates.parameters = {
   controls: { disable: true },
 };
 
+export const WithNumbers: StoryFn = () => {
+  const steps = [
+    { label: 'Passo 1', status: 'completed', icon: 1 },
+    { label: 'Passo 2', status: 'completed', icon: 2 },
+    { label: 'Passo 3', status: 'active', icon: 3 },
+    { label: 'Passo 4', status: 'disabled', icon: 4 },
+    { label: 'Passo 5', status: 'disabled', icon: 5 },
+  ] as StepItem[];
+  
+  return DefaultTemplate({ orientation: 'horizontal', steps });
+};
+
+WithNumbers.parameters = {
+  controls: { disable: true },
+};
+
+export const WithCustomIcons: StoryFn = () => {
+  const steps = [
+    { label: 'Usuário', status: 'completed', icon: 'userCircle' },
+    { label: 'Endereço', status: 'completed', icon: 'houseSimple' },
+    { label: 'Pagamento', status: 'active', icon: 'currencyDollarCircle' },
+    { label: 'Confirmação', status: 'disabled', icon: 'checkCircle' },
+  ] as StepItem[];
+  
+  return DefaultTemplate({ orientation: 'horizontal', steps });
+};
+
+WithCustomIcons.parameters = {
+  controls: { disable: true },
+};
+

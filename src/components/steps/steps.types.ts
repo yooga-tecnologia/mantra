@@ -1,4 +1,5 @@
 import { getLibPrefix } from '../../utils/utils';
+import type { ExtendedIconName } from '../icon/icon.types';
 
 export const COMPONENT_PREFIX = getLibPrefix() + 'steps';
 
@@ -15,6 +16,7 @@ export type StepOrientation = (typeof stepOrientationArray)[number];
 export interface StepItem {
   label: string;
   status: StepStatus;
+  icon?: number | ExtendedIconName; // Permite número ou ícone customizado
 }
 
 export interface StepsProps {

@@ -29,8 +29,15 @@ O componente `mnt-steps` é utilizado para indicar o progresso de um processo em
 interface StepItem {
   label: string;
   status: 'completed' | 'active' | 'disabled';
+  icon?: number | ExtendedIconName; // Opcional: número ou ícone customizado
 }
 ```
+
+| Propriedade | Tipo                          | Obrigatório | Descrição                                    |
+| ----------- | ----------------------------- | ----------- | -------------------------------------------- |
+| `label`     | `string`                      | Sim         | Texto exibido ao lado do step                |
+| `status`    | `StepStatus`                  | Sim         | Estado do step (completed/active/disabled)   |
+| `icon`      | `number \| ExtendedIconName`  | Não         | Número ou ícone customizado para o círculo   |
 
 ## Estados
 
@@ -74,6 +81,31 @@ interface StepItem {
     {"label": "Verificar Email", "status": "completed"},
     {"label": "Configurar Perfil", "status": "active"},
     {"label": "Começar a Usar", "status": "disabled"}
+  ]'
+></mnt-steps>
+```
+
+### Com Números
+```html
+<mnt-steps
+  orientation="horizontal"
+  steps='[
+    {"label": "Passo 1", "status": "completed", "icon": 1},
+    {"label": "Passo 2", "status": "active", "icon": 2},
+    {"label": "Passo 3", "status": "disabled", "icon": 3}
+  ]'
+></mnt-steps>
+```
+
+### Com Ícones Customizados
+```html
+<mnt-steps
+  orientation="horizontal"
+  steps='[
+    {"label": "Usuário", "status": "completed", "icon": "userCircle"},
+    {"label": "Endereço", "status": "completed", "icon": "houseSimple"},
+    {"label": "Pagamento", "status": "active", "icon": "currencyDollarCircle"},
+    {"label": "Confirmação", "status": "disabled", "icon": "checkCircle"}
   ]'
 ></mnt-steps>
 ```
