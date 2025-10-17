@@ -9,7 +9,7 @@ Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/)
 ### 🚀 Adicionado
 
 - Variantes de Icon:
-  - Map
+  - mapTrifold
 
 ## [2.5.2] – 2025-01-15
 
