@@ -1,0 +1,12 @@
+/**
+* This file is a barrel file for the styles of the <mnt-steps> component.
+*
+* WARNING: Do not add CSS rules directly to the file src/components/steps/steps.scss.
+*
+* Use the variant files (_variant-horizontal.scss, _variant-vertical.scss) to define specific styles.
+**/
+
+@forward "./__base"; // Base styles for the steps component
+@forward "./_variant-horizontal"; // Horizontal orientation styles
+@forward "./_variant-vertical"; // Vertical orientation styles
+

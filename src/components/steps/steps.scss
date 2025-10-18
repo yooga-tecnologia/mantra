@@ -1,0 +1,13 @@
+/**
+  * This file is a barrel file for the styles of the <mnt-steps> component.
+  *
+  * WARNING: Please do not add any CSS rules directly to this file!
+  * Check [index.scss](./styles/index.scss) to know how to organize component's stylesheets
+  **/
+
+@use '../../shared/theme/core/theme' as theme;
+@use '../../shared/theme/core/typography' as typography;
+@use '../../shared/theme/tokens/_sizing' as sizing;
+
+@forward './styles/index.scss';
+
