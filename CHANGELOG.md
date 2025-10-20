@@ -4,6 +4,54 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.6.0] – 2025-01-15
+
+### 🚀 Adicionado
+
+- **Steps**: Novo componente de navegação sequencial para guiar usuários através de processos multi-etapas
+  - Suporte a orientações horizontal e vertical
+  - Estados visuais: `done` (concluído), `active` (ativo), `disabled` (desabilitado)
+  - Ícones automáticos: check (✓) para steps concluídos
+  - Suporte a ícones customizados e numéricos
+  - Controle de progresso com `maxAccessedIndex` para desbloquear steps sequencialmente
+  - Métodos públicos para navegação: `nextStep()`, `previousStep()`, `goToStep()`, `resetToFirstStep()`
+  - Eventos de interação: `stepClick` com dados completos do step selecionado
+  - Exposição de estado interno via atributo `data-max-accessed-index`
+
+### ✨ Melhorado
+
+- **Steps**: Sistema de navegação inteligente
+  - Steps futuros permanecem desabilitados até serem "desbloqueados" pelo progresso
+  - Steps anteriores permanecem clicáveis mesmo após avanço
+  - Atualização automática de status: `active` → `done` ao avançar
+  - Sincronização de estado entre múltiplas instâncias do componente
+
+### 🧪 Testes
+
+- **Cobertura completa (97.14%)** para componente Steps
+- Testes abrangentes para todos os cenários:
+  - Renderização e orientações (horizontal/vertical)
+  - Estados visuais e classes CSS
+  - Ícones automáticos e customizados
+  - Navegação e controle de progresso
+  - Métodos públicos e eventos
+  - Edge cases e tratamento de erros
+
+### 📚 Documentação
+
+- **Storybook**: Documentação completa do componente Steps
+  - Exemplos práticos de uso em diferentes orientações
+  - Demonstração de todos os estados e comportamentos
+  - Casos de uso para formulários complexos e onboarding
+  - Integração com eventos e métodos públicos
+
+### 🎨 Design
+
+- **Steps**: Estilos alinhados com Figma
+  - Status "done" ao invés de "completed" conforme especificação
+  - Cores e estados visuais consistentes
+  - Hover states e transições suaves
+
 ## [2.5.3] – 2025-10-17
 
 ### 🚀 Adicionado

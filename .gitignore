@@ -29,3 +29,5 @@ UserInterfaceState.xcuserstate
 node_modules/
 
 coverage/
+
+.playwright-mcp/    

@@ -1,0 +1,141 @@
+@use "sass:map";
+@use "../../../shared/theme/core/theme" as theme;
+@use "../../../shared/theme/tokens/_sizing" as sizing;
+
+$component-prefix: theme.get-prefix('steps');
+
+/**
+  * CONTAINER BASE STYLES
+  */
+
+.#{$component-prefix}-container {
+  display: flex;
+  padding: 32px;
+  border-radius: 6px;
+  box-shadow:
+    0px 0px 1px 0px rgba(0, 0, 0, 0.03),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.03);
+  box-sizing: border-box;
+}
+
+/**
+  * DIVIDER
+  */
+
+.#{$component-prefix}-divider {
+  flex-shrink: 0;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: #e0e3e5;
+  }
+}
+
+/**
+  * INDIVIDUAL STEP
+  */
+
+button {
+  appearance: none;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.#{$component-prefix}-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  // BASE STYLES
+
+  .#{$component-prefix}-label,
+  .#{$component-prefix}-index {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    background-color: transparent;
+    border: 2px solid transparent;
+    color: inherit;
+  }
+
+  .#{$component-prefix}-index {
+    width: 32px;
+    color: #0D547F;
+    background-color: #83CEF6;
+  }
+
+  .#{$component-prefix}-label {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    width: fit-content;
+    background-color: transparent;
+    border: 2px solid transparent;
+    color: #4B5053;
+  }
+
+  &:hover {
+    .#{$component-prefix}-label,
+    .#{$component-prefix}-index {
+      transition: all ease-in-out 0.2s;
+      color: #0D547F;
+    }
+  }
+
+  // STATES
+
+  &-done {
+    .#{$component-prefix}-index {
+      background-color: #83cef6;
+      border-color: #83cef6;
+      color: #0b7cbe;
+    }
+
+    &:hover {
+      .#{$component-prefix}-label,
+      .#{$component-prefix}-index {
+        background-color: #BDE3FA;
+        border-color: #BDE3FA;
+        color: #114769;
+      }
+    }
+  }
+
+  &-active {
+    .#{$component-prefix}-label,
+    .#{$component-prefix}-index {
+      background-color: #E1F1FD;
+      border-color: #0B7CBE;
+      color: #0D547F
+    }
+
+    &:hover {
+      .#{$component-prefix}-label,
+      .#{$component-prefix}-index {
+        background-color: #BDE3FA;
+        border-color: #0B7CBE;
+        color: #0D547F;
+      }
+    }
+  }
+
+  &-disabled {
+    .#{$component-prefix}-index {
+      background-color: #F5F6F6;
+      border-color: #F5F6F6;
+      color: #CED2D3;
+    }
+  }
+}
