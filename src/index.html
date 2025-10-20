@@ -15,10 +15,154 @@
   <h1>Mantra - Sandbox</h1>
 
   <div>
-    <mnt-button label="Primary Button" size="large" variant="emphasis" color="primary" icon-left="arrow-left" icon-right="arrow-right"></mnt-button>
-    <mnt-button label="Primary Button" size="medium" variant="emphasis" color="primary" icon-left="arrow-left" icon-right="arrow-right"></mnt-button>
-    <mnt-button label="Primary Button" size="small" variant="emphasis" color="primary" icon-left="arrow-left" icon-right="arrow-right"></mnt-button>
+    <h2>Steps Component - Teste de Funcionalidade</h2>
+    <p>Clique nos steps para testar a navegação. Steps futuros ficam desabilitados.</p>
+
+    <h3>Orientacao Horizontal</h3>
+    <mnt-steps
+      id="horizontal-steps"
+      active-step-id="step-2"
+      orientation="horizontal"
+    ></mnt-steps>
+
+    <h3>Orientacao Vertical</h3>
+    <mnt-steps
+      id="vertical-steps"
+      active-step-id="step-2"
+      orientation="vertical"
+    ></mnt-steps>
+
+    <div style="margin-top: 20px;">
+      <button onclick="handlePreviousStep()">Previous</button>
+      <button onclick="handleNextStep()">Next</button>
+      <button onclick="resetSteps()">Reset</button>
+      <button onclick="showState()">Show State</button>
+    </div>
+
+    <div id="state-info" style="margin-top: 10px; padding: 10px; background: #e8f4fd; border-radius: 4px; font-family: monospace;">
+      <strong>Estado Atual:</strong>
+      <div id="state-content">Clique em "Show State" para ver o estado atual</div>
+    </div>
+
+    <div id="log" style="margin-top: 20px; padding: 10px; background: #f0f0f0; border-radius: 4px;">
+      <strong>Log de Eventos:</strong>
+      <div id="log-content"></div>
+    </div>
   </div>
+  <script>
+    const steps = [
+      {id: 'step-1', label: 'Step 1', icon: 'currencySimple', status: 'done'},
+      {id: 'step-2', label: 'Step 2', icon: 'currencySimple', status: 'active'},
+      {id: 'step-3', label: 'Step 3', icon: 'currencySimple', status: 'disabled'},
+      {id: 'step-4', label: 'Step 4', icon: 'currencySimple', status: 'disabled'},
+      {id: 'step-5', label: 'Step 5', icon: 'currencySimple', status: 'disabled'},
+    ];
+
+    const horizontalStepsElement = document.getElementById('horizontal-steps');
+    const verticalStepsElement = document.getElementById('vertical-steps');
+
+    // Configurar steps para ambos os componentes
+    horizontalStepsElement.steps = steps;
+    verticalStepsElement.steps = steps;
+
+    // Adicionar listeners para eventos de clique
+    horizontalStepsElement.addEventListener('stepClick', (event) => {
+      logEvent('Horizontal Steps', event.detail);
+      // Sincronizar com o componente vertical
+      verticalStepsElement.activeStepId = event.detail.stepId;
+    });
+
+    verticalStepsElement.addEventListener('stepClick', (event) => {
+      logEvent('Vertical Steps', event.detail);
+      // Sincronizar com o componente horizontal
+      horizontalStepsElement.activeStepId = event.detail.stepId;
+    });
+
+    function logEvent(source, detail) {
+      const logContent = document.getElementById('log-content');
+      const timestamp = new Date().toLocaleTimeString();
+      logContent.innerHTML += `<div>[${timestamp}] ${source}: Step "${detail.step.label}" (ID: ${detail.stepId}, Index: ${detail.stepIndex})</div>`;
+      logContent.scrollTop = logContent.scrollHeight;
+    }
+
+    function handleNextStep() {
+      const currentIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
+      if (currentIndex < steps.length - 1) {
+        // Atualiza o status do step atual para "done"
+        steps[currentIndex].status = 'done';
+
+        // Avança para o próximo step
+        const newActiveId = steps[currentIndex + 1].id;
+        horizontalStepsElement.activeStepId = newActiveId;
+        verticalStepsElement.activeStepId = newActiveId;
+
+        // Atualiza os steps nos componentes
+        horizontalStepsElement.steps = [...steps];
+        verticalStepsElement.steps = [...steps];
+
+        logEvent('Button Next', { stepId: newActiveId, stepIndex: currentIndex + 1, step: steps[currentIndex + 1] });
+      }
+    }
+
+    function handlePreviousStep() {
+      const currentIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
+      if (currentIndex > 0) {
+        const newActiveId = steps[currentIndex - 1].id;
+        horizontalStepsElement.activeStepId = newActiveId;
+        verticalStepsElement.activeStepId = newActiveId;
+
+        // Atualiza os steps nos componentes
+        horizontalStepsElement.steps = [...steps];
+        verticalStepsElement.steps = [...steps];
+
+        logEvent('Button Previous', { stepId: newActiveId, stepIndex: currentIndex - 1, step: steps[currentIndex - 1] });
+      }
+    }
+
+    function resetSteps() {
+      // Reseta todos os steps para o estado inicial
+      steps.forEach((step, index) => {
+        if (index === 0) {
+          step.status = 'active';
+        } else {
+          step.status = 'disabled';
+        }
+      });
+      
+      horizontalStepsElement.activeStepId = 'step-1';
+      verticalStepsElement.activeStepId = 'step-1';
+      
+      // Atualiza os steps nos componentes
+      horizontalStepsElement.steps = [...steps];
+      verticalStepsElement.steps = [...steps];
+      
+      logEvent('Reset', { stepId: 'step-1', stepIndex: 0, step: steps[0] });
+    }
+
+    function showState() {
+      const activeStepIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
+      const stateContent = document.getElementById('state-content');
+
+      let stateInfo = `Active Step: ${horizontalStepsElement.activeStepId} (index: ${activeStepIndex})\n`;
+      stateInfo += `Max Accessed Index (Horizontal): ${horizontalStepsElement.getAttribute('data-max-accessed-index') || 'N/A'}\n`;
+      stateInfo += `Max Accessed Index (Vertical): ${verticalStepsElement.getAttribute('data-max-accessed-index') || 'N/A'}\n`;
+      stateInfo += `Is First Step: ${activeStepIndex === 0}\n`;
+      stateInfo += `Is Last Step: ${activeStepIndex === steps.length - 1}\n\n`;
+      stateInfo += 'Step States:\n';
+
+      steps.forEach((step, index) => {
+        const isActive = index === activeStepIndex;
+        const horizontalMaxIndex = parseInt(horizontalStepsElement.getAttribute('data-max-accessed-index') || '0');
+        const verticalMaxIndex = parseInt(verticalStepsElement.getAttribute('data-max-accessed-index') || '0');
+        const maxIndex = Math.max(horizontalMaxIndex, verticalMaxIndex);
+        const isDisabled = index > maxIndex;
+        const status = isActive ? 'ACTIVE' : isDisabled ? 'DISABLED' : 'CLICKABLE';
+        stateInfo += `  ${step.label}: ${status}\n`;
+      });
+
+      stateContent.textContent = stateInfo;
+    }
+  </script>
 </body>
 
 </html>

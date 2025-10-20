@@ -12,7 +12,7 @@ import { FieldNumberProps } from "./components/field-number/field-number.types";
 import { FieldTextProps } from "./components/field-text/field-text.types";
 import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
-import { StepsProps } from "./components/steps/steps.types";
+import { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 import { TooltipProps } from "./components/tooltip/tooltip.types";
 export { BadgeBaseProps } from "./components/badge/badge.types";
 export { BrandProps } from "./components/brand/brand.types";
@@ -21,7 +21,7 @@ export { FieldNumberProps } from "./components/field-number/field-number.types";
 export { FieldTextProps } from "./components/field-text/field-text.types";
 export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
-export { StepsProps } from "./components/steps/steps.types";
+export { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 export { TooltipProps } from "./components/tooltip/tooltip.types";
 export namespace Components {
     interface MntBadge {
@@ -103,6 +103,7 @@ export namespace Components {
         "width": IllustrationProps['width'];
     }
     interface MntSteps {
+        "activeStepId"?: StepsProps['activeStepId'];
         "orientation": StepsProps['orientation'];
         "steps": StepsProps['steps'];
     }
@@ -126,6 +127,10 @@ export interface MntFieldNumberCustomEvent<T> extends CustomEvent<T> {
 export interface MntFieldTextCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntFieldTextElement;
+}
+export interface MntStepsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntStepsElement;
 }
 declare global {
     interface HTMLMntBadgeElement extends Components.MntBadge, HTMLStencilElement {
@@ -228,7 +233,18 @@ declare global {
         prototype: HTMLMntIllustrationElement;
         new (): HTMLMntIllustrationElement;
     };
+    interface HTMLMntStepsElementEventMap {
+        "stepClick": { stepId: string; stepIndex: number; status: StepStatus; step: StepItem };
+    }
     interface HTMLMntStepsElement extends Components.MntSteps, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntStepsElementEventMap>(type: K, listener: (this: HTMLMntStepsElement, ev: MntStepsCustomEvent<HTMLMntStepsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntStepsElementEventMap>(type: K, listener: (this: HTMLMntStepsElement, ev: MntStepsCustomEvent<HTMLMntStepsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLMntStepsElement: {
         prototype: HTMLMntStepsElement;
@@ -346,6 +362,8 @@ declare namespace LocalJSX {
         "width"?: IllustrationProps['width'];
     }
     interface MntSteps {
+        "activeStepId"?: StepsProps['activeStepId'];
+        "onStepClick"?: (event: MntStepsCustomEvent<{ stepId: string; stepIndex: number; status: StepStatus; step: StepItem }>) => void;
         "orientation"?: StepsProps['orientation'];
         "steps"?: StepsProps['steps'];
     }

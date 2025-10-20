@@ -4,7 +4,7 @@ import type { ExtendedIconName } from '../icon/icon.types';
 export const COMPONENT_PREFIX = getLibPrefix() + 'steps';
 
 /** Possible step status values */
-export const stepStatusArray = ['completed', 'active', 'disabled'] as const;
+export const stepStatusArray = ['done', 'active', 'disabled'] as const;
 
 /** Possible step orientation values */
 export const stepOrientationArray = ['horizontal', 'vertical'] as const;
@@ -14,6 +14,7 @@ export type StepStatus = (typeof stepStatusArray)[number];
 export type StepOrientation = (typeof stepOrientationArray)[number];
 
 export interface StepItem {
+  id: string; // Adicionado ID único para cada step
   label: string;
   status: StepStatus;
   icon?: number | ExtendedIconName; // Permite número ou ícone customizado
@@ -22,5 +23,5 @@ export interface StepItem {
 export interface StepsProps {
   orientation?: StepOrientation;
   steps: StepItem[];
+  activeStepId?: string; // ID do step ativo (substitui currentStep)
 }
-
