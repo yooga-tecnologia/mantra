@@ -13,6 +13,8 @@ import { FieldTextProps } from "./components/field-text/field-text.types";
 import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
 import { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
+import { TabItemProps } from "./components/tab-item/tab-item.types";
+import { TabItem, TabItemGroupProps } from "./components/tab-item-group/tab-item-group.types";
 import { TooltipProps } from "./components/tooltip/tooltip.types";
 export { BadgeBaseProps } from "./components/badge/badge.types";
 export { BrandProps } from "./components/brand/brand.types";
@@ -22,6 +24,8 @@ export { FieldTextProps } from "./components/field-text/field-text.types";
 export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
 export { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
+export { TabItemProps } from "./components/tab-item/tab-item.types";
+export { TabItem, TabItemGroupProps } from "./components/tab-item-group/tab-item-group.types";
 export { TooltipProps } from "./components/tooltip/tooltip.types";
 export namespace Components {
     interface MntBadge {
@@ -107,6 +111,19 @@ export namespace Components {
         "orientation": StepsProps['orientation'];
         "steps": StepsProps['steps'];
     }
+    interface MntTabItem {
+        "disabled": boolean;
+        "icon"?: TabItemProps['icon'];
+        "label": string;
+        "orientation": TabItemProps['orientation'];
+        "selected": boolean;
+        "tabId": string;
+    }
+    interface MntTabItemGroup {
+        "orientation": TabItemGroupProps['orientation'];
+        "selectedId"?: string;
+        "tabs": TabItem[] | string;
+    }
     interface MntTooltip {
         "position": TooltipProps['position'];
         "text": TooltipProps['text'];
@@ -131,6 +148,14 @@ export interface MntFieldTextCustomEvent<T> extends CustomEvent<T> {
 export interface MntStepsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntStepsElement;
+}
+export interface MntTabItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntTabItemElement;
+}
+export interface MntTabItemGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntTabItemGroupElement;
 }
 declare global {
     interface HTMLMntBadgeElement extends Components.MntBadge, HTMLStencilElement {
@@ -250,6 +275,40 @@ declare global {
         prototype: HTMLMntStepsElement;
         new (): HTMLMntStepsElement;
     };
+    interface HTMLMntTabItemElementEventMap {
+        "tabItemClick": string;
+    }
+    interface HTMLMntTabItemElement extends Components.MntTabItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntTabItemElementEventMap>(type: K, listener: (this: HTMLMntTabItemElement, ev: MntTabItemCustomEvent<HTMLMntTabItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntTabItemElementEventMap>(type: K, listener: (this: HTMLMntTabItemElement, ev: MntTabItemCustomEvent<HTMLMntTabItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntTabItemElement: {
+        prototype: HTMLMntTabItemElement;
+        new (): HTMLMntTabItemElement;
+    };
+    interface HTMLMntTabItemGroupElementEventMap {
+        "tabChange": string;
+    }
+    interface HTMLMntTabItemGroupElement extends Components.MntTabItemGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntTabItemGroupElementEventMap>(type: K, listener: (this: HTMLMntTabItemGroupElement, ev: MntTabItemGroupCustomEvent<HTMLMntTabItemGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntTabItemGroupElementEventMap>(type: K, listener: (this: HTMLMntTabItemGroupElement, ev: MntTabItemGroupCustomEvent<HTMLMntTabItemGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntTabItemGroupElement: {
+        prototype: HTMLMntTabItemGroupElement;
+        new (): HTMLMntTabItemGroupElement;
+    };
     interface HTMLMntTooltipElement extends Components.MntTooltip, HTMLStencilElement {
     }
     var HTMLMntTooltipElement: {
@@ -267,6 +326,8 @@ declare global {
         "mnt-icon-large": HTMLMntIconLargeElement;
         "mnt-illustration": HTMLMntIllustrationElement;
         "mnt-steps": HTMLMntStepsElement;
+        "mnt-tab-item": HTMLMntTabItemElement;
+        "mnt-tab-item-group": HTMLMntTabItemGroupElement;
         "mnt-tooltip": HTMLMntTooltipElement;
     }
 }
@@ -367,6 +428,21 @@ declare namespace LocalJSX {
         "orientation"?: StepsProps['orientation'];
         "steps"?: StepsProps['steps'];
     }
+    interface MntTabItem {
+        "disabled"?: boolean;
+        "icon"?: TabItemProps['icon'];
+        "label": string;
+        "onTabItemClick"?: (event: MntTabItemCustomEvent<string>) => void;
+        "orientation"?: TabItemProps['orientation'];
+        "selected"?: boolean;
+        "tabId": string;
+    }
+    interface MntTabItemGroup {
+        "onTabChange"?: (event: MntTabItemGroupCustomEvent<string>) => void;
+        "orientation"?: TabItemGroupProps['orientation'];
+        "selectedId"?: string;
+        "tabs": TabItem[] | string;
+    }
     interface MntTooltip {
         "position"?: TooltipProps['position'];
         "text"?: TooltipProps['text'];
@@ -382,6 +458,8 @@ declare namespace LocalJSX {
         "mnt-icon-large": MntIconLarge;
         "mnt-illustration": MntIllustration;
         "mnt-steps": MntSteps;
+        "mnt-tab-item": MntTabItem;
+        "mnt-tab-item-group": MntTabItemGroup;
         "mnt-tooltip": MntTooltip;
     }
 }
@@ -399,6 +477,8 @@ declare module "@stencil/core" {
             "mnt-icon-large": LocalJSX.MntIconLarge & JSXBase.HTMLAttributes<HTMLMntIconLargeElement>;
             "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
             "mnt-steps": LocalJSX.MntSteps & JSXBase.HTMLAttributes<HTMLMntStepsElement>;
+            "mnt-tab-item": LocalJSX.MntTabItem & JSXBase.HTMLAttributes<HTMLMntTabItemElement>;
+            "mnt-tab-item-group": LocalJSX.MntTabItemGroup & JSXBase.HTMLAttributes<HTMLMntTabItemGroupElement>;
             "mnt-tooltip": LocalJSX.MntTooltip & JSXBase.HTMLAttributes<HTMLMntTooltipElement>;
         }
     }

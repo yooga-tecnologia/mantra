@@ -7,7 +7,8 @@
     "icon",
     "brand",
     "field-number",
-    "button"
+    "button",
+    "tab"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false

@@ -1,0 +1,12 @@
+@use "sass:map";
+@use "../../../shared/theme/core/theme" as theme;
+
+$component-prefix: theme.get-prefix('tab-item-group');
+
+@mixin set-tab-group-horizontal-styles() {
+  .#{$component-prefix}-horizontal {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+}
