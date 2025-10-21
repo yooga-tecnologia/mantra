@@ -1,0 +1,11 @@
+@use "sass:map";
+@use "../../../shared/theme/core/theme" as theme;
+@use "../../../shared/theme/tokens/sizing" as sizing;
+
+$component-prefix: theme.get-prefix('tab-item-group');
+
+$border-radius-medium: map.get(sizing.$border-radius-map, "medium");
+
+.#{$component-prefix} {
+  @include theme.set-box-sizing(border-box);
+}

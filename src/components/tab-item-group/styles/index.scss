@@ -1,0 +1,16 @@
+/**
+ * This file is a barrel file for the styles of the TabItemGroup component.
+ *
+ * WARNING: Please do not add any CSS rules directly to this file!
+ * Check [index.scss](./styles/index.scss) to know how to organize component's stylesheets
+ **/
+
+@use "sass:map";
+
+@forward "./__base"; // Base styles for the tab-item-group component
+
+@use "./_orientation-horizontal" as tab-group-horizontal;
+@use "./_orientation-vertical" as tab-group-vertical;
+
+@include tab-group-horizontal.set-tab-group-horizontal-styles();
+@include tab-group-vertical.set-tab-group-vertical-styles();

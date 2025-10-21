@@ -1,0 +1,68 @@
+@use "sass:map";
+@use "../../../shared/theme/core/theme" as theme;
+@use "../../../shared/theme/tokens/sizing" as sizing;
+
+$component-prefix: theme.get-prefix('tab-item');
+$border-radius-medium: map.get(sizing.$border-radius-map, "medium");
+
+div[class^='mnt-tab-item-group']{
+  display: flex;
+  gap: 16px;
+  border-color: #E5E7E8;
+}
+
+.#{$component-prefix} {
+  @include theme.set-colors(theme.get-tone-from-palette(700, 'neutral'), transparent);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  border-radius: $border-radius-medium;
+  padding: 8px 16px;
+  transition: all ease-in-out 0.2s;
+  cursor: pointer;
+
+  // ICON VARIANT
+
+  &-icon {
+    flex-direction: column;
+  }
+
+  &:not(&-icon) {
+    flex-direction: row;
+    height: 32px;
+  }
+
+  // ELEMENTS
+
+  &-label {
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  mnt-icon svg g {
+    color: currentColor;
+    fill: currentColor;
+  }
+
+  // STATES
+
+  &:hover {
+    background: theme.get-tone-from-palette(50, 'neutral');
+    color: theme.get-tone-from-palette(800, 'neutral');
+    cursor: pointer;
+  }
+
+  &-selected {
+    background: theme.get-tone-from-palette(100, 'primary');
+    color: theme.get-tone-from-palette(800, 'primary');
+
+    &:hover {
+      background: theme.get-tone-from-palette(200, 'primary');
+      color: theme.get-tone-from-palette(900, 'primary');
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@use "sass:map";
+@use "../../../shared/theme/core/theme" as theme;
+
+$component-prefix: theme.get-prefix('tab-item-group-vertical');
+$child-prefix: theme.get-prefix('tab-item');
+
+@mixin set-tab-vertical-styles() {
+  .#{$component-prefix} {
+    flex-direction: column;
+
+    .#{$child-prefix}-selected {
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 4px;
+        border-radius: 4px;
+        background: #0B7CBE;
+        margin: auto;
+        left: 0;
+        bottom: -12px;
+      }
+    }
+  }
+}

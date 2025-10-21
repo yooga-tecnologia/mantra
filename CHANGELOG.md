@@ -4,6 +4,24 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.7.0] – 2025-01-15
+
+### 🚀 Adicionado
+
+- **Tab**: Sistema de navegação por abas com componentes mnt-tab-item e mnt-tab-item-group
+  - Suporte a orientação horizontal e vertical
+  - Ícones opcionais em cada tab
+  - Gerenciamento de estado de seleção (controlado ou automático)
+  - Eventos de mudança de tab (tabChange)
+  - Estados visuais: default, hover, selected, disabled
+
+### 📖 Documentação
+
+- **Tab**: Criação de documentação completa no Storybook
+  - Exemplos interativos com diferentes orientações
+  - Demonstração de tabs com e sem ícones
+  - Casos de uso com estados disabled
+
 ## [2.6.0] – 2025-01-15
 
 ### 🚀 Adicionado

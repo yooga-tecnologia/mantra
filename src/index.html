@@ -49,120 +49,165 @@
       <div id="log-content"></div>
     </div>
   </div>
-  <script>
-    const steps = [
-      {id: 'step-1', label: 'Step 1', icon: 'currencySimple', status: 'done'},
-      {id: 'step-2', label: 'Step 2', icon: 'currencySimple', status: 'active'},
-      {id: 'step-3', label: 'Step 3', icon: 'currencySimple', status: 'disabled'},
-      {id: 'step-4', label: 'Step 4', icon: 'currencySimple', status: 'disabled'},
-      {id: 'step-5', label: 'Step 5', icon: 'currencySimple', status: 'disabled'},
-    ];
 
-    const horizontalStepsElement = document.getElementById('horizontal-steps');
-    const verticalStepsElement = document.getElementById('vertical-steps');
+  <div>
+    <h2>Tab item</h2>
 
-    // Configurar steps para ambos os componentes
-    horizontalStepsElement.steps = steps;
-    verticalStepsElement.steps = steps;
+    <h3>with icon</h3>
+    <mnt-tab-item tab-id="tab-1" label="Tab 1" icon="plus" selected="true" orientation="horizontal"></mnt-tab-item>
+    <mnt-tab-item tab-id="tab-2" label="Tab 2" icon="minus" selected="false" orientation="horizontal"></mnt-tab-item>
 
-    // Adicionar listeners para eventos de clique
-    horizontalStepsElement.addEventListener('stepClick', (event) => {
-      logEvent('Horizontal Steps', event.detail);
-      // Sincronizar com o componente vertical
-      verticalStepsElement.activeStepId = event.detail.stepId;
-    });
+    <h3>without icon</h3>
+    <mnt-tab-item tab-id="tab-3" label="Tab 3" selected="false" orientation="horizontal"></mnt-tab-item>
+    <mnt-tab-item tab-id="tab-4" label="Tab 4" selected="false" orientation="horizontal"></mnt-tab-item>
+  </div>
 
-    verticalStepsElement.addEventListener('stepClick', (event) => {
-      logEvent('Vertical Steps', event.detail);
-      // Sincronizar com o componente horizontal
-      horizontalStepsElement.activeStepId = event.detail.stepId;
-    });
+  <div>
+    <h2>Tab item group - Horizontal</h2>
+    <mnt-tab-item-group id="tab-item-group-horizontal" selected-id="tab-1" orientation="horizontal"></mnt-tab-item-group>
+    <mnt-tab-item-group id="tab-item-group-horizontal-icon" selected-id="tab-1" orientation="horizontal"></mnt-tab-item-group>
+  </div>
+  <div>
+    <h2>Tab item group - Vertical</h2>
+    <mnt-tab-item-group id="tab-item-group-vertical" selected-id="tab-1" orientation="vertical"></mnt-tab-item-group>
+  </div>
+</body>
 
-    function logEvent(source, detail) {
-      const logContent = document.getElementById('log-content');
-      const timestamp = new Date().toLocaleTimeString();
-      logContent.innerHTML += `<div>[${timestamp}] ${source}: Step "${detail.step.label}" (ID: ${detail.stepId}, Index: ${detail.stepIndex})</div>`;
-      logContent.scrollTop = logContent.scrollHeight;
-    }
+<script>
+  const mockTabsIcon = [
+    { tabId: 'tab-1', label: 'Tab 1', icon: 'plus' },
+    { tabId: 'tab-2', label: 'Tab 2', icon: 'minus' },
+    { tabId: 'tab-3', label: 'Tab 3', icon: 'plus' },
+    { tabId: 'tab-4', label: 'Tab 4', icon: 'minus' },
+  ];
 
-    function handleNextStep() {
-      const currentIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
-      if (currentIndex < steps.length - 1) {
-        // Atualiza o status do step atual para "done"
-        steps[currentIndex].status = 'done';
+  const mockTabs= [
+    { tabId: 'tab-1', label: 'Tab 1' },
+    { tabId: 'tab-2', label: 'Tab 2' },
+    { tabId: 'tab-3', label: 'Tab 3' },
+    { tabId: 'tab-4', label: 'Tab 4' },
+  ];
 
-        // Avança para o próximo step
-        const newActiveId = steps[currentIndex + 1].id;
-        horizontalStepsElement.activeStepId = newActiveId;
-        verticalStepsElement.activeStepId = newActiveId;
+  const tabItemGroupHorizontal = document.getElementById('tab-item-group-horizontal');
+  tabItemGroupHorizontal.tabs = mockTabs;
 
-        // Atualiza os steps nos componentes
-        horizontalStepsElement.steps = [...steps];
-        verticalStepsElement.steps = [...steps];
+  const tabItemGroupHorizontalIcon = document.getElementById('tab-item-group-horizontal-icon');
+  tabItemGroupHorizontalIcon.tabs = mockTabsIcon;
 
-        logEvent('Button Next', { stepId: newActiveId, stepIndex: currentIndex + 1, step: steps[currentIndex + 1] });
-      }
-    }
+  // const tabItemGroupVertical = document.getElementById('tab-item-group-vertical');
+  // tabItemGroupVertical.tabs = mockTabs;
 
-    function handlePreviousStep() {
-      const currentIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
-      if (currentIndex > 0) {
-        const newActiveId = steps[currentIndex - 1].id;
-        horizontalStepsElement.activeStepId = newActiveId;
-        verticalStepsElement.activeStepId = newActiveId;
+  const steps = [
+    {id: 'step-1', label: 'Step 1', icon: 'currencySimple', status: 'done'},
+    {id: 'step-2', label: 'Step 2', icon: 'currencySimple', status: 'active'},
+    {id: 'step-3', label: 'Step 3', icon: 'currencySimple', status: 'disabled'},
+    {id: 'step-4', label: 'Step 4', icon: 'currencySimple', status: 'disabled'},
+    {id: 'step-5', label: 'Step 5', icon: 'currencySimple', status: 'disabled'},
+  ];
 
-        // Atualiza os steps nos componentes
-        horizontalStepsElement.steps = [...steps];
-        verticalStepsElement.steps = [...steps];
+  const horizontalStepsElement = document.getElementById('horizontal-steps');
+  const verticalStepsElement = document.getElementById('vertical-steps');
 
-        logEvent('Button Previous', { stepId: newActiveId, stepIndex: currentIndex - 1, step: steps[currentIndex - 1] });
-      }
-    }
+  // Configurar steps para ambos os componentes
+  horizontalStepsElement.steps = steps;
+  verticalStepsElement.steps = steps;
 
-    function resetSteps() {
-      // Reseta todos os steps para o estado inicial
-      steps.forEach((step, index) => {
-        if (index === 0) {
-          step.status = 'active';
-        } else {
-          step.status = 'disabled';
-        }
-      });
-      
-      horizontalStepsElement.activeStepId = 'step-1';
-      verticalStepsElement.activeStepId = 'step-1';
-      
+  // Adicionar listeners para eventos de clique
+  horizontalStepsElement.addEventListener('stepClick', (event) => {
+    logEvent('Horizontal Steps', event.detail);
+    // Sincronizar com o componente vertical
+    verticalStepsElement.activeStepId = event.detail.stepId;
+  });
+
+  verticalStepsElement.addEventListener('stepClick', (event) => {
+    logEvent('Vertical Steps', event.detail);
+    // Sincronizar com o componente horizontal
+    horizontalStepsElement.activeStepId = event.detail.stepId;
+  });
+
+  function logEvent(source, detail) {
+    const logContent = document.getElementById('log-content');
+    const timestamp = new Date().toLocaleTimeString();
+    logContent.innerHTML += `<div>[${timestamp}] ${source}: Step "${detail.step.label}" (ID: ${detail.stepId}, Index: ${detail.stepIndex})</div>`;
+    logContent.scrollTop = logContent.scrollHeight;
+  }
+
+  function handleNextStep() {
+    const currentIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
+    if (currentIndex < steps.length - 1) {
+      // Atualiza o status do step atual para "done"
+      steps[currentIndex].status = 'done';
+
+      // Avança para o próximo step
+      const newActiveId = steps[currentIndex + 1].id;
+      horizontalStepsElement.activeStepId = newActiveId;
+      verticalStepsElement.activeStepId = newActiveId;
+
       // Atualiza os steps nos componentes
       horizontalStepsElement.steps = [...steps];
       verticalStepsElement.steps = [...steps];
-      
-      logEvent('Reset', { stepId: 'step-1', stepIndex: 0, step: steps[0] });
+
+      logEvent('Button Next', { stepId: newActiveId, stepIndex: currentIndex + 1, step: steps[currentIndex + 1] });
     }
+  }
 
-    function showState() {
-      const activeStepIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
-      const stateContent = document.getElementById('state-content');
+  function handlePreviousStep() {
+    const currentIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
+    if (currentIndex > 0) {
+      const newActiveId = steps[currentIndex - 1].id;
+      horizontalStepsElement.activeStepId = newActiveId;
+      verticalStepsElement.activeStepId = newActiveId;
 
-      let stateInfo = `Active Step: ${horizontalStepsElement.activeStepId} (index: ${activeStepIndex})\n`;
-      stateInfo += `Max Accessed Index (Horizontal): ${horizontalStepsElement.getAttribute('data-max-accessed-index') || 'N/A'}\n`;
-      stateInfo += `Max Accessed Index (Vertical): ${verticalStepsElement.getAttribute('data-max-accessed-index') || 'N/A'}\n`;
-      stateInfo += `Is First Step: ${activeStepIndex === 0}\n`;
-      stateInfo += `Is Last Step: ${activeStepIndex === steps.length - 1}\n\n`;
-      stateInfo += 'Step States:\n';
+      // Atualiza os steps nos componentes
+      horizontalStepsElement.steps = [...steps];
+      verticalStepsElement.steps = [...steps];
 
-      steps.forEach((step, index) => {
-        const isActive = index === activeStepIndex;
-        const horizontalMaxIndex = parseInt(horizontalStepsElement.getAttribute('data-max-accessed-index') || '0');
-        const verticalMaxIndex = parseInt(verticalStepsElement.getAttribute('data-max-accessed-index') || '0');
-        const maxIndex = Math.max(horizontalMaxIndex, verticalMaxIndex);
-        const isDisabled = index > maxIndex;
-        const status = isActive ? 'ACTIVE' : isDisabled ? 'DISABLED' : 'CLICKABLE';
-        stateInfo += `  ${step.label}: ${status}\n`;
-      });
-
-      stateContent.textContent = stateInfo;
+      logEvent('Button Previous', { stepId: newActiveId, stepIndex: currentIndex - 1, step: steps[currentIndex - 1] });
     }
-  </script>
-</body>
+  }
 
+  function resetSteps() {
+    // Reseta todos os steps para o estado inicial
+    steps.forEach((step, index) => {
+      if (index === 0) {
+        step.status = 'active';
+      } else {
+        step.status = 'disabled';
+      }
+    });
+    
+    horizontalStepsElement.activeStepId = 'step-1';
+    verticalStepsElement.activeStepId = 'step-1';
+    
+    // Atualiza os steps nos componentes
+    horizontalStepsElement.steps = [...steps];
+    verticalStepsElement.steps = [...steps];
+    
+    logEvent('Reset', { stepId: 'step-1', stepIndex: 0, step: steps[0] });
+  }
+
+  function showState() {
+    const activeStepIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
+    const stateContent = document.getElementById('state-content');
+
+    let stateInfo = `Active Step: ${horizontalStepsElement.activeStepId} (index: ${activeStepIndex})\n`;
+    stateInfo += `Max Accessed Index (Horizontal): ${horizontalStepsElement.getAttribute('data-max-accessed-index') || 'N/A'}\n`;
+    stateInfo += `Max Accessed Index (Vertical): ${verticalStepsElement.getAttribute('data-max-accessed-index') || 'N/A'}\n`;
+    stateInfo += `Is First Step: ${activeStepIndex === 0}\n`;
+    stateInfo += `Is Last Step: ${activeStepIndex === steps.length - 1}\n\n`;
+    stateInfo += 'Step States:\n';
+
+    steps.forEach((step, index) => {
+      const isActive = index === activeStepIndex;
+      const horizontalMaxIndex = parseInt(horizontalStepsElement.getAttribute('data-max-accessed-index') || '0');
+      const verticalMaxIndex = parseInt(verticalStepsElement.getAttribute('data-max-accessed-index') || '0');
+      const maxIndex = Math.max(horizontalMaxIndex, verticalMaxIndex);
+      const isDisabled = index > maxIndex;
+      const status = isActive ? 'ACTIVE' : isDisabled ? 'DISABLED' : 'CLICKABLE';
+      stateInfo += `  ${step.label}: ${status}\n`;
+    });
+
+    stateContent.textContent = stateInfo;
+  }
+</script>
 </html>

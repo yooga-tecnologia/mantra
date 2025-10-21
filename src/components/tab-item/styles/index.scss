@@ -1,0 +1,16 @@
+/**
+ * This file is a barrel file for the styles of the TabItem component.
+ *
+ * WARNING: Please do not add any CSS rules directly to this file!
+ * Check [index.scss](./styles/index.scss) to know how to organize component's stylesheets
+ **/
+
+@use "sass:map";
+
+@forward "./__base"; // Base styles for the tab-item component
+
+@use "./_orientation-horizontal" as tab-horizontal;
+@use "./_orientation-vertical" as tab-vertical;
+
+@include tab-horizontal.set-tab-horizontal-styles();
+@include tab-vertical.set-tab-vertical-styles();
