@@ -1,6 +1,6 @@
 {
   "name": "@yooga-tecnologia/mantra",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "description": "Biblioteca de componentes web desenvolvida com StencilJS para criar interfaces reutilizáveis e performáticas em diferentes frameworks e projetos.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -51,7 +51,8 @@
     "version:minor": "npm version minor --no-git-tag-version",
     "version:major": "npm version major --no-git-tag-version",
     "pre-commit": "npm run test && npm run build",
-    "release": "bash scripts/release.sh"
+    "release": "bash scripts/release.sh",
+    "builder.io:index": "npx @builder.io/dev-tools@latest index-repo"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.4",
