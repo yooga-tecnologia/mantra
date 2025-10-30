@@ -5,7 +5,6 @@ $component-prefix: theme.get-prefix('tab-item-group');
 
 @mixin set-tab-group-vertical-styles() {
   .#{$component-prefix}-vertical {
-    @debug 'component-prefix: #{$component-prefix}';
     flex-direction: column;
     align-items: stretch;
     width: fit-content;

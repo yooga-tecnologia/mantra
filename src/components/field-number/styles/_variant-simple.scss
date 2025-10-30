@@ -1,0 +1,127 @@
+@use 'sass:map';
+@use '../../../shared/theme/core/theme' as theme;
+@use '../../../shared/theme/tokens/inputs/_field-number' as field-number-tokens;
+@use '__base' as base;
+
+$component-prefix: theme.get-prefix('field-number');
+$field-number-color-scheme: base.$field-number-color-scheme;
+$field-number-size-configs: field-number-tokens.$field-number-size-configs;
+
+mnt-field-number {
+  display: flex;
+  width: 100%;
+
+  .#{$component-prefix}-input-container.#{$component-prefix}-variant-simple {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+
+    &.#{$component-prefix}-input-container-focused {
+      input[type='number'] {
+        border-width: map.get($field-number-color-scheme, focus, border-width);
+        border-color: map.get($field-number-color-scheme, focus, border-color);
+      }
+    }
+
+    &-focused {
+      input[type='number'] {
+        border-width: map.get($field-number-color-scheme, focus, border-width);
+        border-color: map.get($field-number-color-scheme, focus, border-color);
+      }
+    }
+
+    &-error {
+      input[type='number'] {
+        border-width: map.get($field-number-color-scheme, error, border-width);
+        border-color: map.get($field-number-color-scheme, error, border-color);
+      }
+    }
+
+    &-success {
+      input[type='number'] {
+        border-width: map.get($field-number-color-scheme, success, border-width);
+        border-color: map.get($field-number-color-scheme, success, border-color);
+      }
+    }
+
+    &-disabled,
+    &:has(input:disabled) {
+      input[type='number'] {
+        border-color: map.get($field-number-color-scheme, disabled, border-color);
+        background-color: map.get($field-number-color-scheme, disabled, background-color);
+        color: map.get($field-number-color-scheme, disabled, text-color);
+        cursor: not-allowed;
+      }
+    }
+
+    &:hover input[type='number'] {
+      border-color: map.get($field-number-color-scheme, hover, border-color);
+    }
+
+    input[type='number'] {
+      border: 1px solid map.get($field-number-color-scheme, default, border-color);
+      border-radius: 6px;
+      transition: all ease-in-out 0.2s;
+      padding: 16px;
+      text-align: center;
+      font-family: 'Poppins Regular', sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      color: map.get($field-number-color-scheme, text, default);
+      width: 56px;
+      height: 56px;
+      max-height: 56px;
+      min-height: 56px;
+      flex-shrink: 0;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        appearance: none;
+        margin: 0;
+      }
+    }
+
+    mnt-button-icon {
+      flex-shrink: 0;
+    }
+
+    // Size variants
+    &.#{$component-prefix}-size-large input[type='number'] {
+      $config: map.get($field-number-size-configs, large);
+      $size: map.get($config, height);
+      width: $size;
+      height: $size;
+      max-height: $size;
+      min-height: $size;
+      padding: map.get($config, input-padding-vertical);
+      font-size: map.get($config, font-size);
+      line-height: map.get($config, line-height);
+    }
+
+    &.#{$component-prefix}-size-medium input[type='number'] {
+      $config: map.get($field-number-size-configs, medium);
+      $size: map.get($config, height);
+      width: $size;
+      height: $size;
+      max-height: $size;
+      min-height: $size;
+      padding: map.get($config, input-padding-vertical) map.get($config, input-padding-horizontal);
+      font-size: map.get($config, font-size);
+      line-height: map.get($config, line-height);
+    }
+
+    &.#{$component-prefix}-size-small input[type='number'] {
+      $config: map.get($field-number-size-configs, small);
+      $size: map.get($config, height);
+      width: $size;
+      height: $size;
+      max-height: $size;
+      min-height: $size;
+      padding: map.get($config, input-padding-vertical) map.get($config, input-padding-horizontal);
+      font-size: map.get($config, font-size);
+      line-height: map.get($config, line-height);
+    }
+  }
+}

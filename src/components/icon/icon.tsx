@@ -25,8 +25,18 @@ export class Icon {
   transform!: string;
   baseIconName!: string;
   backgroundElRef?: HTMLSpanElement;
+  parsedBackground?: { color: string; shape: string };
+
+  iconBgGapSizeMap = {
+    tiny: 4,
+    small: 8,
+    medium: 12,
+    large: 16,
+    doubleLarge: 24,
+  };
 
   componentWillLoad() {
+    this.parseBackgroundAttribute();
     this.calculateSizes();
     this.baseIconName = this.getBaseIconName(this.icon);
     this.transform = this.getTransform(this.icon);
@@ -37,10 +47,48 @@ export class Icon {
     this.updateIcon();
   }
 
+  private parseBackgroundAttribute(): void {
+    if (!this.background) {
+      this.parsedBackground = undefined;
+      return;
+    }
+
+    // Se já é um array (tupla [string, shape]), usar diretamente
+    if (Array.isArray(this.background)) {
+      this.parsedBackground = {
+        color: this.background[0],
+        shape: this.background[1],
+      };
+      return;
+    }
+
+    // Se é uma string JSON válida (ex: '["#color", "shape"]')
+    if (typeof this.background === 'string' && this.background.startsWith('[')) {
+      try {
+        const parsed = JSON.parse(this.background);
+        if (Array.isArray(parsed) && parsed.length === 2) {
+          this.parsedBackground = {
+            color: parsed[0],
+            shape: parsed[1],
+          };
+          return;
+        }
+      } catch (e) {
+        // Se falhar, tratar como cor simples
+        console.log('[MANTRA][mnt-icon] Error parsing background:', e);
+      }
+    }
+
+    this.parsedBackground = {
+      color: this.background,
+      shape: 'circle',
+    };
+  }
+
   private getIconClass(): string {
     const classes = ['mnt-icon'];
 
-    if (this.background) {
+    if (this.parsedBackground) {
       classes.push('mnt-icon-with-background');
     }
 
@@ -69,20 +117,27 @@ export class Icon {
 
     const baseSize = typeof numericSize === 'number' ? numericSize : iconSizes[numericSize] || iconSizes.medium;
 
-    if (this.background && baseSize < iconSizes.large) {
-      console.warn(
-        `[mnt-icon] Background property is not recommended for sizes smaller than 'large' (32px). ` +
-          `Current size: ${baseSize}px. Consider using 'large' or 'doubleLarge' for better visual results.`,
-      );
-    }
+    this.iconSize = `${baseSize}px`;
 
-    if (this.background && baseSize > iconSizes.medium) {
-      this.bgSize = `${baseSize}px`;
-      this.iconSize = `${baseSize - iconSizes.small}px`;
+    if (this.parsedBackground) {
+      // Background mantém o tamanho do SVG + gap baseado no tamanho
+      // Precisamos normalizar o size para uma chave válida do map
+      const normalizedSize = typeof this.size === 'number' ? this.getSizeNameFromNumericValue(this.size) : this.size;
+
+      const gapSize = this.iconBgGapSizeMap[normalizedSize as keyof typeof this.iconBgGapSizeMap] || this.iconBgGapSizeMap.medium;
+
+      this.bgSize = `${baseSize + gapSize}px`;
     } else {
-      this.iconSize = `${baseSize}px`;
       this.bgSize = undefined;
     }
+  }
+
+  private getSizeNameFromNumericValue(size: number): string {
+    if (size <= iconSizes.tiny) return 'tiny';
+    if (size <= iconSizes.small) return 'small';
+    if (size <= iconSizes.medium) return 'medium';
+    if (size <= iconSizes.large) return 'large';
+    return 'doubleLarge';
   }
 
   private getTransform(iconName: string): string {
@@ -95,15 +150,20 @@ export class Icon {
   }
 
   private setBackgroundProperties(): void {
-    const targetSize = this.background ? this.bgSize : this.iconSize;
-    if (targetSize) {
+    if (this.parsedBackground) {
+      // Container mantém o tamanho do background (SVG + 8px)
+      const targetSize = this.bgSize;
       this.el.style.width = targetSize;
       this.el.style.height = targetSize;
+    } else {
+      // Sem background, container usa o tamanho do SVG
+      this.el.style.width = this.iconSize;
+      this.el.style.height = this.iconSize;
     }
 
-    if (this.background && this.bgSize && this.backgroundElRef) {
-      this.backgroundElRef.classList.add('mnt-icon-bg', 'mnt-border-circle');
-      this.backgroundElRef.style.backgroundColor = this.background;
+    if (this.parsedBackground && this.backgroundElRef) {
+      this.backgroundElRef.classList.add('mnt-icon-bg', `mnt-border-${this.parsedBackground.shape}`);
+      this.backgroundElRef.style.backgroundColor = this.parsedBackground.color;
       this.backgroundElRef.style.width = this.bgSize;
       this.backgroundElRef.style.height = this.bgSize;
     }
@@ -125,11 +185,11 @@ export class Icon {
   }
 
   render(): JSX.Element {
-    if (this.background) {
+    if (this.parsedBackground) {
       return (
         <div class={this.getIconClass()}>
           {this.getIconBase()}
-          {this.background && <span ref={(el) => (this.backgroundElRef = el)}></span>}
+          <span ref={(el) => (this.backgroundElRef = el)}></span>
         </div>
       );
     }

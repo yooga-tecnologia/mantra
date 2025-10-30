@@ -2,3 +2,4 @@
 @use "../core/theme" as theme;
 @use "../core/typography" as typography;
 @use "./sizing" as sizing;
+@forward './inputs';

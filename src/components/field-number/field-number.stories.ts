@@ -15,9 +15,11 @@ O componente **FieldNumber** é um campo de entrada numérica com funcionalidade
 ## Características
 
 - **Botões de incremento/decremento**: Controles visuais para ajustar valores
-- **Múltiplas variantes**: Default e Plain
+- **Múltiplas variantes**: Default, Plain e Simple
+- **Múltiplos tamanhos**: Small (32px), Medium (42px), Large (56px)
 - **Formatação decimal**: Suporte a casas decimais configuráveis
 - **Validação**: Valores mínimos e máximos
+- **Estados visuais**: Default, hover, focus, error, success, disabled
 - **Eventos customizados**: Emissão de eventos para mudanças de valor
 - **Acessibilidade**: Suporte completo a leitores de tela
 
@@ -240,3 +242,127 @@ const MultipleFieldsTemplate = (): HTMLString => `
 `;
 
 export const MultipleFields: StoryFn = MultipleFieldsTemplate;
+
+/**
+ * Demonstra as três variantes: Plain, Default e Simple
+ */
+const VariantsTemplate = (): HTMLString => `
+  <div style="display: flex; flex-direction: column; gap: 2rem; max-width: 600px;">
+    <div>
+      <h3 style="margin-bottom: 1rem;">Variante PLAIN</h3>
+      <mnt-field-number
+        input-name="plain-example"
+        variant="plain"
+        value="0">
+      </mnt-field-number>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom: 1rem;">Variante DEFAULT</h3>
+      <mnt-field-number
+        input-name="default-example"
+        variant="default"
+        label="Quantidade"
+        value="1"
+        required>
+      </mnt-field-number>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom: 1rem;">Variante SIMPLE</h3>
+      <mnt-field-number
+        input-name="simple-example"
+        variant="simple"
+        value="10">
+      </mnt-field-number>
+    </div>
+  </div>
+`;
+
+export const Variants: StoryFn = VariantsTemplate;
+
+/**
+ * Demonstra os três tamanhos em cada variante
+ */
+const SizesTemplate = (): HTMLString => `
+  <div style="display: flex; flex-direction: column; gap: 2rem; max-width: 600px;">
+    <div>
+      <h3 style="margin-bottom: 1rem;">Tamanhos - PLAIN</h3>
+      <div style="display: flex; gap: 1rem; align-items: flex-start;">
+        <div>
+          <p style="font-size: 12px; margin-bottom: 0.5rem;">Small (32px)</p>
+          <mnt-field-number input-name="plain-small" variant="plain" size="small" value="0"></mnt-field-number>
+        </div>
+        <div>
+          <p style="font-size: 12px; margin-bottom: 0.5rem;">Medium (42px)</p>
+          <mnt-field-number input-name="plain-medium" variant="plain" size="medium" value="0"></mnt-field-number>
+        </div>
+        <div>
+          <p style="font-size: 12px; margin-bottom: 0.5rem;">Large (56px)</p>
+          <mnt-field-number input-name="plain-large" variant="plain" size="large" value="0"></mnt-field-number>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom: 1rem;">Tamanhos - DEFAULT</h3>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <mnt-field-number input-name="default-small" variant="default" size="small" label="Small (32px)" value="1"></mnt-field-number>
+        <mnt-field-number input-name="default-medium" variant="default" size="medium" label="Medium (42px)" value="1"></mnt-field-number>
+        <mnt-field-number input-name="default-large" variant="default" size="large" label="Large (56px)" value="1"></mnt-field-number>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom: 1rem;">Tamanhos - SIMPLE</h3>
+      <div style="display: flex; gap: 1rem; align-items: flex-start;">
+        <div>
+          <p style="font-size: 12px; margin-bottom: 0.5rem;">Small (32x32px)</p>
+          <mnt-field-number input-name="simple-small" variant="simple" size="small" value="5"></mnt-field-number>
+        </div>
+        <div>
+          <p style="font-size: 12px; margin-bottom: 0.5rem;">Medium (42x42px)</p>
+          <mnt-field-number input-name="simple-medium" variant="simple" size="medium" value="10"></mnt-field-number>
+        </div>
+        <div>
+          <p style="font-size: 12px; margin-bottom: 0.5rem;">Large (56x56px)</p>
+          <mnt-field-number input-name="simple-large" variant="simple" size="large" value="20"></mnt-field-number>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+export const Sizes: StoryFn = SizesTemplate;
+
+/**
+ * Demonstra os estados visuais: default, hover, focus, error, success, disabled
+ */
+const StatesTemplate = (): HTMLString => `
+  <div style="display: flex; flex-direction: column; gap: 2rem; max-width: 600px;">
+    <div>
+      <h3 style="margin-bottom: 1rem;">Estados do INPUT</h3>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <mnt-field-number
+          input-name="state-default"
+          variant="default"
+          label="Estado Default"
+          value="0">
+        </mnt-field-number>
+        
+        <mnt-field-number
+          input-name="state-disabled"
+          variant="default"
+          label="Estado Disabled"
+          value="0"
+          disabled>
+        </mnt-field-number>
+      </div>
+      <p style="font-size: 12px; color: #666; margin-top: 0.5rem;">
+        Nota: Estados de focus, error e success são aplicados via classes CSS. Adicione manualmente no container para testar.
+      </p>
+    </div>
+  </div>
+`;
+
+export const States: StoryFn = StatesTemplate;

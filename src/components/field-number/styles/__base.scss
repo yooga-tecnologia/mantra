@@ -1,0 +1,84 @@
+@use 'sass:map';
+@use '../../../shared/theme/core/theme' as theme;
+
+$component-prefix: theme.get-prefix('field-number');
+$field-number-color-scheme: (
+  default: (
+    border-color: #CED2D3,
+  ),
+  hover: (
+    border-color: #818A8F,
+  ),
+  focus: (
+    border-color: #0B7CBE,
+    border-width: 1px,
+  ),
+  error: (
+    border-color: #E41F1E,
+    border-width: 1px,
+  ),
+  success: (
+    border-color: #15A459,
+    border-width: 1px,
+  ),
+  disabled: (
+    border-color: #E5E7E8,
+    background-color: #E5E7E8,
+    text-color: #ABB2B5,
+  ),
+  text: (
+    default: #242628,
+    disabled: #ABB2B5,
+  ),
+);
+
+$field-number-properties: (
+  border-radius: 12px,
+  padding: 6px,
+);
+
+@mixin set-fill-available {
+  width: 100%;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: stretch;
+}
+
+// Base styles
+
+.text-color-primary {
+  color: #0A639A;
+}
+
+
+mnt-field-number * {
+  box-sizing: border-box;
+}
+
+// Remove default arrows from input number
+input[type='number'] {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+
+  &,
+  &:hover,
+  &:focus {
+    border: none;
+    outline: none;
+    transition: all ease-in-out 0.2s;
+  }
+}
+
+// Label styles
+.#{$component-prefix}-label {
+  font-weight: 500;
+  color: #4B5053;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 14px;
+}

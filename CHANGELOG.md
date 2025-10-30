@@ -4,6 +4,35 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.7.2] – 2025-10-30
+
+### ✨ Melhorado
+
+- **FieldNumber**:
+  - Adicionado suporte a propriedade `size` (small, medium, large)
+  - Implementada API `formAssociated` para integração nativa com formulários
+  - Refatoração de estilos em sistema modular
+  - Adicionados tokens de tema específicos
+  - Melhorias na estrutura de container com sizing responsivo
+
+- **Icon**:
+  - Suporte a formas customizadas no background (circle, rounded, square)
+  - Parsing robusto de background com múltiplos formatos
+  - Cálculo dinâmico de tamanho do background
+
+### 🐛 Correções
+
+- **Button**: Prevenção de quebra de texto em labels
+
+### 📖 Documentação
+
+- **FieldNumber**: Exemplos atualizados com novos tamanhos no Storybook
+- **Icon**: Nova story "Background Examples" demonstrando formas disponíveis
+
+### 🔧 Configuração
+
+- Adicionado script `builder.io:index` para indexação de componentes
+
 ## [2.7.1] – 2025-10-22
 
 ### 🚀 Adicionado

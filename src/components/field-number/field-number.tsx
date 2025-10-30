@@ -1,161 +1,232 @@
-import { Component, EventEmitter, h, Prop, Event } from '@stencil/core';
-import { FieldNumberProps } from './field-number.types';
+import { Component, h, Prop, State, AttachInternals, Host } from '@stencil/core';
+import { setComponentClass } from 'src/utils/utils';
+import { SizeVariants } from '@theme/theme.types';
+
+import type { FieldNumberVariant } from './field-number.types';
 
 @Component({
   tag: 'mnt-field-number',
   styleUrl: 'field-number.scss',
   shadow: false,
+  formAssociated: true,
 })
 export class FieldNumber {
   @Prop() inputName!: string;
-  @Prop() variant: FieldNumberProps['variant'] = 'default';
-  @Prop({ mutable: true }) value: number | string = 0;
-  @Prop() required: boolean = false;
-
-  @Prop() label?: FieldNumberProps['label'];
-  @Prop() step?: number = 0.1;
-  @Prop() toFixed?: number | undefined;
+  @Prop() variant?: FieldNumberVariant = 'plain';
+  @Prop() size?: Exclude<SizeVariants, 'tiny'>;
+  @Prop() label?: string;
+  @Prop() required?: boolean;
+  @Prop() disabled?: boolean;
   @Prop() min?: number;
   @Prop() max?: number;
+  @Prop() step?: number;
 
-  // Events
-  @Event() valueChange: EventEmitter<string>;
-  /**
-   * Evento emitido com o valor numérico (sem formatação) quando o campo é alterado
-   */
-  @Event() rawValueChange: EventEmitter<string>;
+  @State() value: string = '0';
 
-  private inputEl?: HTMLInputElement;
+  @AttachInternals() internals: ElementInternals;
 
-  public getInput(): HTMLInputElement | undefined {
-    return this.inputEl;
+  inputEl?: HTMLInputElement;
+  containerEl?: HTMLDivElement;
+  componentPrefix: string = setComponentClass('field-number');
+  private readonly containerId = `${this.componentPrefix}-input-container-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
+  private getContainerEl(): HTMLDivElement | null {
+    if (this.containerEl) {
+      return this.containerEl;
+    }
+    return document.getElementById(this.containerId) as HTMLDivElement;
   }
 
-  private handleInput(event: Event): void {
+  private addFocusClass(): void {
+    const container = this.getContainerEl();
+    if (container) {
+      container.classList.add(`${this.componentPrefix}-input-container-focused`);
+    }
+  }
+
+  private removeFocusClass(): void {
+    const container = this.getContainerEl();
+    if (container) {
+      container.classList.remove(`${this.componentPrefix}-input-container-focused`);
+    }
+  }
+
+  componentWillLoad(): void {
+    this.internals.setFormValue(this.value);
+  }
+
+  private handleInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    let value = input.value;
-    let rawValue: string = value;
-
-    this.rawValueChange.emit(rawValue);
-    this.valueChange.emit(value);
+    this.value = input.value;
+    this.internals.setFormValue(this.value);
   }
 
-  private formatDecimal(value: number): void {
-    if (this.toFixed !== undefined) {
-      this.value = Number(value.toFixed(this.toFixed));
+  private decrementValue(): void {
+    const stepValue = this.step || 1;
+    const newValue = Number(this.value) - stepValue;
+    const minValue = this.min || Number.NEGATIVE_INFINITY;
+
+    if (newValue >= minValue) {
+      this.value = newValue.toString();
+      this.internals.setFormValue(this.value);
     }
   }
 
   private incrementValue(): void {
-    this.value = Number(this.value) + Number(this.step);
-    this.formatDecimal(this.value as number);
+    const stepValue = this.step || 1;
+    const newValue = Number(this.value) + stepValue;
+    const maxValue = this.max || Number.POSITIVE_INFINITY;
+
+    if (newValue <= maxValue) {
+      this.value = newValue.toString();
+      this.internals.setFormValue(this.value);
+    }
   }
 
-  private decrementValue(): void {
-    this.value = Number(this.value) - Number(this.step);
-    this.formatDecimal(this.value as number);
+  private isDecrementDisabled(): boolean {
+    return this.min !== undefined && Number(this.value) <= this.min;
   }
 
-  private renderLabel(): void {
+  private isIncrementDisabled(): boolean {
+    return this.max !== undefined && Number(this.value) >= this.max;
+  }
+
+  get containerClass() {
+    const baseClass = `${this.componentPrefix}-input-container`;
+    const variantClass = `${this.componentPrefix}-variant-${this.variant}`;
+    const sizeClass = this.size ? `${this.componentPrefix}-size-${this.size}` : '';
+    return `${baseClass} ${variantClass} ${sizeClass}`.trim();
+  }
+
+  get buttonVariant(): 'plain' | 'regular' {
+    switch (this.variant) {
+      case 'plain':
+        return 'plain';
+      case 'default':
+        return 'regular';
+    }
+  }
+
+  renderLabel() {
+    if (!this.label) return null;
+
     return (
-      this.label && (
-        <label
-          class="mnt-field-number-label"
-          htmlFor={this.inputName}
-        >
-          {this.label}
-          {this.required && <span class="text-color-primary">*</span>}
-        </label>
-      )
+      <label
+        class={`${this.componentPrefix}-label`}
+        htmlFor={this.inputName}
+      >
+        {this.label}
+        {this.required && <span class="text-color-primary">*</span>}
+      </label>
     );
   }
 
-  private renderActionButtons(): void {
-    return (
-      <div class="mnt-field-number-actions">
-        <mnt-button-icon
-          variant={this.variant === 'plain' ? 'plain' : 'regular'}
-          color="neutral"
-          icon="minus"
-          size="small"
-          disabled={this.min !== undefined && Number(this.value) <= this.min}
-          onButtonClick={() => this.decrementValue()}
-        ></mnt-button-icon>
-        <mnt-button-icon
-          variant={this.variant === 'plain' ? 'plain' : 'regular'}
-          color="neutral"
-          icon="plus"
-          size="small"
-          disabled={this.max !== undefined && Number(this.value) >= this.max}
-          onButtonClick={() => this.incrementValue()}
-        ></mnt-button-icon>
-      </div>
-    );
-  }
-
-  private renderInput() {
+  renderInput() {
     return (
       <input
+        onInput={(event) => this.handleInputChange(event)}
+        onFocus={() => this.addFocusClass()}
+        onBlur={() => this.removeFocusClass()}
+        ref={(el) => (this.inputEl = el)}
         type="number"
         id={this.inputName}
-        value={this.value}
         required={this.required}
         min={this.min}
         max={this.max}
         step={this.step}
-        onInput={(e) => this.handleInput(e)}
-        ref={(el) => (this.inputEl = el)}
+        value={this.value}
+        disabled={this.disabled}
+        data-size={this.size}
       />
     );
   }
 
-  private renderDefaultVariant() {
-    return [
-      this.renderLabel(),
-      <div class="mnt-field-number-input-container">
-        {this.renderInput()}
-        {this.renderActionButtons()}
-      </div>,
-    ];
+  renderDecrementButton() {
+    return (
+      <mnt-button-icon
+        icon="minus"
+        variant={this.buttonVariant}
+        color="neutral"
+        size="small"
+        disabled={this.isDecrementDisabled() || this.disabled}
+        onButtonClick={() => this.decrementValue()}
+      />
+    );
   }
 
-  // TODO: implementar o variant simple
-  // private renderSimpleVariant() {
-  //   return (
-  //     <input
-  //       type="number"
-  //       class="simple"
-  //     />
-  //   );
-  // }
-
-  private renderPlainVariant() {
+  renderIncrementButton() {
     return (
-      <div class="mnt-field-number-input-container">
+      <mnt-button-icon
+        icon="plus"
+        variant={this.buttonVariant}
+        color="neutral"
+        size="small"
+        disabled={this.isIncrementDisabled() || this.disabled}
+        onButtonClick={() => this.incrementValue()}
+      />
+    );
+  }
+
+  renderPlainVariant() {
+    return (
+      <div
+        ref={(el) => (this.containerEl = el)}
+        id={this.containerId}
+        class={this.containerClass}
+      >
+        {this.renderDecrementButton()}
         {this.renderInput()}
-        {this.renderActionButtons()}
+        {this.renderIncrementButton()}
       </div>
     );
   }
 
-  private renderContainer() {
-    let container;
-    switch (this.variant) {
-      // TODO: implementar o variant simple
-      // case 'simple':
-      //   container = this.renderSimpleVariant();
-      //   break;
-      case 'plain':
-        container = this.renderPlainVariant();
-        break;
-      default:
-        container = this.renderDefaultVariant();
-    }
+  renderSimpleVariant() {
+    return (
+      <div
+        ref={(el) => (this.containerEl = el)}
+        id={this.containerId}
+        class={this.containerClass}
+      >
+        {this.renderDecrementButton()}
+        {this.renderInput()}
+        {this.renderIncrementButton()}
+      </div>
+    );
+  }
 
-    return container;
+  renderDefaultVariant() {
+    return (
+      <div>
+        {this.renderLabel()}
+        <div
+          ref={(el) => (this.containerEl = el)}
+          id={this.containerId}
+          class={this.containerClass}
+        >
+          <div
+            class={`${this.componentPrefix}-input-wrapper`}
+            data-size={this.size}
+          >
+            {this.renderInput()}
+          </div>
+          <div class={`${this.componentPrefix}-actions`}>
+            {this.renderDecrementButton()}
+            {this.renderIncrementButton()}
+          </div>
+        </div>
+      </div>
+    );
   }
 
   render() {
-    return <div class={`mnt-field-number mnt-field-number-${this.variant}`}>{this.renderContainer()}</div>;
+    const content =
+      {
+        plain: this.renderPlainVariant(),
+        simple: this.renderSimpleVariant(),
+        default: this.renderDefaultVariant(),
+      }[this.variant] || this.renderPlainVariant();
+
+    return <Host>{content}</Host>;
   }
 }
