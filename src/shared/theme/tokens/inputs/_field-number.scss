@@ -1,0 +1,47 @@
+@use 'sass:map';
+
+//
+// Field Number Size Configurations
+// Used to define sizes for field-number component variants
+//
+
+$field-number-size-configs: (
+  small: (
+    height: 32px,
+    font-size: 12px,
+    line-height: 16px,
+    input-padding-horizontal: 8px,
+    input-padding-vertical: 4px,
+    plain-height: 32px,
+    plain-font-size: 12px,
+    plain-line-height: 16px,
+  ),
+  medium: (
+    height: 42px,
+    font-size: 14px,
+    line-height: 20px,
+    input-padding-horizontal: 16px,
+    input-padding-vertical: 12px,
+    plain-height: 42px,
+    plain-font-size: 14px,
+    plain-line-height: 20px,
+  ),
+  large: (
+    height: 56px,
+    font-size: 16px,
+    line-height: 24px,
+    input-padding-horizontal: 16px,
+    input-padding-vertical: 16px,
+    plain-height: 56px,
+    plain-font-size: 16px,
+    plain-line-height: 24px,
+  ),
+);
+
+// Helper function to get field-number size config
+@function get-field-number-size($size) {
+  @return map.get($field-number-size-configs, $size);
+}
+
+
+

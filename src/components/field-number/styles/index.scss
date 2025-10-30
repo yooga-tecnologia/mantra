@@ -1,9 +1,12 @@
 /**
-* This file is a barrel file for the styles of the <mnt-field-number> component.
+* This file is a barrel file for the styles of the field-number component.
 *
 * WARNING: Do not add CSS rules directly to the file src/components/field-number/field-number.scss.
 *
 * Use the variant files (_variant-plain.scss, _variant-default.scss, etc.) to define specific styles.
 **/
 
-@use './styles';
+@forward './__base';
+@use './_variant-plain';
+@use './_variant-default';
+@use './_variant-simple';
