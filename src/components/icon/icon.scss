@@ -4,10 +4,9 @@ mnt-icon,
 mnt-icon-large {
   display: inline-block;
   vertical-align: middle;
-  line-height: 0; // Remove whitespace below the icon
-  font-size: 0; // Remove any inherited font size
+  line-height: 0;
+  font-size: 0;
 }
-
 
 mnt-icon {
   .mnt-icon-with-background {
@@ -32,6 +31,14 @@ mnt-icon {
 
       &.mnt-border-circle  {
         border-radius: 50%;
+      }
+
+      &.mnt-border-rounded  {
+        border-radius: 6px;
+      }
+
+      &.mnt-border-square  {
+        border-radius: 0;
       }
     }
   }

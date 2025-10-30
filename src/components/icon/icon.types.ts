@@ -22,6 +22,7 @@ export type Direction = (typeof ICON_DIRECTIONS)[number];
 export type IconAnimation = (typeof ICON_ANIMATION_ARRAY)[number];
 export type IconSize = keyof typeof iconSizes;
 export type IconLargeSize = keyof typeof iconLargeSizes;
+export type IconBackgroundShape = 'circle' | 'rounded' | 'square';
 
 type DirectionalSuffix = `-${Direction}`;
 export type ExtendedIconName = IconName | `${IconName}${DirectionalSuffix}`;
@@ -33,7 +34,7 @@ export interface IconBaseProps {
 
 export interface IconProps extends IconBaseProps {
   icon: ExtendedIconName;
-  background?: string;
+  background?: [string, IconBackgroundShape] | string | undefined;
   animation?: IconAnimation;
 }
 

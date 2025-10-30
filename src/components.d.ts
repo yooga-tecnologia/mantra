@@ -8,7 +8,8 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { BadgeBaseProps } from "./components/badge/badge.types";
 import { BrandProps } from "./components/brand/brand.types";
 import { ButtonIconProps, ButtonProps } from "./components/button/button.types";
-import { FieldNumberProps } from "./components/field-number/field-number.types";
+import { FieldNumberVariant } from "./components/field-number/field-number.types";
+import { SizeVariants } from "./shared/theme/theme.types";
 import { FieldTextProps } from "./components/field-text/field-text.types";
 import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
@@ -19,7 +20,8 @@ import { TooltipProps } from "./components/tooltip/tooltip.types";
 export { BadgeBaseProps } from "./components/badge/badge.types";
 export { BrandProps } from "./components/brand/brand.types";
 export { ButtonIconProps, ButtonProps } from "./components/button/button.types";
-export { FieldNumberProps } from "./components/field-number/field-number.types";
+export { FieldNumberVariant } from "./components/field-number/field-number.types";
+export { SizeVariants } from "./shared/theme/theme.types";
 export { FieldTextProps } from "./components/field-text/field-text.types";
 export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
@@ -59,15 +61,15 @@ export namespace Components {
         "variant": ButtonIconProps['variant'];
     }
     interface MntFieldNumber {
+        "disabled"?: boolean;
         "inputName": string;
-        "label"?: FieldNumberProps['label'];
+        "label"?: string;
         "max"?: number;
         "min"?: number;
-        "required": boolean;
+        "required"?: boolean;
+        "size"?: Exclude<SizeVariants, 'tiny'>;
         "step"?: number;
-        "toFixed"?: number | undefined;
-        "value": number | string;
-        "variant": FieldNumberProps['variant'];
+        "variant"?: FieldNumberVariant;
     }
     interface MntFieldText {
         "disabled"?: FieldTextProps['disabled'];
@@ -137,10 +139,6 @@ export interface MntButtonIconCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntButtonIconElement;
 }
-export interface MntFieldNumberCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLMntFieldNumberElement;
-}
 export interface MntFieldTextCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntFieldTextElement;
@@ -204,19 +202,7 @@ declare global {
         prototype: HTMLMntButtonIconElement;
         new (): HTMLMntButtonIconElement;
     };
-    interface HTMLMntFieldNumberElementEventMap {
-        "valueChange": string;
-        "rawValueChange": string;
-    }
     interface HTMLMntFieldNumberElement extends Components.MntFieldNumber, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLMntFieldNumberElementEventMap>(type: K, listener: (this: HTMLMntFieldNumberElement, ev: MntFieldNumberCustomEvent<HTMLMntFieldNumberElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLMntFieldNumberElementEventMap>(type: K, listener: (this: HTMLMntFieldNumberElement, ev: MntFieldNumberCustomEvent<HTMLMntFieldNumberElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLMntFieldNumberElement: {
         prototype: HTMLMntFieldNumberElement;
@@ -365,20 +351,15 @@ declare namespace LocalJSX {
         "variant"?: ButtonIconProps['variant'];
     }
     interface MntFieldNumber {
+        "disabled"?: boolean;
         "inputName": string;
-        "label"?: FieldNumberProps['label'];
+        "label"?: string;
         "max"?: number;
         "min"?: number;
-        /**
-          * Evento emitido com o valor numérico (sem formatação) quando o campo é alterado
-         */
-        "onRawValueChange"?: (event: MntFieldNumberCustomEvent<string>) => void;
-        "onValueChange"?: (event: MntFieldNumberCustomEvent<string>) => void;
         "required"?: boolean;
+        "size"?: Exclude<SizeVariants, 'tiny'>;
         "step"?: number;
-        "toFixed"?: number | undefined;
-        "value"?: number | string;
-        "variant"?: FieldNumberProps['variant'];
+        "variant"?: FieldNumberVariant;
     }
     interface MntFieldText {
         "disabled"?: FieldTextProps['disabled'];
