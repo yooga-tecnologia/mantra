@@ -4,6 +4,51 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.7.3] – 2025-10-30
+
+### ✨ Melhorado
+
+- **FieldNumber**: Refatoração interna e melhorias na sincronização de estado
+  - Alterado `value` de `@State()` para `@Prop({ mutable: true, reflect: true })` para permitir controle bidirecional
+  - Adicionado `@Watch('value')` para sincronização automática entre propriedade e input element
+  - Implementado `componentDidLoad()` para garantir sincronização inicial do valor
+  - Melhorias em `incrementValue()` e `decrementValue()`:
+    - Atualização direta do input element quando valores são alterados programaticamente
+    - Emissão de eventos `input` e `change` customizados para compatibilidade com frameworks
+    - Melhor tratamento de valores numéricos (tratamento de `undefined` no max)
+    - Sincronização completa com `formAssociated` API
+  - Melhorias em `handleInputChange()`:
+    - Emissão de evento `change` customizado com `bubbles: true` para captura no Angular
+    - Estrutura do evento: `{ detail: { value: string } }`
+  - Melhorias em `renderInput()`:
+    - Geração automática de ID único quando `inputName` não é fornecido
+    - Adição do atributo `name` no input para melhor integração com formulários
+
+- **FieldNumber**: Melhorias na cobertura de testes unitários
+  - Corrigidos testes de incremento/decremento para validar valores como string
+  - Atualizados testes de eventos para usar o novo evento `change` customizado
+  - Adicionados testes para propriedade `size` (small, medium, large)
+  - Adicionados testes para estado `disabled` (input e botões de ação)
+  - Adicionados testes para variante `simple`
+  - Adicionados testes para integração com formulários via `formAssociated` API
+  - Melhorada validação de valores decimais em operações de incremento/decremento
+
+### 📖 Documentação
+
+- **FieldNumber**: Nova story no Storybook com exemplos de integração Angular
+  - Exemplos de uso com Template-driven Forms (ngModel)
+  - Exemplos de integração com Reactive Forms (FormControl, FormGroup)
+  - Exemplos de controle programático usando ViewChild
+  - Código TypeScript e templates HTML comentados para facilitar implementação
+  - Demonstração visual funcional do componente integrado
+
+### 🧪 Testes
+
+- **FieldNumber**: Cobertura de testes ampliada
+  - Testes para todos os cenários de uso do componente
+  - Validação de eventos customizados emitidos pelo componente
+  - Testes de edge cases e comportamento de formulários
+
 ## [2.7.2] – 2025-10-30
 
 ### ✨ Melhorado

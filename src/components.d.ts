@@ -69,6 +69,7 @@ export namespace Components {
         "required"?: boolean;
         "size"?: Exclude<SizeVariants, 'tiny'>;
         "step"?: number;
+        "value": string;
         "variant"?: FieldNumberVariant;
     }
     interface MntFieldText {
@@ -359,6 +360,7 @@ declare namespace LocalJSX {
         "required"?: boolean;
         "size"?: Exclude<SizeVariants, 'tiny'>;
         "step"?: number;
+        "value"?: string;
         "variant"?: FieldNumberVariant;
     }
     interface MntFieldText {

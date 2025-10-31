@@ -9,11 +9,214 @@
   <script type="module" src="/build/mantra.esm.js"></script>
   <script nomodule src="/build/mantra.js"></script>
   <link rel="stylesheet" href="/build/mantra.css" />
+
+  <style>
+    .container-teste {
+      max-width: 400px;
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      /* border: 1px solid red; */
+    }
+
+    .container-teste > div {
+      width: 50%;
+    }
+  </style>
 </head>
 
 <body>
   <h1>Mantra - Sandbox</h1>
 
+  <mnt-icon icon="starOutline" size="tiny" color="black" background="['#E5E7E8', 'circle']"></mnt-icon>
+  <mnt-icon icon="starOutline" size="small" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
+  <mnt-icon icon="starOutline" size="medium" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
+  <mnt-icon icon="starOutline" size="large" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
+  <mnt-icon icon="starOutline" size="doubleLarge" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
+
+  <mnt-icon icon="starOutline" size="tiny" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
+  <mnt-icon icon="starOutline" size="small" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
+  <mnt-icon icon="starOutline" size="medium" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
+  <mnt-icon icon="starOutline" size="large" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
+  <mnt-icon icon="starOutline" size="doubleLarge" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
+
+  <mnt-icon icon="starOutline" size="tiny" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
+  <mnt-icon icon="starOutline" size="small" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
+  <mnt-icon icon="starOutline" size="medium" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
+  <mnt-icon icon="starOutline" size="large" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
+  <mnt-icon icon="starOutline" size="doubleLarge" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
+
+<!-- 
+  <div>
+    <h2>FieldNumber Component - Teste de Funcionalidade</h2>
+
+    <h3>Variante PLAIN</h3>
+    <div style="margin-bottom: 20px;">
+      <p style="font-size: 12px; color: #4B5053; margin-bottom: 8px;">Size: Large (56px)</p>
+      <mnt-field-number
+        input-name="field-number-plain-large"
+        variant="plain"
+        size="large"
+        value="0"
+      ></mnt-field-number>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <p style="font-size: 12px; color: #4B5053; margin-bottom: 8px;">Size: Medium (42px)</p>
+      <mnt-field-number
+        input-name="field-number-plain-medium"
+        variant="plain"
+        size="medium"
+        value="0"
+      ></mnt-field-number>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <p style="font-size: 12px; color: #4B5053; margin-bottom: 8px;">Size: Small</p>
+      <mnt-field-number
+        input-name="field-number-plain-small"
+        variant="plain"
+        size="small"
+        value="0"
+      ></mnt-field-number>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <p style="font-size: 12px; color: #4B5053; margin-bottom: 8px;">Com limites min/max</p>
+      <mnt-field-number
+        input-name="field-number-plain-minmax"
+        variant="plain"
+        value="5"
+        min="0"
+        max="10"
+        step="1"
+      ></mnt-field-number>
+    </div>
+
+    <h3>Variante DEFAULT</h3>
+    <div style="max-width: 500px; margin-bottom: 20px;">
+      <p style="font-size: 12px; color: #4B5053; margin-bottom: 8px;">Size: Large (56px)</p>
+      <mnt-field-number
+        input-name="field-number-default-large"
+        variant="default"
+        size="large"
+        label="Quantidade"
+        value="1"
+        step="1"
+        required
+      ></mnt-field-number>
+    </div>
+
+    <div style="max-width: 500px; margin-bottom: 20px;">
+      <p style="font-size: 12px; color: #4B5053; margin-bottom: 8px;">Size: Medium (42px)</p>
+      <mnt-field-number
+        input-name="field-number-default-medium"
+        variant="default"
+        size="medium"
+        label="Quantidade"
+        value="1"
+        step="1"
+      ></mnt-field-number>
+    </div>
+
+    <div style="max-width: 500px; margin-bottom: 20px;">
+      <p style="font-size: 12px; color: #4B5053; margin-bottom: 8px;">Size: Small (32px)</p>
+      <mnt-field-number
+        input-name="field-number-default-small"
+        variant="default"
+        size="small"
+        label="Quantidade"
+        value="1"
+      ></mnt-field-number>
+    </div>
+
+    <div style="max-width: 500px; margin-bottom: 20px;">
+      <mnt-field-number
+        input-name="field-number-default-minmax"
+        variant="default"
+        label="Valor com limite"
+        value="50"
+        min="0"
+        max="100"
+        step="5"
+      ></mnt-field-number>
+    </div>
+
+    <h3>Variante SIMPLE</h3>
+    <div style="margin-bottom: 20px;">
+      <p>Size: Large (56px)</p>
+      <mnt-field-number
+        input-name="field-number-simple-large"
+        variant="simple"
+        size="large"
+        value="10"
+      ></mnt-field-number>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <p>Size: Medium (42px)</p>
+      <mnt-field-number
+        input-name="field-number-simple-medium"
+        variant="simple"
+        size="medium"
+        value="20"
+      ></mnt-field-number>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <p>Size: Small (32px)</p>
+      <mnt-field-number
+        input-name="field-number-simple-small"
+        variant="simple"
+        size="small"
+        value="5"
+      ></mnt-field-number>
+    </div>
+
+    <h3>Estados e Propriedades</h3>
+    <div style="max-width: 500px; margin-bottom: 20px;">
+      <mnt-field-number
+        input-name="field-number-disabled"
+        variant="default"
+        label="Campo desabilitado"
+        value="100"
+        disabled
+      ></mnt-field-number>
+    </div>
+
+    <div style="max-width: 500px; margin-bottom: 20px;">
+      <mnt-field-number
+        input-name="field-number-decimal"
+        variant="default"
+        label="Valor decimal"
+        value="1.5"
+        step="0.1"
+        min="0"
+        max="10"
+      ></mnt-field-number>
+    </div>
+
+    <h3>Estados - Error/Success</h3>
+    <div style="max-width: 500px; margin-bottom: 20px;">
+      <p style="font-size: 12px; color: #4B5053; margin-bottom: 8px;">Estado de erro (adicionar classe manualmente no container se necessário)</p>
+      <mnt-field-number
+        input-name="field-number-error"
+        variant="default"
+        label="Campo com erro"
+        value="0"
+      ></mnt-field-number>
+    </div>
+
+    <div style="max-width: 500px; margin-bottom: 20px;">
+      <p style="font-size: 12px; color: #4B5053; margin-bottom: 8px;">Estado de sucesso (adicionar classe manualmente no container se necessário)</p>
+      <mnt-field-number
+        input-name="field-number-success"
+        variant="default"
+        label="Campo válido"
+        value="0"
+      ></mnt-field-number>
+    </div>
+  </div>
   <div>
     <h2>Steps Component - Teste de Funcionalidade</h2>
     <p>Clique nos steps para testar a navegação. Steps futuros ficam desabilitados.</p>
@@ -70,144 +273,144 @@
   <div>
     <h2>Tab item group - Vertical</h2>
     <mnt-tab-item-group id="tab-item-group-vertical" selected-id="tab-1" orientation="vertical"></mnt-tab-item-group>
-  </div>
+  </div> -->
 </body>
 
 <script>
-  const mockTabsIcon = [
-    { tabId: 'tab-1', label: 'Tab 1', icon: 'plus' },
-    { tabId: 'tab-2', label: 'Tab 2', icon: 'minus' },
-    { tabId: 'tab-3', label: 'Tab 3', icon: 'plus' },
-    { tabId: 'tab-4', label: 'Tab 4', icon: 'minus' },
-  ];
+  // const mockTabsIcon = [
+  //   { tabId: 'tab-1', label: 'Tab 1', icon: 'plus' },
+  //   { tabId: 'tab-2', label: 'Tab 2', icon: 'minus' },
+  //   { tabId: 'tab-3', label: 'Tab 3', icon: 'plus' },
+  //   { tabId: 'tab-4', label: 'Tab 4', icon: 'minus' },
+  // ];
 
-  const mockTabs= [
-    { tabId: 'tab-1', label: 'Tab 1' },
-    { tabId: 'tab-2', label: 'Tab 2' },
-    { tabId: 'tab-3', label: 'Tab 3' },
-    { tabId: 'tab-4', label: 'Tab 4' },
-  ];
+  // const mockTabs= [
+  //   { tabId: 'tab-1', label: 'Tab 1' },
+  //   { tabId: 'tab-2', label: 'Tab 2' },
+  //   { tabId: 'tab-3', label: 'Tab 3' },
+  //   { tabId: 'tab-4', label: 'Tab 4' },
+  // ];
 
-  const tabItemGroupHorizontal = document.getElementById('tab-item-group-horizontal');
-  tabItemGroupHorizontal.tabs = mockTabs;
+  // const tabItemGroupHorizontal = document.getElementById('tab-item-group-horizontal');
+  // tabItemGroupHorizontal.tabs = mockTabs;
 
-  const tabItemGroupHorizontalIcon = document.getElementById('tab-item-group-horizontal-icon');
-  tabItemGroupHorizontalIcon.tabs = mockTabsIcon;
+  // const tabItemGroupHorizontalIcon = document.getElementById('tab-item-group-horizontal-icon');
+  // tabItemGroupHorizontalIcon.tabs = mockTabsIcon;
 
-  // const tabItemGroupVertical = document.getElementById('tab-item-group-vertical');
-  // tabItemGroupVertical.tabs = mockTabs;
+  // // const tabItemGroupVertical = document.getElementById('tab-item-group-vertical');
+  // // tabItemGroupVertical.tabs = mockTabs;
 
-  const steps = [
-    {id: 'step-1', label: 'Step 1', icon: 'currencySimple', status: 'done'},
-    {id: 'step-2', label: 'Step 2', icon: 'currencySimple', status: 'active'},
-    {id: 'step-3', label: 'Step 3', icon: 'currencySimple', status: 'disabled'},
-    {id: 'step-4', label: 'Step 4', icon: 'currencySimple', status: 'disabled'},
-    {id: 'step-5', label: 'Step 5', icon: 'currencySimple', status: 'disabled'},
-  ];
+  // const steps = [
+  //   {id: 'step-1', label: 'Step 1', icon: 'currencySimple', status: 'done'},
+  //   {id: 'step-2', label: 'Step 2', icon: 'currencySimple', status: 'active'},
+  //   {id: 'step-3', label: 'Step 3', icon: 'currencySimple', status: 'disabled'},
+  //   {id: 'step-4', label: 'Step 4', icon: 'currencySimple', status: 'disabled'},
+  //   {id: 'step-5', label: 'Step 5', icon: 'currencySimple', status: 'disabled'},
+  // ];
 
-  const horizontalStepsElement = document.getElementById('horizontal-steps');
-  const verticalStepsElement = document.getElementById('vertical-steps');
+  // const horizontalStepsElement = document.getElementById('horizontal-steps');
+  // const verticalStepsElement = document.getElementById('vertical-steps');
 
-  // Configurar steps para ambos os componentes
-  horizontalStepsElement.steps = steps;
-  verticalStepsElement.steps = steps;
+  // // Configurar steps para ambos os componentes
+  // horizontalStepsElement.steps = steps;
+  // verticalStepsElement.steps = steps;
 
-  // Adicionar listeners para eventos de clique
-  horizontalStepsElement.addEventListener('stepClick', (event) => {
-    logEvent('Horizontal Steps', event.detail);
-    // Sincronizar com o componente vertical
-    verticalStepsElement.activeStepId = event.detail.stepId;
-  });
+  // // Adicionar listeners para eventos de clique
+  // horizontalStepsElement.addEventListener('stepClick', (event) => {
+  //   logEvent('Horizontal Steps', event.detail);
+  //   // Sincronizar com o componente vertical
+  //   verticalStepsElement.activeStepId = event.detail.stepId;
+  // });
 
-  verticalStepsElement.addEventListener('stepClick', (event) => {
-    logEvent('Vertical Steps', event.detail);
-    // Sincronizar com o componente horizontal
-    horizontalStepsElement.activeStepId = event.detail.stepId;
-  });
+  // verticalStepsElement.addEventListener('stepClick', (event) => {
+  //   logEvent('Vertical Steps', event.detail);
+  //   // Sincronizar com o componente horizontal
+  //   horizontalStepsElement.activeStepId = event.detail.stepId;
+  // });
 
-  function logEvent(source, detail) {
-    const logContent = document.getElementById('log-content');
-    const timestamp = new Date().toLocaleTimeString();
-    logContent.innerHTML += `<div>[${timestamp}] ${source}: Step "${detail.step.label}" (ID: ${detail.stepId}, Index: ${detail.stepIndex})</div>`;
-    logContent.scrollTop = logContent.scrollHeight;
-  }
+  // function logEvent(source, detail) {
+  //   const logContent = document.getElementById('log-content');
+  //   const timestamp = new Date().toLocaleTimeString();
+  //   logContent.innerHTML += `<div>[${timestamp}] ${source}: Step "${detail.step.label}" (ID: ${detail.stepId}, Index: ${detail.stepIndex})</div>`;
+  //   logContent.scrollTop = logContent.scrollHeight;
+  // }
 
-  function handleNextStep() {
-    const currentIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
-    if (currentIndex < steps.length - 1) {
-      // Atualiza o status do step atual para "done"
-      steps[currentIndex].status = 'done';
+  // function handleNextStep() {
+  //   const currentIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
+  //   if (currentIndex < steps.length - 1) {
+  //     // Atualiza o status do step atual para "done"
+  //     steps[currentIndex].status = 'done';
 
-      // Avança para o próximo step
-      const newActiveId = steps[currentIndex + 1].id;
-      horizontalStepsElement.activeStepId = newActiveId;
-      verticalStepsElement.activeStepId = newActiveId;
+  //     // Avança para o próximo step
+  //     const newActiveId = steps[currentIndex + 1].id;
+  //     horizontalStepsElement.activeStepId = newActiveId;
+  //     verticalStepsElement.activeStepId = newActiveId;
 
-      // Atualiza os steps nos componentes
-      horizontalStepsElement.steps = [...steps];
-      verticalStepsElement.steps = [...steps];
+  //     // Atualiza os steps nos componentes
+  //     horizontalStepsElement.steps = [...steps];
+  //     verticalStepsElement.steps = [...steps];
 
-      logEvent('Button Next', { stepId: newActiveId, stepIndex: currentIndex + 1, step: steps[currentIndex + 1] });
-    }
-  }
+  //     logEvent('Button Next', { stepId: newActiveId, stepIndex: currentIndex + 1, step: steps[currentIndex + 1] });
+  //   }
+  // }
 
-  function handlePreviousStep() {
-    const currentIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
-    if (currentIndex > 0) {
-      const newActiveId = steps[currentIndex - 1].id;
-      horizontalStepsElement.activeStepId = newActiveId;
-      verticalStepsElement.activeStepId = newActiveId;
+  // function handlePreviousStep() {
+  //   const currentIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
+  //   if (currentIndex > 0) {
+  //     const newActiveId = steps[currentIndex - 1].id;
+  //     horizontalStepsElement.activeStepId = newActiveId;
+  //     verticalStepsElement.activeStepId = newActiveId;
 
-      // Atualiza os steps nos componentes
-      horizontalStepsElement.steps = [...steps];
-      verticalStepsElement.steps = [...steps];
+  //     // Atualiza os steps nos componentes
+  //     horizontalStepsElement.steps = [...steps];
+  //     verticalStepsElement.steps = [...steps];
 
-      logEvent('Button Previous', { stepId: newActiveId, stepIndex: currentIndex - 1, step: steps[currentIndex - 1] });
-    }
-  }
+  //     logEvent('Button Previous', { stepId: newActiveId, stepIndex: currentIndex - 1, step: steps[currentIndex - 1] });
+  //   }
+  // }
 
-  function resetSteps() {
-    // Reseta todos os steps para o estado inicial
-    steps.forEach((step, index) => {
-      if (index === 0) {
-        step.status = 'active';
-      } else {
-        step.status = 'disabled';
-      }
-    });
-    
-    horizontalStepsElement.activeStepId = 'step-1';
-    verticalStepsElement.activeStepId = 'step-1';
-    
-    // Atualiza os steps nos componentes
-    horizontalStepsElement.steps = [...steps];
-    verticalStepsElement.steps = [...steps];
-    
-    logEvent('Reset', { stepId: 'step-1', stepIndex: 0, step: steps[0] });
-  }
+  // function resetSteps() {
+  //   // Reseta todos os steps para o estado inicial
+  //   steps.forEach((step, index) => {
+  //     if (index === 0) {
+  //       step.status = 'active';
+  //     } else {
+  //       step.status = 'disabled';
+  //     }
+  //   });
 
-  function showState() {
-    const activeStepIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
-    const stateContent = document.getElementById('state-content');
+  //   horizontalStepsElement.activeStepId = 'step-1';
+  //   verticalStepsElement.activeStepId = 'step-1';
 
-    let stateInfo = `Active Step: ${horizontalStepsElement.activeStepId} (index: ${activeStepIndex})\n`;
-    stateInfo += `Max Accessed Index (Horizontal): ${horizontalStepsElement.getAttribute('data-max-accessed-index') || 'N/A'}\n`;
-    stateInfo += `Max Accessed Index (Vertical): ${verticalStepsElement.getAttribute('data-max-accessed-index') || 'N/A'}\n`;
-    stateInfo += `Is First Step: ${activeStepIndex === 0}\n`;
-    stateInfo += `Is Last Step: ${activeStepIndex === steps.length - 1}\n\n`;
-    stateInfo += 'Step States:\n';
+  //   // Atualiza os steps nos componentes
+  //   horizontalStepsElement.steps = [...steps];
+  //   verticalStepsElement.steps = [...steps];
 
-    steps.forEach((step, index) => {
-      const isActive = index === activeStepIndex;
-      const horizontalMaxIndex = parseInt(horizontalStepsElement.getAttribute('data-max-accessed-index') || '0');
-      const verticalMaxIndex = parseInt(verticalStepsElement.getAttribute('data-max-accessed-index') || '0');
-      const maxIndex = Math.max(horizontalMaxIndex, verticalMaxIndex);
-      const isDisabled = index > maxIndex;
-      const status = isActive ? 'ACTIVE' : isDisabled ? 'DISABLED' : 'CLICKABLE';
-      stateInfo += `  ${step.label}: ${status}\n`;
-    });
+  //   logEvent('Reset', { stepId: 'step-1', stepIndex: 0, step: steps[0] });
+  // }
 
-    stateContent.textContent = stateInfo;
-  }
+  // function showState() {
+  //   const activeStepIndex = steps.findIndex((s) => s.id === horizontalStepsElement.activeStepId);
+  //   const stateContent = document.getElementById('state-content');
+
+  //   let stateInfo = `Active Step: ${horizontalStepsElement.activeStepId} (index: ${activeStepIndex})\n`;
+  //   stateInfo += `Max Accessed Index (Horizontal): ${horizontalStepsElement.getAttribute('data-max-accessed-index') || 'N/A'}\n`;
+  //   stateInfo += `Max Accessed Index (Vertical): ${verticalStepsElement.getAttribute('data-max-accessed-index') || 'N/A'}\n`;
+  //   stateInfo += `Is First Step: ${activeStepIndex === 0}\n`;
+  //   stateInfo += `Is Last Step: ${activeStepIndex === steps.length - 1}\n\n`;
+  //   stateInfo += 'Step States:\n';
+
+  //   steps.forEach((step, index) => {
+  //     const isActive = index === activeStepIndex;
+  //     const horizontalMaxIndex = parseInt(horizontalStepsElement.getAttribute('data-max-accessed-index') || '0');
+  //     const verticalMaxIndex = parseInt(verticalStepsElement.getAttribute('data-max-accessed-index') || '0');
+  //     const maxIndex = Math.max(horizontalMaxIndex, verticalMaxIndex);
+  //     const isDisabled = index > maxIndex;
+  //     const status = isActive ? 'ACTIVE' : isDisabled ? 'DISABLED' : 'CLICKABLE';
+  //     stateInfo += `  ${step.label}: ${status}\n`;
+  //   });
+
+  //   stateContent.textContent = stateInfo;
+  // }
 </script>
 </html>
