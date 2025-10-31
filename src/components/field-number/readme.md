@@ -17,6 +17,7 @@
 | `required`               | `required`   |             | `boolean`                          | `undefined` |
 | `size`                   | `size`       |             | `"large" \| "medium" \| "small"`   | `undefined` |
 | `step`                   | `step`       |             | `number`                           | `undefined` |
+| `value`                  | `value`      |             | `string`                           | `'0'`       |
 | `variant`                | `variant`    |             | `"default" \| "plain" \| "simple"` | `'plain'`   |
 
 

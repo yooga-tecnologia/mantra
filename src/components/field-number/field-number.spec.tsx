@@ -10,7 +10,6 @@ describe('<mnt-field-number>', () => {
 
     const fieldNumber = page.root;
     expect(fieldNumber).not.toBeNull();
-    // Verificar se o componente contém a classe base
     expect(fieldNumber.outerHTML).toContain('mnt-field-number');
 
     const input = page.root.querySelector('input[type="number"]');
@@ -92,20 +91,11 @@ describe('<mnt-field-number>', () => {
       });
 
       const fieldNumber = page.root;
-      // Verificar se o HTML contém a classe do variant
       expect(fieldNumber.outerHTML).toContain(`mnt-field-number-${variant}`);
-
-      // if (variant === 'simple') {
-      //   // Simple variant should render input without action buttons
-      //   const actions = page.root.querySelector('.mnt-field-number-actions');
-      //   expect(actions).toBeNull();
-      // }
       if (variant === 'plain') {
-        // Plain variant should have action buttons (as per current implementation)
         const actions = page.root.querySelector('.mnt-field-number-actions');
         expect(actions).not.toBeNull();
       } else {
-        // Default variant should have action buttons
         const actions = page.root.querySelector('.mnt-field-number-actions');
         expect(actions).not.toBeNull();
       }
@@ -152,7 +142,6 @@ describe('<mnt-field-number>', () => {
       const buttons = actionButtons.querySelectorAll('mnt-button-icon');
       expect(buttons.length).toBe(2);
 
-      // For plain variant, buttons should have 'plain' variant
       const decrementButton = buttons[0];
       expect(decrementButton.getAttribute('variant')).toBe('plain');
 
@@ -168,15 +157,14 @@ describe('<mnt-field-number>', () => {
 
       const component = page.rootInstance;
 
-      // Initial value should be 5
       expect(component.value).toBe('5');
 
-      // Call increment method
       component.incrementValue();
       await page.waitForChanges();
 
-      // Value should be incremented by step (1)
-      expect(component.value).toBe(6);
+      expect(component.value).toBe('6');
+      const inputAfter = page.root.querySelector('input[type="number"]') as HTMLInputElement;
+      expect(inputAfter.value).toBe('6');
     });
 
     it('decrements value when minus button is clicked', async () => {
@@ -186,16 +174,16 @@ describe('<mnt-field-number>', () => {
       });
 
       const component = page.rootInstance;
+      const input = page.root.querySelector('input[type="number"]') as HTMLInputElement;
 
-      // Initial value should be 5
       expect(component.value).toBe('5');
+      expect(input.value).toBe('5');
 
-      // Call decrement method
       component.decrementValue();
       await page.waitForChanges();
 
-      // Value should be decremented by step (1)
-      expect(component.value).toBe(4);
+      expect(component.value).toBe('4');
+      expect(input.value).toBe('4');
     });
 
     it('respects step value for increment/decrement operations', async () => {
@@ -205,37 +193,37 @@ describe('<mnt-field-number>', () => {
       });
 
       const component = page.rootInstance;
+      const input = page.root.querySelector('input[type="number"]') as HTMLInputElement;
 
-      // Test increment with step 0.5
       component.incrementValue();
       await page.waitForChanges();
-      expect(component.value).toBe(0.5);
+      expect(component.value).toBe('0.5');
+      expect(input.value).toBe('0.5');
 
-      // Test decrement with step 0.5
       component.decrementValue();
       await page.waitForChanges();
-      expect(component.value).toBe(0);
+      expect(component.value).toBe('0');
+      expect(input.value).toBe('0');
     });
 
-    it('applies toFixed formatting when incrementing/decrementing', async () => {
+    it('handles decimal values correctly in increment/decrement operations', async () => {
       const page = await newSpecPage({
         components: [FieldNumber],
-        html: `<mnt-field-number input-name="test-field" value="0" step="0.333" to-fixed="2"></mnt-field-number>`,
+        html: `<mnt-field-number input-name="test-field" value="0" step="0.333"></mnt-field-number>`,
       });
 
       const component = page.rootInstance;
-
-      // Test increment with toFixed formatting
-      component.incrementValue();
-      await page.waitForChanges();
-      expect(component.value).toBe(0.33); // Should be rounded to 2 decimal places
+      const input = page.root.querySelector('input[type="number"]') as HTMLInputElement;
 
       component.incrementValue();
       await page.waitForChanges();
-      // Use tolerance for floating-point precision
-      const expectedValue = 0.66;
-      const actualValue = parseFloat(component.value);
-      expect(Math.abs(actualValue - expectedValue)).toBeLessThanOrEqual(0.01);
+      expect(component.value).toBe('0.333');
+      expect(input.value).toBe('0.333');
+
+      component.incrementValue();
+      await page.waitForChanges();
+      expect(component.value).toBe('0.666');
+      expect(input.value).toBe('0.666');
     });
 
     it('disables decrement button when value reaches minimum', async () => {
@@ -247,7 +235,6 @@ describe('<mnt-field-number>', () => {
       const actionButtons = page.root.querySelector('.mnt-field-number-actions');
       const decrementButton = actionButtons.querySelector('mnt-button-icon[icon="minus"]');
 
-      // Button should be disabled when value equals min
       expect(decrementButton.hasAttribute('disabled')).toBeTruthy();
     });
 
@@ -260,7 +247,6 @@ describe('<mnt-field-number>', () => {
       const actionButtons = page.root.querySelector('.mnt-field-number-actions');
       const incrementButton = actionButtons.querySelector('mnt-button-icon[icon="plus"]');
 
-      // Button should be disabled when value equals max
       expect(incrementButton.hasAttribute('disabled')).toBeTruthy();
     });
 
@@ -274,14 +260,13 @@ describe('<mnt-field-number>', () => {
       const decrementButton = actionButtons.querySelector('mnt-button-icon[icon="minus"]');
       const incrementButton = actionButtons.querySelector('mnt-button-icon[icon="plus"]');
 
-      // Both buttons should be enabled when value is within range
       expect(decrementButton.hasAttribute('disabled')).toBeFalsy();
       expect(incrementButton.hasAttribute('disabled')).toBeFalsy();
     });
   });
 
   describe('Events', () => {
-    it('emits valueChange event when input value changes', async () => {
+    it('emits change event when input value changes', async () => {
       const page = await newSpecPage({
         components: [FieldNumber],
         html: `<mnt-field-number input-name="test-field"></mnt-field-number>`,
@@ -289,53 +274,166 @@ describe('<mnt-field-number>', () => {
 
       let emittedValue: string;
 
-      page.root.addEventListener('valueChange', (event: CustomEvent) => {
-        emittedValue = event.detail;
+      page.root.addEventListener('change', (event: CustomEvent) => {
+        emittedValue = event.detail.value;
       });
 
       const input = page.root.querySelector('input[type="number"]') as HTMLInputElement;
       input.value = '10';
-      input.dispatchEvent(new Event('input'));
+      input.dispatchEvent(new Event('input', { bubbles: true }));
 
       await page.waitForChanges();
       expect(emittedValue).toBe('10');
     });
 
-    it('emits rawValueChange event when input value changes', async () => {
+    it('emits change event when increment button is clicked', async () => {
       const page = await newSpecPage({
         components: [FieldNumber],
-        html: `<mnt-field-number input-name="test-field"></mnt-field-number>`,
+        html: `<mnt-field-number input-name="test-field" value="5" step="1"></mnt-field-number>`,
       });
 
-      let emittedRawValue: string;
+      let emittedValue: string;
 
-      page.root.addEventListener('rawValueChange', (event: CustomEvent) => {
-        emittedRawValue = event.detail;
-      });
-
-      const input = page.root.querySelector('input[type="number"]') as HTMLInputElement;
-      input.value = '10.5';
-      input.dispatchEvent(new Event('input'));
-
-      await page.waitForChanges();
-      expect(emittedRawValue).toBe('10.5');
-    });
-  });
-
-  describe('Public Methods', () => {
-    it('provides access to input element through getInput method', async () => {
-      const page = await newSpecPage({
-        components: [FieldNumber],
-        html: `<mnt-field-number input-name="test-field"></mnt-field-number>`,
+      page.root.addEventListener('change', (event: CustomEvent) => {
+        emittedValue = event.detail.value;
       });
 
       const component = page.rootInstance;
-      const inputElement = component.getInput();
+      component.incrementValue();
+      await page.waitForChanges();
 
-      expect(inputElement).not.toBeNull();
-      expect(inputElement.tagName).toBe('INPUT');
-      expect(inputElement.type).toBe('number');
-      expect(inputElement.id).toBe('test-field');
+      expect(emittedValue).toBe('6');
+    });
+
+    it('emits change event when decrement button is clicked', async () => {
+      const page = await newSpecPage({
+        components: [FieldNumber],
+        html: `<mnt-field-number input-name="test-field" value="5" step="1"></mnt-field-number>`,
+      });
+
+      let emittedValue: string;
+
+      page.root.addEventListener('change', (event: CustomEvent) => {
+        emittedValue = event.detail.value;
+      });
+
+      const component = page.rootInstance;
+      component.decrementValue();
+      await page.waitForChanges();
+
+      expect(emittedValue).toBe('4');
+    });
+  });
+
+  describe('Size Property', () => {
+    it('applies size classes correctly', async () => {
+      const sizes = ['small', 'medium', 'large'] as const;
+
+      for (const size of sizes) {
+        const page = await newSpecPage({
+          components: [FieldNumber],
+          html: `<mnt-field-number input-name="test-field" variant="default" size="${size}"></mnt-field-number>`,
+        });
+
+        const container = page.root.querySelector('.mnt-field-number-input-container');
+        expect(container).not.toBeNull();
+        expect(container.classList.contains(`mnt-field-number-size-${size}`)).toBeTruthy();
+      }
+    });
+
+    it('applies size attribute to input', async () => {
+      const page = await newSpecPage({
+        components: [FieldNumber],
+        html: `<mnt-field-number input-name="test-field" size="large"></mnt-field-number>`,
+      });
+
+      const input = page.root.querySelector('input[type="number"]');
+      expect(input.getAttribute('data-size')).toBe('large');
+    });
+  });
+
+  describe('Disabled State', () => {
+    it('disables input when disabled prop is true', async () => {
+      const page = await newSpecPage({
+        components: [FieldNumber],
+        html: `<mnt-field-number input-name="test-field" disabled></mnt-field-number>`,
+      });
+
+      const input = page.root.querySelector('input[type="number"]') as HTMLInputElement;
+      expect(input.hasAttribute('disabled')).toBeTruthy();
+      expect(input.disabled).toBeTruthy();
+    });
+
+    it('disables increment and decrement buttons when disabled prop is true', async () => {
+      const page = await newSpecPage({
+        components: [FieldNumber],
+        html: `<mnt-field-number input-name="test-field" disabled value="5" min="0" max="10"></mnt-field-number>`,
+      });
+
+      const actionButtons = page.root.querySelector('.mnt-field-number-actions');
+      const buttons = actionButtons.querySelectorAll('mnt-button-icon');
+
+      buttons.forEach((button) => {
+        expect(button.hasAttribute('disabled')).toBeTruthy();
+      });
+    });
+
+    it('prevents value change when disabled', async () => {
+      const page = await newSpecPage({
+        components: [FieldNumber],
+        html: `<mnt-field-number input-name="test-field" disabled value="5" step="1"></mnt-field-number>`,
+      });
+
+      const component = page.rootInstance;
+      const initialValue = component.value;
+
+      component.incrementValue();
+      await page.waitForChanges();
+
+      expect(component.value).toBe(initialValue);
+    });
+  });
+
+  describe('Simple Variant', () => {
+    it('renders simple variant correctly', async () => {
+      const page = await newSpecPage({
+        components: [FieldNumber],
+        html: `<mnt-field-number input-name="test-field" variant="simple"></mnt-field-number>`,
+      });
+
+      const fieldNumber = page.root;
+      expect(fieldNumber.outerHTML).toContain('mnt-field-number-variant-simple');
+
+      const container = page.root.querySelector('.mnt-field-number-input-container');
+      expect(container).not.toBeNull();
+    });
+  });
+
+  describe('Form Association', () => {
+    it('sets form value on componentWillLoad', async () => {
+      const page = await newSpecPage({
+        components: [FieldNumber],
+        html: `<form id="test-form"><mnt-field-number input-name="test-field" value="42"></mnt-field-number></form>`,
+      });
+
+      const component = page.rootInstance;
+      expect(component.internals).toBeDefined();
+    });
+
+    it('updates form value when value changes', async () => {
+      const page = await newSpecPage({
+        components: [FieldNumber],
+        html: `<mnt-field-number input-name="test-field" value="10"></mnt-field-number>`,
+      });
+
+      const component = page.rootInstance;
+      const input = page.root.querySelector('input[type="number"]') as HTMLInputElement;
+
+      input.value = '20';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await page.waitForChanges();
+
+      expect(component.value).toBe('20');
     });
   });
 
@@ -350,21 +448,22 @@ describe('<mnt-field-number>', () => {
       expect(input.getAttribute('value')).toBe('10.5');
     });
 
-    it('handles numeric values correctly', async () => {
+    it('handles numeric values correctly when set programmatically', async () => {
       const page = await newSpecPage({
         components: [FieldNumber],
         html: `<mnt-field-number input-name="test-field"></mnt-field-number>`,
       });
 
       const component = page.rootInstance;
-      component.value = 42;
+      component.value = '42';
       await page.waitForChanges();
 
-      const input = page.root.querySelector('input[type="number"]');
-      expect(input.getAttribute('value')).toBe('42');
+      const input = page.root.querySelector('input[type="number"]') as HTMLInputElement;
+      expect(input.value).toBe('42');
+      expect(component.value).toBe('42');
     });
 
-    it('handles undefined toFixed gracefully', async () => {
+    it('handles decimal step values correctly', async () => {
       const page = await newSpecPage({
         components: [FieldNumber],
         html: `<mnt-field-number input-name="test-field" value="0" step="0.333"></mnt-field-number>`,
@@ -372,10 +471,9 @@ describe('<mnt-field-number>', () => {
 
       const component = page.rootInstance;
 
-      // When toFixed is undefined, value should not be formatted
       component.incrementValue();
       await page.waitForChanges();
-      expect(component.value).toBe(0.333);
+      expect(component.value).toBe('0.333');
     });
 
     it('handles zero step value', async () => {
@@ -386,14 +484,13 @@ describe('<mnt-field-number>', () => {
 
       const component = page.rootInstance;
 
-      // With step 0, value should remain unchanged
       component.incrementValue();
       await page.waitForChanges();
-      expect(component.value).toBe(5);
+      expect(component.value).toBe('5');
 
       component.decrementValue();
       await page.waitForChanges();
-      expect(component.value).toBe(5);
+      expect(component.value).toBe('5');
     });
   });
 
@@ -405,11 +502,9 @@ describe('<mnt-field-number>', () => {
       });
 
       const container = page.root;
-      // Verificar se o HTML contém as classes corretas
       expect(container.outerHTML).toContain('mnt-field-number');
       expect(container.outerHTML).toContain('mnt-field-number-default');
 
-      // Verificar se o input existe
       const input = page.root.querySelector('input[type="number"]');
       expect(input).not.toBeNull();
     });
@@ -420,19 +515,15 @@ describe('<mnt-field-number>', () => {
         html: `<mnt-field-number input-name="test-field" variant="default" label="Test"></mnt-field-number>`,
       });
 
-      // Should have label
       const label = page.root.querySelector('.mnt-field-number-label');
       expect(label).not.toBeNull();
 
-      // Should have input container
       const inputContainer = page.root.querySelector('.mnt-field-number-input-container');
       expect(inputContainer).not.toBeNull();
 
-      // Should have input inside container
       const input = inputContainer.querySelector('input[type="number"]');
       expect(input).not.toBeNull();
 
-      // Should have action buttons inside container
       const actions = inputContainer.querySelector('.mnt-field-number-actions');
       expect(actions).not.toBeNull();
     });

@@ -366,3 +366,158 @@ const StatesTemplate = (): HTMLString => `
 `;
 
 export const States: StoryFn = StatesTemplate;
+
+/**
+ * Exemplo de uso programático em aplicações Angular.
+ * Demonstra como integrar o componente com Angular Forms (Reactive Forms e Template-driven).
+ */
+const AngularIntegrationTemplate = (): HTMLString => `
+  <div style="display: flex; flex-direction: column; gap: 2rem; max-width: 600px;">
+    <div>
+      <h3 style="margin-bottom: 1rem;">Angular Integration Examples</h3>
+      
+      <div style="margin-bottom: 2rem;">
+        <h4 style="margin-bottom: 0.5rem; font-size: 14px;">1. Template-driven Forms</h4>
+        <p style="font-size: 12px; color: #666; margin-bottom: 1rem;">
+          Use o componente diretamente no template com ngModel ou FormsModule.
+        </p>
+        <div style="padding: 1rem; background: #f5f5f5; border-radius: 8px; font-family: monospace; font-size: 12px;">
+<pre style="margin: 0;">&lt;!-- component.html --&gt;
+&lt;form #myForm="ngForm"&gt;
+  &lt;mnt-field-number
+    input-name="quantity"
+    label="Quantidade"
+    [(ngModel)]="quantity"
+    [min]="0"
+    [max]="100"
+    [step]="1"
+    (change)="onQuantityChange($event)"
+    required&gt;
+  &lt;/mnt-field-number&gt;
+&lt;/form&gt;</pre>
+        </div>
+        <div style="padding: 1rem; background: #f5f5f5; border-radius: 8px; font-family: monospace; font-size: 12px; margin-top: 0.5rem;">
+<pre style="margin: 0;">// component.ts
+export class MyComponent {
+  quantity: string = '0';
+  
+  onQuantityChange(event: CustomEvent) {
+    this.quantity = event.detail.value;
+    console.log('Quantity changed:', this.quantity);
+  }
+}</pre>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h4 style="margin-bottom: 0.5rem; font-size: 14px;">2. Reactive Forms</h4>
+        <p style="font-size: 12px; color: #666; margin-bottom: 1rem;">
+          Integre com FormControl e FormGroup do Angular Reactive Forms.
+        </p>
+        <div style="padding: 1rem; background: #f5f5f5; border-radius: 8px; font-family: monospace; font-size: 12px;">
+<pre style="margin: 0;">// component.ts
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+export class MyComponent {
+  myForm: FormGroup;
+  
+  constructor(private fb: FormBuilder) {
+    this.myForm = this.fb.group({
+      quantity: ['0', [Validators.required, Validators.min(0), Validators.max(100)]]
+    });
+    
+    // Listen to changes
+    this.myForm.get('quantity')?.valueChanges.subscribe(value => {
+      console.log('Form value changed:', value);
+    });
+  }
+}</pre>
+        </div>
+        <div style="padding: 1rem; background: #f5f5f5; border-radius: 8px; font-family: monospace; font-size: 12px; margin-top: 0.5rem;">
+<pre style="margin: 0;">&lt;!-- component.html --&gt;
+&lt;form [formGroup]="myForm"&gt;
+  &lt;mnt-field-number
+    input-name="quantity"
+    label="Quantidade"
+    [value]="myForm.get('quantity')?.value"
+    [min]="0"
+    [max]="100"
+    [step]="1"
+    (change)="onFieldChange($event, 'quantity')"
+    [required]="myForm.get('quantity')?.hasError('required')"&gt;
+  &lt;/mnt-field-number&gt;
+&lt;/form&gt;</pre>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h4 style="margin-bottom: 0.5rem; font-size: 14px;">3. Programmatic Value Control</h4>
+        <p style="font-size: 12px; color: #666; margin-bottom: 1rem;">
+          Controle o valor do componente programaticamente usando ViewChild.
+        </p>
+        <div style="padding: 1rem; background: #f5f5f5; border-radius: 8px; font-family: monospace; font-size: 12px;">
+<pre style="margin: 0;">// component.ts
+import { Component, ViewChild, ElementRef } from '@angular/core';
+
+export class MyComponent {
+  @ViewChild('fieldNumber', { static: false }) fieldNumberRef!: ElementRef&lt;HTMLMntFieldNumberElement&gt;;
+  
+  resetValue() {
+    if (this.fieldNumberRef?.nativeElement) {
+      this.fieldNumberRef.nativeElement.value = '0';
+    }
+  }
+  
+  setValue(value: string) {
+    if (this.fieldNumberRef?.nativeElement) {
+      this.fieldNumberRef.nativeElement.value = value;
+    }
+  }
+}</pre>
+        </div>
+        <div style="padding: 1rem; background: #f5f5f5; border-radius: 8px; font-family: monospace; font-size: 12px; margin-top: 0.5rem;">
+<pre style="margin: 0;">&lt;!-- component.html --&gt;
+&lt;mnt-field-number
+  #fieldNumber
+  input-name="quantity"
+  label="Quantidade"
+  [value]="quantity"
+  (change)="onChange($event)"&gt;
+&lt;/mnt-field-number&gt;
+
+&lt;button (click)="resetValue()"&gt;Reset&lt;/button&gt;
+&lt;button (click)="setValue('10')"&gt;Set to 10&lt;/button&gt;</pre>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="margin-bottom: 0.5rem; font-size: 14px;">4. Working Example</h4>
+        <p style="font-size: 12px; color: #666; margin-bottom: 1rem;">
+          Exemplo funcional demonstrando o componente em ação:
+        </p>
+        <mnt-field-number
+          input-name="angular-example"
+          label="Quantidade"
+          value="5"
+          min="0"
+          max="100"
+          step="1"
+          variant="default"
+          size="medium">
+        </mnt-field-number>
+      </div>
+    </div>
+  </div>
+`;
+
+export const AngularIntegration: StoryFn = AngularIntegrationTemplate;
+AngularIntegration.parameters = {
+  id: 'angular-integration',
+  docs: {
+    description: {
+      story: 'Exemplos práticos de como integrar o componente FieldNumber em aplicações Angular, incluindo Template-driven Forms, Reactive Forms e controle programático.',
+    },
+  },
+  controls: { disable: true },
+};

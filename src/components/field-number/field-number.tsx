@@ -1,4 +1,4 @@
-import { Component, h, Prop, State, AttachInternals, Host } from '@stencil/core';
+import { Component, h, Prop, AttachInternals, Host, Watch, Element } from '@stencil/core';
 import { setComponentClass } from 'src/utils/utils';
 import { SizeVariants } from '@theme/theme.types';
 
@@ -21,14 +21,34 @@ export class FieldNumber {
   @Prop() max?: number;
   @Prop() step?: number;
 
-  @State() value: string = '0';
+  @Prop({ mutable: true, reflect: true }) value: string = '0';
+
+  @Element() el!: HTMLElement;
 
   @AttachInternals() internals: ElementInternals;
+
+  @Watch('value')
+  valueWatcher(newValue: string) {
+    if (this.value === newValue && this.inputEl && this.inputEl.value === newValue) {
+      return;
+    }
+
+    if (this.value !== newValue) {
+      this.value = newValue;
+    }
+
+    if (this.inputEl && this.inputEl.value !== newValue) {
+      this.inputEl.value = newValue;
+      this.internals.setFormValue(newValue);
+    }
+  }
 
   inputEl?: HTMLInputElement;
   containerEl?: HTMLDivElement;
   componentPrefix: string = setComponentClass('field-number');
   private readonly containerId = `${this.componentPrefix}-input-container-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
+  constructor() {}
 
   private getContainerEl(): HTMLDivElement | null {
     if (this.containerEl) {
@@ -55,10 +75,26 @@ export class FieldNumber {
     this.internals.setFormValue(this.value);
   }
 
+  componentDidLoad(): void {
+    if (this.inputEl && this.inputEl.value !== this.value) {
+      this.inputEl.value = this.value;
+      this.internals.setFormValue(this.value);
+    }
+  }
+
   private handleInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    this.value = input.value;
+    const newValue = input.value;
+    this.value = newValue;
     this.internals.setFormValue(this.value);
+
+    // Disparar evento customizado no elemento do componente para Angular capturar
+    const changeEvent = new CustomEvent('change', {
+      bubbles: true,
+      cancelable: true,
+      detail: { value: newValue },
+    });
+    this.el.dispatchEvent(changeEvent);
   }
 
   private decrementValue(): void {
@@ -67,19 +103,52 @@ export class FieldNumber {
     const minValue = this.min || Number.NEGATIVE_INFINITY;
 
     if (newValue >= minValue) {
-      this.value = newValue.toString();
+      const newValueStr = newValue.toString();
+
+      if (this.inputEl) {
+        this.inputEl.value = newValueStr;
+      }
+
+      this.value = newValueStr;
       this.internals.setFormValue(this.value);
+
+      if (this.inputEl) {
+        this.inputEl.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));
+        const changeEvent = new CustomEvent('change', {
+          bubbles: true,
+          cancelable: true,
+          detail: { value: newValueStr },
+        });
+        this.el.dispatchEvent(changeEvent);
+      }
     }
   }
 
   private incrementValue(): void {
     const stepValue = this.step || 1;
-    const newValue = Number(this.value) + stepValue;
-    const maxValue = this.max || Number.POSITIVE_INFINITY;
+    const currentValue = Number(this.value) || 0;
+    const newValue = currentValue + stepValue;
+    const maxValue = this.max !== undefined ? Number(this.max) : Number.POSITIVE_INFINITY;
 
     if (newValue <= maxValue) {
-      this.value = newValue.toString();
+      const newValueStr = newValue.toString();
+
+      if (this.inputEl) {
+        this.inputEl.value = newValueStr;
+      }
+
+      this.value = newValueStr;
       this.internals.setFormValue(this.value);
+
+      if (this.inputEl) {
+        this.inputEl.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));
+        const changeEvent = new CustomEvent('change', {
+          bubbles: true,
+          cancelable: true,
+          detail: { value: newValueStr },
+        });
+        this.el.dispatchEvent(changeEvent);
+      }
     }
   }
 
@@ -122,6 +191,8 @@ export class FieldNumber {
   }
 
   renderInput() {
+    const inputId = this.inputName || `${this.componentPrefix}-input-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
     return (
       <input
         onInput={(event) => this.handleInputChange(event)}
@@ -129,7 +200,8 @@ export class FieldNumber {
         onBlur={() => this.removeFocusClass()}
         ref={(el) => (this.inputEl = el)}
         type="number"
-        id={this.inputName}
+        id={inputId}
+        name={inputId}
         required={this.required}
         min={this.min}
         max={this.max}
