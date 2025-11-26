@@ -206,6 +206,11 @@ export class Icon {
       );
     }
 
-    return this.getIconBase();
+    // Sempre renderizar com wrapper para aplicar classes de direção
+    return (
+      <div class={this.getIconClass()}>
+        {this.getIconBase()}
+      </div>
+    );
   }
 }
