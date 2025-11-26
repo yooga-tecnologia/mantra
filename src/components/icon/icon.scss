@@ -1,5 +1,10 @@
 @forward "../../shared/theme/core/animations";
 
+@mixin rotate($angle) {
+  transform: rotate($angle);
+  -webkit-transform: rotate($angle);
+}
+
 mnt-icon,
 mnt-icon-large {
   display: inline-block;
@@ -9,6 +14,21 @@ mnt-icon-large {
 }
 
 mnt-icon {
+  .mnt-icon-d {
+    &-up svg {
+      @include rotate(0);
+    }
+    &-down svg {
+      @include rotate(180deg);
+    }
+    &-left svg {
+      @include rotate(-90deg);
+    }
+    &-right svg {
+      @include rotate(90deg);
+    }
+  }
+
   .mnt-icon-with-background {
     position: relative;
     display: flex;

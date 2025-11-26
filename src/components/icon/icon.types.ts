@@ -35,6 +35,7 @@ export interface IconBaseProps {
 export interface IconProps extends IconBaseProps {
   icon: ExtendedIconName;
   background?: [string, IconBackgroundShape] | string | undefined;
+  bgShape?: IconBackgroundShape;
   animation?: IconAnimation;
 }
 

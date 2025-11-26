@@ -12,11 +12,16 @@ const meta: Meta<IconProps> = {
   component: 'mnt-icon',
   argTypes: {
     icon: { control: 'select', options: ICON_OPTIONS.sort() },
-    size: { control: 'select', options: Object.keys(iconSizes) },
-    color: { control: 'color' },
+    size: { control: 'select', table: { defaultValue: { summary: 'medium' } }, options: Object.keys(iconSizes) },
+    color: { control: 'color', table: { defaultValue: { summary: 'currentColor' } } },
     background: {
       control: 'color',
-      description: 'Cor de fundo. Para formas customizadas (circle, rounded, square), veja a story Background Examples abaixo.',
+      description: 'Cor de fundo. Use a prop bg-shape para definir a forma (circle, rounded, square).',
+    },
+    bgShape: {
+      control: 'select',
+      options: ['circle', 'rounded', 'square'],
+      description: 'Forma do background quando a prop background estiver definida',
     },
     // animation: { control: 'select', options: ICON_ANIMATION_ARRAY },
   },
@@ -56,6 +61,8 @@ const DefaultTemplate = (args: IconProps) => {
       : `background='["${args.background[0]}", "${args.background[1]}"]'`
     : '';
 
+  const bgShapeAttr = args.bgShape ? `bg-shape="${args.bgShape}"` : '';
+
   // const animationAttr = args.animation ? `animation="${args.animation}"` : '';
 
   return `
@@ -64,7 +71,8 @@ const DefaultTemplate = (args: IconProps) => {
   size="${args.size}"
   color="${args.color}"
   ${backgroundAttr}
-  ></mnt-icon>
+  ${bgShapeAttr}
+></mnt-icon>
 `;
 };
 
@@ -101,10 +109,10 @@ Default.parameters = {
  */
 const BackgroundExamplesTemplate = (): HTMLString => {
   const shapes = [
-    { bg: '#E5E7E8', fg: '#4B5053', label: 'Default (circle)', background: '#E5E7E8' },
-    { bg: '#E1F1FD', fg: '#0A639A', label: 'Circle explícito', background: `['#E1F1FD', 'circle']` },
-    { bg: '#FFE1E1', fg: '#C01642', label: 'Rounded', background: `['#FFE1E1', 'rounded']` },
-    { bg: '#DCFCEA', fg: '#16653C', label: 'Square', background: `['#DCFCEA', 'square']` },
+    { bg: '#E5E7E8', fg: '#4B5053', label: 'Default (circle)', bgColor: '#E5E7E8', bgShape: undefined },
+    { bg: '#E1F1FD', fg: '#0A639A', label: 'Circle explícito', bgColor: '#E1F1FD', bgShape: 'circle' },
+    { bg: '#FFE1E1', fg: '#C01642', label: 'Rounded', bgColor: '#FFE1E1', bgShape: 'rounded' },
+    { bg: '#DCFCEA', fg: '#16653C', label: 'Square', bgColor: '#DCFCEA', bgShape: 'square' },
   ];
 
   const sizes = ['tiny', 'small', 'medium', 'large', 'doubleLarge'] as const;
@@ -117,7 +125,7 @@ const BackgroundExamplesTemplate = (): HTMLString => {
       .map(
         (shape) => `
       <div style="display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%;">
-        <mnt-icon icon="starOutline" size="${size}" color="${shape.fg}" background="${shape.background}"></mnt-icon>
+        <mnt-icon icon="starOutline" size="${size}" color="${shape.fg}" background="${shape.bgColor}" ${shape.bgShape ? `bg-shape="${shape.bgShape}"` : ''}></mnt-icon>
       </div>
         `,
       )
@@ -153,9 +161,11 @@ BackgroundExamples.parameters = {
     description: {
       story:
         'Exemplos de uso do background com diferentes shapes (circle, rounded, square) e tamanhos.\n\n' +
-        '**Uso programático:**\n' +
+        '**Uso recomendado (nova forma):**\n' +
         '- Para cor simples: `background="#color"` (shape padrão: circle)\n' +
-        '- Para shape customizado: `background={["#color", "circle|rounded|square"]}`',
+        '- Para shape customizado: `background="#color" bg-shape="circle|rounded|square"`\n\n' +
+        '**Uso alternativo (retrocompatibilidade):**\n' +
+        '- Formato array: `background={["#color", "circle|rounded|square"]}`',
     },
   },
 };
@@ -198,7 +208,7 @@ const SizingVariantsTemplate = (): HTMLString => {
         .map(
           (size) => `
       <div class="sb-box">
-        <mnt-icon icon="starOutline" size="${size}" color="#0A639A" background='["#E1F1FD", "circle"]'></mnt-icon>
+        <mnt-icon icon="starOutline" size="${size}" color="#0A639A" background="#E1F1FD" bg-shape="circle"></mnt-icon>
         <div style="margin-top: 4px; text-align: center;">
           <p class="label-medium-tiny">${size}</p>
           <p class="label-regular-tiny">(${iconSizes[size]}px)</p>
@@ -216,7 +226,7 @@ const SizingVariantsTemplate = (): HTMLString => {
           <mnt-icon icon="caret" size="${customSize}" color="#242628"></mnt-icon>
         </div>
         <div class="sb-box">
-          <mnt-icon icon="caret" size="${customSize}" color="#242628" background='["#E1F1FD", "circle"]'></mnt-icon>
+          <mnt-icon icon="caret" size="${customSize}" color="#242628" background="#E1F1FD" bg-shape="circle"></mnt-icon>
         </div>
     </div>
   </div>
@@ -230,9 +240,11 @@ SizingVariants.parameters = {
     description: {
       story:
         'Demonstra todos os tamanhos pré-definidos (tiny, small, medium, large, doubleLarge) e tamanho customizado. O background adiciona automaticamente 8px ao tamanho do ícone para manter proporção visual.\n\n' +
-        '**Uso programático:**\n' +
+        '**Uso recomendado (nova forma):**\n' +
         '- Para cor simples: `background="#color"` (shape padrão: circle)\n' +
-        '- Para shape customizado: `background={["#color", "circle|rounded|square"]}`',
+        '- Para shape customizado: `background="#color" bg-shape="circle|rounded|square"`\n\n' +
+        '**Uso alternativo (retrocompatibilidade):**\n' +
+        '- Formato array: `background={["#color", "circle|rounded|square"]}`',
     },
   },
 };
@@ -265,6 +277,14 @@ const IconsByCategory = [
   {
     label: 'Maps and Transportation',
     icons: ICONS.MAPS_AND_TRANSPORTATION_ICONS,
+  },
+  {
+    label: 'Emotions',
+    icons: ICONS.USER_EMOTION_ICONS,
+  },
+  {
+    label: 'Numbers',
+    icons: ICONS.NUMBER_ICONS,
   },
 ];
 

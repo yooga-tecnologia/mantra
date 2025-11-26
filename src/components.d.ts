@@ -95,6 +95,7 @@ export namespace Components {
     interface MntIcon {
         "animation"?: IconProps['animation'];
         "background"?: IconProps['background'];
+        "bgShape"?: IconProps['bgShape'];
         "color": IconProps['color'];
         "icon": IconProps['icon'];
         "size": IconProps['size'];
@@ -391,6 +392,7 @@ declare namespace LocalJSX {
     interface MntIcon {
         "animation"?: IconProps['animation'];
         "background"?: IconProps['background'];
+        "bgShape"?: IconProps['bgShape'];
         "color"?: IconProps['color'];
         "icon": IconProps['icon'];
         "size"?: IconProps['size'];
