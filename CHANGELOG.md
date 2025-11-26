@@ -4,6 +4,17 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.8.2] – 2025-11-26
+
+### 🐛 Correções
+
+- **Icon**:
+  - Ícones da categoria "BRANDS_AND_MEDIA_ICONS" não eram exibidos corretamente;
+
+- **Steps** (Horizontal):
+  - Ajuste de tamanho dos ícones;
+  - Ajuste de visualização de itens desabilitados;
+
 ## [2.8.1] – 2025-11-26
 
 ### 🐛 Correções
