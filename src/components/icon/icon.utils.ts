@@ -8,12 +8,14 @@ import {
   MAPS_AND_TRANSPORTATION_ICONS,
   NUMBER_ICONS,
   USER_EMOTION_ICONS,
+  BRANDS_AND_MEDIA_ICONS,
 } from './icon-base';
 
 import { ICON_LARGE } from './icon-large-base';
 
 export const ICON_CATEGORIES = [
   UI_ACTIONS_ICONS,
+  BRANDS_AND_MEDIA_ICONS,
   COMMUNICATION_AND_SOCIAL_ICONS,
   COMMON_ACTIONS_ICONS,
   USER_EMOTION_ICONS,
@@ -34,6 +36,7 @@ export const ICON_OPTIONS = [
   ...Object.keys(PRIVACY_AND_SECURITY_ICONS),
   ...Object.keys(HARDWARE_ICONS),
   ...Object.keys(MAPS_AND_TRANSPORTATION_ICONS),
+  ...Object.keys(BRANDS_AND_MEDIA_ICONS),
 ];
 export const ICON_LARGE_OPTIONS = [...Object.keys(ICON_LARGE)];
 
