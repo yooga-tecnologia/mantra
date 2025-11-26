@@ -95,7 +95,7 @@ export class Steps {
       return (
         <mnt-icon
           icon="check"
-          size="medium"
+          size="small"
           class={`${COMPONENT_PREFIX}-icon`}
         />
       );
@@ -109,7 +109,7 @@ export class Steps {
       return (
         <mnt-icon
           icon={step.icon}
-          size="medium"
+          size="small"
           class={`${COMPONENT_PREFIX}-icon`}
         />
       );
@@ -125,7 +125,7 @@ export class Steps {
     const isDisabled = index > this.maxAccessedIndex; // Desabilita steps futuros (índice maior que o máximo acessado)
 
     let stepClass = `${COMPONENT_PREFIX}-item`;
-    
+
     if (isActive) {
       stepClass += ` ${COMPONENT_PREFIX}-item-active`;
     } else if (isDisabled) {

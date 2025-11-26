@@ -10,11 +10,6 @@ $component-prefix: theme.get-prefix('steps');
 
 .#{$component-prefix}-container {
   display: flex;
-  padding: 32px;
-  border-radius: 6px;
-  box-shadow:
-    0px 0px 1px 0px rgba(0, 0, 0, 0.03),
-    0px 2px 4px 0px rgba(0, 0, 0, 0.03);
   box-sizing: border-box;
 }
 
@@ -80,13 +75,13 @@ button {
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
-    width: fit-content;
+    width: max-content;
     background-color: transparent;
     border: 2px solid transparent;
     color: #4B5053;
   }
 
-  &:hover {
+  &:not(.#{$component-prefix}-item-disabled):hover {
     .#{$component-prefix}-label,
     .#{$component-prefix}-index {
       transition: all ease-in-out 0.2s;
@@ -132,6 +127,16 @@ button {
   }
 
   &-disabled {
+    &-index,
+    &-label {
+      &:focus,
+      &:hover {
+        pointer-events: none;
+        cursor: not-allowed;
+        color: #CED2D3 !important;
+      }
+    }
+
     .#{$component-prefix}-index {
       background-color: #F5F6F6;
       border-color: #F5F6F6;
