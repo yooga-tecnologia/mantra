@@ -165,4 +165,134 @@ describe('<mnt-icon>', () => {
     expect(span).not.toBeNull();
     expect(span.style.width).toBe(''); // No width/height set for medium size
   });
+
+  describe('bgShape property', () => {
+    it('should apply bgShape correctly when provided with background', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search" size="large" background="#E1F1FD" bg-shape="rounded"></mnt-icon>`,
+      });
+
+      await page.waitForChanges();
+
+      const span = page.root.querySelector('span');
+      expect(span).not.toBeNull();
+      expect(span.classList.contains('mnt-border-rounded')).toBeTruthy();
+      expect(span.style.backgroundColor).toBe('#E1F1FD');
+    });
+
+    it('should apply square shape when bgShape is square', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search" size="large" background="#DCFCEA" bg-shape="square"></mnt-icon>`,
+      });
+
+      await page.waitForChanges();
+
+      const span = page.root.querySelector('span');
+      expect(span).not.toBeNull();
+      expect(span.classList.contains('mnt-border-square')).toBeTruthy();
+      expect(span.style.backgroundColor).toBe('#DCFCEA');
+    });
+
+    it('should apply circle shape when bgShape is circle', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search" size="large" background="#E5E7E8" bg-shape="circle"></mnt-icon>`,
+      });
+
+      await page.waitForChanges();
+
+      const span = page.root.querySelector('span');
+      expect(span).not.toBeNull();
+      expect(span.classList.contains('mnt-border-circle')).toBeTruthy();
+      expect(span.style.backgroundColor).toBe('#E5E7E8');
+    });
+
+    it('should default to circle when background is provided without bgShape', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search" size="large" background="#E5E7E8"></mnt-icon>`,
+      });
+
+      await page.waitForChanges();
+
+      const span = page.root.querySelector('span');
+      expect(span).not.toBeNull();
+      expect(span.classList.contains('mnt-border-circle')).toBeTruthy();
+    });
+  });
+
+  describe('background retrocompatibility', () => {
+    it('should still support array format for background', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search" size="large"></mnt-icon>`,
+      });
+
+      // Simulate array format
+      page.rootInstance.background = ['#FFE1E1', 'rounded'];
+      await page.waitForChanges();
+
+      const span = page.root.querySelector('span');
+      expect(span).not.toBeNull();
+      expect(span.classList.contains('mnt-border-rounded')).toBeTruthy();
+      expect(span.style.backgroundColor).toBe('#FFE1E1');
+    });
+
+    it('should still support JSON string format for background', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search" size="large" background='["#DCFCEA", "square"]'></mnt-icon>`,
+      });
+
+      await page.waitForChanges();
+
+      const span = page.root.querySelector('span');
+      expect(span).not.toBeNull();
+      expect(span.classList.contains('mnt-border-square')).toBeTruthy();
+      expect(span.style.backgroundColor).toBe('#DCFCEA');
+    });
+
+    it('should prioritize bgShape over array format', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search" size="large"></mnt-icon>`,
+      });
+
+      // Set both bgShape and background as array
+      page.rootInstance.background = ['#E1F1FD', 'circle'];
+      page.rootInstance.bgShape = 'square';
+      await page.waitForChanges();
+
+      const span = page.root.querySelector('span');
+      expect(span).not.toBeNull();
+      // bgShape should take priority
+      expect(span.classList.contains('mnt-border-square')).toBeTruthy();
+      // But color should come from background (first element of array in this case is ignored)
+      expect(span.style.backgroundColor).toBe('#E1F1FD');
+    });
+
+    it('should handle invalid JSON gracefully', async () => {
+      const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search" size="large" background='[invalid json]'></mnt-icon>`,
+      });
+
+      await page.waitForChanges();
+
+      // Should fallback to treating as simple color with circle shape
+      const span = page.root.querySelector('span');
+      expect(span).not.toBeNull();
+      expect(span.classList.contains('mnt-border-circle')).toBeTruthy();
+      expect(consoleSpy).toHaveBeenCalledWith(
+        '[MANTRA][mnt-icon] Error parsing background:',
+        expect.any(SyntaxError),
+      );
+
+      consoleSpy.mockRestore();
+    });
+  });
 });

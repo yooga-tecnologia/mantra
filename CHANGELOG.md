@@ -4,6 +4,41 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.7.4] – 2025-11-25
+
+### 🐛 Correções
+
+- **Icon**:
+  - Adiciona suporte de transform em outros navegadores (Safari, Firefox)
+
+  - Nova propriedade `bg-shape` para simplificar definição de formas de background
+    - Nova prop opcional: `bg-shape="circle|rounded|square"`
+    - Uso simplificado: `<mnt-icon background="#color" bg-shape="rounded" />`
+    - Mantém retrocompatibilidade com formato array: `background='["#color", "shape"]'`
+    - Correção de problemas de parsing no Storybook
+    - A nova prop `bg-shape` tem prioridade sobre o parsing de array quando ambos são fornecidos
+
+### 🚀 Adicionado
+
+- Variantes de Icon:
+  - apple
+  - instagram
+  - googlePlay
+
+- **FieldNumber (variante plain)**: Adicionado suporte à propriedade `full-width`
+  - Por padrão, o container agora se ajusta à largura do conteúdo (input + botões)
+  - Nova propriedade `full-width` permite que o container ocupe 100% do container-pai quando necessário
+  - Comportamento consistente com o componente Button
+  - Outras variantes (default, simple) não foram afetadas
+
+### 🧪 Testes
+
+- **Icon**: Testes abrangentes para nova propriedade `bg-shape`
+  - Validação de todas as formas: circle, rounded, square
+  - Testes de prioridade: bgShape sobrepõe formato array
+  - Testes de retrocompatibilidade: formato array e JSON string continuam funcionando
+  - Tratamento de erros: parsing de JSON inválido com fallback adequado
+
 ## [2.7.3] – 2025-10-30
 
 ### ✨ Melhorado

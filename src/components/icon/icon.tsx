@@ -1,6 +1,6 @@
 import { Component, Prop, h, Element, JSX } from '@stencil/core';
 
-import { directionTransformMap, ICON_DIRECTION_SUFFIX_REGEX } from './icon.constants';
+import { ICON_DIRECTION_SUFFIX_REGEX } from './icon.constants';
 
 import { iconSizes } from './icon.types';
 import type { Direction, IconProps } from './icon.types';
@@ -18,6 +18,7 @@ export class Icon {
   @Prop() size: IconProps['size'] = 'medium';
   @Prop() color: IconProps['color'] = 'currentColor';
   @Prop() background?: IconProps['background'];
+  @Prop() bgShape?: IconProps['bgShape'];
   @Prop() animation?: IconProps['animation'];
 
   iconSize!: string;
@@ -25,6 +26,7 @@ export class Icon {
   transform!: string;
   baseIconName!: string;
   backgroundElRef?: HTMLSpanElement;
+  direction!: Direction;
   parsedBackground?: { color: string; shape: string };
 
   iconBgGapSizeMap = {
@@ -39,7 +41,7 @@ export class Icon {
     this.parseBackgroundAttribute();
     this.calculateSizes();
     this.baseIconName = this.getBaseIconName(this.icon);
-    this.transform = this.getTransform(this.icon);
+    this.direction = this.getDirection(this.icon);
   }
 
   componentDidLoad() {
@@ -53,7 +55,16 @@ export class Icon {
       return;
     }
 
-    // Se já é um array (tupla [string, shape]), usar diretamente
+    // Nova prop bgShape tem prioridade
+    if (this.bgShape) {
+      this.parsedBackground = {
+        color: this.background as string,
+        shape: this.bgShape,
+      };
+      return;
+    }
+
+    // Retrocompatibilidade: Se já é um array (tupla [string, shape]), usar diretamente
     if (Array.isArray(this.background)) {
       this.parsedBackground = {
         color: this.background[0],
@@ -62,7 +73,7 @@ export class Icon {
       return;
     }
 
-    // Se é uma string JSON válida (ex: '["#color", "shape"]')
+    // Retrocompatibilidade: Se é uma string JSON válida (ex: '["#color", "shape"]')
     if (typeof this.background === 'string' && this.background.startsWith('[')) {
       try {
         const parsed = JSON.parse(this.background);
@@ -79,6 +90,7 @@ export class Icon {
       }
     }
 
+    // Padrão: cor simples com shape circle
     this.parsedBackground = {
       color: this.background,
       shape: 'circle',
@@ -91,6 +103,8 @@ export class Icon {
     if (this.parsedBackground) {
       classes.push('mnt-icon-with-background');
     }
+
+    classes.push(`mnt-icon-d-${this.direction}`);
 
     return classes.join(' ');
   }
@@ -140,13 +154,12 @@ export class Icon {
     return 'doubleLarge';
   }
 
-  private getTransform(iconName: string): string {
+  private getDirection(iconName: string): Direction {
     const match = ICON_DIRECTION_SUFFIX_REGEX.exec(iconName);
-    if (match) {
-      const direction = match[1] as Direction;
-      return directionTransformMap[direction];
-    }
-    return 'rotate(0)';
+
+    if (!match) return 'up';
+
+    return match[1] as Direction;
   }
 
   private setBackgroundProperties(): void {
@@ -177,7 +190,6 @@ export class Icon {
         width={this.iconSize}
         height={this.iconSize}
         fill={this.color}
-        transform={this.transform}
       >
         <g id="icon-container"></g>
       </svg>
