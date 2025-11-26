@@ -28,23 +28,150 @@
 <body>
   <h1>Mantra - Sandbox</h1>
 
-  <mnt-icon icon="starOutline" size="tiny" color="black" background="['#E5E7E8', 'circle']"></mnt-icon>
-  <mnt-icon icon="starOutline" size="small" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
-  <mnt-icon icon="starOutline" size="medium" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
-  <mnt-icon icon="starOutline" size="large" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
-  <mnt-icon icon="starOutline" size="doubleLarge" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
+  <mnt-icon icon="caret-right" size="tiny" color="black" background="['#E5E7E8', 'circle']"></mnt-icon>
+  <mnt-icon icon="caret-right" size="small" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
+  <mnt-icon icon="caret-right" size="medium" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
+  <mnt-icon icon="caret-right" size="large" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
+  <mnt-icon icon="caret-right" size="doubleLarge" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
+  <mnt-button-icon icon="caret-right" size="large" variant="emphasis" color="primary"></mnt-button-icon>
 
-  <mnt-icon icon="starOutline" size="tiny" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
-  <mnt-icon icon="starOutline" size="small" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
-  <mnt-icon icon="starOutline" size="medium" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
-  <mnt-icon icon="starOutline" size="large" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
-  <mnt-icon icon="starOutline" size="doubleLarge" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
+  <mnt-icon icon="caret-left" size="tiny" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
+  <mnt-icon icon="caret-left" size="small" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
+  <mnt-icon icon="caret-left" size="medium" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
+  <mnt-icon icon="caret-left" size="large" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
+  <mnt-icon icon="caret-left" size="doubleLarge" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
 
-  <mnt-icon icon="starOutline" size="tiny" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
-  <mnt-icon icon="starOutline" size="small" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
-  <mnt-icon icon="starOutline" size="medium" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
-  <mnt-icon icon="starOutline" size="large" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
-  <mnt-icon icon="starOutline" size="doubleLarge" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
+  <mnt-icon icon="caret-down" size="tiny" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
+  <mnt-icon icon="caret-down" size="small" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
+  <mnt-icon icon="caret-down" size="medium" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
+  <mnt-icon icon="caret-down" size="large" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
+  <mnt-icon icon="caret-down" size="doubleLarge" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
+
+  <hr style="margin: 40px 0; border: 1px solid #ddd;">
+
+  <h2>🧪 Testes de Ícones Direcionais em Componentes</h2>
+  <p style="color: #666; margin-bottom: 20px;">Verificar se os ícones rotacionam corretamente (up, down, left, right) em todos os componentes</p>
+
+  <div style="margin-bottom: 40px;">
+    <h3>Icon - Sem Background (Direções)</h3>
+    <p style="font-size: 12px; color: #666; margin-bottom: 10px;">Ícones devem rotacionar corretamente sem background</p>
+    <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+      <div style="text-align: center;">
+        <mnt-icon icon="caret-up" size="large" color="black"></mnt-icon>
+        <p style="font-size: 11px; margin-top: 4px;">caret-up</p>
+      </div>
+      <div style="text-align: center;">
+        <mnt-icon icon="caret-down" size="large" color="black"></mnt-icon>
+        <p style="font-size: 11px; margin-top: 4px;">caret-down</p>
+      </div>
+      <div style="text-align: center;">
+        <mnt-icon icon="caret-left" size="large" color="black"></mnt-icon>
+        <p style="font-size: 11px; margin-top: 4px;">caret-left</p>
+      </div>
+      <div style="text-align: center;">
+        <mnt-icon icon="caret-right" size="large" color="black"></mnt-icon>
+        <p style="font-size: 11px; margin-top: 4px;">caret-right</p>
+      </div>
+      <div style="text-align: center;">
+        <mnt-icon icon="arrow-up" size="large" color="black"></mnt-icon>
+        <p style="font-size: 11px; margin-top: 4px;">arrow-up</p>
+      </div>
+      <div style="text-align: center;">
+        <mnt-icon icon="arrow-down" size="large" color="black"></mnt-icon>
+        <p style="font-size: 11px; margin-top: 4px;">arrow-down</p>
+      </div>
+      <div style="text-align: center;">
+        <mnt-icon icon="arrow-left" size="large" color="black"></mnt-icon>
+        <p style="font-size: 11px; margin-top: 4px;">arrow-left</p>
+      </div>
+      <div style="text-align: center;">
+        <mnt-icon icon="arrow-right" size="large" color="black"></mnt-icon>
+        <p style="font-size: 11px; margin-top: 4px;">arrow-right</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 40px;">
+    <h3>ButtonIcon - Ícones Direcionais</h3>
+    <p style="font-size: 12px; color: #666; margin-bottom: 10px;">ButtonIcon com ícones em todas as direções</p>
+    
+    <div style="margin-bottom: 16px;">
+      <h4 style="font-size: 14px; margin-bottom: 8px;">Variante: Regular</h4>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <mnt-button-icon icon="caret-up" size="small" variant="regular" color="neutral"></mnt-button-icon>
+        <mnt-button-icon icon="caret-down" size="small" variant="regular" color="neutral"></mnt-button-icon>
+        <mnt-button-icon icon="caret-left" size="small" variant="regular" color="neutral"></mnt-button-icon>
+        <mnt-button-icon icon="caret-right" size="small" variant="regular" color="neutral"></mnt-button-icon>
+        
+        <mnt-button-icon icon="arrow-up" size="medium" variant="regular" color="primary"></mnt-button-icon>
+        <mnt-button-icon icon="arrow-down" size="medium" variant="regular" color="primary"></mnt-button-icon>
+        <mnt-button-icon icon="arrow-left" size="medium" variant="regular" color="primary"></mnt-button-icon>
+        <mnt-button-icon icon="arrow-right" size="medium" variant="regular" color="primary"></mnt-button-icon>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <h4 style="font-size: 14px; margin-bottom: 8px;">Variante: Emphasis</h4>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <mnt-button-icon icon="caret-up" size="large" variant="emphasis" color="primary"></mnt-button-icon>
+        <mnt-button-icon icon="caret-down" size="large" variant="emphasis" color="primary"></mnt-button-icon>
+        <mnt-button-icon icon="caret-left" size="large" variant="emphasis" color="primary"></mnt-button-icon>
+        <mnt-button-icon icon="caret-right" size="large" variant="emphasis" color="primary"></mnt-button-icon>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <h4 style="font-size: 14px; margin-bottom: 8px;">Variante: Plain</h4>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <mnt-button-icon icon="caret-up" size="tiny" variant="plain" color="neutral"></mnt-button-icon>
+        <mnt-button-icon icon="caret-down" size="tiny" variant="plain" color="neutral"></mnt-button-icon>
+        <mnt-button-icon icon="caret-left" size="tiny" variant="plain" color="neutral"></mnt-button-icon>
+        <mnt-button-icon icon="caret-right" size="tiny" variant="plain" color="neutral"></mnt-button-icon>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 40px;">
+    <h3>Button - Com iconLeft e iconRight</h3>
+    <p style="font-size: 12px; color: #666; margin-bottom: 10px;">Botões com ícones direcionais à esquerda e direita</p>
+    
+    <div style="display: flex; flex-direction: column; gap: 12px; max-width: 600px;">
+      <mnt-button label="Anterior" icon-left="arrow-left" variant="regular" color="neutral" size="medium"></mnt-button>
+      <mnt-button label="Próximo" icon-right="arrow-right" variant="regular" color="primary" size="medium"></mnt-button>
+      <mnt-button label="Voltar" icon-left="caret-left" variant="regular" color="neutral" size="small"></mnt-button>
+      <mnt-button label="Avançar" icon-right="caret-right" variant="emphasis" color="primary" size="small"></mnt-button>
+      <mnt-button label="Expandir" icon-right="caret-down" variant="plain" color="neutral" size="medium"></mnt-button>
+      <mnt-button label="Recolher" icon-right="caret-up" variant="plain" color="neutral" size="medium"></mnt-button>
+      <mnt-button label="Com ícones em ambos lados" icon-left="arrow-left" icon-right="arrow-right" variant="regular" color="primary" size="medium"></mnt-button>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 40px;">
+    <h3>TabItem - Com Ícones</h3>
+    <p style="font-size: 12px; color: #666; margin-bottom: 10px;">Tabs com ícones direcionais</p>
+    
+    <div style="margin-bottom: 16px;">
+      <h4 style="font-size: 14px; margin-bottom: 8px;">Horizontal</h4>
+      <div style="display: flex; gap: 8px;">
+        <mnt-tab-item tab-id="tab-1" label="Up" icon="arrow-up" selected="true" orientation="horizontal"></mnt-tab-item>
+        <mnt-tab-item tab-id="tab-2" label="Down" icon="arrow-down" selected="false" orientation="horizontal"></mnt-tab-item>
+        <mnt-tab-item tab-id="tab-3" label="Left" icon="arrow-left" selected="false" orientation="horizontal"></mnt-tab-item>
+        <mnt-tab-item tab-id="tab-4" label="Right" icon="arrow-right" selected="false" orientation="horizontal"></mnt-tab-item>
+      </div>
+    </div>
+
+    <div>
+      <h4 style="font-size: 14px; margin-bottom: 8px;">Vertical</h4>
+      <div style="display: flex; flex-direction: column; gap: 8px; max-width: 200px;">
+        <mnt-tab-item tab-id="tab-5" label="Caret Up" icon="caret-up" selected="false" orientation="vertical"></mnt-tab-item>
+        <mnt-tab-item tab-id="tab-6" label="Caret Down" icon="caret-down" selected="true" orientation="vertical"></mnt-tab-item>
+        <mnt-tab-item tab-id="tab-7" label="Caret Left" icon="caret-left" selected="false" orientation="vertical"></mnt-tab-item>
+        <mnt-tab-item tab-id="tab-8" label="Caret Right" icon="caret-right" selected="false" orientation="vertical"></mnt-tab-item>
+      </div>
+    </div>
+  </div>
+
+  <hr style="margin: 40px 0; border: 1px solid #ddd;">
 
 <!-- 
   <div>

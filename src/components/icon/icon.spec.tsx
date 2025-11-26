@@ -13,7 +13,10 @@ describe('<mnt-icon>', () => {
     expect(svg.getAttribute('width')).toBe('24px');
     expect(svg.getAttribute('height')).toBe('24px');
     expect(svg.getAttribute('fill')).toBe('currentColor');
-    expect(svg.getAttribute('transform')).toBe('rotate(0)');
+
+    // Verifica que o wrapper tem a classe de direção padrão
+    const wrapper = page.root.querySelector('.mnt-icon-d-up');
+    expect(wrapper).not.toBeNull();
 
     const span = page.root.querySelector('span');
     expect(span).toBeNull();
@@ -21,21 +24,22 @@ describe('<mnt-icon>', () => {
 
   it('transform and base icon name mapping', async () => {
     const testCases = [
-      { icon: 'arrow-up', expectedTransform: 'rotate(0)', expectedBase: 'arrow' },
-      { icon: 'arrow-down', expectedTransform: 'rotate(180 0 0)', expectedBase: 'arrow' },
-      { icon: 'arrow-right', expectedTransform: 'rotate(90 0 0)', expectedBase: 'arrow' },
-      { icon: 'arrow-left', expectedTransform: 'rotate(-90 0 0)', expectedBase: 'arrow' },
-      { icon: 'search', expectedTransform: 'rotate(0)', expectedBase: 'search' },
+      { icon: 'arrow-up', expectedDirection: 'up', expectedBase: 'arrow' },
+      { icon: 'arrow-down', expectedDirection: 'down', expectedBase: 'arrow' },
+      { icon: 'arrow-right', expectedDirection: 'right', expectedBase: 'arrow' },
+      { icon: 'arrow-left', expectedDirection: 'left', expectedBase: 'arrow' },
+      { icon: 'search', expectedDirection: 'up', expectedBase: 'search' },
     ];
 
-    for (const { icon, expectedTransform, expectedBase } of testCases) {
+    for (const { icon, expectedDirection, expectedBase } of testCases) {
       const page = await newSpecPage({
         components: [Icon],
         html: `<mnt-icon icon="${icon}"></mnt-icon>`,
       });
 
-      const svg = page.root.querySelector('svg');
-      expect(svg.getAttribute('transform')).toBe(expectedTransform);
+      // Verifica que o wrapper tem a classe de direção correta
+      const wrapper = page.root.querySelector(`.mnt-icon-d-${expectedDirection}`);
+      expect(wrapper).not.toBeNull();
       expect(page.rootInstance.getBaseIconName(icon)).toBe(expectedBase);
     }
   });
@@ -48,7 +52,10 @@ describe('<mnt-icon>', () => {
 
     const svg = page.root.querySelector('svg');
     expect(svg).not.toBeNull();
-    expect(svg.getAttribute('transform')).toBe('rotate(180 0 0)');
+    
+    // Verifica que o wrapper tem a classe de direção 'down'
+    const wrapper = page.root.querySelector('.mnt-icon-d-down');
+    expect(wrapper).not.toBeNull();
   });
 
   it('renders with background and adjusts sizes correctly', async () => {

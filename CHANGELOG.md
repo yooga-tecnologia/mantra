@@ -4,7 +4,14 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
-## [2.7.4] – 2025-11-25
+## [2.8.1] – 2025-11-26
+
+### 🐛 Correções
+
+- **Icon**:
+  - Correção de incompatibilidade em outros componentes que consomem Icon
+
+## [2.8.0] – 2025-11-25
 
 ### 🐛 Correções
 
