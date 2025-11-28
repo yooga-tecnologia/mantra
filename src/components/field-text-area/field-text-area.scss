@@ -1,0 +1,259 @@
+@use 'sass:map';
+
+@use '../../shared/theme/core/theme' as theme;
+@use '../../shared/theme/tokens/primitives' as primitives;
+
+// 1. VARIABLES & COLOR SCHEME
+
+$component-prefix: theme.get-prefix('field-text-area');
+
+$field-text-area-color-scheme: (
+  neutral: (
+    icon-color: #4B5053,
+    text-color: #242628,
+    placeholder-color: #818A8F,
+    background-color: transparent,
+    inline-message-color: #4B5053,
+    border-color: #CED2D3,
+    border-color-on-hover: #818A8F,
+    border-color-on-focus: #0B7CBE,
+    counter-color: #5F676C,
+  ),
+  error: (
+    icon-color: #C01615,
+    text-color: #242628,
+    placeholder-color: #818A8F,
+    background-color: transparent,
+    inline-message-color: #C01615,
+    border-color: #E41F1E,
+    border-color-on-hover: #818A8F,
+    border-color-on-focus: #0B7CBE,
+    counter-color: #5F676C,
+  ),
+  success: (
+    icon-color: #16653C,
+    text-color: #242628,
+    placeholder-color: #818A8F,
+    background-color: transparent,
+    inline-message-color: #16653C,
+    border-color: #15A459,
+    border-color-on-hover: #818A8F,
+    border-color-on-focus: #0B7CBE,
+    counter-color: #5F676C,
+  ),
+  disabled: (
+    icon-color: #ABB2B5,
+    text-color: #ABB2B5,
+    placeholder-color: #ABB2B5,
+    background-color: #E5E7E8,
+    inline-message-color: #ABB2B5,
+    border-color: #E5E7E8,
+    border-color-on-hover: #E5E7E8,
+    border-color-on-focus: #E5E7E8,
+    counter-color: #ABB2B5,
+  ),
+);
+
+// 2. BASE STYLES
+
+.text-color-primary {
+  color: #0A639A;
+}
+
+.#{$component-prefix} {
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+
+  &,
+  textarea,
+  label,
+  span {
+    font-family: primitives.$body-font-family;
+  }
+
+  &-label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #4B5053;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+  }
+
+  // Container com borda que engloba textarea + contador
+  &-textarea {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 140px;
+    border: 1px solid #CED2D3;
+    border-radius: 6px;
+    background-color: transparent;
+    transition: all ease-in-out .2s;
+
+    &:hover {
+      border-color: #818A8F;
+    }
+
+    &:focus-within {
+      border-color: #0B7CBE;
+      border-width: 2px;
+    }
+
+    textarea {
+      width: 100%;
+      flex: 1;
+      min-height: 100px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #242628;
+      padding: 16px;
+      padding-bottom: 8px;
+      resize: none;
+      background-color: transparent;
+      outline: none;
+
+      &::placeholder {
+        color: #818A8F;
+      }
+    }
+
+    mnt-icon.icon-state {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      pointer-events: none;
+    }
+  }
+
+  &-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px 12px 16px;
+    pointer-events: none;
+  }
+
+  &-counter {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #5F676C;
+  }
+
+  &-inline-message {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #4B5053;
+    min-height: 32px;
+    padding-top: 8px;
+    padding-bottom: 4px;
+
+    mnt-icon {
+      color: #4B5053;
+    }
+  }
+}
+
+// 3. COLOR SCHEMES
+
+@each $color, $color-scheme in $field-text-area-color-scheme {
+  .#{$component-prefix}-#{$color} {
+    .#{$component-prefix}-textarea {
+      border-color: map.get($color-scheme, border-color);
+      background-color: map.get($color-scheme, background-color);
+
+      @if $color != disabled {
+        &:hover {
+          border-color: map.get($color-scheme, border-color-on-hover);
+        }
+
+        &:focus-within {
+          border-color: map.get($color-scheme, border-color-on-focus);
+        }
+      }
+
+      mnt-icon.icon-state {
+        color: map.get($color-scheme, icon-color);
+      }
+
+      textarea {
+        color: map.get($color-scheme, text-color);
+        background-color: map.get($color-scheme, background-color);
+
+        &::placeholder {
+          color: map.get($color-scheme, placeholder-color);
+        }
+      }
+    }
+
+    .#{$component-prefix}-counter {
+      color: map.get($color-scheme, counter-color);
+    }
+
+    .#{$component-prefix}-inline-message {
+      color: map.get($color-scheme, inline-message-color);
+
+      mnt-icon {
+        color: map.get($color-scheme, inline-message-color);
+      }
+    }
+  }
+}
+
+// 4. DISABLED STATE
+
+.#{$component-prefix}-disabled {
+  .#{$component-prefix}-label {
+    color: #ABB2B5;
+
+    .text-color-primary {
+      color: #ABB2B5;
+    }
+  }
+
+  .#{$component-prefix}-textarea {
+    cursor: not-allowed;
+    background-color: #E5E7E8;
+    border: 1px solid #E5E7E8;
+
+    &:hover,
+    &:focus-within {
+      border: 1px solid #E5E7E8;
+    }
+
+    textarea {
+      cursor: not-allowed;
+      background-color: transparent;
+      color: #ABB2B5;
+
+      &::placeholder {
+        color: #ABB2B5;
+      }
+    }
+  }
+
+  .#{$component-prefix}-counter {
+    color: #ABB2B5;
+  }
+}
+
+// 5. ERROR/SUCCESS STATE - Border width adjustment
+
+.#{$component-prefix}-error,
+.#{$component-prefix}-success {
+  .#{$component-prefix}-textarea {
+    border-width: 2px;
+  }
+}

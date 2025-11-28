@@ -4,6 +4,37 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.9.0] – 2025-11-28
+
+### 🚀 Adicionado
+
+- **FieldTextArea**: Novo componente de campo de texto multilinha (textarea)
+  - Suporte a estados visuais: `default`, `error`, `success`
+  - Suporte a estado desabilitado (`disabled`)
+  - Contador de caracteres dinâmico com limite configurável (`maxLength`)
+  - Mensagem inline opcional com ícone contextual
+  - Indicador de campo obrigatório (`required`)
+  - Label com slots para botões de ação e informação
+  - Propriedades: `inputName`, `labelText`, `placeholder`, `state`, `disabled`, `required`, `maxLength`, `rows`, `value`, `inlineMessage`, `hasActionButton`, `hasInfoButton`
+  - Evento `valueChange` para integração com formulários
+  - Método `getTextarea()` para acesso programático ao elemento nativo
+
+### 🧪 Testes
+
+- **FieldTextArea**: Cobertura completa de testes unitários
+  - Testes de renderização básica e com props
+  - Validação de todos os estados visuais
+  - Testes de contador de caracteres
+  - Testes de eventos e métodos públicos
+  - Testes de slots e mensagens inline
+
+### 📖 Documentação
+
+- **FieldTextArea**: Documentação completa no Storybook
+  - Exemplos interativos com todos os estados
+  - Demonstração de variantes filled e empty
+  - Casos de uso com validação (error/success)
+
 ## [2.8.2] – 2025-11-26
 
 ### 🐛 Correções

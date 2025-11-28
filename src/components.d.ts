@@ -11,6 +11,7 @@ import { ButtonIconProps, ButtonProps } from "./components/button/button.types";
 import { FieldNumberVariant } from "./components/field-number/field-number.types";
 import { SizeVariants } from "./shared/theme/theme.types";
 import { FieldTextProps } from "./components/field-text/field-text.types";
+import { FieldTextAreaProps } from "./components/field-text-area/field-text-area.types";
 import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
 import { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
@@ -23,6 +24,7 @@ export { ButtonIconProps, ButtonProps } from "./components/button/button.types";
 export { FieldNumberVariant } from "./components/field-number/field-number.types";
 export { SizeVariants } from "./shared/theme/theme.types";
 export { FieldTextProps } from "./components/field-text/field-text.types";
+export { FieldTextAreaProps } from "./components/field-text-area/field-text-area.types";
 export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
 export { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
@@ -92,6 +94,20 @@ export namespace Components {
         "state"?: FieldTextProps['state'];
         "value"?: string;
     }
+    interface MntFieldTextArea {
+        "disabled"?: FieldTextAreaProps['disabled'];
+        "hasActionButton"?: FieldTextAreaProps['hasActionButton'];
+        "hasInfoButton"?: FieldTextAreaProps['hasInfoButton'];
+        "inlineMessage"?: FieldTextAreaProps['inlineMessage'];
+        "inputName": string;
+        "labelText"?: FieldTextAreaProps['labelText'];
+        "maxLength"?: number;
+        "placeholder"?: FieldTextAreaProps['placeholder'];
+        "required"?: FieldTextAreaProps['required'];
+        "rows"?: number;
+        "state"?: FieldTextAreaProps['state'];
+        "value"?: string;
+    }
     interface MntIcon {
         "animation"?: IconProps['animation'];
         "background"?: IconProps['background'];
@@ -144,6 +160,10 @@ export interface MntButtonIconCustomEvent<T> extends CustomEvent<T> {
 export interface MntFieldTextCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntFieldTextElement;
+}
+export interface MntFieldTextAreaCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntFieldTextAreaElement;
 }
 export interface MntStepsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -228,6 +248,23 @@ declare global {
         prototype: HTMLMntFieldTextElement;
         new (): HTMLMntFieldTextElement;
     };
+    interface HTMLMntFieldTextAreaElementEventMap {
+        "valueChange": string;
+    }
+    interface HTMLMntFieldTextAreaElement extends Components.MntFieldTextArea, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntFieldTextAreaElementEventMap>(type: K, listener: (this: HTMLMntFieldTextAreaElement, ev: MntFieldTextAreaCustomEvent<HTMLMntFieldTextAreaElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntFieldTextAreaElementEventMap>(type: K, listener: (this: HTMLMntFieldTextAreaElement, ev: MntFieldTextAreaCustomEvent<HTMLMntFieldTextAreaElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntFieldTextAreaElement: {
+        prototype: HTMLMntFieldTextAreaElement;
+        new (): HTMLMntFieldTextAreaElement;
+    };
     interface HTMLMntIconElement extends Components.MntIcon, HTMLStencilElement {
     }
     var HTMLMntIconElement: {
@@ -310,6 +347,7 @@ declare global {
         "mnt-button-icon": HTMLMntButtonIconElement;
         "mnt-field-number": HTMLMntFieldNumberElement;
         "mnt-field-text": HTMLMntFieldTextElement;
+        "mnt-field-text-area": HTMLMntFieldTextAreaElement;
         "mnt-icon": HTMLMntIconElement;
         "mnt-icon-large": HTMLMntIconLargeElement;
         "mnt-illustration": HTMLMntIllustrationElement;
@@ -389,6 +427,21 @@ declare namespace LocalJSX {
         "state"?: FieldTextProps['state'];
         "value"?: string;
     }
+    interface MntFieldTextArea {
+        "disabled"?: FieldTextAreaProps['disabled'];
+        "hasActionButton"?: FieldTextAreaProps['hasActionButton'];
+        "hasInfoButton"?: FieldTextAreaProps['hasInfoButton'];
+        "inlineMessage"?: FieldTextAreaProps['inlineMessage'];
+        "inputName"?: string;
+        "labelText"?: FieldTextAreaProps['labelText'];
+        "maxLength"?: number;
+        "onValueChange"?: (event: MntFieldTextAreaCustomEvent<string>) => void;
+        "placeholder"?: FieldTextAreaProps['placeholder'];
+        "required"?: FieldTextAreaProps['required'];
+        "rows"?: number;
+        "state"?: FieldTextAreaProps['state'];
+        "value"?: string;
+    }
     interface MntIcon {
         "animation"?: IconProps['animation'];
         "background"?: IconProps['background'];
@@ -439,6 +492,7 @@ declare namespace LocalJSX {
         "mnt-button-icon": MntButtonIcon;
         "mnt-field-number": MntFieldNumber;
         "mnt-field-text": MntFieldText;
+        "mnt-field-text-area": MntFieldTextArea;
         "mnt-icon": MntIcon;
         "mnt-icon-large": MntIconLarge;
         "mnt-illustration": MntIllustration;
@@ -458,6 +512,7 @@ declare module "@stencil/core" {
             "mnt-button-icon": LocalJSX.MntButtonIcon & JSXBase.HTMLAttributes<HTMLMntButtonIconElement>;
             "mnt-field-number": LocalJSX.MntFieldNumber & JSXBase.HTMLAttributes<HTMLMntFieldNumberElement>;
             "mnt-field-text": LocalJSX.MntFieldText & JSXBase.HTMLAttributes<HTMLMntFieldTextElement>;
+            "mnt-field-text-area": LocalJSX.MntFieldTextArea & JSXBase.HTMLAttributes<HTMLMntFieldTextAreaElement>;
             "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;
             "mnt-icon-large": LocalJSX.MntIconLarge & JSXBase.HTMLAttributes<HTMLMntIconLargeElement>;
             "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
