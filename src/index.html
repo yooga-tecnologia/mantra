@@ -28,24 +28,34 @@
 <body>
   <h1>Mantra - Sandbox</h1>
 
-  <mnt-icon icon="caret-right" size="tiny" color="black" background="['#E5E7E8', 'circle']"></mnt-icon>
-  <mnt-icon icon="caret-right" size="small" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
-  <mnt-icon icon="caret-right" size="medium" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
-  <mnt-icon icon="caret-right" size="large" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
-  <mnt-icon icon="caret-right" size="doubleLarge" color="black" background='["#E5E7E8", "circle"]'></mnt-icon>
-  <mnt-button-icon icon="caret-right" size="large" variant="emphasis" color="primary"></mnt-button-icon>
+  <mnt-icon-large icon="delivery" size="small" color="red"></mnt-icon-large>
+  <mnt-icon-large icon="delivery" size="medium" color="red"></mnt-icon-large>
+  <mnt-icon-large icon="delivery" size="large" color="red"></mnt-icon-large>
 
-  <mnt-icon icon="caret-left" size="tiny" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
-  <mnt-icon icon="caret-left" size="small" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
-  <mnt-icon icon="caret-left" size="medium" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
-  <mnt-icon icon="caret-left" size="large" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
-  <mnt-icon icon="caret-left" size="doubleLarge" color="black" background='["#E5E7E8", "rounded"]'></mnt-icon>
+  <mnt-icon-large icon="currency" size="small" color="red"></mnt-icon-large>
+  <mnt-icon-large icon="currency" size="medium" color="red"></mnt-icon-large>
+  <mnt-icon-large icon="currency" size="large" color="red"></mnt-icon-large>
 
-  <mnt-icon icon="caret-down" size="tiny" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
-  <mnt-icon icon="caret-down" size="small" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
-  <mnt-icon icon="caret-down" size="medium" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
-  <mnt-icon icon="caret-down" size="large" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
-  <mnt-icon icon="caret-down" size="doubleLarge" color="black" background='["#E5E7E8", "square"]'></mnt-icon>
+  <mnt-icon-large icon="percent" size="small" color="red"></mnt-icon-large>
+  <mnt-icon-large icon="percent" size="medium" color="red"></mnt-icon-large>
+  <mnt-icon-large icon="percent" size="large" color="red"></mnt-icon-large>
+
+  <mnt-icon-large icon="route" size="small" color="red"></mnt-icon-large>
+  <mnt-icon-large icon="route" size="medium" color="red"></mnt-icon-large>
+  <mnt-icon-large icon="route" size="large" color="red"></mnt-icon-large>
+
+  <mnt-icon icon="instagram" size="tiny" color="black"></mnt-icon>
+  <mnt-icon icon="instagram" size="small" color="black"></mnt-icon>
+  <mnt-icon icon="instagram" size="medium" color="black"></mnt-icon>
+  <mnt-icon icon="instagram" size="large" color="black"></mnt-icon>
+  <mnt-icon icon="instagram" size="doubleLarge" color="black"></mnt-icon>
+
+  STEPS
+  <mnt-steps
+    id="horizontal-steps"
+    orientation="horizontal"
+    active-step-id="step-1"
+  ></mnt-steps>
 
   <hr style="margin: 40px 0; border: 1px solid #ddd;">
 
@@ -146,7 +156,7 @@
     </div>
   </div>
 
-  <div style="margin-bottom: 40px;">
+  <!-- <div style="margin-bottom: 40px;">
     <h3>TabItem - Com Ícones</h3>
     <p style="font-size: 12px; color: #666; margin-bottom: 10px;">Tabs com ícones direcionais</p>
     
@@ -169,7 +179,7 @@
         <mnt-tab-item tab-id="tab-8" label="Caret Right" icon="caret-right" selected="false" orientation="vertical"></mnt-tab-item>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <hr style="margin: 40px 0; border: 1px solid #ddd;">
 
@@ -427,19 +437,20 @@
   // // const tabItemGroupVertical = document.getElementById('tab-item-group-vertical');
   // // tabItemGroupVertical.tabs = mockTabs;
 
-  // const steps = [
-  //   {id: 'step-1', label: 'Step 1', icon: 'currencySimple', status: 'done'},
-  //   {id: 'step-2', label: 'Step 2', icon: 'currencySimple', status: 'active'},
-  //   {id: 'step-3', label: 'Step 3', icon: 'currencySimple', status: 'disabled'},
-  //   {id: 'step-4', label: 'Step 4', icon: 'currencySimple', status: 'disabled'},
-  //   {id: 'step-5', label: 'Step 5', icon: 'currencySimple', status: 'disabled'},
-  // ];
+  const steps = [
+    {id: 'step-0', label: 'Step 0', icon: 'zero',},
+    {id: 'step-1', label: 'Step 1', icon: 'one',},
+    {id: 'step-2', label: 'Step 2', icon: 'two',},
+    // {id: 'step-3', label: 'Step 3', icon: 'currencySimple', status: 'disabled'},
+    // {id: 'step-4', label: 'Step 4', icon: 'currencySimple', status: 'disabled'},
+    // {id: 'step-5', label: 'Step 5', icon: 'currencySimple', status: 'disabled'},
+  ];
 
-  // const horizontalStepsElement = document.getElementById('horizontal-steps');
+  const horizontalStepsElement = document.getElementById('horizontal-steps');
   // const verticalStepsElement = document.getElementById('vertical-steps');
 
-  // // Configurar steps para ambos os componentes
-  // horizontalStepsElement.steps = steps;
+  // Configurar steps para ambos os componentes
+  horizontalStepsElement.steps = steps;
   // verticalStepsElement.steps = steps;
 
   // // Adicionar listeners para eventos de clique
