@@ -4,6 +4,26 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.8.4] – 2025-12-15
+
+### 🚀 Adicionado
+
+- **Icon**
+  - threeCircle
+  - threeSquare
+  - three
+  - filter
+  - filterHorizontal
+  - currencyCirclePlus
+  - currencyCircleMinus
+  - currencyCircle
+  - ticket
+  - percent
+
+- **IconLarge**
+  - priceTagPercent
+  - priceTagCurrency
+
 ## [2.8.3] – 2025-12-08
 
 ### 🚀 Adicionado
