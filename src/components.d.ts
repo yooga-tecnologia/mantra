@@ -281,9 +281,9 @@ declare global {
         new (): HTMLMntStepsElement;
     };
     interface HTMLMntSwitchElementEventMap {
-        "mntChange": SwitchChangeEventDetail;
-        "mntBlur": FocusEvent;
-        "mntFocus": FocusEvent;
+        "onChange": SwitchChangeEventDetail;
+        "onBlur": FocusEvent;
+        "onFocus": FocusEvent;
     }
     interface HTMLMntSwitchElement extends Components.MntSwitch, HTMLStencilElement {
         addEventListener<K extends keyof HTMLMntSwitchElementEventMap>(type: K, listener: (this: HTMLMntSwitchElement, ev: MntSwitchCustomEvent<HTMLMntSwitchElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -457,9 +457,9 @@ declare namespace LocalJSX {
         "inputId"?: SwitchBaseProps['inputId'];
         "label"?: SwitchBaseProps['label'];
         "name"?: SwitchBaseProps['name'];
-        "onMntBlur"?: (event: MntSwitchCustomEvent<FocusEvent>) => void;
-        "onMntChange"?: (event: MntSwitchCustomEvent<SwitchChangeEventDetail>) => void;
-        "onMntFocus"?: (event: MntSwitchCustomEvent<FocusEvent>) => void;
+        "onOnBlur"?: (event: MntSwitchCustomEvent<FocusEvent>) => void;
+        "onOnChange"?: (event: MntSwitchCustomEvent<SwitchChangeEventDetail>) => void;
+        "onOnFocus"?: (event: MntSwitchCustomEvent<FocusEvent>) => void;
         "required"?: SwitchBaseProps['required'];
         "type"?: SwitchType;
         "value"?: SwitchBaseProps['value'];

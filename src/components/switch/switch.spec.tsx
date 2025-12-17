@@ -134,12 +134,12 @@ describe('<mnt-switch>', () => {
       expect(input.checked).toBe(false);
     });
 
-    it('SHOULD emit mntChange event WHEN checked state changes', async () => {
+    it('SHOULD emit onChange event WHEN checked state changes', async () => {
       const page = await createSwitchComponent('<mnt-switch input-id="test" value="testValue"></mnt-switch>');
       const input = page.root.querySelector('input') as HTMLInputElement;
 
       const changeHandler = jest.fn();
-      page.root.addEventListener('mntChange', changeHandler);
+      page.root.addEventListener('onChange', changeHandler);
 
       input.click();
       await page.waitForChanges();
@@ -180,12 +180,12 @@ describe('<mnt-switch>', () => {
       expect(radio2.checked).toBe(true);
     });
 
-    it('SHOULD emit mntChange event with name WHEN radio changes', async () => {
+    it('SHOULD emit onChange event with name WHEN radio changes', async () => {
       const page = await createSwitchComponent('<mnt-switch input-id="test" type="radio" name="group1" value="option1"></mnt-switch>');
       const input = page.root.querySelector('input') as HTMLInputElement;
 
       const changeHandler = jest.fn();
-      page.root.addEventListener('mntChange', changeHandler);
+      page.root.addEventListener('onChange', changeHandler);
 
       input.click();
       await page.waitForChanges();
@@ -233,12 +233,12 @@ describe('<mnt-switch>', () => {
   });
 
   describe('Events', () => {
-    it('SHOULD emit mntFocus event WHEN input receives focus', async () => {
+    it('SHOULD emit onFocus event WHEN input receives focus', async () => {
       const page = await createSwitchComponent('<mnt-switch></mnt-switch>');
       const input = page.root.querySelector('input') as HTMLInputElement;
 
       const focusHandler = jest.fn();
-      page.root.addEventListener('mntFocus', focusHandler);
+      page.root.addEventListener('onFocus', focusHandler);
 
       input.dispatchEvent(new FocusEvent('focus'));
       await page.waitForChanges();
@@ -246,12 +246,12 @@ describe('<mnt-switch>', () => {
       expect(focusHandler).toHaveBeenCalledTimes(1);
     });
 
-    it('SHOULD emit mntBlur event WHEN input loses focus', async () => {
+    it('SHOULD emit onBlur event WHEN input loses focus', async () => {
       const page = await createSwitchComponent('<mnt-switch></mnt-switch>');
       const input = page.root.querySelector('input') as HTMLInputElement;
 
       const blurHandler = jest.fn();
-      page.root.addEventListener('mntBlur', blurHandler);
+      page.root.addEventListener('onBlur', blurHandler);
 
       input.dispatchEvent(new FocusEvent('blur'));
       await page.waitForChanges();

@@ -25,16 +25,16 @@ export class Switch {
   @Prop() label?: SwitchBaseProps['label'];
   @Prop() description?: SwitchBaseProps['description'];
   @Prop() disabled?: SwitchBaseProps['disabled'] = false;
-  @Prop({ mutable: true }) checked?: SwitchBaseProps['checked'] = false;
+  @Prop({ mutable: true, reflect: true }) checked?: SwitchBaseProps['checked'] = false;
   @Prop() required?: SwitchBaseProps['required'] = false;
 
   // State
   @State() private internalChecked: boolean = false;
 
   // Events
-  @Event({ eventName: 'mntChange' }) mntChange: EventEmitter<SwitchChangeEventDetail>;
-  @Event({ eventName: 'mntBlur' }) mntBlur: EventEmitter<FocusEvent>;
-  @Event({ eventName: 'mntFocus' }) mntFocus: EventEmitter<FocusEvent>;
+  @Event({ eventName: 'onChange' }) onChange: EventEmitter<SwitchChangeEventDetail>;
+  @Event({ eventName: 'onBlur' }) onBlur: EventEmitter<FocusEvent>;
+  @Event({ eventName: 'onFocus' }) onFocus: EventEmitter<FocusEvent>;
 
   componentWillLoad() {
     this.generatedId = this.inputId || this.el.id || `mnt-switch-${++switchIdCounter}`;
@@ -46,10 +46,7 @@ export class Switch {
   componentDidLoad() {
     // Adiciona listener de evento nativo para garantir que o clique no label funcione
     if (this.inputEl) {
-      console.log('[mnt-switch] Adicionando listener ao input:', this.generatedId);
       this.inputEl.addEventListener('change', this.handleChange);
-    } else {
-      console.error('[mnt-switch] Input element não encontrado!');
     }
   }
 
@@ -62,8 +59,14 @@ export class Switch {
 
   @Watch('checked')
   watchCheckedProp(newValue: boolean) {
-    this.internalChecked = newValue;
-    this.updateFormValue();
+    if (this.internalChecked !== newValue) {
+      this.internalChecked = newValue;
+      this.updateFormValue();
+
+      if (this.inputEl && this.inputEl.checked !== newValue) {
+        this.inputEl.checked = newValue;
+      }
+    }
   }
 
   private validateProps(): void {
@@ -94,7 +97,7 @@ export class Switch {
   }
 
   private handleChange = (event: Event): void => {
-    console.log('[mnt-switch] handleChange disparado!', event);
+    // console.log('[mnt-switch] handleChange disparado!', event);
     const target = event.target as HTMLInputElement;
     this.internalChecked = target.checked;
     this.checked = target.checked;
@@ -102,20 +105,38 @@ export class Switch {
     this.updateFormValue();
 
     // Emit custom event with detailed information
-    this.mntChange.emit({
+    this.onChange.emit({
       checked: this.internalChecked,
       value: this.value,
       id: this.generatedId,
       name: this.name,
     });
+
+    // Emit native-like events for better framework integration
+    // This allows frameworks to listen to standard 'change' and 'input' events
+    this.el.dispatchEvent(
+      new CustomEvent('change', {
+        bubbles: true,
+        composed: true,
+        detail: { checked: this.internalChecked, value: this.value },
+      }),
+    );
+
+    this.el.dispatchEvent(
+      new CustomEvent('input', {
+        bubbles: true,
+        composed: true,
+        detail: { checked: this.internalChecked, value: this.value },
+      }),
+    );
   };
 
   private handleBlur = (event: FocusEvent): void => {
-    this.mntBlur.emit(event);
+    this.onBlur.emit(event);
   };
 
   private handleFocus = (event: FocusEvent): void => {
-    this.mntFocus.emit(event);
+    this.onFocus.emit(event);
   };
 
   /**
@@ -137,8 +158,23 @@ export class Switch {
    */
   public setChecked(checked: boolean): void {
     this.checked = checked;
-    this.internalChecked = checked;
-    this.updateFormValue();
+  }
+
+  /**
+   * Simple checked setter for framework integration
+   * Use: element.checkedValue = true/false
+   */
+  public set checkedValue(val: any) {
+    const checked = val === true || val === 'true' || val === 1;
+    this.setChecked(checked);
+  }
+
+  /**
+   * Simple checked getter for framework integration
+   * Use: const val = element.checkedValue
+   */
+  public get checkedValue(): boolean {
+    return this.internalChecked;
   }
 
   private getSwitchElement(): FunctionalComponent<HostAttributes> {
@@ -176,7 +212,7 @@ export class Switch {
           <label
             class={`${COMPONENT_PREFIX}-label-wrapper`}
             onClick={(e) => {
-              console.log('[mnt-switch] Label clicado! Tentando toggle...');
+              // console.log('[mnt-switch] Label clicado! Tentando toggle...');
               e.preventDefault(); // Previne comportamento padrão para evitar duplo clique
               if (this.inputEl && !this.disabled) {
                 this.inputEl.click();

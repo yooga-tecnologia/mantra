@@ -10,7 +10,8 @@
     "button",
     "tab",
     "steps",
-    "icon-large"
+    "icon-large",
+    "switch"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false
