@@ -1,6 +1,6 @@
 {
   "name": "@yooga-tecnologia/mantra",
-  "version": "2.8.4",
+  "version": "2.8.5",
   "description": "Biblioteca de componentes web desenvolvida com StencilJS para criar interfaces reutilizáveis e performáticas em diferentes frameworks e projetos.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -88,5 +88,8 @@
     "storybook": "^8.5.2",
     "typescript": "^5.8.2"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "mantra": "^0.1.1"
+  }
 }
