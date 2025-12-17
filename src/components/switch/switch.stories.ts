@@ -37,7 +37,7 @@ const meta: Meta<SwitchBaseProps> = {
           '- **Radio:** Use o mesmo `name` para agrupar opções e `value` diferente para cada uma\n' +
           '- **Validação:** Use `required` para campos obrigatórios\n' +
           '- **Acessibilidade:** Sempre forneça `label` para melhor UX\n' +
-          '- **Eventos:** Ouça `mntChange` para reagir a mudanças de estado\n\n' +
+          '- **Eventos:** Ouça `onChange` para reagir a mudanças de estado\n\n' +
           '**Atenção:** Para radio buttons, todos os switches do mesmo grupo devem ter o mesmo `name` mas `value` e `id` únicos.\n\n' +
           'Para ver todos os estados e variações, explore as stories [Checkbox](#checkbox-default) e [Radio Group](#radio-group).\n\n',
       },
@@ -287,7 +287,7 @@ export const RadioGroup: StoryFn = (): HTMLString => {
     </div>
     <script>
       document.querySelectorAll('mnt-switch[type="radio"]').forEach(el => {
-        el.addEventListener('mntChange', (e) => {
+        el.addEventListener('onChange', (e) => {
           console.log('Payment method changed:', e.detail);
         });
       });
@@ -406,7 +406,7 @@ export const FormIntegration: StoryFn = (): HTMLString => {
 
       // Listen to custom events
       document.querySelectorAll('mnt-switch').forEach(el => {
-        el.addEventListener('mntChange', (e) => {
+        el.addEventListener('onChange', (e) => {
           console.log('Switch changed:', {
             id: e.detail.id,
             checked: e.detail.checked,
@@ -436,7 +436,7 @@ FormIntegration.parameters = {
         '**Funcionalidades demonstradas:**\n' +
         '- ✅ Submissão via FormData (integração nativa)\n' +
         '- ✅ Validação de required (previne submit)\n' +
-        '- ✅ Eventos mntChange logados no console\n' +
+        '- ✅ Eventos onChange logados no console\n' +
         '- ✅ Display dos dados submetidos em JSON\n\n' +
         '**Use este padrão para:** Cadastros, configurações de conta, preferências de usuário, checkout.',
     },

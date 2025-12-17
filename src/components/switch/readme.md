@@ -22,11 +22,11 @@
 
 ## Events
 
-| Event       | Description | Type                                   |
-| ----------- | ----------- | -------------------------------------- |
-| `mntBlur`   |             | `CustomEvent<FocusEvent>`              |
-| `mntChange` |             | `CustomEvent<SwitchChangeEventDetail>` |
-| `mntFocus`  |             | `CustomEvent<FocusEvent>`              |
+| Event      | Description | Type                                   |
+| ---------- | ----------- | -------------------------------------- |
+| `onBlur`   |             | `CustomEvent<FocusEvent>`              |
+| `onChange` |             | `CustomEvent<SwitchChangeEventDetail>` |
+| `onFocus`  |             | `CustomEvent<FocusEvent>`              |
 
 
 ----------------------------------------------
