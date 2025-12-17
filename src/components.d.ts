@@ -14,6 +14,7 @@ import { FieldTextProps } from "./components/field-text/field-text.types";
 import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
 import { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
+import { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
 import { TabItemProps } from "./components/tab-item/tab-item.types";
 import { TabItem, TabItemGroupProps } from "./components/tab-item-group/tab-item-group.types";
 import { TooltipProps } from "./components/tooltip/tooltip.types";
@@ -26,6 +27,7 @@ export { FieldTextProps } from "./components/field-text/field-text.types";
 export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
 export { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
+export { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
 export { TabItemProps } from "./components/tab-item/tab-item.types";
 export { TabItem, TabItemGroupProps } from "./components/tab-item-group/tab-item-group.types";
 export { TooltipProps } from "./components/tooltip/tooltip.types";
@@ -115,6 +117,17 @@ export namespace Components {
         "orientation": StepsProps['orientation'];
         "steps": StepsProps['steps'];
     }
+    interface MntSwitch {
+        "checked"?: SwitchBaseProps['checked'];
+        "description"?: SwitchBaseProps['description'];
+        "disabled"?: SwitchBaseProps['disabled'];
+        "inputId"?: SwitchBaseProps['inputId'];
+        "label"?: SwitchBaseProps['label'];
+        "name"?: SwitchBaseProps['name'];
+        "required"?: SwitchBaseProps['required'];
+        "type"?: SwitchType;
+        "value"?: SwitchBaseProps['value'];
+    }
     interface MntTabItem {
         "disabled": boolean;
         "icon"?: TabItemProps['icon'];
@@ -148,6 +161,10 @@ export interface MntFieldTextCustomEvent<T> extends CustomEvent<T> {
 export interface MntStepsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntStepsElement;
+}
+export interface MntSwitchCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntSwitchElement;
 }
 export interface MntTabItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -263,6 +280,25 @@ declare global {
         prototype: HTMLMntStepsElement;
         new (): HTMLMntStepsElement;
     };
+    interface HTMLMntSwitchElementEventMap {
+        "mntChange": SwitchChangeEventDetail;
+        "mntBlur": FocusEvent;
+        "mntFocus": FocusEvent;
+    }
+    interface HTMLMntSwitchElement extends Components.MntSwitch, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntSwitchElementEventMap>(type: K, listener: (this: HTMLMntSwitchElement, ev: MntSwitchCustomEvent<HTMLMntSwitchElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntSwitchElementEventMap>(type: K, listener: (this: HTMLMntSwitchElement, ev: MntSwitchCustomEvent<HTMLMntSwitchElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntSwitchElement: {
+        prototype: HTMLMntSwitchElement;
+        new (): HTMLMntSwitchElement;
+    };
     interface HTMLMntTabItemElementEventMap {
         "tabItemClick": string;
     }
@@ -314,6 +350,7 @@ declare global {
         "mnt-icon-large": HTMLMntIconLargeElement;
         "mnt-illustration": HTMLMntIllustrationElement;
         "mnt-steps": HTMLMntStepsElement;
+        "mnt-switch": HTMLMntSwitchElement;
         "mnt-tab-item": HTMLMntTabItemElement;
         "mnt-tab-item-group": HTMLMntTabItemGroupElement;
         "mnt-tooltip": HTMLMntTooltipElement;
@@ -413,6 +450,20 @@ declare namespace LocalJSX {
         "orientation"?: StepsProps['orientation'];
         "steps"?: StepsProps['steps'];
     }
+    interface MntSwitch {
+        "checked"?: SwitchBaseProps['checked'];
+        "description"?: SwitchBaseProps['description'];
+        "disabled"?: SwitchBaseProps['disabled'];
+        "inputId"?: SwitchBaseProps['inputId'];
+        "label"?: SwitchBaseProps['label'];
+        "name"?: SwitchBaseProps['name'];
+        "onMntBlur"?: (event: MntSwitchCustomEvent<FocusEvent>) => void;
+        "onMntChange"?: (event: MntSwitchCustomEvent<SwitchChangeEventDetail>) => void;
+        "onMntFocus"?: (event: MntSwitchCustomEvent<FocusEvent>) => void;
+        "required"?: SwitchBaseProps['required'];
+        "type"?: SwitchType;
+        "value"?: SwitchBaseProps['value'];
+    }
     interface MntTabItem {
         "disabled"?: boolean;
         "icon"?: TabItemProps['icon'];
@@ -443,6 +494,7 @@ declare namespace LocalJSX {
         "mnt-icon-large": MntIconLarge;
         "mnt-illustration": MntIllustration;
         "mnt-steps": MntSteps;
+        "mnt-switch": MntSwitch;
         "mnt-tab-item": MntTabItem;
         "mnt-tab-item-group": MntTabItemGroup;
         "mnt-tooltip": MntTooltip;
@@ -462,6 +514,7 @@ declare module "@stencil/core" {
             "mnt-icon-large": LocalJSX.MntIconLarge & JSXBase.HTMLAttributes<HTMLMntIconLargeElement>;
             "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
             "mnt-steps": LocalJSX.MntSteps & JSXBase.HTMLAttributes<HTMLMntStepsElement>;
+            "mnt-switch": LocalJSX.MntSwitch & JSXBase.HTMLAttributes<HTMLMntSwitchElement>;
             "mnt-tab-item": LocalJSX.MntTabItem & JSXBase.HTMLAttributes<HTMLMntTabItemElement>;
             "mnt-tab-item-group": LocalJSX.MntTabItemGroup & JSXBase.HTMLAttributes<HTMLMntTabItemGroupElement>;
             "mnt-tooltip": LocalJSX.MntTooltip & JSXBase.HTMLAttributes<HTMLMntTooltipElement>;

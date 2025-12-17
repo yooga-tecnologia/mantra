@@ -28,12 +28,36 @@
 <body>
   <h1>Mantra - Sandbox</h1>
 
-  <mnt-icon-large icon="delivery" size="small" color="red"></mnt-icon-large>
+  <h2>Teste de Switch - Clique no Label</h2>
+  <div style="padding: 20px; background: #f5f5f5; border-radius: 8px; margin-bottom: 20px;">
+    <mnt-switch id="test-switch" label="Clique aqui no label ou no switch" description="O status deve mudar ao clicar no texto"></mnt-switch>
+    <div id="switch-status" style="margin-top: 10px; padding: 10px; background: white; border-radius: 4px;">
+      <strong>Status:</strong> <span id="status-text">Não marcado</span>
+    </div>
+  </div>
+
+  <mnt-switch></mnt-switch>
+  <mnt-switch id="switch-1" label="Label exemplo" description="Texto pequeno para descrever o switch"></mnt-switch>
+  <mnt-switch id="switch-2" label="Label exemplo"></mnt-switch>
+
+  <script>
+    // Teste: Verificar se o clique no label funciona
+    const testSwitch = document.getElementById('test-switch');
+    const statusText = document.getElementById('status-text');
+    
+    testSwitch.addEventListener('mntChange', (event) => {
+      console.log('Switch mudou!', event.detail);
+      statusText.textContent = event.detail.checked ? '✅ Marcado' : '❌ Não marcado';
+      statusText.style.color = event.detail.checked ? 'green' : 'red';
+    });
+    
+    console.log('Teste de clique no label configurado. Clique no texto "Clique aqui no label..." para testar.');
+  </script>
+
+  <!-- <mnt-icon-large icon="delivery" size="small" color="red"></mnt-icon-large>
   <mnt-icon-large icon="delivery" size="medium" color="red"></mnt-icon-large>
   <mnt-icon-large icon="delivery" size="large" color="red"></mnt-icon-large>
 
-  <mnt-icon-large icon="currency" size="small" color="red"></mnt-icon-large>
-  <mnt-icon-large icon="currency" size="medium" color="red"></mnt-icon-large>
   <mnt-icon-large icon="currency" size="large" color="red"></mnt-icon-large>
 
   <mnt-icon-large icon="percent" size="small" color="red"></mnt-icon-large>
@@ -42,7 +66,18 @@
 
   <mnt-icon-large icon="route" size="small" color="red"></mnt-icon-large>
   <mnt-icon-large icon="route" size="medium" color="red"></mnt-icon-large>
-  <mnt-icon-large icon="route" size="large" color="red"></mnt-icon-large>
+  <mnt-icon-large icon="route" size="large" color="red"></mnt-icon-large> -->
+
+  <!-- <mnt-icon icon="houseSimple" size="medium" color="red"></mnt-icon>
+  <mnt-icon icon="currencySimple" size="medium" color="red"></mnt-icon>
+  <mnt-icon icon="currencyCircle" size="medium" color="red"></mnt-icon>
+  <mnt-icon icon="currencyCircleMinus" size="medium" color="red"></mnt-icon>
+  <mnt-icon icon="currencyCirclePlus" size="medium" color="red"></mnt-icon>
+  <mnt-icon icon="ticket" size="medium" color="red"></mnt-icon>
+
+  <mnt-icon icon="three" size="medium" color="red"></mnt-icon>
+  <mnt-icon icon="threeSquare" size="medium" color="red"></mnt-icon>
+  <mnt-icon icon="threeCircle" size="medium" color="red"></mnt-icon>
 
   <mnt-icon icon="transfer" size="tiny" color="black"></mnt-icon>
   <mnt-icon icon="transfer" size="small" color="black"></mnt-icon>
@@ -50,7 +85,6 @@
   <mnt-icon icon="transfer" size="large" color="black"></mnt-icon>
   <mnt-icon icon="transfer" size="doubleLarge" color="black"></mnt-icon>
 
-  STEPS
   <mnt-steps
     id="horizontal-steps"
     orientation="horizontal"
@@ -154,7 +188,7 @@
       <mnt-button label="Recolher" icon-right="caret-up" variant="plain" color="neutral" size="medium"></mnt-button>
       <mnt-button label="Com ícones em ambos lados" icon-left="arrow-left" icon-right="arrow-right" variant="regular" color="primary" size="medium"></mnt-button>
     </div>
-  </div>
+  </div> -->
 
   <!-- <div style="margin-bottom: 40px;">
     <h3>TabItem - Com Ícones</h3>

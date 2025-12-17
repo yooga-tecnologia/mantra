@@ -1,0 +1,15 @@
+/**
+* This file is a barrel file for the styles of the <mnt-badge> component.
+*
+* WARNING: Do not add CSS rules directly to the file src/components/badge/badge.scss.
+*
+* Use the variant files (_variant-default.scss) to define specific styles.
+**/
+
+@use "sass:map";
+
+@forward "./__base"; // Base styles for the badge component
+
+@use "./_variant-default" as switch-default;
+
+@include switch-default.set-switch-styles();
