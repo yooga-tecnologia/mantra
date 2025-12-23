@@ -22,22 +22,23 @@ export class Badge {
 
   @Watch('label')
   handleLabelChange(newValue: string): void {
-    if (this.badgeElement) {
+    if (this.badgeElement && newValue) {
       this.badgeElement.setAttribute('aria-label', newValue);
     }
   }
 
   get badgeClass(): string {
-    if (!this.label) {
-      console.warn('[MANTRA] The "label" property is required for the badge component.');
+    if (!this.label && !this.icon) {
+      console.warn('[MANTRA] Either "label" or "icon" property is required for the badge component.');
       return '';
     }
 
     const sizeClass = `${COMPONENT_PREFIX}-${this.size}`;
     const colorClass = `${COMPONENT_PREFIX}-${this.color}`;
     const toneClass = `${COMPONENT_PREFIX}-${this.tone}`;
+    const iconOnlyClass = this.icon && !this.label ? `${COMPONENT_PREFIX}-icon-only` : '';
 
-    return `${sizeClass} ${colorClass} ${toneClass}`;
+    return `${sizeClass} ${colorClass} ${toneClass} ${iconOnlyClass}`.trim();
   }
 
   render(): FunctionalComponent<HostAttributes> {
@@ -45,7 +46,7 @@ export class Badge {
       <Host>
         <div
           role="status"
-          aria-label={this.label}
+          aria-label={this.label || (this.icon ? `Badge com ícone ${this.icon}` : '')}
           class={this.badgeClass}
           ref={(el) => (this.badgeElement = el as HTMLElement)}
         >
@@ -57,9 +58,7 @@ export class Badge {
             />
           )}
 
-          <span class={`${COMPONENT_PREFIX}-label`}>
-            {this.label}
-          </span>
+          {this.label && <span class={`${COMPONENT_PREFIX}-label`}>{this.label}</span>}
         </div>
       </Host>
     );

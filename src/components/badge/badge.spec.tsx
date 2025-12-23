@@ -100,6 +100,27 @@ describe('<mnt-badge>', () => {
 
       expect(icon).toBeNull();
     });
+
+    it('SHOULD render badge with icon only WHEN only icon property is provided', async () => {
+      // SETUP
+      const page = await createBadgeComponent(`<mnt-badge icon="${DEFAULT_ICON}"></mnt-badge>`);
+      const icon = page.root.querySelector('mnt-icon');
+      const span = page.root.querySelector('span');
+      const badge = getBadgeElement(page);
+
+      // ASSERTION
+      expect(icon).not.toBeNull();
+      expect(icon.getAttribute('icon')).toBe(DEFAULT_ICON);
+      expect(span).toBeNull();
+      expect(badge).toHaveClass(`${COMPONENT_PREFIX}-icon-only`);
+    });
+
+    it('SHOULD NOT render label span WHEN label is not provided', async () => {
+      const page = await createBadgeComponent(`<mnt-badge icon="${DEFAULT_ICON}"></mnt-badge>`);
+      const span = page.root.querySelector('span');
+
+      expect(span).toBeNull();
+    });
   });
 
   describe('Accessibility', () => {
