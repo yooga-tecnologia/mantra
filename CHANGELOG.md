@@ -4,6 +4,39 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.9.2] – 2025-12-26
+
+### 🚀 Adicionado
+
+- **DatePicker**: Novo componente de seleção de datas
+  - Modo single: Seleção de data única
+  - Modo range: Seleção de intervalo/período entre duas datas
+  - Propriedade `disablePastDates`: Desabilita seleção de datas anteriores ao dia atual
+  - Integração nativa com formulários HTML via `formAssociated`
+  - Validação integrada com suporte a `required` e custom validity
+  - Eventos customizados: `date-selected`, `cancel`, `month-change`
+  - Internacionalização: Suporte a diferentes locales (pt-BR, en-US, etc.)
+  - Acessibilidade: ARIA attributes e navegação via teclado
+  - Configurações: `minDate`, `maxDate`, `firstDayOfWeek`, `initialMonth`
+  - Distinção visual entre início e fim do range (modo range)
+  - Calendário dinâmico: Exibe apenas semanas do mês atual/necessárias
+  - Documentação completa e exemplos no Storybook
+  - Exemplos práticos no `index.html`
+
+### ✨ Melhorado
+
+- **Switch**: Renomeação de eventos para seguir padrão Stencil
+  - Eventos renomeados de `onChange`, `onBlur`, `onFocus` para `mntChange`, `mntBlur`, `mntFocus`
+  - Eliminação de warnings do Stencil sobre conflitos com eventos nativos do DOM
+  - Mantém compatibilidade com eventos nativos via `dispatchEvent`
+  - Documentação e testes atualizados
+
+### 🗑️ Removido
+
+- **DatePicker**: Propriedade `showWeekNumbers` removida
+  - Propriedade estava definida mas não implementada
+  - Removida para evitar confusão e manter API limpa
+
 ## [2.9.1] – 2025-12-17
 
 ### 🐛 Correções
