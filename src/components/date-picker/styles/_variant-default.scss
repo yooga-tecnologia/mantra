@@ -1,0 +1,16 @@
+@use "sass:map";
+
+// @use "../../../shared/theme/tokens/feedbacks/index.scss" as feedback-tokens;
+@use "../../../shared/theme/core/theme" as theme;
+
+$component-prefix: theme.get-prefix('date-picker');
+
+///
+/// Date Picker Default Theme
+///
+
+@mixin set-date-picker-styles() {
+  // TODO: Implement DEFAULT styles
+
+  // TODO: Implement RANGE styles
+}

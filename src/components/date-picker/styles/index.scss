@@ -1,0 +1,15 @@
+/**
+* This file is a barrel file for the styles of the <mnt-date-picker> component.
+*
+* WARNING: Do not add CSS rules directly to the file src/components/date-picker/date-picker.scss.
+*
+* Use the variant files (_variant-default.scss) to define specific styles.
+**/
+
+@use "sass:map";
+
+@forward "./__base"; // Base styles for the date picker component
+
+@use "./_variant-default" as date-picker-default;
+
+@include date-picker-default.set-date-picker-styles();
