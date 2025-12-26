@@ -4,38 +4,37 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.9.3] – 2025-12-26
+
+### 🚀 Adicionado
+
+- **FieldDate**: Novo componente de campo de data com integração ao DatePicker
+  - Suporte a modos `single` e `range`
+  - Input readonly com click outside para fechar
+  - Eventos: `valueChange` e `rawValueChange`
+  - Responsivo com 3 tamanhos (small, medium, large)
+  - Documentação Angular completa (template-driven, reactive forms, ViewChild)
+  - Testes unitários e stories no Storybook
+
 ## [2.9.2] – 2025-12-26
 
 ### 🚀 Adicionado
 
 - **DatePicker**: Novo componente de seleção de datas
-  - Modo single: Seleção de data única
-  - Modo range: Seleção de intervalo/período entre duas datas
-  - Propriedade `disablePastDates`: Desabilita seleção de datas anteriores ao dia atual
-  - Integração nativa com formulários HTML via `formAssociated`
-  - Validação integrada com suporte a `required` e custom validity
-  - Eventos customizados: `date-selected`, `cancel`, `month-change`
-  - Internacionalização: Suporte a diferentes locales (pt-BR, en-US, etc.)
-  - Acessibilidade: ARIA attributes e navegação via teclado
-  - Configurações: `minDate`, `maxDate`, `firstDayOfWeek`, `initialMonth`
-  - Distinção visual entre início e fim do range (modo range)
-  - Calendário dinâmico: Exibe apenas semanas do mês atual/necessárias
-  - Documentação completa e exemplos no Storybook
-  - Exemplos práticos no `index.html`
+  - Modos `single` e `range`
+  - Propriedade `disablePastDates`
+  - Integração com formulários HTML via `formAssociated`
+  - Eventos: `date-selected`, `cancel`, `month-change`
+  - Internacionalização e acessibilidade
+  - Distinção visual para início e fim do range
 
 ### ✨ Melhorado
 
-- **Switch**: Renomeação de eventos para seguir padrão Stencil
-  - Eventos renomeados de `onChange`, `onBlur`, `onFocus` para `mntChange`, `mntBlur`, `mntFocus`
-  - Eliminação de warnings do Stencil sobre conflitos com eventos nativos do DOM
-  - Mantém compatibilidade com eventos nativos via `dispatchEvent`
-  - Documentação e testes atualizados
+- **Switch**: Eventos renomeados para `mntChange`, `mntBlur`, `mntFocus` para evitar conflitos com eventos nativos do DOM
 
 ### 🗑️ Removido
 
-- **DatePicker**: Propriedade `showWeekNumbers` removida
-  - Propriedade estava definida mas não implementada
-  - Removida para evitar confusão e manter API limpa
+- **DatePicker**: Propriedade `showWeekNumbers` (não estava implementada)
 
 ## [2.9.1] – 2025-12-17
 

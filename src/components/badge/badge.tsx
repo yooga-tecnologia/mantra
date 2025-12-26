@@ -57,9 +57,7 @@ export class Badge {
             />
           )}
 
-          <span class={`${COMPONENT_PREFIX}-label`}>
-            {this.label}
-          </span>
+          <span class={`${COMPONENT_PREFIX}-label`}>{this.label}</span>
         </div>
       </Host>
     );
