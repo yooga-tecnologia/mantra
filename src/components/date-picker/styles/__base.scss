@@ -1,0 +1,198 @@
+@use "sass:map";
+@use "../../../shared/theme/core/theme" as theme;
+@use "../../../shared/theme/tokens/_sizing" as sizing;
+
+$component-prefix: theme.get-prefix('date-picker');
+$border-radius: 6px;
+
+$focus-outline-width: 2px;
+
+$range-start-bg-color: #83CEF6;
+$range-start-text-color: #0D547F;
+$range-bg-color: #E1F1FD;
+$range-text-color: #0D547F;
+
+// Sizes
+
+@mixin set-calendar-grid() {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+  text-align: center;
+  gap: $focus-outline-width; // Grants a better visual separation between days on keyboard navigation
+}
+
+#{$component-prefix} {
+  display: block;
+  padding: 16px;
+  max-width: 320px;
+  width: fit-content;
+
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow:
+    0 0 4px 0 rgba(0, 0, 0, 0.03),
+    0 2px 8px 0 rgba(0, 0, 0, 0.03),
+    0 4px 12px 0 rgba(0, 0, 0, 0.03),
+    0 6px 16px 0 rgba(0, 0, 0, 0.03);
+
+  .#{$component-prefix}-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    .#{$component-prefix}-title {
+      font-size: 14px;
+      line-height: 20px;
+      text-wrap: nowrap;
+
+      color: #242628;
+      font-weight: 500;
+    }
+  }
+
+  .#{$component-prefix}-weekdays,
+  .#{$component-prefix}-days button {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 4px;
+  }
+
+  .#{$component-prefix}-weekdays {
+    @include set-calendar-grid();
+    margin-bottom: 12px;
+    font-weight: 400;
+    color: #5F676C;
+  }
+
+  .#{$component-prefix}-days {
+    @include set-calendar-grid();
+
+    button.#{$component-prefix}-day {
+      appearance: none;
+      border: none;
+      color: #4B5053;
+      font-weight: 500;
+      background-color: #FFF;
+      border-radius: $border-radius;
+      height: 32px;
+      width: 32px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #F5F5F5;
+      }
+
+      &:focus-visible {
+        outline: $focus-outline-width solid #0D547F;
+      }
+
+      &,
+      &:hover,
+      &:disabled,
+      &:focus,
+      &:focus-visible {
+        transition: all ease-in-out .2s;
+      }
+
+      // Modifiers
+
+      &--today {
+        position: relative;
+        color: inherit;
+
+        &::after {
+          content: "";
+          display: block;
+          position: absolute;
+          height: 4px;
+          width: 4px;
+          margin: auto;
+          top: auto;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: $range-start-bg-color;
+          border-radius: $border-radius;
+          background-color: $range-start-bg-color;
+        }
+      }
+
+      &--selected {
+        background-color: $range-start-bg-color;
+        color: $range-start-text-color;
+
+        &:hover {
+          background-color: #BDE3FA;
+        }
+      }
+
+      &--disabled,
+      &:disabled {
+        opacity: 0.25;
+        background-color: transparent;
+        text-decoration: line-through;
+
+        &:hover {
+          cursor: not-allowed;
+        }
+      }
+
+      &--other-month {
+        background-color: transparent;
+        opacity: 0.5;
+      }
+    }
+  }
+
+  // RANGE STYLE
+
+  &[mode="range"] {
+    // Dias dentro do range (entre início e fim)
+    button.#{$component-prefix}-day--in-range {
+      background-color: $range-bg-color;
+      color: $range-text-color;
+      border-radius: 0;
+
+      &:hover {
+        cursor: pointer;
+        // background-color: $range-color-hover;
+      }
+    }
+
+    button.#{$component-prefix}-day--range-start,
+    button.#{$component-prefix}-day--range-end {
+      background-color: $range-start-bg-color;
+      color: $range-start-text-color;
+      font-weight: 500;
+    }
+
+    // Data de INÍCIO do range
+    button.#{$component-prefix}-day--range-start {
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    // Data de FIM do range
+    button.#{$component-prefix}-day--range-end {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+
+    // Quando início e fim são a mesma data (range de 1 dia)
+    button.#{$component-prefix}-day--range-start.#{$component-prefix}-day--range-end {
+      border-radius: $border-radius;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+}

@@ -11,7 +11,8 @@
     "tab",
     "steps",
     "icon-large",
-    "switch"
+    "switch",
+    "date-picker"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false

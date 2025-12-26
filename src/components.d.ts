@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { BadgeBaseProps } from "./components/badge/badge.types";
 import { BrandProps } from "./components/brand/brand.types";
 import { ButtonIconProps, ButtonProps } from "./components/button/button.types";
+import { DatePickerMode, DateRange, DateSelectedEventDetail, MonthYear } from "./components/date-picker/date-picker.types";
 import { FieldNumberVariant } from "./components/field-number/field-number.types";
 import { SizeVariants } from "./shared/theme/theme.types";
 import { FieldTextProps } from "./components/field-text/field-text.types";
@@ -21,6 +22,7 @@ import { TooltipProps } from "./components/tooltip/tooltip.types";
 export { BadgeBaseProps } from "./components/badge/badge.types";
 export { BrandProps } from "./components/brand/brand.types";
 export { ButtonIconProps, ButtonProps } from "./components/button/button.types";
+export { DatePickerMode, DateRange, DateSelectedEventDetail, MonthYear } from "./components/date-picker/date-picker.types";
 export { FieldNumberVariant } from "./components/field-number/field-number.types";
 export { SizeVariants } from "./shared/theme/theme.types";
 export { FieldTextProps } from "./components/field-text/field-text.types";
@@ -61,6 +63,20 @@ export namespace Components {
         "icon"?: ButtonIconProps['icon'];
         "size": ButtonIconProps['size'];
         "variant": ButtonIconProps['variant'];
+    }
+    interface MntDatePicker {
+        "disablePastDates"?: boolean;
+        "disabled"?: boolean;
+        "firstDayOfWeek"?: number;
+        "initialMonth"?: Date | string | null;
+        "locale"?: string;
+        "maxDate"?: Date | string | null;
+        "minDate"?: Date | string | null;
+        "mode"?: DatePickerMode;
+        "placeholder"?: string;
+        "required"?: boolean;
+        "selectedDate"?: Date | string | null;
+        "selectedRange"?: DateRange | null;
     }
     interface MntFieldNumber {
         "disabled"?: boolean;
@@ -154,6 +170,10 @@ export interface MntButtonIconCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntButtonIconElement;
 }
+export interface MntDatePickerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntDatePickerElement;
+}
 export interface MntFieldTextCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntFieldTextElement;
@@ -220,6 +240,25 @@ declare global {
     var HTMLMntButtonIconElement: {
         prototype: HTMLMntButtonIconElement;
         new (): HTMLMntButtonIconElement;
+    };
+    interface HTMLMntDatePickerElementEventMap {
+        "datePickerSelected": DateSelectedEventDetail;
+        "datePickerCancel": void;
+        "datePickerMonthChange": MonthYear;
+    }
+    interface HTMLMntDatePickerElement extends Components.MntDatePicker, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntDatePickerElementEventMap>(type: K, listener: (this: HTMLMntDatePickerElement, ev: MntDatePickerCustomEvent<HTMLMntDatePickerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntDatePickerElementEventMap>(type: K, listener: (this: HTMLMntDatePickerElement, ev: MntDatePickerCustomEvent<HTMLMntDatePickerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntDatePickerElement: {
+        prototype: HTMLMntDatePickerElement;
+        new (): HTMLMntDatePickerElement;
     };
     interface HTMLMntFieldNumberElement extends Components.MntFieldNumber, HTMLStencilElement {
     }
@@ -344,6 +383,7 @@ declare global {
         "mnt-brand": HTMLMntBrandElement;
         "mnt-button": HTMLMntButtonElement;
         "mnt-button-icon": HTMLMntButtonIconElement;
+        "mnt-date-picker": HTMLMntDatePickerElement;
         "mnt-field-number": HTMLMntFieldNumberElement;
         "mnt-field-text": HTMLMntFieldTextElement;
         "mnt-icon": HTMLMntIconElement;
@@ -388,6 +428,23 @@ declare namespace LocalJSX {
         "onButtonClick"?: (event: MntButtonIconCustomEvent<MouseEvent>) => void;
         "size"?: ButtonIconProps['size'];
         "variant"?: ButtonIconProps['variant'];
+    }
+    interface MntDatePicker {
+        "disablePastDates"?: boolean;
+        "disabled"?: boolean;
+        "firstDayOfWeek"?: number;
+        "initialMonth"?: Date | string | null;
+        "locale"?: string;
+        "maxDate"?: Date | string | null;
+        "minDate"?: Date | string | null;
+        "mode"?: DatePickerMode;
+        "onDatePickerCancel"?: (event: MntDatePickerCustomEvent<void>) => void;
+        "onDatePickerMonthChange"?: (event: MntDatePickerCustomEvent<MonthYear>) => void;
+        "onDatePickerSelected"?: (event: MntDatePickerCustomEvent<DateSelectedEventDetail>) => void;
+        "placeholder"?: string;
+        "required"?: boolean;
+        "selectedDate"?: Date | string | null;
+        "selectedRange"?: DateRange | null;
     }
     interface MntFieldNumber {
         "disabled"?: boolean;
@@ -488,6 +545,7 @@ declare namespace LocalJSX {
         "mnt-brand": MntBrand;
         "mnt-button": MntButton;
         "mnt-button-icon": MntButtonIcon;
+        "mnt-date-picker": MntDatePicker;
         "mnt-field-number": MntFieldNumber;
         "mnt-field-text": MntFieldText;
         "mnt-icon": MntIcon;
@@ -508,6 +566,7 @@ declare module "@stencil/core" {
             "mnt-brand": LocalJSX.MntBrand & JSXBase.HTMLAttributes<HTMLMntBrandElement>;
             "mnt-button": LocalJSX.MntButton & JSXBase.HTMLAttributes<HTMLMntButtonElement>;
             "mnt-button-icon": LocalJSX.MntButtonIcon & JSXBase.HTMLAttributes<HTMLMntButtonIconElement>;
+            "mnt-date-picker": LocalJSX.MntDatePicker & JSXBase.HTMLAttributes<HTMLMntDatePickerElement>;
             "mnt-field-number": LocalJSX.MntFieldNumber & JSXBase.HTMLAttributes<HTMLMntFieldNumberElement>;
             "mnt-field-text": LocalJSX.MntFieldText & JSXBase.HTMLAttributes<HTMLMntFieldTextElement>;
             "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;
