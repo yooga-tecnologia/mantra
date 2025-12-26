@@ -130,6 +130,10 @@ export class MyComponent {
 
 ## Dependencies
 
+### Used by
+
+ - [mnt-field-date](../field-date)
+
 ### Depends on
 
 - [mnt-button-icon](../button)
@@ -139,6 +143,7 @@ export class MyComponent {
 graph TD;
   mnt-date-picker --> mnt-button-icon
   mnt-button-icon --> mnt-icon
+  mnt-field-date --> mnt-date-picker
   style mnt-date-picker fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

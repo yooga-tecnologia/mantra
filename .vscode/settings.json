@@ -12,7 +12,8 @@
     "steps",
     "icon-large",
     "switch",
-    "date-picker"
+    "date-picker",
+    "field-date"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false

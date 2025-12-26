@@ -1,0 +1,181 @@
+@use 'sass:map';
+
+@use '../../shared/theme/core/theme' as theme;
+@use '../../shared/theme/tokens/primitives' as primitives;
+
+// 1. MAPPERS, FUNCTIONS & VARIABLES
+
+$component-prefix: theme.get-prefix('field-date');
+$field-date-size-configs: (
+  small: (
+    min-width: 180px,
+    font-size: 12px,
+    icon-size: 16px,
+    icon-gap: 8px,
+    padding: 4px 8px,
+    gap: 4px,
+  ),
+  medium: (
+    min-width: 220px,
+    font-size: 14px,
+    icon-size: 20px,
+    icon-gap: 12px,
+    padding: 12px 16px,
+    gap: 6px,
+  ),
+  large: (
+    min-width: 260px,
+    font-size: 16px,
+    icon-size: 24px,
+    icon-gap: 16px,
+    padding: 16px,
+    gap: 8px,
+  ),
+);
+
+$field-date-color-scheme: (
+  icon-color: #4B5053,
+  text-color: #242628,
+  placeholder-color: #818A8F,
+  background-color: transparent,
+  inline-message-color: #818A8F,
+  border-color: #CED2D3,
+  border-color-on-hover: #818A8F,
+  border-color-on-focus: #0B7CBE,
+);
+
+@mixin field-date-size($size-map) {
+  font-size: map.get($size-map, font-size);
+  gap: map.get($size-map, gap);
+}
+
+// 2. BASE STYLES
+
+.text-color-primary {
+  color: #0A639A;
+}
+
+.#{$component-prefix} {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+
+  &,
+  input,
+  label,
+  span {
+    font-family: primitives.$body-font-family;
+  }
+
+  &-label {
+    font-weight: 500;
+    color: #4B5053;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &-input {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    input {
+      width: 100%;
+      border: 1px solid #D1D5DB;
+      border-radius: 6px;
+      font-weight: 400;
+      color: #242628;
+
+      &::placeholder {
+        color: #818A8F;
+      }
+
+      &[readonly] {
+        cursor: pointer;
+        background-color: #fff;
+      }
+    }
+
+    mnt-icon {
+      position: absolute;
+      pointer-events: none;
+    }
+    .icon-left,
+    .icon-right {
+      color: unset !important;
+    }
+  }
+
+  &-picker-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: fit-content;
+    animation: slideDown 0.2s ease-out;
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+// 3. SIZING
+
+@each $size, $configs in $field-date-size-configs {
+  $size-map: map.get($field-date-size-configs, $size);
+  $icon-gap: map.get($size-map, icon-size) + map.get($size-map, gap) + map.get($size-map, icon-gap);
+
+  .#{$component-prefix}-#{$size} {
+    &,
+    & > .#{$component-prefix}-label,
+    & > .#{$component-prefix}-input input {
+      @include field-date-size($size-map);
+    }
+
+    .#{$component-prefix}-input {
+      & > .icon-right {
+        right: map.get($size-map, icon-gap);
+        color: map.get($field-date-color-scheme, icon-color) !important;
+      }
+
+      input {
+        padding: map.get($size-map, padding);
+        padding-right: $icon-gap !important;
+        color: map.get($field-date-color-scheme, text-color);
+        border-color: map.get($field-date-color-scheme, border-color);
+        background-color: map.get($field-date-color-scheme, background-color);
+        min-width: map.get($size-map, min-width);
+
+        &::placeholder {
+          color: map.get($field-date-color-scheme, placeholder-color);
+        }
+
+        &:hover {
+          border-color: map.get($field-date-color-scheme, border-color-on-hover);
+          background-color: map.get($field-date-color-scheme, background-color);
+        }
+
+        &:focus {
+          border-color: map.get($field-date-color-scheme, border-color-on-focus);
+          outline: 1px solid map.get($field-date-color-scheme, border-color-on-focus);
+        }
+
+        &,
+        &:hover,
+        &:focus {
+          transition: all ease-in-out .2s;
+        }
+      }
+    }
+  }
+}
