@@ -13,7 +13,8 @@
     "icon-large",
     "switch",
     "date-picker",
-    "field-date"
+    "field-date",
+    "npm"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false
