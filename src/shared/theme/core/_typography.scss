@@ -64,11 +64,16 @@ $base-grid: primitives.$base-grid;
 
   $line-height: math.floor($font-size * 1);
 
-  @return if(
-    $line-height % $base-grid == 0,
-    $line-height,
-    $line-height + $base-grid - ($line-height % $base-grid)
-  );
+  // @return if(
+  //   $line-height % $base-grid == 0,
+  //   $line-height,
+  //   $line-height + $base-grid - ($line-height % $base-grid)
+  // );
+  @if($line-height % $base-grid == 0) {
+    @return $line-height;
+  } @else {
+    @return $line-height + $base-grid - ($line-height % $base-grid);
+  }
 }
 
 /// Sets the font-face for a given weight.

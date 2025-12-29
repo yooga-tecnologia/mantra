@@ -44,7 +44,6 @@ export const config: Config = {
      * Webapp Output Target
      * @see https://stenciljs.com/docs/www
      * */
-
     {
       type: 'www',
       serviceWorker: null,
@@ -55,9 +54,12 @@ export const config: Config = {
         },
       ],
     },
-
     {
       type: 'docs-readme',
+    },
+    {
+      type: 'docs-json',
+      file: './custom-elements.json',
     },
   ],
   testing: {
