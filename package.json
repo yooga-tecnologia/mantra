@@ -1,6 +1,6 @@
 {
   "name": "@yooga-tecnologia/mantra",
-  "version": "2.9.3",
+  "version": "3.0.0",
   "description": "Biblioteca de componentes web desenvolvida com StencilJS para criar interfaces reutilizáveis e performáticas em diferentes frameworks e projetos.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -14,9 +14,9 @@
       "require": "./dist/mantra/mantra.cjs.js"
     },
     "./loader": {
+      "types": "./loader/index.d.ts",
       "import": "./loader/index.js",
-      "require": "./loader/index.cjs",
-      "types": "./loader/index.d.ts"
+      "require": "./loader/index.cjs"
     }
   },
   "style": "dist/mantra/mantra.css",
@@ -41,7 +41,7 @@
     "test.watch:e2e": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "npm run build && storybook build",
     "cache-clear": "rm -rf ./node_modules ./dist/ ./.stencil/ ./storybook-static/ ./www ./loader/",
     "version:patch": "npm version patch --no-git-tag-version",
     "version:minor": "npm version minor --no-git-tag-version",
@@ -54,8 +54,8 @@
     "@stencil/core": "^4.25.1",
     "@stencil/sass": "^3.0.12",
     "@stencil/storybook-plugin": "^0.5.6",
-    "@storybook/addon-docs": "^9.1.17",
-    "@storybook/html-vite": "^9.1.17",
+    "@storybook/addon-docs": "^10.1.11",
+    "@storybook/html-vite": "^10.1.11",
     "@types/jest": "^29.5.6",
     "@types/marked": "^5.0.2",
     "@types/node": "^18.0.0",
@@ -77,9 +77,10 @@
     "puppeteer": "^24.5.0",
     "sass": "^1.83.4",
     "sass-loader": "^16.0.4",
-    "storybook": "^9.1.17",
+    "storybook": "^10.1.11",
     "typescript": "^5.8.2",
-    "vite": "^5.4.11"
+    "vite": "^5.4.11",
+    "eslint-plugin-storybook": "10.1.11"
   },
   "license": "MIT"
 }

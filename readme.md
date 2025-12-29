@@ -20,7 +20,7 @@ A proposta do Mantra é fornecer componentes encapsulados e flexíveis que possa
 
 - Suporte a Storybook: Visualização e testes interativos dos componentes.
 
-- Estilização com SCSS: Utilizando @stencil/sass para maior flexibilidade.
+- Estilização com SCSS: Utilizando `@stencil/sass` para maior flexibilidade.
 
 - Testes Automatizados: Inclui Jest e Puppeteer para testes unitários e e2e.
 
@@ -53,6 +53,7 @@ Para mais detalhes sobre cada componente e suas propriedades, consulte a documen
 ## 📜 Scripts Disponíveis
 
 ### Desenvolvimento e Testes
+
 ```bash
 npm run build           # Compila os componentes
 npm run start           # Inicia o servidor de desenvolvimento
@@ -63,12 +64,19 @@ npm run build-storybook # Gera a versão estática do Storybook
 ```
 
 ### Release e Publicação
+
 ```bash
 npm run release         # Script interativo para preparar releases
 npm run pre-commit      # Executa testes e build (verificação pré-commit)
 ```
 
-> **📋 Processo de Release:** O release é feito via Pull Request para `main`. Após o merge, o GitHub Actions automaticamente publica no GitHub Packages e faz deploy do Storybook. Veja [RELEASE_PROCESS.md](./RELEASE_PROCESS.md) para detalhes.
+> **📋 Processo de Release:**
+>
+> O release é feito via Pull Request para `main`.
+>
+> Após o merge, o GitHub Actions automaticamente publica no GitHub Packages e faz deploy do Storybook.
+>
+> Veja [RELEASE_PROCESS.md](./RELEASE_PROCESS.md) para detalhes.
 
 ## 🛠 Tecnologias Utilizadas
 

@@ -4,6 +4,20 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [3.0.0] – 2025-12-29
+
+### ✨ Melhorado
+
+- Bump do Storybook
+  - Versão atulizada: v8 -> v10
+  - Ajustes na configuração do SB;
+  - Criação de tema;
+  - Ajustes nos stories dos componentes, seguindo [documentação de migração oficial](https://github.com/storybookjs/storybook/blob/next/MIGRATION.md)
+
+> OBS.: Stencil ainda não disponibilizou um addon atualizado para esta versão mais atual do Storybook. Sendo necessário instalar dependências utilizando flag `--legacy-peer-deps`.
+>
+> Para mais informações, leia a issue relacionada [clicando aqui](https://github.com/stenciljs/storybook/issues/43)
+
 ## [2.9.3] – 2025-12-26
 
 ### 🚀 Adicionado

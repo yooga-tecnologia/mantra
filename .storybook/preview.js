@@ -1,19 +1,37 @@
-import { defineCustomElements } from '../loader';
-
 import { setCustomElementsManifest } from '@stencil/storybook-plugin';
+import { themes } from 'storybook/theming';
+
+import { defineCustomElements } from '../loader';
 import customElements from '../custom-elements.json';
+
+import './_fonts.scss';
+import './_styles.scss';
 
 defineCustomElements();
 setCustomElementsManifest(customElements);
 
 const preview = {
   parameters: {
+    backgrounds: {
+      options: {
+        // 👇 Default options
+        dark: { name: 'dark', value: '#333' },
+        light: { name: 'light', value: '#F7F9F2' },
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
     },
+    docs: {
+      theme: themes.dark,
+    },
+  },
+  initialGlobals: {
+    // 👇 Set the initial background color
+    backgrounds: { value: 'light' },
   },
   decorators: [
     (story) => {
