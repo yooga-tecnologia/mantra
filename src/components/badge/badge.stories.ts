@@ -13,7 +13,7 @@ const SB_TABLE_ICON = {
   },
 };
 
-const filteredSizeVariantsArray = sizeVariantsArray.filter((size) => size !== 'large');
+const filteredSizeVariantsArray = sizeVariantsArray;
 
 const meta: Meta<BadgeBaseProps> = {
   title: 'Components/Badge/Default',

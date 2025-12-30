@@ -12,7 +12,7 @@
 | `color`  | `color`   |             | `"critical" \| "neutral" \| "primary" \| "secondary" \| "success" \| "warning"` | `'primary'` |
 | `icon`   | `icon`    |             | `string`                                                                        | `undefined` |
 | `label`  | `label`   |             | `string`                                                                        | `undefined` |
-| `size`   | `size`    |             | `"medium" \| "small" \| "tiny"`                                                 | `'medium'`  |
+| `size`   | `size`    |             | `"large" \| "medium" \| "small" \| "tiny"`                                      | `'medium'`  |
 | `tone`   | `tone`    |             | `"default" \| "emphasis" \| "highlight"`                                        | `'default'` |
 
 
