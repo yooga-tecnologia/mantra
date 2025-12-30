@@ -90,7 +90,7 @@ const getColorVariants = (color: ThemePalette): HTMLString => {
   return `
 <div class="sb-section-box">
   <h4>${color}</h4>
-  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
+  <div class="sb-grid-5 sb-grid-row-divider sb-grid-row-title">
     ${badgeVariants.join('')}
   </div>
 </div>`;
