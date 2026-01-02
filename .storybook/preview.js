@@ -14,7 +14,6 @@ const preview = {
   parameters: {
     backgrounds: {
       options: {
-        // 👇 Default options
         dark: { name: 'dark', value: '#333' },
         light: { name: 'light', value: '#F7F9F2' },
       },
@@ -26,8 +25,23 @@ const preview = {
       },
     },
     docs: {
-      theme: themes.dark,
-      codePanel: true,
+      theme: themes.light,
+      codePanel: false,
+    },
+    options: {
+      storySort: {
+        order: [
+          'Components',
+          [
+            'Button',
+            [
+              'Intro',
+              'Default',
+              'Icon',
+            ],
+          ],
+        ],
+      },
     },
   },
   initialGlobals: {

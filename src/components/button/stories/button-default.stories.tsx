@@ -1,45 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 
-import { themePalettesArray } from '../../shared/theme/theme.types';
-import { ButtonProps, buttonStyleArray } from './button.types';
-import { sizeVariantsArray } from '../../shared/theme/theme.types';
-import { Button } from './button';
+import { themePalettesArray } from '../../../shared/theme/theme.types';
+import { ButtonProps, buttonStyleArray } from '../button.types';
+import { sizeVariantsArray } from '../../../shared/theme/theme.types';
+import { Button } from '../button';
 
 type Story = StoryObj;
 
 const meta = {
-  title: 'Components/Button',
+  title: 'Components/Button/Default',
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     docs: {
       codePanel: true,
       description: {
-        component: `
-O componente **Button** permite que usuários realizem ações e façam escolhas com um único toque ou clique.
-
-Botões comunicam ações que os usuários podem realizar e são tipicamente colocados em interfaces como diálogos,
-formulários, cards, toolbars, etc.
-
-🔗 [**FIGMA**](https://www.figma.com/design/ezr4b0ZxjmeWjASveGQoJS/-1-Core-Components?node-id=407-766&t=YDt7UhIUEjPwGOIf-4)
-
-## Guia de uso para variantes
-
-- **Regular (solid)**: Ação primária de alto destaque, use para a ação mais importante da tela
-- **Emphasis**: Variação com mais destaque visual (gradientes/sombras), ideal para CTAs importantes
-- **Stroke (outline)**: Ações secundárias com menos destaque, bom para ações complementares
-- **Plain (ghost)**: Ações terciárias ou em contextos com limitação de espaço, mínimo de interferência visual
-
-## Cores disponíveis
-
-Cada cor tem um significado semântico:
-- **Primary**: Ações principais da aplicação
-- **Secondary**: Ações secundárias
-- **Neutral**: Ações neutras ou de cancelamento
-- **Success**: Confirmações e ações positivas
-- **Warning**: Ações que requerem atenção
-- **Critical**: Ações destrutivas ou de alta importância
-        `,
+        component: `Variante de button que contém label, color, variant, size, disabled, fullWidth, iconLeft, iconRight e iconAnimation.`,
       },
     },
   },
@@ -131,7 +107,7 @@ Cada cor tem um significado semântico:
 export default meta;
 
 const baseArgs = {
-  label: 'Button',
+  label: 'Button/Default',
   size: 'medium',
   color: 'primary',
   disabled: false,

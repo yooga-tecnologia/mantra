@@ -3,7 +3,7 @@ import readme from '../../readme.md?raw';
 
 export default {
   title: 'Intro',
-  tags: ['autodocs'],
+  tags: [],
   parameters: {
     layout: 'padded',
     backgrounds: {
