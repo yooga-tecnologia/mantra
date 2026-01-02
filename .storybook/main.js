@@ -2,9 +2,12 @@
 
 const config = {
   stories: [
+    '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
-  addons: [],
+  addons: [
+    '@storybook/addon-docs',
+  ],
   framework: {
     name: '@storybook/html-vite',
     options: {},
@@ -12,6 +15,9 @@ const config = {
   staticDirs: [
     { from: '../dist-custom-elements/fonts', to: '/fonts' }
   ],
+  docs: {
+    defaultName: 'Docs',
+  },
 };
 
 export default config;

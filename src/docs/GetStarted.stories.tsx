@@ -24,7 +24,7 @@ export default {
   },
 };
 
-export const GettingStarted = () => {
+export const GetStarted = () => {
   const readmeContent = marked(readme) as string;
   const container = document.createElement('div');
   container.className = 'sb-docs-container';

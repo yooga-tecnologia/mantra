@@ -27,6 +27,7 @@ const preview = {
     },
     docs: {
       theme: themes.dark,
+      codePanel: true,
     },
   },
   initialGlobals: {

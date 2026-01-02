@@ -46,11 +46,6 @@ $border-radius-medium: map.get(sizing.$border-radius-map, "medium");
     width: 100%;
   }
 
-  .#{$component-prefix}disabled:hover {
-    pointer-events: none;
-    cursor: not-allowed;
-  }
-
   button[class^="#{$component-prefix}-#{$size}"],
   .#{$component-prefix}-#{$size} {
     display: flex;
@@ -63,7 +58,7 @@ $border-radius-medium: map.get(sizing.$border-radius-map, "medium");
     border-radius: $border-radius-medium;
 
     &:not(:disabled):hover,
-    &:not(.button-disabled):hover {
+    &:not(.#{$component-prefix}-disabled):hover {
       cursor: pointer;
     }
 
@@ -82,6 +77,10 @@ $border-radius-medium: map.get(sizing.$border-radius-map, "medium");
     &.#{$component-prefix}-icon {
       height: map.get($size-map, "height");
       width: map.get($size-map, "height");
+    }
+
+    &.#{$component-prefix}-disabled:hover {
+      cursor: not-allowed;
     }
   }
 }
