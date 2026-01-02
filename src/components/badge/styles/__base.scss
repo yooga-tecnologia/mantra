@@ -8,7 +8,7 @@ $component-prefix: theme.get-prefix('badge');
 
 $badge-size-configs: (
   "tiny": (
-    font-size: 12px,
+    font-size: 11px,
     padding: 4px 8px,
     height: 24px,
     gap: 4px,
@@ -57,7 +57,7 @@ $badge-size-configs: (
     span.#{$component-prefix}-label {
       font-weight: 500;
       font-size: map.get($size-map, "font-size");
-      line-height: map.get($size-map, "height");
+      //line-height: map.get($size-map, "height");
       text-wrap-mode: nowrap;
     }
   }

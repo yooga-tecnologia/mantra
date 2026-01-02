@@ -41,6 +41,29 @@ export class Badge {
     return `${sizeClass} ${colorClass} ${toneClass} ${iconOnlyClass}`.trim();
   }
 
+  get iconSize(): number {
+    let iconSize = 16;
+
+    switch (this.size) {
+      case 'tiny':
+        iconSize = 12;
+        break;
+      case 'small':
+        iconSize = 16;
+        break;
+      case 'medium':
+        iconSize = 16;
+        break;
+      case 'large':
+        iconSize = 20;
+        break;
+      default:
+        iconSize = 16;
+    }
+
+    return iconSize;
+  }
+
   render(): FunctionalComponent<HostAttributes> {
     return (
       <Host>
@@ -53,7 +76,7 @@ export class Badge {
           {this.icon && (
             <mnt-icon
               icon={this.icon}
-              size={this.size}
+              size={this.iconSize}
               class={`${COMPONENT_PREFIX}-icon`}
             />
           )}
