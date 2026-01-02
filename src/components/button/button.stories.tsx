@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 
 import { themePalettesArray } from '../../shared/theme/theme.types';
-import { buttonStyleArray } from './button.types';
+import { ButtonProps, buttonStyleArray } from './button.types';
 import { sizeVariantsArray } from '../../shared/theme/theme.types';
 import { Button } from './button';
 
@@ -136,12 +136,15 @@ const baseArgs = {
   color: 'primary',
   disabled: false,
   fullWidth: false,
+  iconLeft: undefined,
+  iconRight: undefined,
+  iconAnimation: 'none',
 };
 
 // Story principal: Matriz de todas as variantes
 export const AllVariants: Story = {
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
     docs: {
       description: {
         story: 'Visualização completa de todas as combinações de variantes e cores disponíveis. Use esta matriz para escolher a melhor combinação para seu caso de uso.',
@@ -198,6 +201,21 @@ export const AllVariants: Story = {
   },
 };
 
+const ButtonTemplate = (props: ButtonProps) => {
+  return `
+    <mnt-button
+      variant="${props.variant}"
+      label="${props.label}"
+      color="${props.color}"
+      size="${props.size}"
+      ${props.iconLeft ? `icon-left="${props.iconLeft}"` : ''}
+      ${props.iconRight ? `icon-right="${props.iconRight}"` : ''}
+      ${props.disabled ? 'disabled' : ''}
+      ${props.fullWidth ? 'full-width' : ''}
+    ></mnt-button>
+  `.trim();
+};
+
 // Stories individuais por variante
 export const Regular: Story = {
   args: {
@@ -211,17 +229,7 @@ export const Regular: Story = {
       },
     },
   },
-  render: ({ label, color, variant, size, disabled, fullWidth }) =>
-    `
-    <mnt-button
-      label="${label}"
-      color="${color}"
-      variant="${variant}"
-      size="${size}"
-      ${disabled ? 'disabled' : ''}
-      ${fullWidth ? 'full-width' : ''}
-    ></mnt-button>
-  `,
+  render: (args) => ButtonTemplate(args),
 };
 
 export const Emphasis: Story = {
@@ -237,17 +245,7 @@ export const Emphasis: Story = {
       },
     },
   },
-  render: ({ label, color, variant, size, disabled, fullWidth }) =>
-    `
-    <mnt-button
-      label="${label}"
-      color="${color}"
-      variant="${variant}"
-      size="${size}"
-      ${disabled ? 'disabled' : ''}
-      ${fullWidth ? 'full-width' : ''}
-    ></mnt-button>
-  `,
+  render: (args) => ButtonTemplate(args),
 };
 
 export const Stroke: Story = {
@@ -263,17 +261,7 @@ export const Stroke: Story = {
       },
     },
   },
-  render: ({ label, color, variant, size, disabled, fullWidth }) =>
-    `
-    <mnt-button
-      label="${label}"
-      color="${color}"
-      variant="${variant}"
-      size="${size}"
-      ${disabled ? 'disabled' : ''}
-      ${fullWidth ? 'full-width' : ''}
-    ></mnt-button>
-  `,
+  render: (args) => ButtonTemplate(args),
 };
 
 export const Plain: Story = {
@@ -288,23 +276,13 @@ export const Plain: Story = {
       },
     },
   },
-  render: ({ label, color, variant, size, disabled, fullWidth }) =>
-    `
-    <mnt-button
-      label="${label}"
-      color="${color}"
-      variant="${variant}"
-      size="${size}"
-      ${disabled ? 'disabled' : ''}
-      ${fullWidth ? 'full-width' : ''}
-    ></mnt-button>
-  `,
+  render: (args) => ButtonTemplate(args),
 };
 
 // Story: Tamanhos disponíveis
 export const Sizes: Story = {
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
     docs: {
       description: {
         story:
@@ -313,37 +291,15 @@ export const Sizes: Story = {
     },
   },
   render: () => {
-    return `
-      <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-        <mnt-button
-          label="Small"
-          color="primary"
-          variant="regular"
-          size="small"
-        ></mnt-button>
-
-        <mnt-button
-          label="Medium"
-          color="primary"
-          variant="regular"
-          size="medium"
-        ></mnt-button>
-
-        <mnt-button
-          label="Large"
-          color="primary"
-          variant="regular"
-          size="large"
-        ></mnt-button>
-      </div>
-    `;
+    const sizes = sizeVariantsArray.filter((s) => s !== 'tiny');
+    return sizes.map((size) => ButtonTemplate({ ...baseArgs, size, variant: 'emphasis' } as ButtonProps)).join('\n');
   },
 };
 
 // Story: Com ícones
 export const WithIcons: Story = {
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
     docs: {
       description: {
         story:
@@ -356,64 +312,26 @@ export const WithIcons: Story = {
       <div style="display: flex; flex-direction: column; gap: 16px;">
         <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
           <span style="font-weight: 600; min-width: 120px;">Icon Left:</span>
-          <mnt-button
-            label="Download"
-            color="primary"
-            variant="regular"
-            size="medium"
-            icon-left="download"
-          ></mnt-button>
-
-          <mnt-button
-            label="Save"
-            color="success"
-            variant="stroke"
-            size="medium"
-            icon-left="check"
-          ></mnt-button>
+          ${ButtonTemplate({ ...baseArgs, iconLeft: 'downloadSimple', variant: 'regular' } as ButtonProps)}
+          ${ButtonTemplate({ ...baseArgs, iconLeft: 'downloadSimple', variant: 'plain' } as ButtonProps)}
+          ${ButtonTemplate({ ...baseArgs, iconLeft: 'downloadSimple', variant: 'stroke' } as ButtonProps)}
+          ${ButtonTemplate({ ...baseArgs, iconLeft: 'downloadSimple', variant: 'emphasis' } as ButtonProps)}
         </div>
 
         <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
           <span style="font-weight: 600; min-width: 120px;">Icon Right:</span>
-          <mnt-button
-            label="Next"
-            color="primary"
-            variant="regular"
-            size="medium"
-            icon-right="arrow-right"
-          ></mnt-button>
-
-          <mnt-button
-            label="External Link"
-            color="secondary"
-            variant="plain"
-            size="medium"
-            icon-right="external-link"
-          ></mnt-button>
+          ${ButtonTemplate({ ...baseArgs, iconRight: 'arrow-right', variant: 'regular' } as ButtonProps)}
+          ${ButtonTemplate({ ...baseArgs, iconRight: 'arrow-right', variant: 'plain' } as ButtonProps)}
+          ${ButtonTemplate({ ...baseArgs, iconRight: 'arrow-right', variant: 'stroke' } as ButtonProps)}
+          ${ButtonTemplate({ ...baseArgs, iconRight: 'arrow-right', variant: 'emphasis' } as ButtonProps)}
         </div>
 
         <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
           <span style="font-weight: 600; min-width: 120px;">Both Icons:</span>
-          <mnt-button
-            label="Search"
-            color="primary"
-            variant="stroke"
-            size="medium"
-            icon-left="search"
-            icon-right="arrow-down"
-          ></mnt-button>
-        </div>
-
-        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-          <span style="font-weight: 600; min-width: 120px;">With Animation:</span>
-          <mnt-button
-            label="Loading"
-            color="primary"
-            variant="regular"
-            size="medium"
-            icon-left="loader"
-            icon-animation="spin"
-          ></mnt-button>
+          ${ButtonTemplate({ ...baseArgs, iconLeft: 'caret-left', iconRight: 'caret-right', variant: 'regular' } as ButtonProps)}
+          ${ButtonTemplate({ ...baseArgs, iconLeft: 'caret-left', iconRight: 'caret-right', variant: 'plain' } as ButtonProps)}
+          ${ButtonTemplate({ ...baseArgs, iconLeft: 'caret-left', iconRight: 'caret-right', variant: 'stroke' } as ButtonProps)}
+          ${ButtonTemplate({ ...baseArgs, iconLeft: 'caret-left', iconRight: 'caret-right', variant: 'emphasis' } as ButtonProps)}
         </div>
       </div>
     `;
@@ -423,7 +341,7 @@ export const WithIcons: Story = {
 // Story: Estados especiais
 export const States: Story = {
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
     docs: {
       description: {
         story: 'Exemplos de estados especiais do botão: **disabled** (desabilitado) e **fullWidth** (largura total do container).',
@@ -436,58 +354,38 @@ export const States: Story = {
         <div>
           <h4 style="margin: 0 0 12px 0; font-size: 14px; font-weight: 600; color: #666;">Disabled State</h4>
           <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <mnt-button
-              label="Disabled Regular"
-              color="primary"
-              variant="regular"
-              size="medium"
-              disabled
-            ></mnt-button>
-
-            <mnt-button
-              label="Disabled Stroke"
-              color="success"
-              variant="stroke"
-              size="medium"
-              disabled
-            ></mnt-button>
-
-            <mnt-button
-              label="Disabled Plain"
-              color="secondary"
-              variant="plain"
-              size="medium"
-              disabled
-            ></mnt-button>
-          </div>
+          ${ButtonTemplate({ ...baseArgs, label: 'Disabled Regular', disabled: true, variant: 'regular' } as ButtonProps)}
+          ${ButtonTemplate({ ...baseArgs, label: 'Disabled Stroke', disabled: true, variant: 'stroke' } as ButtonProps)}
+          ${ButtonTemplate({ ...baseArgs, label: 'Disabled Plain', disabled: true, variant: 'plain' } as ButtonProps)}
+          ${ButtonTemplate({ ...baseArgs, label: 'Disabled Emphasis', disabled: true, variant: 'emphasis' } as ButtonProps)}
         </div>
+      </div>
+    `;
+  },
+};
 
-        <div>
-          <h4 style="margin: 0 0 12px 0; font-size: 14px; font-weight: 600; color: #666;">Full Width</h4>
-          <div style="width: 100%; max-width: 400px;">
-            <mnt-button
-              label="Full Width Button"
-              color="primary"
-              variant="regular"
-              size="medium"
-              full-width
-            ></mnt-button>
-          </div>
-        </div>
-
-        <div>
-          <h4 style="margin: 0 0 12px 0; font-size: 14px; font-weight: 600; color: #666;">Full Width + Icon</h4>
-          <div style="width: 100%; max-width: 400px;">
-            <mnt-button
-              label="Continue to Payment"
-              color="success"
-              variant="regular"
-              size="large"
-              full-width
-              icon-right="arrow-right"
-            ></mnt-button>
-          </div>
-        </div>
+// Story: Full Width
+export const FullWidth: Story = {
+  args: {
+    ...baseArgs,
+    fullWidth: true,
+  },
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        story: 'Exemplo de como usar botões com largura total do container.',
+      },
+    },
+  },
+  render: (args) => {
+    return `
+      <div style="display: flex; flex-direction: column; gap: 24px; width: 600px; max-width: 400px;">
+        <h4 style="text-align: center; margin: 0 0 12px 0; font-size: 14px; font-weight: 600; color: #666;">Full Width (eg.: container width = 600px)</h4>
+        ${ButtonTemplate({ ...args, variant: 'regular' })}
+        ${ButtonTemplate({ ...args, variant: 'plain' })}
+        ${ButtonTemplate({ ...args, variant: 'stroke' })}
+        ${ButtonTemplate({ ...args, variant: 'emphasis' })}
       </div>
     `;
   },
@@ -496,7 +394,7 @@ export const States: Story = {
 // Story: Exemplo de uso em formulário
 export const InFormContext: Story = {
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
     docs: {
       description: {
         story: 'Exemplo de como usar botões em um contexto de formulário, demonstrando hierarquia visual entre ações primárias e secundárias.',
