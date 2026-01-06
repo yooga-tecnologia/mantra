@@ -9,11 +9,11 @@ assignees: co-ana
 
 ## Tipo
 <!-- Marque o tipo de problema/sugestão -->
-[ ] Documentação incorreta ou desatualizada
-[ ] Documentação ausente
-[ ] Exemplo de código não funciona
-[ ] Melhoria na clareza/explicação
-[ ] Tradução
+- [ ] Documentação incorreta ou desatualizada
+- [ ] Documentação ausente
+- [ ] Exemplo de código não funciona
+- [ ] Melhoria na clareza/explicação
+- [ ] Tradução
 
 ## Localização
 <!-- Onde está o problema? -->

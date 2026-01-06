@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Sugira uma nova funcionalidade ou melhoria
-title: "[feature]"
+title: "[feature] "
 labels: enhancement
 assignees: co-ana
 
