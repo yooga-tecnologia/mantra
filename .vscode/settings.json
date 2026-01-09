@@ -14,7 +14,8 @@
     "switch",
     "date-picker",
     "field-date",
-    "npm"
+    "npm",
+    "field-text"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false

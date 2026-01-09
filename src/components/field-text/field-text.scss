@@ -85,6 +85,10 @@ $field-text-color-scheme: (
     font-family: primitives.$body-font-family;
   }
 
+  &-full-width {
+    width: 100%;
+  }
+
   &-label {
     font-weight: 500;
     color: #4B5053;
@@ -107,6 +111,21 @@ $field-text-color-scheme: (
 
       &::placeholder {
         color: #818A8F;
+      }
+
+      &[disabled],
+      &[disabled]:hover {
+        cursor: not-allowed;
+        background-color: map.get($field-text-color-scheme, disabled, background-color);
+        border-color: map.get($field-text-color-scheme, disabled, border-color);
+        color: map.get($field-text-color-scheme, disabled, text-color);
+      }
+    }
+
+    &-full-width {
+      &,
+      & > input {
+        width: 100%;
       }
     }
 

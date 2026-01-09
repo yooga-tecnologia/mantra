@@ -4,6 +4,43 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.9.4] - 2026-01-09
+
+### ✨ Melhorado
+
+- **FieldText (Currency Mask)**: Refatoração completa da máscara de moeda para melhor UX
+  - **Formatação apenas no blur**: Durante a digitação, o campo mostra o valor sem formatação. A formatação para moeda brasileira (R$) é aplicada apenas quando o usuário sai do campo
+  - **Interpretação inteligente de valores**:
+    - Valores sem separador decimal (ex: `30000`) são interpretados como reais inteiros → `R$ 30.000,00`
+    - Valores com separador decimal (ex: `1000.5`) mantêm as casas decimais → `R$ 1.000,50`
+  - **Suporte a vírgula e ponto**: Aceita tanto `1000,5` quanto `1000.5` como entrada
+  - **Comportamento focus/blur otimizado**:
+    - No focus: Exibe valor raw (ex: `30000.00`) para facilitar edição
+    - No blur: Formata para moeda (ex: `R$ 30.000,00`)
+  - **Método público `getRawValue()`**: Permite acesso programático ao valor numérico sem formatação
+  - **Eventos aprimorados**: `valueChange` agora emite tanto `formattedValue` quanto `rawValue`
+  - **Suporte completo ao Angular**: Property binding `[value]` funciona corretamente com @Watch
+  - **Controle de estado interno**: Flag `isFocused` garante renderização correta durante digitação
+
+### 🧪 Testes
+
+- **FieldText (Currency Mask)**: Cobertura de testes ampliada com 14 novos testes
+  - **Formatting behavior** (5 testes): Validação de formatação para valores inteiros, decimais, com vírgula/ponto, valores pequenos e grandes
+  - **Focus/Blur behavior** (2 testes): Comportamento de exibição raw no focus e formatação no blur
+  - **Value emission** (1 teste): Validação de emissão correta de formattedValue e rawValue
+  - **Edge cases** (3 testes): Tratamento de valores vazios, zero e inválidos
+  - **Methods** (2 testes): Testes do método público `getRawValue()`
+  - **Events** (1 teste): Validação de estrutura de eventos emitidos
+
+### 📖 Documentação
+
+- **FieldText (Currency Mask)**: Nova story no Storybook demonstrando funcionalidade completa
+  - Exemplos interativos com campos funcionais
+  - Tabela de transformações (entrada → saída formatada → valor raw)
+  - Explicação detalhada do comportamento focus/blur
+  - Guia de uso com código de integração Angular
+  - Lista de casos de uso práticos
+
 ## [2.9.3] – 2025-12-26
 
 ### 🚀 Adicionado

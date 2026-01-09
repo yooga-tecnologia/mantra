@@ -148,8 +148,279 @@ describe('mnt-field-text', () => {
       });
     });
   });
-  describe('Events', () => {});
-  describe('Methods', () => {});
+  describe('Events', () => {
+    it('SHOULD emit valueChange with formattedValue and rawValue', async () => {
+      const page = await createFieldTextComponent(`
+        <mnt-field-text input-name="eventTest"></mnt-field-text>
+      `);
+      const input = getInputElement(page);
+      const spy = jest.fn();
+      page.root.addEventListener('valueChange', spy);
+
+      input.value = 'test value';
+      input.dispatchEvent(new Event('input'));
+      await page.waitForChanges();
+
+      expect(spy).toHaveBeenCalled();
+      const eventDetail = spy.mock.calls[0][0].detail;
+      expect(eventDetail).toHaveProperty('formattedValue');
+      expect(eventDetail).toHaveProperty('rawValue');
+    });
+  });
+
+  describe('Methods', () => {
+    describe('getRawValue()', () => {
+      it('SHOULD return raw currency value when mask is currency', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="currencyTest"
+            mask="currency"
+            value="1000.50"
+          ></mnt-field-text>
+        `);
+
+        const component = page.rootInstance as FieldText;
+        const rawValue = component.getRawValue();
+
+        expect(rawValue).toBeTruthy();
+        expect(typeof rawValue).toBe('string');
+      });
+
+      it('SHOULD return regular value when no mask is applied', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="noMaskTest"
+            value="test"
+          ></mnt-field-text>
+        `);
+
+        const component = page.rootInstance as FieldText;
+        const rawValue = component.getRawValue();
+
+        expect(rawValue).toBe('test');
+      });
+    });
+  });
+
+  describe('Currency Mask', () => {
+    describe('Formatting behavior', () => {
+      it('SHOULD format integer values as reais when no decimal separator', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="currencyTest"
+            mask="currency"
+            value="30000"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        await page.waitForChanges();
+
+        // Deve formatar 30000 como R$ 30.000,00
+        expect(input.value).toContain('30.000');
+      });
+
+      it('SHOULD preserve decimal values when decimal separator is present', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="currencyTest"
+            mask="currency"
+            value="1000.50"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        await page.waitForChanges();
+
+        // Deve formatar como R$ 1.000,50
+        expect(input.value).toContain('1.000');
+        expect(input.value).toContain(',50');
+      });
+
+      it('SHOULD accept both comma and dot as decimal separator', async () => {
+        // Teste com ponto
+        const pageDot = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="currencyDot"
+            mask="currency"
+            value="1000.50"
+          ></mnt-field-text>
+        `);
+
+        // Teste com vírgula
+        const pageComma = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="currencyComma"
+            mask="currency"
+            value="1000,50"
+          ></mnt-field-text>
+        `);
+
+        const inputDot = getInputElement(pageDot);
+        const inputComma = getInputElement(pageComma);
+
+        await pageDot.waitForChanges();
+        await pageComma.waitForChanges();
+
+        // Ambos devem resultar no mesmo formato
+        expect(inputDot.value).toBe(inputComma.value);
+      });
+
+      it('SHOULD handle small values correctly', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="currencySmall"
+            mask="currency"
+            value="1.50"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        await page.waitForChanges();
+
+        expect(input.value).toContain('1,50');
+      });
+
+      it('SHOULD handle large values with proper thousand separators', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="currencyLarge"
+            mask="currency"
+            value="1000000.99"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        await page.waitForChanges();
+
+        expect(input.value).toContain('1.000.000');
+        expect(input.value).toContain(',99');
+      });
+    });
+
+    describe('Focus/Blur behavior', () => {
+      it('SHOULD show raw value on focus', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="focusTest"
+            mask="currency"
+            value="100"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        const component = page.rootInstance as FieldText;
+
+        // Simula focus
+        component.onFocus({ target: input });
+        await page.waitForChanges();
+
+        // Deve mostrar valor raw sem formatação
+        expect(input.value).not.toContain('R$');
+      });
+
+      it('SHOULD format value on blur', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="blurTest"
+            mask="currency"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        const component = page.rootInstance as FieldText;
+
+        // Simula digitação
+        input.value = '30000';
+        component.onInput({ target: input });
+        await page.waitForChanges();
+
+        // Simula blur
+        component.onBlur({ target: input });
+        await page.waitForChanges();
+
+        // Deve formatar
+        expect(input.value).toContain('R$');
+        expect(input.value).toContain('30.000');
+      });
+    });
+
+    describe('Value emission', () => {
+      it('SHOULD emit both formatted and raw values on blur', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="emitTest"
+            mask="currency"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        const component = page.rootInstance as FieldText;
+        const spy = jest.fn();
+
+        page.root.addEventListener('valueChange', spy);
+
+        // Simula digitação e blur
+        input.value = '1000.50';
+        component.onInput({ target: input });
+        component.onBlur({ target: input });
+        await page.waitForChanges();
+
+        expect(spy).toHaveBeenCalled();
+        const eventDetail = spy.mock.calls[spy.mock.calls.length - 1][0].detail;
+
+        // Deve ter ambos os valores
+        expect(eventDetail.formattedValue).toContain('R$');
+        expect(eventDetail.rawValue).toBe('1000.50');
+      });
+    });
+
+    describe('Edge cases', () => {
+      it('SHOULD handle empty value', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="emptyTest"
+            mask="currency"
+            value=""
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        expect(input.value).toBe('');
+      });
+
+      it('SHOULD handle zero value', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="zeroTest"
+            mask="currency"
+            value="0"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        await page.waitForChanges();
+
+        expect(input.value).toBeTruthy();
+      });
+
+      it('SHOULD handle invalid input gracefully', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="invalidTest"
+            mask="currency"
+            value="abc"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        await page.waitForChanges();
+
+        // Não deve quebrar, deve retornar string vazia ou valor padrão
+        expect(input.value).toBeDefined();
+      });
+    });
+  });
 
   describe('Native input attributes and events', () => {
     it('SHOULD propagate maxLength, minLength, max, min, value to input', async () => {
@@ -169,20 +440,6 @@ describe('mnt-field-text', () => {
       expect(input.max).toBe('100');
       expect(input.min).toBe('10');
       expect(input.value).toBe('abc');
-    });
-
-    it('SHOULD emit valueChange event and update value on input', async () => {
-      const page = await createFieldTextComponent(`
-        <mnt-field-text input-name="eventTest"></mnt-field-text>
-      `);
-      const input = getInputElement(page);
-      const spy = jest.fn();
-      page.root.addEventListener('valueChange', spy);
-      input.value = 'novo valor';
-      input.dispatchEvent(new Event('input'));
-      await page.waitForChanges();
-      expect(spy).toHaveBeenCalled();
-      expect(spy.mock.calls[0][0].detail).toBe('novo valor');
     });
   });
 });
