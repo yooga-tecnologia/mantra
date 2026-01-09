@@ -4,6 +4,7 @@ import { sass } from '@stencil/sass';
 export const config: Config = {
   namespace: 'mantra',
   globalStyle: './src/_common-variables.scss',
+  hydratedFlag: null,
   outputTargets: [
     /**
      * Distribution Output Target

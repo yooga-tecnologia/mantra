@@ -24,16 +24,14 @@
   </style>
 
   <script>
-    const datePickerConfig = {
-      mode: 'range',
-    };
+    // const datePickerConfig = {
+    //   mode: 'range',
+    // };
+    // setTimeout(() => {
+    //   const fieldText0 = document.getElementById('field-1-input');
+    //   fieldText0.value = '100';
+    // }, 1000);
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const fieldDate1 = document.getElementById('date-1');
-      const fieldDate2 = document.getElementById('date-2');
-      fieldDate1.datePickerConfig = datePickerConfig;
-      fieldDate2.datePickerConfig = datePickerConfig;
-    });
   </script>
 </head>
 
@@ -41,20 +39,21 @@
   <h1>Mantra - Sandbox</h1>
 
 
-  <h2>Field Date</h2>
+  <h2>Field Text</h2>
 
   <div class="container-teste">
-    <div>
-      <mnt-field-date size="small" id="date-1" input-name="date-1" placeholder="Teste single" label-text="Data" required></mnt-field-date>
-    </div>
-    <mnt-field-date size="small" id="date-2" input-name="date-2" placeholder="Teste range" label-text="Data" required></mnt-field-date>
-    <mnt-field-date size="medium" input-name="date-3" placeholder="Teste range" label-text="Data" required></mnt-field-date>
-    <mnt-field-date size="large" input-name="date-4" placeholder="Teste range" label-text="Data" required></mnt-field-date>
-    <!-- <div style="display: flex; flex-direction: column; gap: 20px;">
-    </div> -->
     <!-- <div>
-      <mnt-field-date size="large" input-name="date-3" placeholder="Selecione uma data" label-text="Data" required></mnt-field-date>
+      <input type="email" name="field-x" autocomplete="email" />
     </div> -->
+
+    <div>
+      <mnt-field-text id="field-1" label-text="vazio" value="teste21"></mnt-field-text>
+      <mnt-field-text id="field-1" label-text="vazio" value="10000"></mnt-field-text>
+      <mnt-field-text id="field-2" label-text="vazio" mask="currency" value="10000.1"></mnt-field-text>
+      <mnt-field-text id="field-2" label-text="vazio" mask="currency" value="10000,1"></mnt-field-text>
+      <!-- <mnt-field-text size="small" autofocus mask="custom" minLength="4" id="field-1" name="name" label-text="vazio" autocomplete></mnt-field-text>
+      <mnt-field-text size="small" autofocus mask="currency" minLength="4" id="field-2" name="name" label-text="com valor inicial" value="1000" autocomplete></mnt-field-text> -->
+    </div>
   </div>
 
 </body>

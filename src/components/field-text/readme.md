@@ -9,21 +9,17 @@
 
 | Property          | Attribute           | Description | Type                                       | Default     |
 | ----------------- | ------------------- | ----------- | ------------------------------------------ | ----------- |
-| `disabled`        | `disabled`          |             | `boolean`                                  | `false`     |
+| `customMask`      | --                  |             | `(value: string) => string`                | `undefined` |
+| `fullWidth`       | `full-width`        |             | `boolean`                                  | `false`     |
 | `hasActionButton` | `has-action-button` |             | `boolean`                                  | `undefined` |
 | `hasInfoButton`   | `has-info-button`   |             | `boolean`                                  | `undefined` |
 | `iconLeft`        | `icon-left`         |             | `string`                                   | `undefined` |
 | `iconRight`       | `icon-right`        |             | `string`                                   | `undefined` |
 | `inlineMessage`   | `inline-message`    |             | `string`                                   | `undefined` |
-| `inputName`       | `input-name`        |             | `string`                                   | `undefined` |
 | `labelText`       | `label-text`        |             | `string`                                   | `undefined` |
 | `mask`            | `mask`              |             | `"currency" \| "custom"`                   | `undefined` |
-| `max`             | `max`               |             | `number`                                   | `undefined` |
-| `maxLength`       | `max-length`        |             | `number`                                   | `undefined` |
-| `min`             | `min`               |             | `number`                                   | `undefined` |
-| `minLength`       | `min-length`        |             | `number`                                   | `undefined` |
+| `name`            | `name`              |             | `string`                                   | `undefined` |
 | `placeholder`     | `placeholder`       |             | `string`                                   | `undefined` |
-| `required`        | `required`          |             | `boolean`                                  | `false`     |
 | `size`            | `size`              |             | `"large" \| "medium" \| "small" \| "tiny"` | `'medium'`  |
 | `state`           | `state`             |             | `"default" \| "error" \| "success"`        | `'default'` |
 | `value`           | `value`             |             | `string`                                   | `undefined` |
@@ -31,10 +27,9 @@
 
 ## Events
 
-| Event            | Description                                                                    | Type                  |
-| ---------------- | ------------------------------------------------------------------------------ | --------------------- |
-| `rawValueChange` | Evento emitido com o valor numérico (sem formatação) quando o campo é alterado | `CustomEvent<string>` |
-| `valueChange`    |                                                                                | `CustomEvent<string>` |
+| Event         | Description | Type                                                          |
+| ------------- | ----------- | ------------------------------------------------------------- |
+| `valueChange` |             | `CustomEvent<{ formattedValue: string; rawValue?: string; }>` |
 
 
 ## Dependencies

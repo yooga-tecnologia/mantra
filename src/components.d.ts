@@ -103,21 +103,17 @@ export namespace Components {
         "variant"?: FieldNumberVariant;
     }
     interface MntFieldText {
-        "disabled"?: FieldTextProps['disabled'];
+        "customMask"?: (value: string) => string;
+        "fullWidth"?: boolean;
         "hasActionButton"?: FieldTextProps['hasActionButton'];
         "hasInfoButton"?: FieldTextProps['hasInfoButton'];
         "iconLeft"?: FieldTextProps['iconLeft'];
         "iconRight"?: FieldTextProps['iconRight'];
         "inlineMessage"?: FieldTextProps['inlineMessage'];
-        "inputName": string;
         "labelText"?: FieldTextProps['labelText'];
-        "mask"?: 'currency' | 'custom';
-        "max"?: number;
-        "maxLength"?: number;
-        "min"?: number;
-        "minLength"?: number;
+        "mask"?: 'currency' | 'custom' | null;
+        "name": string;
         "placeholder"?: FieldTextProps['placeholder'];
-        "required"?: FieldTextProps['required'];
         "size"?: FieldTextProps['size'];
         "state"?: FieldTextProps['state'];
         "value"?: string;
@@ -301,8 +297,7 @@ declare global {
         new (): HTMLMntFieldNumberElement;
     };
     interface HTMLMntFieldTextElementEventMap {
-        "valueChange": string;
-        "rawValueChange": string;
+        "valueChange": { formattedValue: string; rawValue?: string };
     }
     interface HTMLMntFieldTextElement extends Components.MntFieldText, HTMLStencilElement {
         addEventListener<K extends keyof HTMLMntFieldTextElementEventMap>(type: K, listener: (this: HTMLMntFieldTextElement, ev: MntFieldTextCustomEvent<HTMLMntFieldTextElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -509,26 +504,18 @@ declare namespace LocalJSX {
         "variant"?: FieldNumberVariant;
     }
     interface MntFieldText {
-        "disabled"?: FieldTextProps['disabled'];
+        "customMask"?: (value: string) => string;
+        "fullWidth"?: boolean;
         "hasActionButton"?: FieldTextProps['hasActionButton'];
         "hasInfoButton"?: FieldTextProps['hasInfoButton'];
         "iconLeft"?: FieldTextProps['iconLeft'];
         "iconRight"?: FieldTextProps['iconRight'];
         "inlineMessage"?: FieldTextProps['inlineMessage'];
-        "inputName"?: string;
         "labelText"?: FieldTextProps['labelText'];
-        "mask"?: 'currency' | 'custom';
-        "max"?: number;
-        "maxLength"?: number;
-        "min"?: number;
-        "minLength"?: number;
-        /**
-          * Evento emitido com o valor numérico (sem formatação) quando o campo é alterado
-         */
-        "onRawValueChange"?: (event: MntFieldTextCustomEvent<string>) => void;
-        "onValueChange"?: (event: MntFieldTextCustomEvent<string>) => void;
+        "mask"?: 'currency' | 'custom' | null;
+        "name"?: string;
+        "onValueChange"?: (event: MntFieldTextCustomEvent<{ formattedValue: string; rawValue?: string }>) => void;
         "placeholder"?: FieldTextProps['placeholder'];
-        "required"?: FieldTextProps['required'];
         "size"?: FieldTextProps['size'];
         "state"?: FieldTextProps['state'];
         "value"?: string;
