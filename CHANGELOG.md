@@ -4,6 +4,21 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.9.6] - 2026-01-13
+
+### ✨ Melhorado
+
+- **FieldText**
+  - Refatoração completa da máscara de moeda para UX funcionar tipo calculadora
+  - **Formatação em tempo real**: Cada dígito é tratado como centavo acumulando, semelhante a calculadoras e caixas eletrônicos
+  - **Comportamento intuitivo durante digitação**:
+    - Digite `1` → `R$ 0,01`
+    - Digite `11` → `R$ 0,11`
+    - Digite `111` → `R$ 1,11`
+    - Digite `1111` → `R$ 11,11`
+    - Digite `11111` → `R$ 111,11`
+    - Digite `111111` → `R$ 1.111,11`
+
 ## [2.9.5] - 2026-01-13
 
 ### ✨ Melhorado
