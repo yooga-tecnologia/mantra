@@ -25,8 +25,15 @@ export class FieldText {
   @Watch('value')
   watchValueProp(newValue: string) {
     // Força atualização quando o valor muda externamente
-    if (newValue !== undefined && newValue !== null) {
-      this.value = newValue;
+    if (newValue !== undefined && newValue !== null && this.inputRef) {
+      if (this.mask === 'currency' && newValue) {
+        // Se é máscara de currency, formata o valor
+        const result = this.processCurrencyInput(newValue);
+        this.inputRef.value = result.formatted;
+        this.rawCurrencyValue = result.raw;
+      } else {
+        this.inputRef.value = newValue;
+      }
     }
   }
 
@@ -46,7 +53,7 @@ export class FieldText {
   private readonly componentPrefix = setComponentClass('field-text', '');
   private readonly iconSizeMap = { small: 16, medium: 20, large: 24 };
   private rawCurrencyValue: string = '';
-  private isFocused: boolean = false;
+  private inputRef?: HTMLInputElement;
 
   /**
    * Retorna o valor raw (sem formatação) quando usa currency mask
@@ -54,6 +61,19 @@ export class FieldText {
    */
   getRawValue(): string {
     return this.mask === 'currency' ? this.rawCurrencyValue : this.value || '';
+  }
+
+  componentDidLoad() {
+    // Seta valor inicial se houver
+    if (this.value && this.inputRef) {
+      if (this.mask === 'currency') {
+        const result = this.processCurrencyInput(this.value);
+        this.inputRef.value = result.formatted;
+        this.rawCurrencyValue = result.raw;
+      } else {
+        this.inputRef.value = this.value;
+      }
+    }
   }
 
   private get fieldTextClass() {
@@ -75,111 +95,133 @@ export class FieldText {
   }
 
   onInput(event: any) {
-    this.value = event.target.value;
     const inputEl = event.target as HTMLInputElement;
+    const inputValue = inputEl.value;
 
     if (!this.mask) {
+      this.value = inputValue;
       this.valueChange.emit({ formattedValue: this.value, rawValue: this.value });
     } else if (this.mask === 'currency') {
-      // Durante digitação: NÃO formata, apenas armazena o valor
-      this.rawCurrencyValue = this.value;
-      this.valueChange.emit({ formattedValue: this.value, rawValue: this.value });
-    } else {
+      // Formata em tempo real como moeda (dígitos acumulam como centavos)
+      const result = this.formatCurrencyRealtime(inputValue);
+      // Garante que não há caracteres HTML ou estranhos
+      const sanitized = result.formatted.replace(/[<>]/g, '');
+
+      // Atualiza o input diretamente no DOM (evita re-render do Stencil)
+      inputEl.value = sanitized;
+
+      // Mantém cursor no final (comportamento natural para calculadora)
+      const cursorPos = sanitized.length;
+      inputEl.setSelectionRange(cursorPos, cursorPos);
+
+      // NÃO atualiza this.value para evitar re-render
+      // Apenas salva para referência interna
+      this.rawCurrencyValue = result.raw;
+      this.valueChange.emit({ formattedValue: sanitized, rawValue: result.raw });
+    } else if (this.mask === 'custom' && this.customMask) {
+      this.value = inputValue;
       const raw = this.value;
       inputEl.value = this.customMask(this.value);
       this.valueChange.emit({ formattedValue: this.value, rawValue: raw });
-    }
-  }
-
-  onBlur(event: any) {
-    this.isFocused = false;
-    const inputEl = event.target as HTMLInputElement;
-
-    if (this.mask === 'currency' && this.value) {
-      const result = this.processCurrencyInput(this.value);
-      inputEl.value = result.formatted;
-      this.value = result.formatted;
-      this.rawCurrencyValue = result.raw;
-      this.valueChange.emit({ formattedValue: result.formatted, rawValue: result.raw });
-    }
-  }
-
-  onFocus(event: any) {
-    this.isFocused = true;
-    const inputEl = event.target as HTMLInputElement;
-
-    if (this.mask === 'currency' && this.rawCurrencyValue) {
-      // AO ENTRAR no campo: mostra valor raw para facilitar edição
-      inputEl.value = this.rawCurrencyValue;
-      this.value = this.rawCurrencyValue;
+    } else {
+      // Sem máscara ou máscara não implementada
+      this.value = inputValue;
+      this.valueChange.emit({ formattedValue: this.value, rawValue: this.value });
     }
   }
 
   /**
-   * Processa input de moeda enquanto o usuário digita ou cola valores
+   * Formata moeda em tempo real durante a digitação
+   * Dígitos acumulam como centavos (comportamento de calculadora)
    *
-   * Detecta automaticamente se é valor com decimal ou valor inteiro
-   *
-   * @param value - Valor do input (pode incluir formatação prévia)
-   *
-   * @returns Objeto com valor formatado e valor raw (decimal como string)
+   * @param value - Valor do input (pode conter formatação prévia)
+   * @returns Objeto com valor formatado e valor raw
    *
    * @example
-   * // Valor inteiro (sem decimal) - interpreta como REAIS
-   * processCurrencyInput('100') // { formatted: 'R$ 100,00', raw: '100.00' }
-   * processCurrencyInput('30000') // { formatted: 'R$ 30.000,00', raw: '30000.00' }
-   *
-   * @example
-   * // Valor com decimal (. ou ,)
-   * processCurrencyInput('1000.5') // { formatted: 'R$ 1.000,50', raw: '1000.50' }
-   * processCurrencyInput('1000,50') // { formatted: 'R$ 1.000,50', raw: '1000.50' }
+   * formatCurrencyRealtime('1') // { formatted: 'R$ 0,01', raw: '0.01' }
+   * formatCurrencyRealtime('11') // { formatted: 'R$ 0,11', raw: '0.11' }
+   * formatCurrencyRealtime('111') // { formatted: 'R$ 1,11', raw: '1.11' }
+   * formatCurrencyRealtime('1111') // { formatted: 'R$ 11,11', raw: '11.11' }
+   * formatCurrencyRealtime('111111') // { formatted: 'R$ 1.111,11', raw: '1111.11' }
    */
-  private processCurrencyInput(value: string): { formatted: string; raw: string } {
-    if (!value) return { formatted: '', raw: '' };
+  private formatCurrencyRealtime(value: string): { formatted: string; raw: string } {
+    if (!value) return { formatted: '', raw: '0.00' };
 
-    const cleanValue = value.replace(/[^\d.,]/g, ''); // Remove tudo exceto dígitos, ponto e vírgula
+    // Sanitiza e remove tudo exceto dígitos
+    const cleanValue = String(value).trim();
+    const onlyDigits = cleanValue.replace(/\D/g, '');
 
-    if (!cleanValue) return { formatted: '', raw: '0' };
+    if (!onlyDigits || onlyDigits === '0') {
+      return { formatted: '', raw: '0.00' };
+    }
 
-    const hasDecimalSeparator = cleanValue.includes('.') || cleanValue.includes(',');
+    // Trata os dígitos como centavos
+    const cents = parseInt(onlyDigits, 10);
+    const numericValue = cents / 100;
+
+    // Formata para moeda brasileira
+    const formatted = numericValue
+      .toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })
+      .replace(/\u00A0/g, ' ') // Remove &nbsp; (non-breaking space) e substitui por espaço comum
+      .trim(); // Remove espaços extras no início/fim
+
+    const rawDecimal = numericValue.toFixed(2);
+
+    return {
+      formatted,
+      raw: rawDecimal,
+    };
+  }
+
+  /**
+   * Converte valor inicial/externo para moeda (usado no carregamento)
+   * Aceita números ou strings com decimal para inicializar o campo
+   *
+   * @param value - Valor a ser convertido
+   * @returns Objeto com valor formatado e valor raw
+   *
+   * @example
+   * processCurrencyInput(100.50) // { formatted: 'R$ 100,50', raw: '100.50' }
+   * processCurrencyInput('100.50') // { formatted: 'R$ 100,50', raw: '100.50' }
+   */
+  private processCurrencyInput(value: string | number): { formatted: string; raw: string } {
+    if (!value && value !== 0) return { formatted: '', raw: '0.00' };
 
     let numericValue: number;
-    let rawDecimal: string;
 
-    if (hasDecimalSeparator) {
-      // Caso 1: Valor completo com decimal
-      const normalized = cleanValue
-        .replace(/\./g, (_match, offset) => {
-          const hasCommaAfter = cleanValue.indexOf(',', offset) > offset;
-          return hasCommaAfter ? '' : '.';
-        })
-        .replace(',', '.');
+    if (typeof value === 'number') {
+      numericValue = value;
+    } else {
+      // Remove formatação e converte para número
+      const cleanValue = value.replace(/[^\d.,]/g, '');
 
+      if (!cleanValue) return { formatted: '', raw: '0.00' };
+
+      // Normaliza separadores (. ou ,) para ponto decimal
+      const normalized = cleanValue.replace(',', '.');
       numericValue = parseFloat(normalized);
 
       if (isNaN(numericValue)) {
-        return { formatted: '', raw: '0' };
+        return { formatted: '', raw: '0.00' };
       }
-
-      rawDecimal = numericValue.toFixed(2);
-    } else {
-      // Caso 2: Apenas dígitos (sem decimal)
-      const onlyDigits = cleanValue.replace(/\D/g, '');
-
-      if (!onlyDigits || onlyDigits === '0') {
-        return { formatted: '', raw: '0' };
-      }
-
-      numericValue = parseInt(onlyDigits, 10);
-      rawDecimal = numericValue.toFixed(2);
     }
 
-    const formatted = numericValue.toLocaleString('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
+    const formatted = numericValue
+      .toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })
+      .replace(/\u00A0/g, ' ') // Remove &nbsp; (non-breaking space) e substitui por espaço comum
+      .trim(); // Remove espaços extras no início/fim
+
+    const rawDecimal = numericValue.toFixed(2);
 
     return {
       formatted,
@@ -224,10 +266,13 @@ export class FieldText {
 
     if (isNaN(numericValue)) return '';
 
-    const formatted = numericValue.toLocaleString('pt-BR', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
+    const formatted = numericValue
+      .toLocaleString('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })
+      .replace(/\u00A0/g, ' ') // Remove &nbsp; (non-breaking space) e substitui por espaço comum
+      .trim(); // Remove espaços extras
 
     return `R$ ${formatted}`;
   }
@@ -244,17 +289,20 @@ export class FieldText {
     }
 
     if (this.mask === 'currency') {
-      if (this.isFocused) {
-        return this.rawCurrencyValue || value;
+      // Se o valor já está formatado (começa com R$), retorna direto
+      if (typeof value === 'string' && value.startsWith('R$')) {
+        return value;
       }
-
-      // Se não está focado, formata o valor
-      const result = this.processCurrencyInput(String(value));
+      // Caso contrário, formata valor inicial vindo do backend/prop
+      const result = this.processCurrencyInput(value);
       this.rawCurrencyValue = result.raw;
       return result.formatted;
-    } else {
+    } else if (this.mask === 'custom' && this.customMask) {
       const formatted = this.customMask(value);
       return formatted;
+    } else {
+      // Sem máscara ou máscara não implementada, retorna valor original
+      return value;
     }
   }
 
@@ -296,8 +344,9 @@ export class FieldText {
         )}
 
         <input
+          ref={(el) => (this.inputRef = el)}
           type={this.host.getAttribute('type') || 'text'}
-          id={this.host.id + '-input'}
+          id={this.name + '-input'}
           name={this.name}
           minLength={Number(this.host.getAttribute('minlength')) || undefined}
           maxLength={Number(this.host.getAttribute('maxlength')) || undefined}
@@ -310,8 +359,6 @@ export class FieldText {
           autoFocus={this.host.hasAttribute('autofocus') || false}
           value={this.getInputValue()}
           onInput={(e) => this.onInput(e)}
-          onBlur={(e) => this.onBlur(e)}
-          onFocus={(e) => this.onFocus(e)}
         />
 
         {this.state === 'error' && (

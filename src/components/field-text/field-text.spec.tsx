@@ -203,24 +203,8 @@ describe('mnt-field-text', () => {
   });
 
   describe('Currency Mask', () => {
-    describe('Formatting behavior', () => {
-      it('SHOULD format integer values as reais when no decimal separator', async () => {
-        const page = await createFieldTextComponent(`
-          <mnt-field-text
-            input-name="currencyTest"
-            mask="currency"
-            value="30000"
-          ></mnt-field-text>
-        `);
-
-        const input = getInputElement(page);
-        await page.waitForChanges();
-
-        // Deve formatar 30000 como R$ 30.000,00
-        expect(input.value).toContain('30.000');
-      });
-
-      it('SHOULD preserve decimal values when decimal separator is present', async () => {
+    describe('Initial value formatting (from backend/prop)', () => {
+      it('SHOULD format numeric values with decimals correctly', async () => {
         const page = await createFieldTextComponent(`
           <mnt-field-text
             input-name="currencyTest"
@@ -266,21 +250,6 @@ describe('mnt-field-text', () => {
         expect(inputDot.value).toBe(inputComma.value);
       });
 
-      it('SHOULD handle small values correctly', async () => {
-        const page = await createFieldTextComponent(`
-          <mnt-field-text
-            input-name="currencySmall"
-            mask="currency"
-            value="1.50"
-          ></mnt-field-text>
-        `);
-
-        const input = getInputElement(page);
-        await page.waitForChanges();
-
-        expect(input.value).toContain('1,50');
-      });
-
       it('SHOULD handle large values with proper thousand separators', async () => {
         const page = await createFieldTextComponent(`
           <mnt-field-text
@@ -298,31 +267,11 @@ describe('mnt-field-text', () => {
       });
     });
 
-    describe('Focus/Blur behavior', () => {
-      it('SHOULD show raw value on focus', async () => {
+    describe('Real-time input behavior (calculator-like)', () => {
+      it('SHOULD format "1" as R$ 0,01', async () => {
         const page = await createFieldTextComponent(`
           <mnt-field-text
-            input-name="focusTest"
-            mask="currency"
-            value="100"
-          ></mnt-field-text>
-        `);
-
-        const input = getInputElement(page);
-        const component = page.rootInstance as FieldText;
-
-        // Simula focus
-        component.onFocus({ target: input });
-        await page.waitForChanges();
-
-        // Deve mostrar valor raw sem formatação
-        expect(input.value).not.toContain('R$');
-      });
-
-      it('SHOULD format value on blur', async () => {
-        const page = await createFieldTextComponent(`
-          <mnt-field-text
-            input-name="blurTest"
+            input-name="realtimeTest"
             mask="currency"
           ></mnt-field-text>
         `);
@@ -330,23 +279,148 @@ describe('mnt-field-text', () => {
         const input = getInputElement(page);
         const component = page.rootInstance as FieldText;
 
-        // Simula digitação
-        input.value = '30000';
+        input.value = '1';
         component.onInput({ target: input });
         await page.waitForChanges();
 
-        // Simula blur
-        component.onBlur({ target: input });
+        expect(input.value).toBe('R$ 0,01');
+      });
+
+      it('SHOULD format "11" as R$ 0,11', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="realtimeTest"
+            mask="currency"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        const component = page.rootInstance as FieldText;
+
+        input.value = '11';
+        component.onInput({ target: input });
         await page.waitForChanges();
 
-        // Deve formatar
-        expect(input.value).toContain('R$');
-        expect(input.value).toContain('30.000');
+        expect(input.value).toBe('R$ 0,11');
+      });
+
+      it('SHOULD format "111" as R$ 1,11', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="realtimeTest"
+            mask="currency"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        const component = page.rootInstance as FieldText;
+
+        input.value = '111';
+        component.onInput({ target: input });
+        await page.waitForChanges();
+
+        expect(input.value).toBe('R$ 1,11');
+      });
+
+      it('SHOULD format "1111" as R$ 11,11', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="realtimeTest"
+            mask="currency"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        const component = page.rootInstance as FieldText;
+
+        input.value = '1111';
+        component.onInput({ target: input });
+        await page.waitForChanges();
+
+        expect(input.value).toBe('R$ 11,11');
+      });
+
+      it('SHOULD format "11111" as R$ 111,11', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="realtimeTest"
+            mask="currency"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        const component = page.rootInstance as FieldText;
+
+        input.value = '11111';
+        component.onInput({ target: input });
+        await page.waitForChanges();
+
+        expect(input.value).toBe('R$ 111,11');
+      });
+
+      it('SHOULD format "111111" as R$ 1.111,11', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="realtimeTest"
+            mask="currency"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        const component = page.rootInstance as FieldText;
+
+        input.value = '111111';
+        component.onInput({ target: input });
+        await page.waitForChanges();
+
+        expect(input.value).toBe('R$ 1.111,11');
+      });
+
+      it('SHOULD strip non-numeric characters during input', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="realtimeTest"
+            mask="currency"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        const component = page.rootInstance as FieldText;
+
+        // Simula usuário digitando "R$ 1.000,00" (colando valor formatado)
+        input.value = 'R$ 1.000,00';
+        component.onInput({ target: input });
+        await page.waitForChanges();
+
+        // Deve extrair apenas os dígitos (100000) e formatar como centavos
+        expect(input.value).toContain('1.000,00');
+      });
+
+      it('SHOULD NOT contain non-breaking space (&nbsp;) in formatted value', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="nbspTest"
+            mask="currency"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        const component = page.rootInstance as FieldText;
+
+        input.value = '12345';
+        component.onInput({ target: input });
+        await page.waitForChanges();
+
+        // Não deve conter &nbsp; (U+00A0)
+        expect(input.value).not.toContain('\u00A0');
+        // Deve conter espaço comum entre R$ e o valor
+        expect(input.value).toBe('R$ 123,45');
+        expect(input.value.charCodeAt(2)).toBe(32); // Espaço comum (não U+00A0)
       });
     });
 
     describe('Value emission', () => {
-      it('SHOULD emit both formatted and raw values on blur', async () => {
+      it('SHOULD emit both formatted and raw values during input', async () => {
         const page = await createFieldTextComponent(`
           <mnt-field-text
             input-name="emitTest"
@@ -360,18 +434,39 @@ describe('mnt-field-text', () => {
 
         page.root.addEventListener('valueChange', spy);
 
-        // Simula digitação e blur
-        input.value = '1000.50';
+        // Simula digitação
+        input.value = '12345';
         component.onInput({ target: input });
-        component.onBlur({ target: input });
         await page.waitForChanges();
 
         expect(spy).toHaveBeenCalled();
         const eventDetail = spy.mock.calls[spy.mock.calls.length - 1][0].detail;
 
-        // Deve ter ambos os valores
+        // Deve emitir valor formatado e raw
         expect(eventDetail.formattedValue).toContain('R$');
-        expect(eventDetail.rawValue).toBe('1000.50');
+        expect(eventDetail.formattedValue).toBe('R$ 123,45');
+        expect(eventDetail.rawValue).toBe('123.45');
+      });
+    });
+
+    describe('getRawValue() method', () => {
+      it('SHOULD return raw decimal value after formatting', async () => {
+        const page = await createFieldTextComponent(`
+          <mnt-field-text
+            input-name="rawValueTest"
+            mask="currency"
+          ></mnt-field-text>
+        `);
+
+        const input = getInputElement(page);
+        const component = page.rootInstance as FieldText;
+
+        input.value = '12345';
+        component.onInput({ target: input });
+        await page.waitForChanges();
+
+        const rawValue = component.getRawValue();
+        expect(rawValue).toBe('123.45');
       });
     });
 
@@ -401,7 +496,7 @@ describe('mnt-field-text', () => {
         const input = getInputElement(page);
         await page.waitForChanges();
 
-        expect(input.value).toBeTruthy();
+        expect(input.value).toBe('R$ 0,00');
       });
 
       it('SHOULD handle invalid input gracefully', async () => {
@@ -416,7 +511,7 @@ describe('mnt-field-text', () => {
         const input = getInputElement(page);
         await page.waitForChanges();
 
-        // Não deve quebrar, deve retornar string vazia ou valor padrão
+        // Não deve quebrar, deve retornar string vazia
         expect(input.value).toBeDefined();
       });
     });
