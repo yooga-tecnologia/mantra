@@ -13,7 +13,7 @@ const LIB_PREFIX = getLibPrefix();
 export class Button {
   // Base styles
   @Prop() size: ButtonProps['size'] = 'medium';
-  @Prop() color: ButtonProps['color'] = 'primary';
+  @Prop() color: ButtonProps['color'] = 'neutral';
   @Prop() variant: ButtonProps['variant'] = 'regular';
   @Prop() fullWidth: ButtonProps['fullWidth'] = false;
 
