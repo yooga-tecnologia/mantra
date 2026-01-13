@@ -4,6 +4,15 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.9.5] - 2026-01-13
+
+### ✨ Melhorado
+
+- **Button e ButtonIcon**
+  - Atributo default atualizado: `color="neutral"`. Os botões iniciarão com propriedades: variant=regular e color=neutral, seguindo orientações dos designers;
+- **ButtonIcon**
+  - Corrigido tamanho de ícones do botão, seguindo definições do Figma.
+
 ## [2.9.4] - 2026-01-09
 
 ### ✨ Melhorado

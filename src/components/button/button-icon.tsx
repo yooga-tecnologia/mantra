@@ -14,7 +14,7 @@ import type { ButtonIconProps } from './button.types';
 export class ButtonIcon {
   // Base styles
   @Prop() size: ButtonIconProps['size'] = 'medium';
-  @Prop() color: ButtonIconProps['color'] = 'primary';
+  @Prop() color: ButtonIconProps['color'] = 'neutral';
   @Prop() variant: ButtonIconProps['variant'] = 'regular';
   @Prop() icon?: ButtonIconProps['icon'];
 
@@ -33,6 +33,27 @@ export class ButtonIcon {
     }
 
     this.buttonClick.emit(event);
+  }
+
+  private getIconSize(): number {
+    let iconSize = 16;
+
+    switch (this.size) {
+      case 'tiny':
+        iconSize = 12;
+        break;
+      case 'small':
+        iconSize = 16;
+        break;
+      case 'medium':
+        iconSize = 20;
+        break;
+      case 'large':
+        iconSize = 24;
+        break;
+    }
+
+    return iconSize;
   }
 
   get buttonClass() {
@@ -63,7 +84,7 @@ export class ButtonIcon {
           part="button"
         >
           <mnt-icon
-            size={this.size}
+            size={this.getIconSize() as number}
             icon={this.icon}
           />
         </button>
