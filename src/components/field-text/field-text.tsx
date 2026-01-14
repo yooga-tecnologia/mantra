@@ -312,7 +312,7 @@ export class FieldText {
     if (!this.labelText) return null;
     return (
       <div class={`${this.componentPrefix}-label`}>
-        <label htmlFor={this.host.id + '-input'}>
+        <label htmlFor={this.name + '-input'}>
           {this.labelText}
           {this.host.hasAttribute('required') && <span class="text-color-primary">*</span>}
         </label>
