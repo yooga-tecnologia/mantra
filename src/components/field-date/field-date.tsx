@@ -1,4 +1,4 @@
-import { Component, Host, Prop, State, Listen, Element, h, EventEmitter, Event } from '@stencil/core';
+import { Component, Host, Prop, State, Listen, Element, h, EventEmitter, Event, Watch } from '@stencil/core';
 import { classNames, setComponentClass } from 'src/utils/utils';
 import { FieldDateProps } from './field-date.types';
 import { DateSelectedEventDetail } from 'src/components';
@@ -61,6 +61,21 @@ export class FieldDate {
     this.showDatePicker = false;
   }
 
+  private getInputValue() {
+    const value = this.value ?? this.el.getAttribute('value');
+    if (!value) {
+      return '';
+    }
+    return value;
+  }
+
+  @Watch('value')
+  watchValueProp(newValue: string) {
+    if (newValue !== undefined && newValue !== null) {
+      this.value = newValue;
+    }
+  }
+
   @Listen('click', { target: 'document' })
   handleClickOutside(event: MouseEvent): void {
     if (!this.showDatePicker) return;
@@ -115,6 +130,14 @@ export class FieldDate {
       <div class={`${this.componentPrefix}-picker-dropdown`}>
         <mnt-date-picker
           mode={this.datePickerConfig?.mode}
+          selectedDate={this.getInputValue()}
+          disablePastDates={this.datePickerConfig?.disablePastDates}
+          initialMonth={this.datePickerConfig?.initialMonth}
+          locale={this.datePickerConfig?.locale}
+          maxDate={this.datePickerConfig?.maxDate}
+          minDate={this.datePickerConfig?.minDate}
+          placeholder={this.datePickerConfig?.placeholder}
+          required={this.datePickerConfig?.required}
           onDatePickerSelected={(e) => {
             this.handleInput(e);
             this.handleCloseDatePicker();

@@ -1,13 +1,6 @@
 import { Component, Host, Prop, Event, EventEmitter, h, State, Watch, Element } from '@stencil/core';
 import { AttachInternals } from '@stencil/core/internal';
-import {
-  COMPONENT_PREFIX,
-  // DatePickerBaseProps,
-  DateSelectedEventDetail,
-  DatePickerMode,
-  DateRange,
-  MonthYear,
-} from './date-picker.types';
+import { COMPONENT_PREFIX, DateSelectedEventDetail, DatePickerMode, DateRange, MonthYear } from './date-picker.types';
 
 @Component({
   tag: 'mnt-date-picker',
@@ -31,14 +24,13 @@ export class DatePicker {
   @Prop() required?: boolean = false;
   @Prop() placeholder?: string;
   @Prop() firstDayOfWeek?: number = 0; // 0 = Sunday
-  @Prop() disablePastDates?: boolean = false; // Desabilita datas anteriores ao dia atual
+  @Prop() disablePastDates?: boolean = false;
 
   // State
   @State() private currentMonth: MonthYear;
   @State() private internalSelectedDate: Date | null = null;
   @State() private internalSelectedRange: DateRange = { start: null, end: null };
   @State() private hoverDate: Date | null = null;
-  // @State() private isOpen: boolean = false;
 
   // Events
   @Event({ eventName: 'datePickerSelected' }) datePickerSelected: EventEmitter<DateSelectedEventDetail>;
@@ -48,10 +40,8 @@ export class DatePicker {
   private today: Date = new Date();
 
   componentWillLoad() {
-    // Initialize dates
     this.initializeDates();
 
-    // Initialize current month
     const initDate = this.getInitialMonthDate();
     this.currentMonth = {
       month: initDate.getMonth(),
@@ -111,6 +101,21 @@ export class DatePicker {
   private parseDate(date: Date | string | null | undefined): Date | null {
     if (!date) return null;
     if (date instanceof Date) return date;
+
+    if (typeof date === 'string') {
+      // Brazilian format: DD/MM/YYYY or DD/MM/YY
+      if (/^\d{1,2}\/\d{1,2}\/\d{2,4}$/.test(date)) {
+        const [day, month, year] = date.split('/').map(Number);
+        return new Date(year, month - 1, day);
+      }
+
+      // ISO format: YYYY-MM-DD
+      if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+        const [year, month, day] = date.split('-').map(Number);
+        return new Date(year, month - 1, day);
+      }
+    }
+
     const parsed = new Date(date);
     return isNaN(parsed.getTime()) ? null : parsed;
   }
@@ -158,12 +163,9 @@ export class DatePicker {
         mode: 'single',
       });
     } else {
-      // Range mode
       if (!this.internalSelectedRange.start || (this.internalSelectedRange.start && this.internalSelectedRange.end)) {
-        // Start new range
         this.internalSelectedRange = { start: date, end: null };
       } else {
-        // Complete range
         if (date < this.internalSelectedRange.start) {
           this.internalSelectedRange = { start: date, end: this.internalSelectedRange.start };
         } else {
@@ -195,17 +197,10 @@ export class DatePicker {
     );
   };
 
-  // private handleCancel = (): void => {
-  //   this.datePickerCancel.emit();
-  //   console.log('cancel')
-  //   // this.isOpen = false;
-  // };
-
   private isDateSelectable(date: Date): boolean {
     const minDate = this.parseDate(this.minDate);
     const maxDate = this.parseDate(this.maxDate);
 
-    // Verifica se deve desabilitar datas passadas
     if (this.disablePastDates) {
       const todayStart = this.getStartOfDay(new Date());
       const dateStart = this.getStartOfDay(date);
@@ -288,7 +283,7 @@ export class DatePicker {
       days.push(new Date(year, month, day));
     }
 
-    // Adiciona apenas os dias necessários para completar a última semana
+    // Add only the days needed to complete the last week
     const lastDayOfWeek = lastDay.getDay();
     const remainingDays = (6 - lastDayOfWeek + this.firstDayOfWeek) % 7;
 
@@ -300,7 +295,7 @@ export class DatePicker {
   }
 
   private getWeekDayNames(): string[] {
-    const baseDate = new Date(2024, 0, this.firstDayOfWeek); // A Sunday
+    const baseDate = new Date(2024, 0, this.firstDayOfWeek); // Sunday
     const names: string[] = [];
 
     for (let i = 0; i < 7; i++) {
@@ -456,17 +451,6 @@ export class DatePicker {
               );
             })}
           </div>
-
-          {/* Footer with Cancel button */}
-          {/* <div class={`${COMPONENT_PREFIX}-footer`}>
-            <button
-              type="button"
-              class={`${COMPONENT_PREFIX}-cancel-button`}
-              onClick={this.handleCancel}
-            >
-              Cancelar
-            </button>
-          </div> */}
         </div>
       </Host>
     );

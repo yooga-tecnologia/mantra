@@ -4,6 +4,14 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.9.7] - 2026-01-14
+
+### 🐛 Corrigido
+
+- **DatePicker**
+  - Bug de timezone: Datas ISO (YYYY-MM-DD) agora são interpretadas no timezone local, evitando mudança de dia
+  - Bug de parsing brasileiro: Datas no formato DD/MM/YYYY agora são interpretadas corretamente (ex: 09/01 = 9 de janeiro, não 1º de setembro)
+
 ## [2.9.6] - 2026-01-13
 
 ### ✨ Melhorado
