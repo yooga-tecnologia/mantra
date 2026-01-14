@@ -4,6 +4,16 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.9.8] - 2026-01-14
+
+### 🐛 Corrigido
+
+- **FieldText, FieldDate e Switch**
+  - Correções de nomenclatura dos campos e labels;
+  - Atributo `inputName` renomeado para `name` para manter padrão.
+- **Switch**
+  - Eventos customizados foram renomeados para evitar logs de warning durante o build. `Events decorated with @Event() should describe the actual DOM event name, not the handler. In other words "onBlur" would be better named as "blur".`
+
 ## [2.9.7] - 2026-01-14
 
 ### 🐛 Corrigido
