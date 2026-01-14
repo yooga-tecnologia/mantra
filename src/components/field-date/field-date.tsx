@@ -10,7 +10,7 @@ import { DateSelectedEventDetail } from 'src/components';
 })
 export class FieldDate {
   @Element() el: HTMLElement;
-  @Prop({ reflect: true }) inputName: string;
+  @Prop({ reflect: true }) name: string;
 
   // Base styles
   @Prop() size?: FieldDateProps['size'] = 'medium';
@@ -91,7 +91,7 @@ export class FieldDate {
     if (!this.labelText) return null;
     return (
       <div class={`${this.componentPrefix}-label`}>
-        <label htmlFor={this.inputName}>
+        <label htmlFor={this.name + '-input'}>
           {this.labelText}
           {this.required && <span class="text-color-primary">*</span>}
         </label>
@@ -106,7 +106,7 @@ export class FieldDate {
           <input
             type="text"
             autocomplete="off"
-            id={this.inputName}
+            id={this.name + '-input'}
             required={this.required}
             onClick={() => this.handleToggleDatePicker()}
             readonly
