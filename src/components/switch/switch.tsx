@@ -181,8 +181,7 @@ export class Switch {
     return (
       <input
         ref={(el) => (this.inputEl = el)}
-        id={this.generatedId}
-        name={this.name}
+        name={this.name + '-switch-input'}
         value={this.value}
         type={this.type}
         class={`${COMPONENT_PREFIX}-switch`}
@@ -218,6 +217,7 @@ export class Switch {
                 this.inputEl.click();
               }
             }}
+            htmlFor={this.name + '-switch-input'}
           >
             {this.label && <span class={`${COMPONENT_PREFIX}-label`}>{this.label}</span>}
             {this.description && <span class={`${COMPONENT_PREFIX}-description`}>{this.description}</span>}
