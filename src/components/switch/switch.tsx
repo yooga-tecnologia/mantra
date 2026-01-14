@@ -1,5 +1,6 @@
 import { Component, Host, Prop, Event, EventEmitter, h, State, Watch, Element } from '@stencil/core';
 import { AttachInternals, FunctionalComponent, HostAttributes } from '@stencil/core/internal';
+
 import { COMPONENT_PREFIX, SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from './switch.types';
 
 let switchIdCounter = 0;
@@ -32,9 +33,9 @@ export class Switch {
   @State() private internalChecked: boolean = false;
 
   // Events
-  @Event({ eventName: 'onChange' }) onChange: EventEmitter<SwitchChangeEventDetail>;
-  @Event({ eventName: 'onBlur' }) onBlur: EventEmitter<FocusEvent>;
-  @Event({ eventName: 'onFocus' }) onFocus: EventEmitter<FocusEvent>;
+  @Event({ eventName: 'switchChange' }) switchChange: EventEmitter<SwitchChangeEventDetail>;
+  @Event({ eventName: 'switchBlur' }) switchBlur: EventEmitter<FocusEvent>;
+  @Event({ eventName: 'switchFocus' }) switchFocus: EventEmitter<FocusEvent>;
 
   componentWillLoad() {
     this.generatedId = this.inputId || this.el.id || `mnt-switch-${++switchIdCounter}`;
@@ -105,7 +106,7 @@ export class Switch {
     this.updateFormValue();
 
     // Emit custom event with detailed information
-    this.onChange.emit({
+    this.switchChange.emit({
       checked: this.internalChecked,
       value: this.value,
       id: this.generatedId,
@@ -115,7 +116,7 @@ export class Switch {
     // Emit native-like events for better framework integration
     // This allows frameworks to listen to standard 'change' and 'input' events
     this.el.dispatchEvent(
-      new CustomEvent('change', {
+      new CustomEvent('switchChange', {
         bubbles: true,
         composed: true,
         detail: { checked: this.internalChecked, value: this.value },
@@ -132,11 +133,11 @@ export class Switch {
   };
 
   private handleBlur = (event: FocusEvent): void => {
-    this.onBlur.emit(event);
+    this.switchBlur.emit(event);
   };
 
   private handleFocus = (event: FocusEvent): void => {
-    this.onFocus.emit(event);
+    this.switchFocus.emit(event);
   };
 
   /**
@@ -181,8 +182,7 @@ export class Switch {
     return (
       <input
         ref={(el) => (this.inputEl = el)}
-        id={this.generatedId}
-        name={this.name}
+        id={this.name + '-switch-input'}
         value={this.value}
         type={this.type}
         class={`${COMPONENT_PREFIX}-switch`}
@@ -211,6 +211,7 @@ export class Switch {
           {this.getSwitchElement()}
           <label
             class={`${COMPONENT_PREFIX}-label-wrapper`}
+            htmlFor={this.name + '-switch-input'}
             onClick={(e) => {
               // console.log('[mnt-switch] Label clicado! Tentando toggle...');
               e.preventDefault(); // Previne comportamento padrão para evitar duplo clique

@@ -83,8 +83,8 @@ export namespace Components {
     interface MntFieldDate {
         "datePickerConfig"?: FieldDateProps['datePickerConfig'];
         "disabled"?: FieldDateProps['disabled'];
-        "inputName": string;
         "labelText"?: FieldDateProps['labelText'];
+        "name": string;
         "placeholder"?: FieldDateProps['placeholder'];
         "required"?: FieldDateProps['required'];
         "size"?: FieldDateProps['size'];
@@ -349,9 +349,9 @@ declare global {
         new (): HTMLMntStepsElement;
     };
     interface HTMLMntSwitchElementEventMap {
-        "onChange": SwitchChangeEventDetail;
-        "onBlur": FocusEvent;
-        "onFocus": FocusEvent;
+        "switchChange": SwitchChangeEventDetail;
+        "switchBlur": FocusEvent;
+        "switchFocus": FocusEvent;
     }
     interface HTMLMntSwitchElement extends Components.MntSwitch, HTMLStencilElement {
         addEventListener<K extends keyof HTMLMntSwitchElementEventMap>(type: K, listener: (this: HTMLMntSwitchElement, ev: MntSwitchCustomEvent<HTMLMntSwitchElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -479,8 +479,8 @@ declare namespace LocalJSX {
     interface MntFieldDate {
         "datePickerConfig"?: FieldDateProps['datePickerConfig'];
         "disabled"?: FieldDateProps['disabled'];
-        "inputName"?: string;
         "labelText"?: FieldDateProps['labelText'];
+        "name"?: string;
         /**
           * Evento emitido com o valor numérico (sem formatação) quando o campo é alterado
          */
@@ -551,9 +551,9 @@ declare namespace LocalJSX {
         "inputId"?: SwitchBaseProps['inputId'];
         "label"?: SwitchBaseProps['label'];
         "name"?: SwitchBaseProps['name'];
-        "onOnBlur"?: (event: MntSwitchCustomEvent<FocusEvent>) => void;
-        "onOnChange"?: (event: MntSwitchCustomEvent<SwitchChangeEventDetail>) => void;
-        "onOnFocus"?: (event: MntSwitchCustomEvent<FocusEvent>) => void;
+        "onSwitchBlur"?: (event: MntSwitchCustomEvent<FocusEvent>) => void;
+        "onSwitchChange"?: (event: MntSwitchCustomEvent<SwitchChangeEventDetail>) => void;
+        "onSwitchFocus"?: (event: MntSwitchCustomEvent<FocusEvent>) => void;
         "required"?: SwitchBaseProps['required'];
         "type"?: SwitchType;
         "value"?: SwitchBaseProps['value'];
