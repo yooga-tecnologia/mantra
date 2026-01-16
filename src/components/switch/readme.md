@@ -22,11 +22,11 @@
 
 ## Events
 
-| Event      | Description | Type                                   |
-| ---------- | ----------- | -------------------------------------- |
-| `onBlur`   |             | `CustomEvent<FocusEvent>`              |
-| `onChange` |             | `CustomEvent<SwitchChangeEventDetail>` |
-| `onFocus`  |             | `CustomEvent<FocusEvent>`              |
+| Event          | Description | Type                                   |
+| -------------- | ----------- | -------------------------------------- |
+| `switchBlur`   |             | `CustomEvent<FocusEvent>`              |
+| `switchChange` |             | `CustomEvent<SwitchChangeEventDetail>` |
+| `switchFocus`  |             | `CustomEvent<FocusEvent>`              |
 
 
 ----------------------------------------------
