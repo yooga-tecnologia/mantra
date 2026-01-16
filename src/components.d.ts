@@ -15,6 +15,7 @@ import { SizeVariants } from "./shared/theme/theme.types";
 import { FieldTextProps } from "./components/field-text/field-text.types";
 import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
+import { LoadingStateProps } from "./components/loading-state/loading-state";
 import { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 import { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
 import { TabItemProps } from "./components/tab-item/tab-item.types";
@@ -30,6 +31,7 @@ export { SizeVariants } from "./shared/theme/theme.types";
 export { FieldTextProps } from "./components/field-text/field-text.types";
 export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
+export { LoadingStateProps } from "./components/loading-state/loading-state";
 export { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 export { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
 export { TabItemProps } from "./components/tab-item/tab-item.types";
@@ -135,6 +137,10 @@ export namespace Components {
         "height": IllustrationProps['height'];
         "name": IllustrationProps['name'];
         "width": IllustrationProps['width'];
+    }
+    interface MntLoadingState {
+        "color": LoadingStateProps['color'];
+        "label"?: LoadingStateProps['label'];
     }
     interface MntSteps {
         "activeStepId"?: StepsProps['activeStepId'];
@@ -331,6 +337,12 @@ declare global {
         prototype: HTMLMntIllustrationElement;
         new (): HTMLMntIllustrationElement;
     };
+    interface HTMLMntLoadingStateElement extends Components.MntLoadingState, HTMLStencilElement {
+    }
+    var HTMLMntLoadingStateElement: {
+        prototype: HTMLMntLoadingStateElement;
+        new (): HTMLMntLoadingStateElement;
+    };
     interface HTMLMntStepsElementEventMap {
         "stepClick": { stepId: string; stepIndex: number; status: StepStatus; step: StepItem };
     }
@@ -419,6 +431,7 @@ declare global {
         "mnt-icon": HTMLMntIconElement;
         "mnt-icon-large": HTMLMntIconLargeElement;
         "mnt-illustration": HTMLMntIllustrationElement;
+        "mnt-loading-state": HTMLMntLoadingStateElement;
         "mnt-steps": HTMLMntStepsElement;
         "mnt-switch": HTMLMntSwitchElement;
         "mnt-tab-item": HTMLMntTabItemElement;
@@ -538,6 +551,10 @@ declare namespace LocalJSX {
         "name": IllustrationProps['name'];
         "width"?: IllustrationProps['width'];
     }
+    interface MntLoadingState {
+        "color"?: LoadingStateProps['color'];
+        "label"?: LoadingStateProps['label'];
+    }
     interface MntSteps {
         "activeStepId"?: StepsProps['activeStepId'];
         "onStepClick"?: (event: MntStepsCustomEvent<{ stepId: string; stepIndex: number; status: StepStatus; step: StepItem }>) => void;
@@ -589,6 +606,7 @@ declare namespace LocalJSX {
         "mnt-icon": MntIcon;
         "mnt-icon-large": MntIconLarge;
         "mnt-illustration": MntIllustration;
+        "mnt-loading-state": MntLoadingState;
         "mnt-steps": MntSteps;
         "mnt-switch": MntSwitch;
         "mnt-tab-item": MntTabItem;
@@ -611,6 +629,7 @@ declare module "@stencil/core" {
             "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;
             "mnt-icon-large": LocalJSX.MntIconLarge & JSXBase.HTMLAttributes<HTMLMntIconLargeElement>;
             "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
+            "mnt-loading-state": LocalJSX.MntLoadingState & JSXBase.HTMLAttributes<HTMLMntLoadingStateElement>;
             "mnt-steps": LocalJSX.MntSteps & JSXBase.HTMLAttributes<HTMLMntStepsElement>;
             "mnt-switch": LocalJSX.MntSwitch & JSXBase.HTMLAttributes<HTMLMntSwitchElement>;
             "mnt-tab-item": LocalJSX.MntTabItem & JSXBase.HTMLAttributes<HTMLMntTabItemElement>;

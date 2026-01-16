@@ -9,7 +9,7 @@
 
 | Property   | Attribute  | Description | Type                                                                            | Default     |
 | ---------- | ---------- | ----------- | ------------------------------------------------------------------------------- | ----------- |
-| `color`    | `color`    |             | `"critical" \| "neutral" \| "primary" \| "secondary" \| "success" \| "warning"` | `'primary'` |
+| `color`    | `color`    |             | `"critical" \| "neutral" \| "primary" \| "secondary" \| "success" \| "warning"` | `'neutral'` |
 | `disabled` | `disabled` |             | `boolean`                                                                       | `false`     |
 | `icon`     | `icon`     |             | `string`                                                                        | `undefined` |
 | `size`     | `size`     |             | `"large" \| "medium" \| "small" \| "tiny"`                                      | `'medium'`  |

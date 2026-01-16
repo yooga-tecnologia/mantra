@@ -11,8 +11,8 @@
 | ------------------ | ------------- | ----------- | ------------------------------------------ | ----------- |
 | `datePickerConfig` | --            |             | `DatePickerBaseProps`                      | `undefined` |
 | `disabled`         | `disabled`    |             | `boolean`                                  | `false`     |
-| `inputName`        | `input-name`  |             | `string`                                   | `undefined` |
 | `labelText`        | `label-text`  |             | `string`                                   | `undefined` |
+| `name`             | `name`        |             | `string`                                   | `undefined` |
 | `placeholder`      | `placeholder` |             | `string`                                   | `undefined` |
 | `required`         | `required`    |             | `boolean`                                  | `false`     |
 | `size`             | `size`        |             | `"large" \| "medium" \| "small" \| "tiny"` | `'medium'`  |

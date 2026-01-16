@@ -1,0 +1,58 @@
+@use 'sass:map';
+@use '../../shared/theme/core/theme' as theme;
+
+$component-prefix: theme.get-prefix('loading-state');
+$loader-size: 6px;
+
+$color-scheme: (
+  neutral: map.get(theme.get-color-palette-by-key('neutral'), 200),
+  primary: map.get(theme.get-color-palette-by-key('primary'), 200),
+  secondary: map.get(theme.get-color-palette-by-key('secondary'), 200),
+  success: map.get(theme.get-color-palette-by-key('success'), 200),
+  warning: map.get(theme.get-color-palette-by-key('warning'), 200),
+  error: map.get(theme.get-color-palette-by-key('critical'), 200),
+);
+
+@mixin set-color($color) {
+  $loader-color: map.get($color-scheme, $color);
+  background:
+    radial-gradient(farthest-side,$loader-color 94%,#0000) top/$loader-size $loader-size no-repeat,
+    conic-gradient(#0000 30%,$loader-color);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - $loader-size),#000 0);
+  mask: radial-gradient(farthest-side,#0000 calc(100% - $loader-size),#000 0);
+  animation: l13 1s infinite linear;
+}
+
+// BASE STYLES
+.#{$component-prefix}-container {
+  display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 16px;
+	height: 100%;
+	width: 100%;
+
+  .#{$component-prefix}-spinner {
+    width: 50px;
+		aspect-ratio: 1;
+		border-radius: 50%;
+  }
+
+  .#{$component-prefix}-label {
+    font-size: 16px;
+    color: #575E63;
+    margin: 0;
+  }
+}
+
+@keyframes l13{
+  100%{transform: rotate(1turn)}
+}
+
+// COLOR SCHEMES
+@each $color, $color-scheme in $color-scheme {
+  .#{$component-prefix}-#{$color} > .#{$component-prefix}-spinner {
+    @include set-color($color);
+  }
+}

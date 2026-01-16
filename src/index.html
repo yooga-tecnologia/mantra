@@ -24,13 +24,6 @@
   </style>
 
   <script>
-    // const datePickerConfig = {
-    //   mode: 'range',
-    // };
-    // setTimeout(() => {
-    //   const fieldText0 = document.getElementById('field-1-input');
-    //   fieldText0.value = '100';
-    // }, 1000);
 
   </script>
 </head>
@@ -38,21 +31,28 @@
 <body>
   <h1>Mantra - Sandbox</h1>
 
-
-  <h2>Field Text</h2>
-
   <div class="container-teste">
-    <!-- <div>
-      <input type="email" name="field-x" autocomplete="email" />
-    </div> -->
-
     <div>
-      <mnt-field-text id="field-1" label-text="vazio" value="teste21"></mnt-field-text>
-      <mnt-field-text id="field-1" label-text="vazio" value="10000"></mnt-field-text>
-      <mnt-field-text id="field-2" label-text="vazio" mask="currency" value="10000.1"></mnt-field-text>
-      <mnt-field-text id="field-2" label-text="vazio" mask="currency" value="10000,1"></mnt-field-text>
-      <!-- <mnt-field-text size="small" autofocus mask="custom" minLength="4" id="field-1" name="name" label-text="vazio" autocomplete></mnt-field-text>
-      <mnt-field-text size="small" autofocus mask="currency" minLength="4" id="field-2" name="name" label-text="com valor inicial" value="1000" autocomplete></mnt-field-text> -->
+      <mnt-loading-state color="primary" label="Carregando..."></mnt-loading-state>
+      <mnt-loading-state color="secondary" label="Carregando... com mais texto para ver como fica o layout"></mnt-loading-state>
+      <mnt-loading-state color="success" label="Carregando... com mais texto para ver como fica o layout"></mnt-loading-state>
+      <mnt-loading-state color="warning" label="Carregando... com mais texto para ver como fica o layout"></mnt-loading-state>
+      <mnt-loading-state color="error" label="Carregando... com mais texto para ver como fica o layout"></mnt-loading-state>
+      
+      <div style="width: 500px; height: 500px; background-color: black;">
+        <mnt-loading-state color="neutral" label="Carregando... com mais texto para ver como fica o layout"></mnt-loading-state>
+      </div>
+    </div>
+
+      <!-- <mnt-date-picker mode="single"></mnt-date-picker>
+      <mnt-date-picker mode="range"></mnt-date-picker>
+      <mnt-date-picker mode="single" disable-past-dates></mnt-date-picker>
+      <mnt-date-picker mode="range" disable-past-dates></mnt-date-picker> -->
+
+      <!-- <mnt-field-date></mnt-field-date>
+      <mnt-field-date mode="range"></mnt-field-date>
+      <mnt-field-date placeholder="Selecione uma data" id="disable-past-dates" mode="single" value="10/01/2026"></mnt-field-date>
+      <mnt-field-date mode="single" disable-past-dates></mnt-field-date> -->
     </div>
   </div>
 
