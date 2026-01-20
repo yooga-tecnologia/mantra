@@ -1,4 +1,4 @@
-import { Component, Prop, h, Element, JSX } from '@stencil/core';
+import { Component, Prop, h, Element, JSX, Watch, State } from '@stencil/core';
 
 import { ICON_DIRECTION_SUFFIX_REGEX } from './icon.constants';
 
@@ -14,12 +14,14 @@ import { getIconSvgByName } from './icon.utils';
 export class Icon {
   @Element() el!: HTMLElement;
 
-  @Prop() icon!: IconProps['icon'];
-  @Prop() size: IconProps['size'] = 'medium';
-  @Prop() color: IconProps['color'] = 'currentColor';
+  @Prop({ mutable: true, reflect: true }) icon!: IconProps['icon'];
+  @Prop({ mutable: true, reflect: true }) size: IconProps['size'] = 'medium';
+  @Prop({ mutable: true, reflect: true }) color: IconProps['color'] = 'currentColor';
   @Prop() background?: IconProps['background'];
   @Prop() bgShape?: IconProps['bgShape'];
   @Prop() animation?: IconProps['animation'];
+
+  @State() parsedBackground?: { color: string; shape: string };
 
   iconSize!: string;
   bgSize?: string;
@@ -27,7 +29,6 @@ export class Icon {
   baseIconName!: string;
   backgroundElRef?: HTMLSpanElement;
   direction!: Direction;
-  parsedBackground?: { color: string; shape: string };
 
   iconBgGapSizeMap = {
     tiny: 4,
@@ -36,6 +37,32 @@ export class Icon {
     large: 16,
     doubleLarge: 24,
   };
+
+  @Watch('size')
+  watchSizeProp() {
+    this.calculateSizes();
+    setTimeout(() => this.setBackgroundProperties(), 0);
+  }
+
+  @Watch('icon')
+  watchIconProp(newIcon: string) {
+    this.baseIconName = this.getBaseIconName(newIcon);
+    this.direction = this.getDirection(newIcon);
+    this.updateIcon();
+  }
+
+  @Watch('color')
+  watchColorProp() {
+    this.updateIcon();
+  }
+
+  @Watch('background')
+  @Watch('bgShape')
+  watchBackgroundProps() {
+    this.parseBackgroundAttribute();
+    this.calculateSizes();
+    setTimeout(() => this.setBackgroundProperties(), 0);
+  }
 
   componentWillLoad() {
     this.parseBackgroundAttribute();
