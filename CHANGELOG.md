@@ -4,6 +4,12 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.9.11] - 2026-01-20
+
+### 🚀 Adicionado
+
+- **FilterSearch**: Criado componente
+
 ## [2.9.10] - 2026-01-16
 
 ### 🚀 Adicionado
