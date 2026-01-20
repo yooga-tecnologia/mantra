@@ -1,0 +1,162 @@
+@use 'sass:map';
+
+@use '../../shared/theme/core/theme' as theme;
+@use '../../shared/theme/tokens/primitives' as primitives;
+
+$component-prefix: theme.get-prefix('filter-search');
+
+$filter-search-color-scheme: (
+  default: (
+    icon-color: #4B5053,
+    text-color: #242628,
+    placeholder-color: #818A8F,
+    background-color: transparent,
+    inline-message-color: #818A8F,
+    border-color: #CED2D3,
+    border-color-on-hover: #818A8F,
+    border-color-on-focus: #0B7CBE,
+  ),
+  error: (
+    icon-color: #C01615,
+    text-color: #242628,
+    placeholder-color: #818A8F,
+    background-color: transparent,
+    inline-message-color: #C01615,
+    border-color: #E41F1E,
+    border-color-on-hover: #818A8F,
+    border-color-on-focus: #0B7CBE,
+  ),
+  success: (
+    icon-color: #16653C,
+    text-color: #242628,
+    placeholder-color: #818A8F,
+    background-color: transparent,
+    inline-message-color: #16653C,
+    border-color: #15A459,
+    border-color-on-hover: #818A8F,
+    border-color-on-focus: #0B7CBE,
+  ),
+);
+
+$filter-search-size-configs: (
+  small: (
+    font-size: 12px,
+    icon-size: 16px,
+    icon-gap: 8px,
+    padding: 4px 8px,
+    gap: 4px,
+    border-radius: 6px,
+  ),
+  medium: (
+    font-size: 14px,
+    icon-size: 20px,
+    icon-gap: 12px,
+    padding: 12px 16px,
+    gap: 6px,
+    border-radius: 6px,
+  ),
+  large: (
+    font-size: 16px,
+    icon-size: 24px,
+    icon-gap: 16px,
+    padding: 16px,
+    gap: 8px,
+    border-radius: 6px,
+  ),
+);
+
+// BASE STYLES
+#{$component-prefix} {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+
+  &,
+  input,
+  mnt-icon {
+    box-sizing: border-box;
+  }
+
+  mnt-icon {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+
+    &:not(.#{$component-prefix}-clear-icon) {
+      pointer-events: none;
+    }
+  }
+
+  input,
+  input:hover,
+  input:focus,
+  input:focus-visible,
+  mnt-icon {
+    transition: border-color ease-in-out .2s, outline ease-in-out .2s;
+  }
+}
+
+// SIZING
+@each $size, $configs in $filter-search-size-configs {
+  $size-map: map.get($filter-search-size-configs, $size);
+  $icon-gap: map.get($size-map, icon-size) + map.get($size-map, icon-gap);
+
+  .#{$component-prefix}-#{$size} {
+    &.#{$component-prefix}-full-width,
+    &.#{$component-prefix}-full-width > input {
+      width: 100%;
+    }
+
+    input.#{$component-prefix}-input {
+      font-family: primitives.$body-font-family;
+      font-size: map.get($size-map, font-size);
+      gap: map.get($size-map, gap);
+      height: map.get($size-map, height);
+      border: 1px solid transparent;
+      border-radius: map.get($size-map, border-radius);
+      outline: 0px solid transparent;
+
+      padding: map.get($size-map, padding);
+      padding-right: $icon-gap;
+    }
+
+    mnt-icon.#{$component-prefix}-search-icon,
+    mnt-icon.#{$component-prefix}-clear-icon {
+      right: map.get($size-map, icon-gap);
+    }
+  }
+}
+
+// COLOR SCHEMES
+@each $color, $color-scheme in $filter-search-color-scheme {
+  .#{$component-prefix}-#{$color} {
+    color: map.get($color-scheme, text-color);
+
+    input.#{$component-prefix}-input {
+      color: map.get($color-scheme, text-color);
+      border-color: map.get($color-scheme, border-color);
+      background-color: map.get($color-scheme, background-color);
+
+      &::placeholder {
+        color: map.get($color-scheme, placeholder-color);
+      }
+
+      &:hover {
+        border-color: map.get($color-scheme, border-color-on-hover);
+        background-color: map.get($color-scheme, background-color);
+      }
+
+      &.#{$component-prefix}-filled {
+        border-color: map.get($color-scheme, border-color-on-focus);
+      }
+
+      &:focus,
+      &:focus-visible {
+        border-color: map.get($color-scheme, border-color-on-focus);
+        background-color: map.get($color-scheme, background-color);
+        outline: 1px solid map.get($color-scheme, border-color-on-focus);
+      }
+    }
+  }
+}

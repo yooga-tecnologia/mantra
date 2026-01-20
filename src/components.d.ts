@@ -13,6 +13,7 @@ import { FieldDateProps } from "./components/field-date/field-date.types";
 import { FieldNumberVariant } from "./components/field-number/field-number.types";
 import { SizeVariants } from "./shared/theme/theme.types";
 import { FieldTextProps } from "./components/field-text/field-text.types";
+import { FieldTextProps as FieldTextProps1 } from "./components/filter-search/filter-search.types";
 import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
 import { LoadingStateProps } from "./components/loading-state/loading-state";
@@ -29,6 +30,7 @@ export { FieldDateProps } from "./components/field-date/field-date.types";
 export { FieldNumberVariant } from "./components/field-number/field-number.types";
 export { SizeVariants } from "./shared/theme/theme.types";
 export { FieldTextProps } from "./components/field-text/field-text.types";
+export { FieldTextProps as FieldTextProps1 } from "./components/filter-search/filter-search.types";
 export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
 export { LoadingStateProps } from "./components/loading-state/loading-state";
@@ -120,6 +122,18 @@ export namespace Components {
         "state"?: FieldTextProps['state'];
         "value"?: string;
     }
+    interface MntFilterSearch {
+        "fullWidth"?: boolean;
+        "hasActionButton"?: FieldTextProps1['hasActionButton'];
+        "hasInfoButton"?: FieldTextProps1['hasInfoButton'];
+        "inlineMessage"?: FieldTextProps1['inlineMessage'];
+        "labelText"?: FieldTextProps1['labelText'];
+        "name": string;
+        "placeholder"?: FieldTextProps1['placeholder'];
+        "size"?: FieldTextProps1['size'];
+        "state"?: FieldTextProps1['state'];
+        "value"?: string;
+    }
     interface MntIcon {
         "animation"?: IconProps['animation'];
         "background"?: IconProps['background'];
@@ -195,6 +209,10 @@ export interface MntFieldDateCustomEvent<T> extends CustomEvent<T> {
 export interface MntFieldTextCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntFieldTextElement;
+}
+export interface MntFilterSearchCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntFilterSearchElement;
 }
 export interface MntStepsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -319,6 +337,24 @@ declare global {
         prototype: HTMLMntFieldTextElement;
         new (): HTMLMntFieldTextElement;
     };
+    interface HTMLMntFilterSearchElementEventMap {
+        "valueChange": { value: string };
+        "filterApplied": { value: string };
+    }
+    interface HTMLMntFilterSearchElement extends Components.MntFilterSearch, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntFilterSearchElementEventMap>(type: K, listener: (this: HTMLMntFilterSearchElement, ev: MntFilterSearchCustomEvent<HTMLMntFilterSearchElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntFilterSearchElementEventMap>(type: K, listener: (this: HTMLMntFilterSearchElement, ev: MntFilterSearchCustomEvent<HTMLMntFilterSearchElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntFilterSearchElement: {
+        prototype: HTMLMntFilterSearchElement;
+        new (): HTMLMntFilterSearchElement;
+    };
     interface HTMLMntIconElement extends Components.MntIcon, HTMLStencilElement {
     }
     var HTMLMntIconElement: {
@@ -428,6 +464,7 @@ declare global {
         "mnt-field-date": HTMLMntFieldDateElement;
         "mnt-field-number": HTMLMntFieldNumberElement;
         "mnt-field-text": HTMLMntFieldTextElement;
+        "mnt-filter-search": HTMLMntFilterSearchElement;
         "mnt-icon": HTMLMntIconElement;
         "mnt-icon-large": HTMLMntIconLargeElement;
         "mnt-illustration": HTMLMntIllustrationElement;
@@ -533,6 +570,20 @@ declare namespace LocalJSX {
         "state"?: FieldTextProps['state'];
         "value"?: string;
     }
+    interface MntFilterSearch {
+        "fullWidth"?: boolean;
+        "hasActionButton"?: FieldTextProps1['hasActionButton'];
+        "hasInfoButton"?: FieldTextProps1['hasInfoButton'];
+        "inlineMessage"?: FieldTextProps1['inlineMessage'];
+        "labelText"?: FieldTextProps1['labelText'];
+        "name"?: string;
+        "onFilterApplied"?: (event: MntFilterSearchCustomEvent<{ value: string }>) => void;
+        "onValueChange"?: (event: MntFilterSearchCustomEvent<{ value: string }>) => void;
+        "placeholder"?: FieldTextProps1['placeholder'];
+        "size"?: FieldTextProps1['size'];
+        "state"?: FieldTextProps1['state'];
+        "value"?: string;
+    }
     interface MntIcon {
         "animation"?: IconProps['animation'];
         "background"?: IconProps['background'];
@@ -603,6 +654,7 @@ declare namespace LocalJSX {
         "mnt-field-date": MntFieldDate;
         "mnt-field-number": MntFieldNumber;
         "mnt-field-text": MntFieldText;
+        "mnt-filter-search": MntFilterSearch;
         "mnt-icon": MntIcon;
         "mnt-icon-large": MntIconLarge;
         "mnt-illustration": MntIllustration;
@@ -626,6 +678,7 @@ declare module "@stencil/core" {
             "mnt-field-date": LocalJSX.MntFieldDate & JSXBase.HTMLAttributes<HTMLMntFieldDateElement>;
             "mnt-field-number": LocalJSX.MntFieldNumber & JSXBase.HTMLAttributes<HTMLMntFieldNumberElement>;
             "mnt-field-text": LocalJSX.MntFieldText & JSXBase.HTMLAttributes<HTMLMntFieldTextElement>;
+            "mnt-filter-search": LocalJSX.MntFilterSearch & JSXBase.HTMLAttributes<HTMLMntFilterSearchElement>;
             "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;
             "mnt-icon-large": LocalJSX.MntIconLarge & JSXBase.HTMLAttributes<HTMLMntIconLargeElement>;
             "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
