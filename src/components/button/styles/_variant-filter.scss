@@ -1,0 +1,72 @@
+@use "sass:map";
+@use "sass:color";
+
+@use "../../../shared/theme/tokens/actions/index.scss" as action-tokens;
+@use "../../../shared/theme/core/theme" as theme;
+
+///
+/// Button Filter Theme
+///
+
+$lib-prefix: theme.get-prefix();
+$border-width: 2px;
+
+@mixin set-button-styles() {
+  @each $theme, $states in action-tokens.$filter-theme-map {
+    .#{$lib-prefix}button-filter {
+
+      // OVERRIDES THE BASE STYLES
+      border-width: $border-width !important;
+      border-radius: 6px !important;
+
+      &.#{$lib-prefix}button-#{$theme} {
+        @include theme.set-colors(
+          map.get($states, "default", "text-color"),
+          map.get($states, "default", "bg-color"),
+          map.get($states, "default", "border-color"),
+        );
+
+        &:hover {
+          @include theme.set-colors(
+            map.get($states, "hover", "text-color"),
+            map.get($states, "hover", "bg-color"),
+            map.get($states, "hover", "border-color"),
+
+          );
+        }
+
+        &:focus {
+          @include theme.set-colors(
+            map.get($states, "focus", "text-color"),
+            map.get($states, "focus", "bg-color"),
+            map.get($states, "focus", "border-color"),
+          );
+        }
+      }
+
+      &.#{$lib-prefix}button-pressed {
+        @include theme.set-colors(
+          map.get($states, "pressed", "text-color"),
+          map.get($states, "pressed", "bg-color"),
+          map.get($states, "pressed", "border-color"),
+        );
+      }
+
+      &.#{$lib-prefix}button-disabled,
+      &:disabled {
+        $disabled-state: map.get(action-tokens.$filter-theme-map, "disabled");
+
+        &,
+        &:hover,
+        &:focus {
+          cursor: not-allowed !important;
+          @include theme.set-colors(
+            map.get($disabled-state, "text-color"),
+            map.get($disabled-state, "bg-color"),
+            map.get($disabled-state, "border-color"),
+          );
+        }
+      }
+    }
+  }
+}

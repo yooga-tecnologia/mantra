@@ -1,0 +1,59 @@
+@use "sass:map";
+
+@use "../../../shared/theme/tokens/actions/index.scss" as action-tokens;
+@use "../../../shared/theme/core/theme" as theme;
+
+///
+/// Button Link Theme
+///
+
+$component-prefix: theme.get-prefix('button');
+
+@mixin set-button-styles() {
+  @each $theme, $specs in action-tokens.$link-theme-map {
+    .#{$component-prefix}-link {
+      text-decoration: underline;
+
+      &.#{$component-prefix}-#{$theme} {
+        @include theme.set-colors(
+          map.get($specs, "default", "text-color"),
+          transparent,
+          transparent
+        );
+
+        &:hover {
+          @include theme.set-colors(
+            map.get($specs, "hover", "text-color"),
+            transparent
+          );
+        }
+
+        &:focus,
+        &:focus-visible,
+        &:active {
+          @include theme.set-colors(
+            map.get($specs, "focus", "text-color"),
+            transparent
+          );
+        }
+      }
+
+      &.#{$component-prefix}-disabled {
+        &,
+        &:hover,
+        &:focus {
+          cursor: not-allowed;
+          @include theme.set-colors(
+            map.get(
+              action-tokens.$link-theme-map,
+              "common-states",
+              "disabled",
+              "text-color"
+            ),
+            transparent
+          );
+        }
+      }
+    }
+  }
+}

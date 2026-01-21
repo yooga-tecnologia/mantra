@@ -1,0 +1,97 @@
+@use "sass:map";
+@use "../../core/_theme" as theme;
+
+@use "./__base" as base;
+
+$link-theme-map: (
+  common-states: (
+    disabled: (
+      "text-color": theme.get-tone-from-palette(200, "neutral"),
+      "bg-color": transparent,
+    ),
+  ),
+  neutral: (
+    default: (
+      "text-color": map.get(base.$action-text-map, "neutral", "default"),
+      "bg-color": transparent,
+    ),
+    hover: (
+      "text-color": map.get(base.$action-text-map, "neutral", "hover"),
+      "bg-color": transparent,
+    ),
+    pressed: (
+      "text-color": map.get(base.$action-text-map, "neutral", "pressed"),
+      "bg-color": transparent,
+    ),
+  ),
+  primary: (
+    default: (
+      "text-color": map.get(base.$action-text-map, "primary", "default"),
+      "bg-color": transparent,
+    ),
+    hover: (
+      "text-color": map.get(base.$action-text-map, "primary", "hover"),
+      "bg-color": transparent,
+    ),
+    pressed: (
+      "text-color": map.get(base.$action-text-map, "primary", "pressed"),
+      "bg-color": transparent,
+    ),
+  ),
+  secondary: (
+    default: (
+      "text-color": map.get(base.$action-text-map, "secondary", "default"),
+      "bg-color": transparent,
+    ),
+    hover: (
+      "text-color": map.get(base.$action-text-map, "secondary", "hover"),
+      "bg-color": transparent,
+    ),
+    pressed: (
+      "text-color": map.get(base.$action-text-map, "secondary", "pressed"),
+      "bg-color": transparent,
+    ),
+  ),
+  success: (
+    default: (
+      "text-color": map.get(base.$action-text-map, "success", "default"),
+      "bg-color": transparent,
+    ),
+    hover: (
+      "text-color": map.get(base.$action-text-map, "success", "hover"),
+      "bg-color": transparent,
+    ),
+    pressed: (
+      "text-color": map.get(base.$action-text-map, "success", "pressed"),
+      "bg-color": transparent,
+    ),
+  ),
+  warning: (
+    default: (
+      "text-color": map.get(base.$action-text-map, "warning", "default"),
+      "bg-color": transparent,
+    ),
+    hover: (
+      "text-color": map.get(base.$action-text-map, "warning", "hover"),
+      "bg-color": transparent,
+    ),
+    pressed: (
+      "text-color": map.get(base.$action-text-map, "warning", "pressed"),
+      "bg-color": transparent,
+    ),
+  ),
+  critical: (
+    default: (
+      "text-color": map.get(base.$action-text-map, "critical", "default"),
+      "bg-color": transparent,
+    ),
+    hover: (
+      "text-color": map.get(base.$action-text-map, "critical", "hover"),
+      "bg-color": transparent,
+    ),
+    pressed: (
+      "text-color": map.get(base.$action-text-map, "critical", "pressed"),
+      "bg-color": transparent,
+    ),
+  ),
+);

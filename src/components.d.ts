@@ -61,6 +61,7 @@ export namespace Components {
         "iconRight"?: ButtonProps['iconRight'];
         "label"?: ButtonProps['label'];
         "size": ButtonProps['size'];
+        "state"?: ButtonProps['state'];
         "variant": ButtonProps['variant'];
     }
     interface MntButtonIcon {
@@ -499,6 +500,7 @@ declare namespace LocalJSX {
         "label"?: ButtonProps['label'];
         "onButtonClick"?: (event: MntButtonCustomEvent<MouseEvent>) => void;
         "size"?: ButtonProps['size'];
+        "state"?: ButtonProps['state'];
         "variant"?: ButtonProps['variant'];
     }
     interface MntButtonIcon {

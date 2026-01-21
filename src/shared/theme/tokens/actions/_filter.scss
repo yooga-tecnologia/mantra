@@ -1,0 +1,28 @@
+@use "sass:map";
+@use "../../core/_theme" as theme;
+
+// FIXME - use text tokens ($action-text-map)
+$filter-theme-map: (
+  disabled: (
+    "text-color": theme.get-tone-from-palette(200, "neutral"),
+    "border-color": theme.get-tone-from-palette(100, "neutral"),
+    "bg-color": theme.get-tone-from-palette(50, "neutral"),
+  ),
+  primary: (
+    default: (
+      "text-color": theme.get-tone-from-palette(700, "neutral"),
+      "border-color": theme.get-tone-from-palette(200, "neutral"),
+      "bg-color": transparent,
+    ),
+    hover: (
+      "text-color": theme.get-tone-from-palette(800, "neutral"),
+      "border-color": theme.get-tone-from-palette(400, "neutral"),
+      "bg-color": transparent,
+    ),
+    pressed: (
+      "text-color": theme.get-tone-from-palette(700, "primary"),
+      "border-color": theme.get-tone-from-palette(600, "primary"),
+      "bg-color": transparent,
+    ),
+  ),
+);
