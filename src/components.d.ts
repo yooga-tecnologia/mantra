@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { BadgeBaseProps } from "./components/badge/badge.types";
 import { BrandProps } from "./components/brand/brand.types";
 import { ButtonIconProps, ButtonProps } from "./components/button/button.types";
+import { CheckboxBaseProps } from "./components/checkbox/checkbox.types";
 import { DatePickerMode, DateRange, DateSelectedEventDetail, MonthYear } from "./components/date-picker/date-picker.types";
 import { FieldDateProps } from "./components/field-date/field-date.types";
 import { FieldNumberVariant } from "./components/field-number/field-number.types";
@@ -17,6 +18,7 @@ import { FieldTextProps as FieldTextProps1 } from "./components/filter-search/fi
 import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
 import { LoadingStateProps } from "./components/loading-state/loading-state";
+import { RadioBaseProps } from "./components/radio/radio.types";
 import { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 import { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
 import { TabItemProps } from "./components/tab-item/tab-item.types";
@@ -25,6 +27,7 @@ import { TooltipProps } from "./components/tooltip/tooltip.types";
 export { BadgeBaseProps } from "./components/badge/badge.types";
 export { BrandProps } from "./components/brand/brand.types";
 export { ButtonIconProps, ButtonProps } from "./components/button/button.types";
+export { CheckboxBaseProps } from "./components/checkbox/checkbox.types";
 export { DatePickerMode, DateRange, DateSelectedEventDetail, MonthYear } from "./components/date-picker/date-picker.types";
 export { FieldDateProps } from "./components/field-date/field-date.types";
 export { FieldNumberVariant } from "./components/field-number/field-number.types";
@@ -34,6 +37,7 @@ export { FieldTextProps as FieldTextProps1 } from "./components/filter-search/fi
 export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
 export { LoadingStateProps } from "./components/loading-state/loading-state";
+export { RadioBaseProps } from "./components/radio/radio.types";
 export { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 export { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
 export { TabItemProps } from "./components/tab-item/tab-item.types";
@@ -70,6 +74,11 @@ export namespace Components {
         "icon"?: ButtonIconProps['icon'];
         "size": ButtonIconProps['size'];
         "variant": ButtonIconProps['variant'];
+    }
+    interface MntCheckbox {
+        "label"?: CheckboxBaseProps['label'];
+        "name"?: CheckboxBaseProps['name'];
+        "variant"?: CheckboxBaseProps['variant'];
     }
     interface MntDatePicker {
         "disablePastDates"?: boolean;
@@ -157,6 +166,12 @@ export namespace Components {
         "color": LoadingStateProps['color'];
         "label"?: LoadingStateProps['label'];
     }
+    interface MntRadio {
+        "checked"?: boolean;
+        "label"?: RadioBaseProps['label'];
+        "name"?: RadioBaseProps['name'];
+        "value"?: string;
+    }
     interface MntSteps {
         "activeStepId"?: StepsProps['activeStepId'];
         "orientation": StepsProps['orientation'];
@@ -214,6 +229,10 @@ export interface MntFieldTextCustomEvent<T> extends CustomEvent<T> {
 export interface MntFilterSearchCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntFilterSearchElement;
+}
+export interface MntRadioCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntRadioElement;
 }
 export interface MntStepsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -277,6 +296,12 @@ declare global {
     var HTMLMntButtonIconElement: {
         prototype: HTMLMntButtonIconElement;
         new (): HTMLMntButtonIconElement;
+    };
+    interface HTMLMntCheckboxElement extends Components.MntCheckbox, HTMLStencilElement {
+    }
+    var HTMLMntCheckboxElement: {
+        prototype: HTMLMntCheckboxElement;
+        new (): HTMLMntCheckboxElement;
     };
     interface HTMLMntDatePickerElementEventMap {
         "datePickerSelected": DateSelectedEventDetail;
@@ -380,6 +405,23 @@ declare global {
         prototype: HTMLMntLoadingStateElement;
         new (): HTMLMntLoadingStateElement;
     };
+    interface HTMLMntRadioElementEventMap {
+        "radioChange": { checked: boolean; value: string };
+    }
+    interface HTMLMntRadioElement extends Components.MntRadio, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntRadioElementEventMap>(type: K, listener: (this: HTMLMntRadioElement, ev: MntRadioCustomEvent<HTMLMntRadioElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntRadioElementEventMap>(type: K, listener: (this: HTMLMntRadioElement, ev: MntRadioCustomEvent<HTMLMntRadioElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntRadioElement: {
+        prototype: HTMLMntRadioElement;
+        new (): HTMLMntRadioElement;
+    };
     interface HTMLMntStepsElementEventMap {
         "stepClick": { stepId: string; stepIndex: number; status: StepStatus; step: StepItem };
     }
@@ -461,6 +503,7 @@ declare global {
         "mnt-brand": HTMLMntBrandElement;
         "mnt-button": HTMLMntButtonElement;
         "mnt-button-icon": HTMLMntButtonIconElement;
+        "mnt-checkbox": HTMLMntCheckboxElement;
         "mnt-date-picker": HTMLMntDatePickerElement;
         "mnt-field-date": HTMLMntFieldDateElement;
         "mnt-field-number": HTMLMntFieldNumberElement;
@@ -470,6 +513,7 @@ declare global {
         "mnt-icon-large": HTMLMntIconLargeElement;
         "mnt-illustration": HTMLMntIllustrationElement;
         "mnt-loading-state": HTMLMntLoadingStateElement;
+        "mnt-radio": HTMLMntRadioElement;
         "mnt-steps": HTMLMntStepsElement;
         "mnt-switch": HTMLMntSwitchElement;
         "mnt-tab-item": HTMLMntTabItemElement;
@@ -510,6 +554,11 @@ declare namespace LocalJSX {
         "onButtonClick"?: (event: MntButtonIconCustomEvent<MouseEvent>) => void;
         "size"?: ButtonIconProps['size'];
         "variant"?: ButtonIconProps['variant'];
+    }
+    interface MntCheckbox {
+        "label"?: CheckboxBaseProps['label'];
+        "name"?: CheckboxBaseProps['name'];
+        "variant"?: CheckboxBaseProps['variant'];
     }
     interface MntDatePicker {
         "disablePastDates"?: boolean;
@@ -608,6 +657,13 @@ declare namespace LocalJSX {
         "color"?: LoadingStateProps['color'];
         "label"?: LoadingStateProps['label'];
     }
+    interface MntRadio {
+        "checked"?: boolean;
+        "label"?: RadioBaseProps['label'];
+        "name"?: RadioBaseProps['name'];
+        "onRadioChange"?: (event: MntRadioCustomEvent<{ checked: boolean; value: string }>) => void;
+        "value"?: string;
+    }
     interface MntSteps {
         "activeStepId"?: StepsProps['activeStepId'];
         "onStepClick"?: (event: MntStepsCustomEvent<{ stepId: string; stepIndex: number; status: StepStatus; step: StepItem }>) => void;
@@ -652,6 +708,7 @@ declare namespace LocalJSX {
         "mnt-brand": MntBrand;
         "mnt-button": MntButton;
         "mnt-button-icon": MntButtonIcon;
+        "mnt-checkbox": MntCheckbox;
         "mnt-date-picker": MntDatePicker;
         "mnt-field-date": MntFieldDate;
         "mnt-field-number": MntFieldNumber;
@@ -661,6 +718,7 @@ declare namespace LocalJSX {
         "mnt-icon-large": MntIconLarge;
         "mnt-illustration": MntIllustration;
         "mnt-loading-state": MntLoadingState;
+        "mnt-radio": MntRadio;
         "mnt-steps": MntSteps;
         "mnt-switch": MntSwitch;
         "mnt-tab-item": MntTabItem;
@@ -676,6 +734,7 @@ declare module "@stencil/core" {
             "mnt-brand": LocalJSX.MntBrand & JSXBase.HTMLAttributes<HTMLMntBrandElement>;
             "mnt-button": LocalJSX.MntButton & JSXBase.HTMLAttributes<HTMLMntButtonElement>;
             "mnt-button-icon": LocalJSX.MntButtonIcon & JSXBase.HTMLAttributes<HTMLMntButtonIconElement>;
+            "mnt-checkbox": LocalJSX.MntCheckbox & JSXBase.HTMLAttributes<HTMLMntCheckboxElement>;
             "mnt-date-picker": LocalJSX.MntDatePicker & JSXBase.HTMLAttributes<HTMLMntDatePickerElement>;
             "mnt-field-date": LocalJSX.MntFieldDate & JSXBase.HTMLAttributes<HTMLMntFieldDateElement>;
             "mnt-field-number": LocalJSX.MntFieldNumber & JSXBase.HTMLAttributes<HTMLMntFieldNumberElement>;
@@ -685,6 +744,7 @@ declare module "@stencil/core" {
             "mnt-icon-large": LocalJSX.MntIconLarge & JSXBase.HTMLAttributes<HTMLMntIconLargeElement>;
             "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
             "mnt-loading-state": LocalJSX.MntLoadingState & JSXBase.HTMLAttributes<HTMLMntLoadingStateElement>;
+            "mnt-radio": LocalJSX.MntRadio & JSXBase.HTMLAttributes<HTMLMntRadioElement>;
             "mnt-steps": LocalJSX.MntSteps & JSXBase.HTMLAttributes<HTMLMntStepsElement>;
             "mnt-switch": LocalJSX.MntSwitch & JSXBase.HTMLAttributes<HTMLMntSwitchElement>;
             "mnt-tab-item": LocalJSX.MntTabItem & JSXBase.HTMLAttributes<HTMLMntTabItemElement>;

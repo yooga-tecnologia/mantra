@@ -16,7 +16,9 @@
     "field-date",
     "npm",
     "field-text",
-    "filter-search"
+    "filter-search",
+    "radio",
+    "checkbox"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false
