@@ -1,7 +1,7 @@
 import { Component, Host, Prop, Watch, h } from '@stencil/core';
+import { FunctionalComponent, HostAttributes } from '@stencil/core/internal';
 
 import { COMPONENT_PREFIX, type BadgeBaseProps } from './badge.types';
-import { FunctionalComponent, HostAttributes } from '@stencil/core/internal';
 
 @Component({
   tag: 'mnt-badge',

@@ -1,0 +1,137 @@
+@use "../../shared/theme/core/theme" as theme;
+
+$component-prefix: theme.get-prefix('checkbox');
+$base-grid: 8px;
+$border-radius: 6px;
+
+$color-neutral: #ABB2B5;
+$color-neutral-hover: #818A8F;
+
+$color-primary: #83CEF6;
+$color-primary-hover: #64B8D9;
+$color-primary-icon: #0D547F;
+
+$color-disabled: #CED2D3;
+$color-disabled-icon: #FFFFFF;
+
+$text-color: #4B5053;
+
+// Control custom element display property
+:host {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.#{$component-prefix}-check,
+.#{$component-prefix}-indeterminate {
+  input {
+    display: none;
+  }
+
+  mnt-icon {
+    width: $base-grid * 2;
+    height: $base-grid * 2;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: transform 0.28s, opacity 0.2s;
+    color: $color-primary-icon;
+  }
+
+  .#{$component-prefix}-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: $base-grid;
+    cursor: pointer;
+    transition: transform 0.28s, opacity 0.2s;
+
+
+    // INPUT CONTAINER STYLES
+
+    .#{$component-prefix}-input-container {
+      width: $base-grid * 2.5;
+      height: $base-grid * 2.5;
+      flex-shrink: 0;
+      border: 2px solid $color-neutral;
+      border-color: $color-neutral;
+      border-radius: $border-radius;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.22s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    &:hover {
+      .#{$component-prefix}-input-container {
+        border-color: $color-neutral-hover;
+      }
+    }
+
+    .#{$component-prefix}-label-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: auto;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0px;
+    }
+
+    .#{$component-prefix}-label {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      margin: 0;
+      color: $text-color;
+    }
+
+    // STYLES FOR CHECKED STATE
+
+    input:checked + .#{$component-prefix}-input-container {
+      border-color: $color-primary;
+      background: $color-primary;
+      transform: scale(1.04);
+    }
+
+    &:hover input:checked + .#{$component-prefix}-input-container {
+      border-color: $color-primary-hover;
+      background: $color-primary-hover;
+    }
+
+    input:checked:disabled + .#{$component-prefix}-input-container {
+      border-color: $color-disabled;
+      background: $color-disabled;
+    }
+
+    input:checked + .#{$component-prefix}-input-container > mnt-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  // Disabled state
+  &:disabled,
+  &.#{$component-prefix}-disabled {
+    .#{$component-prefix}-input-container {
+      border-color: $color-disabled;
+      background: $color-disabled;
+    }
+
+    .#{$component-prefix}-label {
+      color: $color-disabled;
+    }
+
+    mnt-icon {
+      color: $color-disabled-icon !important;
+    }
+
+    &:hover > .#{$component-prefix}-wrapper {
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Disabled no host
+:host([disabled]) {
+  opacity: 0.5;
+  pointer-events: none;
+}
