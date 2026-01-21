@@ -4,7 +4,7 @@ import type { ExtendedIconName, IconAnimation } from '../icon/icon.types';
 export const componentPrefix = 'button';
 
 /** Possible button style variants */
-export const buttonStyleArray = ['regular', 'emphasis', 'stroke', 'plain'] as const;
+export const buttonStyleArray = ['regular', 'emphasis', 'stroke', 'plain', 'filter', 'link'] as const;
 
 /** Types derived from arrays */
 export type ButtonStyle = (typeof buttonStyleArray)[number];
@@ -22,6 +22,7 @@ export interface ButtonProps extends ButtonBaseProps {
   iconLeft?: ExtendedIconName;
   iconRight?: ExtendedIconName;
   iconAnimation?: IconAnimation;
+  state?: 'default' | 'pressed';
 }
 
 export interface ButtonIconProps extends ButtonBaseProps {

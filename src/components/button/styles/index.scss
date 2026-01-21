@@ -14,8 +14,12 @@
 @use "./_variant-stroke" as button-stroke;
 @use "./_variant-plain" as button-plain;
 @use "./_variant-regular" as button-regular;
+@use "./_variant-filter" as button-filter;
+@use "./_variant-link" as button-link;
 
 @include button-emphasis.set-button-styles();
 @include button-stroke.set-button-styles();
 @include button-plain.set-button-styles();
 @include button-regular.set-button-styles();
+@include button-filter.set-button-styles();
+@include button-link.set-button-styles();

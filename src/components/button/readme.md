@@ -13,7 +13,7 @@
 | `disabled` | `disabled` |             | `boolean`                                                                       | `false`     |
 | `icon`     | `icon`     |             | `string`                                                                        | `undefined` |
 | `size`     | `size`     |             | `"large" \| "medium" \| "small" \| "tiny"`                                      | `'medium'`  |
-| `variant`  | `variant`  |             | `"emphasis" \| "plain" \| "regular" \| "stroke"`                                | `'regular'` |
+| `variant`  | `variant`  |             | `"emphasis" \| "filter" \| "link" \| "plain" \| "regular" \| "stroke"`          | `'regular'` |
 
 
 ## Events

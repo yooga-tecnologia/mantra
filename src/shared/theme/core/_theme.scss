@@ -51,7 +51,7 @@ $tone-map: (
 @mixin set-colors(
   $text-color,
   $bg-color: transparent,
-  $border-color: none
+  $border-color: none,
 ) {
   color: $text-color;
   background-color: $bg-color;
@@ -60,8 +60,7 @@ $tone-map: (
     fill: $text-color;
   }
 
-  @if $border-color != none {
-    border-width: 1px;
+  @if ($border-color != none) {
     border-style: solid;
     border-color: $border-color;
   }

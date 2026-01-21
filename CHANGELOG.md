@@ -4,6 +4,15 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [2.9.12] - 2026-01-21
+
+### 🚀 Adicionado
+
+- **Button**: Variantes de estilo adicionadas `filter` e `link`;
+  - Ambos permitem o uso de propriedades de tamanho (`size`) e adição de ícones (`icon-left` e `icon-right`);
+  - Variante `link` permite o uso de configurações de cores como os demais estilos (`stroke`, `emphasis`, `plain` e `regular`);
+  - Variante `filter` é mais limitada, permitindo apenas o uso de cor primary;
+
 ## [2.9.11] - 2026-01-20
 
 ### 🚀 Adicionado

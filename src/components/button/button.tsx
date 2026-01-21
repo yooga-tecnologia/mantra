@@ -16,6 +16,7 @@ export class Button {
   @Prop() color: ButtonProps['color'] = 'neutral';
   @Prop() variant: ButtonProps['variant'] = 'regular';
   @Prop() fullWidth: ButtonProps['fullWidth'] = false;
+  @Prop() state?: ButtonProps['state'] = 'default';
 
   // Structure
   @Prop() label?: ButtonProps['label'];
@@ -64,6 +65,11 @@ export class Button {
     let colorClass = '';
     let sizeClass = '';
 
+    if (this.variant === 'filter' && (this.color !== 'primary' || this.color === undefined)) {
+      console.warn('[MANTRA] The "primary" color is the only supported color for the "filter" variant. Please use a different color.');
+      this.color = 'primary';
+    }
+
     if (this.variant === 'emphasis' && this.color === 'neutral') {
       console.warn('[MANTRA] The "neutral" color is not supported for the "emphasis" variant. Please use a different color.');
       colorClass = `${LIB_PREFIX}button-primary`;
@@ -81,8 +87,9 @@ export class Button {
     const variantClass = `${LIB_PREFIX}button-${this.variant}`;
     const disabledClass = this.disabled ? `${LIB_PREFIX}button-disabled` : '';
     const fullWidthClass = this.fullWidth ? `${LIB_PREFIX}button-full-width` : '';
+    const stateClass = this.state ? `${LIB_PREFIX}button-${this.state}` : '';
 
-    return `${fullWidthClass} ${variantClass} ${sizeClass} ${colorClass} ${disabledClass}`;
+    return `${fullWidthClass} ${variantClass} ${sizeClass} ${colorClass} ${disabledClass} ${stateClass}`;
   }
 
   render() {
