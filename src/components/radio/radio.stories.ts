@@ -2,17 +2,55 @@ import type { Meta, StoryFn } from '@storybook/html';
 import { HTMLString } from 'src/utils/utils';
 import { RadioBaseProps } from './radio.types';
 
-const meta: Meta<RadioBaseProps> = {
+const meta: Meta = {
   title: 'Forms/Radio',
   component: 'mnt-radio',
   argTypes: {
     name: {
       control: 'text',
       description: 'Nome do radio button (usado para agrupar radios)',
+      table: {
+        type: { summary: 'string' },
+      },
     },
     label: {
       control: 'text',
       description: 'Texto do label',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    value: {
+      control: 'text',
+      description: 'Valor do radio (emitido no evento)',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    checked: {
+      control: 'boolean',
+      description: 'Se o radio está marcado',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Se o radio está desabilitado',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    // Eventos
+    radioChange: {
+      action: 'radioChange',
+      description: 'Evento emitido quando o estado do radio muda',
+      table: {
+        category: 'Events',
+        type: { summary: '(event: CustomEvent<{ checked: boolean; value: string }>) => void' },
+      },
     },
   },
   parameters: {
@@ -39,23 +77,9 @@ Isso é útil para casos onde você quer permitir "nenhuma opção selecionada".
 - Primeiro clique → Marca o radio
 - Segundo clique (no mesmo radio) → Desmarca o radio
 
-### 📋 Evento radioChange:
+### 📚 Documentação completa:
 
-O evento \`radioChange\` é emitido ao clicar no radio e contém:
-
-\`\`\`typescript
-{
-  checked: boolean,  // true se foi marcado, false se foi desmarcado
-  value: string      // o valor do radio (prop value ou name)
-}
-\`\`\`
-
-### ♿ Acessibilidade:
-
-- Label clicável associado ao input
-- Suporte a navegação por teclado (Tab, Space)
-- Estados visuais claros (checked, unchecked, disabled)
-- Atributo \`disabled\` funcional
+Veja o story **"Usage Documentation"** para exemplos detalhados de uso em JavaScript e Angular.
         `,
       },
     },
@@ -87,6 +111,226 @@ Example.parameters = {
   docs: {
     description: {
       story: 'Exemplo básico do radio button com configurações padrão.',
+    },
+  },
+};
+
+/**
+ * Documentação de Uso
+ */
+export const UsageDocumentation: StoryFn = () => `
+  <div style="padding: 40px; max-width: 900px; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif;">
+    <h1 style="margin-top: 0; color: #1f2937;">📚 Como Usar o Componente Radio</h1>
+
+    <div style="padding: 16px; background: #e0e7ff; border-left: 4px solid #6366f1; border-radius: 4px; margin-bottom: 32px;">
+      <strong style="color: #4338ca;">ℹ️ Props e Eventos</strong>
+      <p style="margin: 8px 0 0 0; color: #4338ca;">
+        Veja todas as props e eventos disponíveis na tabela de <strong>Controls</strong> acima 
+        (aba ao lado de "Canvas").
+      </p>
+    </div>
+
+    <!-- Comportamento Customizado -->
+    <section style="margin-bottom: 48px;">
+      <div style="padding: 16px; background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 24px;">
+        <strong style="color: #92400e;">⚠️ COMPORTAMENTO CUSTOMIZADO</strong>
+        <p style="margin: 8px 0 0 0; color: #78350f;">
+          <strong>Diferente do radio HTML nativo</strong>, este componente permite <strong>desmarcar</strong> 
+          um radio clicando nele novamente.
+        </p>
+        <ul style="margin: 8px 0 0 20px; color: #78350f; line-height: 1.8;">
+          <li>Primeiro clique → Marca o radio</li>
+          <li>Segundo clique (no mesmo radio) → Desmarca o radio</li>
+          <li>Útil para permitir "nenhuma seleção"</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- HTML Básico -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="color: #374151; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">📖 HTML Básico</h2>
+      
+      <h3 style="color: #4b5563; margin-top: 24px;">Radio simples</h3>
+      <pre style="background: #f9fafb; padding: 16px; border-radius: 8px; overflow-x: auto; border: 1px solid #e5e7eb;"><code>&lt;mnt-radio
+  name="option"
+  label="Opção A"
+  value="optionA"
+&gt;&lt;/mnt-radio&gt;</code></pre>
+
+      <h3 style="color: #4b5563; margin-top: 24px;">Radio pré-selecionado</h3>
+      <pre style="background: #f9fafb; padding: 16px; border-radius: 8px; overflow-x: auto; border: 1px solid #e5e7eb;"><code>&lt;mnt-radio
+  name="option"
+  label="Opção B"
+  value="optionB"
+  checked
+&gt;&lt;/mnt-radio&gt;</code></pre>
+
+      <h3 style="color: #4b5563; margin-top: 24px;">Grupo de radios</h3>
+      <pre style="background: #f9fafb; padding: 16px; border-radius: 8px; overflow-x: auto; border: 1px solid #e5e7eb;"><code>&lt;mnt-radio name="size" label="Pequeno" value="S"&gt;&lt;/mnt-radio&gt;
+&lt;mnt-radio name="size" label="Médio" value="M"&gt;&lt;/mnt-radio&gt;
+&lt;mnt-radio name="size" label="Grande" value="G"&gt;&lt;/mnt-radio&gt;</code></pre>
+      <p style="color: #6b7280; margin-top: 8px; font-size: 14px;">
+        ℹ️ Radios com o mesmo <code style="background: #fef3c7; padding: 2px 6px; border-radius: 4px;">name</code> 
+        formam um grupo.
+      </p>
+    </section>
+
+    <!-- Evento radioChange -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="color: #374151; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">🔄 Evento radioChange</h2>
+      
+      <p style="color: #6b7280; line-height: 1.6;">
+        O componente emite o evento customizado <code style="background: #fef3c7; padding: 2px 6px; border-radius: 4px;">radioChange</code> quando o estado muda.
+      </p>
+
+      <h3 style="color: #4b5563; margin-top: 24px;">Estrutura do evento</h3>
+      <pre style="background: #f9fafb; padding: 16px; border-radius: 8px; overflow-x: auto; border: 1px solid #e5e7eb;"><code>{
+  detail: {
+    checked: boolean,  // true se foi marcado, false se foi desmarcado
+    value: string      // o valor do radio (prop value ou name)
+  }
+}</code></pre>
+
+      <h3 style="color: #4b5563; margin-top: 24px;">JavaScript/HTML</h3>
+      <pre style="background: #f9fafb; padding: 16px; border-radius: 8px; overflow-x: auto; border: 1px solid #e5e7eb;"><code>const radio = document.querySelector('mnt-radio');
+
+radio.addEventListener('radioChange', (event) => {
+  const { checked, value } = event.detail;
+  console.log(\`Radio \${value} is now \${checked ? 'checked' : 'unchecked'}\`);
+});</code></pre>
+    </section>
+
+    <!-- Angular -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="color: #374151; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">🚀 Uso em Angular</h2>
+
+      <div style="padding: 16px; background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 24px;">
+        <strong style="color: #92400e;">⚠️ IMPORTANTE:</strong>
+        <p style="margin: 8px 0 0 0; color: #78350f;">
+          Use <code style="background: white; padding: 2px 6px; border-radius: 4px;">(radioChange)</code> e <strong>NÃO</strong> <code style="background: white; padding: 2px 6px; border-radius: 4px;">(click)</code>!
+        </p>
+        <ul style="margin: 8px 0 0 20px; color: #78350f; line-height: 1.8;">
+          <li>❌ <code style="background: white; padding: 2px 6px; border-radius: 4px;">(click)="handleChange()"</code> → Causa double-click (event bubbling)</li>
+          <li>✅ <code style="background: white; padding: 2px 6px; border-radius: 4px;">(radioChange)="handleChange($event)"</code> → Funciona corretamente</li>
+        </ul>
+      </div>
+
+      <h3 style="color: #4b5563; margin-top: 24px;">TypeScript Component</h3>
+      <pre style="background: #f9fafb; padding: 16px; border-radius: 8px; overflow-x: auto; border: 1px solid #e5e7eb; font-size: 14px;"><code>// component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-product-size',
+  templateUrl: './product-size.component.html'
+})
+export class ProductSizeComponent {
+  selectedSize: string = '';
+
+  sizeOptions = [
+    { value: 'S', label: 'Pequeno (P)' },
+    { value: 'M', label: 'Médio (M)' },
+    { value: 'G', label: 'Grande (G)' },
+    { value: 'GG', label: 'Extra Grande (GG)' }
+  ];
+
+  handleRadioChange(event: any): void {
+    const { checked, value } = event.detail;
+    
+    console.log('[RADIO] Radio changed:', { checked, value });
+
+    if (checked) {
+      this.selectedSize = value;
+    } else {
+      this.selectedSize = ''; // Desmarcou (comportamento customizado)
+    }
+
+    console.log('[RADIO] Selected size:', this.selectedSize);
+  }
+}</code></pre>
+
+      <h3 style="color: #4b5563; margin-top: 24px;">Template HTML</h3>
+      <pre style="background: #f9fafb; padding: 16px; border-radius: 8px; overflow-x: auto; border: 1px solid #e5e7eb; font-size: 14px;"><code>&lt;!-- component.html --&gt;
+&lt;div class="size-selector"&gt;
+  &lt;h3&gt;Escolha o tamanho:&lt;/h3&gt;
+
+  &lt;div class="radio-group" *ngFor="let size of sizeOptions"&gt;
+    &lt;mnt-radio
+      [name]="'product-size'"
+      [value]="size.value"
+      [label]="size.label"
+      (radioChange)="handleRadioChange($event)"
+      [checked]="selectedSize === size.value"
+    &gt;&lt;/mnt-radio&gt;
+  &lt;/div&gt;
+
+  &lt;p&gt;Tamanho selecionado: {{ selectedSize || 'Nenhum' }}&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+
+    <!-- Grupos -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="color: #374151; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">👥 Grupos de Radios</h2>
+      
+      <p style="color: #6b7280; line-height: 1.6;">
+        Radios com o mesmo <code style="background: #fef3c7; padding: 2px 6px; border-radius: 4px;">name</code> 
+        formam um grupo. Quando um radio do grupo é marcado, os outros são automaticamente desmarcados.
+      </p>
+
+      <h3 style="color: #4b5563; margin-top: 24px;">Exemplo</h3>
+      <pre style="background: #f9fafb; padding: 16px; border-radius: 8px; overflow-x: auto; border: 1px solid #e5e7eb;"><code>&lt;!-- Grupo 1: Cor --&gt;
+&lt;mnt-radio name="color" label="Vermelho" value="red"&gt;&lt;/mnt-radio&gt;
+&lt;mnt-radio name="color" label="Azul" value="blue"&gt;&lt;/mnt-radio&gt;
+
+&lt;!-- Grupo 2: Tamanho (independente do Grupo 1) --&gt;
+&lt;mnt-radio name="size" label="P" value="S"&gt;&lt;/mnt-radio&gt;
+&lt;mnt-radio name="size" label="M" value="M"&gt;&lt;/mnt-radio&gt;</code></pre>
+    </section>
+
+    <!-- Dicas -->
+    <section>
+      <h2 style="color: #374151; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">💡 Dicas e Boas Práticas</h2>
+      
+      <div style="margin-top: 16px;">
+        <div style="padding: 16px; background: #dbeafe; border-left: 4px solid #3b82f6; border-radius: 4px; margin-bottom: 16px;">
+          <strong style="color: #1e40af;">✓ Use value único para cada radio</strong>
+          <p style="margin: 8px 0 0 0; color: #1e3a8a;">
+            Sempre defina um <code style="background: white; padding: 2px 6px; border-radius: 4px;">value</code> 
+            único para identificar qual opção foi selecionada.
+          </p>
+        </div>
+
+        <div style="padding: 16px; background: #dbeafe; border-left: 4px solid #3b82f6; border-radius: 4px; margin-bottom: 16px;">
+          <strong style="color: #1e40af;">✓ Agrupe radios relacionados com o mesmo name</strong>
+          <p style="margin: 8px 0 0 0; color: #1e3a8a;">
+            Use o mesmo <code style="background: white; padding: 2px 6px; border-radius: 4px;">name</code> 
+            para radios que representam opções mutuamente exclusivas.
+          </p>
+        </div>
+
+        <div style="padding: 16px; background: #dbeafe; border-left: 4px solid #3b82f6; border-radius: 4px; margin-bottom: 16px;">
+          <strong style="color: #1e40af;">✓ Sincronize o estado com checked</strong>
+          <p style="margin: 8px 0 0 0; color: #1e3a8a;">
+            Use <code style="background: white; padding: 2px 6px; border-radius: 4px;">[checked]</code> 
+            para refletir qual opção está selecionada no estado da aplicação.
+          </p>
+        </div>
+
+        <div style="padding: 16px; background: #fee2e2; border-left: 4px solid #ef4444; border-radius: 4px;">
+          <strong style="color: #991b1b;">✗ Não use (click) para detectar mudanças</strong>
+          <p style="margin: 8px 0 0 0; color: #7f1d1d;">
+            O evento <code style="background: white; padding: 2px 6px; border-radius: 4px;">(click)</code> 
+            causa double-click. Sempre use <code style="background: white; padding: 2px 6px; border-radius: 4px;">(radioChange)</code>.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+`;
+UsageDocumentation.parameters = {
+  controls: { disable: true },
+  docs: {
+    description: {
+      story: 'Documentação completa de uso do componente radio com exemplos em JavaScript e Angular.',
     },
   },
 };

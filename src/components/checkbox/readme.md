@@ -9,9 +9,18 @@
 
 | Property  | Attribute | Description | Type                         | Default     |
 | --------- | --------- | ----------- | ---------------------------- | ----------- |
+| `checked` | `checked` |             | `boolean`                    | `false`     |
 | `label`   | `label`   |             | `string`                     | `undefined` |
 | `name`    | `name`    |             | `string`                     | `undefined` |
+| `value`   | `value`   |             | `string`                     | `undefined` |
 | `variant` | `variant` |             | `"check" \| "indeterminate"` | `'check'`   |
+
+
+## Events
+
+| Event            | Description | Type                                                |
+| ---------------- | ----------- | --------------------------------------------------- |
+| `checkboxChange` |             | `CustomEvent<{ checked: boolean; value: string; }>` |
 
 
 ## Dependencies

@@ -10,5 +10,8 @@ export type CheckboxVariant = (typeof checkboxVariantArray)[number];
 export interface CheckboxBaseProps {
   name?: string;
   label?: string;
+  value?: string;
+  checked?: boolean;
   variant?: CheckboxVariant;
+  disabled?: boolean;
 }
