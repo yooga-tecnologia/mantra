@@ -76,8 +76,10 @@ export namespace Components {
         "variant": ButtonIconProps['variant'];
     }
     interface MntCheckbox {
+        "checked"?: boolean;
         "label"?: CheckboxBaseProps['label'];
         "name"?: CheckboxBaseProps['name'];
+        "value"?: string;
         "variant"?: CheckboxBaseProps['variant'];
     }
     interface MntDatePicker {
@@ -167,10 +169,10 @@ export namespace Components {
         "label"?: LoadingStateProps['label'];
     }
     interface MntRadio {
-        "checked"?: boolean;
+        "checked"?: RadioBaseProps['checked'];
         "label"?: RadioBaseProps['label'];
         "name"?: RadioBaseProps['name'];
-        "value"?: string;
+        "value"?: RadioBaseProps['value'];
     }
     interface MntSteps {
         "activeStepId"?: StepsProps['activeStepId'];
@@ -213,6 +215,10 @@ export interface MntButtonCustomEvent<T> extends CustomEvent<T> {
 export interface MntButtonIconCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntButtonIconElement;
+}
+export interface MntCheckboxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntCheckboxElement;
 }
 export interface MntDatePickerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -297,7 +303,18 @@ declare global {
         prototype: HTMLMntButtonIconElement;
         new (): HTMLMntButtonIconElement;
     };
+    interface HTMLMntCheckboxElementEventMap {
+        "checkboxChange": { checked: boolean; value: string };
+    }
     interface HTMLMntCheckboxElement extends Components.MntCheckbox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntCheckboxElementEventMap>(type: K, listener: (this: HTMLMntCheckboxElement, ev: MntCheckboxCustomEvent<HTMLMntCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntCheckboxElementEventMap>(type: K, listener: (this: HTMLMntCheckboxElement, ev: MntCheckboxCustomEvent<HTMLMntCheckboxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLMntCheckboxElement: {
         prototype: HTMLMntCheckboxElement;
@@ -556,8 +573,11 @@ declare namespace LocalJSX {
         "variant"?: ButtonIconProps['variant'];
     }
     interface MntCheckbox {
+        "checked"?: boolean;
         "label"?: CheckboxBaseProps['label'];
         "name"?: CheckboxBaseProps['name'];
+        "onCheckboxChange"?: (event: MntCheckboxCustomEvent<{ checked: boolean; value: string }>) => void;
+        "value"?: string;
         "variant"?: CheckboxBaseProps['variant'];
     }
     interface MntDatePicker {
@@ -658,11 +678,11 @@ declare namespace LocalJSX {
         "label"?: LoadingStateProps['label'];
     }
     interface MntRadio {
-        "checked"?: boolean;
+        "checked"?: RadioBaseProps['checked'];
         "label"?: RadioBaseProps['label'];
         "name"?: RadioBaseProps['name'];
         "onRadioChange"?: (event: MntRadioCustomEvent<{ checked: boolean; value: string }>) => void;
-        "value"?: string;
+        "value"?: RadioBaseProps['value'];
     }
     interface MntSteps {
         "activeStepId"?: StepsProps['activeStepId'];
