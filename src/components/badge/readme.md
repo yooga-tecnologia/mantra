@@ -12,7 +12,7 @@
 | `color`  | `color`   |             | `"critical" \| "neutral" \| "primary" \| "secondary" \| "success" \| "warning"` | `'primary'` |
 | `icon`   | `icon`    |             | `string`                                                                        | `undefined` |
 | `label`  | `label`   |             | `string`                                                                        | `undefined` |
-| `size`   | `size`    |             | `"medium" \| "small" \| "tiny"`                                                 | `'medium'`  |
+| `size`   | `size`    |             | `"large" \| "medium" \| "small" \| "tiny"`                                      | `'medium'`  |
 | `tone`   | `tone`    |             | `"default" \| "emphasis" \| "highlight"`                                        | `'default'` |
 
 
@@ -25,8 +25,8 @@
 ### Graph
 ```mermaid
 graph TD;
-  mnt-badge --> mnt-icon
-  style mnt-badge fill:#f9f,stroke:#333,stroke-width:4px
+  mnt-badge-icon --> mnt-icon
+  style mnt-badge-icon fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

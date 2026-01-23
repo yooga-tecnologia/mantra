@@ -13,7 +13,8 @@ $component-prefix: theme.get-prefix('badge');
   @each $color, $specs in theme.$theme-map {
     @each $tone in theme.$tone-map {
       $variant-scheme: map.get(feedback-tokens.$badge-theme-map, $color, $tone);
-      .#{$component-prefix}-#{$color}.#{$component-prefix}-#{$tone} {
+      .#{$component-prefix}-#{$color}.#{$component-prefix}-#{$tone},
+      .#{$component-prefix}-icon-#{$color}.#{$component-prefix}-icon-#{$tone} {
         @include theme.set-colors(
           map.get($variant-scheme, "text-color"),
           map.get($variant-scheme, "bg-color"),
