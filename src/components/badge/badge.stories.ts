@@ -13,8 +13,6 @@ const SB_TABLE_ICON = {
   },
 };
 
-const filteredSizeVariantsArray = sizeVariantsArray.filter((size) => size !== 'large');
-
 const meta: Meta<BadgeBaseProps> = {
   title: 'Components/Badge/Default',
   component: 'mnt-badge',
@@ -25,10 +23,10 @@ const meta: Meta<BadgeBaseProps> = {
     },
     size: {
       control: 'select',
-      options: filteredSizeVariantsArray,
+      options: sizeVariantsArray,
       table: {
         defaultValue: { summary: 'medium' },
-        type: { summary: filteredSizeVariantsArray.join(' | ') },
+        type: { summary: sizeVariantsArray.join(' | ') },
       },
     },
     color: {
@@ -82,7 +80,7 @@ const getColorVariants = (color: ThemePalette): HTMLString => {
 
   colorTonesArray.map((tone) => {
     badgeVariants.push(`<span>${tone}</span>`);
-    filteredSizeVariantsArray.map((size) => {
+    sizeVariantsArray.map((size) => {
       const label = `${tone} ${size}`;
       badgeVariants.push(DefaultTemplate({ color, tone, size, icon: 'clock', label }));
     });
@@ -90,7 +88,7 @@ const getColorVariants = (color: ThemePalette): HTMLString => {
   return `
 <div class="sb-section-box">
   <h4>${color}</h4>
-  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
+  <div class="sb-grid-5 sb-grid-row-divider sb-grid-row-title">
     ${badgeVariants.join('')}
   </div>
 </div>`;

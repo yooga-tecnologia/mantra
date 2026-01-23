@@ -18,7 +18,8 @@
     "field-text",
     "filter-search",
     "radio",
-    "checkbox"
+    "checkbox",
+    "badge"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false

@@ -8,7 +8,7 @@ export const COMPONENT_PREFIX = getLibPrefix() + 'badge';
 export interface BadgeBaseProps {
   label: string;
   icon?: ExtendedIconName;
-  size?: Exclude<SizeVariants, 'large'>;
+  size?: SizeVariants;
   color?: ThemePalette;
   tone?: ColorTone;
   disabled?: boolean;

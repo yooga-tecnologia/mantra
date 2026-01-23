@@ -51,6 +51,13 @@ export namespace Components {
         "size"?: BadgeBaseProps['size'];
         "tone"?: BadgeBaseProps['tone'];
     }
+    interface MntBadgeIcon {
+        "color"?: BadgeBaseProps['color'];
+        "icon"?: BadgeBaseProps['icon'];
+        "label"?: BadgeBaseProps['label'];
+        "size"?: BadgeBaseProps['size'];
+        "tone"?: BadgeBaseProps['tone'];
+    }
     interface MntBrand {
         "color": BrandProps['color'];
         "height": BrandProps['height'];
@@ -262,6 +269,12 @@ declare global {
     var HTMLMntBadgeElement: {
         prototype: HTMLMntBadgeElement;
         new (): HTMLMntBadgeElement;
+    };
+    interface HTMLMntBadgeIconElement extends Components.MntBadgeIcon, HTMLStencilElement {
+    }
+    var HTMLMntBadgeIconElement: {
+        prototype: HTMLMntBadgeIconElement;
+        new (): HTMLMntBadgeIconElement;
     };
     interface HTMLMntBrandElement extends Components.MntBrand, HTMLStencilElement {
     }
@@ -517,6 +530,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "mnt-badge": HTMLMntBadgeElement;
+        "mnt-badge-icon": HTMLMntBadgeIconElement;
         "mnt-brand": HTMLMntBrandElement;
         "mnt-button": HTMLMntButtonElement;
         "mnt-button-icon": HTMLMntButtonIconElement;
@@ -540,6 +554,13 @@ declare global {
 }
 declare namespace LocalJSX {
     interface MntBadge {
+        "color"?: BadgeBaseProps['color'];
+        "icon"?: BadgeBaseProps['icon'];
+        "label"?: BadgeBaseProps['label'];
+        "size"?: BadgeBaseProps['size'];
+        "tone"?: BadgeBaseProps['tone'];
+    }
+    interface MntBadgeIcon {
         "color"?: BadgeBaseProps['color'];
         "icon"?: BadgeBaseProps['icon'];
         "label"?: BadgeBaseProps['label'];
@@ -725,6 +746,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "mnt-badge": MntBadge;
+        "mnt-badge-icon": MntBadgeIcon;
         "mnt-brand": MntBrand;
         "mnt-button": MntButton;
         "mnt-button-icon": MntButtonIcon;
@@ -751,6 +773,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "mnt-badge": LocalJSX.MntBadge & JSXBase.HTMLAttributes<HTMLMntBadgeElement>;
+            "mnt-badge-icon": LocalJSX.MntBadgeIcon & JSXBase.HTMLAttributes<HTMLMntBadgeIconElement>;
             "mnt-brand": LocalJSX.MntBrand & JSXBase.HTMLAttributes<HTMLMntBrandElement>;
             "mnt-button": LocalJSX.MntButton & JSXBase.HTMLAttributes<HTMLMntButtonElement>;
             "mnt-button-icon": LocalJSX.MntButtonIcon & JSXBase.HTMLAttributes<HTMLMntButtonIconElement>;

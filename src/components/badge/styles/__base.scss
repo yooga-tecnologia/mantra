@@ -25,8 +25,58 @@ $badge-size-configs: (
     height: 48px,
     gap: 8px,
   ),
+  "large": (
+    font-size: 16px,
+    padding: 12px 16px,
+    height: 48px,
+    gap: 8px,
+  ),
 );
 
+$badge-icon-size-configs: (
+  "tiny": (
+    width: 12px,
+    height: 12px,
+    padding: 4px,
+  ),
+  "small": (
+    width: 14px,
+    height: 14px,
+    padding: 8px,
+  ),
+  "medium": (
+    width: 16px,
+    height: 16px,
+    padding: 12px,
+  ),
+  "large": (
+    width: 18px,
+    height: 18px,
+    padding: 14px,
+  ),
+);
+
+// Badge Icon Sizes
+@each $size, $configs in $badge-icon-size-configs {
+  $size-map: map.get($badge-icon-size-configs, $size);
+
+  #{$component-prefix}-icon {
+    @include theme.set-box-sizing(border-box);
+  }
+
+  div.#{$component-prefix}-icon-#{$size} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: map.get($size-map, "padding");
+    width: map.get($size-map, "width");
+    height: map.get($size-map, "height");
+    box-sizing: border-box;
+    border-radius: map.get(sizing.$border-radius-map, "circular");
+  }
+}
+
+// Badge Sizes
 @each $size, $configs in $badge-size-configs {
   $size-map: map.get($badge-size-configs, $size);
 
@@ -38,6 +88,7 @@ $badge-size-configs: (
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
     gap: map.get($size-map, "gap");
     padding: map.get($size-map, "padding");
     height: map.get($size-map, "height");
