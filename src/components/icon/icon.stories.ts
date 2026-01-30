@@ -286,6 +286,10 @@ const IconsByCategory = [
     label: 'Numbers',
     icons: ICONS.NUMBER_ICONS,
   },
+  {
+    label: 'Brands and Media',
+    icons: ICONS.BRANDS_AND_MEDIA_ICONS,
+  },
 ];
 
 const renderIconBox = (iconName: string): HTMLString => {

@@ -5,6 +5,14 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 eção de event handlers
 
+## [2.9.16] - 2026-01-30
+
+### 🚀 Adicionado
+
+- **Icon**:
+  - Variantes de ícone: google
+  - Documentação: visualização de categoria: BRANDS_AND_MEDIA_ICONS
+
 ## [2.9.15] - 2026-01-21
 
 ### 🚀 Adicionado
