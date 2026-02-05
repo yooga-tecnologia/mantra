@@ -45,71 +45,170 @@ export { TabItem, TabItemGroupProps } from "./components/tab-item-group/tab-item
 export { TooltipProps } from "./components/tooltip/tooltip.types";
 export namespace Components {
     interface MntBadge {
+        /**
+          * @default 'primary'
+         */
         "color"?: BadgeBaseProps['color'];
         "icon"?: BadgeBaseProps['icon'];
         "label": BadgeBaseProps['label'];
+        /**
+          * @default 'medium'
+         */
         "size"?: BadgeBaseProps['size'];
+        /**
+          * @default 'default'
+         */
         "tone"?: BadgeBaseProps['tone'];
     }
     interface MntBadgeIcon {
+        /**
+          * @default 'primary'
+         */
         "color"?: BadgeBaseProps['color'];
         "icon"?: BadgeBaseProps['icon'];
         "label"?: BadgeBaseProps['label'];
+        /**
+          * @default 'medium'
+         */
         "size"?: BadgeBaseProps['size'];
+        /**
+          * @default 'default'
+         */
         "tone"?: BadgeBaseProps['tone'];
     }
     interface MntBrand {
         "color": BrandProps['color'];
+        /**
+          * @default 35
+         */
         "height": BrandProps['height'];
         "name": BrandProps['name'];
     }
     interface MntButton {
+        /**
+          * @default 'neutral'
+         */
         "color": ButtonProps['color'];
+        /**
+          * @default false
+         */
         "disabled": ButtonProps['disabled'];
+        /**
+          * @default false
+         */
         "fullWidth": ButtonProps['fullWidth'];
         "iconAnimation"?: ButtonProps['iconAnimation'];
         "iconLeft"?: ButtonProps['iconLeft'];
         "iconRight"?: ButtonProps['iconRight'];
         "label"?: ButtonProps['label'];
+        /**
+          * @default 'medium'
+         */
         "size": ButtonProps['size'];
+        /**
+          * @default 'default'
+         */
         "state"?: ButtonProps['state'];
+        /**
+          * @default 'regular'
+         */
         "variant": ButtonProps['variant'];
     }
     interface MntButtonIcon {
+        /**
+          * @default 'neutral'
+         */
         "color": ButtonIconProps['color'];
+        /**
+          * @default false
+         */
         "disabled": ButtonIconProps['disabled'];
         "icon"?: ButtonIconProps['icon'];
+        /**
+          * @default 'medium'
+         */
         "size": ButtonIconProps['size'];
+        /**
+          * @default 'regular'
+         */
         "variant": ButtonIconProps['variant'];
     }
     interface MntCheckbox {
+        /**
+          * @default false
+         */
         "checked"?: boolean;
         "label"?: CheckboxBaseProps['label'];
         "name"?: CheckboxBaseProps['name'];
         "value"?: string;
+        /**
+          * @default 'check'
+         */
         "variant"?: CheckboxBaseProps['variant'];
     }
     interface MntDatePicker {
+        /**
+          * @default false
+         */
         "disablePastDates"?: boolean;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
+        /**
+          * @default 0
+         */
         "firstDayOfWeek"?: number;
+        /**
+          * @default null
+         */
         "initialMonth"?: Date | string | null;
+        /**
+          * @default 'pt-BR'
+         */
         "locale"?: string;
+        /**
+          * @default null
+         */
         "maxDate"?: Date | string | null;
+        /**
+          * @default null
+         */
         "minDate"?: Date | string | null;
+        /**
+          * @default 'single'
+         */
         "mode"?: DatePickerMode;
         "placeholder"?: string;
+        /**
+          * @default false
+         */
         "required"?: boolean;
+        /**
+          * @default null
+         */
         "selectedDate"?: Date | string | null;
+        /**
+          * @default null
+         */
         "selectedRange"?: DateRange | null;
     }
     interface MntFieldDate {
         "datePickerConfig"?: FieldDateProps['datePickerConfig'];
+        /**
+          * @default false
+         */
         "disabled"?: FieldDateProps['disabled'];
         "labelText"?: FieldDateProps['labelText'];
         "name": string;
         "placeholder"?: FieldDateProps['placeholder'];
+        /**
+          * @default false
+         */
         "required"?: FieldDateProps['required'];
+        /**
+          * @default 'medium'
+         */
         "size"?: FieldDateProps['size'];
         "value"?: string;
     }
@@ -122,11 +221,20 @@ export namespace Components {
         "required"?: boolean;
         "size"?: Exclude<SizeVariants, 'tiny'>;
         "step"?: number;
+        /**
+          * @default '0'
+         */
         "value": string;
+        /**
+          * @default 'plain'
+         */
         "variant"?: FieldNumberVariant;
     }
     interface MntFieldText {
         "customMask"?: (value: string) => string;
+        /**
+          * @default false
+         */
         "fullWidth"?: boolean;
         "hasActionButton"?: FieldTextProps['hasActionButton'];
         "hasInfoButton"?: FieldTextProps['hasInfoButton'];
@@ -137,11 +245,20 @@ export namespace Components {
         "mask"?: 'currency' | 'custom' | null;
         "name": string;
         "placeholder"?: FieldTextProps['placeholder'];
+        /**
+          * @default 'medium'
+         */
         "size"?: FieldTextProps['size'];
+        /**
+          * @default 'default'
+         */
         "state"?: FieldTextProps['state'];
         "value"?: string;
     }
     interface MntFilterSearch {
+        /**
+          * @default false
+         */
         "fullWidth"?: boolean;
         "hasActionButton"?: FieldTextProps1['hasActionButton'];
         "hasInfoButton"?: FieldTextProps1['hasInfoButton'];
@@ -149,7 +266,13 @@ export namespace Components {
         "labelText"?: FieldTextProps1['labelText'];
         "name": string;
         "placeholder"?: FieldTextProps1['placeholder'];
+        /**
+          * @default 'medium'
+         */
         "size"?: FieldTextProps1['size'];
+        /**
+          * @default 'default'
+         */
         "state"?: FieldTextProps1['state'];
         "value"?: string;
     }
@@ -157,25 +280,49 @@ export namespace Components {
         "animation"?: IconProps['animation'];
         "background"?: IconProps['background'];
         "bgShape"?: IconProps['bgShape'];
+        /**
+          * @default 'currentColor'
+         */
         "color": IconProps['color'];
         "icon": IconProps['icon'];
+        /**
+          * @default 'medium'
+         */
         "size": IconProps['size'];
     }
     interface MntIconLarge {
+        /**
+          * @default 'currentColor'
+         */
         "color": IconLargeProps['color'];
         "icon": string;
+        /**
+          * @default 'medium'
+         */
         "size": IconLargeProps['size'];
     }
     interface MntIllustration {
+        /**
+          * @default 140
+         */
         "height": IllustrationProps['height'];
         "name": IllustrationProps['name'];
+        /**
+          * @default 140
+         */
         "width": IllustrationProps['width'];
     }
     interface MntLoadingState {
+        /**
+          * @default 'neutral'
+         */
         "color": LoadingStateProps['color'];
         "label"?: LoadingStateProps['label'];
     }
     interface MntRadio {
+        /**
+          * @default false
+         */
         "checked"?: RadioBaseProps['checked'];
         "label"?: RadioBaseProps['label'];
         "name"?: RadioBaseProps['name'];
@@ -183,34 +330,70 @@ export namespace Components {
     }
     interface MntSteps {
         "activeStepId"?: StepsProps['activeStepId'];
+        /**
+          * @default 'horizontal'
+         */
         "orientation": StepsProps['orientation'];
+        /**
+          * @default []
+         */
         "steps": StepsProps['steps'];
     }
     interface MntSwitch {
+        /**
+          * @default false
+         */
         "checked"?: SwitchBaseProps['checked'];
         "description"?: SwitchBaseProps['description'];
+        /**
+          * @default false
+         */
         "disabled"?: SwitchBaseProps['disabled'];
         "inputId"?: SwitchBaseProps['inputId'];
         "label"?: SwitchBaseProps['label'];
         "name"?: SwitchBaseProps['name'];
+        /**
+          * @default false
+         */
         "required"?: SwitchBaseProps['required'];
+        /**
+          * @default 'checkbox'
+         */
         "type"?: SwitchType;
+        /**
+          * @default ''
+         */
         "value"?: SwitchBaseProps['value'];
     }
     interface MntTabItem {
+        /**
+          * @default false
+         */
         "disabled": boolean;
         "icon"?: TabItemProps['icon'];
         "label": string;
+        /**
+          * @default 'horizontal'
+         */
         "orientation": TabItemProps['orientation'];
+        /**
+          * @default false
+         */
         "selected": boolean;
         "tabId": string;
     }
     interface MntTabItemGroup {
+        /**
+          * @default 'horizontal'
+         */
         "orientation": TabItemGroupProps['orientation'];
         "selectedId"?: string;
         "tabs": TabItem[] | string;
     }
     interface MntTooltip {
+        /**
+          * @default 'top'
+         */
         "position": TooltipProps['position'];
         "text": TooltipProps['text'];
     }
@@ -553,73 +736,176 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    type OneOf<K extends string, T> = { [P in K]: T } | { [P in `attr:${K}`]: T } | { [P in `prop:${K}`]: T };
+
     interface MntBadge {
+        /**
+          * @default 'primary'
+         */
         "color"?: BadgeBaseProps['color'];
         "icon"?: BadgeBaseProps['icon'];
         "label"?: BadgeBaseProps['label'];
+        /**
+          * @default 'medium'
+         */
         "size"?: BadgeBaseProps['size'];
+        /**
+          * @default 'default'
+         */
         "tone"?: BadgeBaseProps['tone'];
     }
     interface MntBadgeIcon {
+        /**
+          * @default 'primary'
+         */
         "color"?: BadgeBaseProps['color'];
         "icon"?: BadgeBaseProps['icon'];
         "label"?: BadgeBaseProps['label'];
+        /**
+          * @default 'medium'
+         */
         "size"?: BadgeBaseProps['size'];
+        /**
+          * @default 'default'
+         */
         "tone"?: BadgeBaseProps['tone'];
     }
     interface MntBrand {
         "color"?: BrandProps['color'];
+        /**
+          * @default 35
+         */
         "height"?: BrandProps['height'];
         "name": BrandProps['name'];
     }
     interface MntButton {
+        /**
+          * @default 'neutral'
+         */
         "color"?: ButtonProps['color'];
+        /**
+          * @default false
+         */
         "disabled"?: ButtonProps['disabled'];
+        /**
+          * @default false
+         */
         "fullWidth"?: ButtonProps['fullWidth'];
         "iconAnimation"?: ButtonProps['iconAnimation'];
         "iconLeft"?: ButtonProps['iconLeft'];
         "iconRight"?: ButtonProps['iconRight'];
         "label"?: ButtonProps['label'];
         "onButtonClick"?: (event: MntButtonCustomEvent<MouseEvent>) => void;
+        /**
+          * @default 'medium'
+         */
         "size"?: ButtonProps['size'];
+        /**
+          * @default 'default'
+         */
         "state"?: ButtonProps['state'];
+        /**
+          * @default 'regular'
+         */
         "variant"?: ButtonProps['variant'];
     }
     interface MntButtonIcon {
+        /**
+          * @default 'neutral'
+         */
         "color"?: ButtonIconProps['color'];
+        /**
+          * @default false
+         */
         "disabled"?: ButtonIconProps['disabled'];
         "icon"?: ButtonIconProps['icon'];
         "onButtonClick"?: (event: MntButtonIconCustomEvent<MouseEvent>) => void;
+        /**
+          * @default 'medium'
+         */
         "size"?: ButtonIconProps['size'];
+        /**
+          * @default 'regular'
+         */
         "variant"?: ButtonIconProps['variant'];
     }
     interface MntCheckbox {
+        /**
+          * @default false
+         */
         "checked"?: boolean;
         "label"?: CheckboxBaseProps['label'];
         "name"?: CheckboxBaseProps['name'];
         "onCheckboxChange"?: (event: MntCheckboxCustomEvent<{ checked: boolean; value: string }>) => void;
         "value"?: string;
+        /**
+          * @default 'check'
+         */
         "variant"?: CheckboxBaseProps['variant'];
     }
     interface MntDatePicker {
+        /**
+          * @default false
+         */
         "disablePastDates"?: boolean;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
+        /**
+          * @default 0
+         */
         "firstDayOfWeek"?: number;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        /**
+          * @default null
+         */
         "initialMonth"?: Date | string | null;
+        /**
+          * @default 'pt-BR'
+         */
         "locale"?: string;
+        /**
+          * @default null
+         */
         "maxDate"?: Date | string | null;
+        /**
+          * @default null
+         */
         "minDate"?: Date | string | null;
+        /**
+          * @default 'single'
+         */
         "mode"?: DatePickerMode;
+        /**
+          * The name of the element, used when submitting an HTML form.
+         */
+        "name"?: string;
         "onDatePickerCancel"?: (event: MntDatePickerCustomEvent<void>) => void;
         "onDatePickerMonthChange"?: (event: MntDatePickerCustomEvent<MonthYear>) => void;
         "onDatePickerSelected"?: (event: MntDatePickerCustomEvent<DateSelectedEventDetail>) => void;
         "placeholder"?: string;
+        /**
+          * @default false
+         */
         "required"?: boolean;
+        /**
+          * @default null
+         */
         "selectedDate"?: Date | string | null;
+        /**
+          * @default null
+         */
         "selectedRange"?: DateRange | null;
     }
     interface MntFieldDate {
         "datePickerConfig"?: FieldDateProps['datePickerConfig'];
+        /**
+          * @default false
+         */
         "disabled"?: FieldDateProps['disabled'];
         "labelText"?: FieldDateProps['labelText'];
         "name"?: string;
@@ -629,24 +915,55 @@ declare namespace LocalJSX {
         "onRawValueChange"?: (event: MntFieldDateCustomEvent<string>) => void;
         "onValueChange"?: (event: MntFieldDateCustomEvent<string>) => void;
         "placeholder"?: FieldDateProps['placeholder'];
+        /**
+          * @default false
+         */
         "required"?: FieldDateProps['required'];
+        /**
+          * @default 'medium'
+         */
         "size"?: FieldDateProps['size'];
         "value"?: string;
     }
     interface MntFieldNumber {
         "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
         "inputName": string;
         "label"?: string;
         "max"?: number;
         "min"?: number;
+        /**
+          * The name of the element, used when submitting an HTML form.
+         */
+        "name"?: string;
         "required"?: boolean;
         "size"?: Exclude<SizeVariants, 'tiny'>;
         "step"?: number;
+        /**
+          * @default '0'
+         */
         "value"?: string;
+        /**
+          * @default 'plain'
+         */
         "variant"?: FieldNumberVariant;
     }
     interface MntFieldText {
         "customMask"?: (value: string) => string;
+        /**
+          * If `true`, the user cannot interact with the element.
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        /**
+          * @default false
+         */
         "fullWidth"?: boolean;
         "hasActionButton"?: FieldTextProps['hasActionButton'];
         "hasInfoButton"?: FieldTextProps['hasInfoButton'];
@@ -658,11 +975,28 @@ declare namespace LocalJSX {
         "name"?: string;
         "onValueChange"?: (event: MntFieldTextCustomEvent<{ formattedValue: string; rawValue?: string }>) => void;
         "placeholder"?: FieldTextProps['placeholder'];
+        /**
+          * @default 'medium'
+         */
         "size"?: FieldTextProps['size'];
+        /**
+          * @default 'default'
+         */
         "state"?: FieldTextProps['state'];
         "value"?: string;
     }
     interface MntFilterSearch {
+        /**
+          * If `true`, the user cannot interact with the element.
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        /**
+          * @default false
+         */
         "fullWidth"?: boolean;
         "hasActionButton"?: FieldTextProps1['hasActionButton'];
         "hasInfoButton"?: FieldTextProps1['hasInfoButton'];
@@ -672,7 +1006,13 @@ declare namespace LocalJSX {
         "onFilterApplied"?: (event: MntFilterSearchCustomEvent<{ value: string }>) => void;
         "onValueChange"?: (event: MntFilterSearchCustomEvent<{ value: string }>) => void;
         "placeholder"?: FieldTextProps1['placeholder'];
+        /**
+          * @default 'medium'
+         */
         "size"?: FieldTextProps1['size'];
+        /**
+          * @default 'default'
+         */
         "state"?: FieldTextProps1['state'];
         "value"?: string;
     }
@@ -680,25 +1020,49 @@ declare namespace LocalJSX {
         "animation"?: IconProps['animation'];
         "background"?: IconProps['background'];
         "bgShape"?: IconProps['bgShape'];
+        /**
+          * @default 'currentColor'
+         */
         "color"?: IconProps['color'];
         "icon": IconProps['icon'];
+        /**
+          * @default 'medium'
+         */
         "size"?: IconProps['size'];
     }
     interface MntIconLarge {
+        /**
+          * @default 'currentColor'
+         */
         "color"?: IconLargeProps['color'];
         "icon": string;
+        /**
+          * @default 'medium'
+         */
         "size"?: IconLargeProps['size'];
     }
     interface MntIllustration {
+        /**
+          * @default 140
+         */
         "height"?: IllustrationProps['height'];
         "name": IllustrationProps['name'];
+        /**
+          * @default 140
+         */
         "width"?: IllustrationProps['width'];
     }
     interface MntLoadingState {
+        /**
+          * @default 'neutral'
+         */
         "color"?: LoadingStateProps['color'];
         "label"?: LoadingStateProps['label'];
     }
     interface MntRadio {
+        /**
+          * @default false
+         */
         "checked"?: RadioBaseProps['checked'];
         "label"?: RadioBaseProps['label'];
         "name"?: RadioBaseProps['name'];
@@ -708,91 +1072,299 @@ declare namespace LocalJSX {
     interface MntSteps {
         "activeStepId"?: StepsProps['activeStepId'];
         "onStepClick"?: (event: MntStepsCustomEvent<{ stepId: string; stepIndex: number; status: StepStatus; step: StepItem }>) => void;
+        /**
+          * @default 'horizontal'
+         */
         "orientation"?: StepsProps['orientation'];
+        /**
+          * @default []
+         */
         "steps"?: StepsProps['steps'];
     }
     interface MntSwitch {
+        /**
+          * @default false
+         */
         "checked"?: SwitchBaseProps['checked'];
         "description"?: SwitchBaseProps['description'];
+        /**
+          * @default false
+         */
         "disabled"?: SwitchBaseProps['disabled'];
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
         "inputId"?: SwitchBaseProps['inputId'];
         "label"?: SwitchBaseProps['label'];
         "name"?: SwitchBaseProps['name'];
         "onSwitchBlur"?: (event: MntSwitchCustomEvent<FocusEvent>) => void;
         "onSwitchChange"?: (event: MntSwitchCustomEvent<SwitchChangeEventDetail>) => void;
         "onSwitchFocus"?: (event: MntSwitchCustomEvent<FocusEvent>) => void;
+        /**
+          * @default false
+         */
         "required"?: SwitchBaseProps['required'];
+        /**
+          * @default 'checkbox'
+         */
         "type"?: SwitchType;
+        /**
+          * @default ''
+         */
         "value"?: SwitchBaseProps['value'];
     }
     interface MntTabItem {
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
         "icon"?: TabItemProps['icon'];
         "label": string;
         "onTabItemClick"?: (event: MntTabItemCustomEvent<string>) => void;
+        /**
+          * @default 'horizontal'
+         */
         "orientation"?: TabItemProps['orientation'];
+        /**
+          * @default false
+         */
         "selected"?: boolean;
         "tabId": string;
     }
     interface MntTabItemGroup {
         "onTabChange"?: (event: MntTabItemGroupCustomEvent<string>) => void;
+        /**
+          * @default 'horizontal'
+         */
         "orientation"?: TabItemGroupProps['orientation'];
         "selectedId"?: string;
         "tabs": TabItem[] | string;
     }
     interface MntTooltip {
+        /**
+          * @default 'top'
+         */
         "position"?: TooltipProps['position'];
         "text"?: TooltipProps['text'];
     }
+
+    interface MntBadgeAttributes {
+        "size": BadgeBaseProps['size'];
+        "color": BadgeBaseProps['color'];
+        "tone": BadgeBaseProps['tone'];
+        "label": BadgeBaseProps['label'];
+        "icon": BadgeBaseProps['icon'];
+    }
+    interface MntBadgeIconAttributes {
+        "size": BadgeBaseProps['size'];
+        "color": BadgeBaseProps['color'];
+        "tone": BadgeBaseProps['tone'];
+        "label": BadgeBaseProps['label'];
+        "icon": BadgeBaseProps['icon'];
+    }
+    interface MntBrandAttributes {
+        "name": BrandProps['name'];
+        "color": BrandProps['color'];
+        "height": BrandProps['height'];
+    }
+    interface MntButtonAttributes {
+        "size": ButtonProps['size'];
+        "color": ButtonProps['color'];
+        "variant": ButtonProps['variant'];
+        "fullWidth": ButtonProps['fullWidth'];
+        "state": ButtonProps['state'];
+        "label": ButtonProps['label'];
+        "iconLeft": ButtonProps['iconLeft'];
+        "iconRight": ButtonProps['iconRight'];
+        "iconAnimation": ButtonProps['iconAnimation'];
+        "disabled": ButtonProps['disabled'];
+    }
+    interface MntButtonIconAttributes {
+        "size": ButtonIconProps['size'];
+        "color": ButtonIconProps['color'];
+        "variant": ButtonIconProps['variant'];
+        "icon": ButtonIconProps['icon'];
+        "disabled": ButtonIconProps['disabled'];
+    }
+    interface MntCheckboxAttributes {
+        "name": CheckboxBaseProps['name'];
+        "label": CheckboxBaseProps['label'];
+        "variant": CheckboxBaseProps['variant'];
+        "checked": boolean;
+        "value": string;
+    }
+    interface MntDatePickerAttributes {
+        "mode": DatePickerMode;
+        "selectedDate": Date | string | null;
+        "minDate": Date | string | null;
+        "maxDate": Date | string | null;
+        "initialMonth": Date | string | null;
+        "locale": string;
+        "disabled": boolean;
+        "required": boolean;
+        "placeholder": string;
+        "firstDayOfWeek": number;
+        "disablePastDates": boolean;
+    }
+    interface MntFieldDateAttributes {
+        "name": string;
+        "size": FieldDateProps['size'];
+        "disabled": FieldDateProps['disabled'];
+        "required": FieldDateProps['required'];
+        "placeholder": FieldDateProps['placeholder'];
+        "value": string;
+        "labelText": FieldDateProps['labelText'];
+    }
+    interface MntFieldNumberAttributes {
+        "inputName": string;
+        "variant": FieldNumberVariant;
+        "size": Exclude<SizeVariants, 'tiny'>;
+        "label": string;
+        "required": boolean;
+        "disabled": boolean;
+        "min": number;
+        "max": number;
+        "step": number;
+        "value": string;
+    }
+    interface MntFieldTextAttributes {
+        "name": string;
+        "fullWidth": boolean;
+        "size": FieldTextProps['size'];
+        "placeholder": FieldTextProps['placeholder'];
+        "state": FieldTextProps['state'];
+        "mask": 'currency' | 'custom' | null;
+        "value": string;
+        "iconLeft": FieldTextProps['iconLeft'];
+        "iconRight": FieldTextProps['iconRight'];
+        "labelText": FieldTextProps['labelText'];
+        "hasActionButton": FieldTextProps['hasActionButton'];
+        "hasInfoButton": FieldTextProps['hasInfoButton'];
+        "inlineMessage": FieldTextProps['inlineMessage'];
+    }
+    interface MntFilterSearchAttributes {
+        "name": string;
+        "fullWidth": boolean;
+        "size": FieldTextProps['size'];
+        "placeholder": FieldTextProps['placeholder'];
+        "state": FieldTextProps['state'];
+        "value": string;
+        "labelText": FieldTextProps['labelText'];
+        "hasActionButton": FieldTextProps['hasActionButton'];
+        "hasInfoButton": FieldTextProps['hasInfoButton'];
+        "inlineMessage": FieldTextProps['inlineMessage'];
+    }
+    interface MntIconAttributes {
+        "icon": IconProps['icon'];
+        "size": string;
+        "color": IconProps['color'];
+        "background": IconProps['background'];
+        "bgShape": IconProps['bgShape'];
+        "animation": IconProps['animation'];
+    }
+    interface MntIconLargeAttributes {
+        "icon": string;
+        "size": string;
+        "color": IconLargeProps['color'];
+    }
+    interface MntIllustrationAttributes {
+        "name": IllustrationProps['name'];
+        "width": IllustrationProps['width'];
+        "height": IllustrationProps['height'];
+    }
+    interface MntLoadingStateAttributes {
+        "color": LoadingStateProps['color'];
+        "label": LoadingStateProps['label'];
+    }
+    interface MntRadioAttributes {
+        "name": RadioBaseProps['name'];
+        "label": RadioBaseProps['label'];
+        "value": RadioBaseProps['value'];
+        "checked": RadioBaseProps['checked'];
+    }
+    interface MntStepsAttributes {
+        "orientation": StepsProps['orientation'];
+        "activeStepId": StepsProps['activeStepId'];
+    }
+    interface MntSwitchAttributes {
+        "inputId": SwitchBaseProps['inputId'];
+        "name": SwitchBaseProps['name'];
+        "value": SwitchBaseProps['value'];
+        "type": SwitchType;
+        "label": SwitchBaseProps['label'];
+        "description": SwitchBaseProps['description'];
+        "disabled": SwitchBaseProps['disabled'];
+        "checked": SwitchBaseProps['checked'];
+        "required": SwitchBaseProps['required'];
+    }
+    interface MntTabItemAttributes {
+        "tabId": string;
+        "label": string;
+        "icon": TabItemProps['icon'];
+        "selected": boolean;
+        "disabled": boolean;
+        "orientation": TabItemProps['orientation'];
+    }
+    interface MntTabItemGroupAttributes {
+        "tabs": TabItem[] | string;
+        "selectedId": string;
+        "orientation": TabItemGroupProps['orientation'];
+    }
+    interface MntTooltipAttributes {
+        "text": TooltipProps['text'];
+        "position": TooltipProps['position'];
+    }
+
     interface IntrinsicElements {
-        "mnt-badge": MntBadge;
-        "mnt-badge-icon": MntBadgeIcon;
-        "mnt-brand": MntBrand;
-        "mnt-button": MntButton;
-        "mnt-button-icon": MntButtonIcon;
-        "mnt-checkbox": MntCheckbox;
-        "mnt-date-picker": MntDatePicker;
-        "mnt-field-date": MntFieldDate;
-        "mnt-field-number": MntFieldNumber;
-        "mnt-field-text": MntFieldText;
-        "mnt-filter-search": MntFilterSearch;
-        "mnt-icon": MntIcon;
-        "mnt-icon-large": MntIconLarge;
-        "mnt-illustration": MntIllustration;
-        "mnt-loading-state": MntLoadingState;
-        "mnt-radio": MntRadio;
-        "mnt-steps": MntSteps;
-        "mnt-switch": MntSwitch;
-        "mnt-tab-item": MntTabItem;
-        "mnt-tab-item-group": MntTabItemGroup;
-        "mnt-tooltip": MntTooltip;
+        "mnt-badge": Omit<MntBadge, keyof MntBadgeAttributes> & { [K in keyof MntBadge & keyof MntBadgeAttributes]?: MntBadge[K] } & { [K in keyof MntBadge & keyof MntBadgeAttributes as `attr:${K}`]?: MntBadgeAttributes[K] } & { [K in keyof MntBadge & keyof MntBadgeAttributes as `prop:${K}`]?: MntBadge[K] };
+        "mnt-badge-icon": Omit<MntBadgeIcon, keyof MntBadgeIconAttributes> & { [K in keyof MntBadgeIcon & keyof MntBadgeIconAttributes]?: MntBadgeIcon[K] } & { [K in keyof MntBadgeIcon & keyof MntBadgeIconAttributes as `attr:${K}`]?: MntBadgeIconAttributes[K] } & { [K in keyof MntBadgeIcon & keyof MntBadgeIconAttributes as `prop:${K}`]?: MntBadgeIcon[K] };
+        "mnt-brand": Omit<MntBrand, keyof MntBrandAttributes> & { [K in keyof MntBrand & keyof MntBrandAttributes]?: MntBrand[K] } & { [K in keyof MntBrand & keyof MntBrandAttributes as `attr:${K}`]?: MntBrandAttributes[K] } & { [K in keyof MntBrand & keyof MntBrandAttributes as `prop:${K}`]?: MntBrand[K] } & OneOf<"name", MntBrand["name"]>;
+        "mnt-button": Omit<MntButton, keyof MntButtonAttributes> & { [K in keyof MntButton & keyof MntButtonAttributes]?: MntButton[K] } & { [K in keyof MntButton & keyof MntButtonAttributes as `attr:${K}`]?: MntButtonAttributes[K] } & { [K in keyof MntButton & keyof MntButtonAttributes as `prop:${K}`]?: MntButton[K] };
+        "mnt-button-icon": Omit<MntButtonIcon, keyof MntButtonIconAttributes> & { [K in keyof MntButtonIcon & keyof MntButtonIconAttributes]?: MntButtonIcon[K] } & { [K in keyof MntButtonIcon & keyof MntButtonIconAttributes as `attr:${K}`]?: MntButtonIconAttributes[K] } & { [K in keyof MntButtonIcon & keyof MntButtonIconAttributes as `prop:${K}`]?: MntButtonIcon[K] };
+        "mnt-checkbox": Omit<MntCheckbox, keyof MntCheckboxAttributes> & { [K in keyof MntCheckbox & keyof MntCheckboxAttributes]?: MntCheckbox[K] } & { [K in keyof MntCheckbox & keyof MntCheckboxAttributes as `attr:${K}`]?: MntCheckboxAttributes[K] } & { [K in keyof MntCheckbox & keyof MntCheckboxAttributes as `prop:${K}`]?: MntCheckbox[K] };
+        "mnt-date-picker": Omit<MntDatePicker, keyof MntDatePickerAttributes> & { [K in keyof MntDatePicker & keyof MntDatePickerAttributes]?: MntDatePicker[K] } & { [K in keyof MntDatePicker & keyof MntDatePickerAttributes as `attr:${K}`]?: MntDatePickerAttributes[K] } & { [K in keyof MntDatePicker & keyof MntDatePickerAttributes as `prop:${K}`]?: MntDatePicker[K] };
+        "mnt-field-date": Omit<MntFieldDate, keyof MntFieldDateAttributes> & { [K in keyof MntFieldDate & keyof MntFieldDateAttributes]?: MntFieldDate[K] } & { [K in keyof MntFieldDate & keyof MntFieldDateAttributes as `attr:${K}`]?: MntFieldDateAttributes[K] } & { [K in keyof MntFieldDate & keyof MntFieldDateAttributes as `prop:${K}`]?: MntFieldDate[K] };
+        "mnt-field-number": Omit<MntFieldNumber, keyof MntFieldNumberAttributes> & { [K in keyof MntFieldNumber & keyof MntFieldNumberAttributes]?: MntFieldNumber[K] } & { [K in keyof MntFieldNumber & keyof MntFieldNumberAttributes as `attr:${K}`]?: MntFieldNumberAttributes[K] } & { [K in keyof MntFieldNumber & keyof MntFieldNumberAttributes as `prop:${K}`]?: MntFieldNumber[K] } & OneOf<"inputName", MntFieldNumber["inputName"]>;
+        "mnt-field-text": Omit<MntFieldText, keyof MntFieldTextAttributes> & { [K in keyof MntFieldText & keyof MntFieldTextAttributes]?: MntFieldText[K] } & { [K in keyof MntFieldText & keyof MntFieldTextAttributes as `attr:${K}`]?: MntFieldTextAttributes[K] } & { [K in keyof MntFieldText & keyof MntFieldTextAttributes as `prop:${K}`]?: MntFieldText[K] };
+        "mnt-filter-search": Omit<MntFilterSearch, keyof MntFilterSearchAttributes> & { [K in keyof MntFilterSearch & keyof MntFilterSearchAttributes]?: MntFilterSearch[K] } & { [K in keyof MntFilterSearch & keyof MntFilterSearchAttributes as `attr:${K}`]?: MntFilterSearchAttributes[K] } & { [K in keyof MntFilterSearch & keyof MntFilterSearchAttributes as `prop:${K}`]?: MntFilterSearch[K] };
+        "mnt-icon": Omit<MntIcon, keyof MntIconAttributes> & { [K in keyof MntIcon & keyof MntIconAttributes]?: MntIcon[K] } & { [K in keyof MntIcon & keyof MntIconAttributes as `attr:${K}`]?: MntIconAttributes[K] } & { [K in keyof MntIcon & keyof MntIconAttributes as `prop:${K}`]?: MntIcon[K] } & OneOf<"icon", MntIcon["icon"]>;
+        "mnt-icon-large": Omit<MntIconLarge, keyof MntIconLargeAttributes> & { [K in keyof MntIconLarge & keyof MntIconLargeAttributes]?: MntIconLarge[K] } & { [K in keyof MntIconLarge & keyof MntIconLargeAttributes as `attr:${K}`]?: MntIconLargeAttributes[K] } & { [K in keyof MntIconLarge & keyof MntIconLargeAttributes as `prop:${K}`]?: MntIconLarge[K] } & OneOf<"icon", MntIconLarge["icon"]>;
+        "mnt-illustration": Omit<MntIllustration, keyof MntIllustrationAttributes> & { [K in keyof MntIllustration & keyof MntIllustrationAttributes]?: MntIllustration[K] } & { [K in keyof MntIllustration & keyof MntIllustrationAttributes as `attr:${K}`]?: MntIllustrationAttributes[K] } & { [K in keyof MntIllustration & keyof MntIllustrationAttributes as `prop:${K}`]?: MntIllustration[K] } & OneOf<"name", MntIllustration["name"]>;
+        "mnt-loading-state": Omit<MntLoadingState, keyof MntLoadingStateAttributes> & { [K in keyof MntLoadingState & keyof MntLoadingStateAttributes]?: MntLoadingState[K] } & { [K in keyof MntLoadingState & keyof MntLoadingStateAttributes as `attr:${K}`]?: MntLoadingStateAttributes[K] } & { [K in keyof MntLoadingState & keyof MntLoadingStateAttributes as `prop:${K}`]?: MntLoadingState[K] };
+        "mnt-radio": Omit<MntRadio, keyof MntRadioAttributes> & { [K in keyof MntRadio & keyof MntRadioAttributes]?: MntRadio[K] } & { [K in keyof MntRadio & keyof MntRadioAttributes as `attr:${K}`]?: MntRadioAttributes[K] } & { [K in keyof MntRadio & keyof MntRadioAttributes as `prop:${K}`]?: MntRadio[K] };
+        "mnt-steps": Omit<MntSteps, keyof MntStepsAttributes> & { [K in keyof MntSteps & keyof MntStepsAttributes]?: MntSteps[K] } & { [K in keyof MntSteps & keyof MntStepsAttributes as `attr:${K}`]?: MntStepsAttributes[K] } & { [K in keyof MntSteps & keyof MntStepsAttributes as `prop:${K}`]?: MntSteps[K] };
+        "mnt-switch": Omit<MntSwitch, keyof MntSwitchAttributes> & { [K in keyof MntSwitch & keyof MntSwitchAttributes]?: MntSwitch[K] } & { [K in keyof MntSwitch & keyof MntSwitchAttributes as `attr:${K}`]?: MntSwitchAttributes[K] } & { [K in keyof MntSwitch & keyof MntSwitchAttributes as `prop:${K}`]?: MntSwitch[K] };
+        "mnt-tab-item": Omit<MntTabItem, keyof MntTabItemAttributes> & { [K in keyof MntTabItem & keyof MntTabItemAttributes]?: MntTabItem[K] } & { [K in keyof MntTabItem & keyof MntTabItemAttributes as `attr:${K}`]?: MntTabItemAttributes[K] } & { [K in keyof MntTabItem & keyof MntTabItemAttributes as `prop:${K}`]?: MntTabItem[K] } & OneOf<"tabId", MntTabItem["tabId"]> & OneOf<"label", MntTabItem["label"]>;
+        "mnt-tab-item-group": Omit<MntTabItemGroup, keyof MntTabItemGroupAttributes> & { [K in keyof MntTabItemGroup & keyof MntTabItemGroupAttributes]?: MntTabItemGroup[K] } & { [K in keyof MntTabItemGroup & keyof MntTabItemGroupAttributes as `attr:${K}`]?: MntTabItemGroupAttributes[K] } & { [K in keyof MntTabItemGroup & keyof MntTabItemGroupAttributes as `prop:${K}`]?: MntTabItemGroup[K] } & OneOf<"tabs", MntTabItemGroup["tabs"]>;
+        "mnt-tooltip": Omit<MntTooltip, keyof MntTooltipAttributes> & { [K in keyof MntTooltip & keyof MntTooltipAttributes]?: MntTooltip[K] } & { [K in keyof MntTooltip & keyof MntTooltipAttributes as `attr:${K}`]?: MntTooltipAttributes[K] } & { [K in keyof MntTooltip & keyof MntTooltipAttributes as `prop:${K}`]?: MntTooltip[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "mnt-badge": LocalJSX.MntBadge & JSXBase.HTMLAttributes<HTMLMntBadgeElement>;
-            "mnt-badge-icon": LocalJSX.MntBadgeIcon & JSXBase.HTMLAttributes<HTMLMntBadgeIconElement>;
-            "mnt-brand": LocalJSX.MntBrand & JSXBase.HTMLAttributes<HTMLMntBrandElement>;
-            "mnt-button": LocalJSX.MntButton & JSXBase.HTMLAttributes<HTMLMntButtonElement>;
-            "mnt-button-icon": LocalJSX.MntButtonIcon & JSXBase.HTMLAttributes<HTMLMntButtonIconElement>;
-            "mnt-checkbox": LocalJSX.MntCheckbox & JSXBase.HTMLAttributes<HTMLMntCheckboxElement>;
-            "mnt-date-picker": LocalJSX.MntDatePicker & JSXBase.HTMLAttributes<HTMLMntDatePickerElement>;
-            "mnt-field-date": LocalJSX.MntFieldDate & JSXBase.HTMLAttributes<HTMLMntFieldDateElement>;
-            "mnt-field-number": LocalJSX.MntFieldNumber & JSXBase.HTMLAttributes<HTMLMntFieldNumberElement>;
-            "mnt-field-text": LocalJSX.MntFieldText & JSXBase.HTMLAttributes<HTMLMntFieldTextElement>;
-            "mnt-filter-search": LocalJSX.MntFilterSearch & JSXBase.HTMLAttributes<HTMLMntFilterSearchElement>;
-            "mnt-icon": LocalJSX.MntIcon & JSXBase.HTMLAttributes<HTMLMntIconElement>;
-            "mnt-icon-large": LocalJSX.MntIconLarge & JSXBase.HTMLAttributes<HTMLMntIconLargeElement>;
-            "mnt-illustration": LocalJSX.MntIllustration & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
-            "mnt-loading-state": LocalJSX.MntLoadingState & JSXBase.HTMLAttributes<HTMLMntLoadingStateElement>;
-            "mnt-radio": LocalJSX.MntRadio & JSXBase.HTMLAttributes<HTMLMntRadioElement>;
-            "mnt-steps": LocalJSX.MntSteps & JSXBase.HTMLAttributes<HTMLMntStepsElement>;
-            "mnt-switch": LocalJSX.MntSwitch & JSXBase.HTMLAttributes<HTMLMntSwitchElement>;
-            "mnt-tab-item": LocalJSX.MntTabItem & JSXBase.HTMLAttributes<HTMLMntTabItemElement>;
-            "mnt-tab-item-group": LocalJSX.MntTabItemGroup & JSXBase.HTMLAttributes<HTMLMntTabItemGroupElement>;
-            "mnt-tooltip": LocalJSX.MntTooltip & JSXBase.HTMLAttributes<HTMLMntTooltipElement>;
+            "mnt-badge": LocalJSX.IntrinsicElements["mnt-badge"] & JSXBase.HTMLAttributes<HTMLMntBadgeElement>;
+            "mnt-badge-icon": LocalJSX.IntrinsicElements["mnt-badge-icon"] & JSXBase.HTMLAttributes<HTMLMntBadgeIconElement>;
+            "mnt-brand": LocalJSX.IntrinsicElements["mnt-brand"] & JSXBase.HTMLAttributes<HTMLMntBrandElement>;
+            "mnt-button": LocalJSX.IntrinsicElements["mnt-button"] & JSXBase.HTMLAttributes<HTMLMntButtonElement>;
+            "mnt-button-icon": LocalJSX.IntrinsicElements["mnt-button-icon"] & JSXBase.HTMLAttributes<HTMLMntButtonIconElement>;
+            "mnt-checkbox": LocalJSX.IntrinsicElements["mnt-checkbox"] & JSXBase.HTMLAttributes<HTMLMntCheckboxElement>;
+            "mnt-date-picker": LocalJSX.IntrinsicElements["mnt-date-picker"] & JSXBase.HTMLAttributes<HTMLMntDatePickerElement>;
+            "mnt-field-date": LocalJSX.IntrinsicElements["mnt-field-date"] & JSXBase.HTMLAttributes<HTMLMntFieldDateElement>;
+            "mnt-field-number": LocalJSX.IntrinsicElements["mnt-field-number"] & JSXBase.HTMLAttributes<HTMLMntFieldNumberElement>;
+            "mnt-field-text": LocalJSX.IntrinsicElements["mnt-field-text"] & JSXBase.HTMLAttributes<HTMLMntFieldTextElement>;
+            "mnt-filter-search": LocalJSX.IntrinsicElements["mnt-filter-search"] & JSXBase.HTMLAttributes<HTMLMntFilterSearchElement>;
+            "mnt-icon": LocalJSX.IntrinsicElements["mnt-icon"] & JSXBase.HTMLAttributes<HTMLMntIconElement>;
+            "mnt-icon-large": LocalJSX.IntrinsicElements["mnt-icon-large"] & JSXBase.HTMLAttributes<HTMLMntIconLargeElement>;
+            "mnt-illustration": LocalJSX.IntrinsicElements["mnt-illustration"] & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
+            "mnt-loading-state": LocalJSX.IntrinsicElements["mnt-loading-state"] & JSXBase.HTMLAttributes<HTMLMntLoadingStateElement>;
+            "mnt-radio": LocalJSX.IntrinsicElements["mnt-radio"] & JSXBase.HTMLAttributes<HTMLMntRadioElement>;
+            "mnt-steps": LocalJSX.IntrinsicElements["mnt-steps"] & JSXBase.HTMLAttributes<HTMLMntStepsElement>;
+            "mnt-switch": LocalJSX.IntrinsicElements["mnt-switch"] & JSXBase.HTMLAttributes<HTMLMntSwitchElement>;
+            "mnt-tab-item": LocalJSX.IntrinsicElements["mnt-tab-item"] & JSXBase.HTMLAttributes<HTMLMntTabItemElement>;
+            "mnt-tab-item-group": LocalJSX.IntrinsicElements["mnt-tab-item-group"] & JSXBase.HTMLAttributes<HTMLMntTabItemGroupElement>;
+            "mnt-tooltip": LocalJSX.IntrinsicElements["mnt-tooltip"] & JSXBase.HTMLAttributes<HTMLMntTooltipElement>;
         }
     }
 }
