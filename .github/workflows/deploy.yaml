@@ -7,10 +7,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
   packages: write
+  pull-requests: read
 
 concurrency:
   group: "pages"
@@ -19,9 +20,15 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      version-changed: ${{ steps.check-version.outputs.changed }}
+      new-version: ${{ steps.check-version.outputs.new-version }}
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Ler versão do Node do .nvmrc
         run: echo "NODE_VERSION=$(cat .nvmrc | sed 's/^v//')" >> $GITHUB_ENV
@@ -37,13 +44,36 @@ jobs:
       - name: Cache npm dependencies
         uses: actions/cache@v4
         with:
-          path: ~/.npm  # Stores npm cache directory
+          path: ~/.npm
           key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: npm install  # More reliable for builds
+        run: npm install
+
+      - name: Executar testes
+        run: npm test
+
+      - name: Verificar se versão mudou
+        id: check-version
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          git checkout HEAD~1 -- package.json 2>/dev/null || echo "First commit"
+          PREVIOUS_VERSION=$(node -p "require('./package.json').version" 2>/dev/null || echo "0.0.0")
+          git checkout HEAD -- package.json
+          
+          echo "Previous version: $PREVIOUS_VERSION"
+          echo "Current version: $CURRENT_VERSION"
+          
+          if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "new-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+            echo "🚀 Version changed from $PREVIOUS_VERSION to $CURRENT_VERSION"
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "📋 No version change detected"
+          fi
 
       - name: Construir o pacote
         run: npm run build
@@ -67,6 +97,131 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  create-release:
+    runs-on: ubuntu-latest
+    needs: build
+    if: needs.build.outputs.version-changed == 'true'
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Obter informações do último merge
+        id: get-merge-info
+        run: |
+          MERGE_COMMIT=$(git log --merges -1 --pretty=format:"%H")
+          
+          if [ -n "$MERGE_COMMIT" ]; then
+            # Extrair número do PR do merge commit
+            PR_NUMBER=$(git log -1 --pretty=format:"%s" $MERGE_COMMIT | grep -oE '#[0-9]+' | sed 's/#//')
+            echo "pr-number=$PR_NUMBER" >> $GITHUB_OUTPUT
+            
+            echo "🔗 Found merge commit: $MERGE_COMMIT"
+            echo "📋 PR Number: $PR_NUMBER"
+            
+            # Buscar título original do PR via GitHub API se temos o número
+            if [ -n "$PR_NUMBER" ]; then
+              PR_TITLE=$(gh pr view $PR_NUMBER --json title --jq '.title' 2>/dev/null || echo "")
+              if [ -n "$PR_TITLE" ]; then
+                echo "merge-title=$PR_TITLE" >> $GITHUB_OUTPUT
+                echo "📝 PR Title (from API): $PR_TITLE"
+              else
+                # Fallback para título do merge se API falhar
+                MERGE_TITLE=$(git log -1 --pretty=format:"%s" $MERGE_COMMIT | sed 's/ (#[0-9]*)$//')
+                echo "merge-title=$MERGE_TITLE" >> $GITHUB_OUTPUT
+                echo "📝 Fallback to merge title: $MERGE_TITLE"
+              fi
+            fi
+          else
+            echo "⚠️ No merge commit found"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Obter descrição do PR
+        if: steps.get-merge-info.outputs.pr-number != ''
+        id: get-pr-description
+        run: |
+          PR_NUMBER="${{ steps.get-merge-info.outputs.pr-number }}"
+          PR_BODY=$(gh pr view $PR_NUMBER --json body --jq '.body' || echo "")
+          echo "$PR_BODY" > pr_description.txt
+          echo "📄 PR Description saved to file"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Criar Release Notes
+        id: create-release
+        run: |
+          VERSION="${{ needs.build.outputs.new-version }}"
+          PR_NUMBER="${{ steps.get-merge-info.outputs.pr-number }}"
+          MERGE_TITLE="${{ steps.get-merge-info.outputs.merge-title }}"
+          
+          RELEASE_NAME="v$VERSION"
+          RELEASE_BODY=""
+          
+          if [ -n "$MERGE_TITLE" ]; then
+            RELEASE_BODY="## 🚀 $MERGE_TITLE"$'\n\n'
+          fi
+          
+          if [ -f "pr_description.txt" ]; then
+            RELEASE_BODY="$RELEASE_BODY$(cat pr_description.txt)"
+          else
+            RELEASE_BODY="${RELEASE_BODY}### Changes"$'\n'"- Version bump to $VERSION"
+          fi
+          
+          RELEASE_BODY="$RELEASE_BODY"$'\n\n'"---"$'\n'"**Release Date:** $(date +'%Y-%m-%d')"$'\n'"**Version:** $VERSION"
+          
+          if [ -n "$PR_NUMBER" ]; then
+            RELEASE_BODY="$RELEASE_BODY"$'\n'"**PR:** #$PR_NUMBER"
+          fi
+          
+          # Criar release (GitHub cria automaticamente uma tag se não existir)
+          gh release create "$RELEASE_NAME" \
+            --title "$RELEASE_NAME" \
+            --notes "$RELEASE_BODY" \
+            --latest \
+            --generate-notes
+          
+          RELEASE_URL=$(gh release view "$RELEASE_NAME" --json url --jq '.url')
+          
+          echo "release-created=true" >> $GITHUB_OUTPUT
+          echo "release-url=$RELEASE_URL" >> $GITHUB_OUTPUT
+          
+          echo "✅ Release $RELEASE_NAME created successfully"
+          echo "🔗 Release URL: $RELEASE_URL"
+          echo "🏷️ Tag v$VERSION created automatically by GitHub"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Atualizar Changelog
+        run: |
+          VERSION="${{ needs.build.outputs.new-version }}"
+          RELEASE_URL="${{ steps.create-release.outputs.release-url }}"
+          MERGE_TITLE="${{ steps.get-merge-info.outputs.merge-title }}"
+          PR_NUMBER="${{ steps.get-merge-info.outputs.pr-number }}"
+          DATE=$(date +'%Y-%m-%d')
+          
+          ./scripts/update-changelog.sh "$VERSION" "$DATE" "$RELEASE_URL" "$MERGE_TITLE" "$PR_NUMBER"
+
+      - name: Commit changelog changes
+        run: |
+          VERSION="${{ needs.build.outputs.new-version }}"
+          
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          git add CHANGELOG.md
+          
+          if git diff --staged --quiet; then
+            echo "📋 No changelog changes to commit"
+          else
+            git commit -m "docs: update changelog for v$VERSION [skip ci]"
+            git push
+            echo "✅ Changelog committed and pushed"
+          fi
 
   deploy:
     runs-on: ubuntu-latest

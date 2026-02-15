@@ -1,6 +1,8 @@
 # Changelog
 
-Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
+Todas as mudanças notáveis deste projeto serão documentadas neste arquivo como **índice de releases**.
+
+📝 **Documentação detalhada** está disponível nas [Release Notes](https://github.com/yooga-tecnologia/mantra/releases) do GitHub.
 
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 eção de event handlers
@@ -482,6 +484,12 @@ Cores não sendo aplicadas corretamente no IconLarge
 ### 🐛 Correções
 
 - **Tooltip**: Correção do problema do tooltip não ajustar com o tamanho do texto
+
+## [Futuras Releases]
+
+*A partir desta versão, o changelog funciona como índice. Documentação detalhada fica nas Release Notes.*
+
+---
 
 ## [2.4.1] – 2025-10-02
 
