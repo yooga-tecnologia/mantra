@@ -1,18 +1,36 @@
 import { defineCustomElements } from '../loader';
-
-import { setCustomElementsManifest } from '@stencil/storybook-plugin';
 import customElements from '../custom-elements.json';
 
+import './_fonts.scss';
+import './_styles.scss';
+
 defineCustomElements();
-setCustomElementsManifest(customElements);
+
+// Configurar custom elements manifest para Storybook v10
+if (customElements) {
+  window.__STORYBOOK_CUSTOM_ELEMENTS_MANIFEST__ = customElements;
+}
 
 const preview = {
   parameters: {
+    backgrounds: {
+      options: {
+        dark: { name: 'dark', value: '#333' },
+        light: { name: 'light', value: '#F7F9F2' },
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
+    },
+    docs: {
+      // theme: themes.dark, // Removido temporariamente
+    },
+    initialGlobals: {
+      // 👇 Set the initial background color
+      backgrounds: { value: 'light' },
     },
   },
   decorators: [
