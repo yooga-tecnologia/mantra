@@ -271,8 +271,8 @@ const IconsByCategory = [
     icons: ICONS.PRIVACY_AND_SECURITY_ICONS,
   },
   {
-    label: 'Hardware',
-    icons: ICONS.HARDWARE_ICONS,
+    label: 'Hardware and Software',
+    icons: ICONS.HARDWARE_AND_SOFTWARE_ICONS,
   },
   {
     label: 'Maps and Transportation',

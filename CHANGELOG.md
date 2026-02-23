@@ -5,6 +5,13 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 eção de event handlers
 
+## [2.9.17] - 2026-02-23
+
+### 🚀 Adicionado
+
+- **Icon**:
+  - Variantes de ícone: magic, magicFilled, magicAlt, magicAltFilled, navigationArrow, package, currencyReversal, creditCard, money, note, noteBlank, terminal, code, codeSimple, printerCurrency, four, five, six, seven, eight, nine,
+
 ## [2.9.16] - 2026-01-30
 
 ### 🚀 Adicionado
