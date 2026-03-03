@@ -9,8 +9,8 @@ eção de event handlers
 
 ### 🚀 Adicionado
 
-- **IcoLarge**:
-  - Variantes adicionadas: users, currencyCashback
+- **IconLarge**:
+  - Variantes adicionadas: map, users, currencyCashback
 
 ## [2.9.19] - 2026-02-25
 
