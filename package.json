@@ -81,7 +81,7 @@
     "puppeteer": "^24.5.0",
     "sass": "^1.83.4",
     "sass-loader": "^16.0.4",
-    "storybook": "^8.6.15",
+    "storybook": "^8.6.17",
     "typescript": "^5.8.2"
   },
   "license": "MIT",
