@@ -5,6 +5,13 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 eção de event handlers
 
+## [2.9.20] - 2026-02-25
+
+### 🚀 Adicionado
+
+- **IconLarge**:
+  - Variantes adicionadas: map, users, currencyCashback
+
 ## [2.9.19] - 2026-02-25
 
 ### 🚀 Adicionado
