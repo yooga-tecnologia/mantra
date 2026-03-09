@@ -11,7 +11,7 @@ export default {
   title: 'Components/Button/Button',
   tags: ['autodocs'],
   parameters: {
-    layout: 'padded',
+    layout: 'padded', // ATENÇÃO: full-width não funciona com layout "centered"
     docs: {
       description: {
         component: `
@@ -245,4 +245,16 @@ ${buttonVariants.join('')}
   </div>
 </div>
 `;
+};
+
+AllVariants.parameters = {
+  controls: {
+    disable: true,
+  },
+  actions: {
+    disable: true,
+  },
+  interactions: {
+    disable: true,
+  },
 };
