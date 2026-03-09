@@ -1,6 +1,6 @@
 import type { StoryFn, StoryObj } from '@storybook/html-vite';
 
-import { buttonColorVariantsArray, ButtonProps, buttonSizeVariantsArray, buttonStyleArray } from './button.types';
+import { buttonColorVariantsArray, ButtonIconProps, buttonSizeVariantsArray, buttonStyleArray } from './button.types';
 import { ICON_OPTIONS } from '../icon/icon.utils';
 import { ThemePalette, themePalettesArray } from '@theme/theme.types';
 import { HTMLString } from 'src/utils/utils';
@@ -8,14 +8,14 @@ import { HTMLString } from 'src/utils/utils';
 type Story = StoryObj;
 
 export default {
-  title: 'Components/Button/Button',
+  title: 'Components/Button/ButtonIcon',
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     docs: {
       description: {
         component: `
-O componente **mnt-button** é um botão com várias variantes e tamanhos.
+O componente **mnt-button-icon** é um botão semelhante ao **mnt-button**, mas com apenas um ícone.
 Utilizado para disparar uma ação ou evento.
 
 Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjASveGQoJS/-1-Core-Components?node-id=407-766&t=dfwzJtcmToPhfZLN-4)
@@ -33,14 +33,6 @@ Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjA
     },
   },
   argTypes: {
-    label: {
-      control: 'text',
-      description: 'O texto exibido no botão',
-      table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'undefined' },
-      },
-    },
     color: {
       control: 'select',
       options: buttonColorVariantsArray,
@@ -68,28 +60,10 @@ Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjA
         defaultValue: { summary: 'medium' },
       },
     },
-    state: {
-      control: 'select',
-      options: ['default', 'pressed'],
-      description: 'Estado visual do botão. Utilizado para indicar quando um botão está selecionado / pressionado. Útil para indicar um estado de seleção de filtros.',
-      table: {
-        type: { summary: 'default | pressed' },
-        defaultValue: { summary: 'default' },
-      },
-    },
-    iconLeft: {
+    icon: {
       control: 'select',
       options: ICON_OPTIONS,
-      description: 'Ícone exibido à esquerda do botão. Veja todas as opções de ícones no [Icon Component](../icon).',
-      table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'undefined' },
-      },
-    },
-    iconRight: {
-      control: 'select',
-      options: ICON_OPTIONS,
-      description: 'Ícone exibido à direita do botão. Veja todas as opções de ícones no [Icon Component](../icon).',
+      description: 'Ícone exibido no botão. Veja todas as opções de ícones no [Icon Component](../icon).',
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: 'undefined' },
@@ -98,84 +72,75 @@ Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjA
   },
   render: (args) => {
     return `
-      <mnt-button ${args}></mnt-button>
+      <mnt-button-icon ${args}></mnt-button-icon>
     `;
   },
 };
 
-const ButtonTemplate = (props: ButtonProps) => {
+const ButtonIconTemplate = (props: ButtonIconProps) => {
   return `
-    <mnt-button
-      label="${props.label}"
+    <mnt-button-icon
       color="${props.color}"
       variant="${props.variant}"
       size="${props.size}"
-      state="${props.state || 'default'}"
-      icon-left="${props.iconLeft || ''}"
-      icon-right="${props.iconRight || ''}"
-    ></mnt-button>
+      icon="${props.icon || 'caret-up'}"
+    ></mnt-button-icon>
   `;
 };
 
 export const Regular: Story = {
   args: {
-    label: 'Click me',
     color: 'primary',
     variant: 'regular',
     size: 'medium',
   },
-  render: ButtonTemplate,
+  render: ButtonIconTemplate,
 };
 
 export const Emphasis: Story = {
   args: {
-    label: 'Click me',
     color: 'primary',
     variant: 'emphasis',
     size: 'medium',
   },
-  render: ButtonTemplate,
+  render: ButtonIconTemplate,
 };
 
 export const Stroke: Story = {
   args: {
-    label: 'Click me',
     color: 'primary',
     variant: 'stroke',
     size: 'medium',
   },
-  render: ButtonTemplate,
+  render: ButtonIconTemplate,
 };
 
 export const Plain: Story = {
   args: {
-    label: 'Click me',
     color: 'primary',
     variant: 'plain',
     size: 'medium',
   },
-  render: ButtonTemplate,
+  render: ButtonIconTemplate,
 };
 
 export const Link: Story = {
   args: {
-    label: 'Click me',
     color: 'primary',
     variant: 'link',
     size: 'medium',
   },
-  render: ButtonTemplate,
+  render: ButtonIconTemplate,
 };
 
 export const Filter: Story = {
   args: {
-    label: 'Click me',
     variant: 'filter',
     color: 'primary',
     size: 'medium',
     state: 'default',
   },
-  render: ButtonTemplate,
+  render: ButtonIconTemplate,
 };
 
 const getColorVariants = (color: ThemePalette) => {
@@ -186,7 +151,7 @@ const getColorVariants = (color: ThemePalette) => {
     .map((variant) => {
       buttonVariants.push(`<span>${variant}</span>`);
       buttonSizeVariantsArray.map((size) => {
-        buttonVariants.push(ButtonTemplate({ label: 'Click me', color, variant, size, iconLeft: 'plus', iconRight: 'plus' }));
+        buttonVariants.push(ButtonIconTemplate({ color, variant, size, icon: 'plus' }));
       });
     });
   return `
@@ -211,22 +176,6 @@ export const AllVariants: StoryFn = () => {
   return `
 <div>
 ${buttonVariants.join('')}
-</div>
-
-<div class="sb-section-box">
-  <h4>Filter</h4>
-  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
-    <span>Default</span>
-    <mnt-button label="Click me" variant="filter" size="small" state="default"></mnt-button>
-    <mnt-button label="Click me" variant="filter" size="medium" state="default"></mnt-button>
-    <mnt-button label="Click me" variant="filter" size="large" state="default"></mnt-button>
-  </div>
-  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
-    <span>Pressed</span>
-    <mnt-button label="Click me" variant="filter" size="small" state="pressed"></mnt-button>
-    <mnt-button label="Click me" variant="filter" size="medium" state="pressed"></mnt-button>
-    <mnt-button label="Click me" variant="filter" size="large" state="pressed"></mnt-button>
-  </div>
 </div>
 `;
 };

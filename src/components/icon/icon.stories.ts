@@ -1,253 +1,208 @@
-import type { Meta, StoryFn } from '@storybook/html';
+import type { StoryFn, StoryObj } from '@storybook/html-vite';
 
-import { iconSizes, type IconProps } from './icon.types';
 import * as ICONS from './icon-base';
-// import { ICON_ANIMATION_ARRAY } from './icon.constants';
 import { ICON_OPTIONS } from './icon.utils';
+import { IconProps, iconSizes } from './icon.types';
+import { HTMLString } from 'src/utils/utils';
+import { directionTransformMap } from './icon.constants';
 
-type HTMLString = string;
+type Story = StoryObj;
 
-const meta: Meta<IconProps> = {
-  title: 'Assets/Icon/Icon',
-  component: 'mnt-icon',
+export default {
+  title: 'Assets/Icon',
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        component: `
+Componente padrão para exibição de ícones SVG simples do Design System.
+
+Permite a utilização de ícones com modificadores de direções, background e shapes.
+
+### ⚠️ Diferenças dos outros componentes:
+- **Icon**: Símbolos mais simples; indicado para uso geral, contido em outros componentes como Button, MessageHighlight, etc.
+- **IconLarge**: Ilustrações complexas, apenas tamanhos médios/grandes; indicado para uso em cards de produtos, serviços, etc.
+- **Illustration**: Ilustrações coloridas e decorativas. Indicado para uso em EmptyState, Dialogs, etc.
+        `,
+      },
+      codePanel: false,
+    },
+  },
   argTypes: {
-    icon: { control: 'select', options: ICON_OPTIONS.sort() },
-    size: { control: 'select', table: { defaultValue: { summary: 'medium' } }, options: Object.keys(iconSizes) },
-    color: { control: 'color', table: { defaultValue: { summary: 'currentColor' } } },
+    icon: {
+      control: 'select',
+      options: ICON_OPTIONS,
+      description: 'Nome do ícone a ser exibido. Veja todas as opções de ícones na seção "All variants"',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
+      },
+    },
+    color: {
+      control: {
+        type: 'color',
+        defaultValue: '#000000',
+      },
+      description: 'Cor do ícone. Utilize valor hexadecimal.',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '#000000' },
+      },
+    },
     background: {
-      control: 'color',
-      description: 'Cor de fundo. Use a prop bg-shape para definir a forma (circle, rounded, square).',
+      control: {
+        type: 'color',
+        defaultValue: 'transparent',
+      },
+      description: 'Cor de fundo do ícone. Utilize valor hexadecimal.',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
+      },
     },
     bgShape: {
       control: 'select',
       options: ['circle', 'rounded', 'square'],
-      description: 'Forma do background quando a prop background estiver definida',
+      description: 'Formato do background do ícone.',
+      table: {
+        type: { summary: 'circle | rounded | square' },
+        defaultValue: { summary: 'undefined' },
+      },
     },
-    // animation: { control: 'select', options: ICON_ANIMATION_ARRAY },
-  },
-  parameters: {
-    docs: {
-      description: {
-        component:
-          '**Icon** é o componente padrão para exibição de ícones SVG simples do Mantra.\n\n' +
-          '### 🎯 **Características principais:**\n' +
-          '- **Símbolos simples e versáteis:** Funcionam bem em qualquer tamanho\n' +
-          '- **Organização por categorias:** UI Actions, Communication, Business, etc.\n' +
-          '- **Altamente flexível:** Suporte a cores, backgrounds, animações e transformações\n' +
-          '- **Otimizado para uso geral:** Ideal para interfaces de usuário do dia a dia\n\n' +
-          '### ⚠️ **Diferenças dos outros componentes:**\n' +
-          '- `Icon`: Símbolos simples, uso geral, qualquer tamanho\n' +
-          '- `IconLarge`: Ilustrações complexas, apenas tamanhos médios/grandes\n' +
-          '- `Illustration`: Desenhos coloridos e decorativos\n\n' +
-          '### 📏 **Funcionalidades especiais:**\n' +
-          '- **Direcionamento automático:** Sufixos como `-left`, `-right` rotacionam o ícone\n' +
-          // '- **Animações:** Spin, pulse, bounce para feedback visual\n' +
-          '- **Responsivo:** Tamanhos de `tiny` (12px) até `xxlarge` (48px)\n' +
-          '- **Background com formas:** Veja a [story Background Examples](#background-examples) abaixo para exemplos de backgrounds com circle, rounded e square\n\n' +
-          '**Atenção:** Os nomes dos ícones devem corresponder exatamente às nomenclaturas do protótipo Figma.\n\n' +
-          'Para visualizar todos os ícones por categoria, veja a [listagem completa](#icon-variants).\n\n' +
-          '**Figma:** [Global Assets | Icon](https://www.figma.com/design/0Yxvp7aJaKkjyXduoQlPpM/-4-Global-Assets?node-id=1321-19&t=KRWz7iIPc95JTGgp-4)\n\n',
+    size: {
+      control: 'select',
+      options: Object.keys(iconSizes),
+      description: 'Tamanho do ícone.',
+      table: {
+        type: { summary: Object.keys(iconSizes).join(' | ') },
+        defaultValue: { summary: 'medium' },
       },
     },
   },
-};
-
-export default meta;
-
-const DefaultTemplate = (args: IconProps) => {
-  const backgroundAttr = args.background
-    ? typeof args.background === 'string'
-      ? `background="${args.background}"`
-      : `background='["${args.background[0]}", "${args.background[1]}"]'`
-    : '';
-
-  const bgShapeAttr = args.bgShape ? `bg-shape="${args.bgShape}"` : '';
-
-  // const animationAttr = args.animation ? `animation="${args.animation}"` : '';
-
-  return `
-<mnt-icon
-  icon="${args.icon}"
-  size="${args.size}"
-  color="${args.color}"
-  ${backgroundAttr}
-  ${bgShapeAttr}
-></mnt-icon>
-`;
-};
-
-export const Default: StoryFn = DefaultTemplate.bind({});
-Default.args = {
-  icon: 'caret',
-  size: 'large',
-  color: 'black',
-  background: undefined,
-  // animation: undefined,
-} as IconProps;
-Default.storyName = 'Playground';
-Default.parameters = {
-  id: 'icon-playground',
-  docs: {
-    description: {
-      story:
-        'Playground do componente `<mnt-icon>`. Use o controle de **background** para adicionar uma cor de fundo (padrão: circle). Para formas customizadas, veja a story **Background Examples** abaixo.',
-    },
-  },
-};
-
-// TODO: Melhorar documentacão desta funcionalidade
-// export const RotationTemplate = DefaultTemplate.bind({});
-// RotationTemplate.args = {
-//   icon: 'caret-left',
-//   size: 'large',
-//   color: 'black',
-//   animation: undefined,
-// } as IconProps;
-
-/**
- * Exemplos de uso do background com diferentes formas e tamanhos
- */
-const BackgroundExamplesTemplate = (): HTMLString => {
-  const shapes = [
-    { bg: '#E5E7E8', fg: '#4B5053', label: 'Default (circle)', bgColor: '#E5E7E8', bgShape: undefined },
-    { bg: '#E1F1FD', fg: '#0A639A', label: 'Circle explícito', bgColor: '#E1F1FD', bgShape: 'circle' },
-    { bg: '#FFE1E1', fg: '#C01642', label: 'Rounded', bgColor: '#FFE1E1', bgShape: 'rounded' },
-    { bg: '#DCFCEA', fg: '#16653C', label: 'Square', bgColor: '#DCFCEA', bgShape: 'square' },
-  ];
-
-  const sizes = ['tiny', 'small', 'medium', 'large', 'doubleLarge'] as const;
-
-  const renderSizeRow = (size: (typeof sizes)[number]): HTMLString => {
+  render: (args) => {
     return `
-  <div class="sb-grid-5 sb-grid-row-title sb-grid-row-divider">
-    <div class="sb-grid-row-title-item">${size}</div>
-    ${shapes
-      .map(
-        (shape) => `
-      <div style="display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%;">
-        <mnt-icon icon="starOutline" size="${size}" color="${shape.fg}" background="${shape.bgColor}" ${shape.bgShape ? `bg-shape="${shape.bgShape}"` : ''}></mnt-icon>
-      </div>
-        `,
-      )
-      .join('')}
-    </div>
-  </div>
-`;
-  };
-
-  return `
-  <div>
-    <div class="sb-grid-4 sb-grid-row-title" style="margin-left: 180px;">
-      ${shapes
-        .map(
-          (shape) => `
-        <h4 style="text-align: center; width: 100%;">
-          ${shape.label}
-        </h4>
-      `,
-        )
-        .join('')}
-      </div>
-    </div>
-    ${sizes.map((size) => renderSizeRow(size)).join('')}
-  </div>
-`;
-};
-
-export const BackgroundExamples: StoryFn = BackgroundExamplesTemplate;
-BackgroundExamples.parameters = {
-  id: 'background-examples',
-  docs: {
-    description: {
-      story:
-        'Exemplos de uso do background com diferentes shapes (circle, rounded, square) e tamanhos.\n\n' +
-        '**Uso recomendado (nova forma):**\n' +
-        '- Para cor simples: `background="#color"` (shape padrão: circle)\n' +
-        '- Para shape customizado: `background="#color" bg-shape="circle|rounded|square"`\n\n' +
-        '**Uso alternativo (retrocompatibilidade):**\n' +
-        '- Formato array: `background={["#color", "circle|rounded|square"]}`',
-    },
+      <mnt-icon ${args}></mnt-icon>
+    `;
   },
 };
+
+const disableArgs = {
+  controls: {
+    disable: true,
+  },
+  actions: {
+    disable: true,
+  },
+  interactions: {
+    disable: true,
+  },
+};
+
+const IconTemplate = (props: IconProps) => {
+  return `
+    <mnt-icon
+      icon="${props.icon}"
+      color="${props.color}"
+      size="${props.size}"
+      background="${props.background}"
+      bg-shape="${props.bgShape}"
+    ></mnt-icon>
+  `;
+};
+
+export const Simple: Story = {
+  args: {
+    icon: 'caret-up',
+    color: '#000',
+    size: 'medium',
+    background: undefined,
+  },
+  render: IconTemplate,
+};
+
+export const Sizes: StoryFn = () => {
+  const sizes = Object.keys(iconSizes);
+  const sizeMap = sizes.map((direction) => {
+    return `
+    <div class="sb-grid-3 sb-grid-row-title">
+      <p class="label-medium-medium text-color-body p-5">${direction.charAt(0).toUpperCase() + direction.slice(1)}</p>
+      <mnt-icon class="p-5" icon="starOutline" color="#000" size="${direction}"></mnt-icon>
+      <mnt-icon class="p-5" icon="starOutline" background="#000" color="#FFF" size="${direction}"></mnt-icon>
+    </div>
+    `;
+  });
+  return `
+<div class="sb-section">
+  <div class="sb-grid-3 sb-grid-row-title sb-grid-row-divider">
+    <p class="label-medium-medium text-color-title">Sizes</p>
+    <p class="label-medium-medium text-color-title">Color</p>
+    <p class="label-medium-medium text-color-title">Background</p>
+  </div>
+  ${sizeMap.join('')}
+</div>
+  `;
+};
+
+Sizes.parameters = disableArgs;
 
 /**
- * Demonstra os tamanhos pré-definidos e customizado
+ * Exemplos de uso de ícones que utilizam modificadores de background e shapes.
  */
-const SizingVariantsTemplate = (): HTMLString => {
-  const preSizes = ['tiny', 'small', 'medium', 'large', 'doubleLarge'] as const;
-  const customSize = 55;
-
+export const BackgroundAndShapes: StoryFn = () => {
+  const shapes = ['circle', 'rounded', 'square'];
+  const shapesIcons = shapes.map((shape) => {
+    return `
+    <div class="sb-grid-3 sb-grid-row-title">
+      <span class="text-color-body p-5">${shape.charAt(0).toUpperCase() + shape.slice(1)}</span>
+      <mnt-icon class="p-5" icon="starOutline" color="#000" size="medium" bg-shape="${shape}"></mnt-icon>
+      <mnt-icon class="p-5" icon="starOutline" background="#000" color="#FFF" size="medium" bg-shape="${shape}"></mnt-icon>
+    </div>
+    `;
+  });
   return `
-  <div style="padding: 16px;">
-    <h3>Tamanhos Pré-definidos</h3>
-
-    <div class="sb-grid-6 sb-grid-stretch">
-      ${preSizes
-        .map(
-          (size) => `
-      <div class="sb-box">
-        <mnt-icon icon="starOutline" size="${size}" color="#242628"></mnt-icon>
-        <div style="margin-top: 4px; text-align: center;">
-          <p class="label-medium-tiny">${size}</p>
-          <p class="label-regular-tiny">(${iconSizes[size]}px)</p>
-        </div>
-      </div>
-      `,
-          // <div style="text-align: center;">
-          //   <mnt-icon icon="caret" size="${size}" color="#242628"></mnt-icon>
-          //   <p style="margin-top: 0.5rem; font-size: 11px; color: #666;">${size}</p>
-          //   <p style="margin-top: 0.25rem; font-size: 10px; color: #999;">${iconSizes[size]}px</p>
-          // </div>
-        )
-        .join('')}
-    </div>
-
-    <h3>Tamanhos com Background</h3>
-    <div class="sb-grid-6 sb-grid-stretch">
-      ${preSizes
-        .map(
-          (size) => `
-      <div class="sb-box">
-        <mnt-icon icon="starOutline" size="${size}" color="#0A639A" background="#E1F1FD" bg-shape="circle"></mnt-icon>
-        <div style="margin-top: 4px; text-align: center;">
-          <p class="label-medium-tiny">${size}</p>
-          <p class="label-regular-tiny">(${iconSizes[size]}px)</p>
-        </div>
-      </div>
-    `,
-        )
-        .join('')}
-    </div>
-
-    <div>
-      <h3>Tamanho Customizado (${customSize}px)</h3>
-      <div class="sb-grid-6 sb-grid-stretch">
-        <div class="sb-box">
-          <mnt-icon icon="caret" size="${customSize}" color="#242628"></mnt-icon>
-        </div>
-        <div class="sb-box">
-          <mnt-icon icon="caret" size="${customSize}" color="#242628" background="#E1F1FD" bg-shape="circle"></mnt-icon>
-        </div>
-    </div>
+<div class="sb-section">
+  <div class="sb-grid-3 sb-grid-row-title sb-grid-row-divider">
+    <p class="label-medium-medium text-color-title">Shapes</p>
+    <p class="label-medium-medium text-color-title">Color</p>
+    <p class="label-medium-medium text-color-title">Background</p>
   </div>
-`;
+  ${shapesIcons.join('')}
+</div>
+  `;
 };
 
-export const SizingVariants: StoryFn = SizingVariantsTemplate;
-SizingVariants.parameters = {
-  id: 'sizing-variants',
-  docs: {
-    description: {
-      story:
-        'Demonstra todos os tamanhos pré-definidos (tiny, small, medium, large, doubleLarge) e tamanho customizado. O background adiciona automaticamente 8px ao tamanho do ícone para manter proporção visual.\n\n' +
-        '**Uso recomendado (nova forma):**\n' +
-        '- Para cor simples: `background="#color"` (shape padrão: circle)\n' +
-        '- Para shape customizado: `background="#color" bg-shape="circle|rounded|square"`\n\n' +
-        '**Uso alternativo (retrocompatibilidade):**\n' +
-        '- Formato array: `background={["#color", "circle|rounded|square"]}`',
-    },
-  },
+BackgroundAndShapes.parameters = disableArgs;
+
+/**
+ * Exemplos de uso de ícones que utilizam modificadores de direções.
+ *
+ * Utilize apenas os ícones que possuem `caret` ou `arrow` no nome.
+ */
+export const Directions: StoryFn = () => {
+  const directions = Object.keys(directionTransformMap);
+  const directionsIcons = directions.map((direction) => {
+    return `
+    <div class="sb-grid-3 sb-grid-row-title">
+      <p class="text-color-body pl-5">${direction.charAt(0).toUpperCase() + direction.slice(1)}</p>
+      <mnt-icon class="p-5" icon="caret-${direction}" color="#000" size="medium"></mnt-icon>
+      <mnt-icon class="p-5" icon="caret-${direction}" background="#000" color="#FFF" size="medium"></mnt-icon>
+    </div>
+    `;
+  });
+  return `
+<div class="sb-section">
+  <div class="sb-grid-3 sb-grid-row-title sb-grid-row-divider">
+    <p class="label-medium-medium text-color-title">Directions</p>
+    <p class="label-medium-medium text-color-title">Color</p>
+    <p class="label-medium-medium text-color-title">Background</p>
+  </div>
+  ${directionsIcons.join('')}
+</div>
+  `;
 };
+
+Directions.parameters = disableArgs;
 
 const IconsByCategory = [
   {
@@ -310,7 +265,18 @@ const renderAllIcons = (): HTMLString => {
         <div class="sb-grid-5 sb-grid-stretch">
           ${Object.keys(category.icons)
             .sort()
-            .map((iconName) => renderIconBox(iconName))
+            .flatMap((iconName) => {
+              // Se o ícone contém 'caret' ou 'arrow', renderizar todas as direções
+              if (iconName.includes('caret') || iconName.includes('arrow')) {
+                const directions = Object.keys(directionTransformMap);
+                return directions.map((direction) => {
+                  const directionalIconName = `${iconName}-${direction}`;
+                  return renderIconBox(directionalIconName);
+                });
+              }
+              // Caso contrário, renderizar apenas o ícone base
+              return renderIconBox(iconName);
+            })
             .join('')}
         </div>
       </div>
@@ -324,13 +290,15 @@ const renderAllIcons = (): HTMLString => {
   `;
 };
 
-export const IconVariants: StoryFn = () => renderAllIcons();
-IconVariants.parameters = {
-  id: 'icon-variants',
-  docs: {
-    description: {
-      story: 'Listagem completa de todos os ícones disponíveis no sistema.',
-    },
-  },
-  controls: { disable: true },
+/**
+ * Todas as variantes de ícones
+ */
+export const AllVariants: StoryFn = () => {
+  return `
+  <div class="sb-section">
+    ${renderAllIcons()}
+  </div>
+  `;
 };
+
+AllVariants.parameters = disableArgs;

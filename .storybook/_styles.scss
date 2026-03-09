@@ -5,8 +5,22 @@
 @use '../src/shared/theme/core/typography' as typography;
 
 $base-grid: primitives.$base-grid;
-// $typography-variants-list: primitives.$typography-variants-list;
+
 @include typography.set-typography();
+
+.text-color{
+  &-title {
+    color: map.get(primitives.$grey-palette, 600);
+  }
+
+  &-caption {
+    color: map.get(primitives.$grey-palette, 400);
+  }
+
+  &-body {
+    color: map.get(primitives.$grey-palette, 500);
+  }
+}
 
 $code-color-scheme: (
   background: #282a36,
@@ -18,6 +32,44 @@ $code-color-scheme: (
   text-cyan: #8be9fd,
   border: #44475a,
 );
+
+.my-2 {
+  margin-top: $base-grid;
+  margin-bottom: $base-grid;
+}
+
+.mb-1 { margin-bottom: $base-grid * 0.25; }
+.mb-2 { margin-bottom: $base-grid * 0.50; }
+.mb-3 { margin-bottom: $base-grid * 0.75; }
+.mb-4 { margin-bottom: $base-grid * 1.00; }
+.mb-5 { margin-bottom: $base-grid * 1.25; }
+.mb-6 { margin-bottom: $base-grid * 1.50; }
+.mb-7 { margin-bottom: $base-grid * 1.75; }
+.mb-8 { margin-bottom: $base-grid * 2.00; }
+.mb-9 { margin-bottom: $base-grid * 2.25; }
+.mb-10 { margin-bottom: $base-grid * 2.50; }
+
+.p-1 { padding: $base-grid * 0.25; }
+.p-2 { padding: $base-grid * 0.50; }
+.p-3 { padding: $base-grid * 0.75; }
+.p-4 { padding: $base-grid * 1.00; }
+.p-5 { padding: $base-grid * 1.25; }
+.p-6 { padding: $base-grid * 1.50; }
+.p-7 { padding: $base-grid * 1.75; }
+.p-8 { padding: $base-grid * 2.00; }
+.p-9 { padding: $base-grid * 2.25; }
+.p-10 { padding: $base-grid * 2.50; }
+
+.pl-1 { padding-left: $base-grid * 0.25; }
+.pl-2 { padding-left: $base-grid * 0.50; }
+.pl-3 { padding-left: $base-grid * 0.75; }
+.pl-4 { padding-left: $base-grid * 1.00; }
+.pl-5 { padding-left: $base-grid * 1.25; }
+.pl-6 { padding-left: $base-grid * 1.50; }
+.pl-7 { padding-left: $base-grid * 1.75; }
+.pl-8 { padding-left: $base-grid * 2.00; }
+.pl-9 { padding-left: $base-grid * 2.25; }
+.pl-10 { padding-left: $base-grid * 2.50; }
 
 .sb-docs-container {
   max-width: 720px;
