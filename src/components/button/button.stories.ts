@@ -11,7 +11,7 @@ export default {
   title: 'Components/Button/Button',
   tags: ['autodocs'],
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
     docs: {
       description: {
         component: `
@@ -21,13 +21,14 @@ Utilizado para disparar uma ação ou evento.
 Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjASveGQoJS/-1-Core-Components?node-id=407-766&t=dfwzJtcmToPhfZLN-4)
 
 ### Recomendações:
-- Variantes de estilo:
+- **Variantes de estilo:**
   - \`emphasis\`: Ações principais, onde botão é o foco da ação e precisa ser destacado.
   - \`regular\` e \`stroke\`: Ações secundárias, onde botão precisa ser destacado mas não é o foco da ação.
   - \`plain\`: Ações secundárias, onde botão não precisa ser destacado.
   - \`link\`: Ações de navegação, onde botão direciona para outras páginas ou seções da aplicação.
   - \`filter\`: Ações de filtros -> Tem uma leve diferença visual e limitação de uso em relação aos demais estilos.
-- Ícones: É possível adicionar ícones à esquerda e à direita do botão, utilizando propriedades \`icon-left\` e \`icon-right\`. Por padrão, não são exibidos.
+- **Ícones:** É possível adicionar ícones à esquerda e à direita do botão, utilizando propriedades \`icon-left\` e \`icon-right\`. Por padrão, não são exibidos.
+- **Largura total:** É possível ocupar a largura total do elemento pai, utilizando a propriedade \`full-width\`. O botão ocupará 100% da largura disponível.
         `,
       },
     },
@@ -95,6 +96,14 @@ Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjA
         defaultValue: { summary: 'undefined' },
       },
     },
+    fullWidth: {
+      control: 'boolean',
+      description: 'Se o botão deve ocupar a largura total da tela',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
   },
   render: (args) => {
     return `
@@ -113,6 +122,7 @@ const ButtonTemplate = (props: ButtonProps) => {
       state="${props.state || 'default'}"
       icon-left="${props.iconLeft || ''}"
       icon-right="${props.iconRight || ''}"
+      full-width="${props.fullWidth}"
     ></mnt-button>
   `;
 };
@@ -123,6 +133,7 @@ export const Regular: Story = {
     color: 'primary',
     variant: 'regular',
     size: 'medium',
+    fullWidth: false,
   },
   render: ButtonTemplate,
 };
@@ -133,6 +144,7 @@ export const Emphasis: Story = {
     color: 'primary',
     variant: 'emphasis',
     size: 'medium',
+    fullWidth: false,
   },
   render: ButtonTemplate,
 };
@@ -143,6 +155,7 @@ export const Stroke: Story = {
     color: 'primary',
     variant: 'stroke',
     size: 'medium',
+    fullWidth: false,
   },
   render: ButtonTemplate,
 };
@@ -153,6 +166,7 @@ export const Plain: Story = {
     color: 'primary',
     variant: 'plain',
     size: 'medium',
+    fullWidth: false,
   },
   render: ButtonTemplate,
 };
@@ -163,6 +177,7 @@ export const Link: Story = {
     color: 'primary',
     variant: 'link',
     size: 'medium',
+    fullWidth: false,
   },
   render: ButtonTemplate,
 };
@@ -174,6 +189,7 @@ export const Filter: Story = {
     color: 'primary',
     size: 'medium',
     state: 'default',
+    fullWidth: false,
   },
   render: ButtonTemplate,
 };
