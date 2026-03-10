@@ -1,6 +1,7 @@
-@use "sass:map";
-@use "sass:math";
-@use "sass:string";
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:string';
+@use 'sass:meta';
 
 @use '../tokens/primitives' as primitives;
 @use './__string-helpers' as string-helper;
@@ -19,15 +20,21 @@ $base-grid: primitives.$base-grid;
 /// @return {Number|null} - The calculated font size in pixels, or null if not found.
 @function get-font-size($variant, $device, $size) {
   $variant-map: map.get(primitives.$typography-variants-list, $variant);
-  $device-map: if($variant-map, map.get($variant-map, $device), null);
-  $font-size: if($device-map, map.get($device-map, $size), null);
 
-  @if($device == null) {
-    $device-map: map.get($variant-map, 'desktop');
-  } @else {
+  $device-map: null;
+  @if $variant-map {
     $device-map: map.get($variant-map, $device);
   }
-  @return if($font-size, $font-size * primitives.$base-font-size, null);
+
+  $font-size: null;
+  @if $device-map {
+    $font-size: map.get($device-map, $size);
+  }
+
+  @if $font-size {
+    @return $font-size * primitives.$base-font-size;
+  }
+  @return null;
 }
 
 /// Ensures the font size meets the minimum threshold of 14px.
@@ -64,11 +71,6 @@ $base-grid: primitives.$base-grid;
 
   $line-height: math.floor($font-size * 1);
 
-  // @return if(
-  //   $line-height % $base-grid == 0,
-  //   $line-height,
-  //   $line-height + $base-grid - ($line-height % $base-grid)
-  // );
   @if($line-height % $base-grid == 0) {
     @return $line-height;
   } @else {
@@ -122,7 +124,10 @@ $base-grid: primitives.$base-grid;
       @if $device == 'desktop' or $device == 'mobile' {
         @each $size-key, $size-value in $config {
           $selector: "*.#{$variant}-#{$size-key}";
-          $media: if($device == 'mobile', "(max-width: 991px)", null);
+          $media: null;
+          @if $device == 'mobile' {
+            $media: "(max-width: 991px)";
+          }
 
           @if $media {
             @media screen and #{$media} {
