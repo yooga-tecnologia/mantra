@@ -22,4 +22,5 @@ export interface FieldTextProps {
   inlineMessage?: string;
   hasActionButton?: boolean;
   hasInfoButton?: boolean;
+  fullWidth?: boolean;
 }

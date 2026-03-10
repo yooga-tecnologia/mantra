@@ -21,7 +21,12 @@ Componente padrão para exibição de logotipos e identidades visuais de marcas 
 - **Flexibilidade**: Ajuste a altura e a cor da marca para atender aos diferentes contextos de uso -- evitando a necessidade de exportar imagens \`.png\` e \`.jpg\`.
         `,
       },
-      codePanel: false,
+      codePanel: true,
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return BrandTemplate(storyContext.args as BrandProps);
+        },
+      },
     },
   },
   argTypes: {

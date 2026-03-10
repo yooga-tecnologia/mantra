@@ -32,6 +32,12 @@ O componente \`mnt-badge-icon\` é uma versão simplificada do \`mnt-badge\`, ut
 Assim como o \`mnt-badge\`, ele possui variantes de cores, tonalidades e tamanhos.
         `,
       },
+      codePanel: true,
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return BadgeIconTemplate(storyContext.args as BadgeBaseProps);
+        },
+      },
     },
   },
   argTypes: {
@@ -79,7 +85,7 @@ Assim como o \`mnt-badge\`, ele possui variantes de cores, tonalidades e tamanho
   },
 };
 
-const BadgeTemplate = (props: BadgeBaseProps) => {
+const BadgeIconTemplate = (props: BadgeBaseProps) => {
   return `
     <mnt-badge-icon
       color="${props.color}"
@@ -100,7 +106,7 @@ export const Default: Story = {
     size: 'medium',
     icon: 'plus',
   },
-  render: BadgeTemplate,
+  render: BadgeIconTemplate,
 };
 
 /**
@@ -113,7 +119,7 @@ export const Highlight: Story = {
     size: 'medium',
     icon: 'plus',
   },
-  render: BadgeTemplate,
+  render: BadgeIconTemplate,
 };
 
 /**
@@ -126,7 +132,7 @@ export const Emphasis: Story = {
     size: 'medium',
     icon: 'plus',
   },
-  render: BadgeTemplate,
+  render: BadgeIconTemplate,
 };
 
 const getColorVariants = (color: ThemePalette) => {
@@ -135,7 +141,7 @@ const getColorVariants = (color: ThemePalette) => {
   badgeToneVariantsArray.map((variant) => {
     badgeVariants.push(`<span class="label-medium-small text-color-title">${variant}</span>`);
     badgeSizeVariantsArray.map((size) => {
-      badgeVariants.push(BadgeTemplate({ label: 'Click me', color, tone: variant, size, icon: 'plus' }));
+      badgeVariants.push(BadgeIconTemplate({ label: 'Click me', color, tone: variant, size, icon: 'plus' }));
     });
   });
   return `

@@ -22,6 +22,12 @@ O tooltip é exibido quando o usuário passa o mouse sobre o elemento que conté
 - Não é recomendado exibir mensagens muito extensas, pois o visual ficará comprometido.
 `,
       },
+      codePanel: true,
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return TooltipTemplate(storyContext.args as TooltipProps, '<button slot="trigger">Hover me</button>');
+        },
+      },
     },
   },
   argTypes: {

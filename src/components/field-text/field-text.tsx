@@ -1,4 +1,5 @@
 import { Component, Element, EventEmitter, Host, Prop, Event, Watch, h } from '@stencil/core';
+
 import { classNames, setComponentClass } from 'src/utils/utils';
 import { FieldTextProps } from './field-text.types';
 
@@ -12,8 +13,8 @@ export class FieldText {
   @Element() host: HTMLElement;
 
   // Base styles
-  @Prop() name: string;
-  @Prop() fullWidth?: boolean = false;
+  @Prop() name: FieldTextProps['inputName'];
+  @Prop() fullWidth?: FieldTextProps['fullWidth'] = false;
   @Prop() size?: FieldTextProps['size'] = 'medium';
   @Prop() placeholder?: FieldTextProps['placeholder'];
   @Prop({ mutable: true, reflect: true }) state?: FieldTextProps['state'] = 'default';

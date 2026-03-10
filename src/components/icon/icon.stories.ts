@@ -26,7 +26,12 @@ Permite a utilização de ícones com modificadores de direções, background e 
 - **Illustration**: Ilustrações coloridas e decorativas. Indicado para uso em EmptyState, Dialogs, etc.
         `,
       },
-      codePanel: false,
+      codePanel: true,
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return IconTemplate(storyContext.args as IconProps);
+        },
+      },
     },
   },
   argTypes: {

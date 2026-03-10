@@ -21,6 +21,12 @@ O componente **mnt-radio** é um elemento de formulário utilizado para selecion
 - Utilize apenas quando for necessário selecionar uma opção de um conjunto.
         `,
       },
+      codePanel: true,
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return RadioTemplate(storyContext.args as RadioBaseProps);
+        },
+      },
     },
   },
   argTypes: {

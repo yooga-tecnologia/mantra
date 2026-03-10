@@ -30,6 +30,12 @@ Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjA
 - Ícones: É possível adicionar ícones à esquerda e à direita do botão, utilizando propriedades \`icon-left\` e \`icon-right\`. Por padrão, não são exibidos.
         `,
       },
+      codePanel: true,
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return ButtonIconTemplate(storyContext.args as ButtonIconProps);
+        },
+      },
     },
   },
   argTypes: {

@@ -19,7 +19,12 @@ Componente para exibição de ilustrações em SVG.
 Permite a estilização apenas de tamanho.
         `,
       },
-      codePanel: false,
+      codePanel: true,
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return IllustrationTemplate(storyContext.args as IllustrationProps);
+        },
+      },
     },
   },
   argTypes: {

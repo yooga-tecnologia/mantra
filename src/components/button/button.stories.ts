@@ -31,6 +31,12 @@ Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjA
 - **Largura total:** É possível ocupar a largura total do elemento pai, utilizando a propriedade \`full-width\`. O botão ocupará 100% da largura disponível.
         `,
       },
+      codePanel: true,
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return ButtonTemplate(storyContext.args as ButtonProps);
+        },
+      },
     },
   },
   argTypes: {

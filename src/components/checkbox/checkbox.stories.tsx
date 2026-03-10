@@ -21,6 +21,12 @@ O componente **mnt-checkbox** é um elemento de formulário utilizado para selec
 
         `,
       },
+      codePanel: true,
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return CheckboxTemplate(storyContext.args as CheckboxBaseProps);
+        },
+      },
     },
   },
   argTypes: {
@@ -87,11 +93,10 @@ const CheckboxTemplate = (props: CheckboxBaseProps) => {
       name="${props.name}"
       label="${props.label}"
       variant="${props.variant}"
-      value="${props.value}"
+      value="${props.value || ''}"
       ${props.checked ? 'checked' : ''}
       ${props.disabled ? 'disabled' : ''}
-    ></mnt-checkbox>
-    `;
+    ></mnt-checkbox>`;
 };
 
 /**

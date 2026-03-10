@@ -9,12 +9,18 @@ export default {
   title: 'Forms/FieldText',
   tags: ['autodocs'],
   parameters: {
-    layout: 'centered',
+    layout: 'padded', // ATENÇÃO: full-width não funciona com layout "centered"
     docs: {
+      codePanel: true,
       description: {
         component: `
 O componente \`mnt-field-text\` é um elemento de formulário utilizado para inserir texto.
         `,
+      },
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return FieldTextTemplate(storyContext.args as FieldTextProps);
+        },
       },
     },
   },
@@ -77,6 +83,14 @@ O componente \`mnt-field-text\` é um elemento de formulário utilizado para ins
         defaultValue: { summary: 'default' },
       },
     },
+    inlineMessage: {
+      control: 'text',
+      description: 'Mensagem exibida abaixo do campo de texto. A aparência da mensagem é definida pela propriedade `state`.',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
+      },
+    },
     iconLeft: {
       control: 'select',
       options: ICON_OPTIONS,
@@ -93,6 +107,14 @@ O componente \`mnt-field-text\` é um elemento de formulário utilizado para ins
       table: {
         type: { summary: ICON_OPTIONS.join(' | ') },
         defaultValue: { summary: 'undefined' },
+      },
+    },
+    fullWidth: {
+      control: 'boolean',
+      description: 'Indica se o campo deve ocupar a largura total do container',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
   },
@@ -113,13 +135,15 @@ const FieldTextTemplate = (props: FieldTextProps) => {
       state="${props.state}"
       icon-left="${props.iconLeft || ''}"
       icon-right="${props.iconRight || ''}"
+      inline-message="${props.inlineMessage || ''}"
       ${props.required ? 'required' : ''}
       ${props.disabled ? 'disabled' : ''}
+      ${props.fullWidth ? 'full-width' : ''}
     ></mnt-field-text>`;
 };
 
 /**
- * Exemplo simples de uso do radio
+ * Exemplo simples de uso do campo de texto.
  */
 export const Default: Story = {
   args: {
@@ -130,33 +154,9 @@ export const Default: Story = {
     state: 'default',
     required: false,
     disabled: false,
+    fullWidth: false,
   },
-  parameters: {
-    docs: {
-      source: {
-        code: FieldTextTemplate({
-          inputName: 'field-text-1',
-          size: 'medium',
-          labelText: 'Label',
-          placeholder: 'Placeholder',
-          state: 'default',
-          required: false,
-          disabled: false,
-        }),
-      },
-    },
-  },
-  render: () => {
-    return FieldTextTemplate({
-      inputName: 'field-text-1',
-      size: 'medium',
-      labelText: 'Label',
-      placeholder: 'Placeholder',
-      state: 'default',
-      required: false,
-      disabled: false,
-    });
-  },
+  render: FieldTextTemplate,
 };
 
 const INFO_BUTTON_TEMPLATE = `
@@ -166,8 +166,9 @@ const INFO_BUTTON_TEMPLATE = `
   </mnt-tooltip>
 </mnt-field-text>
 `;
+
 /**
- * Exemplo de uso do field-text com botão de informação + tooltip
+ * Exemplo de uso do `field-text` + botão de informação + tooltip
  */
 export const InfoButton: Story = {
   args: {
@@ -194,8 +195,15 @@ export const InfoButton: Story = {
   },
 };
 
+const ACTION_BUTTON_TEMPLATE = `
+<mnt-field-text label-text="Label" placeholder="Placeholder" has-action-button>
+  <mnt-button size="small" slot="action-button">Ação 1</mnt-button>
+  <mnt-button style="margin-left: 8px;" size="small" variant="emphasis" slot="action-button">Ação 2</mnt-button>
+</mnt-field-text>
+`;
+
 /**
- * Exemplo de uso do field-text com botões de ação
+ * Exemplo de uso do `field-text` + botões de ação
  */
 export const ActionButton: Story = {
   args: {
@@ -210,12 +218,49 @@ export const ActionButton: Story = {
     iconRight: undefined,
     hasActionButton: true,
   },
+  parameters: {
+    docs: {
+      source: {
+        code: ACTION_BUTTON_TEMPLATE,
+      },
+    },
+  },
   render: () => {
-    return `
-      <mnt-field-text label-text="Label" placeholder="Placeholder" has-action-button>
-        <mnt-button size="small" slot="action-button">Ação 1</mnt-button>
-        <mnt-button style="margin-left: 8px;" size="small" variant="emphasis" slot="action-button">Ação 2</mnt-button>
-      </mnt-field-text>
-    `;
+    return ACTION_BUTTON_TEMPLATE;
+  },
+};
+
+const INLINE_MESSAGE_TEMPLATE = `
+<div class="sb-grid-3 sb-grid-row-title">
+  <mnt-field-text label-text="Label" placeholder="Placeholder" state="default" inline-message="Mensagem de informação"></mnt-field-text>
+  <mnt-field-text label-text="Label" placeholder="Placeholder" state="error" inline-message="Mensagem de erro"></mnt-field-text>
+  <mnt-field-text label-text="Label" placeholder="Placeholder" state="success" inline-message="Mensagem de sucesso"></mnt-field-text>
+</div>
+`;
+
+/**
+ * Exemplo de uso do `field-text` com mensagem inline.
+ *
+ * Utilize a propriedade `state` para definir o tipo de mensagem
+ */
+export const InlineMessage: Story = {
+  args: {
+    inputName: 'field-text-inline-message',
+    size: 'medium',
+    labelText: 'Label',
+    placeholder: 'Placeholder',
+    state: 'default',
+    required: false,
+    disabled: false,
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: INLINE_MESSAGE_TEMPLATE,
+      },
+    },
+  },
+  render: () => {
+    return INLINE_MESSAGE_TEMPLATE;
   },
 };

@@ -25,6 +25,7 @@ export default {
   parameters: {
     layout: 'centered',
     docs: {
+      codePanel: true,
       description: {
         component: `
 O componente **mnt-badge** é um elemento com variantes de cores, tonalidades e tamanhos.
@@ -37,6 +38,11 @@ Utilizado para exibir informações de status, prioridade, etc.
   - \`emphasis\`: Informações com maior destaque visual / prioridade.
 - **Ícones:** É possível adicionar ícones à esquerda, utilizando propriedades \`icon\`. Por padrão, **não será exibido**.
         `,
+      },
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return BadgeTemplate(storyContext.args as BadgeBaseProps);
+        },
       },
     },
   },

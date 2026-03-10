@@ -19,7 +19,12 @@ Componente para exibição de ícones SVG mais complexos do Design System.
 Permite a estilização apenas de tamanho e cor do ícone.
         `,
       },
-      codePanel: false,
+      codePanel: true,
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return IconLargeTemplate(storyContext.args as IconProps);
+        },
+      },
     },
   },
   argTypes: {
