@@ -235,7 +235,7 @@ export namespace Components {
         /**
           * @default false
          */
-        "fullWidth"?: boolean;
+        "fullWidth"?: FieldTextProps['fullWidth'];
         "hasActionButton"?: FieldTextProps['hasActionButton'];
         "hasInfoButton"?: FieldTextProps['hasInfoButton'];
         "iconLeft"?: FieldTextProps['iconLeft'];
@@ -243,7 +243,7 @@ export namespace Components {
         "inlineMessage"?: FieldTextProps['inlineMessage'];
         "labelText"?: FieldTextProps['labelText'];
         "mask"?: 'currency' | 'custom' | null;
-        "name": string;
+        "name": FieldTextProps['inputName'];
         "placeholder"?: FieldTextProps['placeholder'];
         /**
           * @default 'medium'
@@ -964,7 +964,7 @@ declare namespace LocalJSX {
         /**
           * @default false
          */
-        "fullWidth"?: boolean;
+        "fullWidth"?: FieldTextProps['fullWidth'];
         "hasActionButton"?: FieldTextProps['hasActionButton'];
         "hasInfoButton"?: FieldTextProps['hasInfoButton'];
         "iconLeft"?: FieldTextProps['iconLeft'];
@@ -972,7 +972,7 @@ declare namespace LocalJSX {
         "inlineMessage"?: FieldTextProps['inlineMessage'];
         "labelText"?: FieldTextProps['labelText'];
         "mask"?: 'currency' | 'custom' | null;
-        "name"?: string;
+        "name"?: FieldTextProps['inputName'];
         "onValueChange"?: (event: MntFieldTextCustomEvent<{ formattedValue: string; rawValue?: string }>) => void;
         "placeholder"?: FieldTextProps['placeholder'];
         /**
@@ -1229,8 +1229,8 @@ declare namespace LocalJSX {
         "value": string;
     }
     interface MntFieldTextAttributes {
-        "name": string;
-        "fullWidth": boolean;
+        "name": FieldTextProps['inputName'];
+        "fullWidth": FieldTextProps['fullWidth'];
         "size": FieldTextProps['size'];
         "placeholder": FieldTextProps['placeholder'];
         "state": FieldTextProps['state'];

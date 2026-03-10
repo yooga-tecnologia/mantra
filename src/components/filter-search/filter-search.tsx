@@ -1,6 +1,6 @@
 import { Component, Element, EventEmitter, Host, Prop, Event, Watch, h, State } from '@stencil/core';
 import { classNames, setComponentClass } from 'src/utils/utils';
-import { FieldTextProps } from './filter-search.types';
+import { FilterSearchProps } from './filter-search.types';
 
 @Component({
   tag: 'mnt-filter-search',
@@ -13,10 +13,10 @@ export class FilterSearch {
 
   // Base styles
   @Prop({ mutable: true }) name: string;
-  @Prop() fullWidth?: boolean = false;
-  @Prop() size?: FieldTextProps['size'] = 'medium';
-  @Prop() placeholder?: FieldTextProps['placeholder'];
-  @Prop({ mutable: true, reflect: true }) state?: FieldTextProps['state'] = 'default';
+  @Prop() fullWidth?: FilterSearchProps['fullWidth'] = false;
+  @Prop() size?: FilterSearchProps['size'] = 'medium';
+  @Prop() placeholder?: FilterSearchProps['placeholder'];
+  @Prop({ mutable: true, reflect: true }) state?: FilterSearchProps['state'] = 'default';
   private readonly iconSizeMap = { small: 16, medium: 20, large: 24 };
 
   // Input Props
@@ -28,12 +28,6 @@ export class FilterSearch {
       this.inputRef.value = newValue || '';
     }
   }
-
-  // Structure
-  @Prop() labelText?: FieldTextProps['labelText'];
-  @Prop() hasActionButton?: FieldTextProps['hasActionButton'];
-  @Prop() hasInfoButton?: FieldTextProps['hasInfoButton'];
-  @Prop({ mutable: true, reflect: true }) inlineMessage?: FieldTextProps['inlineMessage'];
 
   // Events
   @Event() valueChange: EventEmitter<{ value: string }>;

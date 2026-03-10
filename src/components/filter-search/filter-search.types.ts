@@ -1,14 +1,15 @@
-import { SizeVariants } from '@theme/theme.types';
+import { SizeVariants, sizeVariantsArray, StateVariants, stateVariantsArray } from '@theme/theme.types';
 import { ExtendedIconName } from '../icon/icon.types';
 
-export interface FieldTextProps {
+export const filterSearchSizeVariantsArray = sizeVariantsArray.filter((size) => size !== 'tiny');
+export const filterSearchStateVariantsArray = stateVariantsArray.filter((state) => state !== 'warning');
+export interface FilterSearchProps {
   // Required
   inputName: string;
 
   // Optional
-  // variant?: 'default' | 'filled';
   color?: 'critical' | 'success' | 'neutral';
-  state?: 'default' | 'error' | 'success';
+  state?: Exclude<StateVariants, 'warning'>;
   size?: SizeVariants;
   iconLeft?: ExtendedIconName;
   iconRight?: ExtendedIconName;
@@ -16,7 +17,5 @@ export interface FieldTextProps {
   disabled?: boolean;
   labelText?: string;
   placeholder?: string;
-  inlineMessage?: string;
-  hasActionButton?: boolean;
-  hasInfoButton?: boolean;
+  fullWidth?: boolean;
 }

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-10T17:23:35",
+  "timestamp": "2026-03-10T18:28:56",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -2217,10 +2217,10 @@
         },
         {
           "name": "size",
-          "type": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+          "type": "\"large\" | \"medium\" | \"small\"",
           "complexType": {
             "original": "FieldDateProps['size']",
-            "resolved": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+            "resolved": "\"large\" | \"medium\" | \"small\"",
             "references": {
               "FieldDateProps": {
                 "location": "import",
@@ -2252,10 +2252,6 @@
             },
             {
               "value": "small",
-              "type": "string"
-            },
-            {
-              "value": "tiny",
               "type": "string"
             }
           ],
@@ -2692,9 +2688,16 @@
           "name": "fullWidth",
           "type": "boolean",
           "complexType": {
-            "original": "boolean",
+            "original": "FieldTextProps['fullWidth']",
             "resolved": "boolean",
-            "references": {}
+            "references": {
+              "FieldTextProps": {
+                "location": "import",
+                "path": "./field-text.types",
+                "id": "src/components/field-text/field-text.types.ts::FieldTextProps",
+                "referenceLocation": "FieldTextProps"
+              }
+            }
           },
           "mutable": false,
           "attr": "full-width",
@@ -2929,9 +2932,16 @@
           "name": "name",
           "type": "string",
           "complexType": {
-            "original": "string",
+            "original": "FieldTextProps['inputName']",
             "resolved": "string",
-            "references": {}
+            "references": {
+              "FieldTextProps": {
+                "location": "import",
+                "path": "./field-text.types",
+                "id": "src/components/field-text/field-text.types.ts::FieldTextProps",
+                "referenceLocation": "FieldTextProps"
+              }
+            }
           },
           "mutable": false,
           "attr": "name",
@@ -5466,7 +5476,7 @@
       "path": "src/components/date-picker/date-picker.types.ts"
     },
     "src/components/field-date/field-date.types.ts::FieldDateProps": {
-      "declaration": "export interface FieldDateProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  size?: SizeVariants;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  datePickerConfig?: DatePickerBaseProps;\n  value?: string;\n}",
+      "declaration": "export interface FieldDateProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  size?: Exclude<SizeVariants, 'tiny'>;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  datePickerConfig?: DatePickerBaseProps;\n  value?: string;\n}",
       "docstring": "",
       "path": "src/components/field-date/field-date.types.ts"
     },
@@ -5481,7 +5491,7 @@
       "path": "src/shared/theme/theme.types.ts"
     },
     "src/components/field-text/field-text.types.ts::FieldTextProps": {
-      "declaration": "export interface FieldTextProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  // variant?: 'default' | 'filled';\n  color?: 'critical' | 'success' | 'neutral';\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: Exclude<SizeVariants, 'tiny'>;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  inlineMessage?: string;\n  hasActionButton?: boolean;\n  hasInfoButton?: boolean;\n}",
+      "declaration": "export interface FieldTextProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  // variant?: 'default' | 'filled';\n  color?: 'critical' | 'success' | 'neutral';\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: Exclude<SizeVariants, 'tiny'>;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  inlineMessage?: string;\n  hasActionButton?: boolean;\n  hasInfoButton?: boolean;\n  fullWidth?: boolean;\n}",
       "docstring": "",
       "path": "src/components/field-text/field-text.types.ts"
     },
