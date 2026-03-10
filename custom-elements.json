@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-10T18:28:56",
+  "timestamp": "2026-03-10T22:07:47",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -3147,9 +3147,16 @@
           "name": "fullWidth",
           "type": "boolean",
           "complexType": {
-            "original": "boolean",
+            "original": "FilterSearchProps['fullWidth']",
             "resolved": "boolean",
-            "references": {}
+            "references": {
+              "FilterSearchProps": {
+                "location": "import",
+                "path": "./filter-search.types",
+                "id": "src/components/filter-search/filter-search.types.ts::FilterSearchProps",
+                "referenceLocation": "FilterSearchProps"
+              }
+            }
           },
           "mutable": false,
           "attr": "full-width",
@@ -3165,126 +3172,6 @@
           "values": [
             {
               "type": "boolean"
-            }
-          ],
-          "optional": true,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "hasActionButton",
-          "type": "boolean",
-          "complexType": {
-            "original": "FieldTextProps['hasActionButton']",
-            "resolved": "boolean",
-            "references": {
-              "FieldTextProps": {
-                "location": "import",
-                "path": "./filter-search.types",
-                "id": "src/components/filter-search/filter-search.types.ts::FieldTextProps",
-                "referenceLocation": "FieldTextProps"
-              }
-            }
-          },
-          "mutable": false,
-          "attr": "has-action-button",
-          "reflectToAttr": false,
-          "docs": "",
-          "docsTags": [],
-          "values": [
-            {
-              "type": "boolean"
-            }
-          ],
-          "optional": true,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "hasInfoButton",
-          "type": "boolean",
-          "complexType": {
-            "original": "FieldTextProps['hasInfoButton']",
-            "resolved": "boolean",
-            "references": {
-              "FieldTextProps": {
-                "location": "import",
-                "path": "./filter-search.types",
-                "id": "src/components/filter-search/filter-search.types.ts::FieldTextProps",
-                "referenceLocation": "FieldTextProps"
-              }
-            }
-          },
-          "mutable": false,
-          "attr": "has-info-button",
-          "reflectToAttr": false,
-          "docs": "",
-          "docsTags": [],
-          "values": [
-            {
-              "type": "boolean"
-            }
-          ],
-          "optional": true,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "inlineMessage",
-          "type": "string",
-          "complexType": {
-            "original": "FieldTextProps['inlineMessage']",
-            "resolved": "string",
-            "references": {
-              "FieldTextProps": {
-                "location": "import",
-                "path": "./filter-search.types",
-                "id": "src/components/filter-search/filter-search.types.ts::FieldTextProps",
-                "referenceLocation": "FieldTextProps"
-              }
-            }
-          },
-          "mutable": true,
-          "attr": "inline-message",
-          "reflectToAttr": true,
-          "docs": "",
-          "docsTags": [],
-          "values": [
-            {
-              "type": "string"
-            }
-          ],
-          "optional": true,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "labelText",
-          "type": "string",
-          "complexType": {
-            "original": "FieldTextProps['labelText']",
-            "resolved": "string",
-            "references": {
-              "FieldTextProps": {
-                "location": "import",
-                "path": "./filter-search.types",
-                "id": "src/components/filter-search/filter-search.types.ts::FieldTextProps",
-                "referenceLocation": "FieldTextProps"
-              }
-            }
-          },
-          "mutable": false,
-          "attr": "label-text",
-          "reflectToAttr": false,
-          "docs": "",
-          "docsTags": [],
-          "values": [
-            {
-              "type": "string"
             }
           ],
           "optional": true,
@@ -3319,14 +3206,14 @@
           "name": "placeholder",
           "type": "string",
           "complexType": {
-            "original": "FieldTextProps['placeholder']",
+            "original": "FilterSearchProps['placeholder']",
             "resolved": "string",
             "references": {
-              "FieldTextProps": {
+              "FilterSearchProps": {
                 "location": "import",
                 "path": "./filter-search.types",
-                "id": "src/components/filter-search/filter-search.types.ts::FieldTextProps",
-                "referenceLocation": "FieldTextProps"
+                "id": "src/components/filter-search/filter-search.types.ts::FilterSearchProps",
+                "referenceLocation": "FilterSearchProps"
               }
             }
           },
@@ -3349,14 +3236,14 @@
           "name": "size",
           "type": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
           "complexType": {
-            "original": "FieldTextProps['size']",
+            "original": "FilterSearchProps['size']",
             "resolved": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
             "references": {
-              "FieldTextProps": {
+              "FilterSearchProps": {
                 "location": "import",
                 "path": "./filter-search.types",
-                "id": "src/components/filter-search/filter-search.types.ts::FieldTextProps",
-                "referenceLocation": "FieldTextProps"
+                "id": "src/components/filter-search/filter-search.types.ts::FilterSearchProps",
+                "referenceLocation": "FilterSearchProps"
               }
             }
           },
@@ -3398,14 +3285,14 @@
           "name": "state",
           "type": "\"default\" | \"error\" | \"success\"",
           "complexType": {
-            "original": "FieldTextProps['state']",
+            "original": "FilterSearchProps['state']",
             "resolved": "\"default\" | \"error\" | \"success\"",
             "references": {
-              "FieldTextProps": {
+              "FilterSearchProps": {
                 "location": "import",
                 "path": "./filter-search.types",
-                "id": "src/components/filter-search/filter-search.types.ts::FieldTextProps",
-                "referenceLocation": "FieldTextProps"
+                "id": "src/components/filter-search/filter-search.types.ts::FilterSearchProps",
+                "referenceLocation": "FilterSearchProps"
               }
             }
           },
@@ -4124,15 +4011,16 @@
       "props": [
         {
           "name": "color",
-          "type": "\"error\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+          "type": "LoadingStateProps",
           "complexType": {
             "original": "LoadingStateProps['color']",
-            "resolved": "\"error\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+            "resolved": "LoadingStateProps",
             "references": {
               "LoadingStateProps": {
-                "location": "local",
-                "path": "/Users/ana.co/dev/mantra/src/components/loading-state/loading-state.tsx",
-                "id": "src/components/loading-state/loading-state.tsx::LoadingStateProps"
+                "location": "import",
+                "path": "src/components",
+                "id": "src/components.d.ts::unknown",
+                "referenceLocation": "LoadingStateProps"
               }
             }
           },
@@ -4149,28 +4037,7 @@
           "default": "'neutral'",
           "values": [
             {
-              "value": "error",
-              "type": "string"
-            },
-            {
-              "value": "neutral",
-              "type": "string"
-            },
-            {
-              "value": "primary",
-              "type": "string"
-            },
-            {
-              "value": "secondary",
-              "type": "string"
-            },
-            {
-              "value": "success",
-              "type": "string"
-            },
-            {
-              "value": "warning",
-              "type": "string"
+              "type": "LoadingStateProps"
             }
           ],
           "optional": false,
@@ -4180,15 +4047,16 @@
         },
         {
           "name": "label",
-          "type": "string",
+          "type": "LoadingStateProps",
           "complexType": {
             "original": "LoadingStateProps['label']",
-            "resolved": "string",
+            "resolved": "LoadingStateProps",
             "references": {
               "LoadingStateProps": {
-                "location": "local",
-                "path": "/Users/ana.co/dev/mantra/src/components/loading-state/loading-state.tsx",
-                "id": "src/components/loading-state/loading-state.tsx::LoadingStateProps"
+                "location": "import",
+                "path": "src/components",
+                "id": "src/components.d.ts::unknown",
+                "referenceLocation": "LoadingStateProps"
               }
             }
           },
@@ -4199,7 +4067,7 @@
           "docsTags": [],
           "values": [
             {
-              "type": "string"
+              "type": "LoadingStateProps"
             }
           ],
           "optional": true,
@@ -5425,11 +5293,6 @@
     }
   ],
   "typeLibrary": {
-    "src/components/loading-state/loading-state.tsx::LoadingStateProps": {
-      "declaration": "export interface LoadingStateProps {\n  // size?: 'small' | 'medium' | 'large';\n  label?: string;\n  color?: 'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'error';\n}",
-      "docstring": "",
-      "path": "src/components/loading-state/loading-state.tsx"
-    },
     "src/components/badge/badge.types.ts::BadgeBaseProps": {
       "declaration": "export interface BadgeBaseProps {\n  label: string;\n  icon?: ExtendedIconName;\n  size?: SizeVariants;\n  color?: ThemePalette;\n  tone?: ColorTone;\n  disabled?: boolean;\n}",
       "docstring": "",
@@ -5495,8 +5358,8 @@
       "docstring": "",
       "path": "src/components/field-text/field-text.types.ts"
     },
-    "src/components/filter-search/filter-search.types.ts::FieldTextProps": {
-      "declaration": "export interface FieldTextProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  // variant?: 'default' | 'filled';\n  color?: 'critical' | 'success' | 'neutral';\n  state?: 'default' | 'error' | 'success';\n  size?: SizeVariants;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  inlineMessage?: string;\n  hasActionButton?: boolean;\n  hasInfoButton?: boolean;\n}",
+    "src/components/filter-search/filter-search.types.ts::FilterSearchProps": {
+      "declaration": "export interface FilterSearchProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  color?: 'critical' | 'success' | 'neutral';\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: SizeVariants;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  fullWidth?: boolean;\n}",
       "docstring": "",
       "path": "src/components/filter-search/filter-search.types.ts"
     },
@@ -5514,6 +5377,11 @@
       "declaration": "{\n  name: keyof typeof ILLUSTRATIONS;\n  width: number;\n  height: number;\n}",
       "docstring": "",
       "path": "src/components/illustration/illustration.types.ts"
+    },
+    "src/components.d.ts::unknown": {
+      "declaration": "any",
+      "docstring": "",
+      "path": "src/components.d.ts"
     },
     "src/components/radio/radio.types.tsx::RadioBaseProps": {
       "declaration": "export interface RadioBaseProps {\n  name?: string;\n  label?: string;\n  value?: string;\n  checked?: boolean;\n  disabled?: boolean;\n}",
