@@ -3,6 +3,8 @@ import { SizeVariants } from '@theme/theme.types';
 export const fieldNumberVariantsArray = ['default', 'plain', 'simple'] as const;
 export type FieldNumberVariant = (typeof fieldNumberVariantsArray)[number];
 
+export const fieldNumberSizeVariantsArray = ['small', 'medium', 'large'] as const;
+
 export interface FieldNumberProps {
   // Required
   inputName: string;

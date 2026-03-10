@@ -389,7 +389,7 @@ export class DatePicker {
               variant="plain"
               color="neutral"
               icon="caret-left"
-              size="tiny"
+              size="small"
               onClick={() => this.previousMonth()}
               disabled={this.disabled}
               aria-label="Previous month"
@@ -401,7 +401,7 @@ export class DatePicker {
               variant="plain"
               color="neutral"
               icon="caret-right"
-              size="tiny"
+              size="small"
               onClick={() => this.nextMonth()}
               disabled={this.disabled}
               aria-label="Previous month"

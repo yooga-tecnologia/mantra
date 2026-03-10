@@ -1,111 +1,196 @@
-import type { Meta, StoryFn } from '@storybook/html';
+import type { StoryFn, StoryObj } from '@storybook/html-vite';
+import { ThemePalette, themePalettesArray } from '@theme/theme.types';
 
-import { colorTonesArray, sizeVariantsArray, ThemePalette, themePalettesArray } from '../../shared/theme/theme.types';
+import { BadgeBaseProps, badgeColorVariantsArray, badgeSizeVariantsArray, badgeToneVariantsArray } from './badge.types';
 import { ICON_OPTIONS } from '../icon/icon.utils';
 import { HTMLString } from 'src/utils/utils';
 
-import { BadgeBaseProps } from './badge.types';
-import { Badge } from './badge';
+type Story = StoryObj;
 
-const SB_TABLE_ICON = {
-  type: {
-    summary: ICON_OPTIONS.join(' | '),
+const disableArgs = {
+  controls: {
+    disable: true,
+  },
+  actions: {
+    disable: true,
+  },
+  interactions: {
+    disable: true,
   },
 };
 
-const meta: Meta<BadgeBaseProps> = {
-  title: 'Components/Badge/Default',
-  component: 'mnt-badge',
+export default {
+  title: 'Components/Badge/Badge',
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+    docs: {
+      codePanel: true,
+      description: {
+        component: `
+O componente **mnt-badge** é um elemento com variantes de cores, tonalidades e tamanhos.
+Utilizado para exibir informações de status, prioridade, etc.
+
+### Recomendações:
+- **Variantes de tonalidades:**
+  - \`default\`: Informações comum, sem destaque visual.
+  - \`highlight\`: Informações com destaque visual.
+  - \`emphasis\`: Informações com maior destaque visual / prioridade.
+- **Ícones:** É possível adicionar ícones à esquerda, utilizando propriedades \`icon\`. Por padrão, **não será exibido**.
+        `,
+      },
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return BadgeTemplate(storyContext.args as BadgeBaseProps);
+        },
+      },
+    },
+  },
   argTypes: {
     label: {
       control: 'text',
-      description: 'Texto exibido dentro da Badge',
-    },
-    size: {
-      control: 'select',
-      options: sizeVariantsArray,
+      description: 'O texto exibido no badge',
       table: {
-        defaultValue: { summary: 'medium' },
-        type: { summary: sizeVariantsArray.join(' | ') },
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
       },
     },
     color: {
       control: 'select',
       options: themePalettesArray,
+      description: 'Variante de cor',
       table: {
-        defaultValue: { summary: 'primary' },
-        type: { summary: themePalettesArray.join(' | ') },
+        type: { summary: badgeColorVariantsArray.join(' | ') },
+        defaultValue: { summary: 'neutral' },
       },
     },
     tone: {
       control: 'select',
-      options: colorTonesArray,
-      description: 'Variação de tonalidade, baseado na cor selecionada',
+      options: badgeToneVariantsArray,
+      description: 'Variante de tonalidade',
       table: {
+        type: { summary: badgeToneVariantsArray.join(' | ') },
         defaultValue: { summary: 'default' },
-        type: { summary: colorTonesArray.join(' | ') },
+      },
+    },
+    size: {
+      control: 'select',
+      options: badgeSizeVariantsArray,
+      description: 'Tamanho do badge',
+      table: {
+        type: { summary: badgeSizeVariantsArray.join(' | ') },
+        defaultValue: { summary: 'medium' },
       },
     },
     icon: {
       control: 'select',
       options: ICON_OPTIONS,
-      table: SB_TABLE_ICON,
+      description: 'Ícone exibido no badge. Veja todas as opções de ícones no [Icon Component](../icon).',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
+      },
     },
+  },
+  render: (args) => {
+    return `
+      <mnt-badge ${args}></mnt-badge>
+    `;
   },
 };
 
-export default meta;
+const BadgeTemplate = (props: BadgeBaseProps) => {
+  return `
+    <mnt-badge
+      label="${props.label}"
+      color="${props.color}"
+      tone="${props.tone}"
+      size="${props.size}"
+      icon="${props.icon || ''}"
+    ></mnt-badge>
+    `;
+};
 
-const DefaultTemplate = (args: BadgeBaseProps): HTMLString => `
-  <mnt-badge
-    icon=${args.icon}
-    color=${args.color}
-    size=${args.size}
-    label="${args.label}"
-    tone=${args.tone}
-  ></mnt-badge>
-`;
+/**
+ * Variante de tonalidade "default"
+ */
+export const Default: Story = {
+  args: {
+    label: 'Label',
+    color: 'primary',
+    tone: 'default',
+    size: 'medium',
+    icon: 'plus',
+  },
+  render: BadgeTemplate,
+};
 
-export const Example = DefaultTemplate.bind({});
-Example.args = {
-  color: 'primary',
-  size: 'tiny',
-  icon: 'plus',
-  tone: 'default',
-  label: 'Badge Label',
-} as BadgeBaseProps;
+/**
+ * Variante de tonalidade "highlight"
+ */
+export const Highlight: Story = {
+  args: {
+    label: 'Label',
+    color: 'primary',
+    tone: 'highlight',
+    size: 'medium',
+    icon: 'plus',
+  },
+  render: BadgeTemplate,
+};
 
-const getColorVariants = (color: ThemePalette): HTMLString => {
-  const badgeVariants: HTMLString[] = [];
+/**
+ * Variante de tonalidade "emphasis"
+ */
+export const Emphasis: Story = {
+  args: {
+    label: 'Label',
+    color: 'primary',
+    tone: 'emphasis',
+    size: 'medium',
+    icon: 'plus',
+  },
+  render: BadgeTemplate,
+};
 
-  colorTonesArray.map((tone) => {
-    badgeVariants.push(`<span>${tone}</span>`);
-    sizeVariantsArray.map((size) => {
-      const label = `${tone} ${size}`;
-      badgeVariants.push(DefaultTemplate({ color, tone, size, icon: 'clock', label }));
+const getColorVariants = (color: ThemePalette) => {
+  const badgeVariants: string[] = [];
+
+  badgeToneVariantsArray.map((variant) => {
+    badgeVariants.push(`<span class="label-medium-small text-color-title">${variant}</span>`);
+    badgeSizeVariantsArray.map((size) => {
+      badgeVariants.push(BadgeTemplate({ label: 'Click me', color, tone: variant, size, icon: 'plus' }));
     });
   });
   return `
 <div class="sb-section-box">
-  <h4>${color}</h4>
+  <h4 class="title-medium text-color-title mb-8">color: ${color}</h4>
   <div class="sb-grid-5 sb-grid-row-divider sb-grid-row-title">
+    <span class="label-medium-medium text-color-title">Tone variant</span>
+    <span class="label-medium-medium text-color-title">Size: tiny</span>
+    <span class="label-medium-medium text-color-title">Size: small</span>
+    <span class="label-medium-medium text-color-title">Size: medium</span>
+    <span class="label-medium-medium text-color-title">Size: large</span>
     ${badgeVariants.join('')}
   </div>
-</div>`;
-};
-
-export const AllVariants: StoryFn<typeof Badge> = () => {
-  const badgeVariants: HTMLString[] = [];
-  themePalettesArray.forEach((color) => {
-    badgeVariants.push(getColorVariants(color));
-  });
-  return `
-<div>
-  ${badgeVariants.join('')}
 </div>
 `;
 };
 
-AllVariants.parameters = {
-  controls: { disable: true },
+/**
+ * Todas as variantes
+ */
+export const AllVariants: StoryFn = () => {
+  const buttonVariants: HTMLString[] = [];
+  themePalettesArray.forEach((color) => {
+    buttonVariants.push(getColorVariants(color));
+  });
+
+  return `
+<div>
+${buttonVariants.join('')}
+</div>
+`;
 };
+
+AllVariants.parameters = disableArgs;

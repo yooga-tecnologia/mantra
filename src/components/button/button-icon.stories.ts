@@ -1,99 +1,179 @@
-import type { Meta, StoryFn } from '@storybook/html';
+import type { StoryFn, StoryObj } from '@storybook/html-vite';
 
-import { sizeVariantsArray, ThemePalette, themePalettesArray } from '../../shared/theme/theme.types';
+import { buttonColorVariantsArray, ButtonIconProps, buttonSizeVariantsArray, buttonStyleArray } from './button.types';
 import { ICON_OPTIONS } from '../icon/icon.utils';
+import { ThemePalette, themePalettesArray } from '@theme/theme.types';
 import { HTMLString } from 'src/utils/utils';
 
-import { type ButtonIconProps, buttonStyleArray } from './button.types';
-import { ButtonIcon } from './button-icon';
+type Story = StoryObj;
 
-const SB_TABLE_ICON = {
-  type: {
-    summary: ICON_OPTIONS.join(' | '),
-  },
-};
-
-const meta: Meta<ButtonIconProps> = {
+export default {
   title: 'Components/Button/ButtonIcon',
-  component: 'mnt-button-icon',
-  argTypes: {
-    size: {
-      control: 'select',
-      options: sizeVariantsArray,
-      table: {
-        defaultValue: { summary: 'medium' },
-        type: { summary: sizeVariantsArray.join(' | ') },
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        component: `
+O componente **mnt-button-icon** é um botão semelhante ao **mnt-button**, mas com apenas um ícone.
+Utilizado para disparar uma ação ou evento.
+
+Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjASveGQoJS/-1-Core-Components?node-id=407-766&t=dfwzJtcmToPhfZLN-4)
+
+### Recomendações:
+- Variantes de estilo:
+  - \`emphasis\`: Ações principais, onde botão é o foco da ação e precisa ser destacado.
+  - \`regular\` e \`stroke\`: Ações secundárias, onde botão precisa ser destacado mas não é o foco da ação.
+  - \`plain\`: Ações secundárias, onde botão não precisa ser destacado.
+  - \`link\`: Ações de navegação, onde botão direciona para outras páginas ou seções da aplicação.
+  - \`filter\`: Ações de filtros -> Tem uma leve diferença visual e limitação de uso em relação aos demais estilos.
+- Ícones: É possível adicionar ícones à esquerda e à direita do botão, utilizando propriedades \`icon-left\` e \`icon-right\`. Por padrão, não são exibidos.
+        `,
+      },
+      codePanel: true,
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return ButtonIconTemplate(storyContext.args as ButtonIconProps);
+        },
       },
     },
-    disabled: {
-      control: 'boolean',
-      table: { defaultValue: { summary: 'false' } },
-    },
+  },
+  argTypes: {
     color: {
       control: 'select',
-      options: themePalettesArray,
+      options: buttonColorVariantsArray,
+      description: 'Variante de cor do botão',
       table: {
-        defaultValue: { summary: 'primary' },
-        type: { summary: themePalettesArray.join(' | ') },
+        type: { summary: buttonColorVariantsArray.join(' | ') },
+        defaultValue: { summary: 'neutral' },
       },
     },
     variant: {
       control: 'select',
       options: buttonStyleArray,
-      description: 'Variantes de estilo',
+      description: 'Variante de estilo do botão',
       table: {
-        defaultValue: { summary: 'emphasis' },
         type: { summary: buttonStyleArray.join(' | ') },
+        defaultValue: { summary: 'regular' },
+      },
+    },
+    size: {
+      control: 'select',
+      options: buttonSizeVariantsArray,
+      description: 'Tamanho do botão',
+      table: {
+        type: { summary: buttonSizeVariantsArray.join(' | ') },
+        defaultValue: { summary: 'medium' },
       },
     },
     icon: {
       control: 'select',
       options: ICON_OPTIONS,
-      table: SB_TABLE_ICON,
+      description: 'Ícone exibido no botão. Veja todas as opções de ícones no [Icon Component](../icon).',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
+      },
     },
+  },
+  render: (args) => {
+    return `
+      <mnt-button-icon ${args}></mnt-button-icon>
+    `;
   },
 };
 
-export default meta;
+const ButtonIconTemplate = (props: ButtonIconProps) => {
+  return `
+    <mnt-button-icon
+      color="${props.color}"
+      variant="${props.variant}"
+      size="${props.size}"
+      icon="${props.icon || 'caret-up'}"
+    ></mnt-button-icon>
+  `;
+};
 
-const DefaultTemplate = (args: ButtonIconProps): HTMLString => `
-  <mnt-button-icon
-    icon=${args.icon}
-    variant=${args.variant}
-    color=${args.color}
-    size=${args.size}
-  ></mnt-button-icon>
-`;
+export const Regular: Story = {
+  args: {
+    color: 'primary',
+    variant: 'regular',
+    size: 'medium',
+  },
+  render: ButtonIconTemplate,
+};
 
-const getColorVariants = (color: ThemePalette): HTMLString => {
-  const buttonVariants: HTMLString[] = [];
+export const Emphasis: Story = {
+  args: {
+    color: 'primary',
+    variant: 'emphasis',
+    size: 'medium',
+  },
+  render: ButtonIconTemplate,
+};
 
-  buttonStyleArray.map((variant) => {
-    buttonVariants.push(`<span>${variant}</span>`);
-    sizeVariantsArray.map((size) => {
-      buttonVariants.push(DefaultTemplate({ color, variant, size, icon: 'plus' }));
+export const Stroke: Story = {
+  args: {
+    color: 'primary',
+    variant: 'stroke',
+    size: 'medium',
+  },
+  render: ButtonIconTemplate,
+};
+
+export const Plain: Story = {
+  args: {
+    color: 'primary',
+    variant: 'plain',
+    size: 'medium',
+  },
+  render: ButtonIconTemplate,
+};
+
+export const Link: Story = {
+  args: {
+    color: 'primary',
+    variant: 'link',
+    size: 'medium',
+  },
+  render: ButtonIconTemplate,
+};
+
+export const Filter: Story = {
+  args: {
+    variant: 'filter',
+    color: 'primary',
+    size: 'medium',
+    state: 'default',
+  },
+  render: ButtonIconTemplate,
+};
+
+const getColorVariants = (color: ThemePalette) => {
+  const buttonVariants: string[] = [];
+
+  buttonStyleArray
+    .filter((variant) => variant !== 'filter')
+    .map((variant) => {
+      buttonVariants.push(`<span>${variant}</span>`);
+      buttonSizeVariantsArray.map((size) => {
+        buttonVariants.push(ButtonIconTemplate({ color, variant, size, icon: 'plus' }));
+      });
     });
-  });
   return `
 <div class="sb-section-box">
   <h4>${color}</h4>
-  <div class="sb-grid-5 sb-grid-row-divider sb-grid-row-title">
+  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
     ${buttonVariants.join('')}
   </div>
 </div>
 `;
 };
 
-export const Example = DefaultTemplate.bind({});
-Example.args = {
-  variant: 'regular',
-  color: 'primary',
-  size: 'tiny',
-  icon: 'plus',
-  disabled: false,
-} as ButtonIconProps;
-
-export const AllVariants: StoryFn<typeof ButtonIcon> = () => {
+/**
+ * Todas as variantes e estados
+ */
+export const AllVariants: StoryFn = () => {
   const buttonVariants: HTMLString[] = [];
   themePalettesArray.forEach((color) => {
     buttonVariants.push(getColorVariants(color));
@@ -101,7 +181,7 @@ export const AllVariants: StoryFn<typeof ButtonIcon> = () => {
 
   return `
 <div>
-  ${buttonVariants.join('')}
+${buttonVariants.join('')}
 </div>
 `;
 };

@@ -7,16 +7,16 @@
 
 ## Properties
 
-| Property           | Attribute     | Description | Type                                       | Default     |
-| ------------------ | ------------- | ----------- | ------------------------------------------ | ----------- |
-| `datePickerConfig` | --            |             | `DatePickerBaseProps`                      | `undefined` |
-| `disabled`         | `disabled`    |             | `boolean`                                  | `false`     |
-| `labelText`        | `label-text`  |             | `string`                                   | `undefined` |
-| `name`             | `name`        |             | `string`                                   | `undefined` |
-| `placeholder`      | `placeholder` |             | `string`                                   | `undefined` |
-| `required`         | `required`    |             | `boolean`                                  | `false`     |
-| `size`             | `size`        |             | `"large" \| "medium" \| "small" \| "tiny"` | `'medium'`  |
-| `value`            | `value`       |             | `string`                                   | `undefined` |
+| Property           | Attribute     | Description | Type                             | Default     |
+| ------------------ | ------------- | ----------- | -------------------------------- | ----------- |
+| `datePickerConfig` | --            |             | `DatePickerBaseProps`            | `undefined` |
+| `disabled`         | `disabled`    |             | `boolean`                        | `false`     |
+| `labelText`        | `label-text`  |             | `string`                         | `undefined` |
+| `name`             | `name`        |             | `string`                         | `undefined` |
+| `placeholder`      | `placeholder` |             | `string`                         | `undefined` |
+| `required`         | `required`    |             | `boolean`                        | `false`     |
+| `size`             | `size`        |             | `"large" \| "medium" \| "small"` | `'medium'`  |
+| `value`            | `value`       |             | `string`                         | `undefined` |
 
 
 ## Events

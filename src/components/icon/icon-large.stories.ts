@@ -1,67 +1,99 @@
-import type { Meta, StoryFn } from '@storybook/html';
+import type { StoryFn, StoryObj } from '@storybook/html-vite';
 
-import { IconLargeProps, iconLargeSizes, type IconProps } from './icon.types';
 import { ICON_LARGE_OPTIONS } from './icon.utils';
+import { iconLargeSizes, IconProps } from './icon.types';
+import { HTMLString } from 'src/utils/utils';
 
-type HTMLString = string;
+type Story = StoryObj;
 
-const meta: Meta<IconProps> = {
-  title: 'Assets/Icon/IconLarge',
-  component: 'mnt-icon-large',
-  argTypes: {
-    icon: { control: 'select', options: ICON_LARGE_OPTIONS },
-    size: { control: 'select', options: Object.keys(iconLargeSizes) },
-    color: { control: 'color' },
-  },
+export default {
+  title: 'Assets/IconLarge',
+  tags: ['autodocs'],
   parameters: {
+    layout: 'centered',
     docs: {
       description: {
-        component:
-          '**Icon Large** é um componente especializado para ícones de maior complexidade visual, distinto do componente `Icon` padrão.\n\n' +
-          '### 🎯 **Características principais:**\n' +
-          '- **Ilustrações mais complexas:** Contêm mais detalhes visuais que os ícones convencionais\n' +
-          '- **Monocromáticos:** Utilizam apenas uma cor, diferentemente do componente `Illustration` que é colorido\n' +
-          '- **Tamanhos maiores recomendados:** Devido à complexidade, não são indicados para tamanhos muito pequenos\n' +
-          '- **Uso específico:** Ideais para destaques, seções principais ou quando precisar de mais impacto visual\n\n' +
-          '### ⚠️ **Diferenças do componente Icon:**\n' +
-          '- `Icon`: Símbolos simples, funcionam bem em qualquer tamanho\n' +
-          '- `IconLarge`: Ilustrações detalhadas, melhores em tamanhos médios/grandes\n\n' +
-          '### 📏 **Recomendações de uso:**\n' +
-          '- **Tamanho mínimo recomendado:** `medium` (24px)\n' +
-          '- **Ideal para:** Headers, cards principais, estados vazios, onboarding\n' +
-          '- **Evitar em:** Botões pequenos, listas densas, elementos inline\n\n' +
-          '**Atenção:** Os nomes dos ícones devem corresponder exatamente às nomenclaturas do protótipo Figma.\n\n' +
-          'Para visualizar todos os ícones disponíveis, veja a [listagem completa](#icon-large-variants).\n\n' +
-          '**Figma:** [Global Assets | IconLarge](https://www.figma.com/design/0Yxvp7aJaKkjyXduoQlPpM/-4-Global-Assets?node-id=1264-68&t=nRkYtrOHJjfZr11g-4)\n\n',
+        component: `
+Componente para exibição de ícones SVG mais complexos do Design System.
+
+Permite a estilização apenas de tamanho e cor do ícone.
+        `,
+      },
+      codePanel: true,
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return IconLargeTemplate(storyContext.args as IconProps);
+        },
       },
     },
   },
-};
-
-export default meta;
-
-const DefaultTemplate = (args: IconLargeProps) => `
-<mnt-icon-large
-  icon="${args.icon}"
-  size="${args.size}"
-  color="${args.color}"
-</mnt-icon-large>
-`;
-
-export const Default: StoryFn = DefaultTemplate.bind({});
-Default.args = {
-  icon: 'placeholder',
-  size: 'medium',
-  color: 'black',
-} as IconLargeProps;
-Default.storyName = 'Playground';
-Default.parameters = {
-  id: 'icon-large-playground',
-  docs: {
-    description: {
-      story: 'Playground do componente `<mnt-icon-large>`.',
+  argTypes: {
+    icon: {
+      control: 'select',
+      options: ICON_LARGE_OPTIONS,
+      description: 'Nome do ícone a ser exibido. Veja todas as opções de ícones na seção "All variants"',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
+      },
+    },
+    size: {
+      control: 'select',
+      options: Object.keys(iconLargeSizes),
+      description: 'Tamanho do ícone.',
+      table: {
+        type: { summary: Object.keys(iconLargeSizes).join(' | ') },
+        defaultValue: { summary: 'medium' },
+      },
+    },
+    color: {
+      control: {
+        type: 'color',
+        defaultValue: '#000000',
+      },
+      description: 'Cor do ícone. Utilize valor hexadecimal.',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '#000000' },
+      },
     },
   },
+  render: (args) => {
+    return `
+      <mnt-icon-large ${args}></mnt-icon-large>
+    `;
+  },
+};
+
+const disableArgs = {
+  controls: {
+    disable: true,
+  },
+  actions: {
+    disable: true,
+  },
+  interactions: {
+    disable: true,
+  },
+};
+
+const IconLargeTemplate = (props: IconProps) => {
+  return `
+    <mnt-icon-large
+      icon="${props.icon}"
+      size="${props.size}"
+      color="${props.color}"
+    ></mnt-icon-large>
+  `;
+};
+
+export const Simple: Story = {
+  args: {
+    icon: 'placeholder',
+    size: 'medium',
+    color: '#000',
+  },
+  render: IconLargeTemplate,
 };
 
 const renderIconBox = (iconName: string): HTMLString => {
@@ -74,26 +106,28 @@ const renderIconBox = (iconName: string): HTMLString => {
 };
 
 const renderAllIcons = (): HTMLString => {
-  let html = '';
-  ICON_LARGE_OPTIONS.forEach((icon) => {
-    html += `${renderIconBox(icon)}`;
+  let html = ``;
+
+  ICON_LARGE_OPTIONS.forEach((element) => {
+    html += `
+      ${renderIconBox(element)}
+    `;
   });
 
+  return html;
+};
+
+/**
+ * Todas as variantes disponíveis
+ */
+export const AllVariants: StoryFn = () => {
   return `
+  <div class="sb-section">
     <div class="sb-grid-6 sb-grid-stretch">
-      ${html}
+      ${renderAllIcons()}
     </div>
+  </div>
   `;
 };
 
-export const IconLargeVariants: StoryFn = () => renderAllIcons();
-IconLargeVariants.storyName = 'Icon Large Variants';
-IconLargeVariants.parameters = {
-  id: 'icon-large-variants',
-  docs: {
-    description: {
-      story: 'Listagem completa de todos os ícones "grandes" disponíveis no sistema.',
-    },
-  },
-  controls: { disable: true },
-};
+AllVariants.parameters = disableArgs;

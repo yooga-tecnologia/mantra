@@ -67,7 +67,7 @@ describe('<mnt-filter-search>', () => {
 
     it('SHOULD render all sizes correctly', async () => {
       const sizes = ['small', 'medium', 'large'];
-      
+
       for (const size of sizes) {
         // SETUP
         const page = await createFilterSearchComponent(`<mnt-filter-search size="${size}"></mnt-filter-search>`);

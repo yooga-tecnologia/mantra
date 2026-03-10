@@ -1,218 +1,266 @@
-import type { Meta, StoryFn } from '@storybook/html';
+import type { StoryFn, StoryObj } from '@storybook/html-vite';
 
-import { sizeVariantsArray, ThemePalette, themePalettesArray } from '../../shared/theme/theme.types';
+import { buttonColorVariantsArray, ButtonProps, buttonSizeVariantsArray, buttonStyleArray } from './button.types';
 import { ICON_OPTIONS } from '../icon/icon.utils';
-
-import { buttonStyleArray, type ButtonProps } from './button.types';
-import { Button } from './button';
+import { ThemePalette, themePalettesArray } from '@theme/theme.types';
 import { HTMLString } from 'src/utils/utils';
 
-const SB_TABLE_ICON = {
-  type: {
-    summary: ICON_OPTIONS.join(' | '),
-  },
-};
+type Story = StoryObj;
 
-const meta: Meta<ButtonProps> = {
-  title: 'Components/Button/Default',
-  component: 'mnt-button',
+export default {
+  title: 'Components/Button/Button',
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded', // ATENÇÃO: full-width não funciona com layout "centered"
+    docs: {
+      description: {
+        component: `
+O componente **mnt-button** é um botão com várias variantes e tamanhos.
+Utilizado para disparar uma ação ou evento.
+
+Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjASveGQoJS/-1-Core-Components?node-id=407-766&t=dfwzJtcmToPhfZLN-4)
+
+### Recomendações:
+- **Variantes de estilo:**
+  - \`emphasis\`: Ações principais, onde botão é o foco da ação e precisa ser destacado.
+  - \`regular\` e \`stroke\`: Ações secundárias, onde botão precisa ser destacado mas não é o foco da ação.
+  - \`plain\`: Ações secundárias, onde botão não precisa ser destacado.
+  - \`link\`: Ações de navegação, onde botão direciona para outras páginas ou seções da aplicação.
+  - \`filter\`: Ações de filtros -> Tem uma leve diferença visual e limitação de uso em relação aos demais estilos.
+- **Ícones:** É possível adicionar ícones à esquerda e à direita do botão, utilizando propriedades \`icon-left\` e \`icon-right\`. Por padrão, não são exibidos.
+- **Largura total:** É possível ocupar a largura total do elemento pai, utilizando a propriedade \`full-width\`. O botão ocupará 100% da largura disponível.
+        `,
+      },
+      codePanel: true,
+      source: {
+        transform: (_: string, storyContext: StoryObj) => {
+          return ButtonTemplate(storyContext.args as ButtonProps);
+        },
+      },
+    },
+  },
   argTypes: {
-    label: { control: 'text' },
-    size: {
-      control: 'select',
-      options: sizeVariantsArray,
-      table: { defaultValue: { summary: 'medium' } },
-    },
-    disabled: {
-      control: 'boolean',
-      table: { defaultValue: { summary: 'false' } },
-    },
-    fullWidth: {
-      control: 'boolean',
-      table: { defaultValue: { summary: 'false' } },
+    label: {
+      control: 'text',
+      description: 'O texto exibido no botão',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
+      },
     },
     color: {
       control: 'select',
-      options: themePalettesArray,
+      options: buttonColorVariantsArray,
+      description: 'Variante de cor do botão',
       table: {
-        defaultValue: { summary: 'primary' },
-        type: { summary: themePalettesArray.join(' | ') },
+        type: { summary: buttonColorVariantsArray.join(' | ') },
+        defaultValue: { summary: 'neutral' },
       },
     },
     variant: {
       control: 'select',
       options: buttonStyleArray,
-      description: 'Variantes de estilo',
+      description: 'Variante de estilo do botão',
       table: {
-        defaultValue: { summary: 'emphasis' },
         type: { summary: buttonStyleArray.join(' | ') },
+        defaultValue: { summary: 'regular' },
+      },
+    },
+    size: {
+      control: 'select',
+      options: buttonSizeVariantsArray,
+      description: 'Tamanho do botão',
+      table: {
+        type: { summary: buttonSizeVariantsArray.join(' | ') },
+        defaultValue: { summary: 'medium' },
+      },
+    },
+    state: {
+      control: 'select',
+      options: ['default', 'pressed'],
+      description: 'Estado visual do botão. Utilizado para indicar quando um botão está selecionado / pressionado. Útil para indicar um estado de seleção de filtros.',
+      table: {
+        type: { summary: 'default | pressed' },
+        defaultValue: { summary: 'default' },
       },
     },
     iconLeft: {
       control: 'select',
       options: ICON_OPTIONS,
-      table: SB_TABLE_ICON,
+      description: 'Ícone exibido à esquerda do botão. Veja todas as opções de ícones no [Icon Component](../icon).',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
+      },
     },
     iconRight: {
       control: 'select',
       options: ICON_OPTIONS,
-      table: SB_TABLE_ICON,
+      description: 'Ícone exibido à direita do botão. Veja todas as opções de ícones no [Icon Component](../icon).',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
+      },
     },
+    fullWidth: {
+      control: 'boolean',
+      description: 'Se o botão deve ocupar a largura total da tela',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+  },
+  render: (args) => {
+    return `
+      <mnt-button ${args}></mnt-button>
+    `;
   },
 };
 
-export default meta;
+const ButtonTemplate = (props: ButtonProps) => {
+  return `
+    <mnt-button
+      label="${props.label}"
+      color="${props.color}"
+      variant="${props.variant}"
+      size="${props.size}"
+      state="${props.state || 'default'}"
+      icon-left="${props.iconLeft || ''}"
+      icon-right="${props.iconRight || ''}"
+      full-width="${props.fullWidth}"
+    ></mnt-button>
+  `;
+};
 
-const DefaultTemplate = (args: ButtonProps): HTMLString => `
-  <mnt-button
-    label="${args.label ?? ''}"
-    icon-left="${args.iconLeft ?? ''}"
-    icon-right="${args.iconRight ?? ''}"
-    full-width="${args.fullWidth}"
-    disabled="${args.disabled}"
-    variant=${args.variant}
-    color=${args.color}
-    size=${args.size}
-  ></mnt-button>
-`;
+export const Regular: Story = {
+  args: {
+    label: 'Click me',
+    color: 'primary',
+    variant: 'regular',
+    size: 'medium',
+    fullWidth: false,
+  },
+  render: ButtonTemplate,
+};
 
-const getColorVariants = (color: ThemePalette): HTMLString => {
-  const buttonVariants: HTMLString[] = [];
+export const Emphasis: Story = {
+  args: {
+    label: 'Click me',
+    color: 'primary',
+    variant: 'emphasis',
+    size: 'medium',
+    fullWidth: false,
+  },
+  render: ButtonTemplate,
+};
 
-  buttonStyleArray.map((variant) => {
-    if (variant === 'filter') return;
-    buttonVariants.push(`<span>${variant}</span>`);
-    sizeVariantsArray.map((size) => {
-      buttonVariants.push(
-        DefaultTemplate({
-          color: color,
-          variant: variant,
-          size: size,
-          iconLeft: 'plus',
-          iconRight: 'plus',
-          label: 'Label',
-          disabled: false,
-          fullWidth: false,
-        }),
-      );
+export const Stroke: Story = {
+  args: {
+    label: 'Click me',
+    color: 'primary',
+    variant: 'stroke',
+    size: 'medium',
+    fullWidth: false,
+  },
+  render: ButtonTemplate,
+};
+
+export const Plain: Story = {
+  args: {
+    label: 'Click me',
+    color: 'primary',
+    variant: 'plain',
+    size: 'medium',
+    fullWidth: false,
+  },
+  render: ButtonTemplate,
+};
+
+export const Link: Story = {
+  args: {
+    label: 'Click me',
+    color: 'primary',
+    variant: 'link',
+    size: 'medium',
+    fullWidth: false,
+  },
+  render: ButtonTemplate,
+};
+
+export const Filter: Story = {
+  args: {
+    label: 'Click me',
+    variant: 'filter',
+    color: 'primary',
+    size: 'medium',
+    state: 'default',
+    fullWidth: false,
+  },
+  render: ButtonTemplate,
+};
+
+const getColorVariants = (color: ThemePalette) => {
+  const buttonVariants: string[] = [];
+
+  buttonStyleArray
+    .filter((variant) => variant !== 'filter')
+    .map((variant) => {
+      buttonVariants.push(`<span>${variant}</span>`);
+      buttonSizeVariantsArray.map((size) => {
+        buttonVariants.push(ButtonTemplate({ label: 'Click me', color, variant, size, iconLeft: 'plus', iconRight: 'plus' }));
+      });
     });
-  });
   return `
 <div class="sb-section-box">
   <h4>${color}</h4>
-  <div class="sb-grid-5 sb-grid-row-divider sb-grid-row-title">
+  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
     ${buttonVariants.join('')}
   </div>
 </div>
 `;
 };
 
-export const Example = DefaultTemplate.bind({});
-Example.args = {
-  label: 'Label',
-  variant: 'emphasis',
-  color: 'primary',
-  size: 'medium',
-  disabled: false,
-  fullWidth: false,
-  iconLeft: undefined,
-  iconRight: undefined,
-} as ButtonProps;
-
-export const AllVariants: StoryFn<typeof Button> = () => {
+/**
+ * Todas as variantes e estados
+ */
+export const AllVariants: StoryFn = () => {
   const buttonVariants: HTMLString[] = [];
   themePalettesArray.forEach((color) => {
     buttonVariants.push(getColorVariants(color));
   });
+
   return `
 <div>
-  ${buttonVariants.join('')}
+${buttonVariants.join('')}
+</div>
+
+<div class="sb-section-box">
+  <h4>Filter</h4>
+  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
+    <span>Default</span>
+    <mnt-button label="Click me" variant="filter" size="small" state="default"></mnt-button>
+    <mnt-button label="Click me" variant="filter" size="medium" state="default"></mnt-button>
+    <mnt-button label="Click me" variant="filter" size="large" state="default"></mnt-button>
+  </div>
+  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
+    <span>Pressed</span>
+    <mnt-button label="Click me" variant="filter" size="small" state="pressed"></mnt-button>
+    <mnt-button label="Click me" variant="filter" size="medium" state="pressed"></mnt-button>
+    <mnt-button label="Click me" variant="filter" size="large" state="pressed"></mnt-button>
+  </div>
 </div>
 `;
 };
 
 AllVariants.parameters = {
-  controls: { disable: true },
-};
-
-/**
- * Botão variante Filter
- */
-export const FilterVariant: StoryFn = () => `
-  <div style="padding: 20px;">
-    <h3 style="margin-bottom: 20px;">Variante Filter</h3>
-    <p style="margin-bottom: 16px; color: #666;">
-      A variante <strong>filter</strong> é ideal para botões de filtro, tags removíveis e chips.
-      Possui borda, background transparente e suporta ícones em ambos os lados.
-    </p>
-
-    <div style="display: flex; flex-direction: column; gap: 40px;">
-      <!-- Tamanhos -->
-      <div>
-        <h4 style="margin-bottom: 12px;">Tamanhos</h4>
-        <div style="display: flex; gap: 12px; align-items: center;">
-          <mnt-button variant="filter" size="small" label="Small Filter"></mnt-button>
-          <mnt-button variant="filter" size="medium" label="Medium Filter"></mnt-button>
-          <mnt-button variant="filter" size="large" label="Large Filter"></mnt-button>
-        </div>
-      </div>
-
-      <!-- Com Ícone à Esquerda -->
-      <div>
-        <h4 style="margin-bottom: 12px;">Filtros com Ícone Descritivo</h4>
-        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-          <mnt-button variant="filter" size="medium" label="Data" icon-left="calendar"></mnt-button>
-          <mnt-button variant="filter" size="medium" label="Ordenar" icon-left="filter"></mnt-button>
-          <mnt-button variant="filter" size="medium" label="Filtros" icon-left="filterHorizontal"></mnt-button>
-          <mnt-button variant="filter" size="medium" label="Favoritos" icon-left="starOutline"></mnt-button>
-        </div>
-      </div>
-
-      <!-- Com Ambos os Ícones -->
-      <div>
-        <h4 style="margin-bottom: 12px;">Filtros Ativos (ambos ícones)</h4>
-        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-          <mnt-button variant="filter" size="small" label="Exemplo 1" icon-left="calendar" icon-right="calendar"></mnt-button>
-          <mnt-button variant="filter" size="medium" label="Exemplo 2" icon-left="headset" icon-right="headset"></mnt-button>
-          <mnt-button variant="filter" size="large" label="Exemplo 3" icon-left="arrow-left" icon-right="arrow-right"></mnt-button>
-        </div>
-      </div>
-
-      <!-- Estados -->
-      <div>
-        <h4 style="margin-bottom: 12px;">Estados</h4>
-        <div style="display: flex; gap: 12px; align-items: center;">
-          <mnt-button variant="filter" size="medium" label="Default"></mnt-button>
-          <mnt-button variant="filter" size="medium" label="Pressed" state="pressed"></mnt-button>
-          <mnt-button variant="filter" size="medium" label="Disabled" disabled></mnt-button>
-        </div>
-      </div>
-    </div>
-
-    <div style="margin-top: 24px; padding: 16px; background: #e3f2fd; border-left: 4px solid #2196f3; border-radius: 4px;">
-      <strong>💡 Quando usar:</strong>
-      <ul style="margin: 8px 0 0 20px; padding: 0;">
-        <li>Tags removíveis em sistemas de filtro</li>
-        <li>Chips de seleção múltipla</li>
-        <li>Botões de filtro em barras de busca</li>
-        <li>Categorias selecionáveis</li>
-        <li>Ações de ordenação e visualização</li>
-      </ul>
-    </div>
-
-    <div style="margin-top: 16px; padding: 16px; background: #f3e5f5; border-left: 4px solid #9c27b0; border-radius: 4px;">
-      <strong>🎨 Dica de Design:</strong>
-      <p style="margin: 8px 0 0 0;">
-        Ícones à esquerda são ideais para identificar o tipo de filtro.
-      </p>
-    </div>
-  </div>
-`;
-FilterVariant.parameters = {
-  controls: { disable: true },
-  docs: {
-    description: {
-      story: 'Variante Filter é ideal para tags removíveis, filtros ativos e chips de seleção com suporte a ícones em ambos os lados.',
-    },
+  controls: {
+    disable: true,
+  },
+  actions: {
+    disable: true,
+  },
+  interactions: {
+    disable: true,
   },
 };

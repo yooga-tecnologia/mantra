@@ -77,8 +77,8 @@ export class Button {
       colorClass = `${LIB_PREFIX}button-${this.color}`;
     }
 
-    if (this.size === 'tiny') {
-      console.warn('[MANTRA] The "tiny" size is not supported for this type of button. Please use a different value.');
+    if (this.size !== 'medium' && this.size !== 'large' && this.size !== 'small') {
+      console.warn('[MANTRA] This size is not supported for this type of button. Please use a different value.');
       sizeClass = `${LIB_PREFIX}button-small`;
     } else {
       sizeClass = `${LIB_PREFIX}button-${this.size}`;

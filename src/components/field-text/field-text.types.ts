@@ -1,5 +1,8 @@
-import { SizeVariants } from '@theme/theme.types';
+import { SizeVariants, sizeVariantsArray, StateVariants, stateVariantsArray } from '@theme/theme.types';
 import { ExtendedIconName } from '../icon/icon.types';
+
+export const fieldTextSizeVariantsArray = sizeVariantsArray.filter((size) => size !== 'tiny');
+export const fieldTextStateVariantsArray = stateVariantsArray.filter((state) => state !== 'warning');
 
 export interface FieldTextProps {
   // Required
@@ -8,8 +11,8 @@ export interface FieldTextProps {
   // Optional
   // variant?: 'default' | 'filled';
   color?: 'critical' | 'success' | 'neutral';
-  state?: 'default' | 'error' | 'success';
-  size?: SizeVariants;
+  state?: Exclude<StateVariants, 'warning'>;
+  size?: Exclude<SizeVariants, 'tiny'>;
   iconLeft?: ExtendedIconName;
   iconRight?: ExtendedIconName;
   required?: boolean;
@@ -19,4 +22,5 @@ export interface FieldTextProps {
   inlineMessage?: string;
   hasActionButton?: boolean;
   hasInfoButton?: boolean;
+  fullWidth?: boolean;
 }

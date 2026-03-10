@@ -1,15 +1,9 @@
 import { Component, Host, Prop, h } from '@stencil/core';
 
 import { getLibPrefix } from '../../utils/utils';
+import { LoadingStateProps } from 'src/components';
 
 const LIB_PREFIX = getLibPrefix();
-
-export interface LoadingStateProps {
-  // size?: 'small' | 'medium' | 'large';
-  label?: string;
-  color?: 'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'error';
-}
-
 @Component({
   tag: 'mnt-loading-state',
   styleUrl: 'loading-state.scss',
