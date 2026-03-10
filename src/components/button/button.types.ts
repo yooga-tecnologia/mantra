@@ -6,13 +6,12 @@ export const componentPrefix = 'button';
 /** Possible button style variants */
 export const buttonStyleArray = ['regular', 'emphasis', 'stroke', 'plain', 'filter', 'link'] as const;
 export const buttonColorVariantsArray = themePalettesArray;
-export const buttonSizeVariantsArray = sizeVariantsArray.filter(size => size !== 'tiny');
+export const buttonSizeVariantsArray = sizeVariantsArray.filter((size) => size !== 'tiny');
 
 /** Types derived from arrays */
 export type ButtonStyle = (typeof buttonStyleArray)[number];
 
 export interface ButtonBaseProps {
-  size?: SizeVariants;
   color?: ThemePalette;
   variant?: ButtonStyle;
   disabled?: boolean;
@@ -25,8 +24,10 @@ export interface ButtonProps extends ButtonBaseProps {
   iconRight?: ExtendedIconName;
   iconAnimation?: IconAnimation;
   state?: 'default' | 'pressed';
+  size?: Exclude<SizeVariants, 'tiny'>;
 }
 
 export interface ButtonIconProps extends ButtonBaseProps {
   icon?: ExtendedIconName;
+  size?: SizeVariants;
 }

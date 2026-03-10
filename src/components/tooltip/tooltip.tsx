@@ -46,8 +46,8 @@ export class Tooltip {
         <div
           class={{
             [this.componentPrefix + 'container']: true,
-            'visible': this.isVisible,
-            'hidden': !this.isVisible,
+            visible: this.isVisible,
+            hidden: !this.isVisible,
           }}
         >
           <slot name="trigger" />

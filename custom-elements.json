@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-09T17:01:31",
+  "timestamp": "2026-03-10T14:04:59",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -869,10 +869,10 @@
         },
         {
           "name": "size",
-          "type": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+          "type": "\"large\" | \"medium\" | \"small\"",
           "complexType": {
             "original": "ButtonProps['size']",
-            "resolved": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+            "resolved": "\"large\" | \"medium\" | \"small\"",
             "references": {
               "ButtonProps": {
                 "location": "import",
@@ -904,10 +904,6 @@
             },
             {
               "value": "small",
-              "type": "string"
-            },
-            {
-              "value": "tiny",
               "type": "string"
             }
           ],
@@ -2984,10 +2980,10 @@
         },
         {
           "name": "size",
-          "type": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+          "type": "\"large\" | \"medium\" | \"small\"",
           "complexType": {
             "original": "FieldTextProps['size']",
-            "resolved": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+            "resolved": "\"large\" | \"medium\" | \"small\"",
             "references": {
               "FieldTextProps": {
                 "location": "import",
@@ -3019,10 +3015,6 @@
             },
             {
               "value": "small",
-              "type": "string"
-            },
-            {
-              "value": "tiny",
               "type": "string"
             }
           ],
@@ -5439,12 +5431,12 @@
       "path": "src/components/brand/brand.types.ts"
     },
     "src/components/button/button.types.ts::ButtonIconProps": {
-      "declaration": "export interface ButtonIconProps extends ButtonBaseProps {\n  icon?: ExtendedIconName;\n}",
+      "declaration": "export interface ButtonIconProps extends ButtonBaseProps {\n  icon?: ExtendedIconName;\n  size?: SizeVariants;\n}",
       "docstring": "",
       "path": "src/components/button/button.types.ts"
     },
     "src/components/button/button.types.ts::ButtonProps": {
-      "declaration": "export interface ButtonProps extends ButtonBaseProps {\n  label?: string;\n  fullWidth?: boolean;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  iconAnimation?: IconAnimation;\n  state?: 'default' | 'pressed';\n}",
+      "declaration": "export interface ButtonProps extends ButtonBaseProps {\n  label?: string;\n  fullWidth?: boolean;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  iconAnimation?: IconAnimation;\n  state?: 'default' | 'pressed';\n  size?: Exclude<SizeVariants, 'tiny'>;\n}",
       "docstring": "",
       "path": "src/components/button/button.types.ts"
     },
@@ -5489,7 +5481,7 @@
       "path": "src/shared/theme/theme.types.ts"
     },
     "src/components/field-text/field-text.types.ts::FieldTextProps": {
-      "declaration": "export interface FieldTextProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  // variant?: 'default' | 'filled';\n  color?: 'critical' | 'success' | 'neutral';\n  state?: 'default' | 'error' | 'success';\n  size?: SizeVariants;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  inlineMessage?: string;\n  hasActionButton?: boolean;\n  hasInfoButton?: boolean;\n}",
+      "declaration": "export interface FieldTextProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  // variant?: 'default' | 'filled';\n  color?: 'critical' | 'success' | 'neutral';\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: Exclude<SizeVariants, 'tiny'>;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  inlineMessage?: string;\n  hasActionButton?: boolean;\n  hasInfoButton?: boolean;\n}",
       "docstring": "",
       "path": "src/components/field-text/field-text.types.ts"
     },

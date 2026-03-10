@@ -4,11 +4,14 @@ export const themePalettesArray = ['primary', 'secondary', 'neutral', 'success',
 export const colorTonesArray = ['default', 'highlight', 'emphasis'] as const;
 /** Components sizing variants */
 export const sizeVariantsArray = ['tiny', 'small', 'medium', 'large'] as const;
+/** Component states variants */
+export const stateVariantsArray = ['default', 'error', 'success', 'warning'] as const;
 
 /** Types derived from arrays */
 export type ThemePalette = (typeof themePalettesArray)[number];
 export type ColorTone = (typeof colorTonesArray)[number];
 export type SizeVariants = (typeof sizeVariantsArray)[number];
+export type StateVariants = (typeof stateVariantsArray)[number];
 
 export enum ButtonIconSizeMap {
   small = 16,
