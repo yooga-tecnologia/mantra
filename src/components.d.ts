@@ -14,10 +14,10 @@ import { FieldDateProps } from "./components/field-date/field-date.types";
 import { FieldNumberVariant } from "./components/field-number/field-number.types";
 import { SizeVariants } from "./shared/theme/theme.types";
 import { FieldTextProps } from "./components/field-text/field-text.types";
-import { FieldTextProps as FieldTextProps1 } from "./components/filter-search/filter-search.types";
+import { FilterSearchProps } from "./components/filter-search/filter-search.types";
 import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
-import { LoadingStateProps } from "./components/loading-state/loading-state";
+import { LoadingStateProps } from "./components.d";
 import { RadioBaseProps } from "./components/radio/radio.types";
 import { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 import { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
@@ -33,10 +33,10 @@ export { FieldDateProps } from "./components/field-date/field-date.types";
 export { FieldNumberVariant } from "./components/field-number/field-number.types";
 export { SizeVariants } from "./shared/theme/theme.types";
 export { FieldTextProps } from "./components/field-text/field-text.types";
-export { FieldTextProps as FieldTextProps1 } from "./components/filter-search/filter-search.types";
+export { FilterSearchProps } from "./components/filter-search/filter-search.types";
 export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
-export { LoadingStateProps } from "./components/loading-state/loading-state";
+export { LoadingStateProps } from "./components.d";
 export { RadioBaseProps } from "./components/radio/radio.types";
 export { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 export { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
@@ -259,21 +259,17 @@ export namespace Components {
         /**
           * @default false
          */
-        "fullWidth"?: boolean;
-        "hasActionButton"?: FieldTextProps1['hasActionButton'];
-        "hasInfoButton"?: FieldTextProps1['hasInfoButton'];
-        "inlineMessage"?: FieldTextProps1['inlineMessage'];
-        "labelText"?: FieldTextProps1['labelText'];
+        "fullWidth"?: FilterSearchProps['fullWidth'];
         "name": string;
-        "placeholder"?: FieldTextProps1['placeholder'];
+        "placeholder"?: FilterSearchProps['placeholder'];
         /**
           * @default 'medium'
          */
-        "size"?: FieldTextProps1['size'];
+        "size"?: FilterSearchProps['size'];
         /**
           * @default 'default'
          */
-        "state"?: FieldTextProps1['state'];
+        "state"?: FilterSearchProps['state'];
         "value"?: string;
     }
     interface MntIcon {
@@ -997,23 +993,19 @@ declare namespace LocalJSX {
         /**
           * @default false
          */
-        "fullWidth"?: boolean;
-        "hasActionButton"?: FieldTextProps1['hasActionButton'];
-        "hasInfoButton"?: FieldTextProps1['hasInfoButton'];
-        "inlineMessage"?: FieldTextProps1['inlineMessage'];
-        "labelText"?: FieldTextProps1['labelText'];
+        "fullWidth"?: FilterSearchProps['fullWidth'];
         "name"?: string;
         "onFilterApplied"?: (event: MntFilterSearchCustomEvent<{ value: string }>) => void;
         "onValueChange"?: (event: MntFilterSearchCustomEvent<{ value: string }>) => void;
-        "placeholder"?: FieldTextProps1['placeholder'];
+        "placeholder"?: FilterSearchProps['placeholder'];
         /**
           * @default 'medium'
          */
-        "size"?: FieldTextProps1['size'];
+        "size"?: FilterSearchProps['size'];
         /**
           * @default 'default'
          */
-        "state"?: FieldTextProps1['state'];
+        "state"?: FilterSearchProps['state'];
         "value"?: string;
     }
     interface MntIcon {
@@ -1245,15 +1237,11 @@ declare namespace LocalJSX {
     }
     interface MntFilterSearchAttributes {
         "name": string;
-        "fullWidth": boolean;
-        "size": FieldTextProps['size'];
-        "placeholder": FieldTextProps['placeholder'];
-        "state": FieldTextProps['state'];
+        "fullWidth": FilterSearchProps['fullWidth'];
+        "size": FilterSearchProps['size'];
+        "placeholder": FilterSearchProps['placeholder'];
+        "state": FilterSearchProps['state'];
         "value": string;
-        "labelText": FieldTextProps['labelText'];
-        "hasActionButton": FieldTextProps['hasActionButton'];
-        "hasInfoButton": FieldTextProps['hasInfoButton'];
-        "inlineMessage": FieldTextProps['inlineMessage'];
     }
     interface MntIconAttributes {
         "icon": IconProps['icon'];
@@ -1274,8 +1262,8 @@ declare namespace LocalJSX {
         "height": IllustrationProps['height'];
     }
     interface MntLoadingStateAttributes {
-        "color": LoadingStateProps['color'];
-        "label": LoadingStateProps['label'];
+        "color": string;
+        "label": string;
     }
     interface MntRadioAttributes {
         "name": RadioBaseProps['name'];

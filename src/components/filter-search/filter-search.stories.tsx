@@ -80,12 +80,6 @@ export const Default: Story = {
   render: FilterSearchTemplate,
 };
 
-const NativeAttributesTemplate = (props: FilterSearchProps) => {
-  return `
-    <mnt-filter-search ${props} autofocus autocomplete="on"></mnt-filter-search>
-  `;
-};
-
 /**
  * Exemplo de uso de atributos nativos do input
  */
