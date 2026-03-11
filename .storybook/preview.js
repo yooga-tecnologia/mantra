@@ -1,16 +1,14 @@
-import { defineCustomElements } from '../loader';
+// Each mnt-*.js in dist/components calls customElements.define() on import
+// (auto-define-custom-elements). Vite's eager glob expands to individual
+// static imports at build time, preserving side effects without lazy loading.
+import.meta.glob('../dist/components/mnt-*.js', { eager: true });
+
 import customElements from '../custom-elements.json';
 
-import './_fonts.scss';
+// _styles.scss imports _typography.scss which generates @font-face with absolute /fonts/ paths.
+// _fonts.scss must come AFTER so its correctly-resolved relative paths win the CSS cascade.
 import './_styles.scss';
-
-// Stencil's lazy loader determines the base URL from the script's `src` attribute.
-// When Vite bundles the loader, this detection fails and resourcesUrl becomes undefined,
-// causing "Constructor for 'mnt-*#undefined' was not found" errors in production.
-// We pass it explicitly using Vite's BASE_URL (set to '/mantra/storybook-static/' in prod).
-defineCustomElements(window, {
-  resourcesUrl: `${import.meta.env.BASE_URL}mantra/`,
-});
+import './_fonts.scss';
 
 // Configurar custom elements manifest para Storybook v10
 if (customElements) {

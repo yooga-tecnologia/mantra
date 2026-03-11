@@ -1,6 +1,6 @@
 {
   "name": "@yooga-tecnologia/mantra",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Biblioteca de componentes web desenvolvida com StencilJS para criar interfaces reutilizáveis e performáticas em diferentes frameworks e projetos.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -39,6 +39,7 @@
     "test:e2e": "stencil test --spec --e2e",
     "test.watch:e2e": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
+    "prestorybook": "[ -d dist/components ] || npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "npm run build && storybook build",
     "cache-clear": "rm -rf ./node_modules ./dist/ ./.stencil/ ./storybook-static/ ./www ./loader/",

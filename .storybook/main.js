@@ -19,8 +19,6 @@ const config = {
   },
   staticDirs: [
     { from: '../dist-custom-elements/fonts', to: '/fonts' },
-    // Serve Stencil lazy-load chunks so defineCustomElements can fetch them at runtime
-    { from: '../dist/mantra', to: '/mantra' },
   ],
   docs: {
     defaultName: 'Docs',
