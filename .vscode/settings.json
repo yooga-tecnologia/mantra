@@ -19,7 +19,8 @@
     "filter-search",
     "radio",
     "checkbox",
-    "badge"
+    "badge",
+    "message-inline"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false

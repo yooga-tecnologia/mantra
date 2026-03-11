@@ -10,11 +10,7 @@ const LIB_PREFIX = getLibPrefix();
   shadow: false,
 })
 export class LoadingState {
-  // Base styles
-  // @Prop() size: LoadingStateProps['size'] = 'medium';
   @Prop() color: LoadingStateProps['color'] = 'neutral';
-  // @Prop() variant: ButtonProps['variant'] = 'regular';
-  // @Prop() fullWidth: ButtonProps['fullWidth'] = false;
 
   // Structure
   @Prop() label?: LoadingStateProps['label'];
