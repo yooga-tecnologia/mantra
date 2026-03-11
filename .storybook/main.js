@@ -18,18 +18,27 @@ const config = {
     options: {},
   },
   staticDirs: [
-    { from: '../dist-custom-elements/fonts', to: '/fonts' }
+    { from: '../dist-custom-elements/fonts', to: '/fonts' },
+    // Serve Stencil lazy-load chunks so defineCustomElements can fetch them at runtime
+    { from: '../dist/mantra', to: '/mantra' },
   ],
   docs: {
     defaultName: 'Docs',
   },
-  async viteFinal(config) {
-    // Configurar aliases do tsconfig.json para o Vite
+  async viteFinal(config, { configType }) {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@theme': path.resolve(__dirname, '../src/shared/theme'),
       '@assets': path.resolve(__dirname, '../src/shared/assets/fonts'),
     };
+
+    // GitHub Pages serves Storybook under /mantra/storybook-static/.
+    // Setting base ensures Vite generates correct URLs for JS chunks and
+    // that import.meta.env.BASE_URL resolves to the right subpath in the browser.
+    if (configType === 'PRODUCTION') {
+      config.base = '/mantra/storybook-static/';
+    }
+
     return config;
   },
 };

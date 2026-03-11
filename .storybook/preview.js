@@ -4,7 +4,13 @@ import customElements from '../custom-elements.json';
 import './_fonts.scss';
 import './_styles.scss';
 
-defineCustomElements();
+// Stencil's lazy loader determines the base URL from the script's `src` attribute.
+// When Vite bundles the loader, this detection fails and resourcesUrl becomes undefined,
+// causing "Constructor for 'mnt-*#undefined' was not found" errors in production.
+// We pass it explicitly using Vite's BASE_URL (set to '/mantra/storybook-static/' in prod).
+defineCustomElements(window, {
+  resourcesUrl: `${import.meta.env.BASE_URL}mantra/`,
+});
 
 // Configurar custom elements manifest para Storybook v10
 if (customElements) {

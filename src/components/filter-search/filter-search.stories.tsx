@@ -58,11 +58,7 @@ O componente \`mnt-filter-search\` é um elemento utilizado para realizar buscas
       },
     },
   },
-  render: (args) => {
-    return `
-      <mnt-filter-search ${args}></mnt-filter-search>
-    `;
-  },
+  render: (args) => FilterSearchTemplate(args as FilterSearchProps),
 };
 
 const FilterSearchTemplate = (props: FilterSearchProps) => {
@@ -99,9 +95,16 @@ export const NativeAttributes: Story = {
       },
     },
   },
-  render: (args) => {
+  render: ({ size = 'medium', inputName = '', fullWidth = false, placeholder = '' }: FilterSearchProps) => {
     return `
-      <mnt-filter-search ${args} autofocus autocomplete="on"></mnt-filter-search>
+      <mnt-filter-search
+        size="${size}"
+        input-name="${inputName}"
+        full-width="${fullWidth}"
+        placeholder="${placeholder}"
+        autofocus
+        autocomplete="on"
+      ></mnt-filter-search>
     `;
   },
 };
