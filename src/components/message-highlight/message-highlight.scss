@@ -1,0 +1,89 @@
+@use 'sass:map';
+
+@use '../../shared/theme/core/theme' as theme;
+
+$component-prefix: theme.get-prefix('message-highlight');
+
+$message-highlight-color-scheme: (
+  neutral: (
+    text-color: theme.get-tone-from-palette(700, 'neutral'),
+    background-color: theme.get-tone-from-palette(100, 'neutral'),
+  ),
+  primary: (
+    text-color: theme.get-tone-from-palette(700, 'primary'),
+    background-color: theme.get-tone-from-palette(100, 'primary'),
+  ),
+  secondary: (
+    text-color: theme.get-tone-from-palette(700, 'secondary'),
+    background-color: theme.get-tone-from-palette(100, 'secondary'),
+  ),
+  success: (
+    text-color: theme.get-tone-from-palette(700, 'success'),
+    background-color: theme.get-tone-from-palette(100, 'success'),
+  ),
+  critical: (
+    text-color: theme.get-tone-from-palette(700, 'critical'),
+    background-color: theme.get-tone-from-palette(100, 'critical'),
+  ),
+  warning: (
+    text-color: theme.get-tone-from-palette(700, 'warning'),
+    background-color: theme.get-tone-from-palette(100, 'warning'),
+  ),
+);
+
+$message-highlight-gap: 8px;
+$message-highlight-border-radius: 12px;
+
+@mixin set-message-highlight-emphasis-styles($color, $text-color, $background-color) {
+  &.#{$component-prefix}-#{$color}.#{$component-prefix}-default {
+    @include theme.set-colors($text-color, transparent);
+    padding: 16px 0px;
+
+    svg,
+    span {
+      color: $text-color;
+    }
+  }
+
+  &.#{$component-prefix}-#{$color}.#{$component-prefix}-emphasis {
+    @include theme.set-colors($text-color, $background-color);
+    padding: 16px 24px;
+
+    svg,
+    span {
+      color: $text-color;
+    }
+  }
+}
+
+.mnt-message-highlight {
+  display: inline-flex;
+  align-items: center;
+  gap: $message-highlight-gap;
+  border-radius: $message-highlight-border-radius;
+  box-sizing: border-box;
+
+  & > span.#{$component-prefix}-label {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  &.#{$component-prefix}-full-width {
+    width: 100%;
+  }
+
+  &.#{$component-prefix}-margin-bottom {
+    margin-bottom: 16px;
+  }
+
+  @each $color, $color-value in $message-highlight-color-scheme {
+    $text-color: map.get($color-value, 'text-color');
+    $background-color: map.get($color-value, 'background-color');
+
+    @debug $text-color;
+    @debug $background-color;
+
+    @include set-message-highlight-emphasis-styles($color, $text-color, $background-color);
+  }
+}
