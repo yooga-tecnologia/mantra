@@ -10,12 +10,16 @@
 | Property     | Attribute     | Description | Type                                | Default     |
 | ------------ | ------------- | ----------- | ----------------------------------- | ----------- |
 | `hasPadding` | `has-padding` |             | `boolean`                           | `false`     |
-| `icon`       | `icon`        |             | `string`                            | `undefined` |
+| `icon`       | `icon`        |             | `string`                            | `''`        |
 | `label`      | `label`       |             | `string`                            | `''`        |
 | `variant`    | `variant`     |             | `"error" \| "neutral" \| "success"` | `'neutral'` |
 
 
 ## Dependencies
+
+### Used by
+
+ - [mnt-field-text](../field-text)
 
 ### Depends on
 
@@ -25,6 +29,7 @@
 ```mermaid
 graph TD;
   mnt-message-inline --> mnt-icon
+  mnt-field-text --> mnt-message-inline
   style mnt-message-inline fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

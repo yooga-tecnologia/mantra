@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-11T20:42:17",
+  "timestamp": "2026-03-12T20:31:17",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -3126,10 +3126,15 @@
       "states": [],
       "dependents": [],
       "dependencies": [
-        "mnt-icon"
+        "mnt-icon",
+        "mnt-message-inline"
       ],
       "dependencyGraph": {
         "mnt-field-text": [
+          "mnt-icon",
+          "mnt-message-inline"
+        ],
+        "mnt-message-inline": [
           "mnt-icon"
         ]
       }
@@ -3647,6 +3652,7 @@
         "mnt-field-date",
         "mnt-field-text",
         "mnt-filter-search",
+        "mnt-message-highlight",
         "mnt-message-inline",
         "mnt-steps",
         "mnt-tab-item"
@@ -3675,6 +3681,9 @@
           "mnt-icon"
         ],
         "mnt-filter-search": [
+          "mnt-icon"
+        ],
+        "mnt-message-highlight": [
           "mnt-icon"
         ],
         "mnt-message-inline": [
@@ -4092,6 +4101,275 @@
       "dependencyGraph": {}
     },
     {
+      "filePath": "src/components/message-highlight/message-highlight.tsx",
+      "encapsulation": "none",
+      "tag": "mnt-message-highlight",
+      "readme": "# mnt-message-inline\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "fullWidth",
+          "type": "boolean",
+          "complexType": {
+            "original": "MessageHighlightProps['fullWidth']",
+            "resolved": "boolean",
+            "references": {
+              "MessageHighlightProps": {
+                "location": "import",
+                "path": "./message-highlight.types",
+                "id": "src/components/message-highlight/message-highlight.types.ts::MessageHighlightProps",
+                "referenceLocation": "MessageHighlightProps"
+              }
+            }
+          },
+          "mutable": true,
+          "attr": "full-width",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "icon",
+          "type": "string",
+          "complexType": {
+            "original": "MessageHighlightProps['icon']",
+            "resolved": "string",
+            "references": {
+              "MessageHighlightProps": {
+                "location": "import",
+                "path": "./message-highlight.types",
+                "id": "src/components/message-highlight/message-highlight.types.ts::MessageHighlightProps",
+                "referenceLocation": "MessageHighlightProps"
+              }
+            }
+          },
+          "mutable": true,
+          "attr": "icon",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "''"
+            }
+          ],
+          "default": "''",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "complexType": {
+            "original": "MessageHighlightProps['label']",
+            "resolved": "string",
+            "references": {
+              "MessageHighlightProps": {
+                "location": "import",
+                "path": "./message-highlight.types",
+                "id": "src/components/message-highlight/message-highlight.types.ts::MessageHighlightProps",
+                "referenceLocation": "MessageHighlightProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "label",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "''"
+            }
+          ],
+          "default": "''",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "marginBottom",
+          "type": "boolean",
+          "complexType": {
+            "original": "MessageHighlightProps['marginBottom']",
+            "resolved": "boolean",
+            "references": {
+              "MessageHighlightProps": {
+                "location": "import",
+                "path": "./message-highlight.types",
+                "id": "src/components/message-highlight/message-highlight.types.ts::MessageHighlightProps",
+                "referenceLocation": "MessageHighlightProps"
+              }
+            }
+          },
+          "mutable": true,
+          "attr": "margin-bottom",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "type",
+          "type": "\"default\" | \"emphasis\"",
+          "complexType": {
+            "original": "MessageHighlightProps['type']",
+            "resolved": "\"default\" | \"emphasis\"",
+            "references": {
+              "MessageHighlightProps": {
+                "location": "import",
+                "path": "./message-highlight.types",
+                "id": "src/components/message-highlight/message-highlight.types.ts::MessageHighlightProps",
+                "referenceLocation": "MessageHighlightProps"
+              }
+            }
+          },
+          "mutable": true,
+          "attr": "type",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'default'"
+            }
+          ],
+          "default": "'default'",
+          "values": [
+            {
+              "value": "default",
+              "type": "string"
+            },
+            {
+              "value": "emphasis",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "variant",
+          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+          "complexType": {
+            "original": "MessageHighlightProps['variant']",
+            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+            "references": {
+              "MessageHighlightProps": {
+                "location": "import",
+                "path": "./message-highlight.types",
+                "id": "src/components/message-highlight/message-highlight.types.ts::MessageHighlightProps",
+                "referenceLocation": "MessageHighlightProps"
+              }
+            }
+          },
+          "mutable": true,
+          "attr": "variant",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'neutral'"
+            }
+          ],
+          "default": "'neutral'",
+          "values": [
+            {
+              "value": "critical",
+              "type": "string"
+            },
+            {
+              "value": "neutral",
+              "type": "string"
+            },
+            {
+              "value": "primary",
+              "type": "string"
+            },
+            {
+              "value": "secondary",
+              "type": "string"
+            },
+            {
+              "value": "success",
+              "type": "string"
+            },
+            {
+              "value": "warning",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [],
+      "listeners": [],
+      "styles": [],
+      "slots": [],
+      "parts": [],
+      "states": [],
+      "dependents": [],
+      "dependencies": [
+        "mnt-icon"
+      ],
+      "dependencyGraph": {
+        "mnt-message-highlight": [
+          "mnt-icon"
+        ]
+      }
+    },
+    {
       "filePath": "src/components/message-inline/message-inline.tsx",
       "encapsulation": "none",
       "tag": "mnt-message-inline",
@@ -4151,17 +4429,23 @@
               }
             }
           },
-          "mutable": false,
+          "mutable": true,
           "attr": "icon",
-          "reflectToAttr": false,
+          "reflectToAttr": true,
           "docs": "",
-          "docsTags": [],
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "''"
+            }
+          ],
+          "default": "''",
           "values": [
             {
               "type": "string"
             }
           ],
-          "optional": true,
+          "optional": false,
           "required": false,
           "getter": false,
           "setter": false
@@ -4217,9 +4501,9 @@
               }
             }
           },
-          "mutable": false,
+          "mutable": true,
           "attr": "variant",
-          "reflectToAttr": false,
+          "reflectToAttr": true,
           "docs": "",
           "docsTags": [
             {
@@ -4255,13 +4539,18 @@
       "slots": [],
       "parts": [],
       "states": [],
-      "dependents": [],
+      "dependents": [
+        "mnt-field-text"
+      ],
       "dependencies": [
         "mnt-icon"
       ],
       "dependencyGraph": {
         "mnt-message-inline": [
           "mnt-icon"
+        ],
+        "mnt-field-text": [
+          "mnt-message-inline"
         ]
       }
     },
@@ -5532,7 +5821,7 @@
       "path": "src/shared/theme/theme.types.ts"
     },
     "src/components/field-text/field-text.types.ts::FieldTextProps": {
-      "declaration": "export interface FieldTextProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  // variant?: 'default' | 'filled';\n  color?: 'critical' | 'success' | 'neutral';\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: Exclude<SizeVariants, 'tiny'>;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  inlineMessage?: string;\n  hasActionButton?: boolean;\n  hasInfoButton?: boolean;\n  fullWidth?: boolean;\n}",
+      "declaration": "export interface FieldTextProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  // variant?: 'default' | 'filled';\n  color?: MessageInlineColorVariants;\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: Exclude<SizeVariants, 'tiny'>;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  inlineMessage?: string;\n  hasActionButton?: boolean;\n  hasInfoButton?: boolean;\n  fullWidth?: boolean;\n}",
       "docstring": "",
       "path": "src/components/field-text/field-text.types.ts"
     },
@@ -5560,6 +5849,11 @@
       "declaration": "any",
       "docstring": "",
       "path": "src/components.d.ts"
+    },
+    "src/components/message-highlight/message-highlight.types.ts::MessageHighlightProps": {
+      "declaration": "export interface MessageHighlightProps {\n  label: string;\n  type?: MessageHighlightTypeVariants;\n  variant?: MessageHighlightColorVariants;\n  icon?: ExtendedIconName;\n  fullWidth?: boolean;\n  marginBottom?: boolean;\n}",
+      "docstring": "",
+      "path": "src/components/message-highlight/message-highlight.types.ts"
     },
     "src/components/message-inline/message-inline.types.ts::MessageInlineProps": {
       "declaration": "export interface MessageInlineProps {\n  variant?: MessageInlineColorVariants;\n  icon?: ExtendedIconName;\n  label?: string;\n  hasPadding?: boolean;\n}",
