@@ -2,6 +2,7 @@ import { Component, Element, EventEmitter, Host, Prop, Event, Watch, h } from '@
 
 import { classNames, setComponentClass } from 'src/utils/utils';
 import { FieldTextProps } from './field-text.types';
+import { MessageInlineColorVariants } from '../message-inline/message-inline.types';
 
 @Component({
   tag: 'mnt-field-text',
@@ -93,6 +94,17 @@ export class FieldText {
       this.iconRight && `${this.componentPrefix}-icon-right`,
       this.fullWidth && `${this.componentPrefix}-full-width`,
     );
+  }
+
+  private get inlineMessageColor(): MessageInlineColorVariants {
+    switch (this.state) {
+      case 'error':
+        return 'error';
+      case 'success':
+        return 'success';
+      default:
+        return 'neutral';
+    }
   }
 
   onInput(event: any) {
@@ -391,25 +403,10 @@ export class FieldText {
   private renderInlineMessage() {
     if (!this.inlineMessage) return null;
     return (
-      <div class={this.componentPrefix + '-inline-message'}>
-        {this.state === 'error' ? (
-          <mnt-icon
-            icon="signalingErrorCircle"
-            size="small"
-          ></mnt-icon>
-        ) : this.state === 'success' ? (
-          <mnt-icon
-            icon="signalingCheckCircle"
-            size="small"
-          ></mnt-icon>
-        ) : (
-          <mnt-icon
-            icon="info"
-            size="small"
-          ></mnt-icon>
-        )}
-        <span>{this.inlineMessage}</span>
-      </div>
+      <mnt-message-inline
+        variant={this.inlineMessageColor}
+        label={this.inlineMessage}
+      ></mnt-message-inline>
     );
   }
 

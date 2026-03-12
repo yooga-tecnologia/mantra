@@ -18,6 +18,7 @@ import { FilterSearchProps } from "./components/filter-search/filter-search.type
 import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
 import { LoadingStateProps } from "./components.d";
+import { MessageInlineProps } from "./components/message-inline/message-inline.types";
 import { RadioBaseProps } from "./components/radio/radio.types";
 import { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 import { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
@@ -37,6 +38,7 @@ export { FilterSearchProps } from "./components/filter-search/filter-search.type
 export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
 export { LoadingStateProps } from "./components.d";
+export { MessageInlineProps } from "./components/message-inline/message-inline.types";
 export { RadioBaseProps } from "./components/radio/radio.types";
 export { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 export { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
@@ -314,6 +316,24 @@ export namespace Components {
          */
         "color": LoadingStateProps['color'];
         "label"?: LoadingStateProps['label'];
+    }
+    interface MntMessageInline {
+        /**
+          * @default false
+         */
+        "hasPadding": MessageInlineProps['hasPadding'];
+        /**
+          * @default ''
+         */
+        "icon": MessageInlineProps['icon'];
+        /**
+          * @default ''
+         */
+        "label": MessageInlineProps['label'];
+        /**
+          * @default 'neutral'
+         */
+        "variant": MessageInlineProps['variant'];
     }
     interface MntRadio {
         /**
@@ -614,6 +634,12 @@ declare global {
         prototype: HTMLMntLoadingStateElement;
         new (): HTMLMntLoadingStateElement;
     };
+    interface HTMLMntMessageInlineElement extends Components.MntMessageInline, HTMLStencilElement {
+    }
+    var HTMLMntMessageInlineElement: {
+        prototype: HTMLMntMessageInlineElement;
+        new (): HTMLMntMessageInlineElement;
+    };
     interface HTMLMntRadioElementEventMap {
         "radioChange": { checked: boolean; value: string };
     }
@@ -723,6 +749,7 @@ declare global {
         "mnt-icon-large": HTMLMntIconLargeElement;
         "mnt-illustration": HTMLMntIllustrationElement;
         "mnt-loading-state": HTMLMntLoadingStateElement;
+        "mnt-message-inline": HTMLMntMessageInlineElement;
         "mnt-radio": HTMLMntRadioElement;
         "mnt-steps": HTMLMntStepsElement;
         "mnt-switch": HTMLMntSwitchElement;
@@ -1051,6 +1078,24 @@ declare namespace LocalJSX {
         "color"?: LoadingStateProps['color'];
         "label"?: LoadingStateProps['label'];
     }
+    interface MntMessageInline {
+        /**
+          * @default false
+         */
+        "hasPadding"?: MessageInlineProps['hasPadding'];
+        /**
+          * @default ''
+         */
+        "icon"?: MessageInlineProps['icon'];
+        /**
+          * @default ''
+         */
+        "label"?: MessageInlineProps['label'];
+        /**
+          * @default 'neutral'
+         */
+        "variant"?: MessageInlineProps['variant'];
+    }
     interface MntRadio {
         /**
           * @default false
@@ -1265,6 +1310,12 @@ declare namespace LocalJSX {
         "color": string;
         "label": string;
     }
+    interface MntMessageInlineAttributes {
+        "label": MessageInlineProps['label'];
+        "hasPadding": MessageInlineProps['hasPadding'];
+        "variant": MessageInlineProps['variant'];
+        "icon": MessageInlineProps['icon'];
+    }
     interface MntRadioAttributes {
         "name": RadioBaseProps['name'];
         "label": RadioBaseProps['label'];
@@ -1320,6 +1371,7 @@ declare namespace LocalJSX {
         "mnt-icon-large": Omit<MntIconLarge, keyof MntIconLargeAttributes> & { [K in keyof MntIconLarge & keyof MntIconLargeAttributes]?: MntIconLarge[K] } & { [K in keyof MntIconLarge & keyof MntIconLargeAttributes as `attr:${K}`]?: MntIconLargeAttributes[K] } & { [K in keyof MntIconLarge & keyof MntIconLargeAttributes as `prop:${K}`]?: MntIconLarge[K] } & OneOf<"icon", MntIconLarge["icon"]>;
         "mnt-illustration": Omit<MntIllustration, keyof MntIllustrationAttributes> & { [K in keyof MntIllustration & keyof MntIllustrationAttributes]?: MntIllustration[K] } & { [K in keyof MntIllustration & keyof MntIllustrationAttributes as `attr:${K}`]?: MntIllustrationAttributes[K] } & { [K in keyof MntIllustration & keyof MntIllustrationAttributes as `prop:${K}`]?: MntIllustration[K] } & OneOf<"name", MntIllustration["name"]>;
         "mnt-loading-state": Omit<MntLoadingState, keyof MntLoadingStateAttributes> & { [K in keyof MntLoadingState & keyof MntLoadingStateAttributes]?: MntLoadingState[K] } & { [K in keyof MntLoadingState & keyof MntLoadingStateAttributes as `attr:${K}`]?: MntLoadingStateAttributes[K] } & { [K in keyof MntLoadingState & keyof MntLoadingStateAttributes as `prop:${K}`]?: MntLoadingState[K] };
+        "mnt-message-inline": Omit<MntMessageInline, keyof MntMessageInlineAttributes> & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes]?: MntMessageInline[K] } & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes as `attr:${K}`]?: MntMessageInlineAttributes[K] } & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes as `prop:${K}`]?: MntMessageInline[K] };
         "mnt-radio": Omit<MntRadio, keyof MntRadioAttributes> & { [K in keyof MntRadio & keyof MntRadioAttributes]?: MntRadio[K] } & { [K in keyof MntRadio & keyof MntRadioAttributes as `attr:${K}`]?: MntRadioAttributes[K] } & { [K in keyof MntRadio & keyof MntRadioAttributes as `prop:${K}`]?: MntRadio[K] };
         "mnt-steps": Omit<MntSteps, keyof MntStepsAttributes> & { [K in keyof MntSteps & keyof MntStepsAttributes]?: MntSteps[K] } & { [K in keyof MntSteps & keyof MntStepsAttributes as `attr:${K}`]?: MntStepsAttributes[K] } & { [K in keyof MntSteps & keyof MntStepsAttributes as `prop:${K}`]?: MntSteps[K] };
         "mnt-switch": Omit<MntSwitch, keyof MntSwitchAttributes> & { [K in keyof MntSwitch & keyof MntSwitchAttributes]?: MntSwitch[K] } & { [K in keyof MntSwitch & keyof MntSwitchAttributes as `attr:${K}`]?: MntSwitchAttributes[K] } & { [K in keyof MntSwitch & keyof MntSwitchAttributes as `prop:${K}`]?: MntSwitch[K] };
@@ -1347,6 +1399,7 @@ declare module "@stencil/core" {
             "mnt-icon-large": LocalJSX.IntrinsicElements["mnt-icon-large"] & JSXBase.HTMLAttributes<HTMLMntIconLargeElement>;
             "mnt-illustration": LocalJSX.IntrinsicElements["mnt-illustration"] & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
             "mnt-loading-state": LocalJSX.IntrinsicElements["mnt-loading-state"] & JSXBase.HTMLAttributes<HTMLMntLoadingStateElement>;
+            "mnt-message-inline": LocalJSX.IntrinsicElements["mnt-message-inline"] & JSXBase.HTMLAttributes<HTMLMntMessageInlineElement>;
             "mnt-radio": LocalJSX.IntrinsicElements["mnt-radio"] & JSXBase.HTMLAttributes<HTMLMntRadioElement>;
             "mnt-steps": LocalJSX.IntrinsicElements["mnt-steps"] & JSXBase.HTMLAttributes<HTMLMntStepsElement>;
             "mnt-switch": LocalJSX.IntrinsicElements["mnt-switch"] & JSXBase.HTMLAttributes<HTMLMntSwitchElement>;

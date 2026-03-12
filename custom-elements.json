@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-11T18:16:26",
+  "timestamp": "2026-03-11T20:42:17",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -3647,6 +3647,7 @@
         "mnt-field-date",
         "mnt-field-text",
         "mnt-filter-search",
+        "mnt-message-inline",
         "mnt-steps",
         "mnt-tab-item"
       ],
@@ -3674,6 +3675,9 @@
           "mnt-icon"
         ],
         "mnt-filter-search": [
+          "mnt-icon"
+        ],
+        "mnt-message-inline": [
           "mnt-icon"
         ],
         "mnt-steps": [
@@ -4086,6 +4090,180 @@
       "dependents": [],
       "dependencies": [],
       "dependencyGraph": {}
+    },
+    {
+      "filePath": "src/components/message-inline/message-inline.tsx",
+      "encapsulation": "none",
+      "tag": "mnt-message-inline",
+      "readme": "# mnt-message-inline\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "hasPadding",
+          "type": "boolean",
+          "complexType": {
+            "original": "MessageInlineProps['hasPadding']",
+            "resolved": "boolean",
+            "references": {
+              "MessageInlineProps": {
+                "location": "import",
+                "path": "./message-inline.types",
+                "id": "src/components/message-inline/message-inline.types.ts::MessageInlineProps",
+                "referenceLocation": "MessageInlineProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "has-padding",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "icon",
+          "type": "string",
+          "complexType": {
+            "original": "MessageInlineProps['icon']",
+            "resolved": "string",
+            "references": {
+              "MessageInlineProps": {
+                "location": "import",
+                "path": "./message-inline.types",
+                "id": "src/components/message-inline/message-inline.types.ts::MessageInlineProps",
+                "referenceLocation": "MessageInlineProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "icon",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "complexType": {
+            "original": "MessageInlineProps['label']",
+            "resolved": "string",
+            "references": {
+              "MessageInlineProps": {
+                "location": "import",
+                "path": "./message-inline.types",
+                "id": "src/components/message-inline/message-inline.types.ts::MessageInlineProps",
+                "referenceLocation": "MessageInlineProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "label",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "''"
+            }
+          ],
+          "default": "''",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "variant",
+          "type": "\"error\" | \"neutral\" | \"success\"",
+          "complexType": {
+            "original": "MessageInlineProps['variant']",
+            "resolved": "\"error\" | \"neutral\" | \"success\"",
+            "references": {
+              "MessageInlineProps": {
+                "location": "import",
+                "path": "./message-inline.types",
+                "id": "src/components/message-inline/message-inline.types.ts::MessageInlineProps",
+                "referenceLocation": "MessageInlineProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "variant",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'neutral'"
+            }
+          ],
+          "default": "'neutral'",
+          "values": [
+            {
+              "value": "error",
+              "type": "string"
+            },
+            {
+              "value": "neutral",
+              "type": "string"
+            },
+            {
+              "value": "success",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [],
+      "listeners": [],
+      "styles": [],
+      "slots": [],
+      "parts": [],
+      "states": [],
+      "dependents": [],
+      "dependencies": [
+        "mnt-icon"
+      ],
+      "dependencyGraph": {
+        "mnt-message-inline": [
+          "mnt-icon"
+        ]
+      }
     },
     {
       "filePath": "src/components/radio/radio.tsx",
@@ -5382,6 +5560,11 @@
       "declaration": "any",
       "docstring": "",
       "path": "src/components.d.ts"
+    },
+    "src/components/message-inline/message-inline.types.ts::MessageInlineProps": {
+      "declaration": "export interface MessageInlineProps {\n  variant?: MessageInlineColorVariants;\n  icon?: ExtendedIconName;\n  label?: string;\n  hasPadding?: boolean;\n}",
+      "docstring": "",
+      "path": "src/components/message-inline/message-inline.types.ts"
     },
     "src/components/radio/radio.types.tsx::RadioBaseProps": {
       "declaration": "export interface RadioBaseProps {\n  name?: string;\n  label?: string;\n  value?: string;\n  checked?: boolean;\n  disabled?: boolean;\n}",

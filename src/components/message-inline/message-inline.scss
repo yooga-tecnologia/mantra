@@ -1,0 +1,39 @@
+@use 'sass:map';
+
+@use '../../shared/theme/core/theme' as theme;
+
+$component-prefix: theme.get-prefix('message-inline');
+
+$message-inline-color-scheme: (
+  neutral: theme.get-tone-from-palette(700, 'neutral'),
+  success: theme.get-tone-from-palette(700, 'success'),
+  error: theme.get-tone-from-palette(800, 'critical'),
+);
+
+$message-inline-padding: 8px;
+$message-inline-gap: 2px;
+
+.mnt-message-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: $message-inline-gap;
+
+  &.#{$component-prefix}-has-padding {
+    padding: $message-inline-padding;
+  }
+
+  & > span.#{$component-prefix}-label {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  @each $color, $color-value in $message-inline-color-scheme {
+    &.#{$component-prefix}-#{$color} {
+      svg,
+      span {
+        color: $color-value;
+      }
+    }
+  }
+}

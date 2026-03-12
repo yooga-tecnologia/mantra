@@ -1,5 +1,7 @@
 import { SizeVariants, sizeVariantsArray, StateVariants, stateVariantsArray } from '@theme/theme.types';
+
 import { ExtendedIconName } from '../icon/icon.types';
+import { MessageInlineColorVariants } from '../message-inline/message-inline.types';
 
 export const fieldTextSizeVariantsArray = sizeVariantsArray.filter((size) => size !== 'tiny');
 export const fieldTextStateVariantsArray = stateVariantsArray.filter((state) => state !== 'warning');
@@ -10,7 +12,7 @@ export interface FieldTextProps {
 
   // Optional
   // variant?: 'default' | 'filled';
-  color?: 'critical' | 'success' | 'neutral';
+  color?: MessageInlineColorVariants;
   state?: Exclude<StateVariants, 'warning'>;
   size?: Exclude<SizeVariants, 'tiny'>;
   iconLeft?: ExtendedIconName;
