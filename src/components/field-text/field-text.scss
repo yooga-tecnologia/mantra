@@ -36,7 +36,6 @@ $field-text-color-scheme: (
     text-color: #242628,
     placeholder-color: #818A8F,
     background-color: transparent,
-    inline-message-color: #818A8F,
     border-color: #CED2D3,
     border-color-on-hover: #818A8F,
     border-color-on-focus: #0B7CBE,
@@ -46,7 +45,6 @@ $field-text-color-scheme: (
     text-color: #242628,
     placeholder-color: #818A8F,
     background-color: transparent,
-    inline-message-color: #C01615,
     border-color: #E41F1E,
     border-color-on-hover: #818A8F,
     border-color-on-focus: #0B7CBE,
@@ -56,7 +54,6 @@ $field-text-color-scheme: (
     text-color: #242628,
     placeholder-color: #818A8F,
     background-color: transparent,
-    inline-message-color: #16653C,
     border-color: #15A459,
     border-color-on-hover: #818A8F,
     border-color-on-focus: #0B7CBE,
@@ -138,17 +135,6 @@ $field-text-color-scheme: (
       color: unset !important;
     }
   }
-
-  &-inline-message {
-    display: flex;
-    align-items: center;
-    font-weight: 400;
-    color: #818A8F;
-
-    mnt-icon {
-      color: #818A8F;
-    }
-  }
 }
 
 // 3. SIZING
@@ -160,7 +146,6 @@ $field-text-color-scheme: (
   .#{$component-prefix}-#{$size} {
     &,
     & > .#{$component-prefix}-label,
-    & > .#{$component-prefix}-inline-message,
     & > .#{$component-prefix}-input input {
       @include field-text-size($size-map);
     }
@@ -243,14 +228,6 @@ $field-text-color-scheme: (
         &:focus {
           transition: all ease-in-out .2s;
         }
-      }
-    }
-
-    .#{$component-prefix}-inline-message {
-      color: map.get($color-scheme, inline-message-color);
-
-      mnt-icon {
-        color: map.get($color-scheme, inline-message-color);
       }
     }
   }

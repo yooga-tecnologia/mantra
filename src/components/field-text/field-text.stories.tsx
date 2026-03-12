@@ -25,7 +25,7 @@ O componente \`mnt-field-text\` é um elemento de formulário utilizado para ins
     },
   },
   argTypes: {
-    inputName: {
+    name: {
       control: 'text',
       description: 'Nome do campo utilizado para identificação no formulário',
       table: {
@@ -128,7 +128,7 @@ O componente \`mnt-field-text\` é um elemento de formulário utilizado para ins
 const FieldTextTemplate = (props: FieldTextProps) => {
   return `
     <mnt-field-text
-      input-name="${props.inputName}"
+      name="${props.inputName}"
       label-text="${props.labelText}"
       size="${props.size}"
       placeholder="${props.placeholder}"
@@ -147,7 +147,7 @@ const FieldTextTemplate = (props: FieldTextProps) => {
  */
 export const Default: Story = {
   args: {
-    inputName: 'field-text-1',
+    name: 'field-text-1',
     size: 'medium',
     labelText: 'Label',
     placeholder: 'Placeholder',
@@ -172,7 +172,7 @@ const INFO_BUTTON_TEMPLATE = `
  */
 export const InfoButton: Story = {
   args: {
-    inputName: 'field-text-info-button',
+    name: 'field-text-info-button',
     size: 'medium',
     labelText: 'Label',
     placeholder: 'Placeholder',

@@ -322,7 +322,10 @@ export namespace Components {
           * @default false
          */
         "hasPadding": MessageInlineProps['hasPadding'];
-        "icon"?: MessageInlineProps['icon'];
+        /**
+          * @default ''
+         */
+        "icon": MessageInlineProps['icon'];
         /**
           * @default ''
          */
@@ -1080,6 +1083,9 @@ declare namespace LocalJSX {
           * @default false
          */
         "hasPadding"?: MessageInlineProps['hasPadding'];
+        /**
+          * @default ''
+         */
         "icon"?: MessageInlineProps['icon'];
         /**
           * @default ''
@@ -1306,8 +1312,8 @@ declare namespace LocalJSX {
     }
     interface MntMessageInlineAttributes {
         "label": MessageInlineProps['label'];
-        "variant": MessageInlineProps['variant'];
         "hasPadding": MessageInlineProps['hasPadding'];
+        "variant": MessageInlineProps['variant'];
         "icon": MessageInlineProps['icon'];
     }
     interface MntRadioAttributes {

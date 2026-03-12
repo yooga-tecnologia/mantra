@@ -10,9 +10,10 @@ import { getLibPrefix } from 'src/utils/utils';
 })
 export class MessageInline {
   @Prop() label: MessageInlineProps['label'] = '';
-  @Prop() variant: MessageInlineProps['variant'] = 'neutral';
   @Prop() hasPadding: MessageInlineProps['hasPadding'] = false;
-  @Prop() icon?: MessageInlineProps['icon'];
+
+  @Prop({ mutable: true, reflect: true }) variant: MessageInlineProps['variant'] = 'neutral';
+  @Prop({ mutable: true, reflect: true }) icon: MessageInlineProps['icon'] = '';
 
   readonly LIB_PREFIX = getLibPrefix();
 
