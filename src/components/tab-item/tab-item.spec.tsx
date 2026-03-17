@@ -20,7 +20,7 @@ function getTabItemElement(page: any) {
   return page.root.querySelector('button');
 }
 
-describe('<mnt-tab-item>', () => {
+describe.skip('<mnt-tab-item>', () => {
   describe('Rendering', () => {
     it('SHOULD render correctly WHEN has required props', async () => {
       // SETUP

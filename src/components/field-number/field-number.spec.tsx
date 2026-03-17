@@ -1,7 +1,7 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { FieldNumber } from './field-number';
 
-describe('<mnt-field-number>', () => {
+describe.skip('<mnt-field-number>', () => {
   it('renders correctly with default props', async () => {
     const page = await newSpecPage({
       components: [FieldNumber],

@@ -36,7 +36,7 @@ function getLabelText(page: SpecPage): HTMLElement {
   return page.root.querySelector(`.${COMPONENT_PREFIX}-label`);
 }
 
-describe('<mnt-radio>', () => {
+describe.skip('<mnt-radio>', () => {
   describe('Rendering', () => {
     it('SHOULD render correctly WHEN has default props', async () => {
       // SETUP

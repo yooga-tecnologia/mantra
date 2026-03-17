@@ -14,10 +14,12 @@ import { FieldDateProps } from "./components/field-date/field-date.types";
 import { FieldNumberVariant } from "./components/field-number/field-number.types";
 import { SizeVariants } from "./shared/theme/theme.types";
 import { FieldTextProps } from "./components/field-text/field-text.types";
-import { FieldTextProps as FieldTextProps1 } from "./components/filter-search/filter-search.types";
+import { FilterSearchProps } from "./components/filter-search/filter-search.types";
 import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
-import { LoadingStateProps } from "./components/loading-state/loading-state";
+import { LoadingStateProps } from "./components.d";
+import { MessageHighlightProps } from "./components/message-highlight/message-highlight.types";
+import { MessageInlineProps } from "./components/message-inline/message-inline.types";
 import { RadioBaseProps } from "./components/radio/radio.types";
 import { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 import { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
@@ -33,10 +35,12 @@ export { FieldDateProps } from "./components/field-date/field-date.types";
 export { FieldNumberVariant } from "./components/field-number/field-number.types";
 export { SizeVariants } from "./shared/theme/theme.types";
 export { FieldTextProps } from "./components/field-text/field-text.types";
-export { FieldTextProps as FieldTextProps1 } from "./components/filter-search/filter-search.types";
+export { FilterSearchProps } from "./components/filter-search/filter-search.types";
 export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
-export { LoadingStateProps } from "./components/loading-state/loading-state";
+export { LoadingStateProps } from "./components.d";
+export { MessageHighlightProps } from "./components/message-highlight/message-highlight.types";
+export { MessageInlineProps } from "./components/message-inline/message-inline.types";
 export { RadioBaseProps } from "./components/radio/radio.types";
 export { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 export { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
@@ -259,21 +263,17 @@ export namespace Components {
         /**
           * @default false
          */
-        "fullWidth"?: boolean;
-        "hasActionButton"?: FieldTextProps1['hasActionButton'];
-        "hasInfoButton"?: FieldTextProps1['hasInfoButton'];
-        "inlineMessage"?: FieldTextProps1['inlineMessage'];
-        "labelText"?: FieldTextProps1['labelText'];
+        "fullWidth"?: FilterSearchProps['fullWidth'];
         "name": string;
-        "placeholder"?: FieldTextProps1['placeholder'];
+        "placeholder"?: FilterSearchProps['placeholder'];
         /**
           * @default 'medium'
          */
-        "size"?: FieldTextProps1['size'];
+        "size"?: FilterSearchProps['size'];
         /**
           * @default 'default'
          */
-        "state"?: FieldTextProps1['state'];
+        "state"?: FilterSearchProps['state'];
         "value"?: string;
     }
     interface MntIcon {
@@ -318,6 +318,54 @@ export namespace Components {
          */
         "color": LoadingStateProps['color'];
         "label"?: LoadingStateProps['label'];
+    }
+    interface MntMessageHighlight {
+        /**
+          * @default 'left'
+         */
+        "align": MessageHighlightProps['align'];
+        /**
+          * @default false
+         */
+        "fullWidth": MessageHighlightProps['fullWidth'];
+        /**
+          * @default ''
+         */
+        "icon": MessageHighlightProps['icon'];
+        /**
+          * @default ''
+         */
+        "label": MessageHighlightProps['label'];
+        /**
+          * @default false
+         */
+        "marginBottom": MessageHighlightProps['marginBottom'];
+        /**
+          * @default 'default'
+         */
+        "type": MessageHighlightProps['type'];
+        /**
+          * @default 'neutral'
+         */
+        "variant": MessageHighlightProps['variant'];
+    }
+    interface MntMessageInline {
+        /**
+          * @default false
+         */
+        "hasPadding": MessageInlineProps['hasPadding'];
+        /**
+          * @default ''
+         */
+        "icon": MessageInlineProps['icon'];
+        /**
+          * @default ''
+         */
+        "label": MessageInlineProps['label'];
+        /**
+          * @default 'neutral'
+         */
+        "variant": MessageInlineProps['variant'];
     }
     interface MntRadio {
         /**
@@ -618,6 +666,18 @@ declare global {
         prototype: HTMLMntLoadingStateElement;
         new (): HTMLMntLoadingStateElement;
     };
+    interface HTMLMntMessageHighlightElement extends Components.MntMessageHighlight, HTMLStencilElement {
+    }
+    var HTMLMntMessageHighlightElement: {
+        prototype: HTMLMntMessageHighlightElement;
+        new (): HTMLMntMessageHighlightElement;
+    };
+    interface HTMLMntMessageInlineElement extends Components.MntMessageInline, HTMLStencilElement {
+    }
+    var HTMLMntMessageInlineElement: {
+        prototype: HTMLMntMessageInlineElement;
+        new (): HTMLMntMessageInlineElement;
+    };
     interface HTMLMntRadioElementEventMap {
         "radioChange": { checked: boolean; value: string };
     }
@@ -727,6 +787,8 @@ declare global {
         "mnt-icon-large": HTMLMntIconLargeElement;
         "mnt-illustration": HTMLMntIllustrationElement;
         "mnt-loading-state": HTMLMntLoadingStateElement;
+        "mnt-message-highlight": HTMLMntMessageHighlightElement;
+        "mnt-message-inline": HTMLMntMessageInlineElement;
         "mnt-radio": HTMLMntRadioElement;
         "mnt-steps": HTMLMntStepsElement;
         "mnt-switch": HTMLMntSwitchElement;
@@ -997,23 +1059,19 @@ declare namespace LocalJSX {
         /**
           * @default false
          */
-        "fullWidth"?: boolean;
-        "hasActionButton"?: FieldTextProps1['hasActionButton'];
-        "hasInfoButton"?: FieldTextProps1['hasInfoButton'];
-        "inlineMessage"?: FieldTextProps1['inlineMessage'];
-        "labelText"?: FieldTextProps1['labelText'];
+        "fullWidth"?: FilterSearchProps['fullWidth'];
         "name"?: string;
         "onFilterApplied"?: (event: MntFilterSearchCustomEvent<{ value: string }>) => void;
         "onValueChange"?: (event: MntFilterSearchCustomEvent<{ value: string }>) => void;
-        "placeholder"?: FieldTextProps1['placeholder'];
+        "placeholder"?: FilterSearchProps['placeholder'];
         /**
           * @default 'medium'
          */
-        "size"?: FieldTextProps1['size'];
+        "size"?: FilterSearchProps['size'];
         /**
           * @default 'default'
          */
-        "state"?: FieldTextProps1['state'];
+        "state"?: FilterSearchProps['state'];
         "value"?: string;
     }
     interface MntIcon {
@@ -1058,6 +1116,54 @@ declare namespace LocalJSX {
          */
         "color"?: LoadingStateProps['color'];
         "label"?: LoadingStateProps['label'];
+    }
+    interface MntMessageHighlight {
+        /**
+          * @default 'left'
+         */
+        "align"?: MessageHighlightProps['align'];
+        /**
+          * @default false
+         */
+        "fullWidth"?: MessageHighlightProps['fullWidth'];
+        /**
+          * @default ''
+         */
+        "icon"?: MessageHighlightProps['icon'];
+        /**
+          * @default ''
+         */
+        "label"?: MessageHighlightProps['label'];
+        /**
+          * @default false
+         */
+        "marginBottom"?: MessageHighlightProps['marginBottom'];
+        /**
+          * @default 'default'
+         */
+        "type"?: MessageHighlightProps['type'];
+        /**
+          * @default 'neutral'
+         */
+        "variant"?: MessageHighlightProps['variant'];
+    }
+    interface MntMessageInline {
+        /**
+          * @default false
+         */
+        "hasPadding"?: MessageInlineProps['hasPadding'];
+        /**
+          * @default ''
+         */
+        "icon"?: MessageInlineProps['icon'];
+        /**
+          * @default ''
+         */
+        "label"?: MessageInlineProps['label'];
+        /**
+          * @default 'neutral'
+         */
+        "variant"?: MessageInlineProps['variant'];
     }
     interface MntRadio {
         /**
@@ -1245,15 +1351,11 @@ declare namespace LocalJSX {
     }
     interface MntFilterSearchAttributes {
         "name": string;
-        "fullWidth": boolean;
-        "size": FieldTextProps['size'];
-        "placeholder": FieldTextProps['placeholder'];
-        "state": FieldTextProps['state'];
+        "fullWidth": FilterSearchProps['fullWidth'];
+        "size": FilterSearchProps['size'];
+        "placeholder": FilterSearchProps['placeholder'];
+        "state": FilterSearchProps['state'];
         "value": string;
-        "labelText": FieldTextProps['labelText'];
-        "hasActionButton": FieldTextProps['hasActionButton'];
-        "hasInfoButton": FieldTextProps['hasInfoButton'];
-        "inlineMessage": FieldTextProps['inlineMessage'];
     }
     interface MntIconAttributes {
         "icon": IconProps['icon'];
@@ -1274,8 +1376,23 @@ declare namespace LocalJSX {
         "height": IllustrationProps['height'];
     }
     interface MntLoadingStateAttributes {
-        "color": LoadingStateProps['color'];
-        "label": LoadingStateProps['label'];
+        "color": string;
+        "label": string;
+    }
+    interface MntMessageHighlightAttributes {
+        "label": MessageHighlightProps['label'];
+        "type": MessageHighlightProps['type'];
+        "variant": MessageHighlightProps['variant'];
+        "icon": MessageHighlightProps['icon'];
+        "fullWidth": MessageHighlightProps['fullWidth'];
+        "marginBottom": MessageHighlightProps['marginBottom'];
+        "align": MessageHighlightProps['align'];
+    }
+    interface MntMessageInlineAttributes {
+        "label": MessageInlineProps['label'];
+        "hasPadding": MessageInlineProps['hasPadding'];
+        "variant": MessageInlineProps['variant'];
+        "icon": MessageInlineProps['icon'];
     }
     interface MntRadioAttributes {
         "name": RadioBaseProps['name'];
@@ -1332,6 +1449,8 @@ declare namespace LocalJSX {
         "mnt-icon-large": Omit<MntIconLarge, keyof MntIconLargeAttributes> & { [K in keyof MntIconLarge & keyof MntIconLargeAttributes]?: MntIconLarge[K] } & { [K in keyof MntIconLarge & keyof MntIconLargeAttributes as `attr:${K}`]?: MntIconLargeAttributes[K] } & { [K in keyof MntIconLarge & keyof MntIconLargeAttributes as `prop:${K}`]?: MntIconLarge[K] } & OneOf<"icon", MntIconLarge["icon"]>;
         "mnt-illustration": Omit<MntIllustration, keyof MntIllustrationAttributes> & { [K in keyof MntIllustration & keyof MntIllustrationAttributes]?: MntIllustration[K] } & { [K in keyof MntIllustration & keyof MntIllustrationAttributes as `attr:${K}`]?: MntIllustrationAttributes[K] } & { [K in keyof MntIllustration & keyof MntIllustrationAttributes as `prop:${K}`]?: MntIllustration[K] } & OneOf<"name", MntIllustration["name"]>;
         "mnt-loading-state": Omit<MntLoadingState, keyof MntLoadingStateAttributes> & { [K in keyof MntLoadingState & keyof MntLoadingStateAttributes]?: MntLoadingState[K] } & { [K in keyof MntLoadingState & keyof MntLoadingStateAttributes as `attr:${K}`]?: MntLoadingStateAttributes[K] } & { [K in keyof MntLoadingState & keyof MntLoadingStateAttributes as `prop:${K}`]?: MntLoadingState[K] };
+        "mnt-message-highlight": Omit<MntMessageHighlight, keyof MntMessageHighlightAttributes> & { [K in keyof MntMessageHighlight & keyof MntMessageHighlightAttributes]?: MntMessageHighlight[K] } & { [K in keyof MntMessageHighlight & keyof MntMessageHighlightAttributes as `attr:${K}`]?: MntMessageHighlightAttributes[K] } & { [K in keyof MntMessageHighlight & keyof MntMessageHighlightAttributes as `prop:${K}`]?: MntMessageHighlight[K] };
+        "mnt-message-inline": Omit<MntMessageInline, keyof MntMessageInlineAttributes> & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes]?: MntMessageInline[K] } & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes as `attr:${K}`]?: MntMessageInlineAttributes[K] } & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes as `prop:${K}`]?: MntMessageInline[K] };
         "mnt-radio": Omit<MntRadio, keyof MntRadioAttributes> & { [K in keyof MntRadio & keyof MntRadioAttributes]?: MntRadio[K] } & { [K in keyof MntRadio & keyof MntRadioAttributes as `attr:${K}`]?: MntRadioAttributes[K] } & { [K in keyof MntRadio & keyof MntRadioAttributes as `prop:${K}`]?: MntRadio[K] };
         "mnt-steps": Omit<MntSteps, keyof MntStepsAttributes> & { [K in keyof MntSteps & keyof MntStepsAttributes]?: MntSteps[K] } & { [K in keyof MntSteps & keyof MntStepsAttributes as `attr:${K}`]?: MntStepsAttributes[K] } & { [K in keyof MntSteps & keyof MntStepsAttributes as `prop:${K}`]?: MntSteps[K] };
         "mnt-switch": Omit<MntSwitch, keyof MntSwitchAttributes> & { [K in keyof MntSwitch & keyof MntSwitchAttributes]?: MntSwitch[K] } & { [K in keyof MntSwitch & keyof MntSwitchAttributes as `attr:${K}`]?: MntSwitchAttributes[K] } & { [K in keyof MntSwitch & keyof MntSwitchAttributes as `prop:${K}`]?: MntSwitch[K] };
@@ -1359,6 +1478,8 @@ declare module "@stencil/core" {
             "mnt-icon-large": LocalJSX.IntrinsicElements["mnt-icon-large"] & JSXBase.HTMLAttributes<HTMLMntIconLargeElement>;
             "mnt-illustration": LocalJSX.IntrinsicElements["mnt-illustration"] & JSXBase.HTMLAttributes<HTMLMntIllustrationElement>;
             "mnt-loading-state": LocalJSX.IntrinsicElements["mnt-loading-state"] & JSXBase.HTMLAttributes<HTMLMntLoadingStateElement>;
+            "mnt-message-highlight": LocalJSX.IntrinsicElements["mnt-message-highlight"] & JSXBase.HTMLAttributes<HTMLMntMessageHighlightElement>;
+            "mnt-message-inline": LocalJSX.IntrinsicElements["mnt-message-inline"] & JSXBase.HTMLAttributes<HTMLMntMessageInlineElement>;
             "mnt-radio": LocalJSX.IntrinsicElements["mnt-radio"] & JSXBase.HTMLAttributes<HTMLMntRadioElement>;
             "mnt-steps": LocalJSX.IntrinsicElements["mnt-steps"] & JSXBase.HTMLAttributes<HTMLMntStepsElement>;
             "mnt-switch": LocalJSX.IntrinsicElements["mnt-switch"] & JSXBase.HTMLAttributes<HTMLMntSwitchElement>;

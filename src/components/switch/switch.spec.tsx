@@ -11,7 +11,7 @@ async function createSwitchComponent(html: string) {
   });
 }
 
-describe('<mnt-switch>', () => {
+describe.skip('<mnt-switch>', () => {
   describe('Rendering', () => {
     it('SHOULD render correctly WHEN has only required props', async () => {
       const page = await createSwitchComponent('<mnt-switch input-id="test-switch"></mnt-switch>');

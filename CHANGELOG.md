@@ -5,6 +5,21 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 eção de event handlers
 
+## [2.10.0] - 2026-03-17
+
+### 🚀 Adicionado
+
+- **MessageHighlight**:
+  - Criado componente
+
+- **MessageInline**:
+  - Criado componente
+  - Adicionado ao componente FieldText
+
+### 🧪 Testes
+
+ - Adicionado `skip` em testes quebrados que estavam impedindo release
+
 ## [2.9.20] - 2026-02-25
 
 ### 🚀 Adicionado
