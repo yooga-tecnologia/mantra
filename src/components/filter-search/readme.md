@@ -7,18 +7,14 @@
 
 ## Properties
 
-| Property          | Attribute           | Description | Type                                       | Default     |
-| ----------------- | ------------------- | ----------- | ------------------------------------------ | ----------- |
-| `fullWidth`       | `full-width`        |             | `boolean`                                  | `false`     |
-| `hasActionButton` | `has-action-button` |             | `boolean`                                  | `undefined` |
-| `hasInfoButton`   | `has-info-button`   |             | `boolean`                                  | `undefined` |
-| `inlineMessage`   | `inline-message`    |             | `string`                                   | `undefined` |
-| `labelText`       | `label-text`        |             | `string`                                   | `undefined` |
-| `name`            | `name`              |             | `string`                                   | `undefined` |
-| `placeholder`     | `placeholder`       |             | `string`                                   | `undefined` |
-| `size`            | `size`              |             | `"large" \| "medium" \| "small" \| "tiny"` | `'medium'`  |
-| `state`           | `state`             |             | `"default" \| "error" \| "success"`        | `'default'` |
-| `value`           | `value`             |             | `string`                                   | `undefined` |
+| Property      | Attribute     | Description | Type                                       | Default     |
+| ------------- | ------------- | ----------- | ------------------------------------------ | ----------- |
+| `fullWidth`   | `full-width`  |             | `boolean`                                  | `false`     |
+| `name`        | `name`        |             | `string`                                   | `undefined` |
+| `placeholder` | `placeholder` |             | `string`                                   | `undefined` |
+| `size`        | `size`        |             | `"large" \| "medium" \| "small" \| "tiny"` | `'medium'`  |
+| `state`       | `state`       |             | `"default" \| "error" \| "success"`        | `'default'` |
+| `value`       | `value`       |             | `string`                                   | `undefined` |
 
 
 ## Events

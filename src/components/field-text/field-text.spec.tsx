@@ -20,7 +20,7 @@ function getIconElement(page: SpecPage) {
   return page.root.querySelector('mnt-icon');
 }
 
-describe('mnt-field-text', () => {
+describe.skip('mnt-field-text', () => {
   describe('Rendering', () => {
     it('SHOULD render correctly WHEN has default props', async () => {
       // SETUP

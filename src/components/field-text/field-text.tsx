@@ -95,6 +95,16 @@ export class FieldText {
     );
   }
 
+  private getMessageInlineVariant() {
+    switch (this.state) {
+      case 'error':
+        return 'error';
+      case 'success':
+        return 'success';
+    }
+    return 'neutral';
+  }
+
   onInput(event: any) {
     const inputEl = event.target as HTMLInputElement;
     const inputValue = inputEl.value;
@@ -389,27 +399,16 @@ export class FieldText {
   }
 
   private renderInlineMessage() {
-    if (!this.inlineMessage) return null;
+    if (!this.inlineMessage) {
+      return null;
+    }
+
     return (
-      <div class={this.componentPrefix + '-inline-message'}>
-        {this.state === 'error' ? (
-          <mnt-icon
-            icon="signalingErrorCircle"
-            size="small"
-          ></mnt-icon>
-        ) : this.state === 'success' ? (
-          <mnt-icon
-            icon="signalingCheckCircle"
-            size="small"
-          ></mnt-icon>
-        ) : (
-          <mnt-icon
-            icon="info"
-            size="small"
-          ></mnt-icon>
-        )}
-        <span>{this.inlineMessage}</span>
-      </div>
+      <mnt-message-inline
+        label={this.inlineMessage}
+        variant={this.getMessageInlineVariant()}
+        icon={this.state === 'error' ? 'signalingErrorCircle' : this.state === 'success' ? 'signalingCheckCircle' : 'info'}
+      ></mnt-message-inline>
     );
   }
 

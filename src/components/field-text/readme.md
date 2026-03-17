@@ -37,11 +37,14 @@
 ### Depends on
 
 - [mnt-icon](../icon)
+- [mnt-message-inline](../message-inline)
 
 ### Graph
 ```mermaid
 graph TD;
   mnt-field-text --> mnt-icon
+  mnt-field-text --> mnt-message-inline
+  mnt-message-inline --> mnt-icon
   style mnt-field-text fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

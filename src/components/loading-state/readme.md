@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type                                                                         | Default     |
-| -------- | --------- | ----------- | ---------------------------------------------------------------------------- | ----------- |
-| `color`  | `color`   |             | `"error" \| "neutral" \| "primary" \| "secondary" \| "success" \| "warning"` | `'neutral'` |
-| `label`  | `label`   |             | `string`                                                                     | `undefined` |
+| Property | Attribute | Description | Type                | Default     |
+| -------- | --------- | ----------- | ------------------- | ----------- |
+| `color`  | `color`   |             | `LoadingStateProps` | `'neutral'` |
+| `label`  | `label`   |             | `LoadingStateProps` | `undefined` |
 
 
 ----------------------------------------------

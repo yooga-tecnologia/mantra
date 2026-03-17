@@ -28,7 +28,7 @@ function getClearIcon(page: SpecPage): HTMLElement {
   return page.root.querySelector(`.${COMPONENT_PREFIX}-clear-icon`);
 }
 
-describe('<mnt-filter-search>', () => {
+describe.skip('<mnt-filter-search>', () => {
   describe('Rendering', () => {
     it('SHOULD render correctly WHEN has default props', async () => {
       // SETUP

@@ -2,221 +2,227 @@ import { newSpecPage } from '@stencil/core/testing';
 import { Icon } from './icon';
 
 describe('<mnt-icon>', () => {
-  it('renders correctly with default props (without background)', async () => {
-    const page = await newSpecPage({
-      components: [Icon],
-      html: `<mnt-icon icon="search"></mnt-icon>`,
-    });
-
-    const svg = page.root.querySelector('svg');
-    expect(svg).not.toBeNull();
-    expect(svg.getAttribute('width')).toBe('24px');
-    expect(svg.getAttribute('height')).toBe('24px');
-    expect(svg.getAttribute('fill')).toBe('currentColor');
-
-    // Verifica que o wrapper tem a classe de direção padrão
-    const wrapper = page.root.querySelector('.mnt-icon-d-up');
-    expect(wrapper).not.toBeNull();
-
-    const span = page.root.querySelector('span');
-    expect(span).toBeNull();
-  });
-
-  it('transform and base icon name mapping', async () => {
-    const testCases = [
-      { icon: 'arrow-up', expectedDirection: 'up', expectedBase: 'arrow' },
-      { icon: 'arrow-down', expectedDirection: 'down', expectedBase: 'arrow' },
-      { icon: 'arrow-right', expectedDirection: 'right', expectedBase: 'arrow' },
-      { icon: 'arrow-left', expectedDirection: 'left', expectedBase: 'arrow' },
-      { icon: 'search', expectedDirection: 'up', expectedBase: 'search' },
-    ];
-
-    for (const { icon, expectedDirection, expectedBase } of testCases) {
+  describe('default rendering', () => {
+    it('renders svg with medium size and currentColor fill', async () => {
       const page = await newSpecPage({
         components: [Icon],
-        html: `<mnt-icon icon="${icon}"></mnt-icon>`,
+        html: `<mnt-icon icon="search"></mnt-icon>`,
       });
 
-      // Verifica que o wrapper tem a classe de direção correta
-      const wrapper = page.root.querySelector(`.mnt-icon-d-${expectedDirection}`);
+      await page.waitForChanges();
+
+      const svg = page.root.querySelector('svg');
+      expect(svg).not.toBeNull();
+      expect(svg.getAttribute('width')).toBe('24px');
+      expect(svg.getAttribute('height')).toBe('24px');
+      expect(svg.getAttribute('fill')).toBe('currentColor');
+    });
+
+    it('wraps svg in a div with direction class', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search"></mnt-icon>`,
+      });
+
+      const wrapper = page.root.querySelector('.mnt-icon');
       expect(wrapper).not.toBeNull();
-      expect(page.rootInstance.getBaseIconName(icon)).toBe(expectedBase);
-    }
-  });
+      expect(wrapper.tagName.toLowerCase()).toBe('div');
 
-  it('applies the correct transformation for a directional icon', async () => {
-    const page = await newSpecPage({
-      components: [Icon],
-      html: `<mnt-icon icon="arrow-down"></mnt-icon>`,
+      const directionWrapper = page.root.querySelector('.mnt-icon-d-up');
+      expect(directionWrapper).not.toBeNull();
     });
 
-    const svg = page.root.querySelector('svg');
-    expect(svg).not.toBeNull();
-    
-    // Verifica que o wrapper tem a classe de direção 'down'
-    const wrapper = page.root.querySelector('.mnt-icon-d-down');
-    expect(wrapper).not.toBeNull();
-  });
-
-  it('renders with background and adjusts sizes correctly', async () => {
-    const page = await newSpecPage({
-      components: [Icon],
-      html: `<mnt-icon icon="search" size="large" background="red"></mnt-icon>`,
-    });
-
-    expect(page.root.getAttribute('style')).toContain('width: 32px');
-    expect(page.root.getAttribute('style')).toContain('height: 32px');
-
-    const span = page.root.querySelector('span');
-    expect(span).not.toBeNull();
-    expect(span.classList.contains('mnt-icon-bg')).toBeTruthy();
-    expect(span.classList.contains('mnt-border-circle')).toBeTruthy();
-    expect(span.style.backgroundColor).toBe('red');
-    expect(span.style.width).toBe('32px');
-    expect(span.style.height).toBe('32px');
-
-    const svg = page.root.querySelector('svg');
-    expect(svg.getAttribute('width')).toBe('16px');
-    expect(svg.getAttribute('height')).toBe('16px');
-  });
-
-  it('respects numeric size prop', async () => {
-    const page = await newSpecPage({
-      components: [Icon],
-      html: `<mnt-icon icon="search" size="50"></mnt-icon>`,
-    });
-
-    await page.waitForChanges();
-
-    const svg = page.root.querySelector('svg')!;
-    expect(svg.getAttribute('width')).toBe('50px');
-    expect(svg.getAttribute('height')).toBe('50px');
-  });
-
-  it('shows warning when using background with small sizes', async () => {
-    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    const page = await newSpecPage({
-      components: [Icon],
-      html: `<mnt-icon icon="search" size="small" background="red"></mnt-icon>`,
-    });
-
-    await page.waitForChanges();
-
-    expect(consoleSpy).toHaveBeenCalledWith(
-      `[mnt-icon] Background property is not recommended for sizes smaller than 'large' (32px). ` +
-        `Current size: 16px. Consider using 'large' or 'doubleLarge' for better visual results.`,
-    );
-
-    consoleSpy.mockRestore();
-  });
-
-  it('respects different predefined sizes', async () => {
-    const sizeTestCases = [
-      { size: 'tiny', expectedSize: '12px' },
-      { size: 'small', expectedSize: '16px' },
-      { size: 'medium', expectedSize: '24px' },
-      { size: 'large', expectedSize: '32px' },
-      { size: 'doubleLarge', expectedSize: '64px' },
-    ];
-
-    for (const { size, expectedSize } of sizeTestCases) {
+    it('does not render span without background', async () => {
       const page = await newSpecPage({
         components: [Icon],
-        html: `<mnt-icon icon="search" size="${size}"></mnt-icon>`,
+        html: `<mnt-icon icon="search"></mnt-icon>`,
       });
 
-      const svg = page.root.querySelector('svg')!;
-      expect(svg.getAttribute('width')).toBe(expectedSize);
-      expect(svg.getAttribute('height')).toBe(expectedSize);
-    }
-  });
-
-  it('respects custom color prop', async () => {
-    const page = await newSpecPage({
-      components: [Icon],
-      html: `<mnt-icon icon="search" color="#ff0000"></mnt-icon>`,
+      const span = page.root.querySelector('span');
+      expect(span).toBeNull();
     });
 
-    const svg = page.root.querySelector('svg')!;
-    expect(svg.getAttribute('fill')).toBe('#ff0000');
-  });
-
-  it('does not show warning when using background with large sizes', async () => {
-    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    const page = await newSpecPage({
-      components: [Icon],
-      html: `<mnt-icon icon="search" size="large" background="blue"></mnt-icon>`,
-    });
-
-    await page.waitForChanges();
-
-    expect(consoleSpy).not.toHaveBeenCalled();
-    consoleSpy.mockRestore();
-  });
-
-  it('handles background without proper size gracefully', async () => {
-    const page = await newSpecPage({
-      components: [Icon],
-      html: `<mnt-icon icon="search" size="medium" background="green"></mnt-icon>`,
-    });
-
-    // Should render without crashing even though background won't work optimally
-    const svg = page.root.querySelector('svg');
-    expect(svg).not.toBeNull();
-    expect(svg.getAttribute('width')).toBe('24px');
-
-    // Background span IS created but without proper sizing since size <= medium
-    const span = page.root.querySelector('span');
-    expect(span).not.toBeNull();
-    expect(span.style.width).toBe(''); // No width/height set for medium size
-  });
-
-  describe('bgShape property', () => {
-    it('should apply bgShape correctly when provided with background', async () => {
+    it('sets host element size to icon size when no background', async () => {
       const page = await newSpecPage({
         components: [Icon],
-        html: `<mnt-icon icon="search" size="large" background="#E1F1FD" bg-shape="rounded"></mnt-icon>`,
+        html: `<mnt-icon icon="search" size="large"></mnt-icon>`,
+      });
+
+      await page.waitForChanges();
+
+      expect(page.root.style.width).toBe('32px');
+      expect(page.root.style.height).toBe('32px');
+    });
+  });
+
+  describe('icon direction', () => {
+    it('resolves base icon name and applies direction class', async () => {
+      const testCases = [
+        { icon: 'arrow-up', expectedDirection: 'up', expectedBase: 'arrow' },
+        { icon: 'arrow-down', expectedDirection: 'down', expectedBase: 'arrow' },
+        { icon: 'arrow-right', expectedDirection: 'right', expectedBase: 'arrow' },
+        { icon: 'arrow-left', expectedDirection: 'left', expectedBase: 'arrow' },
+        { icon: 'search', expectedDirection: 'up', expectedBase: 'search' },
+      ];
+
+      for (const { icon, expectedDirection, expectedBase } of testCases) {
+        const page = await newSpecPage({
+          components: [Icon],
+          html: `<mnt-icon icon="${icon}"></mnt-icon>`,
+        });
+
+        const wrapper = page.root.querySelector(`.mnt-icon-d-${expectedDirection}`);
+        expect(wrapper).not.toBeNull();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        expect((page.rootInstance as any).getBaseIconName(icon)).toBe(expectedBase);
+      }
+    });
+
+    it('applies mnt-icon-d-down for arrow-down', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="arrow-down"></mnt-icon>`,
+      });
+
+      const wrapper = page.root.querySelector('.mnt-icon-d-down');
+      expect(wrapper).not.toBeNull();
+    });
+  });
+
+  describe('size prop', () => {
+    it('applies all predefined sizes to svg dimensions', async () => {
+      const testCases = [
+        { size: 'tiny', expectedSize: '12px' },
+        { size: 'small', expectedSize: '16px' },
+        { size: 'medium', expectedSize: '24px' },
+        { size: 'large', expectedSize: '32px' },
+        { size: 'doubleLarge', expectedSize: '64px' },
+      ];
+
+      for (const { size, expectedSize } of testCases) {
+        const page = await newSpecPage({
+          components: [Icon],
+          html: `<mnt-icon icon="search" size="${size}"></mnt-icon>`,
+        });
+
+        const svg = page.root.querySelector('svg');
+        expect(svg.getAttribute('width')).toBe(expectedSize);
+        expect(svg.getAttribute('height')).toBe(expectedSize);
+      }
+    });
+
+    it('accepts numeric size as string', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search" size="50"></mnt-icon>`,
+      });
+
+      await page.waitForChanges();
+
+      const svg = page.root.querySelector('svg');
+      expect(svg.getAttribute('width')).toBe('50px');
+      expect(svg.getAttribute('height')).toBe('50px');
+    });
+  });
+
+  describe('color prop', () => {
+    it('uses currentColor as default fill', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search"></mnt-icon>`,
+      });
+
+      const svg = page.root.querySelector('svg');
+      expect(svg.getAttribute('fill')).toBe('currentColor');
+    });
+
+    it('applies custom color to svg fill', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search" color="#ff0000"></mnt-icon>`,
+      });
+
+      const svg = page.root.querySelector('svg');
+      expect(svg.getAttribute('fill')).toBe('#ff0000');
+    });
+  });
+
+  describe('background prop', () => {
+    it('renders span element when background is provided', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search" size="large" background="red"></mnt-icon>`,
       });
 
       await page.waitForChanges();
 
       const span = page.root.querySelector('span');
       expect(span).not.toBeNull();
-      expect(span.classList.contains('mnt-border-rounded')).toBeTruthy();
-      expect(span.style.backgroundColor).toBe('#E1F1FD');
     });
 
-    it('should apply square shape when bgShape is square', async () => {
+    it('adds mnt-icon-with-background class when background is provided', async () => {
       const page = await newSpecPage({
         components: [Icon],
-        html: `<mnt-icon icon="search" size="large" background="#DCFCEA" bg-shape="square"></mnt-icon>`,
+        html: `<mnt-icon icon="search" size="large" background="red"></mnt-icon>`,
       });
 
       await page.waitForChanges();
 
-      const span = page.root.querySelector('span');
-      expect(span).not.toBeNull();
-      expect(span.classList.contains('mnt-border-square')).toBeTruthy();
-      expect(span.style.backgroundColor).toBe('#DCFCEA');
+      const wrapper = page.root.querySelector('.mnt-icon-with-background');
+      expect(wrapper).not.toBeNull();
     });
 
-    it('should apply circle shape when bgShape is circle', async () => {
+    it('sets span and host to bgSize (iconSize + gap) and svg to iconSize', async () => {
       const page = await newSpecPage({
         components: [Icon],
-        html: `<mnt-icon icon="search" size="large" background="#E5E7E8" bg-shape="circle"></mnt-icon>`,
+        html: `<mnt-icon icon="search" size="large" background="red"></mnt-icon>`,
       });
 
       await page.waitForChanges();
 
+      // large: iconSize=32px, gap=16px → bgSize=48px
+      const svg = page.root.querySelector('svg');
+      expect(svg.getAttribute('width')).toBe('32px');
+      expect(svg.getAttribute('height')).toBe('32px');
+
       const span = page.root.querySelector('span');
-      expect(span).not.toBeNull();
+      expect(span.classList.contains('mnt-icon-bg')).toBeTruthy();
       expect(span.classList.contains('mnt-border-circle')).toBeTruthy();
-      expect(span.style.backgroundColor).toBe('#E5E7E8');
+      expect(span.style.backgroundColor).toBe('red');
+      expect(span.style.width).toBe('48px');
+      expect(span.style.height).toBe('48px');
+
+      expect(page.root.style.width).toBe('48px');
+      expect(page.root.style.height).toBe('48px');
     });
 
-    it('should default to circle when background is provided without bgShape', async () => {
+    it('calculates bgSize as iconSize + gap for each predefined size', async () => {
+      const testCases = [
+        { size: 'tiny', iconSize: '12px', bgSize: '16px' },        // 12 + 4
+        { size: 'small', iconSize: '16px', bgSize: '24px' },       // 16 + 8
+        { size: 'medium', iconSize: '24px', bgSize: '36px' },      // 24 + 12
+        { size: 'large', iconSize: '32px', bgSize: '48px' },       // 32 + 16
+        { size: 'doubleLarge', iconSize: '64px', bgSize: '88px' }, // 64 + 24
+      ];
+
+      for (const { size, iconSize, bgSize } of testCases) {
+        const page = await newSpecPage({
+          components: [Icon],
+          html: `<mnt-icon icon="search" size="${size}" background="blue"></mnt-icon>`,
+        });
+
+        await page.waitForChanges();
+
+        const svg = page.root.querySelector('svg');
+        expect(svg.getAttribute('width')).toBe(iconSize);
+
+        const span = page.root.querySelector('span');
+        expect(span.style.width).toBe(bgSize);
+        expect(page.root.style.width).toBe(bgSize);
+      }
+    });
+
+    it('defaults to circle shape when no bgShape is provided', async () => {
       const page = await newSpecPage({
         components: [Icon],
         html: `<mnt-icon icon="search" size="large" background="#E5E7E8"></mnt-icon>`,
@@ -230,15 +236,57 @@ describe('<mnt-icon>', () => {
     });
   });
 
-  describe('background retrocompatibility', () => {
-    it('should still support array format for background', async () => {
+  describe('bgShape prop', () => {
+    it('applies rounded shape', async () => {
       const page = await newSpecPage({
         components: [Icon],
-        html: `<mnt-icon icon="search" size="large"></mnt-icon>`,
+        html: `<mnt-icon icon="search" size="large" background="#E1F1FD" bg-shape="rounded"></mnt-icon>`,
       });
 
-      // Simulate array format
-      page.rootInstance.background = ['#FFE1E1', 'rounded'];
+      await page.waitForChanges();
+
+      const span = page.root.querySelector('span');
+      expect(span).not.toBeNull();
+      expect(span.classList.contains('mnt-border-rounded')).toBeTruthy();
+      expect(span.style.backgroundColor).toBe('#E1F1FD');
+    });
+
+    it('applies square shape', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search" size="large" background="#DCFCEA" bg-shape="square"></mnt-icon>`,
+      });
+
+      await page.waitForChanges();
+
+      const span = page.root.querySelector('span');
+      expect(span).not.toBeNull();
+      expect(span.classList.contains('mnt-border-square')).toBeTruthy();
+      expect(span.style.backgroundColor).toBe('#DCFCEA');
+    });
+
+    it('applies circle shape', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search" size="large" background="#E5E7E8" bg-shape="circle"></mnt-icon>`,
+      });
+
+      await page.waitForChanges();
+
+      const span = page.root.querySelector('span');
+      expect(span).not.toBeNull();
+      expect(span.classList.contains('mnt-border-circle')).toBeTruthy();
+      expect(span.style.backgroundColor).toBe('#E5E7E8');
+    });
+  });
+
+  describe('background retrocompatibility', () => {
+    it('supports JSON string format ["color", "shape"] from HTML attribute', async () => {
+      const page = await newSpecPage({
+        components: [Icon],
+        html: `<mnt-icon icon="search" size="large" background='["#FFE1E1", "rounded"]'></mnt-icon>`,
+      });
+
       await page.waitForChanges();
 
       const span = page.root.querySelector('span');
@@ -247,7 +295,7 @@ describe('<mnt-icon>', () => {
       expect(span.style.backgroundColor).toBe('#FFE1E1');
     });
 
-    it('should still support JSON string format for background', async () => {
+    it('supports JSON string format ["color", "shape"]', async () => {
       const page = await newSpecPage({
         components: [Icon],
         html: `<mnt-icon icon="search" size="large" background='["#DCFCEA", "square"]'></mnt-icon>`,
@@ -261,26 +309,21 @@ describe('<mnt-icon>', () => {
       expect(span.style.backgroundColor).toBe('#DCFCEA');
     });
 
-    it('should prioritize bgShape over array format', async () => {
+    it('prioritizes bgShape over shape from JSON string format', async () => {
       const page = await newSpecPage({
         components: [Icon],
-        html: `<mnt-icon icon="search" size="large"></mnt-icon>`,
+        html: `<mnt-icon icon="search" size="large" background="#E1F1FD" bg-shape="square"></mnt-icon>`,
       });
 
-      // Set both bgShape and background as array
-      page.rootInstance.background = ['#E1F1FD', 'circle'];
-      page.rootInstance.bgShape = 'square';
       await page.waitForChanges();
 
       const span = page.root.querySelector('span');
       expect(span).not.toBeNull();
-      // bgShape should take priority
       expect(span.classList.contains('mnt-border-square')).toBeTruthy();
-      // But color should come from background (first element of array in this case is ignored)
       expect(span.style.backgroundColor).toBe('#E1F1FD');
     });
 
-    it('should handle invalid JSON gracefully', async () => {
+    it('falls back to simple color with circle shape on invalid JSON', async () => {
       const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
 
       const page = await newSpecPage({
@@ -290,7 +333,6 @@ describe('<mnt-icon>', () => {
 
       await page.waitForChanges();
 
-      // Should fallback to treating as simple color with circle shape
       const span = page.root.querySelector('span');
       expect(span).not.toBeNull();
       expect(span.classList.contains('mnt-border-circle')).toBeTruthy();
