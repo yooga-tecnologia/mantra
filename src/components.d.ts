@@ -17,6 +17,7 @@ import { FieldTextProps } from "./components/field-text/field-text.types";
 import { FilterSearchProps } from "./components/filter-search/filter-search.types";
 import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
+import { LoadingStateProps } from "./components/loading-state/loading-state.types";
 import { MessageHighlightProps } from "./components/message-highlight/message-highlight.types";
 import { MessageInlineProps } from "./components/message-inline/message-inline.types";
 import { RadioBaseProps } from "./components/radio/radio.types";
@@ -25,7 +26,6 @@ import { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./componen
 import { TabItemProps } from "./components/tab-item/tab-item.types";
 import { TabItem, TabItemGroupProps } from "./components/tab-item-group/tab-item-group.types";
 import { TooltipProps } from "./components/tooltip/tooltip.types";
-import { LoadingStateProps } from './components/loading-state/loading-state.types';
 export { BadgeBaseProps } from "./components/badge/badge.types";
 export { BrandProps } from "./components/brand/brand.types";
 export { ButtonIconProps, ButtonProps } from "./components/button/button.types";
@@ -38,6 +38,7 @@ export { FieldTextProps } from "./components/field-text/field-text.types";
 export { FilterSearchProps } from "./components/filter-search/filter-search.types";
 export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
+export { LoadingStateProps } from "./components/loading-state/loading-state.types";
 export { MessageHighlightProps } from "./components/message-highlight/message-highlight.types";
 export { MessageInlineProps } from "./components/message-inline/message-inline.types";
 export { RadioBaseProps } from "./components/radio/radio.types";
@@ -1375,8 +1376,8 @@ declare namespace LocalJSX {
         "height": IllustrationProps['height'];
     }
     interface MntLoadingStateAttributes {
-        "color": string;
-        "label": string;
+        "color": LoadingStateProps['color'];
+        "label": LoadingStateProps['label'];
     }
     interface MntMessageHighlightAttributes {
         "label": MessageHighlightProps['label'];

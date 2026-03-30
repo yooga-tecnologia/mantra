@@ -1,7 +1,7 @@
 import { Component, Host, Prop, h } from '@stencil/core';
 
 import { getLibPrefix } from '../../utils/utils';
-import { LoadingStateProps } from 'src/components';
+import { LoadingStateProps } from './loading-state.types';
 
 const LIB_PREFIX = getLibPrefix();
 @Component({
