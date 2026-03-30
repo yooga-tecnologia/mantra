@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-30T17:14:51",
+  "timestamp": "2026-03-30T17:24:59",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -4024,15 +4024,15 @@
       "props": [
         {
           "name": "color",
-          "type": "LoadingStateProps",
+          "type": "\"error\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
           "complexType": {
             "original": "LoadingStateProps['color']",
-            "resolved": "LoadingStateProps",
+            "resolved": "\"error\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
             "references": {
               "LoadingStateProps": {
                 "location": "import",
-                "path": "src/components",
-                "id": "src/components.d.ts::unknown",
+                "path": "./loading-state.types",
+                "id": "src/components/loading-state/loading-state.types.ts::LoadingStateProps",
                 "referenceLocation": "LoadingStateProps"
               }
             }
@@ -4050,7 +4050,28 @@
           "default": "'neutral'",
           "values": [
             {
-              "type": "LoadingStateProps"
+              "value": "error",
+              "type": "string"
+            },
+            {
+              "value": "neutral",
+              "type": "string"
+            },
+            {
+              "value": "primary",
+              "type": "string"
+            },
+            {
+              "value": "secondary",
+              "type": "string"
+            },
+            {
+              "value": "success",
+              "type": "string"
+            },
+            {
+              "value": "warning",
+              "type": "string"
             }
           ],
           "optional": false,
@@ -4060,15 +4081,15 @@
         },
         {
           "name": "label",
-          "type": "LoadingStateProps",
+          "type": "string",
           "complexType": {
             "original": "LoadingStateProps['label']",
-            "resolved": "LoadingStateProps",
+            "resolved": "string",
             "references": {
               "LoadingStateProps": {
                 "location": "import",
-                "path": "src/components",
-                "id": "src/components.d.ts::unknown",
+                "path": "./loading-state.types",
+                "id": "src/components/loading-state/loading-state.types.ts::LoadingStateProps",
                 "referenceLocation": "LoadingStateProps"
               }
             }
@@ -4080,7 +4101,7 @@
           "docsTags": [],
           "values": [
             {
-              "type": "LoadingStateProps"
+              "type": "string"
             }
           ],
           "optional": true,
@@ -4497,7 +4518,7 @@
         },
         {
           "name": "label",
-          "type": "LoadingStateProps",
+          "type": "string",
           "complexType": {
             "original": "MessageInlineProps['label']",
             "resolved": "string",
@@ -4523,7 +4544,7 @@
           "default": "''",
           "values": [
             {
-              "type": "LoadingStateProps"
+              "type": "string"
             }
           ],
           "optional": false,
@@ -5890,10 +5911,10 @@
       "docstring": "",
       "path": "src/components/illustration/illustration.types.ts"
     },
-    "src/components.d.ts::unknown": {
-      "declaration": "any",
+    "src/components/loading-state/loading-state.types.ts::LoadingStateProps": {
+      "declaration": "export interface LoadingStateProps {\n  // size?: 'small' | 'medium' | 'large';\n  label?: string;\n  color?: LoadingStateColorVariant;\n}",
       "docstring": "",
-      "path": "src/components.d.ts"
+      "path": "src/components/loading-state/loading-state.types.ts"
     },
     "src/components/message-highlight/message-highlight.types.ts::MessageHighlightProps": {
       "declaration": "export interface MessageHighlightProps {\n  label: string;\n  type?: MessageHighlightTypeVariants;\n  variant?: MessageHighlightColorVariants;\n  icon?: ExtendedIconName;\n  fullWidth?: boolean;\n  marginBottom?: boolean;\n  align?: 'left' | 'center' | 'right';\n}",
