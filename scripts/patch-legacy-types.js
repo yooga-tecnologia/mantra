@@ -1,15 +1,20 @@
 #!/usr/bin/env node
 
 /**
- * Patches generated Stencil type definitions to remove TypeScript 5.x-only
- * syntax, making the package consumable by TypeScript 4.x projects (e.g. Angular 12).
+ * Patches generated Stencil type definitions to remove TypeScript 5.x / 4.4+
+ * syntax, making the package consumable by TypeScript 4.3.x projects (e.g. Angular 12).
  *
- * Problem: Stencil 4.x emits `Mixin<const TMixins extends ...>` in
- * stencil-public-runtime.d.ts. The `const` modifier in generic type parameters
- * is a TS 5.0 feature and causes TS1005 parse errors in TS 4.x compilers.
+ * Incompatibilities fixed:
  *
- * Fix: remove the `const` modifier. Inference becomes slightly less strict but
- * the public API remains fully usable for consumers.
+ * 1. `const` type parameter modifier (TS 5.0)
+ *    `Mixin<const TMixins extends ...>` → `Mixin<TMixins extends ...>`
+ *    Fix: remove `const` modifier. Inference becomes slightly less strict but
+ *    the public API remains fully usable.
+ *
+ * 2. Template literal index signatures (TS 4.4)
+ *    `[key: \`aria${string}\`]: ...` → removed
+ *    TS 4.3 only allows `string` or `number` as index signature key types.
+ *    These are JSX-only type hints irrelevant for Angular consumers.
  */
 
 const fs = require('fs');
@@ -25,11 +30,16 @@ if (!fs.existsSync(TARGET_FILE)) {
 let content = fs.readFileSync(TARGET_FILE, 'utf8');
 const original = content;
 
+// Fix 1: `const` type parameter modifier (TS 5.0+)
 content = content.replace(/<const\s+/g, '<');
+
+// Fix 2: template literal index signatures (TS 4.4+)
+// Matches lines like: `    [key: \`aria${string}\`]: string | boolean | undefined;`
+content = content.replace(/^[ \t]+\[key: `[^`]*`\][^;]*;\r?\n/gm, '');
 
 if (content !== original) {
   fs.writeFileSync(TARGET_FILE, content, 'utf8');
   console.log('[patch-legacy-types] Patched stencil-public-runtime.d.ts for TS 4.x compatibility.');
 } else {
-  console.log('[patch-legacy-types] No `const` type parameters found, skipping.');
+  console.log('[patch-legacy-types] No patches needed.');
 }
