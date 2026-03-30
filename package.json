@@ -32,7 +32,7 @@
   ],
   "scripts": {
     "dev": "concurrently \"npm:build --watch\" \"npm:storybook\"",
-    "build": "stencil build",
+    "build": "stencil build && node scripts/patch-legacy-types.js",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --coverage",
     "test.watch": "stencil test --spec  --watchAll",
