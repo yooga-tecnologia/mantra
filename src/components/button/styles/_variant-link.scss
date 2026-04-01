@@ -38,10 +38,13 @@ $component-prefix: theme.get-prefix('button');
         }
       }
 
-      &.#{$component-prefix}-disabled {
+      &.#{$component-prefix}-disabled,
+      &:disabled,
+      &[disabled] {
         &,
         &:hover,
         &:focus {
+          pointer-events: none;
           cursor: not-allowed;
           @include theme.set-colors(
             map.get(

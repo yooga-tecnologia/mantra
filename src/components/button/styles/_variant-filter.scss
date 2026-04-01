@@ -53,12 +53,14 @@ $border-width: 2px;
       }
 
       &.#{$lib-prefix}button-disabled,
-      &:disabled {
+      &:disabled,
+      &[disabled] {
         $disabled-state: map.get(action-tokens.$filter-theme-map, "disabled");
 
         &,
         &:hover,
         &:focus {
+          pointer-events: none;
           cursor: not-allowed !important;
           @include theme.set-colors(
             map.get($disabled-state, "text-color"),
