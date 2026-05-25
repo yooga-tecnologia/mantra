@@ -1,84 +1,90 @@
 #!/usr/bin/env node
 
 /**
- * Patches generated Stencil type definitions to remove TypeScript 5.x / 4.5+ / 4.4+
- * syntax, making the package consumable by TypeScript 4.3.x projects (e.g. Angular 12).
+ * Patches generated Stencil type definitions to remove modern TypeScript
+ * syntax, making the package consumable by older TypeScript projects
+ * (e.g. Angular 12 / TS 4.2).
  *
- * Incompatibilities fixed:
+ * Problems handled:
  *
- * 1. `const` type parameter modifier (TS 5.0) — stencil-public-runtime.d.ts only
- *    `Mixin<const TMixins extends ...>` → `Mixin<TMixins extends ...>`
+ * 1. `Mixin<const TMixins extends ...>` (TS 5.0+):
+ *    The `const` modifier in generic type parameters causes TS1005 parse
+ *    errors in TS 4.x. Fix: remove the `const` modifier. Inference becomes
+ *    slightly less strict but the public API remains fully usable.
+ *    Scope: stencil-public-runtime.d.ts only.
  *
- * 2. Template literal index signatures (TS 4.4) — stencil-public-runtime.d.ts only
- *    `[key: \`aria${string}\`]: ...` → removed
- *    TS 4.3 only allows `string` or `number` as index signature key types.
+ * 2. `[key: ` + "`aria${string}`" + `]: ...` template-literal index
+ *    signatures (TS 4.4+): trigger TS1023 ("An index signature parameter
+ *    type must be either 'string' or 'number'") in older versions.
+ *    Fix: drop those lines. Consumers can still use `aria-*` attributes via
+ *    the regular JSX typings; the lost benefit is autocomplete-only.
+ *    Scope: stencil-public-runtime.d.ts only.
  *
- * 3. Inline `type` modifier in imports (TS 4.5) — all .d.ts files
- *    `import { type SizeVariants, type ThemePalette }` → `import { SizeVariants, ThemePalette }`
- *    In .d.ts files all imports are type-only by definition, so removing `type` is safe.
+ * 3. Inline `type` modifier in named imports (TS 4.5+):
+ *    e.g. `import { type Foo, type Bar } from '...'`. Triggers TS2305
+ *    ("Module '...' has no exported member 'type'") in TS < 4.5.
+ *    Fix: strip the inline `type` keyword. The full `import type { ... }`
+ *    form (TS 3.8+) is preserved as-is.
+ *    Scope: every .d.ts file under dist/types.
  */
 
 const fs = require('fs');
 const path = require('path');
 
-const DIST_TYPES_DIR = path.join(__dirname, '..', 'dist', 'types');
-const RUNTIME_FILE = path.join(DIST_TYPES_DIR, 'stencil-public-runtime.d.ts');
+const TYPES_DIR = path.join(__dirname, '..', 'dist', 'types');
+const RUNTIME_FILE = path.join(TYPES_DIR, 'stencil-public-runtime.d.ts');
 
-if (!fs.existsSync(DIST_TYPES_DIR)) {
-  console.warn('[patch-legacy-types] dist/types not found, skipping patch.');
+if (!fs.existsSync(TYPES_DIR)) {
+  console.warn('[patch-legacy-types] Types directory not found, skipping patch:', TYPES_DIR);
   process.exit(0);
 }
 
 let totalPatched = 0;
 
-function patchFile(filePath, patches) {
-  let content = fs.readFileSync(filePath, 'utf8');
-  const original = content;
+walkDtsFiles(TYPES_DIR, (file) => {
+  const original = fs.readFileSync(file, 'utf8');
+  let content = original;
 
-  for (const patch of patches) {
-    content = patch(content);
+  if (file === RUNTIME_FILE) {
+    content = patchRuntimeOnly(content);
   }
+
+  content = stripInlineTypeImports(content);
 
   if (content !== original) {
-    fs.writeFileSync(filePath, content, 'utf8');
+    fs.writeFileSync(file, content, 'utf8');
     totalPatched++;
   }
+});
+
+if (totalPatched > 0) {
+  console.log(`[patch-legacy-types] Patched ${totalPatched} .d.ts file(s) for TS 4.x compatibility.`);
+} else {
+  console.log('[patch-legacy-types] Nothing to patch, skipping.');
 }
 
-function getAllDtsFiles(dir) {
-  const results = [];
+function walkDtsFiles(dir, callback) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      results.push(...getAllDtsFiles(fullPath));
+      walkDtsFiles(fullPath, callback);
     } else if (entry.isFile() && entry.name.endsWith('.d.ts')) {
-      results.push(fullPath);
+      callback(fullPath);
     }
   }
-  return results;
 }
 
-// --- Patch 1 & 2: stencil-public-runtime.d.ts only ---
-if (fs.existsSync(RUNTIME_FILE)) {
-  patchFile(RUNTIME_FILE, [
-    // Fix 1: `const` type parameter modifier (TS 5.0+)
-    (content) => content.replace(/<const\s+/g, '<'),
-
-    // Fix 2: template literal index signatures (TS 4.4+)
-    (content) => content.replace(/^[ \t]+\[key: `[^`]*`\][^;]*;\r?\n/gm, ''),
-  ]);
+function patchRuntimeOnly(content) {
+  return content
+    .replace(/<const\s+/g, '<')
+    .replace(/^\s*\[key:\s*`aria-?\$\{string\}`\][^\n]*\r?\n/gm, '');
 }
 
-// --- Patch 3: inline `type` in imports (TS 4.5+) — all .d.ts files ---
-const allDtsFiles = getAllDtsFiles(DIST_TYPES_DIR);
-
-for (const file of allDtsFiles) {
-  patchFile(file, [
-    // `import { type Foo, type Bar }` → `import { Foo, Bar }`
-    (content) => content.replace(/\bimport\s*\{([^}]*)\}/g, (match, imports) =>
-      match.replace(/\btype\s+/g, '')
-    ),
-  ]);
+function stripInlineTypeImports(content) {
+  return content.replace(/import\s*\{([^}]+)\}\s*from/g, (match, names) => {
+    const cleaned = names.replace(/\btype\s+(?=\w)/g, '');
+    return `import {${cleaned}} from`;
+  });
 }
 
 console.log(`[patch-legacy-types] Patched ${totalPatched} file(s) for TS 4.x compatibility.`);

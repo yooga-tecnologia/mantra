@@ -25,7 +25,15 @@ O componente \`mnt-message-highlight\` é um elemento de feedback utilizado para
     },
   },
   argTypes: {
-    label: {
+    headline: {
+      control: 'text',
+      description: 'Título da mensagem',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
+      },
+    },
+    text: {
       control: 'text',
       description: 'Texto exibido à direita do ícone',
       table: {
@@ -69,7 +77,7 @@ O componente \`mnt-message-highlight\` é um elemento de feedback utilizado para
     },
     marginBottom: {
       control: 'boolean',
-      description: 'Adiciona margem inferior ao componente',
+      description: 'Adiciona margem inferior ao componente (16px)',
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: 'false' },
@@ -94,8 +102,9 @@ O componente \`mnt-message-highlight\` é um elemento de feedback utilizado para
 
 const MessageHighlightTemplate = (props: MessageHighlightProps) => {
   return `
-     <mnt-message-highlight
-      label="${props.label || ''}"
+    <mnt-message-highlight
+      text="${props.text || ''}"
+      headline="${props.headline || ''}"
       variant="${props.variant || 'neutral'}"
       type="${props.type || 'default'}"
       icon="${props.icon}"
@@ -110,7 +119,8 @@ const MessageHighlightTemplate = (props: MessageHighlightProps) => {
  */
 export const Default: Story = {
   args: {
-    label: 'Mensagem de informação',
+    text: 'Mensagem de informação',
+    headline: 'Título!',
     variant: 'neutral',
     type: 'default',
     icon: 'info',
@@ -123,7 +133,8 @@ export const Default: Story = {
 
 export const FullWidth: Story = {
   args: {
-    label: 'Mensagem de informação',
+    text: 'Mensagem de informação',
+    headline: 'Título!',
     variant: 'neutral',
     type: 'default',
     icon: 'info',
@@ -136,7 +147,8 @@ export const FullWidth: Story = {
 
 export const WithMarginBottom: Story = {
   args: {
-    label: 'Mensagem de informação',
+    text: 'Mensagem de informação',
+    headline: 'Título!',
     variant: 'neutral',
     type: 'default',
     icon: 'info',
@@ -149,7 +161,8 @@ export const WithMarginBottom: Story = {
 
 export const WithAlignCenter: Story = {
   args: {
-    label: 'Mensagem de informação',
+    text: 'Mensagem de informação',
+    headline: 'Título!',
     variant: 'success',
     type: 'emphasis',
     icon: 'info',

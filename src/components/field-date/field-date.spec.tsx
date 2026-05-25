@@ -25,6 +25,108 @@ function getDatePickerDropdown(page: SpecPage): HTMLElement {
   return page.root.querySelector('.mnt-field-date-picker-dropdown');
 }
 
+function getDatePickerBackdrop(page: SpecPage): HTMLElement {
+  return page.root.querySelector('.mnt-field-date-picker-backdrop');
+}
+
+async function createFieldDateOnly(html: string) {
+  return await newSpecPage({
+    components: [FieldDate],
+    html,
+  });
+}
+
+describe('mnt-field-date - Responsive Modal Backdrop', () => {
+  it('SHOULD NOT render backdrop WHEN date picker is closed', async () => {
+    const page = await createFieldDateOnly(`<mnt-field-date name="dateInput"></mnt-field-date>`);
+    expect(getDatePickerBackdrop(page)).toBeNull();
+  });
+
+  it('SHOULD render backdrop WHEN date picker is open', async () => {
+    const page = await createFieldDateOnly(`<mnt-field-date name="dateInput"></mnt-field-date>`);
+    const inputElement = getInputElement(page);
+
+    inputElement.click();
+    await page.waitForChanges();
+
+    expect(getDatePickerBackdrop(page)).not.toBeNull();
+  });
+
+  it('SHOULD render backdrop as sibling of dropdown WHEN picker is open', async () => {
+    const page = await createFieldDateOnly(`<mnt-field-date name="dateInput"></mnt-field-date>`);
+    const inputElement = getInputElement(page);
+
+    inputElement.click();
+    await page.waitForChanges();
+
+    const backdrop = getDatePickerBackdrop(page);
+    const dropdown = getDatePickerDropdown(page);
+    expect(backdrop).not.toBeNull();
+    expect(dropdown).not.toBeNull();
+    expect(backdrop.parentElement).toBe(dropdown.parentElement);
+  });
+
+  it('SHOULD close date picker WHEN backdrop is clicked', async () => {
+    const page = await createFieldDateOnly(`<mnt-field-date name="dateInput"></mnt-field-date>`);
+    const inputElement = getInputElement(page);
+
+    inputElement.click();
+    await page.waitForChanges();
+    expect(getDatePickerDropdown(page)).not.toBeNull();
+
+    const backdrop = getDatePickerBackdrop(page);
+    backdrop.click();
+    await page.waitForChanges();
+
+    expect(getDatePickerDropdown(page)).toBeNull();
+    expect(getDatePickerBackdrop(page)).toBeNull();
+  });
+});
+
+describe('mnt-field-date - Auto Flip Placement', () => {
+  it('SHOULD apply a placement modifier class to dropdown WHEN picker opens', async () => {
+    const page = await createFieldDateOnly(`<mnt-field-date name="dateInput"></mnt-field-date>`);
+    const inputElement = getInputElement(page);
+
+    inputElement.click();
+    await page.waitForChanges();
+
+    const dropdown = getDatePickerDropdown(page);
+    expect(dropdown).not.toBeNull();
+    expect(dropdown.className).toMatch(/mnt-field-date-picker-dropdown--(bottom|top)/);
+  });
+
+  it('SHOULD default to bottom placement WHEN there is enough space below', async () => {
+    const page = await createFieldDateOnly(`<mnt-field-date name="dateInput"></mnt-field-date>`);
+    const inputElement = getInputElement(page);
+
+    const inputContainer = page.root.querySelector('.mnt-field-date-input') as HTMLElement;
+    inputContainer.getBoundingClientRect = jest.fn(() => ({ top: 100, bottom: 140, left: 0, right: 200, width: 200, height: 40, x: 0, y: 100, toJSON: () => ({}) }));
+    Object.defineProperty(window, 'innerHeight', { configurable: true, value: 800 });
+
+    inputElement.click();
+    await page.waitForChanges();
+
+    const dropdown = getDatePickerDropdown(page);
+    expect(dropdown.className).toContain('mnt-field-date-picker-dropdown--bottom');
+  });
+
+  it('SHOULD flip to top placement WHEN there is not enough space below but enough above', async () => {
+    const page = await createFieldDateOnly(`<mnt-field-date name="dateInput"></mnt-field-date>`);
+    const inputElement = getInputElement(page);
+
+    const inputContainer = page.root.querySelector('.mnt-field-date-input') as HTMLElement;
+    inputContainer.getBoundingClientRect = jest.fn(() => ({ top: 700, bottom: 740, left: 0, right: 200, width: 200, height: 40, x: 0, y: 700, toJSON: () => ({}) }));
+    Object.defineProperty(window, 'innerHeight', { configurable: true, value: 800 });
+
+    inputElement.click();
+    await page.waitForChanges();
+
+    const dropdown = getDatePickerDropdown(page);
+    expect(dropdown.className).toContain('mnt-field-date-picker-dropdown--top');
+  });
+});
+
 describe.skip('mnt-field-date', () => {
   describe('Rendering', () => {
     it('SHOULD render correctly WHEN has default props', async () => {

@@ -9,7 +9,8 @@ import { getLibPrefix } from 'src/utils/utils';
   shadow: false,
 })
 export class MessageHighlight {
-  @Prop() label: MessageHighlightProps['label'] = '';
+  @Prop() text: MessageHighlightProps['text'] = '';
+  @Prop() headline?: MessageHighlightProps['headline'] = '';
 
   @Prop({ mutable: true, reflect: true }) type: MessageHighlightProps['type'] = 'default';
   @Prop({ mutable: true, reflect: true }) variant: MessageHighlightProps['variant'] = 'neutral';
@@ -30,11 +31,12 @@ export class MessageHighlight {
     const marginBottomClass = this.marginBottom ? `${this.componentPrefix}-margin-bottom` : '';
     const typeClass = this.type ? `${this.componentPrefix}-${this.type}` : '';
     const alignClass = this.align ? `${this.componentPrefix}-${this.align}` : '';
+    const headlineClass = this.headline ? `${this.componentPrefix}-headline` : '';
 
-    return `${this.componentPrefix} ${variantClass} ${typeClass} ${fullWidthClass} ${marginBottomClass} ${alignClass}`;
+    return `${this.componentPrefix} ${variantClass} ${typeClass} ${fullWidthClass} ${marginBottomClass} ${alignClass} ${headlineClass}`;
   }
 
-  private getIcon(): any {
+  private getIcon(): HTMLMntIconElement {
     let iconName = '';
 
     switch (this.variant) {
@@ -64,18 +66,47 @@ export class MessageHighlight {
     );
   }
 
+  getHeadline(): HTMLHeadingElement {
+    return (
+      <h6
+        class={`${this.componentPrefix}-headline`}
+        aria-label={this.headline}
+      >
+        {this.headline}
+      </h6>
+    );
+  }
+
+  getText(): HTMLSpanElement {
+    return (
+      <span
+        class={`${this.componentPrefix}-text`}
+        aria-label={this.text}
+      >
+        {this.text}
+      </span>
+    );
+  }
+
   render() {
+    if (this.headline && this.text) {
+      return (
+        <Host class={this.componentClass() + ' align-flex-start'}>
+          {this.getIcon()}
+
+          <div class={this.componentPrefix + '-text-container'}>
+            {this.getHeadline()}
+            {this.getText()}
+          </div>
+        </Host>
+      );
+    }
+
     return (
       <Host class={this.componentClass()}>
         {this.getIcon()}
-        {this.label && (
-          <span
-            class={`${this.componentPrefix}-label`}
-            aria-label={this.label}
-          >
-            {this.label}
-          </span>
-        )}
+        {this.headline && this.getHeadline()}
+        {this.text && this.getText()}
       </Host>
     );
   }

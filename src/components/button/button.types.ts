@@ -6,7 +6,7 @@ export const componentPrefix = 'button';
 /** Possible button style variants */
 export const buttonStyleArray = ['regular', 'emphasis', 'stroke', 'plain', 'filter', 'link'] as const;
 export const buttonColorVariantsArray = themePalettesArray;
-export const buttonSizeVariantsArray = sizeVariantsArray.filter((size) => size !== 'tiny');
+export const buttonSizeVariantsArray = sizeVariantsArray;
 
 /** Types derived from arrays */
 export type ButtonStyle = (typeof buttonStyleArray)[number];
@@ -24,7 +24,7 @@ export interface ButtonProps extends ButtonBaseProps {
   iconRight?: ExtendedIconName;
   iconAnimation?: IconAnimation;
   state?: 'default' | 'pressed';
-  size?: Exclude<SizeVariants, 'tiny'>;
+  size?: SizeVariants;
 }
 
 export interface ButtonIconProps extends ButtonBaseProps {

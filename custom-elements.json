@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-30T17:54:37",
+  "timestamp": "2026-05-25T18:02:47",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -4212,6 +4212,42 @@
           "setter": false
         },
         {
+          "name": "headline",
+          "type": "string",
+          "complexType": {
+            "original": "MessageHighlightProps['headline']",
+            "resolved": "string",
+            "references": {
+              "MessageHighlightProps": {
+                "location": "import",
+                "path": "./message-highlight.types",
+                "id": "src/components/message-highlight/message-highlight.types.ts::MessageHighlightProps",
+                "referenceLocation": "MessageHighlightProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "headline",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "''"
+            }
+          ],
+          "default": "''",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
           "name": "icon",
           "type": "string",
           "complexType": {
@@ -4229,42 +4265,6 @@
           "mutable": true,
           "attr": "icon",
           "reflectToAttr": true,
-          "docs": "",
-          "docsTags": [
-            {
-              "name": "default",
-              "text": "''"
-            }
-          ],
-          "default": "''",
-          "values": [
-            {
-              "type": "string"
-            }
-          ],
-          "optional": false,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
-          "name": "label",
-          "type": "string",
-          "complexType": {
-            "original": "MessageHighlightProps['label']",
-            "resolved": "string",
-            "references": {
-              "MessageHighlightProps": {
-                "location": "import",
-                "path": "./message-highlight.types",
-                "id": "src/components/message-highlight/message-highlight.types.ts::MessageHighlightProps",
-                "referenceLocation": "MessageHighlightProps"
-              }
-            }
-          },
-          "mutable": false,
-          "attr": "label",
-          "reflectToAttr": false,
           "docs": "",
           "docsTags": [
             {
@@ -4312,6 +4312,42 @@
           "values": [
             {
               "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "complexType": {
+            "original": "MessageHighlightProps['text']",
+            "resolved": "string",
+            "references": {
+              "MessageHighlightProps": {
+                "location": "import",
+                "path": "./message-highlight.types",
+                "id": "src/components/message-highlight/message-highlight.types.ts::MessageHighlightProps",
+                "referenceLocation": "MessageHighlightProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "text",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "''"
+            }
+          ],
+          "default": "''",
+          "values": [
+            {
+              "type": "string"
             }
           ],
           "optional": false,
@@ -5917,7 +5953,7 @@
       "path": "src/components/loading-state/loading-state.types.ts"
     },
     "src/components/message-highlight/message-highlight.types.ts::MessageHighlightProps": {
-      "declaration": "export interface MessageHighlightProps {\n  label: string;\n  type?: MessageHighlightTypeVariants;\n  variant?: MessageHighlightColorVariants;\n  icon?: ExtendedIconName;\n  fullWidth?: boolean;\n  marginBottom?: boolean;\n  align?: 'left' | 'center' | 'right';\n}",
+      "declaration": "export interface MessageHighlightProps {\n  text: string;\n  headline?: string;\n  type?: MessageHighlightTypeVariants;\n  variant?: MessageHighlightColorVariants;\n  icon?: ExtendedIconName;\n  fullWidth?: boolean;\n  marginBottom?: boolean;\n  align?: 'left' | 'center' | 'right';\n}",
       "docstring": "",
       "path": "src/components/message-highlight/message-highlight.types.ts"
     },

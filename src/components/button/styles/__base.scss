@@ -3,68 +3,75 @@
 @use "../../../shared/theme/tokens/sizing" as sizing;
 
 $component-prefix: theme.get-prefix('button');
+$border-radius-medium: map.get(sizing.$border-radius-map, "medium");
 
 // Sizes
 
 $button-size-configs: (
-  "tiny": (
-    font-size: 12px,
-    padding: 8px,
-    height: 24px,
-  ),
-  "small": (
-    font-size: 12px,
-    padding: 8px,
-    height: 32px,
-  ),
-  "medium": (
-    font-size: 14px,
-    padding: 12px 16px,
-    height: 48px,
-  ),
-  "large": (
-    font-size: 16px,
-    padding: 16px 24px,
-    height: 56px,
-  ),
+  "tiny":   ( font-size: 12px, padding: 8px,        height: 32px ),
+  "small":  ( font-size: 12px, padding: 8px,        height: 40px ),
+  "medium": ( font-size: 14px, padding: 12px 16px,  height: 48px ),
+  "large":  ( font-size: 16px, padding: 16px 24px,  height: 56px ),
 );
 
-$border-radius-medium: map.get(sizing.$border-radius-map, "medium");
+// Per-breakpoint size aliasing (mobile-first ascending min-width).
+// At each breakpoint, the size class on the left renders with the values from the size on the right.
+$button-breakpoints: (
+  0:   ( tiny: tiny, small: tiny,   medium: tiny,   large: small  ),
+  577: ( tiny: tiny, small: small,  medium: small,  large: medium ),
+  992: ( tiny: tiny, small: small,  medium: medium, large: large  ),
+);
 
-@each $size, $configs in $button-size-configs {
+@mixin set-button-size($size) {
   $size-map: map.get($button-size-configs, $size);
+  padding: map.get($size-map, "padding");
+  height: map.get($size-map, "height");
 
-  #{$component-prefix},
-  #{$component-prefix}-icon {
+  span {
+    font-size: map.get($size-map, "font-size");
+  }
+}
+
+// Size-agnostic rules: emitted once
+
+#{$component-prefix},
+#{$component-prefix}-icon {
+  a,
+  button {
     @include theme.set-box-sizing(border-box);
-  }
-
-  // TODO - Check if it overrides the L85 rule
-  #{$component-prefix}[full-width="true"],
-  a.#{$component-prefix}-full-width,
-  button.#{$component-prefix}-full-width {
-    width: 100%;
-  }
-
-  .#{$component-prefix}-disabled,
-  button[disabled] {
-    pointer-events: none;
-    cursor: not-allowed;
-  }
-
-  button[class^="#{$component-prefix}-#{$size}"],
-  .#{$component-prefix}-#{$size} {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
-
-    padding: map.get($size-map, "padding");
-    height: map.get($size-map, "height");
     border-radius: $border-radius-medium;
+  }
 
-    &:not(:disabled):hover,
-    &:not(.button-disabled):hover {
+  &[full-width],
+  &[full-width="true"],
+  a.#{$component-prefix}-full-width,
+  button.#{$component-prefix}-full-width {
+    width: 100%;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+#{$component-prefix}[disabled] button,
+.#{$component-prefix}-disabled {
+  &:hover,
+  &:focus,
+  &:active {
+    cursor: not-allowed;
+  }
+}
+
+// Size-specific base styles (no breakpoint variation)
+
+@each $size, $configs in $button-size-configs {
+  .#{$component-prefix}-#{$size} {
+    &:not(:disabled):not(.#{$component-prefix}-disabled):hover {
       cursor: pointer;
     }
 
@@ -75,21 +82,19 @@ $border-radius-medium: map.get(sizing.$border-radius-map, "medium");
     }
 
     span {
-      font-size: map.get($size-map, "font-size");
       font-weight: 500;
       text-wrap: nowrap;
-    }
-
-    &.#{$component-prefix}-icon {
-      height: map.get($size-map, "height");
-      width: map.get($size-map, "height");
     }
   }
 }
 
-.#{$component-prefix}-full-width {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+// Responsive sizing: single loop generates all media queries
+@each $min-width, $aliases in $button-breakpoints {
+  @media (min-width: #{$min-width}px) {
+    @each $size, $aliased-size in $aliases {
+      .#{$component-prefix}-#{$size} {
+        @include set-button-size($aliased-size);
+      }
+    }
+  }
 }
