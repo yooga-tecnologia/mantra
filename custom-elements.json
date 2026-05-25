@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-25T18:02:47",
+  "timestamp": "2026-05-25T22:23:03",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -869,10 +869,10 @@
         },
         {
           "name": "size",
-          "type": "\"large\" | \"medium\" | \"small\"",
+          "type": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
           "complexType": {
             "original": "ButtonProps['size']",
-            "resolved": "\"large\" | \"medium\" | \"small\"",
+            "resolved": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
             "references": {
               "ButtonProps": {
                 "location": "import",
@@ -904,6 +904,10 @@
             },
             {
               "value": "small",
+              "type": "string"
+            },
+            {
+              "value": "tiny",
               "type": "string"
             }
           ],
@@ -5878,7 +5882,7 @@
       "path": "src/components/button/button.types.ts"
     },
     "src/components/button/button.types.ts::ButtonProps": {
-      "declaration": "export interface ButtonProps extends ButtonBaseProps {\n  label?: string;\n  fullWidth?: boolean;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  iconAnimation?: IconAnimation;\n  state?: 'default' | 'pressed';\n  size?: Exclude<SizeVariants, 'tiny'>;\n}",
+      "declaration": "export interface ButtonProps extends ButtonBaseProps {\n  label?: string;\n  fullWidth?: boolean;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  iconAnimation?: IconAnimation;\n  state?: 'default' | 'pressed';\n  size?: SizeVariants;\n}",
       "docstring": "",
       "path": "src/components/button/button.types.ts"
     },
