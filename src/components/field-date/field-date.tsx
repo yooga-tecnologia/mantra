@@ -34,8 +34,12 @@ export class FieldDate {
 
   private readonly componentPrefix = setComponentClass('field-date', '');
   private readonly iconSizeMap = { small: 16, medium: 20, large: 24 };
+  private readonly pickerEstimatedHeight = 360;
+  private readonly pickerGap = 4;
+  private inputContainerRef?: HTMLElement;
 
   @State() private showDatePicker: boolean = false;
+  @State() private pickerPlacement: 'bottom' | 'top' = 'bottom';
 
   private get fieldDateClass(): string {
     return classNames(this.componentPrefix, `${this.componentPrefix}-${this.size}`);
@@ -54,11 +58,48 @@ export class FieldDate {
   }
 
   private handleToggleDatePicker(): void {
+    if (!this.showDatePicker) {
+      this.pickerPlacement = this.computePickerPlacement();
+    }
     this.showDatePicker = !this.showDatePicker;
   }
 
   private handleCloseDatePicker(): void {
     this.showDatePicker = false;
+  }
+
+  private computePickerPlacement(): 'bottom' | 'top' {
+    if (!this.inputContainerRef || typeof window === 'undefined') return 'bottom';
+
+    const inputRect = this.inputContainerRef.getBoundingClientRect();
+    const bounds = this.getOverflowBounds();
+    const requiredSpace = this.pickerEstimatedHeight + this.pickerGap;
+
+    const spaceBelow = bounds.bottom - inputRect.bottom;
+    const spaceAbove = inputRect.top - bounds.top;
+
+    if (spaceBelow >= requiredSpace) return 'bottom';
+    if (spaceAbove >= requiredSpace) return 'top';
+
+    return spaceAbove > spaceBelow ? 'top' : 'bottom';
+  }
+
+  private getOverflowBounds(): { top: number; bottom: number } {
+    const fallback = { top: 0, bottom: window.innerHeight };
+    if (!this.el) return fallback;
+
+    let parent = this.el.parentElement;
+    while (parent && parent !== document.body) {
+      const style = window.getComputedStyle(parent);
+      const overflowY = `${style.overflowY} ${style.overflow}`;
+      if (/auto|scroll|hidden/.test(overflowY)) {
+        const rect = parent.getBoundingClientRect();
+        return { top: rect.top, bottom: rect.bottom };
+      }
+      parent = parent.parentElement;
+    }
+
+    return fallback;
   }
 
   private getInputValue() {
@@ -102,7 +143,10 @@ export class FieldDate {
   private renderInput() {
     return (
       <div>
-        <div class={this.inputClass}>
+        <div
+          class={this.inputClass}
+          ref={(el) => (this.inputContainerRef = el as HTMLElement)}
+        >
           <input
             type="text"
             autocomplete="off"
@@ -126,8 +170,17 @@ export class FieldDate {
 
   private renderDatePicker() {
     if (!this.showDatePicker) return null;
-    return (
-      <div class={`${this.componentPrefix}-picker-dropdown`}>
+    return [
+      <div
+        class={`${this.componentPrefix}-picker-backdrop`}
+        onClick={() => this.handleCloseDatePicker()}
+        aria-hidden="true"
+      ></div>,
+      <div
+        class={`${this.componentPrefix}-picker-dropdown ${this.componentPrefix}-picker-dropdown--${this.pickerPlacement}`}
+        role="dialog"
+        aria-modal="true"
+      >
         <mnt-date-picker
           mode={this.datePickerConfig?.mode}
           selectedDate={this.getInputValue()}
@@ -143,8 +196,8 @@ export class FieldDate {
             this.handleCloseDatePicker();
           }}
         ></mnt-date-picker>
-      </div>
-    );
+      </div>,
+    ];
   }
 
   render() {

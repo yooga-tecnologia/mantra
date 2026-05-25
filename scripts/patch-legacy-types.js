@@ -1,35 +1,88 @@
 #!/usr/bin/env node
 
 /**
- * Patches generated Stencil type definitions to remove TypeScript 5.x-only
- * syntax, making the package consumable by TypeScript 4.x projects (e.g. Angular 12).
+ * Patches generated Stencil type definitions to remove modern TypeScript
+ * syntax, making the package consumable by older TypeScript projects
+ * (e.g. Angular 12 / TS 4.2).
  *
- * Problem: Stencil 4.x emits `Mixin<const TMixins extends ...>` in
- * stencil-public-runtime.d.ts. The `const` modifier in generic type parameters
- * is a TS 5.0 feature and causes TS1005 parse errors in TS 4.x compilers.
+ * Problems handled:
  *
- * Fix: remove the `const` modifier. Inference becomes slightly less strict but
- * the public API remains fully usable for consumers.
+ * 1. `Mixin<const TMixins extends ...>` (TS 5.0+):
+ *    The `const` modifier in generic type parameters causes TS1005 parse
+ *    errors in TS 4.x. Fix: remove the `const` modifier. Inference becomes
+ *    slightly less strict but the public API remains fully usable.
+ *    Scope: stencil-public-runtime.d.ts only.
+ *
+ * 2. `[key: ` + "`aria${string}`" + `]: ...` template-literal index
+ *    signatures (TS 4.4+): trigger TS1023 ("An index signature parameter
+ *    type must be either 'string' or 'number'") in older versions.
+ *    Fix: drop those lines. Consumers can still use `aria-*` attributes via
+ *    the regular JSX typings; the lost benefit is autocomplete-only.
+ *    Scope: stencil-public-runtime.d.ts only.
+ *
+ * 3. Inline `type` modifier in named imports (TS 4.5+):
+ *    e.g. `import { type Foo, type Bar } from '...'`. Triggers TS2305
+ *    ("Module '...' has no exported member 'type'") in TS < 4.5.
+ *    Fix: strip the inline `type` keyword. The full `import type { ... }`
+ *    form (TS 3.8+) is preserved as-is.
+ *    Scope: every .d.ts file under dist/types.
  */
 
 const fs = require('fs');
 const path = require('path');
 
-const TARGET_FILE = path.join(__dirname, '..', 'dist', 'types', 'stencil-public-runtime.d.ts');
+const TYPES_DIR = path.join(__dirname, '..', 'dist', 'types');
+const RUNTIME_FILE = path.join(TYPES_DIR, 'stencil-public-runtime.d.ts');
 
-if (!fs.existsSync(TARGET_FILE)) {
-  console.warn('[patch-legacy-types] File not found, skipping patch:', TARGET_FILE);
+if (!fs.existsSync(TYPES_DIR)) {
+  console.warn('[patch-legacy-types] Types directory not found, skipping patch:', TYPES_DIR);
   process.exit(0);
 }
 
-let content = fs.readFileSync(TARGET_FILE, 'utf8');
-const original = content;
+let totalPatched = 0;
 
-content = content.replace(/<const\s+/g, '<');
+walkDtsFiles(TYPES_DIR, (file) => {
+  const original = fs.readFileSync(file, 'utf8');
+  let content = original;
 
-if (content !== original) {
-  fs.writeFileSync(TARGET_FILE, content, 'utf8');
-  console.log('[patch-legacy-types] Patched stencil-public-runtime.d.ts for TS 4.x compatibility.');
+  if (file === RUNTIME_FILE) {
+    content = patchRuntimeOnly(content);
+  }
+
+  content = stripInlineTypeImports(content);
+
+  if (content !== original) {
+    fs.writeFileSync(file, content, 'utf8');
+    totalPatched++;
+  }
+});
+
+if (totalPatched > 0) {
+  console.log(`[patch-legacy-types] Patched ${totalPatched} .d.ts file(s) for TS 4.x compatibility.`);
 } else {
-  console.log('[patch-legacy-types] No `const` type parameters found, skipping.');
+  console.log('[patch-legacy-types] Nothing to patch, skipping.');
+}
+
+function walkDtsFiles(dir, callback) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      walkDtsFiles(fullPath, callback);
+    } else if (entry.isFile() && entry.name.endsWith('.d.ts')) {
+      callback(fullPath);
+    }
+  }
+}
+
+function patchRuntimeOnly(content) {
+  return content
+    .replace(/<const\s+/g, '<')
+    .replace(/^\s*\[key:\s*`aria-?\$\{string\}`\][^\n]*\r?\n/gm, '');
+}
+
+function stripInlineTypeImports(content) {
+  return content.replace(/import\s*\{([^}]+)\}\s*from/g, (match, names) => {
+    const cleaned = names.replace(/\btype\s+(?=\w)/g, '');
+    return `import {${cleaned}} from`;
+  });
 }
