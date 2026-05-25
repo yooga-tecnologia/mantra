@@ -20,7 +20,8 @@
     "radio",
     "checkbox",
     "badge",
-    "message-inline"
+    "message-inline",
+    "message-highlight"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false

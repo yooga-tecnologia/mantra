@@ -8,7 +8,8 @@ export const messageHighlightTypeVariantsArray = ['default', 'emphasis'] as cons
 export type MessageHighlightTypeVariants = (typeof messageHighlightTypeVariantsArray)[number];
 
 export interface MessageHighlightProps {
-  label: string;
+  text: string;
+  headline?: string;
   type?: MessageHighlightTypeVariants;
   variant?: MessageHighlightColorVariants;
   icon?: ExtendedIconName;

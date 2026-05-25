@@ -331,15 +331,19 @@ export namespace Components {
         /**
           * @default ''
          */
-        "icon": MessageHighlightProps['icon'];
+        "headline"?: MessageHighlightProps['headline'];
         /**
           * @default ''
          */
-        "label": MessageHighlightProps['label'];
+        "icon": MessageHighlightProps['icon'];
         /**
           * @default false
          */
         "marginBottom": MessageHighlightProps['marginBottom'];
+        /**
+          * @default ''
+         */
+        "text": MessageHighlightProps['text'];
         /**
           * @default 'default'
          */
@@ -1129,15 +1133,19 @@ declare namespace LocalJSX {
         /**
           * @default ''
          */
-        "icon"?: MessageHighlightProps['icon'];
+        "headline"?: MessageHighlightProps['headline'];
         /**
           * @default ''
          */
-        "label"?: MessageHighlightProps['label'];
+        "icon"?: MessageHighlightProps['icon'];
         /**
           * @default false
          */
         "marginBottom"?: MessageHighlightProps['marginBottom'];
+        /**
+          * @default ''
+         */
+        "text"?: MessageHighlightProps['text'];
         /**
           * @default 'default'
          */
@@ -1380,7 +1388,8 @@ declare namespace LocalJSX {
         "label": LoadingStateProps['label'];
     }
     interface MntMessageHighlightAttributes {
-        "label": MessageHighlightProps['label'];
+        "text": MessageHighlightProps['text'];
+        "headline": MessageHighlightProps['headline'];
         "type": MessageHighlightProps['type'];
         "variant": MessageHighlightProps['variant'];
         "icon": MessageHighlightProps['icon'];
