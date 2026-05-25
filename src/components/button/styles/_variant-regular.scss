@@ -33,7 +33,11 @@ $lib-prefix: theme.get-prefix();
         );
       }
 
-      &:disabled {
+      &:disabled,
+      &[disabled] {
+        pointer-events: none;
+        cursor: not-allowed;
+
         @include theme.set-colors(
           map.get(
             action-tokens.$stroke-theme-map,

@@ -86,3 +86,5 @@ function stripInlineTypeImports(content) {
     return `import {${cleaned}} from`;
   });
 }
+
+console.log(`[patch-legacy-types] Patched ${totalPatched} file(s) for TS 4.x compatibility.`);
