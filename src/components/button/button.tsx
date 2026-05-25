@@ -42,20 +42,23 @@ export class Button {
   }
 
   get iconSize(): number {
-    let iconSize = 16;
+    let iconSize = 18;
 
     switch (this.size) {
+      case 'tiny':
+        iconSize = 14;
+        break;
       case 'small':
         iconSize = 16;
         break;
       case 'medium':
-        iconSize = 20;
+        iconSize = 18;
         break;
       case 'large':
-        iconSize = 24;
+        iconSize = 20;
         break;
       default:
-        iconSize = 16;
+        iconSize = 18;
     }
 
     return iconSize;
@@ -77,7 +80,7 @@ export class Button {
       colorClass = `${LIB_PREFIX}button-${this.color}`;
     }
 
-    if (this.size !== 'medium' && this.size !== 'large' && this.size !== 'small') {
+    if (this.size !== 'medium' && this.size !== 'large' && this.size !== 'small' && this.size !== 'tiny') {
       console.warn('[MANTRA] This size is not supported for this type of button. Please use a different value.');
       sizeClass = `${LIB_PREFIX}button-small`;
     } else {
