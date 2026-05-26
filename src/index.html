@@ -1,43 +1,309 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html dir="ltr" lang="pt-BR">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-  <title>Stencil Component Starter</title>
+  <title>Mantra - Sandbox · Editar Cupom</title>
 
   <script type="module" src="/build/mantra.esm.js"></script>
   <script nomodule src="/build/mantra.js"></script>
   <link rel="stylesheet" href="/build/mantra.css" />
 
   <style>
-    /* .container-teste {
-      display: flex;
-      flex-direction: column;
-      gap: 80px;
-      padding: 20px;
-      background-color: #f0f0f0;
+    :root {
+      --color-text: #242628;
+      --color-text-soft: #4B5053;
+      --color-border: #E1E4E5;
+      --color-bg: #F4F6F7;
+      --color-surface: #FFFFFF;
     }
 
-    .container-teste > div {
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      min-height: 100vh;
+    }
+
+    .page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+
+    .modal {
       width: 100%;
-    } */
+      max-width: 640px;
+      background-color: var(--color-surface);
+      border-radius: 12px;
+      box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.06),
+        0 8px 32px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      max-height: calc(100vh - 32px);
+      overflow: hidden;
+    }
+
+    .modal__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 24px 16px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .modal__title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .modal__close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      color: var(--color-text-soft);
+    }
+
+    .modal__body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .section + .section {
+      margin-top: 32px;
+    }
+
+    .section__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .section__title {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .section__badges {
+      display: flex;
+      gap: 8px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-grid > mnt-field-text,
+    .form-grid > mnt-field-date {
+      width: 100%;
+    }
+
+    .modal__footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      padding: 16px 24px;
+      border-top: 1px solid var(--color-border);
+      background-color: var(--color-surface);
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 0;
+        align-items: stretch;
+      }
+
+      .modal {
+        max-width: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+/* 
+      .modal__footer {
+        flex-direction: column-reverse;
+      }
+
+      .modal__footer mnt-button {
+        width: 100%;
+      } */
+    }
   </style>
-
-  <script>
-
-  </script>
 </head>
 
 <body>
-  <h1>Mantra - Sandbox</h1>
+  <div class="page">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <header class="modal__header">
+        <h2 class="modal__title" id="modal-title">Exemplo button</h2>
+        <span class="modal__viewport">Viewport: <span id="viewport-size"></span> (<span id="viewport-width"></span>px)</span>
+        <!-- <button class="modal__close" type="button" aria-label="Fechar">
+          <mnt-icon icon="close" size="20"></mnt-icon>
+        </button> -->
+      </header>
+      <!-- 
 
-  <div class="container-teste">
-    <mnt-message-highlight headline="Título!" text="Mensagem de sucesso" variant="success" full-width></mnt-message-highlight>
-    <mnt-message-highlight text="Mensagem de sucesso" variant="success" full-width></mnt-message-highlight>
+      <div class="modal__body">
+        <section class="section">
+          <div class="section__header">
+            <h3 class="section__title">Dados gerais</h3>
+            <div class="section__badges">
+              <mnt-badge label="DELIVERY" color="neutral" tone="default" size="small"></mnt-badge>
+              <mnt-badge label="PDV" color="neutral" tone="default" size="small"></mnt-badge>
+            </div>
+          </div>
 
-    <mnt-message-highlight type="emphasis" headline="Título!" text="Mensagem de sucesso" variant="success" full-width></mnt-message-highlight>
-    <mnt-message-highlight type="emphasis" text="Mensagem de sucesso" variant="success" full-width></mnt-message-highlight>
+          <div class="form-grid">
+            <mnt-field-text
+              name="couponType"
+              label-text="Tipo de cupom"
+              has-info-button
+              value="Desconto em %"
+              size="medium"
+            >
+              <mnt-icon slot="info-button" icon="info" size="16"></mnt-icon>
+            </mnt-field-text>
+
+            <mnt-field-text
+              name="couponCode"
+              label-text="Código do cupom"
+              has-info-button
+              required
+              value="444"
+              size="medium"
+            >
+              <mnt-icon slot="info-button" icon="info" size="16"></mnt-icon>
+            </mnt-field-text>
+
+            <mnt-field-text
+              name="discountValue"
+              label-text="Valor de desconto (%)"
+              required
+              value="1"
+              size="medium"
+            ></mnt-field-text>
+
+            <mnt-field-text
+              name="minOrderValue"
+              label-text="Valor mínimo do pedido"
+              required
+              mask="currency"
+              value="0.01"
+              size="medium"
+            ></mnt-field-text>
+
+            <mnt-field-text
+              name="couponQuantity"
+              label-text="Quantidade de cupons"
+              has-info-button
+              required
+              value="20"
+              size="medium"
+            >
+              <mnt-icon slot="info-button" icon="info" size="16"></mnt-icon>
+            </mnt-field-text>
+
+            <mnt-field-text
+              name="usageLimit"
+              label-text="Quantidade limite de uso"
+              has-info-button
+              required
+              value="20"
+              size="medium"
+            >
+              <mnt-icon slot="info-button" icon="info" size="16"></mnt-icon>
+            </mnt-field-text>
+
+            <mnt-field-date
+              name="startDate"
+              label-text="Data de início"
+              value="19/05/2026"
+              placeholder="dd/mm/aaaa"
+              size="medium"
+            ></mnt-field-date>
+
+            <mnt-field-date
+              name="endDate"
+              label-text="Data de término"
+              required
+              value="21/05/2026"
+              placeholder="dd/mm/aaaa"
+              size="medium"
+            ></mnt-field-date>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section__header">
+            <h3 class="section__title">Outros</h3>
+          </div>
+
+          <mnt-switch
+            name="ignoreShipping"
+            label="Não aplicar valor no frete"
+          ></mnt-switch>
+        </section>
+      </div> -->
+
+      <footer class="modal__footer">
+        <mnt-button onclick="handleButtonClick(event)" disabled icon-left="close" label="Large" variant="stroke" color="primary" size="large"></mnt-button>
+        <mnt-button onclick="handleButtonClick(event)" icon-left="close" label="Large" variant="stroke" color="primary" size="large"></mnt-button>
+        <mnt-button loading="true" onclick="handleButtonClick(event)" icon-left="close" label="Large" variant="stroke" color="primary" size="large"></mnt-button>
+        <mnt-button onclick="handleButtonClick(event)" icon-left="check" label="Medium" variant="stroke" color="primary" size="medium"></mnt-button>
+        <mnt-button onclick="handleButtonClick(event)" icon-left="check" label="Small" variant="stroke" color="primary" size="small"></mnt-button>
+        <mnt-button onclick="handleButtonClick(event)" icon-left="check" label="Tiny" variant="stroke" color="primary" size="tiny"></mnt-button>
+      </footer>
+
+      <footer class="modal__footer">
+        <mnt-button full-width icon-left="close" label="Large" variant="emphasis" color="primary" size="large"></mnt-button>
+        <mnt-button full-width icon-left="check" label="Medium" variant="emphasis" color="primary" size="medium"></mnt-button>
+        <mnt-button full-width icon-left="check" label="Small" variant="emphasis" color="primary" size="small"></mnt-button>
+        <mnt-button full-width icon-left="check" label="Tiny" variant="emphasis" color="primary" size="tiny"></mnt-button>
+      </footer>
+    </div>
   </div>
+  <script>
+    const viewportWidth = document.body.clientWidth;
+    const viewportSize = viewportWidth < 600 ? 'Mobile' : 'Desktop';
+
+    // document.getElementById('viewport-size').textContent = viewport.matches ? 'Mobile' : 'Desktop';
+    document.getElementById('viewport-width').textContent = viewportWidth;
+    document.getElementById('viewport-size').textContent = viewportSize;
+
+    function handleButtonClick(event) {
+      const button = event.currentTarget;
+      button.loading = true;
+      setTimeout(() => {
+        button.loading = false;
+      }, 2000);
+    }
+  </script>
 </body>
 </html>

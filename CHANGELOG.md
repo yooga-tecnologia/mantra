@@ -5,6 +5,18 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 eção de event handlers
 
+## [2.10.6] - 2026-05-26
+
+### 🚀 Adicionado
+
+- **Button**:
+  - Size adicionado: 'tiny'
+  - Breakpoints adicionados
+  - Permite o uso de loading state
+
+- **MessageHighlight**:
+  - Props atualizadas, permitindo o uso de headline e text ao invés de apenas um label;
+
 ## [2.10.1] - 2026-03-30
 
 ### 🚀 Adicionado

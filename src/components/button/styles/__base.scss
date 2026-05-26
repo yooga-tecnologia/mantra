@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "../../../shared/theme/core/theme" as theme;
 @use "../../../shared/theme/tokens/sizing" as sizing;
+@use "../../../shared/theme/tokens/animations" as animations;
 
 $component-prefix: theme.get-prefix('button');
 $border-radius-medium: map.get(sizing.$border-radius-map, "medium");
@@ -55,6 +56,16 @@ $button-breakpoints: (
     width: 100%;
     justify-content: center;
     align-items: center;
+  }
+
+  .#{$component-prefix}-loading {
+    &:hover {
+      cursor: progress !important;
+    }
+
+    mnt-icon {
+      animation: animations.$spin-animation 1s linear infinite;
+    }
   }
 }
 

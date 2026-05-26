@@ -7,9 +7,11 @@ export const componentPrefix = 'button';
 export const buttonStyleArray = ['regular', 'emphasis', 'stroke', 'plain', 'filter', 'link'] as const;
 export const buttonColorVariantsArray = themePalettesArray;
 export const buttonSizeVariantsArray = sizeVariantsArray;
+export const buttonStateVariantsArray = ['default', 'pressed', 'loading'] as const;
 
 /** Types derived from arrays */
 export type ButtonStyle = (typeof buttonStyleArray)[number];
+export type ButtonStateVariants = (typeof buttonStateVariantsArray)[number];
 
 export interface ButtonBaseProps {
   color?: ThemePalette;
@@ -23,8 +25,9 @@ export interface ButtonProps extends ButtonBaseProps {
   iconLeft?: ExtendedIconName;
   iconRight?: ExtendedIconName;
   iconAnimation?: IconAnimation;
-  state?: 'default' | 'pressed';
+  state?: ButtonStateVariants;
   size?: SizeVariants;
+  loading?: boolean;
 }
 
 export interface ButtonIconProps extends ButtonBaseProps {
