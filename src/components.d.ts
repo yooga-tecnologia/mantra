@@ -101,10 +101,13 @@ export namespace Components {
           * @default false
          */
         "fullWidth": ButtonProps['fullWidth'];
-        "iconAnimation"?: ButtonProps['iconAnimation'];
         "iconLeft"?: ButtonProps['iconLeft'];
         "iconRight"?: ButtonProps['iconRight'];
         "label"?: ButtonProps['label'];
+        /**
+          * @default false
+         */
+        "loading": ButtonProps['loading'];
         /**
           * @default 'medium'
          */
@@ -857,10 +860,13 @@ declare namespace LocalJSX {
           * @default false
          */
         "fullWidth"?: ButtonProps['fullWidth'];
-        "iconAnimation"?: ButtonProps['iconAnimation'];
         "iconLeft"?: ButtonProps['iconLeft'];
         "iconRight"?: ButtonProps['iconRight'];
         "label"?: ButtonProps['label'];
+        /**
+          * @default false
+         */
+        "loading"?: ButtonProps['loading'];
         "onButtonClick"?: (event: MntButtonCustomEvent<MouseEvent>) => void;
         /**
           * @default 'medium'
@@ -1291,8 +1297,8 @@ declare namespace LocalJSX {
         "label": ButtonProps['label'];
         "iconLeft": ButtonProps['iconLeft'];
         "iconRight": ButtonProps['iconRight'];
-        "iconAnimation": ButtonProps['iconAnimation'];
         "disabled": ButtonProps['disabled'];
+        "loading": ButtonProps['loading'];
     }
     interface MntButtonIconAttributes {
         "size": ButtonIconProps['size'];

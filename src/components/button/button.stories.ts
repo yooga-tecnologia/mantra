@@ -1,6 +1,6 @@
 import type { StoryFn, StoryObj } from '@storybook/html-vite';
 
-import { buttonColorVariantsArray, ButtonProps, buttonSizeVariantsArray, buttonStyleArray } from './button.types';
+import { buttonColorVariantsArray, ButtonProps, buttonSizeVariantsArray, buttonStateVariantsArray, buttonStyleArray } from './button.types';
 import { ICON_OPTIONS } from '../icon/icon.utils';
 import { ThemePalette, themePalettesArray } from '@theme/theme.types';
 import { HTMLString } from 'src/utils/utils';
@@ -29,7 +29,27 @@ Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjA
   - \`filter\`: Ações de filtros -> Tem uma leve diferença visual e limitação de uso em relação aos demais estilos.
 - **Ícones:** É possível adicionar ícones à esquerda e à direita do botão, utilizando propriedades \`icon-left\` e \`icon-right\`. Por padrão, não são exibidos.
 - **Largura total:** É possível ocupar a largura total do elemento pai, utilizando a propriedade \`full-width\`. O botão ocupará 100% da largura disponível.
-        `,
+- **Estados:**
+  - \`default\`: Estado normal do botão.
+  - \`pressed\`:
+    - Utilizado para indicar quando um botão está selecionado / pressionado;
+    - Útil para indicar um estado de seleção de filtros.
+  - \`loading\`:
+    - Exibe apenas o ícone de carregamento, ocultando label/ícones visíveis em outros estados;
+    - Bloqueia interações enquanto estiver ativo, impedindo que o usuário clique no botão;
+    - A largura do botão é congelada na transição para evitar layout shift
+    - O controle do estado é programático *(responsabilidade do consumidor)*
+
+### Responsividade:
+Na tabela abaixo, há uma relação entre as variantes de tamanho e os breakpoints.
+
+| Variantes | ≥576px       |	≥768px      |	≥992px (tamanho padrão) |
+|-----------|--------------|--------------|-------------------------|
+| Large     | small        | medium       | large                   |
+| Medium    | tiny         | small        | medium                  |
+| Small     | tiny         | small        | small                   |
+| Tiny      | tiny         | tiny         | tiny                    |
+`,
       },
       codePanel: true,
       source: {
@@ -77,10 +97,10 @@ Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjA
     },
     state: {
       control: 'select',
-      options: ['default', 'pressed'],
+      options: buttonStateVariantsArray,
       description: 'Estado visual do botão. Utilizado para indicar quando um botão está selecionado / pressionado. Útil para indicar um estado de seleção de filtros.',
       table: {
-        type: { summary: 'default | pressed' },
+        type: { summary: buttonStateVariantsArray.join(' | ') },
         defaultValue: { summary: 'default' },
       },
     },
@@ -110,6 +130,15 @@ Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjA
         defaultValue: { summary: 'false' },
       },
     },
+    loading: {
+      control: 'boolean',
+      description:
+        'Quando ativo, exibe um ícone de loading com animação de rotação, oculta label/ícones e bloqueia o evento de click. A largura do botão é congelada para evitar layout shift. Uso programático.',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
   },
   render: (args) => {
     return `
@@ -119,13 +148,25 @@ Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjA
 };
 
 const ButtonTemplate = (props: ButtonProps) => {
+  if (props.loading) {
+    return `
+      <mnt-button
+        label="${props.label}"
+        color="${props.color}"
+        variant="${props.variant}"
+        size="${props.size}"
+        full-width="${props.fullWidth}"
+        loading
+      ></mnt-button>
+    `;
+  }
   return `
     <mnt-button
       label="${props.label}"
       color="${props.color}"
       variant="${props.variant}"
       size="${props.size}"
-      state="${props.state || 'default'}"
+      state="${props.state}"
       icon-left="${props.iconLeft || ''}"
       icon-right="${props.iconRight || ''}"
       full-width="${props.fullWidth}"
@@ -200,6 +241,65 @@ export const Filter: Story = {
   render: ButtonTemplate,
 };
 
+/**
+ * Estado de carregamento. O botão substitui seu conteúdo por um ícone de loading com animação de rotação,
+ * trava sua largura para evitar layout shift, aplica `aria-busy="true"` e bloqueia o evento de click.
+ *
+ * O controle do estado é programático — quem consome a lib é responsável por alternar a flag.
+ */
+export const Loading: Story = {
+  args: {
+    label: 'Salvando alterações',
+    color: 'primary',
+    variant: 'emphasis',
+    size: 'medium',
+    fullWidth: false,
+    loading: true,
+  },
+  render: ButtonTemplate,
+};
+
+/**
+ * Demonstração interativa: clique no botão para ativar o loading por 2 segundos.
+ * Útil para visualizar a transição (congelamento de largura, troca de conteúdo).
+ */
+export const LoadingDemo: StoryFn = () => {
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = `
+<div class="sb-section-box">
+  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
+    <span>Tiny</span>
+    <span>Small</span>
+    <span>Medium</span>
+    <span>Large</span>
+
+    <mnt-button label="Salvar" icon-left="check" variant="emphasis" color="primary" size="tiny"></mnt-button>
+    <mnt-button label="Salvar" icon-left="check" variant="emphasis" color="primary" size="small"></mnt-button>
+    <mnt-button label="Salvar" icon-left="check" variant="emphasis" color="primary" size="medium"></mnt-button>
+    <mnt-button label="Salvar" icon-left="check" variant="emphasis" color="primary" size="large"></mnt-button>
+  </div>
+</div>
+  `;
+
+  wrapper.querySelectorAll<HTMLElement & { loading: boolean }>('mnt-button').forEach((button) => {
+    button.addEventListener('buttonClick', () => {
+      console.log('[LoadingDemo] buttonClick', button.getAttribute('size'));
+      button.loading = true;
+      setTimeout(() => {
+        button.loading = false;
+      }, 2000);
+    });
+  });
+
+  return wrapper;
+};
+
+LoadingDemo.parameters = {
+  controls: { disable: true },
+  actions: { disable: true },
+  interactions: { disable: true },
+};
+
 const getColorVariants = (color: ThemePalette) => {
   const buttonVariants: string[] = [];
 
@@ -208,13 +308,13 @@ const getColorVariants = (color: ThemePalette) => {
     .map((variant) => {
       buttonVariants.push(`<span>${variant}</span>`);
       buttonSizeVariantsArray.map((size) => {
-        buttonVariants.push(ButtonTemplate({ label: 'Click me', color, variant, size, iconLeft: 'plus', iconRight: 'plus' }));
+        buttonVariants.push(ButtonTemplate({ label: size, color, variant, size, iconLeft: 'plus', iconRight: 'plus' }));
       });
     });
   return `
 <div class="sb-section-box">
   <h4>${color}</h4>
-  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
+  <div class="sb-grid-5 sb-grid-row-divider sb-grid-row-title">
     ${buttonVariants.join('')}
   </div>
 </div>
@@ -237,17 +337,34 @@ ${buttonVariants.join('')}
 
 <div class="sb-section-box">
   <h4>Filter</h4>
-  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
+  <div class="sb-grid-5 sb-grid-row-divider sb-grid-row-title">
     <span>Default</span>
-    <mnt-button label="Click me" variant="filter" size="small" state="default"></mnt-button>
-    <mnt-button label="Click me" variant="filter" size="medium" state="default"></mnt-button>
-    <mnt-button label="Click me" variant="filter" size="large" state="default"></mnt-button>
+    <mnt-button label="tiny" variant="filter" size="tiny" state="default"></mnt-button>
+    <mnt-button label="small" variant="filter" size="small" state="default"></mnt-button>
+    <mnt-button label="medium" variant="filter" size="medium" state="default"></mnt-button>
+    <mnt-button label="large" variant="filter" size="large" state="default"></mnt-button>
   </div>
-  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
+  <div class="sb-grid-5 sb-grid-row-divider sb-grid-row-title">
     <span>Pressed</span>
-    <mnt-button label="Click me" variant="filter" size="small" state="pressed"></mnt-button>
-    <mnt-button label="Click me" variant="filter" size="medium" state="pressed"></mnt-button>
-    <mnt-button label="Click me" variant="filter" size="large" state="pressed"></mnt-button>
+    <mnt-button label="tiny" variant="filter" size="tiny" state="pressed"></mnt-button>
+    <mnt-button label="small" variant="filter" size="small" state="pressed"></mnt-button>
+    <mnt-button label="medium" variant="filter" size="medium" state="pressed"></mnt-button>
+    <mnt-button label="large" variant="filter" size="large" state="pressed"></mnt-button>
+  </div>
+</div>
+
+<div class="sb-section-box">
+  <h4>Loading</h4>
+  <div class="sb-grid-4 sb-grid-row-divider sb-grid-row-title">
+    <span>Tiny</span>
+    <span>Small</span>
+    <span>Medium</span>
+    <span>Large</span>
+
+    <mnt-button label="Salvando" loading="true" variant="emphasis" color="primary" size="tiny"></mnt-button>
+    <mnt-button label="Salvando" loading="true" variant="emphasis" color="primary" size="small"></mnt-button>
+    <mnt-button label="Salvando" loading="true" variant="emphasis" color="primary" size="medium"></mnt-button>
+    <mnt-button label="Salvando" loading="true" variant="emphasis" color="primary" size="large"></mnt-button>
   </div>
 </div>
 `;

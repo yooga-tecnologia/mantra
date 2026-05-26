@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-25T22:23:03",
+  "timestamp": "2026-05-26T17:02:41",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -747,37 +747,6 @@
           "setter": false
         },
         {
-          "name": "iconAnimation",
-          "type": "\"rotation\"",
-          "complexType": {
-            "original": "ButtonProps['iconAnimation']",
-            "resolved": "\"rotation\"",
-            "references": {
-              "ButtonProps": {
-                "location": "import",
-                "path": "./button.types",
-                "id": "src/components/button/button.types.ts::ButtonProps",
-                "referenceLocation": "ButtonProps"
-              }
-            }
-          },
-          "mutable": false,
-          "attr": "icon-animation",
-          "reflectToAttr": false,
-          "docs": "",
-          "docsTags": [],
-          "values": [
-            {
-              "value": "rotation",
-              "type": "string"
-            }
-          ],
-          "optional": true,
-          "required": false,
-          "getter": false,
-          "setter": false
-        },
-        {
           "name": "iconLeft",
           "type": "string",
           "complexType": {
@@ -868,6 +837,42 @@
           "setter": false
         },
         {
+          "name": "loading",
+          "type": "boolean",
+          "complexType": {
+            "original": "ButtonProps['loading']",
+            "resolved": "boolean",
+            "references": {
+              "ButtonProps": {
+                "location": "import",
+                "path": "./button.types",
+                "id": "src/components/button/button.types.ts::ButtonProps",
+                "referenceLocation": "ButtonProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "loading",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
           "name": "size",
           "type": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
           "complexType": {
@@ -918,10 +923,10 @@
         },
         {
           "name": "state",
-          "type": "\"default\" | \"pressed\"",
+          "type": "\"default\" | \"loading\" | \"pressed\"",
           "complexType": {
             "original": "ButtonProps['state']",
-            "resolved": "\"default\" | \"pressed\"",
+            "resolved": "\"default\" | \"loading\" | \"pressed\"",
             "references": {
               "ButtonProps": {
                 "location": "import",
@@ -945,6 +950,10 @@
           "values": [
             {
               "value": "default",
+              "type": "string"
+            },
+            {
+              "value": "loading",
               "type": "string"
             },
             {
@@ -5882,7 +5891,7 @@
       "path": "src/components/button/button.types.ts"
     },
     "src/components/button/button.types.ts::ButtonProps": {
-      "declaration": "export interface ButtonProps extends ButtonBaseProps {\n  label?: string;\n  fullWidth?: boolean;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  iconAnimation?: IconAnimation;\n  state?: 'default' | 'pressed';\n  size?: SizeVariants;\n}",
+      "declaration": "export interface ButtonProps extends ButtonBaseProps {\n  label?: string;\n  fullWidth?: boolean;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  iconAnimation?: IconAnimation;\n  state?: ButtonStateVariants;\n  size?: SizeVariants;\n  loading?: boolean;\n}",
       "docstring": "",
       "path": "src/components/button/button.types.ts"
     },

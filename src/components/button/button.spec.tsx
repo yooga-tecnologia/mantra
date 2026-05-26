@@ -163,6 +163,103 @@ describe('<mnt-button>', () => {
     });
   });
 
+  describe('Loading state', () => {
+    const LOADING_ICON = 'loading';
+
+    it('SHOULD apply mnt-button-loading class WHEN loading=true', async () => {
+      const page = await createButtonComponent(`<mnt-button loading="true" label="${DEFAULT_LABEL}"></mnt-button>`);
+      expect(getButtonElement(page)).toHaveClass(`${LIB_PREFIX}button-loading`);
+    });
+
+    it('SHOULD render the loading icon WHEN loading=true', async () => {
+      const page = await createButtonComponent(`<mnt-button loading="true" label="${DEFAULT_LABEL}"></mnt-button>`);
+      const icon = page.root.querySelector('.icon-loading');
+
+      expect(icon).not.toBeNull();
+      expect(icon.tagName.toLowerCase()).toBe('mnt-icon');
+      expect(icon.getAttribute('icon')).toBe(LOADING_ICON);
+    });
+
+    it('SHOULD render the loading icon inside a button with the loading class', async () => {
+      const page = await createButtonComponent(`<mnt-button loading="true" label="${DEFAULT_LABEL}"></mnt-button>`);
+      const button = getButtonElement(page);
+      const icon = button.querySelector('.icon-loading');
+
+      expect(icon).not.toBeNull();
+      expect(button).toHaveClass(`${LIB_PREFIX}button-loading`);
+    });
+
+    it('SHOULD NOT render label WHEN loading=true', async () => {
+      const page = await createButtonComponent(`<mnt-button loading="true" label="${DEFAULT_LABEL}"></mnt-button>`);
+      const label = page.root.querySelector('.label');
+
+      expect(label).toBeNull();
+    });
+
+    it('SHOULD NOT render iconLeft NOR iconRight WHEN loading=true', async () => {
+      const page = await createButtonComponent(
+        `<mnt-button loading="true" icon-left="${ICON_LEFT}" icon-right="${ICON_RIGHT}" label="${DEFAULT_LABEL}"></mnt-button>`,
+      );
+
+      expect(page.root.querySelector('.icon-left')).toBeNull();
+      expect(page.root.querySelector('.icon-right')).toBeNull();
+    });
+
+    it('SHOULD apply aria-busy="true" WHEN loading=true', async () => {
+      const page = await createButtonComponent(`<mnt-button loading="true" label="${DEFAULT_LABEL}"></mnt-button>`);
+      expect(getButtonElement(page).getAttribute('aria-busy')).toBe('true');
+    });
+
+    it('SHOULD NOT apply aria-busy WHEN loading is not active', async () => {
+      const page = await createButtonComponent(`<mnt-button label="${DEFAULT_LABEL}"></mnt-button>`);
+      expect(getButtonElement(page).hasAttribute('aria-busy')).toBe(false);
+    });
+
+    it('SHOULD NOT emit click event WHEN loading=true', async () => {
+      const page = await createButtonComponent(`<mnt-button loading="true" label="${DEFAULT_LABEL}"></mnt-button>`);
+      const button = getButtonElement(page);
+
+      const spy = jest.fn();
+      page.root.addEventListener('buttonClick', spy);
+
+      button.click();
+
+      expect(spy).not.toHaveBeenCalled();
+    });
+
+    it('SHOULD freeze the button width WHEN transitioning from idle to loading', async () => {
+      const page = await createButtonComponent(`<mnt-button label="${DEFAULT_LABEL}"></mnt-button>`);
+      const button = getButtonElement(page);
+
+      const capturedWidth = 200;
+      button.getBoundingClientRect = jest.fn(
+        () => ({ width: capturedWidth, height: 40, top: 0, left: 0, right: capturedWidth, bottom: 40, x: 0, y: 0, toJSON: () => ({}) }) as DOMRect,
+      );
+
+      page.root.loading = true;
+      await page.waitForChanges();
+
+      expect(button.style.minWidth).toBe(`${capturedWidth}px`);
+    });
+
+    it('SHOULD release the frozen width WHEN transitioning back from loading to idle', async () => {
+      const page = await createButtonComponent(`<mnt-button label="${DEFAULT_LABEL}"></mnt-button>`);
+      const button = getButtonElement(page);
+
+      button.getBoundingClientRect = jest.fn(
+        () => ({ width: 180, height: 40, top: 0, left: 0, right: 180, bottom: 40, x: 0, y: 0, toJSON: () => ({}) }) as DOMRect,
+      );
+
+      page.root.loading = true;
+      await page.waitForChanges();
+      expect(button.style.minWidth).toBe('180px');
+
+      page.root.loading = false;
+      await page.waitForChanges();
+      expect(button.style.minWidth).toBe('');
+    });
+  });
+
   describe('Events', () => {
     it('SHOULD emit click event WHEN button is clicked', async () => {
       const page = await createButtonComponent(`<mnt-button label="${DEFAULT_LABEL}"></mnt-button>`);

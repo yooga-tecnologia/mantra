@@ -1,9 +1,10 @@
-import { Component, Host, Prop, Event, EventEmitter, h } from '@stencil/core';
+import { Component, Host, Prop, State, Watch, Event, EventEmitter, h } from '@stencil/core';
 
 import { getLibPrefix } from '../../utils/utils';
 import type { ButtonProps } from './button.types';
 
 const LIB_PREFIX = getLibPrefix();
+const LOADING_ICON = 'loading';
 
 @Component({
   tag: 'mnt-button',
@@ -22,17 +23,34 @@ export class Button {
   @Prop() label?: ButtonProps['label'];
   @Prop() iconLeft?: ButtonProps['iconLeft'];
   @Prop() iconRight?: ButtonProps['iconRight'];
-  @Prop() iconAnimation?: ButtonProps['iconAnimation'];
 
   // States
   @Prop() disabled: ButtonProps['disabled'] = false;
+  @Prop() loading: ButtonProps['loading'] = false;
 
   // Events
   @Event() buttonClick: EventEmitter<MouseEvent>;
 
-  // Methods
+  // Internal state
+  @State() private frozenWidth?: number;
+
+  // Refs
+  private buttonRef?: HTMLButtonElement;
+
+  @Watch('loading')
+  handleLoadingChange(newValue: boolean, oldValue: boolean) {
+    if (newValue && !oldValue) {
+      this.frozenWidth = this.buttonRef?.getBoundingClientRect().width;
+      return;
+    }
+
+    if (!newValue && oldValue) {
+      this.frozenWidth = undefined;
+    }
+  }
+
   private handleClick(event: MouseEvent) {
-    if (this.disabled) {
+    if (this.disabled || this.loading) {
       event.preventDefault();
       event.stopPropagation();
       return;
@@ -91,44 +109,62 @@ export class Button {
     const disabledClass = this.disabled ? `${LIB_PREFIX}button-disabled` : '';
     const fullWidthClass = this.fullWidth ? `${LIB_PREFIX}button-full-width` : '';
     const stateClass = this.state ? `${LIB_PREFIX}button-${this.state}` : '';
+    const loadingClass = this.loading ? `${LIB_PREFIX}button-loading` : '';
 
-    return `${fullWidthClass} ${variantClass} ${sizeClass} ${colorClass} ${disabledClass} ${stateClass}`;
+    return `${fullWidthClass} ${variantClass} ${sizeClass} ${colorClass} ${disabledClass} ${stateClass} ${loadingClass}`;
+  }
+
+  private renderLoadingContent() {
+    return (
+      <mnt-icon
+        icon={LOADING_ICON}
+        size={this.iconSize}
+        class="icon-loading"
+      />
+    );
+  }
+
+  private renderIdleContent() {
+    return [
+      this.iconLeft && (
+        <mnt-icon
+          icon={this.iconLeft}
+          size={this.iconSize}
+          class="icon-left"
+        />
+      ),
+      this.label ? (
+        <span class="label">{this.label}</span>
+      ) : (
+        <span class="label">
+          <slot></slot>
+        </span>
+      ),
+      this.iconRight && (
+        <mnt-icon
+          icon={this.iconRight}
+          size={this.iconSize}
+          class="icon-right"
+        />
+      ),
+    ];
   }
 
   render() {
+    const inlineStyle = this.frozenWidth ? { minWidth: `${this.frozenWidth}px` } : undefined;
+
     return (
       <Host>
         <button
+          ref={(el) => (this.buttonRef = el as HTMLButtonElement)}
           class={this.buttonClass}
           disabled={this.disabled}
+          aria-busy={this.loading ? 'true' : null}
+          style={inlineStyle}
           onClick={(event) => this.handleClick(event)}
           part="button"
         >
-          {this.iconLeft && (
-            <mnt-icon
-              icon={this.iconLeft}
-              animation={this.iconAnimation}
-              size={this.iconSize}
-              class="icon-left"
-            />
-          )}
-
-          {this.label ? (
-            <span class="label">{this.label}</span>
-          ) : (
-            <span class="label">
-              <slot></slot>
-            </span>
-          )}
-
-          {this.iconRight && (
-            <mnt-icon
-              icon={this.iconRight}
-              animation={this.iconAnimation}
-              size={this.iconSize}
-              class="icon-right"
-            />
-          )}
+          {this.loading ? this.renderLoadingContent() : this.renderIdleContent()}
         </button>
       </Host>
     );

@@ -13,11 +13,12 @@
  *    slightly less strict but the public API remains fully usable.
  *    Scope: stencil-public-runtime.d.ts only.
  *
- * 2. `[key: ` + "`aria${string}`" + `]: ...` template-literal index
- *    signatures (TS 4.4+): trigger TS1023 ("An index signature parameter
- *    type must be either 'string' or 'number'") in older versions.
- *    Fix: drop those lines. Consumers can still use `aria-*` attributes via
- *    the regular JSX typings; the lost benefit is autocomplete-only.
+ * 2. `[key: \`${prefix}${string}\`]: ...` template-literal index signatures
+ *    (TS 4.4+): trigger TS1023 ("An index signature parameter type must be
+ *    either 'string' or 'number'") in older versions. Known offenders include
+ *    `aria${string}`, `aria-${string}`, and `prop:${string}`.
+ *    Fix: drop any index signature whose key type is a template literal.
+ *    The lost benefit is autocomplete for those dynamic prefixes only.
  *    Scope: stencil-public-runtime.d.ts only.
  *
  * 3. Inline `type` modifier in named imports (TS 4.5+):
@@ -77,7 +78,10 @@ function walkDtsFiles(dir, callback) {
 function patchRuntimeOnly(content) {
   return content
     .replace(/<const\s+/g, '<')
-    .replace(/^\s*\[key:\s*`aria-?\$\{string\}`\][^\n]*\r?\n/gm, '');
+    // Remove every index signature whose key type is a template literal string,
+    // e.g. [key: `aria${string}`], [key: `aria-${string}`], [key: `prop:${string}`].
+    // These are valid TS 4.4+ syntax but cause TS1023 in older compilers.
+    .replace(/^\s*\[key:\s*`[^`]*\$\{string\}[^`]*`\][^\n]*\r?\n/gm, '');
 }
 
 function stripInlineTypeImports(content) {
