@@ -1,0 +1,64 @@
+@use "sass:map";
+
+@use "../../../shared/theme/tokens/actions/index.scss" as action-tokens;
+@use "../../../shared/theme/core/theme" as theme;
+
+///
+/// Tag Removable Theme
+///
+
+$component-prefix: theme.get-prefix('tag');
+
+// Phase 1: content fades out and scales down (Material Design 3 exit motion).
+@keyframes tag-remove-exit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+}
+
+// Phase 2: the occupied space collapses so neighbouring tags reflow smoothly.
+@keyframes tag-remove-collapse {
+  from {
+    width: var(--tag-width);
+    min-width: var(--tag-width);
+    padding-left: var(--tag-pl);
+    padding-right: var(--tag-pr);
+    margin-right: var(--tag-mr, 0px);
+    opacity: 0;
+  }
+  to {
+    width: 0;
+    min-width: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-right: 0;
+    opacity: 0;
+  }
+}
+
+@mixin set-tag-styles() {
+  .#{$component-prefix}-removable {
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    &[disabled]:hover {
+      cursor: not-allowed;
+    }
+
+    // When the removing class is added, run both animation phases sequentially.
+    // Phase 1 runs first (250ms), then phase 2 collapses the space (200ms).
+    &.#{$component-prefix}-removing {
+      pointer-events: none;
+      overflow: hidden;
+      animation:
+        tag-remove-exit 250ms cubic-bezier(0.2, 0, 0, 1) forwards,
+        tag-remove-collapse 200ms ease-out 250ms forwards;
+    }
+  }
+}

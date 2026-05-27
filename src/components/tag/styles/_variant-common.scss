@@ -1,0 +1,18 @@
+@use "sass:map";
+
+@use "../../../shared/theme/tokens/actions/index.scss" as action-tokens;
+@use "../../../shared/theme/core/theme" as theme;
+
+///
+/// Tag Common Theme
+///
+
+$component-prefix: theme.get-prefix('tag');
+
+@mixin set-tag-styles() {
+  .#{$component-prefix}-common {
+    background-color: theme.get-tone-from-palette(100, "neutral");
+    border-color: theme.get-tone-from-palette(100, "neutral");
+    color: theme.get-tone-from-palette(700, "neutral");
+  }
+}

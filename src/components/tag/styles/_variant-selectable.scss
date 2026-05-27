@@ -1,0 +1,83 @@
+@use "sass:map";
+
+@use "../../../shared/theme/tokens/actions/index.scss" as action-tokens;
+@use "../../../shared/theme/core/theme" as theme;
+
+///
+/// Tag Selectable Theme
+///
+
+$component-prefix: theme.get-prefix('tag');
+
+$tag-color-configs: (
+  default: (
+    default: (
+      background-color: transparent,
+      border-color: theme.get-tone-from-palette(300, "neutral"),
+      color: theme.get-tone-from-palette(700, "neutral"),
+    ),
+    hover: (
+      background-color: theme.get-tone-from-palette(50, "neutral"),
+      border-color: theme.get-tone-from-palette(400, "neutral"),
+      color: theme.get-tone-from-palette(700, "neutral"),
+    ),
+  ),
+  selected: (
+    default: (
+      background-color: theme.get-tone-from-palette(100, "primary"),
+      border-color: theme.get-tone-from-palette(600, "primary"),
+      color: theme.get-tone-from-palette(800, "primary"),
+    ),
+    hover: (
+      background-color: theme.get-tone-from-palette(200, "primary"),
+      border-color: theme.get-tone-from-palette(600, "primary"),
+      color: theme.get-tone-from-palette(800, "primary"),
+    ),
+  ),
+);
+
+@mixin set-tag-colors($border, $bg, $text) {
+  border-color: $border;
+  background-color: $bg;
+  color: $text;
+}
+
+@mixin set-tag-styles() {
+  .#{$component-prefix}-selectable {
+    &:not(.#{$component-prefix}-selected) {
+      @include set-tag-colors(
+        map.get($tag-color-configs, "default", "default", "border-color"),
+        map.get($tag-color-configs, "default", "default", "background-color"),
+        map.get($tag-color-configs, "default", "default", "color")
+      );
+    }
+
+    &:hover,
+    &:focus {
+      @include set-tag-colors(
+        map.get($tag-color-configs, "default", "hover", "border-color"),
+        map.get($tag-color-configs, "default", "hover", "background-color"),
+        map.get($tag-color-configs, "default", "hover", "color")
+      );
+    }
+
+    &.#{$component-prefix}-selected {
+      outline: 1px solid map.get($tag-color-configs, "selected", "default", "border-color");
+      @include set-tag-colors(
+        map.get($tag-color-configs, "selected", "default", "border-color"),
+        map.get($tag-color-configs, "selected", "default", "background-color"),
+        map.get($tag-color-configs, "selected", "default", "color")
+      );
+
+      &:hover,
+      &:focus {
+        outline: 1px solid map.get($tag-color-configs, "selected", "hover", "border-color");
+        @include set-tag-colors(
+          map.get($tag-color-configs, "selected", "hover", "border-color"),
+          map.get($tag-color-configs, "selected", "hover", "background-color"),
+          map.get($tag-color-configs, "selected", "hover", "color")
+        );
+      }
+    }
+  }
+}

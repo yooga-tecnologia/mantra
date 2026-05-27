@@ -146,14 +146,14 @@
       .form-grid {
         grid-template-columns: 1fr;
       }
-/* 
+
       .modal__footer {
         flex-direction: column-reverse;
       }
 
       .modal__footer mnt-button {
         width: 100%;
-      } */
+      }
     }
   </style>
 </head>
@@ -162,26 +162,43 @@
   <div class="page">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <header class="modal__header">
-        <h2 class="modal__title" id="modal-title">Exemplo button</h2>
-        <span class="modal__viewport">Viewport: <span id="viewport-size"></span> (<span id="viewport-width"></span>px)</span>
-        <!-- <button class="modal__close" type="button" aria-label="Fechar">
+        <h2 class="modal__title" id="modal-title">Editar Cupom: 444</h2>
+        <button class="modal__close" type="button" aria-label="Fechar">
           <mnt-icon icon="close" size="20"></mnt-icon>
-        </button> -->
+        </button>
       </header>
-      <!-- 
 
       <div class="modal__body">
         <section class="section">
           <div class="section__header">
-            <h3 class="section__title">Dados gerais</h3>
+            <!-- <h3 class="section__title">Dados gerais</h3> -->
             <div class="section__badges">
-              <mnt-badge label="DELIVERY" color="neutral" tone="default" size="small"></mnt-badge>
-              <mnt-badge label="PDV" color="neutral" tone="default" size="small"></mnt-badge>
+              <mnt-tag-selectable icon="plus" size="tiny" label="selectable"></mnt-tag-selectable>
+              <mnt-tag-selectable icon="plus" size="small" label="selectable"></mnt-tag-selectable>
+              <mnt-tag-selectable icon="plus" size="medium" label="selectable"></mnt-tag-selectable>
+              <mnt-tag-selectable icon="plus" size="large" label="selectable"></mnt-tag-selectable>
+              <!-- <mnt-badge label="DELIVERY" color="neutral" tone="default" size="small"></mnt-badge>
+              <mnt-badge label="PDV" color="neutral" tone="default" size="small"></mnt-badge> -->
             </div>
           </div>
 
           <div class="form-grid">
-            <mnt-field-text
+            <div class="section__badges">
+              <mnt-tag icon="plus" size="tiny" label="common"></mnt-tag>
+              <mnt-tag icon="plus" size="small" label="common"></mnt-tag>
+              <mnt-tag size="medium" label="common"></mnt-tag>
+              <mnt-tag size="large" label="common"></mnt-tag>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="section__badges">
+              <mnt-tag-removable id="removable-1" icon="plus" size="tiny" label="removable"></mnt-tag-removable>
+              <mnt-tag-removable id="removable-2" icon="plus" size="small" label="removable"></mnt-tag-removable>
+              <mnt-tag-removable id="removable-3" size="medium" label="removable"></mnt-tag-removable>
+              <mnt-tag-removable id="removable-4" size="large" label="removable"></mnt-tag-removable>
+              <mnt-tag-removable id="removable-5" disabled size="large" label="removable"></mnt-tag-removable>
+            </div>
+            <!-- <mnt-field-text
               name="couponType"
               label-text="Tipo de cupom"
               has-info-button
@@ -189,9 +206,9 @@
               size="medium"
             >
               <mnt-icon slot="info-button" icon="info" size="16"></mnt-icon>
-            </mnt-field-text>
+            </mnt-field-text> -->
 
-            <mnt-field-text
+            <!-- <mnt-field-text
               name="couponCode"
               label-text="Código do cupom"
               has-info-button
@@ -256,7 +273,7 @@
               value="21/05/2026"
               placeholder="dd/mm/aaaa"
               size="medium"
-            ></mnt-field-date>
+            ></mnt-field-date> -->
           </div>
         </section>
 
@@ -270,40 +287,21 @@
             label="Não aplicar valor no frete"
           ></mnt-switch>
         </section>
-      </div> -->
+      </div>
 
       <footer class="modal__footer">
-        <mnt-button onclick="handleButtonClick(event)" disabled icon-left="close" label="Large" variant="stroke" color="primary" size="large"></mnt-button>
-        <mnt-button onclick="handleButtonClick(event)" icon-left="close" label="Large" variant="stroke" color="primary" size="large"></mnt-button>
-        <mnt-button loading="true" onclick="handleButtonClick(event)" icon-left="close" label="Large" variant="stroke" color="primary" size="large"></mnt-button>
-        <mnt-button onclick="handleButtonClick(event)" icon-left="check" label="Medium" variant="stroke" color="primary" size="medium"></mnt-button>
-        <mnt-button onclick="handleButtonClick(event)" icon-left="check" label="Small" variant="stroke" color="primary" size="small"></mnt-button>
-        <mnt-button onclick="handleButtonClick(event)" icon-left="check" label="Tiny" variant="stroke" color="primary" size="tiny"></mnt-button>
-      </footer>
-
-      <footer class="modal__footer">
-        <mnt-button full-width icon-left="close" label="Large" variant="emphasis" color="primary" size="large"></mnt-button>
-        <mnt-button full-width icon-left="check" label="Medium" variant="emphasis" color="primary" size="medium"></mnt-button>
-        <mnt-button full-width icon-left="check" label="Small" variant="emphasis" color="primary" size="small"></mnt-button>
-        <mnt-button full-width icon-left="check" label="Tiny" variant="emphasis" color="primary" size="tiny"></mnt-button>
+        <mnt-button label="Cancelar" variant="plain" color="neutral" size="medium"></mnt-button>
+        <mnt-button label="Salvar" variant="emphasis" color="primary" size="medium"></mnt-button>
       </footer>
     </div>
   </div>
+
   <script>
-    const viewportWidth = document.body.clientWidth;
-    const viewportSize = viewportWidth < 600 ? 'Mobile' : 'Desktop';
-
-    // document.getElementById('viewport-size').textContent = viewport.matches ? 'Mobile' : 'Desktop';
-    document.getElementById('viewport-width').textContent = viewportWidth;
-    document.getElementById('viewport-size').textContent = viewportSize;
-
-    function handleButtonClick(event) {
-      const button = event.currentTarget;
-      button.loading = true;
-      setTimeout(() => {
-        button.loading = false;
-      }, 2000);
-    }
+    document.addEventListener('tagRemoved', function (event) {
+      var id = event.detail.id;
+      var tag = document.querySelector('mnt-tag-removable[id="' + id + '"]');
+      if (tag) tag.remove();
+    });
   </script>
 </body>
 </html>
