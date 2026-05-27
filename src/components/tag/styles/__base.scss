@@ -1,0 +1,96 @@
+@use "sass:map";
+@use "../../../shared/theme/core/theme" as theme;
+@use "../../../shared/theme/tokens/sizing" as sizing;
+@use "../../../shared/theme/tokens/animations" as animations;
+
+$component-prefix: theme.get-prefix('tag');
+$border-radius-circular: map.get(sizing.$border-radius-map, "circular");
+
+// Sizes
+
+$tag-size-configs: (
+  "tiny":   ( font-size: 12px, padding: 8px 12px, height: 24px, gap: 4px ),
+  "small":  ( font-size: 12px, padding: 8px 16px, height: 32px, gap: 4px ),
+  "medium": ( font-size: 14px, padding: 12px 16px, height: 40px, gap: 4px ),
+  "large":  ( font-size: 16px, padding: 12px 24px, height: 48px, gap: 8px ),
+);
+
+// Per-breakpoint size aliasing (mobile-first ascending min-width).
+// At each breakpoint, the size class on the left renders with the values from the size on the right.
+$tag-breakpoints: (
+  0:   ( tiny: tiny, small: tiny,   medium: tiny,   large: small  ),
+  577: ( tiny: tiny, small: small,  medium: small,  large: medium ),
+  992: ( tiny: tiny, small: small,  medium: medium, large: large  ),
+);
+
+@mixin set-tag-size($size) {
+  $size-map: map.get($tag-size-configs, $size);
+  padding: map.get($size-map, "padding");
+  height: map.get($size-map, "height");
+  gap: map.get($size-map, "gap");
+  border-radius: $border-radius-circular;
+
+  span {
+    font-size: map.get($size-map, "font-size");
+  }
+}
+
+// Size-agnostic rules: emitted once
+.#{$component-prefix} {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.#{$component-prefix}-common {
+  border: 1px solid purple
+}
+
+button.#{$component-prefix}-removable,
+button.#{$component-prefix}-selectable {
+  appearance: none;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid transparent;
+  outline: 0px solid transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+#{$component-prefix}[disabled] button,
+.#{$component-prefix}-disabled {
+  &:hover,
+  &:focus,
+  &:active {
+    cursor: not-allowed;
+  }
+}
+
+// Size-specific base styles (no breakpoint variation)
+
+@each $size, $configs in $tag-size-configs {
+  .#{$component-prefix}-#{$size} {
+    span {
+      font-weight: 500;
+      text-wrap: nowrap;
+    }
+  }
+}
+
+// Responsive sizing: single loop generates all media queries
+@each $min-width, $aliases in $tag-breakpoints {
+  @media (min-width: #{$min-width}px) {
+    @each $size, $aliased-size in $aliases {
+      .#{$component-prefix}-common.#{$component-prefix}-#{$size} {
+        @include set-tag-size($aliased-size);
+      }
+
+      button.#{$component-prefix}-removable.#{$component-prefix}-#{$size},
+      button.#{$component-prefix}-selectable.#{$component-prefix}-#{$size} {
+        @include set-tag-size($aliased-size);
+      }
+    }
+  }
+}

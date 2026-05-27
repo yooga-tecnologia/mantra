@@ -87,19 +87,19 @@ export class Button {
     let sizeClass = '';
 
     if (this.variant === 'filter' && (this.color !== 'primary' || this.color === undefined)) {
-      console.warn('[MANTRA] The "primary" color is the only supported color for the "filter" variant. Please use a different color.');
+      console.warn('[MANTRA][button]: The "primary" color is the only supported color for the "filter" variant. Please use a different color.');
       this.color = 'primary';
     }
 
     if (this.variant === 'emphasis' && this.color === 'neutral') {
-      console.warn('[MANTRA] The "neutral" color is not supported for the "emphasis" variant. Please use a different color.');
+      console.warn('[MANTRA][button]: The "neutral" color is not supported for the "emphasis" variant. Please use a different color.');
       colorClass = `${LIB_PREFIX}button-primary`;
     } else {
       colorClass = `${LIB_PREFIX}button-${this.color}`;
     }
 
     if (this.size !== 'medium' && this.size !== 'large' && this.size !== 'small' && this.size !== 'tiny') {
-      console.warn('[MANTRA] This size is not supported for this type of button. Please use a different value.');
+      console.warn('[MANTRA][button]: This size is not supported for this type of button. Please use a different value.');
       sizeClass = `${LIB_PREFIX}button-small`;
     } else {
       sizeClass = `${LIB_PREFIX}button-${this.size}`;

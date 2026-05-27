@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-26T17:13:19",
+  "timestamp": "2026-05-27T17:44:10",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -3668,7 +3668,10 @@
         "mnt-message-highlight",
         "mnt-message-inline",
         "mnt-steps",
-        "mnt-tab-item"
+        "mnt-tab-item",
+        "mnt-tag",
+        "mnt-tag-removable",
+        "mnt-tag-selectable"
       ],
       "dependencies": [],
       "dependencyGraph": {
@@ -3706,6 +3709,15 @@
           "mnt-icon"
         ],
         "mnt-tab-item": [
+          "mnt-icon"
+        ],
+        "mnt-tag": [
+          "mnt-icon"
+        ],
+        "mnt-tag-removable": [
+          "mnt-icon"
+        ],
+        "mnt-tag-selectable": [
           "mnt-icon"
         ]
       }
@@ -5753,6 +5765,508 @@
       }
     },
     {
+      "filePath": "src/components/tag/tag.tsx",
+      "encapsulation": "none",
+      "tag": "mnt-tag",
+      "readme": "# mnt-tag-selectable\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "icon",
+          "type": "string",
+          "complexType": {
+            "original": "TagProps['icon']",
+            "resolved": "string",
+            "references": {
+              "TagProps": {
+                "location": "import",
+                "path": "./tag.types",
+                "id": "src/components/tag/tag.types.ts::TagProps",
+                "referenceLocation": "TagProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "icon",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "complexType": {
+            "original": "TagProps['label']",
+            "resolved": "string",
+            "references": {
+              "TagProps": {
+                "location": "import",
+                "path": "./tag.types",
+                "id": "src/components/tag/tag.types.ts::TagProps",
+                "referenceLocation": "TagProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "label",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "size",
+          "type": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+          "complexType": {
+            "original": "TagProps['size']",
+            "resolved": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+            "references": {
+              "TagProps": {
+                "location": "import",
+                "path": "./tag.types",
+                "id": "src/components/tag/tag.types.ts::TagProps",
+                "referenceLocation": "TagProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "size",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'medium'"
+            }
+          ],
+          "default": "'medium'",
+          "values": [
+            {
+              "value": "large",
+              "type": "string"
+            },
+            {
+              "value": "medium",
+              "type": "string"
+            },
+            {
+              "value": "small",
+              "type": "string"
+            },
+            {
+              "value": "tiny",
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [],
+      "listeners": [],
+      "styles": [],
+      "slots": [],
+      "parts": [],
+      "states": [],
+      "dependents": [],
+      "dependencies": [
+        "mnt-icon"
+      ],
+      "dependencyGraph": {
+        "mnt-tag": [
+          "mnt-icon"
+        ]
+      }
+    },
+    {
+      "filePath": "src/components/tag/tag-removable.tsx",
+      "encapsulation": "none",
+      "tag": "mnt-tag-removable",
+      "readme": "# mnt-tag-selectable\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "disabled",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "icon",
+          "type": "string",
+          "complexType": {
+            "original": "TagProps['icon']",
+            "resolved": "string",
+            "references": {
+              "TagProps": {
+                "location": "import",
+                "path": "./tag.types",
+                "id": "src/components/tag/tag.types.ts::TagProps",
+                "referenceLocation": "TagProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "icon",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "complexType": {
+            "original": "TagProps['label']",
+            "resolved": "string",
+            "references": {
+              "TagProps": {
+                "location": "import",
+                "path": "./tag.types",
+                "id": "src/components/tag/tag.types.ts::TagProps",
+                "referenceLocation": "TagProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "label",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "size",
+          "type": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+          "complexType": {
+            "original": "TagProps['size']",
+            "resolved": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+            "references": {
+              "TagProps": {
+                "location": "import",
+                "path": "./tag.types",
+                "id": "src/components/tag/tag.types.ts::TagProps",
+                "referenceLocation": "TagProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "size",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'medium'"
+            }
+          ],
+          "default": "'medium'",
+          "values": [
+            {
+              "value": "large",
+              "type": "string"
+            },
+            {
+              "value": "medium",
+              "type": "string"
+            },
+            {
+              "value": "small",
+              "type": "string"
+            },
+            {
+              "value": "tiny",
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "tagId",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "tag-id",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [
+        {
+          "event": "tagRemoved",
+          "detail": "TagRemovedEvent",
+          "bubbles": true,
+          "complexType": {
+            "original": "TagRemovedEvent",
+            "resolved": "TagRemovedEvent",
+            "references": {
+              "TagRemovedEvent": {
+                "location": "import",
+                "path": "./tag.types",
+                "id": "src/components/tag/tag.types.ts::TagRemovedEvent",
+                "referenceLocation": "TagRemovedEvent"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "",
+          "docsTags": []
+        }
+      ],
+      "listeners": [],
+      "styles": [],
+      "slots": [],
+      "parts": [
+        {
+          "name": "button",
+          "docs": ""
+        }
+      ],
+      "states": [],
+      "dependents": [],
+      "dependencies": [
+        "mnt-icon"
+      ],
+      "dependencyGraph": {
+        "mnt-tag-removable": [
+          "mnt-icon"
+        ]
+      }
+    },
+    {
+      "filePath": "src/components/tag/tag-selectable.tsx",
+      "encapsulation": "none",
+      "tag": "mnt-tag-selectable",
+      "readme": "# mnt-tag-selectable\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "icon",
+          "type": "string",
+          "complexType": {
+            "original": "TagProps['icon']",
+            "resolved": "string",
+            "references": {
+              "TagProps": {
+                "location": "import",
+                "path": "./tag.types",
+                "id": "src/components/tag/tag.types.ts::TagProps",
+                "referenceLocation": "TagProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "icon",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "complexType": {
+            "original": "TagProps['label']",
+            "resolved": "string",
+            "references": {
+              "TagProps": {
+                "location": "import",
+                "path": "./tag.types",
+                "id": "src/components/tag/tag.types.ts::TagProps",
+                "referenceLocation": "TagProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "label",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "size",
+          "type": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+          "complexType": {
+            "original": "TagProps['size']",
+            "resolved": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+            "references": {
+              "TagProps": {
+                "location": "import",
+                "path": "./tag.types",
+                "id": "src/components/tag/tag.types.ts::TagProps",
+                "referenceLocation": "TagProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "size",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'medium'"
+            }
+          ],
+          "default": "'medium'",
+          "values": [
+            {
+              "value": "large",
+              "type": "string"
+            },
+            {
+              "value": "medium",
+              "type": "string"
+            },
+            {
+              "value": "small",
+              "type": "string"
+            },
+            {
+              "value": "tiny",
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [
+        {
+          "event": "tagSelectableChange",
+          "detail": "{ selected: boolean; }",
+          "bubbles": true,
+          "complexType": {
+            "original": "{ selected: boolean }",
+            "resolved": "{ selected: boolean; }",
+            "references": {}
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "",
+          "docsTags": []
+        }
+      ],
+      "listeners": [],
+      "styles": [],
+      "slots": [],
+      "parts": [],
+      "states": [],
+      "dependents": [],
+      "dependencies": [
+        "mnt-icon"
+      ],
+      "dependencyGraph": {
+        "mnt-tag-selectable": [
+          "mnt-icon"
+        ]
+      }
+    },
+    {
       "filePath": "src/components/tooltip/tooltip.tsx",
       "encapsulation": "none",
       "tag": "mnt-tooltip",
@@ -6024,6 +6538,16 @@
       "declaration": "export interface TabItemGroupProps {\n  tabs: TabItem[];\n  selectedId?: string;\n  orientation?: TabOrientation;\n}",
       "docstring": "",
       "path": "src/components/tab-item-group/tab-item-group.types.ts"
+    },
+    "src/components/tag/tag.types.ts::TagProps": {
+      "declaration": "export interface TagProps {\n  label: string;\n  tagId?: string;\n  size?: SizeVariants;\n  state?: 'default' | 'selected' | 'disabled';\n  icon?: ExtendedIconName | undefined;\n}",
+      "docstring": "",
+      "path": "src/components/tag/tag.types.ts"
+    },
+    "src/components/tag/tag.types.ts::TagRemovedEvent": {
+      "declaration": "export interface TagRemovedEvent {\n  tagId: string;\n  label: string;\n}",
+      "docstring": "",
+      "path": "src/components/tag/tag.types.ts"
     },
     "src/components/tooltip/tooltip.types.ts::TooltipProps": {
       "declaration": "{\n  text: string;\n  position?: TooltipPosition;\n}",

@@ -21,7 +21,8 @@
     "checkbox",
     "badge",
     "message-inline",
-    "message-highlight"
+    "message-highlight",
+    "tag"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false

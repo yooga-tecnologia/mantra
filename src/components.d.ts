@@ -25,6 +25,7 @@ import { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types
 import { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
 import { TabItemProps } from "./components/tab-item/tab-item.types";
 import { TabItem, TabItemGroupProps } from "./components/tab-item-group/tab-item-group.types";
+import { TagProps, TagRemovedEvent } from "./components/tag/tag.types";
 import { TooltipProps } from "./components/tooltip/tooltip.types";
 export { BadgeBaseProps } from "./components/badge/badge.types";
 export { BrandProps } from "./components/brand/brand.types";
@@ -46,6 +47,7 @@ export { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types
 export { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
 export { TabItemProps } from "./components/tab-item/tab-item.types";
 export { TabItem, TabItemGroupProps } from "./components/tab-item-group/tab-item-group.types";
+export { TagProps, TagRemovedEvent } from "./components/tag/tag.types";
 export { TooltipProps } from "./components/tooltip/tooltip.types";
 export namespace Components {
     interface MntBadge {
@@ -445,6 +447,35 @@ export namespace Components {
         "selectedId"?: string;
         "tabs": TabItem[] | string;
     }
+    interface MntTag {
+        "icon"?: TagProps['icon'];
+        "label": TagProps['label'];
+        /**
+          * @default 'medium'
+         */
+        "size"?: TagProps['size'];
+    }
+    interface MntTagRemovable {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        "icon"?: TagProps['icon'];
+        "label": TagProps['label'];
+        /**
+          * @default 'medium'
+         */
+        "size"?: TagProps['size'];
+        "tagId"?: string;
+    }
+    interface MntTagSelectable {
+        "icon"?: TagProps['icon'];
+        "label": TagProps['label'];
+        /**
+          * @default 'medium'
+         */
+        "size"?: TagProps['size'];
+    }
     interface MntTooltip {
         /**
           * @default 'top'
@@ -500,6 +531,14 @@ export interface MntTabItemCustomEvent<T> extends CustomEvent<T> {
 export interface MntTabItemGroupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntTabItemGroupElement;
+}
+export interface MntTagRemovableCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntTagRemovableElement;
+}
+export interface MntTagSelectableCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntTagSelectableElement;
 }
 declare global {
     interface HTMLMntBadgeElement extends Components.MntBadge, HTMLStencilElement {
@@ -772,6 +811,46 @@ declare global {
         prototype: HTMLMntTabItemGroupElement;
         new (): HTMLMntTabItemGroupElement;
     };
+    interface HTMLMntTagElement extends Components.MntTag, HTMLStencilElement {
+    }
+    var HTMLMntTagElement: {
+        prototype: HTMLMntTagElement;
+        new (): HTMLMntTagElement;
+    };
+    interface HTMLMntTagRemovableElementEventMap {
+        "tagRemoved": TagRemovedEvent;
+    }
+    interface HTMLMntTagRemovableElement extends Components.MntTagRemovable, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntTagRemovableElementEventMap>(type: K, listener: (this: HTMLMntTagRemovableElement, ev: MntTagRemovableCustomEvent<HTMLMntTagRemovableElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntTagRemovableElementEventMap>(type: K, listener: (this: HTMLMntTagRemovableElement, ev: MntTagRemovableCustomEvent<HTMLMntTagRemovableElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntTagRemovableElement: {
+        prototype: HTMLMntTagRemovableElement;
+        new (): HTMLMntTagRemovableElement;
+    };
+    interface HTMLMntTagSelectableElementEventMap {
+        "tagSelectableChange": { selected: boolean };
+    }
+    interface HTMLMntTagSelectableElement extends Components.MntTagSelectable, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntTagSelectableElementEventMap>(type: K, listener: (this: HTMLMntTagSelectableElement, ev: MntTagSelectableCustomEvent<HTMLMntTagSelectableElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntTagSelectableElementEventMap>(type: K, listener: (this: HTMLMntTagSelectableElement, ev: MntTagSelectableCustomEvent<HTMLMntTagSelectableElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntTagSelectableElement: {
+        prototype: HTMLMntTagSelectableElement;
+        new (): HTMLMntTagSelectableElement;
+    };
     interface HTMLMntTooltipElement extends Components.MntTooltip, HTMLStencilElement {
     }
     var HTMLMntTooltipElement: {
@@ -801,6 +880,9 @@ declare global {
         "mnt-switch": HTMLMntSwitchElement;
         "mnt-tab-item": HTMLMntTabItemElement;
         "mnt-tab-item-group": HTMLMntTabItemGroupElement;
+        "mnt-tag": HTMLMntTagElement;
+        "mnt-tag-removable": HTMLMntTagRemovableElement;
+        "mnt-tag-selectable": HTMLMntTagSelectableElement;
         "mnt-tooltip": HTMLMntTooltipElement;
     }
 }
@@ -1261,6 +1343,37 @@ declare namespace LocalJSX {
         "selectedId"?: string;
         "tabs": TabItem[] | string;
     }
+    interface MntTag {
+        "icon"?: TagProps['icon'];
+        "label"?: TagProps['label'];
+        /**
+          * @default 'medium'
+         */
+        "size"?: TagProps['size'];
+    }
+    interface MntTagRemovable {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        "icon"?: TagProps['icon'];
+        "label"?: TagProps['label'];
+        "onTagRemoved"?: (event: MntTagRemovableCustomEvent<TagRemovedEvent>) => void;
+        /**
+          * @default 'medium'
+         */
+        "size"?: TagProps['size'];
+        "tagId"?: string;
+    }
+    interface MntTagSelectable {
+        "icon"?: TagProps['icon'];
+        "label"?: TagProps['label'];
+        "onTagSelectableChange"?: (event: MntTagSelectableCustomEvent<{ selected: boolean }>) => void;
+        /**
+          * @default 'medium'
+         */
+        "size"?: TagProps['size'];
+    }
     interface MntTooltip {
         /**
           * @default 'top'
@@ -1443,6 +1556,23 @@ declare namespace LocalJSX {
         "selectedId": string;
         "orientation": TabItemGroupProps['orientation'];
     }
+    interface MntTagAttributes {
+        "label": TagProps['label'];
+        "size": TagProps['size'];
+        "icon": TagProps['icon'];
+    }
+    interface MntTagRemovableAttributes {
+        "label": TagProps['label'];
+        "size": TagProps['size'];
+        "icon": TagProps['icon'];
+        "tagId": string;
+        "disabled": boolean;
+    }
+    interface MntTagSelectableAttributes {
+        "label": TagProps['label'];
+        "size": TagProps['size'];
+        "icon": TagProps['icon'];
+    }
     interface MntTooltipAttributes {
         "text": TooltipProps['text'];
         "position": TooltipProps['position'];
@@ -1471,6 +1601,9 @@ declare namespace LocalJSX {
         "mnt-switch": Omit<MntSwitch, keyof MntSwitchAttributes> & { [K in keyof MntSwitch & keyof MntSwitchAttributes]?: MntSwitch[K] } & { [K in keyof MntSwitch & keyof MntSwitchAttributes as `attr:${K}`]?: MntSwitchAttributes[K] } & { [K in keyof MntSwitch & keyof MntSwitchAttributes as `prop:${K}`]?: MntSwitch[K] };
         "mnt-tab-item": Omit<MntTabItem, keyof MntTabItemAttributes> & { [K in keyof MntTabItem & keyof MntTabItemAttributes]?: MntTabItem[K] } & { [K in keyof MntTabItem & keyof MntTabItemAttributes as `attr:${K}`]?: MntTabItemAttributes[K] } & { [K in keyof MntTabItem & keyof MntTabItemAttributes as `prop:${K}`]?: MntTabItem[K] } & OneOf<"tabId", MntTabItem["tabId"]> & OneOf<"label", MntTabItem["label"]>;
         "mnt-tab-item-group": Omit<MntTabItemGroup, keyof MntTabItemGroupAttributes> & { [K in keyof MntTabItemGroup & keyof MntTabItemGroupAttributes]?: MntTabItemGroup[K] } & { [K in keyof MntTabItemGroup & keyof MntTabItemGroupAttributes as `attr:${K}`]?: MntTabItemGroupAttributes[K] } & { [K in keyof MntTabItemGroup & keyof MntTabItemGroupAttributes as `prop:${K}`]?: MntTabItemGroup[K] } & OneOf<"tabs", MntTabItemGroup["tabs"]>;
+        "mnt-tag": Omit<MntTag, keyof MntTagAttributes> & { [K in keyof MntTag & keyof MntTagAttributes]?: MntTag[K] } & { [K in keyof MntTag & keyof MntTagAttributes as `attr:${K}`]?: MntTagAttributes[K] } & { [K in keyof MntTag & keyof MntTagAttributes as `prop:${K}`]?: MntTag[K] };
+        "mnt-tag-removable": Omit<MntTagRemovable, keyof MntTagRemovableAttributes> & { [K in keyof MntTagRemovable & keyof MntTagRemovableAttributes]?: MntTagRemovable[K] } & { [K in keyof MntTagRemovable & keyof MntTagRemovableAttributes as `attr:${K}`]?: MntTagRemovableAttributes[K] } & { [K in keyof MntTagRemovable & keyof MntTagRemovableAttributes as `prop:${K}`]?: MntTagRemovable[K] };
+        "mnt-tag-selectable": Omit<MntTagSelectable, keyof MntTagSelectableAttributes> & { [K in keyof MntTagSelectable & keyof MntTagSelectableAttributes]?: MntTagSelectable[K] } & { [K in keyof MntTagSelectable & keyof MntTagSelectableAttributes as `attr:${K}`]?: MntTagSelectableAttributes[K] } & { [K in keyof MntTagSelectable & keyof MntTagSelectableAttributes as `prop:${K}`]?: MntTagSelectable[K] };
         "mnt-tooltip": Omit<MntTooltip, keyof MntTooltipAttributes> & { [K in keyof MntTooltip & keyof MntTooltipAttributes]?: MntTooltip[K] } & { [K in keyof MntTooltip & keyof MntTooltipAttributes as `attr:${K}`]?: MntTooltipAttributes[K] } & { [K in keyof MntTooltip & keyof MntTooltipAttributes as `prop:${K}`]?: MntTooltip[K] };
     }
 }
@@ -1500,6 +1633,9 @@ declare module "@stencil/core" {
             "mnt-switch": LocalJSX.IntrinsicElements["mnt-switch"] & JSXBase.HTMLAttributes<HTMLMntSwitchElement>;
             "mnt-tab-item": LocalJSX.IntrinsicElements["mnt-tab-item"] & JSXBase.HTMLAttributes<HTMLMntTabItemElement>;
             "mnt-tab-item-group": LocalJSX.IntrinsicElements["mnt-tab-item-group"] & JSXBase.HTMLAttributes<HTMLMntTabItemGroupElement>;
+            "mnt-tag": LocalJSX.IntrinsicElements["mnt-tag"] & JSXBase.HTMLAttributes<HTMLMntTagElement>;
+            "mnt-tag-removable": LocalJSX.IntrinsicElements["mnt-tag-removable"] & JSXBase.HTMLAttributes<HTMLMntTagRemovableElement>;
+            "mnt-tag-selectable": LocalJSX.IntrinsicElements["mnt-tag-selectable"] & JSXBase.HTMLAttributes<HTMLMntTagSelectableElement>;
             "mnt-tooltip": LocalJSX.IntrinsicElements["mnt-tooltip"] & JSXBase.HTMLAttributes<HTMLMntTooltipElement>;
         }
     }
