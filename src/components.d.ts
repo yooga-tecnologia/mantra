@@ -475,6 +475,7 @@ export namespace Components {
           * @default 'medium'
          */
         "size"?: TagProps['size'];
+        "tagId"?: string;
     }
     interface MntTooltip {
         /**
@@ -835,7 +836,7 @@ declare global {
         new (): HTMLMntTagRemovableElement;
     };
     interface HTMLMntTagSelectableElementEventMap {
-        "tagSelectableChange": { selected: boolean };
+        "tagSelected": { tagId: string; label: string };
     }
     interface HTMLMntTagSelectableElement extends Components.MntTagSelectable, HTMLStencilElement {
         addEventListener<K extends keyof HTMLMntTagSelectableElementEventMap>(type: K, listener: (this: HTMLMntTagSelectableElement, ev: MntTagSelectableCustomEvent<HTMLMntTagSelectableElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1368,11 +1369,12 @@ declare namespace LocalJSX {
     interface MntTagSelectable {
         "icon"?: TagProps['icon'];
         "label"?: TagProps['label'];
-        "onTagSelectableChange"?: (event: MntTagSelectableCustomEvent<{ selected: boolean }>) => void;
+        "onTagSelected"?: (event: MntTagSelectableCustomEvent<{ tagId: string; label: string }>) => void;
         /**
           * @default 'medium'
          */
         "size"?: TagProps['size'];
+        "tagId"?: string;
     }
     interface MntTooltip {
         /**
@@ -1572,6 +1574,7 @@ declare namespace LocalJSX {
         "label": TagProps['label'];
         "size": TagProps['size'];
         "icon": TagProps['icon'];
+        "tagId": string;
     }
     interface MntTooltipAttributes {
         "text": TooltipProps['text'];

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-27T17:44:10",
+  "timestamp": "2026-05-27T18:47:37",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -6232,17 +6232,40 @@
           "required": false,
           "getter": false,
           "setter": false
+        },
+        {
+          "name": "tagId",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "tag-id",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
         }
       ],
       "methods": [],
       "events": [
         {
-          "event": "tagSelectableChange",
-          "detail": "{ selected: boolean; }",
+          "event": "tagSelected",
+          "detail": "{ tagId: string; label: string; }",
           "bubbles": true,
           "complexType": {
-            "original": "{ selected: boolean }",
-            "resolved": "{ selected: boolean; }",
+            "original": "{ tagId: string; label: string }",
+            "resolved": "{ tagId: string; label: string; }",
             "references": {}
           },
           "cancelable": true,
@@ -6254,7 +6277,12 @@
       "listeners": [],
       "styles": [],
       "slots": [],
-      "parts": [],
+      "parts": [
+        {
+          "name": "button",
+          "docs": ""
+        }
+      ],
       "states": [],
       "dependents": [],
       "dependencies": [

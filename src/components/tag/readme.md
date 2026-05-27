@@ -12,13 +12,21 @@
 | `icon`   | `icon`    |             | `string`                                   | `undefined` |
 | `label`  | `label`   |             | `string`                                   | `undefined` |
 | `size`   | `size`    |             | `"large" \| "medium" \| "small" \| "tiny"` | `'medium'`  |
+| `tagId`  | `tag-id`  |             | `string`                                   | `undefined` |
 
 
 ## Events
 
-| Event                 | Description | Type                                  |
-| --------------------- | ----------- | ------------------------------------- |
-| `tagSelectableChange` |             | `CustomEvent<{ selected: boolean; }>` |
+| Event         | Description | Type                                             |
+| ------------- | ----------- | ------------------------------------------------ |
+| `tagSelected` |             | `CustomEvent<{ tagId: string; label: string; }>` |
+
+
+## Shadow Parts
+
+| Part       | Description |
+| ---------- | ----------- |
+| `"button"` |             |
 
 
 ## Dependencies
