@@ -6,7 +6,7 @@ import { TAG_REMOVE_ANIMATION_DURATION_MS } from './tag.types';
 
 const LIB_PREFIX = getLibPrefix();
 
-const DEFAULT_ID = 'tag-1';
+const DEFAULT_TAG_ID = 'tag-1';
 const DEFAULT_LABEL = 'Frontend';
 
 async function createTagRemovable(html: string) {
@@ -23,7 +23,7 @@ function getButtonElement(page: any): HTMLButtonElement {
 describe('<mnt-tag-removable>', () => {
   describe('Rendering', () => {
     it('SHOULD render correctly WHEN required props are provided', async () => {
-      const page = await createTagRemovable(`<mnt-tag-removable id="${DEFAULT_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
+      const page = await createTagRemovable(`<mnt-tag-removable tag-id="${DEFAULT_TAG_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
       const button = getButtonElement(page);
 
       expect(button).not.toBeNull();
@@ -31,21 +31,30 @@ describe('<mnt-tag-removable>', () => {
     });
 
     it('SHOULD render the label WHEN label prop is provided', async () => {
-      const page = await createTagRemovable(`<mnt-tag-removable id="${DEFAULT_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
+      const page = await createTagRemovable(`<mnt-tag-removable tag-id="${DEFAULT_TAG_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
       const span = getButtonElement(page).querySelector('span');
 
       expect(span.textContent).toBe(DEFAULT_LABEL);
     });
 
-    it('SHOULD render close icon', async () => {
-      const page = await createTagRemovable(`<mnt-tag-removable id="${DEFAULT_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
-      const icon = getButtonElement(page).querySelector('mnt-icon');
+    it('SHOULD always render the close icon', async () => {
+      const page = await createTagRemovable(`<mnt-tag-removable tag-id="${DEFAULT_TAG_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
+      const icons = getButtonElement(page).querySelectorAll('mnt-icon');
+      const closeIcon = Array.from(icons).find((el) => el.getAttribute('icon') === 'close');
 
-      expect(icon).not.toBeNull();
-      expect(icon.getAttribute('icon')).toBe('close');
+      expect(closeIcon).not.toBeNull();
     });
 
-    it('SHOULD warn and render null WHEN id is not provided', async () => {
+    it('SHOULD render an additional icon BEFORE the label WHEN icon prop is provided', async () => {
+      const page = await createTagRemovable(`<mnt-tag-removable tag-id="${DEFAULT_TAG_ID}" label="${DEFAULT_LABEL}" icon="check"></mnt-tag-removable>`);
+      const icons = getButtonElement(page).querySelectorAll('mnt-icon');
+
+      expect(icons.length).toBe(2);
+      expect(icons[0].getAttribute('icon')).toBe('check');
+      expect(icons[1].getAttribute('icon')).toBe('close');
+    });
+
+    it('SHOULD warn and render null WHEN tagId is not provided', async () => {
       const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
       const page = await createTagRemovable(`<mnt-tag-removable label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
 
@@ -56,21 +65,19 @@ describe('<mnt-tag-removable>', () => {
     });
 
     it('SHOULD apply aria-label with label text for accessibility', async () => {
-      const page = await createTagRemovable(`<mnt-tag-removable id="${DEFAULT_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
-      const button = getButtonElement(page);
-
-      expect(button.getAttribute('aria-label')).toBe(`Remover ${DEFAULT_LABEL}`);
+      const page = await createTagRemovable(`<mnt-tag-removable tag-id="${DEFAULT_TAG_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
+      expect(getButtonElement(page).getAttribute('aria-label')).toBe(`Remover ${DEFAULT_LABEL}`);
     });
   });
 
   describe('Disabled state', () => {
     it('SHOULD disable the button WHEN disabled=true', async () => {
-      const page = await createTagRemovable(`<mnt-tag-removable id="${DEFAULT_ID}" label="${DEFAULT_LABEL}" disabled="true"></mnt-tag-removable>`);
+      const page = await createTagRemovable(`<mnt-tag-removable tag-id="${DEFAULT_TAG_ID}" label="${DEFAULT_LABEL}" disabled="true"></mnt-tag-removable>`);
       expect(getButtonElement(page)).toHaveAttribute('disabled');
     });
 
     it('SHOULD NOT emit tagRemoved WHEN disabled and clicked', async () => {
-      const page = await createTagRemovable(`<mnt-tag-removable id="${DEFAULT_ID}" label="${DEFAULT_LABEL}" disabled="true"></mnt-tag-removable>`);
+      const page = await createTagRemovable(`<mnt-tag-removable tag-id="${DEFAULT_TAG_ID}" label="${DEFAULT_LABEL}" disabled="true"></mnt-tag-removable>`);
       const spy = jest.fn();
       page.root.addEventListener('tagRemoved', spy);
 
@@ -81,13 +88,13 @@ describe('<mnt-tag-removable>', () => {
   });
 
   describe('Remove animation', () => {
-    // Create the page with REAL timers, then switch to fake timers only for the
-    // assertions that need to control time. This avoids a deadlock where
-    // jest.useFakeTimers() in beforeEach causes page.waitForChanges() to hang
-    // because Stencil's scheduler itself uses timers internally.
+    // Pages are created with REAL timers, then fake timers are activated only
+    // inside each test that controls time. This avoids deadlock where
+    // jest.useFakeTimers() in beforeEach blocks page.waitForChanges() because
+    // Stencil's scheduler uses timers internally.
 
     it('SHOULD apply mnt-tag-removing class immediately on click', async () => {
-      const page = await createTagRemovable(`<mnt-tag-removable id="${DEFAULT_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
+      const page = await createTagRemovable(`<mnt-tag-removable tag-id="${DEFAULT_TAG_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
 
       getButtonElement(page).click();
       await page.waitForChanges();
@@ -96,19 +103,18 @@ describe('<mnt-tag-removable>', () => {
     });
 
     it('SHOULD NOT emit tagRemoved immediately on click', async () => {
-      const page = await createTagRemovable(`<mnt-tag-removable id="${DEFAULT_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
+      const page = await createTagRemovable(`<mnt-tag-removable tag-id="${DEFAULT_TAG_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
       const spy = jest.fn();
       page.root.addEventListener('tagRemoved', spy);
 
       jest.useFakeTimers();
       getButtonElement(page).click();
-      // Do NOT advance timers — the 450ms setTimeout must NOT have fired yet.
       expect(spy).not.toHaveBeenCalled();
       jest.useRealTimers();
     });
 
     it('SHOULD emit tagRemoved after animation duration', async () => {
-      const page = await createTagRemovable(`<mnt-tag-removable id="${DEFAULT_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
+      const page = await createTagRemovable(`<mnt-tag-removable tag-id="${DEFAULT_TAG_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
       const spy = jest.fn();
       page.root.addEventListener('tagRemoved', spy);
 
@@ -120,8 +126,8 @@ describe('<mnt-tag-removable>', () => {
       expect(spy).toHaveBeenCalledTimes(1);
     });
 
-    it('SHOULD emit tagRemoved with correct id and label', async () => {
-      const page = await createTagRemovable(`<mnt-tag-removable id="${DEFAULT_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
+    it('SHOULD emit tagRemoved with correct tagId and label', async () => {
+      const page = await createTagRemovable(`<mnt-tag-removable tag-id="${DEFAULT_TAG_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
       const spy = jest.fn();
       page.root.addEventListener('tagRemoved', spy);
 
@@ -132,19 +138,19 @@ describe('<mnt-tag-removable>', () => {
 
       expect(spy).toHaveBeenCalledWith(
         expect.objectContaining({
-          detail: { id: DEFAULT_ID, label: DEFAULT_LABEL },
+          detail: { tagId: DEFAULT_TAG_ID, label: DEFAULT_LABEL },
         }),
       );
     });
 
     it('SHOULD NOT trigger a second removal WHEN clicked again while already removing', async () => {
-      const page = await createTagRemovable(`<mnt-tag-removable id="${DEFAULT_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
+      const page = await createTagRemovable(`<mnt-tag-removable tag-id="${DEFAULT_TAG_ID}" label="${DEFAULT_LABEL}"></mnt-tag-removable>`);
       const spy = jest.fn();
       page.root.addEventListener('tagRemoved', spy);
 
       jest.useFakeTimers();
       getButtonElement(page).click();
-      getButtonElement(page).click(); // second click while removing — must be a no-op
+      getButtonElement(page).click();
       jest.advanceTimersByTime(TAG_REMOVE_ANIMATION_DURATION_MS * 2);
       jest.useRealTimers();
 
@@ -156,7 +162,7 @@ describe('<mnt-tag-removable>', () => {
     it.each(['tiny', 'small', 'medium', 'large'] as const)(
       'SHOULD apply mnt-tag-%s class WHEN size="%s"',
       async (size) => {
-        const page = await createTagRemovable(`<mnt-tag-removable id="${DEFAULT_ID}" label="${DEFAULT_LABEL}" size="${size}"></mnt-tag-removable>`);
+        const page = await createTagRemovable(`<mnt-tag-removable tag-id="${DEFAULT_TAG_ID}" label="${DEFAULT_LABEL}" size="${size}"></mnt-tag-removable>`);
         expect(getButtonElement(page)).toHaveClass(`${LIB_PREFIX}tag-${size}`);
       },
     );
