@@ -21,13 +21,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Ler versão do Node do .nvmrc
         run: echo "NODE_VERSION=$(cat .nvmrc | sed 's/^v//')" >> $GITHUB_ENV
 
       - name: Configurar Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
@@ -35,15 +35,15 @@ jobs:
           scope: '@yooga-tecnologia'
 
       - name: Cache npm dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
-          path: ~/.npm  # Stores npm cache directory
+          path: ~/.npm
           key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: npm install  # More reliable for builds
+        run: npm install
 
       - name: Construir o pacote
         run: npm run build
@@ -52,7 +52,7 @@ jobs:
         run: npm run build-storybook
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Build com Jekyll
         uses: actions/jekyll-build-pages@v1
@@ -61,7 +61,7 @@ jobs:
           destination: ./_site
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
 
       - name: Publicar no GitHub Packages
         run: npm publish
@@ -77,4 +77,4 @@ jobs:
     steps:
       - name: Deploy para GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
