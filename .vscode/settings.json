@@ -22,7 +22,8 @@
     "badge",
     "message-inline",
     "message-highlight",
-    "tag"
+    "tag",
+    "options-list"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false
