@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-17T16:31:43",
+  "timestamp": "2026-06-23T19:41:45",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -3667,6 +3667,7 @@
         "mnt-filter-search",
         "mnt-message-highlight",
         "mnt-message-inline",
+        "mnt-options-list",
         "mnt-steps",
         "mnt-tab-item",
         "mnt-tag",
@@ -3703,6 +3704,9 @@
           "mnt-icon"
         ],
         "mnt-message-inline": [
+          "mnt-icon"
+        ],
+        "mnt-options-list": [
           "mnt-icon"
         ],
         "mnt-steps": [
@@ -4678,6 +4682,263 @@
         ],
         "mnt-field-text": [
           "mnt-message-inline"
+        ]
+      }
+    },
+    {
+      "filePath": "src/components/options-list/options-list.tsx",
+      "encapsulation": "none",
+      "tag": "mnt-options-list",
+      "readme": "# mnt-field-text\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "fullWidth",
+          "type": "boolean",
+          "complexType": {
+            "original": "OptionsListProps['fullWidth']",
+            "resolved": "boolean",
+            "references": {
+              "OptionsListProps": {
+                "location": "import",
+                "path": "./options-list.types",
+                "id": "src/components/options-list/options-list.types.ts::OptionsListProps",
+                "referenceLocation": "OptionsListProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "full-width",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "items",
+          "type": "OptionsListRawItem[] | string",
+          "complexType": {
+            "original": "string | OptionsListRawItem[]",
+            "resolved": "OptionsListRawItem[] | string",
+            "references": {
+              "OptionsListRawItem": {
+                "location": "import",
+                "path": "./options-list.types",
+                "id": "src/components/options-list/options-list.types.ts::OptionsListRawItem",
+                "referenceLocation": "OptionsListRawItem"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "items",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'[]'"
+            }
+          ],
+          "default": "'[]'",
+          "values": [
+            {
+              "type": "OptionsListRawItem[]"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "labelText",
+          "type": "string",
+          "complexType": {
+            "original": "OptionsListProps['labelText']",
+            "resolved": "string",
+            "references": {
+              "OptionsListProps": {
+                "location": "import",
+                "path": "./options-list.types",
+                "id": "src/components/options-list/options-list.types.ts::OptionsListProps",
+                "referenceLocation": "OptionsListProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "label-text",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "complexType": {
+            "original": "OptionsListProps['name']",
+            "resolved": "string",
+            "references": {
+              "OptionsListProps": {
+                "location": "import",
+                "path": "./options-list.types",
+                "id": "src/components/options-list/options-list.types.ts::OptionsListProps",
+                "referenceLocation": "OptionsListProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "name",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "complexType": {
+            "original": "OptionsListProps['placeholder']",
+            "resolved": "string",
+            "references": {
+              "OptionsListProps": {
+                "location": "import",
+                "path": "./options-list.types",
+                "id": "src/components/options-list/options-list.types.ts::OptionsListProps",
+                "referenceLocation": "OptionsListProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "placeholder",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "complexType": {
+            "original": "OptionsListProps['value']",
+            "resolved": "string",
+            "references": {
+              "OptionsListProps": {
+                "location": "import",
+                "path": "./options-list.types",
+                "id": "src/components/options-list/options-list.types.ts::OptionsListProps",
+                "referenceLocation": "OptionsListProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "value",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [
+        {
+          "event": "optionSelect",
+          "detail": "OptionsListChangeDetail",
+          "bubbles": true,
+          "complexType": {
+            "original": "OptionsListSelectPayload",
+            "resolved": "OptionsListChangeDetail",
+            "references": {
+              "OptionsListSelectPayload": {
+                "location": "import",
+                "path": "./options-list.types",
+                "id": "src/components/options-list/options-list.types.ts::OptionsListSelectPayload",
+                "referenceLocation": "OptionsListSelectPayload"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "",
+          "docsTags": []
+        }
+      ],
+      "listeners": [
+        {
+          "event": "scroll",
+          "target": "window",
+          "capture": false,
+          "passive": true
+        },
+        {
+          "event": "resize",
+          "target": "window",
+          "capture": false,
+          "passive": true
+        }
+      ],
+      "styles": [],
+      "slots": [],
+      "parts": [],
+      "states": [],
+      "dependents": [],
+      "dependencies": [
+        "mnt-icon"
+      ],
+      "dependencyGraph": {
+        "mnt-options-list": [
+          "mnt-icon"
         ]
       }
     },
@@ -6463,7 +6724,7 @@
       "path": "src/components/date-picker/date-picker.types.ts"
     },
     "src/components/field-date/field-date.types.ts::FieldDateProps": {
-      "declaration": "export interface FieldDateProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  size?: Exclude<SizeVariants, 'tiny'>;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  datePickerConfig?: DatePickerBaseProps;\n  value?: string;\n}",
+      "declaration": "export interface FieldDateProps extends FormFieldBaseProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  size?: Exclude<SizeVariants, 'tiny'>;\n  required?: boolean;\n  disabled?: boolean;\n  datePickerConfig?: DatePickerBaseProps;\n  value?: string;\n}",
       "docstring": "",
       "path": "src/components/field-date/field-date.types.ts"
     },
@@ -6478,12 +6739,12 @@
       "path": "src/shared/theme/theme.types.ts"
     },
     "src/components/field-text/field-text.types.ts::FieldTextProps": {
-      "declaration": "export interface FieldTextProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  // variant?: 'default' | 'filled';\n  color?: 'critical' | 'success' | 'neutral';\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: Exclude<SizeVariants, 'tiny'>;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  inlineMessage?: string;\n  hasActionButton?: boolean;\n  hasInfoButton?: boolean;\n  fullWidth?: boolean;\n}",
+      "declaration": "export interface FieldTextProps extends FormFieldBaseProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  color?: 'critical' | 'success' | 'neutral';\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: Exclude<SizeVariants, 'tiny'>;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  inlineMessage?: string;\n  hasActionButton?: boolean;\n  hasInfoButton?: boolean;\n}",
       "docstring": "",
       "path": "src/components/field-text/field-text.types.ts"
     },
     "src/components/filter-search/filter-search.types.ts::FilterSearchProps": {
-      "declaration": "export interface FilterSearchProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  color?: 'critical' | 'success' | 'neutral';\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: SizeVariants;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  fullWidth?: boolean;\n}",
+      "declaration": "export interface FilterSearchProps extends FormFieldBaseProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  color?: 'critical' | 'success' | 'neutral';\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: SizeVariants;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n}",
       "docstring": "",
       "path": "src/components/filter-search/filter-search.types.ts"
     },
@@ -6516,6 +6777,21 @@
       "declaration": "export interface MessageInlineProps {\n  variant?: MessageInlineColorVariants;\n  icon?: ExtendedIconName;\n  label?: string;\n  hasPadding?: boolean;\n}",
       "docstring": "",
       "path": "src/components/message-inline/message-inline.types.ts"
+    },
+    "src/components/options-list/options-list.types.ts::OptionsListProps": {
+      "declaration": "export interface OptionsListProps extends FormFieldBaseProps {\n  /** Accepts a JSON string OR a direct array (e.g. Angular property binding). */\n  items?: string | OptionsListRawItem[];\n  value?: string;\n}",
+      "docstring": "",
+      "path": "src/components/options-list/options-list.types.ts"
+    },
+    "src/components/options-list/options-list.types.ts::OptionsListRawItem": {
+      "declaration": "export type OptionsListRawItem = string | { value: string; label: string } | Record<string, string>;",
+      "docstring": "",
+      "path": "src/components/options-list/options-list.types.ts"
+    },
+    "src/components/options-list/options-list.types.ts::OptionsListSelectPayload": {
+      "declaration": "export interface OptionsListChangeDetail {\n  value: string;\n  label: string;\n}",
+      "docstring": "",
+      "path": "src/components/options-list/options-list.types.ts"
     },
     "src/components/radio/radio.types.tsx::RadioBaseProps": {
       "declaration": "export interface RadioBaseProps {\n  name?: string;\n  label?: string;\n  value?: string;\n  checked?: boolean;\n  disabled?: boolean;\n}",

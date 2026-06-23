@@ -2,6 +2,7 @@ import { Component, Element, EventEmitter, Host, Prop, Event, Watch, h } from '@
 
 import { classNames, setComponentClass } from 'src/utils/utils';
 import { FieldTextProps } from './field-text.types';
+import { renderFieldLabel } from 'src/shared/form-field/form-field-label';
 
 @Component({
   tag: 'mnt-field-text',
@@ -319,30 +320,6 @@ export class FieldText {
 
   // Render Methods
 
-  private renderLabel() {
-    if (!this.labelText) return null;
-    return (
-      <div class={`${this.componentPrefix}-label`}>
-        <label htmlFor={this.name + '-input'}>
-          {this.labelText}
-          {this.host.hasAttribute('required') && <span class="text-color-primary">*</span>}
-        </label>
-
-        {this.hasInfoButton && (
-          <div class={`${this.componentPrefix}-info-button`}>
-            <slot name="info-button"></slot>
-          </div>
-        )}
-
-        {this.hasActionButton && (
-          <div class={`${this.componentPrefix}-action-button`}>
-            <slot name="action-button"></slot>
-          </div>
-        )}
-      </div>
-    );
-  }
-
   private renderInput() {
     return (
       <div class={this.inputClass}>
@@ -415,7 +392,12 @@ export class FieldText {
   render() {
     return (
       <Host class={this.fieldTextClass}>
-        {this.renderLabel()}
+        {renderFieldLabel({
+          labelText: this.labelText,
+          prefix: this.componentPrefix,
+          labelId: this.name + '-label',
+          required: this.host.hasAttribute('required'),
+        })}
         {this.renderInput()}
         {this.renderInlineMessage()}
       </Host>

@@ -105,9 +105,15 @@ $field-text-color-scheme: (
       border-radius: 6px;
       font-weight: 400;
       color: #242628;
+      transition: all ease-in-out .2s;
 
       &::placeholder {
         color: #818A8F;
+      }
+
+      &:hover {
+        border-color: map.get($field-text-color-scheme, neutral, border-color-on-hover);
+        background-color: map.get($field-text-color-scheme, neutral, background-color);
       }
 
       &[disabled],

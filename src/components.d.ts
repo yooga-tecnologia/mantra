@@ -20,6 +20,7 @@ import { IllustrationProps } from "./components/illustration/illustration.types"
 import { LoadingStateProps } from "./components/loading-state/loading-state.types";
 import { MessageHighlightProps } from "./components/message-highlight/message-highlight.types";
 import { MessageInlineProps } from "./components/message-inline/message-inline.types";
+import { OptionsListProps, OptionsListRawItem, OptionsListSelectPayload } from "./components/options-list/options-list.types";
 import { RadioBaseProps } from "./components/radio/radio.types";
 import { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 import { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
@@ -42,6 +43,7 @@ export { IllustrationProps } from "./components/illustration/illustration.types"
 export { LoadingStateProps } from "./components/loading-state/loading-state.types";
 export { MessageHighlightProps } from "./components/message-highlight/message-highlight.types";
 export { MessageInlineProps } from "./components/message-inline/message-inline.types";
+export { OptionsListProps, OptionsListRawItem, OptionsListSelectPayload } from "./components/options-list/options-list.types";
 export { RadioBaseProps } from "./components/radio/radio.types";
 export { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 export { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
@@ -376,6 +378,20 @@ export namespace Components {
          */
         "variant": MessageInlineProps['variant'];
     }
+    interface MntOptionsList {
+        /**
+          * @default false
+         */
+        "fullWidth"?: OptionsListProps['fullWidth'];
+        /**
+          * @default '[]'
+         */
+        "items": string | OptionsListRawItem[];
+        "labelText"?: OptionsListProps['labelText'];
+        "name"?: OptionsListProps['name'];
+        "placeholder"?: OptionsListProps['placeholder'];
+        "value"?: OptionsListProps['value'];
+    }
     interface MntRadio {
         /**
           * @default false
@@ -512,6 +528,10 @@ export interface MntFieldTextCustomEvent<T> extends CustomEvent<T> {
 export interface MntFilterSearchCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntFilterSearchElement;
+}
+export interface MntOptionsListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntOptionsListElement;
 }
 export interface MntRadioCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -725,6 +745,23 @@ declare global {
         prototype: HTMLMntMessageInlineElement;
         new (): HTMLMntMessageInlineElement;
     };
+    interface HTMLMntOptionsListElementEventMap {
+        "optionSelect": OptionsListSelectPayload;
+    }
+    interface HTMLMntOptionsListElement extends Components.MntOptionsList, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntOptionsListElementEventMap>(type: K, listener: (this: HTMLMntOptionsListElement, ev: MntOptionsListCustomEvent<HTMLMntOptionsListElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntOptionsListElementEventMap>(type: K, listener: (this: HTMLMntOptionsListElement, ev: MntOptionsListCustomEvent<HTMLMntOptionsListElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntOptionsListElement: {
+        prototype: HTMLMntOptionsListElement;
+        new (): HTMLMntOptionsListElement;
+    };
     interface HTMLMntRadioElementEventMap {
         "radioChange": { checked: boolean; value: string };
     }
@@ -876,6 +913,7 @@ declare global {
         "mnt-loading-state": HTMLMntLoadingStateElement;
         "mnt-message-highlight": HTMLMntMessageHighlightElement;
         "mnt-message-inline": HTMLMntMessageInlineElement;
+        "mnt-options-list": HTMLMntOptionsListElement;
         "mnt-radio": HTMLMntRadioElement;
         "mnt-steps": HTMLMntStepsElement;
         "mnt-switch": HTMLMntSwitchElement;
@@ -1262,6 +1300,29 @@ declare namespace LocalJSX {
          */
         "variant"?: MessageInlineProps['variant'];
     }
+    interface MntOptionsList {
+        /**
+          * If `true`, the user cannot interact with the element.
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        /**
+          * @default false
+         */
+        "fullWidth"?: OptionsListProps['fullWidth'];
+        /**
+          * @default '[]'
+         */
+        "items"?: string | OptionsListRawItem[];
+        "labelText"?: OptionsListProps['labelText'];
+        "name"?: OptionsListProps['name'];
+        "onOptionSelect"?: (event: MntOptionsListCustomEvent<OptionsListSelectPayload>) => void;
+        "placeholder"?: OptionsListProps['placeholder'];
+        "value"?: OptionsListProps['value'];
+    }
     interface MntRadio {
         /**
           * @default false
@@ -1524,6 +1585,14 @@ declare namespace LocalJSX {
         "variant": MessageInlineProps['variant'];
         "icon": MessageInlineProps['icon'];
     }
+    interface MntOptionsListAttributes {
+        "name": OptionsListProps['name'];
+        "labelText": OptionsListProps['labelText'];
+        "placeholder": OptionsListProps['placeholder'];
+        "items": string | OptionsListRawItem[];
+        "value": OptionsListProps['value'];
+        "fullWidth": OptionsListProps['fullWidth'];
+    }
     interface MntRadioAttributes {
         "name": RadioBaseProps['name'];
         "label": RadioBaseProps['label'];
@@ -1599,6 +1668,7 @@ declare namespace LocalJSX {
         "mnt-loading-state": Omit<MntLoadingState, keyof MntLoadingStateAttributes> & { [K in keyof MntLoadingState & keyof MntLoadingStateAttributes]?: MntLoadingState[K] } & { [K in keyof MntLoadingState & keyof MntLoadingStateAttributes as `attr:${K}`]?: MntLoadingStateAttributes[K] } & { [K in keyof MntLoadingState & keyof MntLoadingStateAttributes as `prop:${K}`]?: MntLoadingState[K] };
         "mnt-message-highlight": Omit<MntMessageHighlight, keyof MntMessageHighlightAttributes> & { [K in keyof MntMessageHighlight & keyof MntMessageHighlightAttributes]?: MntMessageHighlight[K] } & { [K in keyof MntMessageHighlight & keyof MntMessageHighlightAttributes as `attr:${K}`]?: MntMessageHighlightAttributes[K] } & { [K in keyof MntMessageHighlight & keyof MntMessageHighlightAttributes as `prop:${K}`]?: MntMessageHighlight[K] };
         "mnt-message-inline": Omit<MntMessageInline, keyof MntMessageInlineAttributes> & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes]?: MntMessageInline[K] } & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes as `attr:${K}`]?: MntMessageInlineAttributes[K] } & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes as `prop:${K}`]?: MntMessageInline[K] };
+        "mnt-options-list": Omit<MntOptionsList, keyof MntOptionsListAttributes> & { [K in keyof MntOptionsList & keyof MntOptionsListAttributes]?: MntOptionsList[K] } & { [K in keyof MntOptionsList & keyof MntOptionsListAttributes as `attr:${K}`]?: MntOptionsListAttributes[K] } & { [K in keyof MntOptionsList & keyof MntOptionsListAttributes as `prop:${K}`]?: MntOptionsList[K] };
         "mnt-radio": Omit<MntRadio, keyof MntRadioAttributes> & { [K in keyof MntRadio & keyof MntRadioAttributes]?: MntRadio[K] } & { [K in keyof MntRadio & keyof MntRadioAttributes as `attr:${K}`]?: MntRadioAttributes[K] } & { [K in keyof MntRadio & keyof MntRadioAttributes as `prop:${K}`]?: MntRadio[K] };
         "mnt-steps": Omit<MntSteps, keyof MntStepsAttributes> & { [K in keyof MntSteps & keyof MntStepsAttributes]?: MntSteps[K] } & { [K in keyof MntSteps & keyof MntStepsAttributes as `attr:${K}`]?: MntStepsAttributes[K] } & { [K in keyof MntSteps & keyof MntStepsAttributes as `prop:${K}`]?: MntSteps[K] };
         "mnt-switch": Omit<MntSwitch, keyof MntSwitchAttributes> & { [K in keyof MntSwitch & keyof MntSwitchAttributes]?: MntSwitch[K] } & { [K in keyof MntSwitch & keyof MntSwitchAttributes as `attr:${K}`]?: MntSwitchAttributes[K] } & { [K in keyof MntSwitch & keyof MntSwitchAttributes as `prop:${K}`]?: MntSwitch[K] };
@@ -1631,6 +1701,7 @@ declare module "@stencil/core" {
             "mnt-loading-state": LocalJSX.IntrinsicElements["mnt-loading-state"] & JSXBase.HTMLAttributes<HTMLMntLoadingStateElement>;
             "mnt-message-highlight": LocalJSX.IntrinsicElements["mnt-message-highlight"] & JSXBase.HTMLAttributes<HTMLMntMessageHighlightElement>;
             "mnt-message-inline": LocalJSX.IntrinsicElements["mnt-message-inline"] & JSXBase.HTMLAttributes<HTMLMntMessageInlineElement>;
+            "mnt-options-list": LocalJSX.IntrinsicElements["mnt-options-list"] & JSXBase.HTMLAttributes<HTMLMntOptionsListElement>;
             "mnt-radio": LocalJSX.IntrinsicElements["mnt-radio"] & JSXBase.HTMLAttributes<HTMLMntRadioElement>;
             "mnt-steps": LocalJSX.IntrinsicElements["mnt-steps"] & JSXBase.HTMLAttributes<HTMLMntStepsElement>;
             "mnt-switch": LocalJSX.IntrinsicElements["mnt-switch"] & JSXBase.HTMLAttributes<HTMLMntSwitchElement>;

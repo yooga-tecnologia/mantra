@@ -1,9 +1,11 @@
 import { SizeVariants, sizeVariantsArray, StateVariants, stateVariantsArray } from '@theme/theme.types';
 import { ExtendedIconName } from '../icon/icon.types';
+import { FormFieldBaseProps } from '../../shared/form-field/form-field.types';
 
 export const filterSearchSizeVariantsArray = sizeVariantsArray.filter((size) => size !== 'tiny');
 export const filterSearchStateVariantsArray = stateVariantsArray.filter((state) => state !== 'warning');
-export interface FilterSearchProps {
+
+export interface FilterSearchProps extends FormFieldBaseProps {
   // Required
   inputName: string;
 
@@ -15,7 +17,4 @@ export interface FilterSearchProps {
   iconRight?: ExtendedIconName;
   required?: boolean;
   disabled?: boolean;
-  labelText?: string;
-  placeholder?: string;
-  fullWidth?: boolean;
 }

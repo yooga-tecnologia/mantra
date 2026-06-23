@@ -82,6 +82,10 @@ $button-breakpoints: (
 
 @each $size, $configs in $button-size-configs {
   .#{$component-prefix}-#{$size} {
+    &.#{$component-prefix}-icon {
+      width: map.get($configs, "height");
+    }
+
     &:not(:disabled):not(.#{$component-prefix}-disabled):hover {
       cursor: pointer;
     }
