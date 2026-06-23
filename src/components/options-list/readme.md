@@ -7,13 +7,14 @@
 
 ## Properties
 
-| Property      | Attribute     | Description | Type      | Default     |
-| ------------- | ------------- | ----------- | --------- | ----------- |
-| `fullWidth`   | `full-width`  |             | `boolean` | `false`     |
-| `items`       | `items`       |             | `string`  | `'[]'`      |
-| `name`        | `name`        |             | `string`  | `undefined` |
-| `placeholder` | `placeholder` |             | `string`  | `undefined` |
-| `value`       | `value`       |             | `string`  | `undefined` |
+| Property      | Attribute     | Description | Type                             | Default     |
+| ------------- | ------------- | ----------- | -------------------------------- | ----------- |
+| `fullWidth`   | `full-width`  |             | `boolean`                        | `false`     |
+| `items`       | `items`       |             | `OptionsListRawItem[] \| string` | `'[]'`      |
+| `labelText`   | `label-text`  |             | `string`                         | `undefined` |
+| `name`        | `name`        |             | `string`                         | `undefined` |
+| `placeholder` | `placeholder` |             | `string`                         | `undefined` |
+| `value`       | `value`       |             | `string`                         | `undefined` |
 
 
 ## Events

@@ -1,3 +1,5 @@
+import { FormFieldBaseProps } from '../../shared/form-field/form-field.types';
+
 export type OptionsListRawItem = string | { value: string; label: string } | Record<string, string>;
 
 export interface OptionsListItem {
@@ -12,12 +14,10 @@ export interface OptionsListChangeDetail {
 
 export type OptionsListSelectPayload = OptionsListChangeDetail | null;
 
-export interface OptionsListProps {
-  name?: string;
-  placeholder?: string;
-  items?: string;
+export interface OptionsListProps extends FormFieldBaseProps {
+  /** Accepts a JSON string OR a direct array (e.g. Angular property binding). */
+  items?: string | OptionsListRawItem[];
   value?: string;
-  fullWidth?: boolean;
 }
 
 export function normalizeItem(raw: OptionsListRawItem): OptionsListItem {
@@ -36,9 +36,16 @@ export function normalizeItem(raw: OptionsListRawItem): OptionsListItem {
   return { value, label };
 }
 
-export function parseItems(json: string): OptionsListItem[] {
+export function parseItems(input: string | OptionsListRawItem[]): OptionsListItem[] {
+  // Support direct array binding (e.g. Angular [items]="array")
+  if (Array.isArray(input)) {
+    return input.map(normalizeItem);
+  }
+
+  if (!input) return [];
+
   try {
-    const raw: OptionsListRawItem[] = JSON.parse(json);
+    const raw: OptionsListRawItem[] = JSON.parse(input);
     return Array.isArray(raw) ? raw.map(normalizeItem) : [];
   } catch {
     return [];

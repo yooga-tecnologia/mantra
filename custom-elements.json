@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-18T18:13:12",
+  "timestamp": "2026-06-22T16:35:02",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -4732,11 +4732,18 @@
         },
         {
           "name": "items",
-          "type": "string",
+          "type": "OptionsListRawItem[] | string",
           "complexType": {
-            "original": "string",
-            "resolved": "string",
-            "references": {}
+            "original": "string | OptionsListRawItem[]",
+            "resolved": "OptionsListRawItem[] | string",
+            "references": {
+              "OptionsListRawItem": {
+                "location": "import",
+                "path": "./options-list.types",
+                "id": "src/components/options-list/options-list.types.ts::OptionsListRawItem",
+                "referenceLocation": "OptionsListRawItem"
+              }
+            }
           },
           "mutable": false,
           "attr": "items",
@@ -4751,10 +4758,43 @@
           "default": "'[]'",
           "values": [
             {
+              "type": "OptionsListRawItem[]"
+            },
+            {
               "type": "string"
             }
           ],
           "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "labelText",
+          "type": "string",
+          "complexType": {
+            "original": "OptionsListProps['labelText']",
+            "resolved": "string",
+            "references": {
+              "OptionsListProps": {
+                "location": "import",
+                "path": "./options-list.types",
+                "id": "src/components/options-list/options-list.types.ts::OptionsListProps",
+                "referenceLocation": "OptionsListProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "label-text",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
           "required": false,
           "getter": false,
           "setter": false
@@ -6684,7 +6724,7 @@
       "path": "src/components/date-picker/date-picker.types.ts"
     },
     "src/components/field-date/field-date.types.ts::FieldDateProps": {
-      "declaration": "export interface FieldDateProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  size?: Exclude<SizeVariants, 'tiny'>;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  datePickerConfig?: DatePickerBaseProps;\n  value?: string;\n}",
+      "declaration": "export interface FieldDateProps extends FormFieldBaseProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  size?: Exclude<SizeVariants, 'tiny'>;\n  required?: boolean;\n  disabled?: boolean;\n  datePickerConfig?: DatePickerBaseProps;\n  value?: string;\n}",
       "docstring": "",
       "path": "src/components/field-date/field-date.types.ts"
     },
@@ -6699,12 +6739,12 @@
       "path": "src/shared/theme/theme.types.ts"
     },
     "src/components/field-text/field-text.types.ts::FieldTextProps": {
-      "declaration": "export interface FieldTextProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  // variant?: 'default' | 'filled';\n  color?: 'critical' | 'success' | 'neutral';\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: Exclude<SizeVariants, 'tiny'>;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  inlineMessage?: string;\n  hasActionButton?: boolean;\n  hasInfoButton?: boolean;\n  fullWidth?: boolean;\n}",
+      "declaration": "export interface FieldTextProps extends FormFieldBaseProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  color?: 'critical' | 'success' | 'neutral';\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: Exclude<SizeVariants, 'tiny'>;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  inlineMessage?: string;\n  hasActionButton?: boolean;\n  hasInfoButton?: boolean;\n}",
       "docstring": "",
       "path": "src/components/field-text/field-text.types.ts"
     },
     "src/components/filter-search/filter-search.types.ts::FilterSearchProps": {
-      "declaration": "export interface FilterSearchProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  color?: 'critical' | 'success' | 'neutral';\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: SizeVariants;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  labelText?: string;\n  placeholder?: string;\n  fullWidth?: boolean;\n}",
+      "declaration": "export interface FilterSearchProps extends FormFieldBaseProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  color?: 'critical' | 'success' | 'neutral';\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: SizeVariants;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n}",
       "docstring": "",
       "path": "src/components/filter-search/filter-search.types.ts"
     },
@@ -6739,7 +6779,12 @@
       "path": "src/components/message-inline/message-inline.types.ts"
     },
     "src/components/options-list/options-list.types.ts::OptionsListProps": {
-      "declaration": "export interface OptionsListProps {\n  name?: string;\n  placeholder?: string;\n  items?: string;\n  value?: string;\n  fullWidth?: boolean;\n}",
+      "declaration": "export interface OptionsListProps extends FormFieldBaseProps {\n  /** Accepts a JSON string OR a direct array (e.g. Angular property binding). */\n  items?: string | OptionsListRawItem[];\n  value?: string;\n}",
+      "docstring": "",
+      "path": "src/components/options-list/options-list.types.ts"
+    },
+    "src/components/options-list/options-list.types.ts::OptionsListRawItem": {
+      "declaration": "export type OptionsListRawItem = string | { value: string; label: string } | Record<string, string>;",
       "docstring": "",
       "path": "src/components/options-list/options-list.types.ts"
     },

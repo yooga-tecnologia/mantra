@@ -1,7 +1,8 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from '@stencil/core';
 
 import { classNames, setComponentClass } from '../../utils/utils';
-import { OptionsListItem, OptionsListProps, OptionsListSelectPayload, parseItems } from './options-list.types';
+import { renderFieldLabel } from '../../shared/form-field/form-field-label';
+import { OptionsListItem, OptionsListProps, OptionsListRawItem, OptionsListSelectPayload, parseItems } from './options-list.types';
 
 const COMPONENT_PREFIX = setComponentClass('options-list');
 // ~41px per item (21px line-height + 20px padding) × 5 items + 8px container padding
@@ -27,8 +28,9 @@ export class OptionsList {
   @Element() host: HTMLElement;
 
   @Prop() name?: OptionsListProps['name'];
+  @Prop() labelText?: OptionsListProps['labelText'];
   @Prop() placeholder?: OptionsListProps['placeholder'];
-  @Prop() items: string = '[]';
+  @Prop() items: string | OptionsListRawItem[] = '[]';
   @Prop() value?: OptionsListProps['value'];
   @Prop() fullWidth?: OptionsListProps['fullWidth'] = false;
 
@@ -45,7 +47,9 @@ export class OptionsList {
   // Portal element rendered as direct child of document.body to avoid
   // position: fixed misalignment when ancestors have CSS transform applied.
   private portalEl: HTMLDivElement | null = null;
+  private readonly componentPrefix = setComponentClass('options-list', '');
   private readonly listboxId = `${COMPONENT_PREFIX}-listbox-${Math.random().toString(36).slice(2, 7)}`;
+  private readonly labelId = `${COMPONENT_PREFIX}-label-${Math.random().toString(36).slice(2, 7)}`;
 
   componentWillLoad() {
     this.parsedItems = parseItems(this.items);
@@ -64,7 +68,7 @@ export class OptionsList {
   }
 
   @Watch('items')
-  onItemsChange(newItems: string) {
+  onItemsChange(newItems: string | OptionsListRawItem[]) {
     this.parsedItems = parseItems(newItems);
   }
 
@@ -286,6 +290,13 @@ export class OptionsList {
           ref={(el) => (this.hiddenInput = el as HTMLInputElement)}
         />
 
+        {renderFieldLabel({
+          labelText: this.labelText,
+          prefix: this.componentPrefix,
+          labelId: this.labelId,
+          required: this.host.hasAttribute('required'),
+        })}
+
         <div
           class={headerClass}
           role="combobox"
@@ -293,6 +304,7 @@ export class OptionsList {
           aria-haspopup="listbox"
           aria-expanded={String(this.isOpen)}
           aria-controls={this.listboxId}
+          aria-labelledby={this.labelText ? this.labelId : undefined}
           aria-activedescendant={this.activedescendant}
           ref={(el) => (this.headerEl = el as HTMLElement)}
           onClick={() => this.handleHeaderClick()}

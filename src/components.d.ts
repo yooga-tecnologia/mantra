@@ -20,7 +20,7 @@ import { IllustrationProps } from "./components/illustration/illustration.types"
 import { LoadingStateProps } from "./components/loading-state/loading-state.types";
 import { MessageHighlightProps } from "./components/message-highlight/message-highlight.types";
 import { MessageInlineProps } from "./components/message-inline/message-inline.types";
-import { OptionsListProps, OptionsListSelectPayload } from "./components/options-list/options-list.types";
+import { OptionsListProps, OptionsListRawItem, OptionsListSelectPayload } from "./components/options-list/options-list.types";
 import { RadioBaseProps } from "./components/radio/radio.types";
 import { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 import { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
@@ -43,7 +43,7 @@ export { IllustrationProps } from "./components/illustration/illustration.types"
 export { LoadingStateProps } from "./components/loading-state/loading-state.types";
 export { MessageHighlightProps } from "./components/message-highlight/message-highlight.types";
 export { MessageInlineProps } from "./components/message-inline/message-inline.types";
-export { OptionsListProps, OptionsListSelectPayload } from "./components/options-list/options-list.types";
+export { OptionsListProps, OptionsListRawItem, OptionsListSelectPayload } from "./components/options-list/options-list.types";
 export { RadioBaseProps } from "./components/radio/radio.types";
 export { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 export { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
@@ -386,7 +386,8 @@ export namespace Components {
         /**
           * @default '[]'
          */
-        "items": string;
+        "items": string | OptionsListRawItem[];
+        "labelText"?: OptionsListProps['labelText'];
         "name"?: OptionsListProps['name'];
         "placeholder"?: OptionsListProps['placeholder'];
         "value"?: OptionsListProps['value'];
@@ -1315,7 +1316,8 @@ declare namespace LocalJSX {
         /**
           * @default '[]'
          */
-        "items"?: string;
+        "items"?: string | OptionsListRawItem[];
+        "labelText"?: OptionsListProps['labelText'];
         "name"?: OptionsListProps['name'];
         "onOptionSelect"?: (event: MntOptionsListCustomEvent<OptionsListSelectPayload>) => void;
         "placeholder"?: OptionsListProps['placeholder'];
@@ -1585,8 +1587,9 @@ declare namespace LocalJSX {
     }
     interface MntOptionsListAttributes {
         "name": OptionsListProps['name'];
+        "labelText": OptionsListProps['labelText'];
         "placeholder": OptionsListProps['placeholder'];
-        "items": string;
+        "items": string | OptionsListRawItem[];
         "value": OptionsListProps['value'];
         "fullWidth": OptionsListProps['fullWidth'];
     }

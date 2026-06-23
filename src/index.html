@@ -14,15 +14,34 @@
 <body>
   <div class="page">
 
-    <mnt-options-list
-      full-width
-      name="estado-1"
-      placeholder="Selecione um estado"
-      items='[{"es":"Espírito Santo"},{"sp":"São Paulo"},{"rj":"Rio de Janeiro"},{"mg":"Minas Gerais"},{"ba":"Bahia"},{"pe":"Pernambuco"},{"al":"Alagoas"},{"se":"Sergipe"},{"to":"Tocantins"},{"am":"Amazonas"},{"ac":"Acre"},{"rr":"Roraima"},{"pa":"Pará"},{"ap":"Amapá"},{"ro":"Rondônia"},{"ms":"Mato Grosso do Sul"},{"mt":"Mato Grosso"},{"go":"Goiás"},{"df":"Distrito Federal"}]'
-    ></mnt-options-list>
+    <div style="display: flex; gap: 10px;">
+
+      <mnt-button label="teste" variant="emphasis" size="tiny" icon-left="arrow-right"></mnt-button>
+      <mnt-button-icon variant="emphasis" size="tiny" icon="arrow-right"></mnt-button-icon>
+      <mnt-button-icon variant="emphasis" size="small" icon="arrow-right"></mnt-button-icon>
+      <mnt-button-icon variant="emphasis" size="medium" icon="arrow-right"></mnt-button-icon>
+      <mnt-button-icon variant="emphasis" size="large" icon="arrow-right"></mnt-button-icon>
+      <mnt-field-text
+        label-text="Estados"
+        required
+        full-width
+        name="estado-1"
+        placeholder="Selecione um estado"
+        items='[{"es":"Espírito Santo"},{"sp":"São Paulo"},{"rj":"Rio de Janeiro"},{"mg":"Minas Gerais"},{"ba":"Bahia"},{"pe":"Pernambuco"},{"al":"Alagoas"},{"se":"Sergipe"},{"to":"Tocantins"},{"am":"Amazonas"},{"ac":"Acre"},{"rr":"Roraima"},{"pa":"Pará"},{"ap":"Amapá"},{"ro":"Rondônia"},{"ms":"Mato Grosso do Sul"},{"mt":"Mato Grosso"},{"go":"Goiás"},{"df":"Distrito Federal"}]'
+      ></mnt-field-text>
+
+      <mnt-options-list
+        label-text="Estados"
+        required
+        full-width
+        name="estado-1"
+        placeholder="Selecione um estado"
+        items='[{"es":"Espírito Santo"},{"sp":"São Paulo"},{"rj":"Rio de Janeiro"},{"mg":"Minas Gerais"},{"ba":"Bahia"},{"pe":"Pernambuco"},{"al":"Alagoas"},{"se":"Sergipe"},{"to":"Tocantins"},{"am":"Amazonas"},{"ac":"Acre"},{"rr":"Roraima"},{"pa":"Pará"},{"ap":"Amapá"},{"ro":"Rondônia"},{"ms":"Mato Grosso do Sul"},{"mt":"Mato Grosso"},{"go":"Goiás"},{"df":"Distrito Federal"}]'
+      ></mnt-options-list>
+    </div>
 
     <mnt-options-list
-
+      label-text="Estados"
       name="estado-2"
       placeholder="Selecione um estado"
       items='[{"es":"Espírito Santo"},{"sp":"São Paulo"},{"rj":"Rio de Janeiro"},{"mg":"Minas Gerais"},{"ba":"Bahia"},{"pe":"Pernambuco"},{"al":"Alagoas"},{"se":"Sergipe"},{"to":"Tocantins"},{"am":"Amazonas"},{"ac":"Acre"},{"rr":"Roraima"},{"pa":"Pará"},{"ap":"Amapá"},{"ro":"Rondônia"},{"ms":"Mato Grosso do Sul"},{"mt":"Mato Grosso"},{"go":"Goiás"},{"df":"Distrito Federal"}]'

@@ -66,9 +66,103 @@ describe('parseItems()', () => {
   it('SHOULD return empty array for empty string', () => {
     expect(parseItems('')).toEqual([]);
   });
+
+  it('SHOULD parse a direct array of strings (Angular property binding)', () => {
+    const result = parseItems(['item1', 'item2']);
+    expect(result).toEqual([
+      { value: 'item1', label: 'item1' },
+      { value: 'item2', label: 'item2' },
+    ]);
+  });
+
+  it('SHOULD parse a direct array of key-value objects (Angular property binding)', () => {
+    const result = parseItems([{ es: 'Espírito Santo' }, { sp: 'São Paulo' }]);
+    expect(result).toEqual([
+      { value: 'es', label: 'Espírito Santo' },
+      { value: 'sp', label: 'São Paulo' },
+    ]);
+  });
+
+  it('SHOULD parse a direct array of explicit {value, label} objects (Angular property binding)', () => {
+    const result = parseItems([{ value: '1', label: 'Option 1' }]);
+    expect(result).toEqual([{ value: '1', label: 'Option 1' }]);
+  });
 });
 
 describe('mnt-options-list', () => {
+  describe('Label', () => {
+    it('SHOULD NOT render a label element when labelText is not provided', async () => {
+      const page = await createComponent(`<mnt-options-list></mnt-options-list>`);
+      expect(page.root.querySelector('.mnt-options-list-label')).toBeNull();
+    });
+
+    it('SHOULD render a label element when labelText is provided', async () => {
+      const page = await createComponent(`<mnt-options-list label-text="Impressora"></mnt-options-list>`);
+      const label = page.root.querySelector('.mnt-options-list-label label');
+      expect(label).not.toBeNull();
+      expect(label.textContent).toBe('Impressora');
+    });
+
+    it('SHOULD render required asterisk when labelText and required attribute are set', async () => {
+      const page = await createComponent(`<mnt-options-list label-text="Impressora" required></mnt-options-list>`);
+      const asterisk = page.root.querySelector('.text-color-primary');
+      expect(asterisk).not.toBeNull();
+    });
+
+    it('SHOULD NOT render required asterisk when required attribute is absent', async () => {
+      const page = await createComponent(`<mnt-options-list label-text="Impressora"></mnt-options-list>`);
+      expect(page.root.querySelector('.text-color-primary')).toBeNull();
+    });
+
+    it('SHOULD set aria-labelledby on header when labelText is provided', async () => {
+      const page = await createComponent(`<mnt-options-list label-text="Impressora"></mnt-options-list>`);
+      const header = page.root.querySelector('.mnt-options-list-header');
+      expect(header.getAttribute('aria-labelledby')).toBeTruthy();
+    });
+
+    it('SHOULD NOT set aria-labelledby on header when labelText is absent', async () => {
+      const page = await createComponent(`<mnt-options-list></mnt-options-list>`);
+      const header = page.root.querySelector('.mnt-options-list-header');
+      expect(header.getAttribute('aria-labelledby')).toBeNull();
+    });
+  });
+
+  describe('Array property binding (e.g. Angular [items]="array")', () => {
+    it('SHOULD render items when items prop is set as a direct array', async () => {
+      const page = await createComponent(`<mnt-options-list></mnt-options-list>`);
+
+      // Simulate Angular property binding: sets the JS property directly (not attribute)
+      (page.root as any).items = [{ es: 'Espírito Santo' }, { sp: 'São Paulo' }];
+      await page.waitForChanges();
+
+      const header = page.root.querySelector('.mnt-options-list-header');
+      (header as HTMLElement).click();
+      await page.waitForChanges();
+
+      expect(getItems(page).length).toBe(2);
+    });
+
+    it('SHOULD emit correct value and label when item from array binding is selected', async () => {
+      const page = await createComponent(`<mnt-options-list></mnt-options-list>`);
+      const spy = jest.fn();
+      page.root.addEventListener('optionSelect', spy);
+
+      (page.root as any).items = [{ es: 'Espírito Santo' }, { sp: 'São Paulo' }];
+      await page.waitForChanges();
+
+      const header = page.root.querySelector('.mnt-options-list-header');
+      (header as HTMLElement).click();
+      await page.waitForChanges();
+
+      (getItems(page)[1] as HTMLElement).click();
+      await page.waitForChanges();
+
+      const detail = spy.mock.calls[0][0].detail;
+      expect(detail.value).toBe('sp');
+      expect(detail.label).toBe('São Paulo');
+    });
+  });
+
   describe('Rendering', () => {
     it('SHOULD render with no items in portal initially (closed state)', async () => {
       const page = await createComponent(`<mnt-options-list items='["a","b","c"]'></mnt-options-list>`);

@@ -6,12 +6,7 @@ type Story = StoryObj;
 
 const STRING_ITEMS = JSON.stringify(['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4']);
 
-const KEY_VALUE_ITEMS = JSON.stringify([
-  { es: 'Espírito Santo' },
-  { sp: 'São Paulo' },
-  { rj: 'Rio de Janeiro' },
-  { mg: 'Minas Gerais' },
-]);
+const KEY_VALUE_ITEMS = JSON.stringify([{ es: 'Espírito Santo' }, { sp: 'São Paulo' }, { rj: 'Rio de Janeiro' }, { mg: 'Minas Gerais' }]);
 
 const EXPLICIT_ITEMS = JSON.stringify([
   { value: '1', label: 'Opção Um' },
@@ -34,6 +29,7 @@ const LONG_ITEMS = JSON.stringify([
 const OptionsListTemplate = (props: Partial<OptionsListProps> & { items?: string }) =>
   `<mnt-options-list
     ${props.name ? `name="${props.name}"` : ''}
+    ${props.labelText ? `label-text="${props.labelText}"` : ''}
     ${props.placeholder ? `placeholder="${props.placeholder}"` : ''}
     ${props.items ? `items='${props.items}'` : ''}
     ${props.value ? `value="${props.value}"` : ''}
@@ -68,6 +64,11 @@ O componente \`mnt-options-list\` exibe uma lista de opções selecionáveis, fu
     },
   },
   argTypes: {
+    labelText: {
+      control: 'text',
+      description: 'Label exibido acima do campo. Quando combinado com o atributo `required`, exibe um asterisco vermelho.',
+      table: { type: { summary: 'string' } },
+    },
     placeholder: {
       control: 'text',
       description: 'Texto exibido quando nenhum item está selecionado.',
@@ -94,6 +95,28 @@ O componente \`mnt-options-list\` exibe uma lista de opções selecionáveis, fu
       table: { type: { summary: 'string' } },
     },
   },
+};
+
+/**
+ * Com `label-text`, exibe um rótulo acima do campo.
+ * Combinado com o atributo `required`, exibe um asterisco vermelho (*).
+ */
+export const WithLabel: Story = {
+  args: {
+    labelText: 'Estados',
+    placeholder: 'Selecione um estado',
+    name: 'state',
+    items: KEY_VALUE_ITEMS,
+    fullWidth: true,
+  },
+  render: (props) => `<mnt-options-list
+    label-text="${props.labelText}"
+    placeholder="${props.placeholder}"
+    name="${props.name}"
+    items='${props.items}'
+    ${props.fullWidth ? 'full-width' : ''}
+    required
+  ></mnt-options-list>`,
 };
 
 /**

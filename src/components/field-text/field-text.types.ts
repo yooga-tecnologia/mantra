@@ -1,15 +1,15 @@
 import { SizeVariants, sizeVariantsArray, StateVariants, stateVariantsArray } from '@theme/theme.types';
 import { ExtendedIconName } from '../icon/icon.types';
+import { FormFieldBaseProps } from '../../shared/form-field/form-field.types';
 
 export const fieldTextSizeVariantsArray = sizeVariantsArray.filter((size) => size !== 'tiny');
 export const fieldTextStateVariantsArray = stateVariantsArray.filter((state) => state !== 'warning');
 
-export interface FieldTextProps {
+export interface FieldTextProps extends FormFieldBaseProps {
   // Required
   inputName: string;
 
   // Optional
-  // variant?: 'default' | 'filled';
   color?: 'critical' | 'success' | 'neutral';
   state?: Exclude<StateVariants, 'warning'>;
   size?: Exclude<SizeVariants, 'tiny'>;
@@ -17,10 +17,7 @@ export interface FieldTextProps {
   iconRight?: ExtendedIconName;
   required?: boolean;
   disabled?: boolean;
-  labelText?: string;
-  placeholder?: string;
   inlineMessage?: string;
   hasActionButton?: boolean;
   hasInfoButton?: boolean;
-  fullWidth?: boolean;
 }
