@@ -9,17 +9,18 @@ $border-radius-medium: map.get(sizing.$border-radius-map, "medium");
 // Sizes
 
 $button-size-configs: (
-  "tiny":   ( font-size: 12px, padding: 8px,        height: 32px ),
-  "small":  ( font-size: 12px, padding: 8px,        height: 40px ),
-  "medium": ( font-size: 14px, padding: 12px 16px,  height: 48px ),
-  "large":  ( font-size: 16px, padding: 16px 24px,  height: 56px ),
+  "xs":     ( font-size: 11px, padding: 6px 10px,  gap: 4px,  height: 28px, border-radius: 8px ), // Aplicado ao tiny em xs breakpoint
+  "tiny":   ( font-size: 12px, padding: 8px 12px,  gap: 6px,  height: 32px, border-radius: 8px ),
+  "small":  ( font-size: 12px, padding: 12px 16px, gap: 6px,  height: 40px, border-radius: 8px ),
+  "medium": ( font-size: 14px, padding: 12px 20px, gap: 8px,  height: 48px, border-radius: 12px ),
+  "large":  ( font-size: 16px, padding: 16px 24px, gap: 8px,  height: 56px, border-radius: 12px ),
 );
 
 // Per-breakpoint size aliasing (mobile-first ascending min-width).
 // At each breakpoint, the size class on the left renders with the values from the size on the right.
 $button-breakpoints: (
-  0:   ( tiny: tiny, small: tiny,   medium: tiny,   large: small  ),
-  577: ( tiny: tiny, small: small,  medium: small,  large: medium ),
+  0:   ( tiny: xs, small: tiny,  medium: small,  large: medium  ),
+  577: ( tiny: xs, small: tiny,  medium: small,  large: medium ),
   992: ( tiny: tiny, small: small,  medium: medium, large: large  ),
 );
 
@@ -43,8 +44,6 @@ $button-breakpoints: (
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    border-radius: $border-radius-medium;
   }
 
   &[full-width],
@@ -82,13 +81,13 @@ $button-breakpoints: (
 
 @each $size, $configs in $button-size-configs {
   .#{$component-prefix}-#{$size} {
-    &.#{$component-prefix}-icon {
-      width: map.get($configs, "height");
-      height: map.get($configs, "height");
-    }
-
     &:not(:disabled):not(.#{$component-prefix}-disabled):hover {
       cursor: pointer;
+    }
+
+    & {
+      border-radius: map.get($configs, "border-radius");
+      gap: map.get($configs, "gap");
     }
 
     &,
@@ -110,6 +109,11 @@ $button-breakpoints: (
     @each $size, $aliased-size in $aliases {
       .#{$component-prefix}-#{$size} {
         @include set-button-size($aliased-size);
+
+        &.#{$component-prefix}-icon {
+          width: map.get(map.get($button-size-configs, $aliased-size), "height");
+          height: map.get(map.get($button-size-configs, $aliased-size), "height");
+        }
       }
     }
   }

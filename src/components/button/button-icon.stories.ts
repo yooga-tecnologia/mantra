@@ -28,6 +28,18 @@ Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjA
   - \`link\`: Ações de navegação, onde botão direciona para outras páginas ou seções da aplicação.
   - \`filter\`: Ações de filtros -> Tem uma leve diferença visual e limitação de uso em relação aos demais estilos.
 - Ícones: É possível adicionar ícones à esquerda e à direita do botão, utilizando propriedades \`icon-left\` e \`icon-right\`. Por padrão, não são exibidos.
+
+### Responsividade:
+Na tabela abaixo, há uma relação entre as variantes de tamanho e os breakpoints.
+
+Obs.: \`XS\` é o tamanho aplicado ao \`tiny\` em breakpoints menores que 576px (NÃO disponível como variante de tamanho).
+
+| Variantes | ≥576px       |	≥768px      |	≥992px (tamanho padrão) |
+|-----------|--------------|--------------|-------------------------|
+| Large     | medium       | medium       | large                   |
+| Medium    | small        | small        | medium                  |
+| Small     | tiny         | tiny         | tiny                    |
+| Tiny      | xs           | xs           | xs                      |
         `,
       },
       codePanel: true,

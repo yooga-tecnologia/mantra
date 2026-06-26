@@ -43,12 +43,14 @@ Veja o protótipo oficial no [Figma](https://www.figma.com/design/ezr4b0ZxjmeWjA
 ### Responsividade:
 Na tabela abaixo, há uma relação entre as variantes de tamanho e os breakpoints.
 
+Obs.: \`XS\` é o tamanho aplicado ao \`tiny\` em breakpoints menores que 576px (NÃO disponível como variante de tamanho).
+
 | Variantes | ≥576px       |	≥768px      |	≥992px (tamanho padrão) |
 |-----------|--------------|--------------|-------------------------|
-| Large     | small        | medium       | large                   |
-| Medium    | tiny         | small        | medium                  |
-| Small     | tiny         | small        | small                   |
-| Tiny      | tiny         | tiny         | tiny                    |
+| Large     | medium       | medium       | large                   |
+| Medium    | small        | small        | medium                  |
+| Small     | tiny         | tiny         | tiny                    |
+| Tiny      | xs           | xs           | xs                      |
 `,
       },
       codePanel: true,
