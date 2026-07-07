@@ -9,11 +9,13 @@ import {
   NUMBER_ICONS,
   USER_EMOTION_ICONS,
   BRANDS_AND_MEDIA_ICONS,
+  YOOGA_ICONS,
 } from './icon-base';
 
 import { ICON_LARGE } from './icon-large-base';
 
 export const ICON_CATEGORIES = [
+  YOOGA_ICONS,
   UI_ACTIONS_ICONS,
   BRANDS_AND_MEDIA_ICONS,
   COMMUNICATION_AND_SOCIAL_ICONS,
@@ -27,6 +29,7 @@ export const ICON_CATEGORIES = [
 ];
 
 export const ICON_OPTIONS = [
+  ...Object.keys(YOOGA_ICONS),
   ...Object.keys(UI_ACTIONS_ICONS),
   ...Object.keys(COMMUNICATION_AND_SOCIAL_ICONS),
   ...Object.keys(COMMON_ACTIONS_ICONS),

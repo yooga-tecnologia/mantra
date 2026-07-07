@@ -211,6 +211,10 @@ Directions.parameters = disableArgs;
 
 const IconsByCategory = [
   {
+    label: 'Yooga Icons',
+    icons: ICONS.YOOGA_ICONS,
+  },
+  {
     label: 'UI Actions',
     icons: ICONS.UI_ACTIONS_ICONS,
   },
