@@ -14,7 +14,24 @@
 <body>
   <div class="page">
 
-    <div style="display: flex; gap: 10px;">
+    <mnt-field-text
+      required
+      minLength="3"
+      maxLength="50"
+      placeholder="Ex.: PRIMEIROPEDIDO"
+      size="medium"
+      has-info-button
+      has-action-button
+      label-text="Cupom"
+      name="cupom"
+    >
+      <mnt-tooltip slot="info-button" text="É o nome utilizado para identificar o cupom na hora de aplicar no pedido" position="top">
+        <mnt-button-icon slot="trigger" size="small" color="neutral" variant="plain" icon="info"></mnt-button-icon>
+      </mnt-tooltip>
+      <mnt-button slot="action-button" label="tiny" variant="emphasis" size="tiny" icon-left="arrow-right"></mnt-button>
+    </mnt-field-text>
+
+    <!-- <div style="display: flex; gap: 10px;">
       <div>
         <mnt-button label="tiny" variant="emphasis" size="tiny" icon-left="arrow-right"></mnt-button>
         <mnt-button label="small" variant="emphasis" size="small" icon-left="arrow-right"></mnt-button>
@@ -27,7 +44,7 @@
         <mnt-button-icon variant="emphasis" size="medium" icon="arrow-right"></mnt-button-icon>
         <mnt-button-icon variant="emphasis" size="large" icon="arrow-right"></mnt-button-icon>
       </div>
-      <!-- <mnt-field-text
+      <mnt-field-text
         label-text="Estados"
         required
         full-width
@@ -43,7 +60,7 @@
         name="estado-1"
         placeholder="Selecione um estado"
         items='[{"es":"Espírito Santo"},{"sp":"São Paulo"},{"rj":"Rio de Janeiro"},{"mg":"Minas Gerais"},{"ba":"Bahia"},{"pe":"Pernambuco"},{"al":"Alagoas"},{"se":"Sergipe"},{"to":"Tocantins"},{"am":"Amazonas"},{"ac":"Acre"},{"rr":"Roraima"},{"pa":"Pará"},{"ap":"Amapá"},{"ro":"Rondônia"},{"ms":"Mato Grosso do Sul"},{"mt":"Mato Grosso"},{"go":"Goiás"},{"df":"Distrito Federal"}]'
-      ></mnt-options-list> -->
+      ></mnt-options-list>
     </div>
 
     <mnt-options-list
@@ -51,7 +68,7 @@
       name="estado-2"
       placeholder="Selecione um estado"
       items='[{"es":"Espírito Santo"},{"sp":"São Paulo"},{"rj":"Rio de Janeiro"},{"mg":"Minas Gerais"},{"ba":"Bahia"},{"pe":"Pernambuco"},{"al":"Alagoas"},{"se":"Sergipe"},{"to":"Tocantins"},{"am":"Amazonas"},{"ac":"Acre"},{"rr":"Roraima"},{"pa":"Pará"},{"ap":"Amapá"},{"ro":"Rondônia"},{"ms":"Mato Grosso do Sul"},{"mt":"Mato Grosso"},{"go":"Goiás"},{"df":"Distrito Federal"}]'
-    ></mnt-options-list>
+    ></mnt-options-list> -->
   </div>
 
   <script>

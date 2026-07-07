@@ -392,12 +392,24 @@ export class FieldText {
   render() {
     return (
       <Host class={this.fieldTextClass}>
-        {renderFieldLabel({
-          labelText: this.labelText,
-          prefix: this.componentPrefix,
-          labelId: this.name + '-label',
-          required: this.host.hasAttribute('required'),
-        })}
+        <div class={`${this.componentPrefix}-label`}>
+          {renderFieldLabel({
+            labelText: this.labelText,
+            prefix: this.componentPrefix,
+            labelId: this.name + '-label',
+            required: this.host.hasAttribute('required'),
+          })}
+          {this.hasInfoButton && (
+            <div class={`${this.componentPrefix}-info-button`}>
+              <slot name="info-button"></slot>
+            </div>
+          )}
+          {this.hasActionButton && (
+            <div class={`${this.componentPrefix}-action-button`}>
+              <slot name="action-button"></slot>
+            </div>
+          )}
+        </div>
         {this.renderInput()}
         {this.renderInlineMessage()}
       </Host>

@@ -23,7 +23,7 @@ export function renderFieldLabel({ labelText, prefix, labelId, required }: Field
 
   return (
     <div class={`${prefix}-label`}>
-      <label id={labelId}>
+      <label htmlFor={labelId + '-input'}>
         {labelText}
         {required && <span class="text-color-primary">*</span>}
       </label>
