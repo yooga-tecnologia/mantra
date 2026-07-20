@@ -7,12 +7,12 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type                                       | Default     |
-| -------- | --------- | ----------- | ------------------------------------------ | ----------- |
-| `icon`   | `icon`    |             | `string`                                   | `undefined` |
-| `label`  | `label`   |             | `string`                                   | `undefined` |
-| `size`   | `size`    |             | `"large" \| "medium" \| "small" \| "tiny"` | `'medium'`  |
-| `tagId`  | `tag-id`  |             | `string`                                   | `undefined` |
+| Property             | Attribute | Description | Type                                       | Default     |
+| -------------------- | --------- | ----------- | ------------------------------------------ | ----------- |
+| `icon`               | `icon`    |             | `string`                                   | `undefined` |
+| `label` _(required)_ | `label`   |             | `string`                                   | `undefined` |
+| `size`               | `size`    |             | `"large" \| "medium" \| "small" \| "tiny"` | `'medium'`  |
+| `tagId`              | `tag-id`  |             | `string`                                   | `undefined` |
 
 
 ## Events
