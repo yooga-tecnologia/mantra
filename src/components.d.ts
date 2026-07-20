@@ -1429,7 +1429,7 @@ declare namespace LocalJSX {
     }
     interface MntTagSelectable {
         "icon"?: TagProps['icon'];
-        "label"?: TagProps['label'];
+        "label": TagProps['label'];
         "onTagSelected"?: (event: MntTagSelectableCustomEvent<{ tagId: string; label: string }>) => void;
         /**
           * @default 'medium'
@@ -1676,7 +1676,7 @@ declare namespace LocalJSX {
         "mnt-tab-item-group": Omit<MntTabItemGroup, keyof MntTabItemGroupAttributes> & { [K in keyof MntTabItemGroup & keyof MntTabItemGroupAttributes]?: MntTabItemGroup[K] } & { [K in keyof MntTabItemGroup & keyof MntTabItemGroupAttributes as `attr:${K}`]?: MntTabItemGroupAttributes[K] } & { [K in keyof MntTabItemGroup & keyof MntTabItemGroupAttributes as `prop:${K}`]?: MntTabItemGroup[K] } & OneOf<"tabs", MntTabItemGroup["tabs"]>;
         "mnt-tag": Omit<MntTag, keyof MntTagAttributes> & { [K in keyof MntTag & keyof MntTagAttributes]?: MntTag[K] } & { [K in keyof MntTag & keyof MntTagAttributes as `attr:${K}`]?: MntTagAttributes[K] } & { [K in keyof MntTag & keyof MntTagAttributes as `prop:${K}`]?: MntTag[K] };
         "mnt-tag-removable": Omit<MntTagRemovable, keyof MntTagRemovableAttributes> & { [K in keyof MntTagRemovable & keyof MntTagRemovableAttributes]?: MntTagRemovable[K] } & { [K in keyof MntTagRemovable & keyof MntTagRemovableAttributes as `attr:${K}`]?: MntTagRemovableAttributes[K] } & { [K in keyof MntTagRemovable & keyof MntTagRemovableAttributes as `prop:${K}`]?: MntTagRemovable[K] };
-        "mnt-tag-selectable": Omit<MntTagSelectable, keyof MntTagSelectableAttributes> & { [K in keyof MntTagSelectable & keyof MntTagSelectableAttributes]?: MntTagSelectable[K] } & { [K in keyof MntTagSelectable & keyof MntTagSelectableAttributes as `attr:${K}`]?: MntTagSelectableAttributes[K] } & { [K in keyof MntTagSelectable & keyof MntTagSelectableAttributes as `prop:${K}`]?: MntTagSelectable[K] };
+        "mnt-tag-selectable": Omit<MntTagSelectable, keyof MntTagSelectableAttributes> & { [K in keyof MntTagSelectable & keyof MntTagSelectableAttributes]?: MntTagSelectable[K] } & { [K in keyof MntTagSelectable & keyof MntTagSelectableAttributes as `attr:${K}`]?: MntTagSelectableAttributes[K] } & { [K in keyof MntTagSelectable & keyof MntTagSelectableAttributes as `prop:${K}`]?: MntTagSelectable[K] } & OneOf<"label", MntTagSelectable["label"]>;
         "mnt-tooltip": Omit<MntTooltip, keyof MntTooltipAttributes> & { [K in keyof MntTooltip & keyof MntTooltipAttributes]?: MntTooltip[K] } & { [K in keyof MntTooltip & keyof MntTooltipAttributes as `attr:${K}`]?: MntTooltipAttributes[K] } & { [K in keyof MntTooltip & keyof MntTooltipAttributes as `prop:${K}`]?: MntTooltip[K] };
     }
 }

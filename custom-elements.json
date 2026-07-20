@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-07T22:33:41",
+  "timestamp": "2026-07-20T15:30:12",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -6441,7 +6441,7 @@
             }
           ],
           "optional": false,
-          "required": false,
+          "required": true,
           "getter": false,
           "setter": false
         },

@@ -13,7 +13,7 @@ const LIB_PREFIX = getLibPrefix();
 export class TagSelectable {
   // Base styles
 
-  @Prop() label: TagProps['label'];
+  @Prop() label!: TagProps['label'];
   @Prop() size?: TagProps['size'] = 'medium';
   @Prop() icon?: TagProps['icon'];
   @Prop() tagId?: string;
@@ -22,7 +22,7 @@ export class TagSelectable {
   @State() selected?: boolean = false;
 
   // Events
-  @Event() tagSelected: EventEmitter<{ tagId: string; label: string }>;
+  @Event() tagSelected!: EventEmitter<{ tagId: string; label: string }>;
 
   private get tagClass() {
     return `${LIB_PREFIX}tag ${LIB_PREFIX}tag-selectable ${LIB_PREFIX}tag-${this.size} ${this.selected ? `${LIB_PREFIX}tag-selected` : ''}`;
@@ -46,12 +46,12 @@ export class TagSelectable {
           aria-label={`Selecionar ${this.label}`}
           part="button"
           class={`${this.tagClass} ${LIB_PREFIX}tag-selectable-button`}
-          onClick={() => this.handleSelect(this.tagId)}
+          onClick={() => this.handleSelect(this.tagId!)}
         >
           {this.icon && (
             <mnt-icon
               icon={this.icon}
-              size={tagIconSizesMap[this.size]}
+              size={tagIconSizesMap[this.size!]}
               color="currentColor"
             ></mnt-icon>
           )}
