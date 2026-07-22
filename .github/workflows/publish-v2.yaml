@@ -48,6 +48,53 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Verificar se a versão já foi publicada
+        id: check
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if npm view "@yooga-tecnologia/mantra@$VERSION" version > /dev/null 2>&1; then
+            echo "A versão $VERSION já existe no registry — publish será pulado."
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          else
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publicar no GitHub Packages
+        if: steps.check.outputs.should_publish == 'true'
+        run: npm publish --tag legacy
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ler versão do Node do .nvmrc
+        run: echo "NODE_VERSION=$(cat .nvmrc | sed 's/^v//')" >> $GITHUB_ENV
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          registry-url: https://npm.pkg.github.com/
+          scope: '@yooga-tecnologia'
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-v2-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-v2-
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Build do Storybook
         run: npm run build-storybook
 
@@ -79,14 +126,9 @@ jobs:
         with:
           path: ./_site
 
-      - name: Publicar no GitHub Packages
-        run: npm publish --tag legacy
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   deploy:
     runs-on: ubuntu-latest
-    needs: publish
+    needs: pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
