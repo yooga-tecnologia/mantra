@@ -1,11 +1,13 @@
 /* Poppins Font Faces for Storybook */
+// Relative paths are resolved by Vite from the source file location and emitted
+// as hashed assets — this ensures correct URLs regardless of the deployment subpath.
 
 @font-face {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/fonts/Poppins-Regular.woff2') format('woff2');
+  src: url('../dist-custom-elements/fonts/Poppins-Regular.woff2') format('woff2');
 }
 
 @font-face {
@@ -13,7 +15,7 @@
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('/fonts/Poppins-Medium.woff2') format('woff2');
+  src: url('../dist-custom-elements/fonts/Poppins-Medium.woff2') format('woff2');
 }
 
 @font-face {
@@ -21,7 +23,7 @@
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url('/fonts/Poppins-SemiBold.woff2') format('woff2');
+  src: url('../dist-custom-elements/fonts/Poppins-SemiBold.woff2') format('woff2');
 }
 
 /* Aplicar Poppins como fonte padrão */
