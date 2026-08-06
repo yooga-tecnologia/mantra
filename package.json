@@ -39,6 +39,7 @@
     "test:e2e": "stencil test --spec --e2e",
     "test.watch:e2e": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
+    "prestorybook": "[ -d dist/components ] || npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "npm run build && storybook build",
     "cache-clear": "rm -rf ./node_modules ./dist/ ./.stencil/ ./storybook-static/ ./www ./loader/",
