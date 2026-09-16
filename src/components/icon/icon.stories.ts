@@ -254,6 +254,10 @@ const IconsByCategory = [
     label: 'Brands and Media',
     icons: ICONS.BRANDS_AND_MEDIA_ICONS,
   },
+  {
+    label: 'Products',
+    icons: ICONS.YOOGA_ICONS,
+  },
 ];
 
 const renderIconBox = (iconName: string): HTMLString => {
