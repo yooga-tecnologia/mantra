@@ -5,6 +5,18 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 eção de event handlers
 
+## [2.11.9] - 2026-09-16
+
+### 🚀 Adicionado
+
+- **Icon**:
+  - Novas variantes:
+    - KDS
+
+### 🐛 Corrigido
+
+- **Switch**: Compatibilidade com iOS 15
+
 ## [2.11.0] - 2026-05-27
 
 ### 🚀 Adicionado
