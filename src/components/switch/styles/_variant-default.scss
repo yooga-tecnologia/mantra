@@ -18,8 +18,8 @@ $switch-sizing-map: (
 
 @mixin set-switch-styles() {
   // SWITCH STYLE
-  @supports(-webkit-appearance: none) or (-moz-appearance: none) {
-    .#{$component-prefix}-switch {
+  // @supports com `or` não é suportado no Safari iOS ≤ 15
+  .#{$component-prefix}-switch {
     --active: #83CEF6;
     --active-inner: #0D547F;
     --focus: rgb(131 206 246 / 50%);
@@ -102,7 +102,6 @@ $switch-sizing-map: (
       &:focus {
         box-shadow: 0 0 0 var(--focus);
       }
-    }
   }
 
   // GROUP STYLES

@@ -26,6 +26,7 @@ export const ICON_CATEGORIES = [
   PRIVACY_AND_SECURITY_ICONS,
   HARDWARE_AND_SOFTWARE_ICONS,
   MAPS_AND_TRANSPORTATION_ICONS,
+  YOOGA_ICONS,
 ];
 
 export const ICON_OPTIONS = [
@@ -40,15 +41,20 @@ export const ICON_OPTIONS = [
   ...Object.keys(HARDWARE_AND_SOFTWARE_ICONS),
   ...Object.keys(MAPS_AND_TRANSPORTATION_ICONS),
   ...Object.keys(BRANDS_AND_MEDIA_ICONS),
+  ...Object.keys(YOOGA_ICONS),
 ];
 export const ICON_LARGE_OPTIONS = [...Object.keys(ICON_LARGE)];
 
 export function getIconSvgByName(name: string, isLarge?: boolean): string | undefined {
+  if (!name) {
+    return undefined;
+  }
+
   if (isLarge) {
-    return ICON_LARGE[name];
+    return ICON_LARGE[name as keyof typeof ICON_LARGE];
   } else {
     for (const category of ICON_CATEGORIES) {
-      if (category[name]) return category[name];
+      if (category[name as keyof typeof category]) return category[name as keyof typeof category];
     }
   }
   return undefined;
