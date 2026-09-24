@@ -60,8 +60,8 @@ describe('mnt-progress-bar', () => {
       expect(label.nextElementSibling).toBe(track);
     });
 
-    it('renders label below when label-position=below', async () => {
-      const { root } = await renderComponent(`<mnt-progress-bar label="Etapa 1" label-position="below"></mnt-progress-bar>`);
+    it('renders label below when label-position=bottom', async () => {
+      const { root } = await renderComponent(`<mnt-progress-bar label="Etapa 1" label-position="bottom"></mnt-progress-bar>`);
       const label = root.querySelector('.mnt-progress-bar__label');
       const track = root.querySelector('.mnt-progress-bar__track');
       expect(label).not.toBeNull();
