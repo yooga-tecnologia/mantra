@@ -25,7 +25,7 @@ interface DropdownPosition {
   formAssociated: true,
 })
 export class OptionsList {
-  @Element() host: HTMLElement;
+  @Element() host!: HTMLElement;
 
   @Prop() name?: OptionsListProps['name'];
   @Prop() labelText?: OptionsListProps['labelText'];
@@ -40,7 +40,7 @@ export class OptionsList {
   @State() focusedIndex: number = -1;
   @State() dropdownPosition: DropdownPosition | null = null;
 
-  @Event() optionSelect: EventEmitter<OptionsListSelectPayload>;
+  @Event() optionSelect!: EventEmitter<OptionsListSelectPayload>;
 
   private hiddenInput!: HTMLInputElement;
   private headerEl!: HTMLElement;

@@ -92,7 +92,7 @@ Utilizado para exibir informações de status, prioridade, etc.
       },
     },
   },
-  render: (args) => {
+  render: (args: BadgeBaseProps) => {
     return `
       <mnt-badge ${args}></mnt-badge>
     `;

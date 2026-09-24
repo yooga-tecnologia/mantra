@@ -7,20 +7,22 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { BadgeBaseProps } from "./components/badge/badge.types";
 import { BrandProps } from "./components/brand/brand.types";
-import { ButtonIconProps, ButtonProps } from "./components/button/button.types";
+import { ButtonIconProps, ButtonProps, ButtonStateVariants, ButtonStyle } from "./components/button/button.types";
 import { CheckboxBaseProps } from "./components/checkbox/checkbox.types";
 import { DatePickerMode, DateRange, DateSelectedEventDetail, MonthYear } from "./components/date-picker/date-picker.types";
+import { DropdownMenuRawItem, DropdownMenuSelectPayload } from "./components/dropdown-menu/dropdown-menu.types";
+import { ExtendedIconName, IconLargeProps, IconProps } from "./components/icon/icon.types";
+import { SizeVariants, ThemePalette } from "./shared/theme/theme.types";
 import { FieldDateProps } from "./components/field-date/field-date.types";
 import { FieldNumberVariant } from "./components/field-number/field-number.types";
-import { SizeVariants } from "./shared/theme/theme.types";
 import { FieldTextProps } from "./components/field-text/field-text.types";
 import { FilterSearchProps } from "./components/filter-search/filter-search.types";
-import { IconLargeProps, IconProps } from "./components/icon/icon.types";
 import { IllustrationProps } from "./components/illustration/illustration.types";
 import { LoadingStateProps } from "./components/loading-state/loading-state.types";
 import { MessageHighlightProps } from "./components/message-highlight/message-highlight.types";
 import { MessageInlineProps } from "./components/message-inline/message-inline.types";
 import { OptionsListProps, OptionsListRawItem, OptionsListSelectPayload } from "./components/options-list/options-list.types";
+import { ProgressBarProps } from "./components/progress-bar/progress-bar.types";
 import { RadioBaseProps } from "./components/radio/radio.types";
 import { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 import { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
@@ -30,20 +32,22 @@ import { TagProps, TagRemovedEvent } from "./components/tag/tag.types";
 import { TooltipProps } from "./components/tooltip/tooltip.types";
 export { BadgeBaseProps } from "./components/badge/badge.types";
 export { BrandProps } from "./components/brand/brand.types";
-export { ButtonIconProps, ButtonProps } from "./components/button/button.types";
+export { ButtonIconProps, ButtonProps, ButtonStateVariants, ButtonStyle } from "./components/button/button.types";
 export { CheckboxBaseProps } from "./components/checkbox/checkbox.types";
 export { DatePickerMode, DateRange, DateSelectedEventDetail, MonthYear } from "./components/date-picker/date-picker.types";
+export { DropdownMenuRawItem, DropdownMenuSelectPayload } from "./components/dropdown-menu/dropdown-menu.types";
+export { ExtendedIconName, IconLargeProps, IconProps } from "./components/icon/icon.types";
+export { SizeVariants, ThemePalette } from "./shared/theme/theme.types";
 export { FieldDateProps } from "./components/field-date/field-date.types";
 export { FieldNumberVariant } from "./components/field-number/field-number.types";
-export { SizeVariants } from "./shared/theme/theme.types";
 export { FieldTextProps } from "./components/field-text/field-text.types";
 export { FilterSearchProps } from "./components/filter-search/filter-search.types";
-export { IconLargeProps, IconProps } from "./components/icon/icon.types";
 export { IllustrationProps } from "./components/illustration/illustration.types";
 export { LoadingStateProps } from "./components/loading-state/loading-state.types";
 export { MessageHighlightProps } from "./components/message-highlight/message-highlight.types";
 export { MessageInlineProps } from "./components/message-inline/message-inline.types";
 export { OptionsListProps, OptionsListRawItem, OptionsListSelectPayload } from "./components/options-list/options-list.types";
+export { ProgressBarProps } from "./components/progress-bar/progress-bar.types";
 export { RadioBaseProps } from "./components/radio/radio.types";
 export { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 export { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
@@ -203,6 +207,64 @@ export namespace Components {
           * @default null
          */
         "selectedRange"?: DateRange | null;
+    }
+    interface MntDropdownMenu {
+        /**
+          * When true, clicking anywhere outside the menu closes it. Default: true.
+          * @default true
+         */
+        "closeOnOutsideClick"?: boolean;
+        /**
+          * Button color variant.
+          * @default 'neutral'
+         */
+        "color"?: ThemePalette;
+        /**
+          * Disables the trigger button.
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Makes the trigger button fill 100% of its container width.
+          * @default false
+         */
+        "fullWidth"?: boolean;
+        /**
+          * Icon on the left side of the button label.
+         */
+        "iconLeft"?: ExtendedIconName;
+        /**
+          * Icon on the right side of the button label (defaults to caret-down when no iconLeft is provided).
+         */
+        "iconRight"?: ExtendedIconName;
+        /**
+          * Items to display in the menu. Accepts a JSON string or a direct array.
+          * @default '[]'
+         */
+        "items": string | DropdownMenuRawItem[];
+        /**
+          * Button label (passed to mnt-button).
+         */
+        "label"?: string;
+        /**
+          * Value of the currently selected item. When set, that item shows a check icon.
+         */
+        "selectedValue"?: string;
+        /**
+          * Button size.
+          * @default 'medium'
+         */
+        "size"?: SizeVariants;
+        /**
+          * Button state.
+          * @default 'default'
+         */
+        "state"?: ButtonStateVariants;
+        /**
+          * Button style variant.
+          * @default 'stroke'
+         */
+        "variant"?: ButtonStyle;
     }
     interface MntFieldDate {
         "datePickerConfig"?: FieldDateProps['datePickerConfig'];
@@ -392,6 +454,33 @@ export namespace Components {
         "placeholder"?: OptionsListProps['placeholder'];
         "value"?: OptionsListProps['value'];
     }
+    interface MntProgressBar {
+        /**
+          * @default 'primary'
+         */
+        "color": ProgressBarProps['color'];
+        /**
+          * @default false
+         */
+        "fullWidth": ProgressBarProps['fullWidth'];
+        "label"?: ProgressBarProps['label'];
+        /**
+          * @default 'top'
+         */
+        "labelPosition": ProgressBarProps['labelPosition'];
+        /**
+          * @default false
+         */
+        "rounded": ProgressBarProps['rounded'];
+        /**
+          * @default 'percent'
+         */
+        "type": ProgressBarProps['type'];
+        /**
+          * @default 0
+         */
+        "value": ProgressBarProps['value'];
+    }
     interface MntRadio {
         /**
           * @default false
@@ -516,6 +605,10 @@ export interface MntCheckboxCustomEvent<T> extends CustomEvent<T> {
 export interface MntDatePickerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMntDatePickerElement;
+}
+export interface MntDropdownMenuCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMntDropdownMenuElement;
 }
 export interface MntFieldDateCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -650,6 +743,23 @@ declare global {
         prototype: HTMLMntDatePickerElement;
         new (): HTMLMntDatePickerElement;
     };
+    interface HTMLMntDropdownMenuElementEventMap {
+        "menuSelect": DropdownMenuSelectPayload;
+    }
+    interface HTMLMntDropdownMenuElement extends Components.MntDropdownMenu, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMntDropdownMenuElementEventMap>(type: K, listener: (this: HTMLMntDropdownMenuElement, ev: MntDropdownMenuCustomEvent<HTMLMntDropdownMenuElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMntDropdownMenuElementEventMap>(type: K, listener: (this: HTMLMntDropdownMenuElement, ev: MntDropdownMenuCustomEvent<HTMLMntDropdownMenuElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMntDropdownMenuElement: {
+        prototype: HTMLMntDropdownMenuElement;
+        new (): HTMLMntDropdownMenuElement;
+    };
     interface HTMLMntFieldDateElementEventMap {
         "valueChange": string;
         "rawValueChange": string;
@@ -761,6 +871,12 @@ declare global {
     var HTMLMntOptionsListElement: {
         prototype: HTMLMntOptionsListElement;
         new (): HTMLMntOptionsListElement;
+    };
+    interface HTMLMntProgressBarElement extends Components.MntProgressBar, HTMLStencilElement {
+    }
+    var HTMLMntProgressBarElement: {
+        prototype: HTMLMntProgressBarElement;
+        new (): HTMLMntProgressBarElement;
     };
     interface HTMLMntRadioElementEventMap {
         "radioChange": { checked: boolean; value: string };
@@ -903,6 +1019,7 @@ declare global {
         "mnt-button-icon": HTMLMntButtonIconElement;
         "mnt-checkbox": HTMLMntCheckboxElement;
         "mnt-date-picker": HTMLMntDatePickerElement;
+        "mnt-dropdown-menu": HTMLMntDropdownMenuElement;
         "mnt-field-date": HTMLMntFieldDateElement;
         "mnt-field-number": HTMLMntFieldNumberElement;
         "mnt-field-text": HTMLMntFieldTextElement;
@@ -914,6 +1031,7 @@ declare global {
         "mnt-message-highlight": HTMLMntMessageHighlightElement;
         "mnt-message-inline": HTMLMntMessageInlineElement;
         "mnt-options-list": HTMLMntOptionsListElement;
+        "mnt-progress-bar": HTMLMntProgressBarElement;
         "mnt-radio": HTMLMntRadioElement;
         "mnt-steps": HTMLMntStepsElement;
         "mnt-switch": HTMLMntSwitchElement;
@@ -1093,6 +1211,65 @@ declare namespace LocalJSX {
           * @default null
          */
         "selectedRange"?: DateRange | null;
+    }
+    interface MntDropdownMenu {
+        /**
+          * When true, clicking anywhere outside the menu closes it. Default: true.
+          * @default true
+         */
+        "closeOnOutsideClick"?: boolean;
+        /**
+          * Button color variant.
+          * @default 'neutral'
+         */
+        "color"?: ThemePalette;
+        /**
+          * Disables the trigger button.
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Makes the trigger button fill 100% of its container width.
+          * @default false
+         */
+        "fullWidth"?: boolean;
+        /**
+          * Icon on the left side of the button label.
+         */
+        "iconLeft"?: ExtendedIconName;
+        /**
+          * Icon on the right side of the button label (defaults to caret-down when no iconLeft is provided).
+         */
+        "iconRight"?: ExtendedIconName;
+        /**
+          * Items to display in the menu. Accepts a JSON string or a direct array.
+          * @default '[]'
+         */
+        "items"?: string | DropdownMenuRawItem[];
+        /**
+          * Button label (passed to mnt-button).
+         */
+        "label"?: string;
+        "onMenuSelect"?: (event: MntDropdownMenuCustomEvent<DropdownMenuSelectPayload>) => void;
+        /**
+          * Value of the currently selected item. When set, that item shows a check icon.
+         */
+        "selectedValue"?: string;
+        /**
+          * Button size.
+          * @default 'medium'
+         */
+        "size"?: SizeVariants;
+        /**
+          * Button state.
+          * @default 'default'
+         */
+        "state"?: ButtonStateVariants;
+        /**
+          * Button style variant.
+          * @default 'stroke'
+         */
+        "variant"?: ButtonStyle;
     }
     interface MntFieldDate {
         "datePickerConfig"?: FieldDateProps['datePickerConfig'];
@@ -1323,6 +1500,33 @@ declare namespace LocalJSX {
         "placeholder"?: OptionsListProps['placeholder'];
         "value"?: OptionsListProps['value'];
     }
+    interface MntProgressBar {
+        /**
+          * @default 'primary'
+         */
+        "color"?: ProgressBarProps['color'];
+        /**
+          * @default false
+         */
+        "fullWidth"?: ProgressBarProps['fullWidth'];
+        "label"?: ProgressBarProps['label'];
+        /**
+          * @default 'top'
+         */
+        "labelPosition"?: ProgressBarProps['labelPosition'];
+        /**
+          * @default false
+         */
+        "rounded"?: ProgressBarProps['rounded'];
+        /**
+          * @default 'percent'
+         */
+        "type"?: ProgressBarProps['type'];
+        /**
+          * @default 0
+         */
+        "value"?: ProgressBarProps['value'];
+    }
     interface MntRadio {
         /**
           * @default false
@@ -1503,6 +1707,20 @@ declare namespace LocalJSX {
         "firstDayOfWeek": number;
         "disablePastDates": boolean;
     }
+    interface MntDropdownMenuAttributes {
+        "items": string | DropdownMenuRawItem[];
+        "label": string;
+        "iconLeft": ExtendedIconName;
+        "iconRight": ExtendedIconName;
+        "color": ThemePalette;
+        "variant": ButtonStyle;
+        "size": SizeVariants;
+        "disabled": boolean;
+        "state": ButtonStateVariants;
+        "fullWidth": boolean;
+        "closeOnOutsideClick": boolean;
+        "selectedValue": string;
+    }
     interface MntFieldDateAttributes {
         "name": string;
         "size": FieldDateProps['size'];
@@ -1593,6 +1811,15 @@ declare namespace LocalJSX {
         "value": OptionsListProps['value'];
         "fullWidth": OptionsListProps['fullWidth'];
     }
+    interface MntProgressBarAttributes {
+        "type": ProgressBarProps['type'];
+        "value": ProgressBarProps['value'];
+        "label": ProgressBarProps['label'];
+        "labelPosition": ProgressBarProps['labelPosition'];
+        "color": ProgressBarProps['color'];
+        "fullWidth": ProgressBarProps['fullWidth'];
+        "rounded": ProgressBarProps['rounded'];
+    }
     interface MntRadioAttributes {
         "name": RadioBaseProps['name'];
         "label": RadioBaseProps['label'];
@@ -1658,6 +1885,7 @@ declare namespace LocalJSX {
         "mnt-button-icon": Omit<MntButtonIcon, keyof MntButtonIconAttributes> & { [K in keyof MntButtonIcon & keyof MntButtonIconAttributes]?: MntButtonIcon[K] } & { [K in keyof MntButtonIcon & keyof MntButtonIconAttributes as `attr:${K}`]?: MntButtonIconAttributes[K] } & { [K in keyof MntButtonIcon & keyof MntButtonIconAttributes as `prop:${K}`]?: MntButtonIcon[K] };
         "mnt-checkbox": Omit<MntCheckbox, keyof MntCheckboxAttributes> & { [K in keyof MntCheckbox & keyof MntCheckboxAttributes]?: MntCheckbox[K] } & { [K in keyof MntCheckbox & keyof MntCheckboxAttributes as `attr:${K}`]?: MntCheckboxAttributes[K] } & { [K in keyof MntCheckbox & keyof MntCheckboxAttributes as `prop:${K}`]?: MntCheckbox[K] };
         "mnt-date-picker": Omit<MntDatePicker, keyof MntDatePickerAttributes> & { [K in keyof MntDatePicker & keyof MntDatePickerAttributes]?: MntDatePicker[K] } & { [K in keyof MntDatePicker & keyof MntDatePickerAttributes as `attr:${K}`]?: MntDatePickerAttributes[K] } & { [K in keyof MntDatePicker & keyof MntDatePickerAttributes as `prop:${K}`]?: MntDatePicker[K] };
+        "mnt-dropdown-menu": Omit<MntDropdownMenu, keyof MntDropdownMenuAttributes> & { [K in keyof MntDropdownMenu & keyof MntDropdownMenuAttributes]?: MntDropdownMenu[K] } & { [K in keyof MntDropdownMenu & keyof MntDropdownMenuAttributes as `attr:${K}`]?: MntDropdownMenuAttributes[K] } & { [K in keyof MntDropdownMenu & keyof MntDropdownMenuAttributes as `prop:${K}`]?: MntDropdownMenu[K] };
         "mnt-field-date": Omit<MntFieldDate, keyof MntFieldDateAttributes> & { [K in keyof MntFieldDate & keyof MntFieldDateAttributes]?: MntFieldDate[K] } & { [K in keyof MntFieldDate & keyof MntFieldDateAttributes as `attr:${K}`]?: MntFieldDateAttributes[K] } & { [K in keyof MntFieldDate & keyof MntFieldDateAttributes as `prop:${K}`]?: MntFieldDate[K] };
         "mnt-field-number": Omit<MntFieldNumber, keyof MntFieldNumberAttributes> & { [K in keyof MntFieldNumber & keyof MntFieldNumberAttributes]?: MntFieldNumber[K] } & { [K in keyof MntFieldNumber & keyof MntFieldNumberAttributes as `attr:${K}`]?: MntFieldNumberAttributes[K] } & { [K in keyof MntFieldNumber & keyof MntFieldNumberAttributes as `prop:${K}`]?: MntFieldNumber[K] } & OneOf<"inputName", MntFieldNumber["inputName"]>;
         "mnt-field-text": Omit<MntFieldText, keyof MntFieldTextAttributes> & { [K in keyof MntFieldText & keyof MntFieldTextAttributes]?: MntFieldText[K] } & { [K in keyof MntFieldText & keyof MntFieldTextAttributes as `attr:${K}`]?: MntFieldTextAttributes[K] } & { [K in keyof MntFieldText & keyof MntFieldTextAttributes as `prop:${K}`]?: MntFieldText[K] };
@@ -1669,6 +1897,7 @@ declare namespace LocalJSX {
         "mnt-message-highlight": Omit<MntMessageHighlight, keyof MntMessageHighlightAttributes> & { [K in keyof MntMessageHighlight & keyof MntMessageHighlightAttributes]?: MntMessageHighlight[K] } & { [K in keyof MntMessageHighlight & keyof MntMessageHighlightAttributes as `attr:${K}`]?: MntMessageHighlightAttributes[K] } & { [K in keyof MntMessageHighlight & keyof MntMessageHighlightAttributes as `prop:${K}`]?: MntMessageHighlight[K] };
         "mnt-message-inline": Omit<MntMessageInline, keyof MntMessageInlineAttributes> & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes]?: MntMessageInline[K] } & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes as `attr:${K}`]?: MntMessageInlineAttributes[K] } & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes as `prop:${K}`]?: MntMessageInline[K] };
         "mnt-options-list": Omit<MntOptionsList, keyof MntOptionsListAttributes> & { [K in keyof MntOptionsList & keyof MntOptionsListAttributes]?: MntOptionsList[K] } & { [K in keyof MntOptionsList & keyof MntOptionsListAttributes as `attr:${K}`]?: MntOptionsListAttributes[K] } & { [K in keyof MntOptionsList & keyof MntOptionsListAttributes as `prop:${K}`]?: MntOptionsList[K] };
+        "mnt-progress-bar": Omit<MntProgressBar, keyof MntProgressBarAttributes> & { [K in keyof MntProgressBar & keyof MntProgressBarAttributes]?: MntProgressBar[K] } & { [K in keyof MntProgressBar & keyof MntProgressBarAttributes as `attr:${K}`]?: MntProgressBarAttributes[K] } & { [K in keyof MntProgressBar & keyof MntProgressBarAttributes as `prop:${K}`]?: MntProgressBar[K] };
         "mnt-radio": Omit<MntRadio, keyof MntRadioAttributes> & { [K in keyof MntRadio & keyof MntRadioAttributes]?: MntRadio[K] } & { [K in keyof MntRadio & keyof MntRadioAttributes as `attr:${K}`]?: MntRadioAttributes[K] } & { [K in keyof MntRadio & keyof MntRadioAttributes as `prop:${K}`]?: MntRadio[K] };
         "mnt-steps": Omit<MntSteps, keyof MntStepsAttributes> & { [K in keyof MntSteps & keyof MntStepsAttributes]?: MntSteps[K] } & { [K in keyof MntSteps & keyof MntStepsAttributes as `attr:${K}`]?: MntStepsAttributes[K] } & { [K in keyof MntSteps & keyof MntStepsAttributes as `prop:${K}`]?: MntSteps[K] };
         "mnt-switch": Omit<MntSwitch, keyof MntSwitchAttributes> & { [K in keyof MntSwitch & keyof MntSwitchAttributes]?: MntSwitch[K] } & { [K in keyof MntSwitch & keyof MntSwitchAttributes as `attr:${K}`]?: MntSwitchAttributes[K] } & { [K in keyof MntSwitch & keyof MntSwitchAttributes as `prop:${K}`]?: MntSwitch[K] };
@@ -1691,6 +1920,7 @@ declare module "@stencil/core" {
             "mnt-button-icon": LocalJSX.IntrinsicElements["mnt-button-icon"] & JSXBase.HTMLAttributes<HTMLMntButtonIconElement>;
             "mnt-checkbox": LocalJSX.IntrinsicElements["mnt-checkbox"] & JSXBase.HTMLAttributes<HTMLMntCheckboxElement>;
             "mnt-date-picker": LocalJSX.IntrinsicElements["mnt-date-picker"] & JSXBase.HTMLAttributes<HTMLMntDatePickerElement>;
+            "mnt-dropdown-menu": LocalJSX.IntrinsicElements["mnt-dropdown-menu"] & JSXBase.HTMLAttributes<HTMLMntDropdownMenuElement>;
             "mnt-field-date": LocalJSX.IntrinsicElements["mnt-field-date"] & JSXBase.HTMLAttributes<HTMLMntFieldDateElement>;
             "mnt-field-number": LocalJSX.IntrinsicElements["mnt-field-number"] & JSXBase.HTMLAttributes<HTMLMntFieldNumberElement>;
             "mnt-field-text": LocalJSX.IntrinsicElements["mnt-field-text"] & JSXBase.HTMLAttributes<HTMLMntFieldTextElement>;
@@ -1702,6 +1932,7 @@ declare module "@stencil/core" {
             "mnt-message-highlight": LocalJSX.IntrinsicElements["mnt-message-highlight"] & JSXBase.HTMLAttributes<HTMLMntMessageHighlightElement>;
             "mnt-message-inline": LocalJSX.IntrinsicElements["mnt-message-inline"] & JSXBase.HTMLAttributes<HTMLMntMessageInlineElement>;
             "mnt-options-list": LocalJSX.IntrinsicElements["mnt-options-list"] & JSXBase.HTMLAttributes<HTMLMntOptionsListElement>;
+            "mnt-progress-bar": LocalJSX.IntrinsicElements["mnt-progress-bar"] & JSXBase.HTMLAttributes<HTMLMntProgressBarElement>;
             "mnt-radio": LocalJSX.IntrinsicElements["mnt-radio"] & JSXBase.HTMLAttributes<HTMLMntRadioElement>;
             "mnt-steps": LocalJSX.IntrinsicElements["mnt-steps"] & JSXBase.HTMLAttributes<HTMLMntStepsElement>;
             "mnt-switch": LocalJSX.IntrinsicElements["mnt-switch"] & JSXBase.HTMLAttributes<HTMLMntSwitchElement>;

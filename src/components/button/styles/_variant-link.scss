@@ -32,7 +32,7 @@ $component-prefix: theme.get-prefix('button');
         &:focus-visible,
         &:active {
           @include theme.set-colors(
-            map.get($specs, "focus", "text-color"),
+            map.get($specs, "pressed", "text-color"),
             transparent
           );
         }

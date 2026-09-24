@@ -23,7 +23,9 @@
     "message-inline",
     "message-highlight",
     "tag",
-    "options-list"
+    "options-list",
+    "dropdown",
+    "progress-bar"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false

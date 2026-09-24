@@ -29,7 +29,7 @@ export class Button {
   @Prop() loading: ButtonProps['loading'] = false;
 
   // Events
-  @Event() buttonClick: EventEmitter<MouseEvent>;
+  @Event() buttonClick!: EventEmitter<MouseEvent>;
 
   // Internal state
   @State() private frozenWidth?: number;

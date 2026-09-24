@@ -1,0 +1,179 @@
+@use 'sass:map';
+
+@use '../../shared/theme/core/theme' as theme;
+@use '../../shared/theme/tokens/primitives' as primitives;
+
+// 1. VARIABLES & COLOR SCHEME
+
+$component-prefix: theme.get-prefix('dropdown-menu');
+
+$dropdown-menu-colors: (
+  text-color: #4B5053,
+  background-color: transparent,
+  border-color-on-open: #E5E7E8,
+  icon-color: #4B5053,
+  separator-color: #E5E7E8,
+  disabled-text-color: #ABB2B5,
+);
+
+$dropdown-menu-item: (
+  hover-bg: #F5F6F6,
+  focused-bg: #E1F1FD,
+);
+
+// 2. BASE
+
+.#{$component-prefix} {
+  display: inline-flex;
+  position: relative;
+  font-family: primitives.$body-font-family;
+
+  &-full-width {
+    display: flex;
+    width: 100%;
+  }
+
+  // 3. TRIGGER ANCHOR
+  // Invisible measurement wrapper — carries ARIA + keyboard handling.
+  // No padding, border or background so it never affects the visual trigger.
+
+  &-trigger-anchor {
+    display: inline-flex;
+    cursor: pointer;
+    outline: none;
+
+    &:focus-visible {
+      border-radius: 4px;
+      box-shadow: 0 0 0 3px rgba(11, 124, 190, 0.2);
+    }
+
+    &-full-width {
+      display: flex;
+      width: 100%;
+    }
+  }
+
+  // 4. MENU LIST
+  // Position is handled via JS inline styles (fixed positioning + portal).
+
+  &-list {
+    box-sizing: border-box;
+    z-index: 1000;
+    background-color: #FFFFFF;
+    border: 1px solid map.get($dropdown-menu-colors, border-color-on-open);
+    overflow-y: auto;
+    padding: 4px 0;
+    min-width: 160px;
+
+    &-below {
+      border-radius: 6px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      transform-origin: top center;
+      animation: mnt-dropdown-menu-enter 180ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    &-above {
+      border-radius: 6px;
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.12);
+      transform-origin: bottom center;
+      animation: mnt-dropdown-menu-enter 180ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+  }
+
+  @keyframes mnt-dropdown-menu-enter {
+    from {
+      opacity: 0;
+      transform: scaleY(0.85);
+    }
+    to {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+
+  // 5. SEPARATOR
+
+  &-separator {
+    height: 1px;
+    margin: 4px 0;
+    background-color: map.get($dropdown-menu-colors, separator-color);
+  }
+
+  // 6. MENU ITEMS
+
+  &-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+
+    &:hover {
+      background-color: map.get($dropdown-menu-item, hover-bg);
+    }
+
+    &-label {
+      flex: 1;
+      min-width: 0;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 500;
+      color: map.get($dropdown-menu-colors, text-color);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &-icon {
+      flex-shrink: 0;
+      color: map.get($dropdown-menu-colors, icon-color);
+    }
+
+    &-check {
+      flex-shrink: 0;
+      margin-left: auto;
+      color: #0D547F;
+    }
+
+    &-selected {
+      background-color: #E1F1FD;
+
+      &:hover {
+        background-color: #E1F1FD;
+      }
+
+      .#{$component-prefix}-item-label {
+        color: #0D547F;
+        font-weight: 500;
+      }
+
+      .#{$component-prefix}-item-icon,
+      .#{$component-prefix}-item-check {
+        color: #0D547F;
+      }
+    }
+
+    &-focused {
+      background-color: map.get($dropdown-menu-item, focused-bg);
+      outline: none;
+    }
+
+    &-disabled {
+      cursor: not-allowed;
+      pointer-events: none;
+
+      .#{$component-prefix}-item-label {
+        color: map.get($dropdown-menu-colors, disabled-text-color);
+      }
+
+      .#{$component-prefix}-item-icon {
+        color: map.get($dropdown-menu-colors, disabled-text-color);
+      }
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+}

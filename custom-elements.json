@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-22T19:06:37",
+  "timestamp": "2026-09-24T22:05:46",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -1056,13 +1056,18 @@
         }
       ],
       "states": [],
-      "dependents": [],
+      "dependents": [
+        "mnt-dropdown-menu"
+      ],
       "dependencies": [
         "mnt-icon"
       ],
       "dependencyGraph": {
         "mnt-button": [
           "mnt-icon"
+        ],
+        "mnt-dropdown-menu": [
+          "mnt-button"
         ]
       }
     },
@@ -2032,6 +2037,511 @@
         ],
         "mnt-field-date": [
           "mnt-date-picker"
+        ]
+      }
+    },
+    {
+      "filePath": "src/components/dropdown-menu/dropdown-menu.tsx",
+      "encapsulation": "none",
+      "tag": "mnt-dropdown-menu",
+      "readme": "# mnt-dropdown-menu\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "closeOnOutsideClick",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "close-on-outside-click",
+          "reflectToAttr": false,
+          "docs": "When true, clicking anywhere outside the menu closes it. Default: true.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "true"
+            }
+          ],
+          "default": "true",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "color",
+          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+          "complexType": {
+            "original": "ThemePalette",
+            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+            "references": {
+              "ThemePalette": {
+                "location": "import",
+                "path": "@theme/theme.types",
+                "id": "src/shared/theme/theme.types.ts::ThemePalette",
+                "referenceLocation": "ThemePalette"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "color",
+          "reflectToAttr": false,
+          "docs": "Button color variant.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'neutral'"
+            }
+          ],
+          "default": "'neutral'",
+          "values": [
+            {
+              "value": "critical",
+              "type": "string"
+            },
+            {
+              "value": "neutral",
+              "type": "string"
+            },
+            {
+              "value": "primary",
+              "type": "string"
+            },
+            {
+              "value": "secondary",
+              "type": "string"
+            },
+            {
+              "value": "success",
+              "type": "string"
+            },
+            {
+              "value": "warning",
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "disabled",
+          "reflectToAttr": false,
+          "docs": "Disables the trigger button.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "fullWidth",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "full-width",
+          "reflectToAttr": false,
+          "docs": "Makes the trigger button fill 100% of its container width.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "iconLeft",
+          "type": "string",
+          "complexType": {
+            "original": "ExtendedIconName",
+            "resolved": "string",
+            "references": {
+              "ExtendedIconName": {
+                "location": "import",
+                "path": "../icon/icon.types",
+                "id": "src/components/icon/icon.types.ts::ExtendedIconName",
+                "referenceLocation": "ExtendedIconName"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "icon-left",
+          "reflectToAttr": false,
+          "docs": "Icon on the left side of the button label.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "iconRight",
+          "type": "string",
+          "complexType": {
+            "original": "ExtendedIconName",
+            "resolved": "string",
+            "references": {
+              "ExtendedIconName": {
+                "location": "import",
+                "path": "../icon/icon.types",
+                "id": "src/components/icon/icon.types.ts::ExtendedIconName",
+                "referenceLocation": "ExtendedIconName"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "icon-right",
+          "reflectToAttr": false,
+          "docs": "Icon on the right side of the button label (defaults to caret-down when no iconLeft is provided).",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "items",
+          "type": "DropdownMenuRawItem[] | string",
+          "complexType": {
+            "original": "string | DropdownMenuRawItem[]",
+            "resolved": "DropdownMenuRawItem[] | string",
+            "references": {
+              "DropdownMenuRawItem": {
+                "location": "import",
+                "path": "./dropdown-menu.types",
+                "id": "src/components/dropdown-menu/dropdown-menu.types.ts::DropdownMenuRawItem",
+                "referenceLocation": "DropdownMenuRawItem"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "items",
+          "reflectToAttr": false,
+          "docs": "Items to display in the menu. Accepts a JSON string or a direct array.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'[]'"
+            }
+          ],
+          "default": "'[]'",
+          "values": [
+            {
+              "type": "DropdownMenuRawItem[]"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "label",
+          "reflectToAttr": false,
+          "docs": "Button label (passed to mnt-button).",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "selectedValue",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "selected-value",
+          "reflectToAttr": false,
+          "docs": "Value of the currently selected item. When set, that item shows a check icon.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "size",
+          "type": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+          "complexType": {
+            "original": "SizeVariants",
+            "resolved": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+            "references": {
+              "SizeVariants": {
+                "location": "import",
+                "path": "@theme/theme.types",
+                "id": "src/shared/theme/theme.types.ts::SizeVariants",
+                "referenceLocation": "SizeVariants"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "size",
+          "reflectToAttr": false,
+          "docs": "Button size.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'medium'"
+            }
+          ],
+          "default": "'medium'",
+          "values": [
+            {
+              "value": "large",
+              "type": "string"
+            },
+            {
+              "value": "medium",
+              "type": "string"
+            },
+            {
+              "value": "small",
+              "type": "string"
+            },
+            {
+              "value": "tiny",
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "state",
+          "type": "\"default\" | \"loading\" | \"pressed\"",
+          "complexType": {
+            "original": "ButtonStateVariants",
+            "resolved": "\"default\" | \"loading\" | \"pressed\"",
+            "references": {
+              "ButtonStateVariants": {
+                "location": "import",
+                "path": "../button/button.types",
+                "id": "src/components/button/button.types.ts::ButtonStateVariants",
+                "referenceLocation": "ButtonStateVariants"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "state",
+          "reflectToAttr": false,
+          "docs": "Button state.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'default'"
+            }
+          ],
+          "default": "'default'",
+          "values": [
+            {
+              "value": "default",
+              "type": "string"
+            },
+            {
+              "value": "loading",
+              "type": "string"
+            },
+            {
+              "value": "pressed",
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "variant",
+          "type": "\"emphasis\" | \"filter\" | \"link\" | \"plain\" | \"regular\" | \"stroke\"",
+          "complexType": {
+            "original": "ButtonStyle",
+            "resolved": "\"emphasis\" | \"filter\" | \"link\" | \"plain\" | \"regular\" | \"stroke\"",
+            "references": {
+              "ButtonStyle": {
+                "location": "import",
+                "path": "../button/button.types",
+                "id": "src/components/button/button.types.ts::ButtonStyle",
+                "referenceLocation": "ButtonStyle"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "variant",
+          "reflectToAttr": false,
+          "docs": "Button style variant.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'stroke'"
+            }
+          ],
+          "default": "'stroke'",
+          "values": [
+            {
+              "value": "emphasis",
+              "type": "string"
+            },
+            {
+              "value": "filter",
+              "type": "string"
+            },
+            {
+              "value": "link",
+              "type": "string"
+            },
+            {
+              "value": "plain",
+              "type": "string"
+            },
+            {
+              "value": "regular",
+              "type": "string"
+            },
+            {
+              "value": "stroke",
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [
+        {
+          "event": "menuSelect",
+          "detail": "DropdownMenuSelectPayload",
+          "bubbles": true,
+          "complexType": {
+            "original": "DropdownMenuSelectPayload",
+            "resolved": "DropdownMenuSelectPayload",
+            "references": {
+              "DropdownMenuSelectPayload": {
+                "location": "import",
+                "path": "./dropdown-menu.types",
+                "id": "src/components/dropdown-menu/dropdown-menu.types.ts::DropdownMenuSelectPayload",
+                "referenceLocation": "DropdownMenuSelectPayload"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "",
+          "docsTags": []
+        }
+      ],
+      "listeners": [
+        {
+          "event": "scroll",
+          "target": "window",
+          "capture": false,
+          "passive": true
+        },
+        {
+          "event": "resize",
+          "target": "window",
+          "capture": false,
+          "passive": true
+        }
+      ],
+      "styles": [],
+      "slots": [],
+      "parts": [],
+      "states": [],
+      "dependents": [],
+      "dependencies": [
+        "mnt-button"
+      ],
+      "dependencyGraph": {
+        "mnt-dropdown-menu": [
+          "mnt-button"
+        ],
+        "mnt-button": [
+          "mnt-icon"
         ]
       }
     },
@@ -4943,6 +5453,315 @@
       }
     },
     {
+      "filePath": "src/components/progress-bar/progress-bar.tsx",
+      "encapsulation": "none",
+      "tag": "mnt-progress-bar",
+      "readme": "# mnt-progress-bar\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "color",
+          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+          "complexType": {
+            "original": "ProgressBarProps['color']",
+            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+            "references": {
+              "ProgressBarProps": {
+                "location": "import",
+                "path": "./progress-bar.types",
+                "id": "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps",
+                "referenceLocation": "ProgressBarProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "color",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'primary'"
+            }
+          ],
+          "default": "'primary'",
+          "values": [
+            {
+              "value": "critical",
+              "type": "string"
+            },
+            {
+              "value": "neutral",
+              "type": "string"
+            },
+            {
+              "value": "primary",
+              "type": "string"
+            },
+            {
+              "value": "secondary",
+              "type": "string"
+            },
+            {
+              "value": "success",
+              "type": "string"
+            },
+            {
+              "value": "warning",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "fullWidth",
+          "type": "boolean",
+          "complexType": {
+            "original": "ProgressBarProps['fullWidth']",
+            "resolved": "boolean",
+            "references": {
+              "ProgressBarProps": {
+                "location": "import",
+                "path": "./progress-bar.types",
+                "id": "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps",
+                "referenceLocation": "ProgressBarProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "full-width",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "complexType": {
+            "original": "ProgressBarProps['label']",
+            "resolved": "string",
+            "references": {
+              "ProgressBarProps": {
+                "location": "import",
+                "path": "./progress-bar.types",
+                "id": "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps",
+                "referenceLocation": "ProgressBarProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "label",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "labelPosition",
+          "type": "\"bottom\" | \"left\" | \"right\" | \"top\"",
+          "complexType": {
+            "original": "ProgressBarProps['labelPosition']",
+            "resolved": "\"bottom\" | \"left\" | \"right\" | \"top\"",
+            "references": {
+              "ProgressBarProps": {
+                "location": "import",
+                "path": "./progress-bar.types",
+                "id": "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps",
+                "referenceLocation": "ProgressBarProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "label-position",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'top'"
+            }
+          ],
+          "default": "'top'",
+          "values": [
+            {
+              "value": "bottom",
+              "type": "string"
+            },
+            {
+              "value": "left",
+              "type": "string"
+            },
+            {
+              "value": "right",
+              "type": "string"
+            },
+            {
+              "value": "top",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "rounded",
+          "type": "boolean",
+          "complexType": {
+            "original": "ProgressBarProps['rounded']",
+            "resolved": "boolean",
+            "references": {
+              "ProgressBarProps": {
+                "location": "import",
+                "path": "./progress-bar.types",
+                "id": "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps",
+                "referenceLocation": "ProgressBarProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "rounded",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "type",
+          "type": "\"percent\" | \"steps\"",
+          "complexType": {
+            "original": "ProgressBarProps['type']",
+            "resolved": "\"percent\" | \"steps\"",
+            "references": {
+              "ProgressBarProps": {
+                "location": "import",
+                "path": "./progress-bar.types",
+                "id": "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps",
+                "referenceLocation": "ProgressBarProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "type",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'percent'"
+            }
+          ],
+          "default": "'percent'",
+          "values": [
+            {
+              "value": "percent",
+              "type": "string"
+            },
+            {
+              "value": "steps",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "value",
+          "type": "[number, number] | number",
+          "complexType": {
+            "original": "ProgressBarProps['value']",
+            "resolved": "[number, number] | number",
+            "references": {
+              "ProgressBarProps": {
+                "location": "import",
+                "path": "./progress-bar.types",
+                "id": "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps",
+                "referenceLocation": "ProgressBarProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "value",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "0"
+            }
+          ],
+          "default": "0",
+          "values": [
+            {
+              "type": "[number, number]"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [],
+      "listeners": [],
+      "styles": [],
+      "slots": [],
+      "parts": [],
+      "states": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    },
+    {
       "filePath": "src/components/radio/radio.tsx",
       "encapsulation": "none",
       "tag": "mnt-radio",
@@ -6723,6 +7542,41 @@
       "docstring": "",
       "path": "src/components/date-picker/date-picker.types.ts"
     },
+    "src/components/dropdown-menu/dropdown-menu.types.ts::DropdownMenuRawItem": {
+      "declaration": "export type DropdownMenuRawItem =\n  | string\n  | { value: string; label: string; icon?: string; disabled?: boolean; separator?: boolean };",
+      "docstring": "",
+      "path": "src/components/dropdown-menu/dropdown-menu.types.ts"
+    },
+    "src/components/icon/icon.types.ts::ExtendedIconName": {
+      "declaration": "string",
+      "docstring": "",
+      "path": "src/components/icon/icon.types.ts"
+    },
+    "src/shared/theme/theme.types.ts::ThemePalette": {
+      "declaration": "\"success\" | \"primary\" | \"secondary\" | \"neutral\" | \"warning\" | \"critical\"",
+      "docstring": "",
+      "path": "src/shared/theme/theme.types.ts"
+    },
+    "src/components/button/button.types.ts::ButtonStyle": {
+      "declaration": "\"filter\" | \"link\" | \"stroke\" | \"emphasis\" | \"regular\" | \"plain\"",
+      "docstring": "",
+      "path": "src/components/button/button.types.ts"
+    },
+    "src/shared/theme/theme.types.ts::SizeVariants": {
+      "declaration": "\"small\" | \"tiny\" | \"medium\" | \"large\"",
+      "docstring": "",
+      "path": "src/shared/theme/theme.types.ts"
+    },
+    "src/components/button/button.types.ts::ButtonStateVariants": {
+      "declaration": "\"loading\" | \"default\" | \"pressed\"",
+      "docstring": "",
+      "path": "src/components/button/button.types.ts"
+    },
+    "src/components/dropdown-menu/dropdown-menu.types.ts::DropdownMenuSelectPayload": {
+      "declaration": "export interface DropdownMenuSelectPayload {\n  value: string;\n  label: string;\n}",
+      "docstring": "",
+      "path": "src/components/dropdown-menu/dropdown-menu.types.ts"
+    },
     "src/components/field-date/field-date.types.ts::FieldDateProps": {
       "declaration": "export interface FieldDateProps extends FormFieldBaseProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  size?: Exclude<SizeVariants, 'tiny'>;\n  required?: boolean;\n  disabled?: boolean;\n  datePickerConfig?: DatePickerBaseProps;\n  value?: string;\n}",
       "docstring": "",
@@ -6732,11 +7586,6 @@
       "declaration": "\"default\" | \"plain\" | \"simple\"",
       "docstring": "",
       "path": "src/components/field-number/field-number.types.ts"
-    },
-    "src/shared/theme/theme.types.ts::SizeVariants": {
-      "declaration": "\"small\" | \"tiny\" | \"medium\" | \"large\"",
-      "docstring": "",
-      "path": "src/shared/theme/theme.types.ts"
     },
     "src/components/field-text/field-text.types.ts::FieldTextProps": {
       "declaration": "export interface FieldTextProps extends FormFieldBaseProps {\n  // Required\n  inputName: string;\n\n  // Optional\n  color?: 'critical' | 'success' | 'neutral';\n  state?: Exclude<StateVariants, 'warning'>;\n  size?: Exclude<SizeVariants, 'tiny'>;\n  iconLeft?: ExtendedIconName;\n  iconRight?: ExtendedIconName;\n  required?: boolean;\n  disabled?: boolean;\n  inlineMessage?: string;\n  hasActionButton?: boolean;\n  hasInfoButton?: boolean;\n}",
@@ -6792,6 +7641,11 @@
       "declaration": "export interface OptionsListChangeDetail {\n  value: string;\n  label: string;\n}",
       "docstring": "",
       "path": "src/components/options-list/options-list.types.ts"
+    },
+    "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps": {
+      "declaration": "export interface ProgressBarProps {\n  type?: ProgressBarType;\n  value?: number | [number, number];\n  label?: string;\n  labelPosition?: ProgressBarLabelPosition;\n  color?: ThemePalette;\n  fullWidth?: boolean;\n  rounded?: boolean;\n}",
+      "docstring": "",
+      "path": "src/components/progress-bar/progress-bar.types.ts"
     },
     "src/components/radio/radio.types.tsx::RadioBaseProps": {
       "declaration": "export interface RadioBaseProps {\n  name?: string;\n  label?: string;\n  value?: string;\n  checked?: boolean;\n  disabled?: boolean;\n}",

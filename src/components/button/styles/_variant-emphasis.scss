@@ -33,8 +33,8 @@ $color-opacity-black-5: rgba(0, 0, 0, 0.05);
       }
       &:focus {
         @include theme.set-colors(
-          map.get($specs, "focus", "text-color"),
-          map.get($specs, "focus", "bg-color")
+          map.get($specs, "pressed", "text-color"),
+          map.get($specs, "pressed", "bg-color")
         );
       }
       &:disabled,

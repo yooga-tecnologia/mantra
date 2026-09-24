@@ -18,7 +18,7 @@ export class TabItem {
   @Prop() disabled: boolean = false;
   @Prop() orientation: TabItemProps['orientation'] = 'horizontal';
 
-  @Event() tabItemClick: EventEmitter<string>;
+  @Event() tabItemClick!: EventEmitter<string>;
 
   private handleClick(event: MouseEvent) {
     if (this.disabled) {

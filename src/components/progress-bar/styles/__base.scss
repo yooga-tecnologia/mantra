@@ -1,0 +1,107 @@
+@use 'sass:map';
+@use 'src/shared/theme/core/theme' as theme;
+@use 'src/shared/theme/tokens/sizing' as sizing;
+@use 'src/shared/theme/tokens/primitives' as primitives;
+
+$component: 'mnt-progress-bar';
+
+$bar-height: 4px;
+$bar-radius-default: 0px;
+$bar-radius-rounded: map.get(sizing.$border-radius-map, 'circular');
+
+$track-color: map.get(primitives.$grey-palette, 100);
+
+$color-map: (
+  primary:   map.get(primitives.$blue-palette, 500),
+  secondary: map.get(primitives.$magenta-palette, 500),
+  tertiary:  map.get(primitives.$purple-palette, 500),
+  neutral:   map.get(primitives.$grey-palette, 600),
+  success:   map.get(primitives.$green-palette, 500),
+  warning:   map.get(primitives.$yellow-palette, 500),
+  critical:  map.get(primitives.$red-palette, 500),
+);
+
+#{$component} {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &[full-width],
+  &[full-width='true'] {
+    display: flex;
+    width: 100%;
+  }
+}
+
+.#{$component}--inline {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  .#{$component}__track {
+    flex: 1;
+  }
+
+  .#{$component}__label {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+.#{$component}--label {
+  &-right,
+  &-left {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.#{$component}__label {
+  display: block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+
+  &-right,
+  &-left {
+    margin: 8px 0;
+    font-size: 12px;
+    line-height: 16px;
+    color: map.get(primitives.$grey-palette, 700);
+  }
+
+  &-top,
+  &-bottom {
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: map.get(primitives.$grey-palette, 500);
+  }
+}
+
+.#{$component}__track {
+  width: 100%;
+  height: $bar-height;
+  background-color: $track-color;
+  border-radius: $bar-radius-default;
+  overflow: hidden;
+
+  #{$component}[rounded] &,
+  #{$component}[rounded='true'] & {
+    border-radius: $bar-radius-rounded;
+  }
+}
+
+.#{$component}__fill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.6s ease-in-out;
+  will-change: width;
+
+  @each $color-name, $color-value in $color-map {
+    .#{$component}--#{$color-name} & {
+      background-color: $color-value;
+    }
+  }
+}

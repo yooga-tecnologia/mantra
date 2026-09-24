@@ -35,8 +35,8 @@ $lib-prefix: theme.get-prefix();
       &:focus {
         border-color: map.get(action-tokens.$stroke-borders-map, "focus");
         @include theme.set-colors(
-          map.get($states, "focus", "text-color"),
-          map.get($states, "focus", "bg-color")
+          map.get($states, "pressed", "text-color"),
+          map.get($states, "pressed", "bg-color")
         );
       }
 
