@@ -5,6 +5,25 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 eção de event handlers
 
+## [2.11.10] - 2026-09-24
+
+### 🚀 Adicionado
+
+- **Dropdown**:
+  - Criação de componente
+
+- **ProgressBar**:
+  - Criação de componente
+
+### 🐛 Corrigido
+
+- **Tabs**:
+  - Variante Horizontal: Ajuste de posicionamento de borda inferior.
+
+- **Button**:
+  - Variante `plain`: Utiliza background com transparência, possibilitando o uso em fundos coloridos.
+  - As demais variantes também tiveram a cor de estado :pressed atualizadas, seguindo esquema de tokens.
+
 ## [2.11.9] - 2026-09-16
 
 ### 🚀 Adicionado

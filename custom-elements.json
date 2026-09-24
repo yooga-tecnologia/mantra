@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-21T18:03:42",
+  "timestamp": "2026-09-24T21:11:16",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -5453,6 +5453,315 @@
       }
     },
     {
+      "filePath": "src/components/progress-bar/progress-bar.tsx",
+      "encapsulation": "none",
+      "tag": "mnt-progress-bar",
+      "readme": "# mnt-progress-bar\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "color",
+          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+          "complexType": {
+            "original": "ProgressBarProps['color']",
+            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+            "references": {
+              "ProgressBarProps": {
+                "location": "import",
+                "path": "./progress-bar.types",
+                "id": "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps",
+                "referenceLocation": "ProgressBarProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "color",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'primary'"
+            }
+          ],
+          "default": "'primary'",
+          "values": [
+            {
+              "value": "critical",
+              "type": "string"
+            },
+            {
+              "value": "neutral",
+              "type": "string"
+            },
+            {
+              "value": "primary",
+              "type": "string"
+            },
+            {
+              "value": "secondary",
+              "type": "string"
+            },
+            {
+              "value": "success",
+              "type": "string"
+            },
+            {
+              "value": "warning",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "fullWidth",
+          "type": "boolean",
+          "complexType": {
+            "original": "ProgressBarProps['fullWidth']",
+            "resolved": "boolean",
+            "references": {
+              "ProgressBarProps": {
+                "location": "import",
+                "path": "./progress-bar.types",
+                "id": "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps",
+                "referenceLocation": "ProgressBarProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "full-width",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "complexType": {
+            "original": "ProgressBarProps['label']",
+            "resolved": "string",
+            "references": {
+              "ProgressBarProps": {
+                "location": "import",
+                "path": "./progress-bar.types",
+                "id": "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps",
+                "referenceLocation": "ProgressBarProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "label",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "labelPosition",
+          "type": "\"bottom\" | \"left\" | \"right\" | \"top\"",
+          "complexType": {
+            "original": "ProgressBarProps['labelPosition']",
+            "resolved": "\"bottom\" | \"left\" | \"right\" | \"top\"",
+            "references": {
+              "ProgressBarProps": {
+                "location": "import",
+                "path": "./progress-bar.types",
+                "id": "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps",
+                "referenceLocation": "ProgressBarProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "label-position",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'top'"
+            }
+          ],
+          "default": "'top'",
+          "values": [
+            {
+              "value": "bottom",
+              "type": "string"
+            },
+            {
+              "value": "left",
+              "type": "string"
+            },
+            {
+              "value": "right",
+              "type": "string"
+            },
+            {
+              "value": "top",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "rounded",
+          "type": "boolean",
+          "complexType": {
+            "original": "ProgressBarProps['rounded']",
+            "resolved": "boolean",
+            "references": {
+              "ProgressBarProps": {
+                "location": "import",
+                "path": "./progress-bar.types",
+                "id": "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps",
+                "referenceLocation": "ProgressBarProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "rounded",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "type",
+          "type": "\"percent\" | \"steps\"",
+          "complexType": {
+            "original": "ProgressBarProps['type']",
+            "resolved": "\"percent\" | \"steps\"",
+            "references": {
+              "ProgressBarProps": {
+                "location": "import",
+                "path": "./progress-bar.types",
+                "id": "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps",
+                "referenceLocation": "ProgressBarProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "type",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'percent'"
+            }
+          ],
+          "default": "'percent'",
+          "values": [
+            {
+              "value": "percent",
+              "type": "string"
+            },
+            {
+              "value": "steps",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "value",
+          "type": "[number, number] | number",
+          "complexType": {
+            "original": "ProgressBarProps['value']",
+            "resolved": "[number, number] | number",
+            "references": {
+              "ProgressBarProps": {
+                "location": "import",
+                "path": "./progress-bar.types",
+                "id": "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps",
+                "referenceLocation": "ProgressBarProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "value",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "0"
+            }
+          ],
+          "default": "0",
+          "values": [
+            {
+              "type": "[number, number]"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [],
+      "listeners": [],
+      "styles": [],
+      "slots": [],
+      "parts": [],
+      "states": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    },
+    {
       "filePath": "src/components/radio/radio.tsx",
       "encapsulation": "none",
       "tag": "mnt-radio",
@@ -7332,6 +7641,11 @@
       "declaration": "export interface OptionsListChangeDetail {\n  value: string;\n  label: string;\n}",
       "docstring": "",
       "path": "src/components/options-list/options-list.types.ts"
+    },
+    "src/components/progress-bar/progress-bar.types.ts::ProgressBarProps": {
+      "declaration": "export interface ProgressBarProps {\n  type?: ProgressBarType;\n  value?: number | [number, number];\n  label?: string;\n  labelPosition?: ProgressBarLabelPosition;\n  color?: ThemePalette;\n  fullWidth?: boolean;\n  rounded?: boolean;\n}",
+      "docstring": "",
+      "path": "src/components/progress-bar/progress-bar.types.ts"
     },
     "src/components/radio/radio.types.tsx::RadioBaseProps": {
       "declaration": "export interface RadioBaseProps {\n  name?: string;\n  label?: string;\n  value?: string;\n  checked?: boolean;\n  disabled?: boolean;\n}",

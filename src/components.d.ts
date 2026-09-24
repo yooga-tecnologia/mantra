@@ -22,6 +22,7 @@ import { LoadingStateProps } from "./components/loading-state/loading-state.type
 import { MessageHighlightProps } from "./components/message-highlight/message-highlight.types";
 import { MessageInlineProps } from "./components/message-inline/message-inline.types";
 import { OptionsListProps, OptionsListRawItem, OptionsListSelectPayload } from "./components/options-list/options-list.types";
+import { ProgressBarProps } from "./components/progress-bar/progress-bar.types";
 import { RadioBaseProps } from "./components/radio/radio.types";
 import { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 import { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
@@ -46,6 +47,7 @@ export { LoadingStateProps } from "./components/loading-state/loading-state.type
 export { MessageHighlightProps } from "./components/message-highlight/message-highlight.types";
 export { MessageInlineProps } from "./components/message-inline/message-inline.types";
 export { OptionsListProps, OptionsListRawItem, OptionsListSelectPayload } from "./components/options-list/options-list.types";
+export { ProgressBarProps } from "./components/progress-bar/progress-bar.types";
 export { RadioBaseProps } from "./components/radio/radio.types";
 export { StepItem, StepsProps, StepStatus } from "./components/steps/steps.types";
 export { SwitchBaseProps, SwitchChangeEventDetail, SwitchType } from "./components/switch/switch.types";
@@ -452,6 +454,33 @@ export namespace Components {
         "placeholder"?: OptionsListProps['placeholder'];
         "value"?: OptionsListProps['value'];
     }
+    interface MntProgressBar {
+        /**
+          * @default 'primary'
+         */
+        "color": ProgressBarProps['color'];
+        /**
+          * @default false
+         */
+        "fullWidth": ProgressBarProps['fullWidth'];
+        "label"?: ProgressBarProps['label'];
+        /**
+          * @default 'top'
+         */
+        "labelPosition": ProgressBarProps['labelPosition'];
+        /**
+          * @default false
+         */
+        "rounded": ProgressBarProps['rounded'];
+        /**
+          * @default 'percent'
+         */
+        "type": ProgressBarProps['type'];
+        /**
+          * @default 0
+         */
+        "value": ProgressBarProps['value'];
+    }
     interface MntRadio {
         /**
           * @default false
@@ -843,6 +872,12 @@ declare global {
         prototype: HTMLMntOptionsListElement;
         new (): HTMLMntOptionsListElement;
     };
+    interface HTMLMntProgressBarElement extends Components.MntProgressBar, HTMLStencilElement {
+    }
+    var HTMLMntProgressBarElement: {
+        prototype: HTMLMntProgressBarElement;
+        new (): HTMLMntProgressBarElement;
+    };
     interface HTMLMntRadioElementEventMap {
         "radioChange": { checked: boolean; value: string };
     }
@@ -996,6 +1031,7 @@ declare global {
         "mnt-message-highlight": HTMLMntMessageHighlightElement;
         "mnt-message-inline": HTMLMntMessageInlineElement;
         "mnt-options-list": HTMLMntOptionsListElement;
+        "mnt-progress-bar": HTMLMntProgressBarElement;
         "mnt-radio": HTMLMntRadioElement;
         "mnt-steps": HTMLMntStepsElement;
         "mnt-switch": HTMLMntSwitchElement;
@@ -1464,6 +1500,33 @@ declare namespace LocalJSX {
         "placeholder"?: OptionsListProps['placeholder'];
         "value"?: OptionsListProps['value'];
     }
+    interface MntProgressBar {
+        /**
+          * @default 'primary'
+         */
+        "color"?: ProgressBarProps['color'];
+        /**
+          * @default false
+         */
+        "fullWidth"?: ProgressBarProps['fullWidth'];
+        "label"?: ProgressBarProps['label'];
+        /**
+          * @default 'top'
+         */
+        "labelPosition"?: ProgressBarProps['labelPosition'];
+        /**
+          * @default false
+         */
+        "rounded"?: ProgressBarProps['rounded'];
+        /**
+          * @default 'percent'
+         */
+        "type"?: ProgressBarProps['type'];
+        /**
+          * @default 0
+         */
+        "value"?: ProgressBarProps['value'];
+    }
     interface MntRadio {
         /**
           * @default false
@@ -1748,6 +1811,15 @@ declare namespace LocalJSX {
         "value": OptionsListProps['value'];
         "fullWidth": OptionsListProps['fullWidth'];
     }
+    interface MntProgressBarAttributes {
+        "type": ProgressBarProps['type'];
+        "value": ProgressBarProps['value'];
+        "label": ProgressBarProps['label'];
+        "labelPosition": ProgressBarProps['labelPosition'];
+        "color": ProgressBarProps['color'];
+        "fullWidth": ProgressBarProps['fullWidth'];
+        "rounded": ProgressBarProps['rounded'];
+    }
     interface MntRadioAttributes {
         "name": RadioBaseProps['name'];
         "label": RadioBaseProps['label'];
@@ -1825,6 +1897,7 @@ declare namespace LocalJSX {
         "mnt-message-highlight": Omit<MntMessageHighlight, keyof MntMessageHighlightAttributes> & { [K in keyof MntMessageHighlight & keyof MntMessageHighlightAttributes]?: MntMessageHighlight[K] } & { [K in keyof MntMessageHighlight & keyof MntMessageHighlightAttributes as `attr:${K}`]?: MntMessageHighlightAttributes[K] } & { [K in keyof MntMessageHighlight & keyof MntMessageHighlightAttributes as `prop:${K}`]?: MntMessageHighlight[K] };
         "mnt-message-inline": Omit<MntMessageInline, keyof MntMessageInlineAttributes> & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes]?: MntMessageInline[K] } & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes as `attr:${K}`]?: MntMessageInlineAttributes[K] } & { [K in keyof MntMessageInline & keyof MntMessageInlineAttributes as `prop:${K}`]?: MntMessageInline[K] };
         "mnt-options-list": Omit<MntOptionsList, keyof MntOptionsListAttributes> & { [K in keyof MntOptionsList & keyof MntOptionsListAttributes]?: MntOptionsList[K] } & { [K in keyof MntOptionsList & keyof MntOptionsListAttributes as `attr:${K}`]?: MntOptionsListAttributes[K] } & { [K in keyof MntOptionsList & keyof MntOptionsListAttributes as `prop:${K}`]?: MntOptionsList[K] };
+        "mnt-progress-bar": Omit<MntProgressBar, keyof MntProgressBarAttributes> & { [K in keyof MntProgressBar & keyof MntProgressBarAttributes]?: MntProgressBar[K] } & { [K in keyof MntProgressBar & keyof MntProgressBarAttributes as `attr:${K}`]?: MntProgressBarAttributes[K] } & { [K in keyof MntProgressBar & keyof MntProgressBarAttributes as `prop:${K}`]?: MntProgressBar[K] };
         "mnt-radio": Omit<MntRadio, keyof MntRadioAttributes> & { [K in keyof MntRadio & keyof MntRadioAttributes]?: MntRadio[K] } & { [K in keyof MntRadio & keyof MntRadioAttributes as `attr:${K}`]?: MntRadioAttributes[K] } & { [K in keyof MntRadio & keyof MntRadioAttributes as `prop:${K}`]?: MntRadio[K] };
         "mnt-steps": Omit<MntSteps, keyof MntStepsAttributes> & { [K in keyof MntSteps & keyof MntStepsAttributes]?: MntSteps[K] } & { [K in keyof MntSteps & keyof MntStepsAttributes as `attr:${K}`]?: MntStepsAttributes[K] } & { [K in keyof MntSteps & keyof MntStepsAttributes as `prop:${K}`]?: MntSteps[K] };
         "mnt-switch": Omit<MntSwitch, keyof MntSwitchAttributes> & { [K in keyof MntSwitch & keyof MntSwitchAttributes]?: MntSwitch[K] } & { [K in keyof MntSwitch & keyof MntSwitchAttributes as `attr:${K}`]?: MntSwitchAttributes[K] } & { [K in keyof MntSwitch & keyof MntSwitchAttributes as `prop:${K}`]?: MntSwitch[K] };
@@ -1859,6 +1932,7 @@ declare module "@stencil/core" {
             "mnt-message-highlight": LocalJSX.IntrinsicElements["mnt-message-highlight"] & JSXBase.HTMLAttributes<HTMLMntMessageHighlightElement>;
             "mnt-message-inline": LocalJSX.IntrinsicElements["mnt-message-inline"] & JSXBase.HTMLAttributes<HTMLMntMessageInlineElement>;
             "mnt-options-list": LocalJSX.IntrinsicElements["mnt-options-list"] & JSXBase.HTMLAttributes<HTMLMntOptionsListElement>;
+            "mnt-progress-bar": LocalJSX.IntrinsicElements["mnt-progress-bar"] & JSXBase.HTMLAttributes<HTMLMntProgressBarElement>;
             "mnt-radio": LocalJSX.IntrinsicElements["mnt-radio"] & JSXBase.HTMLAttributes<HTMLMntRadioElement>;
             "mnt-steps": LocalJSX.IntrinsicElements["mnt-steps"] & JSXBase.HTMLAttributes<HTMLMntStepsElement>;
             "mnt-switch": LocalJSX.IntrinsicElements["mnt-switch"] & JSXBase.HTMLAttributes<HTMLMntSwitchElement>;

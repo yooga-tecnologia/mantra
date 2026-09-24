@@ -1,8 +1,8 @@
 @use "sass:map";
 @use "../../core/_theme" as theme;
 
-$surface-action-plain-hover: theme.get-tone-from-palette(50, "neutral");
-$surface-action-plain-pressed: theme.get-tone-from-palette(100, "neutral");
+$surface-action-plain-hover: rgba(0,0,0,0.05);
+$surface-action-plain-pressed: rgba(0,0,0,0.1);
 
 // FIXME - use text tokens ($action-text-map)
 

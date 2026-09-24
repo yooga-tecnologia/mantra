@@ -31,6 +31,92 @@
       <mnt-button slot="action-button" label="tiny" variant="emphasis" size="tiny" icon-left="arrow-right"></mnt-button>
     </mnt-field-text> -->
 
+    <div style="display: flex; gap: 10px; background-color: #f0f0f0; padding: 10px;">
+      <mnt-button label="plain" variant="plain"></mnt-button>
+      <mnt-button label="plain" variant="plain"></mnt-button>
+
+      <div style="display: flex; gap: 10px; background-color: #FFF1F1; padding: 10px;">
+        <mnt-button label="plain" variant="regular"></mnt-button>
+        <mnt-button label="plain" variant="regular"></mnt-button>
+      </div>
+    </div>
+
+    <!-- Progress Bar Examples -->
+    <div style="display: flex; flex-direction: column; gap: 32px; padding: 24px; max-width: 600px;">
+      <h3 style="margin: 0; font-family: sans-serif; font-size: 14px; color: #4B5053;">mnt-progress-bar</h3>
+
+      <!-- type: percent -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">type: percent</p>
+        <mnt-progress-bar type="percent" value="25" label="25% concluído" color="primary" full-width></mnt-progress-bar>
+        <mnt-progress-bar type="percent" value="50" label="50% concluído" color="success" full-width></mnt-progress-bar>
+        <mnt-progress-bar type="percent" value="80" label="80% concluído" color="warning" full-width></mnt-progress-bar>
+        <mnt-progress-bar type="percent" value="95" label="95% concluído" color="critical" full-width></mnt-progress-bar>
+      </div>
+
+      <!-- type: steps -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">type: steps</p>
+        <mnt-progress-bar id="steps-bar" type="steps" label="Etapa 1 de 4" color="primary" full-width></mnt-progress-bar>
+        <div style="display: flex; gap: 8px;">
+          <button onclick="updateStep(-1)" style="padding: 6px 12px; cursor: pointer;">← Anterior</button>
+          <button onclick="updateStep(1)" style="padding: 6px 12px; cursor: pointer;">Próximo →</button>
+        </div>
+      </div>
+
+      <!-- rounded -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">rounded</p>
+        <mnt-progress-bar type="percent" value="60" label="60% — arredondado" color="primary" full-width rounded></mnt-progress-bar>
+        <mnt-progress-bar type="percent" value="35" label="35% — sem arredondamento" color="secondary" full-width></mnt-progress-bar>
+      </div>
+
+      <!-- label-position: below -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">label-position: below</p>
+        <mnt-progress-bar type="percent" value="70" label="Etapa 3 de 5" label-position="below" color="secondary" full-width></mnt-progress-bar>
+      </div>
+
+      <!-- cores -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">variações de color</p>
+        <mnt-progress-bar type="percent" value="50" label="primary" color="primary" full-width></mnt-progress-bar>
+        <mnt-progress-bar type="percent" value="50" label="secondary" color="secondary" full-width></mnt-progress-bar>
+        <mnt-progress-bar type="percent" value="50" label="success" color="success" full-width></mnt-progress-bar>
+        <mnt-progress-bar type="percent" value="50" label="warning" color="warning" full-width></mnt-progress-bar>
+        <mnt-progress-bar type="percent" value="50" label="critical" color="critical" full-width></mnt-progress-bar>
+        <mnt-progress-bar type="percent" value="50" label="neutral" color="neutral" full-width></mnt-progress-bar>
+      </div>
+
+      <!-- inline (sem full-width) -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">inline (sem full-width)</p>
+        <mnt-progress-bar type="percent" value="40" label="40%" color="primary"></mnt-progress-bar>
+      </div>
+
+      <!-- label-position: left e right -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">label-position: left / right (label compacto)</p>
+        <mnt-progress-bar type="steps" label="Etapa 1 de 4" label-position="left" color="primary" full-width></mnt-progress-bar>
+        <mnt-progress-bar type="steps" label="Etapa 3 de 5" label-position="right" color="secondary" full-width></mnt-progress-bar>
+        <mnt-progress-bar type="percent" value="72" label-position="left" color="success" full-width></mnt-progress-bar>
+        <mnt-progress-bar type="percent" value="20" label-position="right" color="warning" full-width></mnt-progress-bar>
+      </div>
+
+      <!-- alteração programática de percent -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">alteração programática</p>
+        <mnt-progress-bar id="dynamic-bar" type="percent" value="0" label="0%" color="primary" full-width rounded></mnt-progress-bar>
+        <div style="display: flex; gap: 8px;">
+          <button onclick="changePercent(0)"   style="padding: 6px 12px; cursor: pointer;">0%</button>
+          <button onclick="changePercent(25)"  style="padding: 6px 12px; cursor: pointer;">25%</button>
+          <button onclick="changePercent(50)"  style="padding: 6px 12px; cursor: pointer;">50%</button>
+          <button onclick="changePercent(75)"  style="padding: 6px 12px; cursor: pointer;">75%</button>
+          <button onclick="changePercent(100)" style="padding: 6px 12px; cursor: pointer;">100%</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Dropdown Menu Examples -->
     <div style="display: flex; flex-direction: column; gap: 24px; padding: 24px;">
       <h3 style="margin: 0; font-family: sans-serif; font-size: 14px; color: #4B5053;">mnt-dropdown-menu</h3>
@@ -142,6 +228,36 @@
   </div>
 
   <script>
+    // Setar value nos exemplos de label left/right (steps)
+    document.querySelectorAll('mnt-progress-bar[label-position="left"][type="steps"], mnt-progress-bar[label-position="right"][type="steps"]').forEach(function (el) {
+      var label = el.getAttribute('label') || '';
+      var match = label.match(/(\d+)\s+de\s+(\d+)/);
+      if (match) el.value = [parseInt(match[1]), parseInt(match[2])];
+    });
+
+    // Steps bar: controle de etapa atual
+    var currentStep = 1;
+    var totalSteps = 4;
+
+    var stepsBar = document.getElementById('steps-bar');
+    if (stepsBar) stepsBar.value = [currentStep, totalSteps];
+
+    function updateStep(delta) {
+      currentStep = Math.min(Math.max(currentStep + delta, 1), totalSteps);
+      var bar = document.getElementById('steps-bar');
+      if (!bar) return;
+      bar.value = [currentStep, totalSteps];
+      bar.label = 'Etapa ' + currentStep + ' de ' + totalSteps;
+    }
+
+    // Alteração programática de percent
+    function changePercent(value) {
+      var bar = document.getElementById('dynamic-bar');
+      if (!bar) return;
+      bar.value = value;
+      bar.label = value + '%';
+    }
+
     document.querySelectorAll('mnt-dropdown-menu').forEach(function (el) {
       el.addEventListener('menuSelect', function (event) {
         console.log('[mnt-dropdown-menu] menuSelect:', event.detail);
