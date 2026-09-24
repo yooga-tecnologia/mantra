@@ -26,7 +26,7 @@ export class TabItemGroup {
     return this.tabs || [];
   }
 
-  @Event() tabChange: EventEmitter<string>;
+  @Event() tabChange!: EventEmitter<string>;
 
   @State() internalSelectedId: string = '';
 
