@@ -31,6 +31,69 @@
       <mnt-button slot="action-button" label="tiny" variant="emphasis" size="tiny" icon-left="arrow-right"></mnt-button>
     </mnt-field-text> -->
 
+    <!-- Dropdown Menu Examples -->
+    <div style="display: flex; flex-direction: column; gap: 24px; padding: 24px;">
+      <h3 style="margin: 0; font-family: sans-serif; font-size: 14px; color: #4B5053;">mnt-dropdown-menu</h3>
+
+      <div style="display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap;">
+
+        <!-- Padrão: stroke + neutral -->
+        <mnt-dropdown-menu
+          label="Ações"
+          items='[{"value":"edit","label":"Editar","icon":"pencil"},{"value":"duplicate","label":"Duplicar","icon":"copy"},{"value":"delete","label":"Excluir","icon":"trash","separator":true}]'
+        ></mnt-dropdown-menu>
+
+        <!-- Emphasis primary -->
+        <mnt-dropdown-menu
+          label="Ações"
+          variant="emphasis"
+          color="primary"
+          items='[{"value":"edit","label":"Editar","icon":"pencil"},{"value":"duplicate","label":"Duplicar","icon":"copy"},{"value":"delete","label":"Excluir","icon":"trash","separator":true}]'
+        ></mnt-dropdown-menu>
+
+        <!-- Plain + ícone à esquerda -->
+        <mnt-dropdown-menu
+          label="Configurações"
+          variant="plain"
+          icon-left="gear"
+          items='[{"value":"profile","label":"Perfil","icon":"user"},{"value":"billing","label":"Cobrança","icon":"credit-card"},{"value":"logout","label":"Sair","icon":"sign-out","separator":true}]'
+        ></mnt-dropdown-menu>
+
+        <!-- Small + disabled item -->
+        <mnt-dropdown-menu
+          label="Small"
+          variant="plain"
+          size="small"
+          items='[{"value":"edit","label":"Editar","icon":"pencil"},{"value":"duplicate","label":"Duplicar","icon":"copy","disabled":true},{"value":"delete","label":"Excluir","icon":"trash","separator":true}]'
+        ></mnt-dropdown-menu>
+
+      </div>
+
+      <!-- Full width -->
+      <div style="width: 260px;">
+        <mnt-dropdown-menu
+          label="Full width"
+          full-width
+          items='[{"value":"edit","label":"Editar","icon":"pencil"},{"value":"duplicate","label":"Duplicar","icon":"copy"},{"value":"delete","label":"Excluir","icon":"trash","separator":true}]'
+        ></mnt-dropdown-menu>
+      </div>
+
+      <!-- Trigger customizado (ex: cabeçalho de página tipo KDS/Cozinha) -->
+      <mnt-dropdown-menu
+        id="kds-menu"
+        selected-value="kds1"
+        items='[{"value":"kds1","label":"Cozinha"},{"value":"kds2","label":"Bar"},{"value":"kds3","label":"Expedição"}]'
+      >
+        <div slot="trigger" style="display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none;">
+          <div>
+            <div style="font-size: 11px; font-weight: 500; color: #818A8F; letter-spacing: 0.04em; text-transform: uppercase;">KDS</div>
+            <div id="kds-label" style="font-size: 22px; font-weight: 700; color: #242628; line-height: 1.2;">Cozinha</div>
+          </div>
+          <mnt-icon icon="caret-down" size="small" style="color: #4B5053; margin-top: 10px;"></mnt-icon>
+        </div>
+      </mnt-dropdown-menu>
+    </div>
+
     <div style="display: flex; gap: 10px;">
       <!-- <div>
         <mnt-icon-large icon="crown" size="120"></mnt-icon-large>
@@ -79,6 +142,23 @@
   </div>
 
   <script>
+    document.querySelectorAll('mnt-dropdown-menu').forEach(function (el) {
+      el.addEventListener('menuSelect', function (event) {
+        console.log('[mnt-dropdown-menu] menuSelect:', event.detail);
+      });
+    });
+
+    // KDS menu: atualiza selected-value e o label do trigger ao selecionar
+    (function () {
+      var kdsMenu = document.getElementById('kds-menu');
+      var kdsLabel = document.getElementById('kds-label');
+      if (!kdsMenu || !kdsLabel) return;
+      kdsMenu.addEventListener('menuSelect', function (event) {
+        kdsMenu.setAttribute('selected-value', event.detail.value);
+        kdsLabel.textContent = event.detail.label;
+      });
+    })();
+
     document.addEventListener('tagRemoved', function (event) {
       var id = event.detail.id;
       var tag = document.querySelector('mnt-tag-removable[id="' + id + '"]');
