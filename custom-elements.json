@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-01T18:52:13",
+  "timestamp": "2026-10-07T14:07:58",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -514,7 +514,7 @@
               }
             }
           },
-          "mutable": false,
+          "mutable": true,
           "attr": "color",
           "reflectToAttr": false,
           "docs": "",
@@ -1238,8 +1238,8 @@
               "type": "string"
             }
           ],
-          "optional": true,
-          "required": false,
+          "optional": false,
+          "required": true,
           "getter": false,
           "setter": false
         },

@@ -14,12 +14,12 @@ export class Brand {
   @Element() el!: HTMLElement;
 
   @Prop() name!: BrandProps['name'];
-  @Prop() color: BrandProps['color'];
   @Prop() height: BrandProps['height'] = 35;
+  @Prop({ mutable: true }) color: BrandProps['color'];
   @State() svgIllustration: string = '';
 
   private svgViewbox: string = '';
-  private gRef: SVGElement | undefined;
+  private gRef!: SVGElement;
 
   componentWillLoad() {
     this.updateIllustration();
@@ -43,8 +43,6 @@ export class Brand {
       this.svgIllustration = BRANDS[this.name].svg;
       this.color = this.color || BRANDS[this.name].color;
       this.svgViewbox = `0 0 ${BRANDS[this.name].size[0]} ${BRANDS[this.name].size[1]}`;
-    } else {
-      console.log(`[Mantra]: Illustration with name "${this.name}" does not exist.`);
     }
   }
 
@@ -59,6 +57,11 @@ export class Brand {
   }
 
   render() {
+    if (!this.svgIllustration) {
+      console.error(`[MANTRA] Illustration name "${this.name.trim()}" does not exist.`);
+      return;
+    }
+
     return (
       <div class={this.getIllustrationClass()}>
         <svg
@@ -68,7 +71,7 @@ export class Brand {
           height={this.height}
           fill={this.color}
         >
-          <g ref={(el) => (this.gRef = el)}></g>
+          <g ref={(el) => (this.gRef = el!)}></g>
         </svg>
       </div>
     );

@@ -7,13 +7,13 @@
 
 ## Properties
 
-| Property   | Attribute  | Description | Type                                                                                          | Default     |
-| ---------- | ---------- | ----------- | --------------------------------------------------------------------------------------------- | ----------- |
-| `color`    | `color`    |             | `"critical" \| "neutral" \| "primary" \| "secondary" \| "success" \| "tertiary" \| "warning"` | `'neutral'` |
-| `disabled` | `disabled` |             | `boolean`                                                                                     | `false`     |
-| `icon`     | `icon`     |             | `string`                                                                                      | `undefined` |
-| `size`     | `size`     |             | `"large" \| "medium" \| "small" \| "tiny"`                                                    | `'medium'`  |
-| `variant`  | `variant`  |             | `"emphasis" \| "filter" \| "link" \| "plain" \| "regular" \| "stroke"`                        | `'regular'` |
+| Property            | Attribute  | Description | Type                                                                                          | Default     |
+| ------------------- | ---------- | ----------- | --------------------------------------------------------------------------------------------- | ----------- |
+| `color`             | `color`    |             | `"critical" \| "neutral" \| "primary" \| "secondary" \| "success" \| "tertiary" \| "warning"` | `'neutral'` |
+| `disabled`          | `disabled` |             | `boolean`                                                                                     | `false`     |
+| `icon` _(required)_ | `icon`     |             | `string`                                                                                      | `undefined` |
+| `size`              | `size`     |             | `"large" \| "medium" \| "small" \| "tiny"`                                                    | `'medium'`  |
+| `variant`           | `variant`  |             | `"emphasis" \| "filter" \| "link" \| "plain" \| "regular" \| "stroke"`                        | `'regular'` |
 
 
 ## Events

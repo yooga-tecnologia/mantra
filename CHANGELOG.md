@@ -5,6 +5,22 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 eção de event handlers
 
+## [2.11.11] - 2026-10-07
+
+### 🚀 Adicionado
+
+- **Tema**:
+  - Adicionado esquema de cores terciário. Aplicado aos componentes: button, badge, message-highlight
+
+- **Brand**:
+  - Adição de variantes relacionadas às marcas: ifood, zé delivery, foody, 99food, keeta.
+  - Adição de log de erro.
+
+### 🧪 Testes
+
+- **Brand**:
+  - Atualização de testes
+
 ## [2.11.10] - 2026-09-24
 
 ### 🚀 Adicionado
