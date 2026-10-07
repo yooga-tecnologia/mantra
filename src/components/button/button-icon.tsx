@@ -16,13 +16,13 @@ export class ButtonIcon {
   @Prop() size: ButtonIconProps['size'] = 'medium';
   @Prop() color: ButtonIconProps['color'] = 'neutral';
   @Prop() variant: ButtonIconProps['variant'] = 'regular';
-  @Prop() icon?: ButtonIconProps['icon'];
+  @Prop() icon!: ButtonIconProps['icon'];
 
   // States
   @Prop() disabled: ButtonIconProps['disabled'] = false;
 
   // Events
-  @Event() buttonClick: EventEmitter<MouseEvent>;
+  @Event() buttonClick!: EventEmitter<MouseEvent>;
 
   // Methods
   private handleClick(event: MouseEvent) {
@@ -75,6 +75,11 @@ export class ButtonIcon {
   }
 
   render() {
+    if (!this.icon) {
+      console.error('[MANTRA] The "icon" prop is required for the "button-icon" component. Please provide a valid icon.');
+      return;
+    }
+
     return (
       <Host>
         <button

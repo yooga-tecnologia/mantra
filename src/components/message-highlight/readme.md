@@ -7,16 +7,16 @@
 
 ## Properties
 
-| Property       | Attribute       | Description | Type                                                                            | Default     |
-| -------------- | --------------- | ----------- | ------------------------------------------------------------------------------- | ----------- |
-| `align`        | `align`         |             | `"center" \| "left" \| "right"`                                                 | `'left'`    |
-| `fullWidth`    | `full-width`    |             | `boolean`                                                                       | `false`     |
-| `headline`     | `headline`      |             | `string`                                                                        | `''`        |
-| `icon`         | `icon`          |             | `string`                                                                        | `''`        |
-| `marginBottom` | `margin-bottom` |             | `boolean`                                                                       | `false`     |
-| `text`         | `text`          |             | `string`                                                                        | `''`        |
-| `type`         | `type`          |             | `"default" \| "emphasis"`                                                       | `'default'` |
-| `variant`      | `variant`       |             | `"critical" \| "neutral" \| "primary" \| "secondary" \| "success" \| "warning"` | `'neutral'` |
+| Property       | Attribute       | Description | Type                                                                                          | Default     |
+| -------------- | --------------- | ----------- | --------------------------------------------------------------------------------------------- | ----------- |
+| `align`        | `align`         |             | `"center" \| "left" \| "right"`                                                               | `'left'`    |
+| `fullWidth`    | `full-width`    |             | `boolean`                                                                                     | `false`     |
+| `headline`     | `headline`      |             | `string`                                                                                      | `''`        |
+| `icon`         | `icon`          |             | `string`                                                                                      | `''`        |
+| `marginBottom` | `margin-bottom` |             | `boolean`                                                                                     | `false`     |
+| `text`         | `text`          |             | `string`                                                                                      | `''`        |
+| `type`         | `type`          |             | `"default" \| "emphasis"`                                                                     | `'default'` |
+| `variant`      | `variant`       |             | `"critical" \| "neutral" \| "primary" \| "secondary" \| "success" \| "tertiary" \| "warning"` | `'neutral'` |
 
 
 ## Dependencies

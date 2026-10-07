@@ -138,7 +138,7 @@ export namespace Components {
           * @default false
          */
         "disabled": ButtonIconProps['disabled'];
-        "icon"?: ButtonIconProps['icon'];
+        "icon": ButtonIconProps['icon'];
         /**
           * @default 'medium'
          */
@@ -1129,7 +1129,7 @@ declare namespace LocalJSX {
           * @default false
          */
         "disabled"?: ButtonIconProps['disabled'];
-        "icon"?: ButtonIconProps['icon'];
+        "icon": ButtonIconProps['icon'];
         "onButtonClick"?: (event: MntButtonIconCustomEvent<MouseEvent>) => void;
         /**
           * @default 'medium'
@@ -1665,8 +1665,8 @@ declare namespace LocalJSX {
     }
     interface MntBrandAttributes {
         "name": BrandProps['name'];
-        "color": BrandProps['color'];
         "height": BrandProps['height'];
+        "color": BrandProps['color'];
     }
     interface MntButtonAttributes {
         "size": ButtonProps['size'];
@@ -1882,7 +1882,7 @@ declare namespace LocalJSX {
         "mnt-badge-icon": Omit<MntBadgeIcon, keyof MntBadgeIconAttributes> & { [K in keyof MntBadgeIcon & keyof MntBadgeIconAttributes]?: MntBadgeIcon[K] } & { [K in keyof MntBadgeIcon & keyof MntBadgeIconAttributes as `attr:${K}`]?: MntBadgeIconAttributes[K] } & { [K in keyof MntBadgeIcon & keyof MntBadgeIconAttributes as `prop:${K}`]?: MntBadgeIcon[K] };
         "mnt-brand": Omit<MntBrand, keyof MntBrandAttributes> & { [K in keyof MntBrand & keyof MntBrandAttributes]?: MntBrand[K] } & { [K in keyof MntBrand & keyof MntBrandAttributes as `attr:${K}`]?: MntBrandAttributes[K] } & { [K in keyof MntBrand & keyof MntBrandAttributes as `prop:${K}`]?: MntBrand[K] } & OneOf<"name", MntBrand["name"]>;
         "mnt-button": Omit<MntButton, keyof MntButtonAttributes> & { [K in keyof MntButton & keyof MntButtonAttributes]?: MntButton[K] } & { [K in keyof MntButton & keyof MntButtonAttributes as `attr:${K}`]?: MntButtonAttributes[K] } & { [K in keyof MntButton & keyof MntButtonAttributes as `prop:${K}`]?: MntButton[K] };
-        "mnt-button-icon": Omit<MntButtonIcon, keyof MntButtonIconAttributes> & { [K in keyof MntButtonIcon & keyof MntButtonIconAttributes]?: MntButtonIcon[K] } & { [K in keyof MntButtonIcon & keyof MntButtonIconAttributes as `attr:${K}`]?: MntButtonIconAttributes[K] } & { [K in keyof MntButtonIcon & keyof MntButtonIconAttributes as `prop:${K}`]?: MntButtonIcon[K] };
+        "mnt-button-icon": Omit<MntButtonIcon, keyof MntButtonIconAttributes> & { [K in keyof MntButtonIcon & keyof MntButtonIconAttributes]?: MntButtonIcon[K] } & { [K in keyof MntButtonIcon & keyof MntButtonIconAttributes as `attr:${K}`]?: MntButtonIconAttributes[K] } & { [K in keyof MntButtonIcon & keyof MntButtonIconAttributes as `prop:${K}`]?: MntButtonIcon[K] } & OneOf<"icon", MntButtonIcon["icon"]>;
         "mnt-checkbox": Omit<MntCheckbox, keyof MntCheckboxAttributes> & { [K in keyof MntCheckbox & keyof MntCheckboxAttributes]?: MntCheckbox[K] } & { [K in keyof MntCheckbox & keyof MntCheckboxAttributes as `attr:${K}`]?: MntCheckboxAttributes[K] } & { [K in keyof MntCheckbox & keyof MntCheckboxAttributes as `prop:${K}`]?: MntCheckbox[K] };
         "mnt-date-picker": Omit<MntDatePicker, keyof MntDatePickerAttributes> & { [K in keyof MntDatePicker & keyof MntDatePickerAttributes]?: MntDatePicker[K] } & { [K in keyof MntDatePicker & keyof MntDatePickerAttributes as `attr:${K}`]?: MntDatePickerAttributes[K] } & { [K in keyof MntDatePicker & keyof MntDatePickerAttributes as `prop:${K}`]?: MntDatePicker[K] };
         "mnt-dropdown-menu": Omit<MntDropdownMenu, keyof MntDropdownMenuAttributes> & { [K in keyof MntDropdownMenu & keyof MntDropdownMenuAttributes]?: MntDropdownMenu[K] } & { [K in keyof MntDropdownMenu & keyof MntDropdownMenuAttributes as `attr:${K}`]?: MntDropdownMenuAttributes[K] } & { [K in keyof MntDropdownMenu & keyof MntDropdownMenuAttributes as `prop:${K}`]?: MntDropdownMenu[K] };

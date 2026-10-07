@@ -20,6 +20,11 @@ $action-text-map: (
     hover: theme.get-tone-from-palette(900, "secondary"),
     pressed: theme.get-tone-from-palette(950, "secondary"),
   ),
+  tertiary: (
+    default: theme.get-tone-from-palette(700, "tertiary"),
+    hover: theme.get-tone-from-palette(900, "tertiary"),
+    pressed: theme.get-tone-from-palette(950, "tertiary"),
+  ),
   neutral: (
     default: theme.get-tone-from-palette(600, "neutral"),
     hover: theme.get-tone-from-palette(800, "neutral"),
@@ -50,6 +55,11 @@ $action-text-map: (
       default: theme.get-tone-from-palette(300, "secondary"),
       hover: theme.get-tone-from-palette(200, "secondary"),
       pressed: theme.get-tone-from-palette(400, "secondary"),
+    ),
+    tertiary: (
+      default: theme.get-tone-from-palette(300, "tertiary"),
+      hover: theme.get-tone-from-palette(200, "tertiary"),
+      pressed: theme.get-tone-from-palette(400, "tertiary"),
     ),
     critical: (
       default: theme.get-tone-from-palette(300, "critical"),

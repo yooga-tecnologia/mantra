@@ -25,7 +25,8 @@
     "tag",
     "options-list",
     "dropdown",
-    "progress-bar"
+    "progress-bar",
+    "theme"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false

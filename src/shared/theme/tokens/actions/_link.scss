@@ -52,6 +52,20 @@ $link-theme-map: (
       "bg-color": transparent,
     ),
   ),
+  tertiary: (
+    default: (
+      "text-color": map.get(base.$action-text-map, "tertiary", "default"),
+      "bg-color": transparent,
+    ),
+    hover: (
+      "text-color": map.get(base.$action-text-map, "tertiary", "hover"),
+      "bg-color": transparent,
+    ),
+    pressed: (
+      "text-color": map.get(base.$action-text-map, "tertiary", "pressed"),
+      "bg-color": transparent,
+    ),
+  ),
   success: (
     default: (
       "text-color": map.get(base.$action-text-map, "success", "default"),

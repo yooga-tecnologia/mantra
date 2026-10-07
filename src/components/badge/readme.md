@@ -7,13 +7,13 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type                                                                            | Default     |
-| -------- | --------- | ----------- | ------------------------------------------------------------------------------- | ----------- |
-| `color`  | `color`   |             | `"critical" \| "neutral" \| "primary" \| "secondary" \| "success" \| "warning"` | `'primary'` |
-| `icon`   | `icon`    |             | `string`                                                                        | `undefined` |
-| `label`  | `label`   |             | `string`                                                                        | `undefined` |
-| `size`   | `size`    |             | `"large" \| "medium" \| "small" \| "tiny"`                                      | `'medium'`  |
-| `tone`   | `tone`    |             | `"default" \| "emphasis" \| "highlight"`                                        | `'default'` |
+| Property | Attribute | Description | Type                                                                                          | Default     |
+| -------- | --------- | ----------- | --------------------------------------------------------------------------------------------- | ----------- |
+| `color`  | `color`   |             | `"critical" \| "neutral" \| "primary" \| "secondary" \| "success" \| "tertiary" \| "warning"` | `'primary'` |
+| `icon`   | `icon`    |             | `string`                                                                                      | `undefined` |
+| `label`  | `label`   |             | `string`                                                                                      | `undefined` |
+| `size`   | `size`    |             | `"large" \| "medium" \| "small" \| "tiny"`                                                    | `'medium'`  |
+| `tone`   | `tone`    |             | `"default" \| "emphasis" \| "highlight"`                                                      | `'default'` |
 
 
 ## Dependencies
