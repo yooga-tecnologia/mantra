@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-24T22:05:46",
+  "timestamp": "2026-10-01T18:52:13",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -17,10 +17,10 @@
       "props": [
         {
           "name": "color",
-          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"tertiary\" | \"warning\"",
           "complexType": {
             "original": "BadgeBaseProps['color']",
-            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"tertiary\" | \"warning\"",
             "references": {
               "BadgeBaseProps": {
                 "location": "import",
@@ -60,6 +60,10 @@
             },
             {
               "value": "success",
+              "type": "string"
+            },
+            {
+              "value": "tertiary",
               "type": "string"
             },
             {
@@ -255,10 +259,10 @@
       "props": [
         {
           "name": "color",
-          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"tertiary\" | \"warning\"",
           "complexType": {
             "original": "BadgeBaseProps['color']",
-            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"tertiary\" | \"warning\"",
             "references": {
               "BadgeBaseProps": {
                 "location": "import",
@@ -298,6 +302,10 @@
             },
             {
               "value": "success",
+              "type": "string"
+            },
+            {
+              "value": "tertiary",
               "type": "string"
             },
             {
@@ -559,10 +567,10 @@
         },
         {
           "name": "name",
-          "type": "\"ifood\" | \"yooga\" | \"yoogaIcon\"",
+          "type": "\"food99Square\" | \"foodySquare\" | \"ifood\" | \"ifoodSquare\" | \"keetaSquare\" | \"yooga\" | \"yoogaIcon\" | \"yoogaSquare\" | \"zeDeliverySquare\"",
           "complexType": {
             "original": "BrandProps['name']",
-            "resolved": "\"ifood\" | \"yooga\" | \"yoogaIcon\"",
+            "resolved": "\"food99Square\" | \"foodySquare\" | \"ifood\" | \"ifoodSquare\" | \"keetaSquare\" | \"yooga\" | \"yoogaIcon\" | \"yoogaSquare\" | \"zeDeliverySquare\"",
             "references": {
               "BrandProps": {
                 "location": "import",
@@ -579,7 +587,23 @@
           "docsTags": [],
           "values": [
             {
+              "value": "food99Square",
+              "type": "string"
+            },
+            {
+              "value": "foodySquare",
+              "type": "string"
+            },
+            {
               "value": "ifood",
+              "type": "string"
+            },
+            {
+              "value": "ifoodSquare",
+              "type": "string"
+            },
+            {
+              "value": "keetaSquare",
               "type": "string"
             },
             {
@@ -588,6 +612,14 @@
             },
             {
               "value": "yoogaIcon",
+              "type": "string"
+            },
+            {
+              "value": "yoogaSquare",
+              "type": "string"
+            },
+            {
+              "value": "zeDeliverySquare",
               "type": "string"
             }
           ],
@@ -619,10 +651,10 @@
       "props": [
         {
           "name": "color",
-          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"tertiary\" | \"warning\"",
           "complexType": {
             "original": "ButtonProps['color']",
-            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"tertiary\" | \"warning\"",
             "references": {
               "ButtonProps": {
                 "location": "import",
@@ -662,6 +694,10 @@
             },
             {
               "value": "success",
+              "type": "string"
+            },
+            {
+              "value": "tertiary",
               "type": "string"
             },
             {
@@ -1082,10 +1118,10 @@
       "props": [
         {
           "name": "color",
-          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"tertiary\" | \"warning\"",
           "complexType": {
             "original": "ButtonIconProps['color']",
-            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"tertiary\" | \"warning\"",
             "references": {
               "ButtonIconProps": {
                 "location": "import",
@@ -1125,6 +1161,10 @@
             },
             {
               "value": "success",
+              "type": "string"
+            },
+            {
+              "value": "tertiary",
               "type": "string"
             },
             {
@@ -2080,10 +2120,10 @@
         },
         {
           "name": "color",
-          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"tertiary\" | \"warning\"",
           "complexType": {
             "original": "ThemePalette",
-            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"tertiary\" | \"warning\"",
             "references": {
               "ThemePalette": {
                 "location": "import",
@@ -2123,6 +2163,10 @@
             },
             {
               "value": "success",
+              "type": "string"
+            },
+            {
+              "value": "tertiary",
               "type": "string"
             },
             {
@@ -4937,10 +4981,10 @@
         },
         {
           "name": "variant",
-          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"tertiary\" | \"warning\"",
           "complexType": {
             "original": "MessageHighlightProps['variant']",
-            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"tertiary\" | \"warning\"",
             "references": {
               "MessageHighlightProps": {
                 "location": "import",
@@ -4980,6 +5024,10 @@
             },
             {
               "value": "success",
+              "type": "string"
+            },
+            {
+              "value": "tertiary",
               "type": "string"
             },
             {
@@ -5463,10 +5511,10 @@
       "props": [
         {
           "name": "color",
-          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+          "type": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"tertiary\" | \"warning\"",
           "complexType": {
             "original": "ProgressBarProps['color']",
-            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\"",
+            "resolved": "\"critical\" | \"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"tertiary\" | \"warning\"",
             "references": {
               "ProgressBarProps": {
                 "location": "import",
@@ -5506,6 +5554,10 @@
             },
             {
               "value": "success",
+              "type": "string"
+            },
+            {
+              "value": "tertiary",
               "type": "string"
             },
             {
@@ -7553,7 +7605,7 @@
       "path": "src/components/icon/icon.types.ts"
     },
     "src/shared/theme/theme.types.ts::ThemePalette": {
-      "declaration": "\"success\" | \"primary\" | \"secondary\" | \"neutral\" | \"warning\" | \"critical\"",
+      "declaration": "\"success\" | \"primary\" | \"secondary\" | \"tertiary\" | \"neutral\" | \"warning\" | \"critical\"",
       "docstring": "",
       "path": "src/shared/theme/theme.types.ts"
     },

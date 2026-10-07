@@ -48,6 +48,20 @@ $emphasis-theme-map: (
       "bg-color": map.get(base.$action-text-map, "surface", "secondary", "pressed"),
     ),
   ),
+  tertiary: (
+    default: (
+      "text-color": map.get(base.$action-text-map, "on", "tertiary", "default"),
+      "bg-color": map.get(base.$action-text-map, "surface", "tertiary", "default"),
+    ),
+    hover: (
+      "text-color": map.get(base.$action-text-map, "on", "tertiary", "hover"),
+      "bg-color": map.get(base.$action-text-map, "surface", "tertiary", "hover"),
+    ),
+    pressed: (
+      "text-color": map.get(base.$action-text-map, "on", "tertiary", "pressed"),
+      "bg-color": map.get(base.$action-text-map, "surface", "tertiary", "pressed"),
+    ),
+  ),
   success: (
     default: (
       "text-color": map.get(base.$action-text-map, "on", "success", "default"),

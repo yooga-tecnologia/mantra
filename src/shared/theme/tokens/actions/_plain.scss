@@ -65,6 +65,20 @@ $plain-theme-map: (
       "bg-color": $surface-action-plain-pressed,
     ),
   ),
+  tertiary: (
+    default: (
+      "text-color": theme.get-tone-from-palette(700, "tertiary"),
+      "bg-color": transparent,
+    ),
+    hover: (
+      "text-color": theme.get-tone-from-palette(900, "tertiary"),
+      "bg-color": $surface-action-plain-hover,
+    ),
+    pressed: (
+      "text-color": theme.get-tone-from-palette(950, "tertiary"),
+      "bg-color": $surface-action-plain-pressed,
+    ),
+  ),
   critical: (
     default: (
       "text-color": theme.get-tone-from-palette(700, "critical"),

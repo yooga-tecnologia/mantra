@@ -67,6 +67,20 @@ $regular-theme-map: (
       "bg-color": map.get($surface-action-regular, "pressed"),
     ),
   ),
+  tertiary: (
+    default: (
+      "text-color": theme.get-tone-from-palette(700, "tertiary"),
+      "bg-color": map.get($surface-action-regular, "default"),
+    ),
+    hover: (
+      "text-color": theme.get-tone-from-palette(900, "tertiary"),
+      "bg-color": map.get($surface-action-regular, "hover"),
+    ),
+    pressed: (
+      "text-color": theme.get-tone-from-palette(950, "tertiary"),
+      "bg-color": map.get($surface-action-regular, "pressed"),
+    ),
+  ),
   success: (
     default: (
       "text-color": theme.get-tone-from-palette(700, "success"),

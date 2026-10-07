@@ -17,6 +17,10 @@ $message-highlight-color-scheme: (
     text-color: theme.get-tone-from-palette(700, 'secondary'),
     background-color: theme.get-tone-from-palette(100, 'secondary'),
   ),
+  tertiary: (
+    text-color: theme.get-tone-from-palette(700, 'tertiary'),
+    background-color: theme.get-tone-from-palette(100, 'tertiary'),
+  ),
   success: (
     text-color: theme.get-tone-from-palette(700, 'success'),
     background-color: theme.get-tone-from-palette(100, 'success'),

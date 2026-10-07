@@ -1,5 +1,5 @@
 /** Possible color palette values */
-export const themePalettesArray = ['primary', 'secondary', 'neutral', 'success', 'warning', 'critical'] as const;
+export const themePalettesArray = ['primary', 'secondary', 'tertiary', 'neutral', 'success', 'warning', 'critical'] as const;
 /** Color accents variants */
 export const colorTonesArray = ['default', 'highlight', 'emphasis'] as const;
 /** Components sizing variants */

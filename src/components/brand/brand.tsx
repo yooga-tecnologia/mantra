@@ -18,8 +18,8 @@ export class Brand {
   @Prop() height: BrandProps['height'] = 35;
   @State() svgIllustration: string = '';
 
-  private svgViewbox;
-  private gRef!: SVGElement;
+  private svgViewbox: string = '';
+  private gRef: SVGElement | undefined;
 
   componentWillLoad() {
     this.updateIllustration();
@@ -43,7 +43,6 @@ export class Brand {
       this.svgIllustration = BRANDS[this.name].svg;
       this.color = this.color || BRANDS[this.name].color;
       this.svgViewbox = `0 0 ${BRANDS[this.name].size[0]} ${BRANDS[this.name].size[1]}`;
-      console.log(this.svgViewbox);
     } else {
       console.log(`[Mantra]: Illustration with name "${this.name}" does not exist.`);
     }

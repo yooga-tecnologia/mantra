@@ -59,6 +59,20 @@ $stroke-theme-map: (
       "bg-color": theme.get-tone-from-palette(100, "neutral"),
     ),
   ),
+  tertiary: (
+    default: (
+      "text-color": theme.get-tone-from-palette(700, "tertiary"),
+      "bg-color": transparent,
+    ),
+    hover: (
+      "text-color": theme.get-tone-from-palette(900, "tertiary"),
+      "bg-color": theme.get-tone-from-palette(50, "neutral"),
+    ),
+    pressed: (
+      "text-color": theme.get-tone-from-palette(950, "tertiary"),
+      "bg-color": theme.get-tone-from-palette(100, "neutral"),
+    ),
+  ),
   success: (
     default: (
       "text-color": theme.get-tone-from-palette(700, "success"),
