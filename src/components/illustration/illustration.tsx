@@ -63,7 +63,7 @@ export class Illustration {
           width={this.width}
           height={this.height}
         >
-          <g ref={(el) => (this.gRef = el)}></g>
+          <g ref={(el) => (this.gRef = el as SVGElement)}></g>
         </svg>
       </div>
     );
