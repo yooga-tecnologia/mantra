@@ -5,6 +5,13 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 eção de event handlers
 
+## [2.11.12] - 2026-10-08
+
+### 🚀 Adicionado
+
+- **Illustration**:
+  - Adição de variantes: reportsMobile, qrCodeMobile, walletMobile, kdsDesktop, totemDevice
+
 ## [2.11.11] - 2026-10-07
 
 ### 🚀 Adicionado
