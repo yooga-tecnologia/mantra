@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-07T14:07:58",
+  "timestamp": "2026-10-08T22:30:57",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -4463,10 +4463,10 @@
         },
         {
           "name": "name",
-          "type": "\"burger\" | \"glasses\" | \"goalWithBoy\" | \"goalWithGirl\" | \"happy\" | \"happyCheck\" | \"happyWithCoin\" | \"happyWithCrying\" | \"heart\" | \"inLove\" | \"maintenance\" | \"sad\" | \"sadWithCoin\" | \"search\" | \"sunglasses\"",
+          "type": "\"burger\" | \"glasses\" | \"goalWithBoy\" | \"goalWithGirl\" | \"happy\" | \"happyCheck\" | \"happyWithCoin\" | \"happyWithCrying\" | \"heart\" | \"inLove\" | \"kdsDesktop\" | \"maintenance\" | \"qrCodeMobile\" | \"reportsMobile\" | \"sad\" | \"sadWithCoin\" | \"search\" | \"sunglasses\" | \"totemDevice\" | \"walletMobile\"",
           "complexType": {
             "original": "IllustrationProps['name']",
-            "resolved": "\"burger\" | \"glasses\" | \"goalWithBoy\" | \"goalWithGirl\" | \"happy\" | \"happyCheck\" | \"happyWithCoin\" | \"happyWithCrying\" | \"heart\" | \"inLove\" | \"maintenance\" | \"sad\" | \"sadWithCoin\" | \"search\" | \"sunglasses\"",
+            "resolved": "\"burger\" | \"glasses\" | \"goalWithBoy\" | \"goalWithGirl\" | \"happy\" | \"happyCheck\" | \"happyWithCoin\" | \"happyWithCrying\" | \"heart\" | \"inLove\" | \"kdsDesktop\" | \"maintenance\" | \"qrCodeMobile\" | \"reportsMobile\" | \"sad\" | \"sadWithCoin\" | \"search\" | \"sunglasses\" | \"totemDevice\" | \"walletMobile\"",
             "references": {
               "IllustrationProps": {
                 "location": "import",
@@ -4523,7 +4523,19 @@
               "type": "string"
             },
             {
+              "value": "kdsDesktop",
+              "type": "string"
+            },
+            {
               "value": "maintenance",
+              "type": "string"
+            },
+            {
+              "value": "qrCodeMobile",
+              "type": "string"
+            },
+            {
+              "value": "reportsMobile",
               "type": "string"
             },
             {
@@ -4540,6 +4552,14 @@
             },
             {
               "value": "sunglasses",
+              "type": "string"
+            },
+            {
+              "value": "totemDevice",
+              "type": "string"
+            },
+            {
+              "value": "walletMobile",
               "type": "string"
             }
           ],
