@@ -1,8 +1,9 @@
-import type { StoryFn, StoryObj } from '@storybook/html-vite';
-import { sizeVariantsArray } from '@theme/theme.types';
+// import type { StoryFn, StoryObj } from '@storybook/html-vite';
+// import { sizeVariantsArray } from '@theme/theme.types';
 // import { ICON_OPTIONS } from '../icon/icon.utils';
 // import { HTMLString } from 'src/utils/utils';
 // import { TagProps } from '../tag/tag.types';
+import { StoryObj } from '@storybook/html-vite';
 import { TagSelectableGroupProps } from './tag-selectable-group.types';
 
 type Story = StoryObj;
