@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Host, Prop, State, Watch } from '@stencil/core';
 import { getLibPrefix } from '../../utils/utils';
 
 import { tagIconSizesMap, TagProps } from './tag.types';
@@ -17,19 +17,30 @@ export class TagSelectable {
   @Prop() size?: TagProps['size'] = 'medium';
   @Prop() icon?: TagProps['icon'];
   @Prop() tagId?: string;
+  @Prop() isSelected?: boolean = false;
 
   // States
-  @State() selected?: boolean = false;
+  @State() internalSelected: boolean = false;
+
+  componentWillLoad() {
+    this.internalSelected = !!this.isSelected;
+  }
+
+  @Watch('isSelected')
+  onSelectedChange(newVal: boolean) {
+    this.internalSelected = newVal;
+  }
 
   // Events
   @Event() tagSelected!: EventEmitter<{ tagId: string; label: string }>;
 
   private get tagClass() {
-    return `${LIB_PREFIX}tag ${LIB_PREFIX}tag-selectable ${LIB_PREFIX}tag-${this.size} ${this.selected ? `${LIB_PREFIX}tag-selected` : ''}`;
+    return `${LIB_PREFIX}tag ${LIB_PREFIX}tag-selectable ${LIB_PREFIX}tag-${this.size} ${this.internalSelected ? `${LIB_PREFIX}tag-selected` : ''}`;
   }
 
   private handleSelect(tagId: string) {
-    this.selected = !this.selected;
+    // ponytail: quando usado standalone (sem grupo), mantém estado interno
+    this.internalSelected = !this.internalSelected;
     this.tagSelected.emit({ tagId, label: this.label });
   }
 

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-08T22:30:57",
+  "timestamp": "2026-10-13T18:56:54",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -7307,6 +7307,35 @@
           "setter": false
         },
         {
+          "name": "isSelected",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "is-selected",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
           "name": "label",
           "type": "string",
           "complexType": {
@@ -7436,11 +7465,267 @@
         }
       ],
       "states": [],
-      "dependents": [],
+      "dependents": [
+        "mnt-tag-selectable-group"
+      ],
       "dependencies": [
         "mnt-icon"
       ],
       "dependencyGraph": {
+        "mnt-tag-selectable": [
+          "mnt-icon"
+        ],
+        "mnt-tag-selectable-group": [
+          "mnt-tag-selectable"
+        ]
+      }
+    },
+    {
+      "filePath": "src/components/tag-selectable-group/tag-selectable-group.tsx",
+      "encapsulation": "none",
+      "tag": "mnt-tag-selectable-group",
+      "readme": "# mnt-tag-selectable-group\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "fullWidth",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "full-width",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "mode",
+          "type": "\"multiple\" | \"single\"",
+          "complexType": {
+            "original": "SelectionMode",
+            "resolved": "\"multiple\" | \"single\"",
+            "references": {
+              "SelectionMode": {
+                "location": "import",
+                "path": "./tag-selectable-group.types",
+                "id": "src/components/tag-selectable-group/tag-selectable-group.types.ts::SelectionMode",
+                "referenceLocation": "SelectionMode"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "mode",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'single'"
+            }
+          ],
+          "default": "'single'",
+          "values": [
+            {
+              "value": "multiple",
+              "type": "string"
+            },
+            {
+              "value": "single",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "selectedId",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "selected-id",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "selectedIds",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "selected-ids",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "size",
+          "type": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+          "complexType": {
+            "original": "TagProps['size']",
+            "resolved": "\"large\" | \"medium\" | \"small\" | \"tiny\"",
+            "references": {
+              "TagProps": {
+                "location": "import",
+                "path": "src/components",
+                "id": "src/components.d.ts::TagProps",
+                "referenceLocation": "TagProps"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "size",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'medium'"
+            }
+          ],
+          "default": "'medium'",
+          "values": [
+            {
+              "value": "large",
+              "type": "string"
+            },
+            {
+              "value": "medium",
+              "type": "string"
+            },
+            {
+              "value": "small",
+              "type": "string"
+            },
+            {
+              "value": "tiny",
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "tags",
+          "type": "TagItem[]",
+          "complexType": {
+            "original": "TagItem[]",
+            "resolved": "TagItem[]",
+            "references": {
+              "TagItem": {
+                "location": "import",
+                "path": "./tag-selectable-group.types",
+                "id": "src/components/tag-selectable-group/tag-selectable-group.types.ts::TagItem",
+                "referenceLocation": "TagItem"
+              }
+            }
+          },
+          "mutable": false,
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "TagItem[]"
+            }
+          ],
+          "optional": false,
+          "required": true,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [
+        {
+          "event": "selectedChange",
+          "detail": "TagGroupChangeEvent",
+          "bubbles": true,
+          "complexType": {
+            "original": "TagGroupChangeEvent",
+            "resolved": "TagGroupChangeEvent",
+            "references": {
+              "TagGroupChangeEvent": {
+                "location": "import",
+                "path": "./tag-selectable-group.types",
+                "id": "src/components/tag-selectable-group/tag-selectable-group.types.ts::TagGroupChangeEvent",
+                "referenceLocation": "TagGroupChangeEvent"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "",
+          "docsTags": []
+        }
+      ],
+      "listeners": [],
+      "styles": [],
+      "slots": [],
+      "parts": [
+        {
+          "name": "group",
+          "docs": ""
+        }
+      ],
+      "states": [],
+      "dependents": [],
+      "dependencies": [
+        "mnt-tag-selectable"
+      ],
+      "dependencyGraph": {
+        "mnt-tag-selectable-group": [
+          "mnt-tag-selectable"
+        ],
         "mnt-tag-selectable": [
           "mnt-icon"
         ]
@@ -7778,6 +8063,26 @@
       "declaration": "export interface TagRemovedEvent {\n  tagId: string;\n  label: string;\n}",
       "docstring": "",
       "path": "src/components/tag/tag.types.ts"
+    },
+    "src/components/tag-selectable-group/tag-selectable-group.types.ts::TagItem": {
+      "declaration": "export interface TagItem {\n  id: string;\n  label: string;\n  icon?: ExtendedIconName;\n}",
+      "docstring": "",
+      "path": "src/components/tag-selectable-group/tag-selectable-group.types.ts"
+    },
+    "src/components/tag-selectable-group/tag-selectable-group.types.ts::SelectionMode": {
+      "declaration": "export type SelectionMode = 'single' | 'multiple';",
+      "docstring": "",
+      "path": "src/components/tag-selectable-group/tag-selectable-group.types.ts"
+    },
+    "src/components.d.ts::TagProps": {
+      "declaration": "any",
+      "docstring": "",
+      "path": "src/components.d.ts"
+    },
+    "src/components/tag-selectable-group/tag-selectable-group.types.ts::TagGroupChangeEvent": {
+      "declaration": "export interface TagGroupChangeEvent {\n  selectedId?: string;\n  selectedIds?: string[];\n}",
+      "docstring": "",
+      "path": "src/components/tag-selectable-group/tag-selectable-group.types.ts"
     },
     "src/components/tooltip/tooltip.types.ts::TooltipProps": {
       "declaration": "{\n  text: string;\n  position?: TooltipPosition;\n}",
