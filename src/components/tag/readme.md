@@ -7,12 +7,13 @@
 
 ## Properties
 
-| Property             | Attribute | Description | Type                                       | Default     |
-| -------------------- | --------- | ----------- | ------------------------------------------ | ----------- |
-| `icon`               | `icon`    |             | `string`                                   | `undefined` |
-| `label` _(required)_ | `label`   |             | `string`                                   | `undefined` |
-| `size`               | `size`    |             | `"large" \| "medium" \| "small" \| "tiny"` | `'medium'`  |
-| `tagId`              | `tag-id`  |             | `string`                                   | `undefined` |
+| Property             | Attribute     | Description | Type                                       | Default     |
+| -------------------- | ------------- | ----------- | ------------------------------------------ | ----------- |
+| `icon`               | `icon`        |             | `string`                                   | `undefined` |
+| `isSelected`         | `is-selected` |             | `boolean`                                  | `false`     |
+| `label` _(required)_ | `label`       |             | `string`                                   | `undefined` |
+| `size`               | `size`        |             | `"large" \| "medium" \| "small" \| "tiny"` | `'medium'`  |
+| `tagId`              | `tag-id`      |             | `string`                                   | `undefined` |
 
 
 ## Events
@@ -31,6 +32,10 @@
 
 ## Dependencies
 
+### Used by
+
+ - [mnt-tag-selectable-group](../tag-selectable-group)
+
 ### Depends on
 
 - [mnt-icon](../icon)
@@ -39,6 +44,7 @@
 ```mermaid
 graph TD;
   mnt-tag-selectable --> mnt-icon
+  mnt-tag-selectable-group --> mnt-tag-selectable
   style mnt-tag-selectable fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

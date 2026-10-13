@@ -7,7 +7,7 @@ import { TagProps } from './tag.types';
 type Story = StoryObj;
 
 export default {
-  title: 'Components/Tag/TagCommon',
+  title: 'Components/Tags/TagCommon',
   tags: ['autodocs'],
   parameters: {
     layout: 'padded', // ATENÇÃO: full-width não funciona com layout "centered"
@@ -66,7 +66,7 @@ Utilize o componente \`mnt-tag\` para exibir informações de um contexto espec�
       },
     },
   },
-  render: (args) => {
+  render: (args: Partial<TagProps>) => {
     return `
       <mnt-tag ${args}></mnt-tag>
     `;
@@ -85,7 +85,7 @@ const TagTemplate = (props: TagProps) => {
 
 export const Common: Story = {
   args: {},
-  render: TagTemplate,
+  render: TagTemplate as any,
 };
 
 const getSizeVariants = () => {

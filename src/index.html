@@ -13,288 +13,87 @@
 
 <body>
   <div class="page">
-    <mnt-illustration name="reportsMobile"></mnt-illustration>
-    <mnt-illustration name="qrCodeMobile"></mnt-illustration>
-    <mnt-illustration name="walletMobile"></mnt-illustration>
-    <mnt-illustration name="totemDevice"></mnt-illustration>
-    <mnt-illustration name="kdsDesktop"></mnt-illustration>
+    <!-- ── Exemplo 1: seleção inicial via selected-id ────────────────────── -->
+    <mnt-tag-selectable-group
+      id="demo-preselected"
+      tags='[{"id":"pedidos","label":"Pedidos"},{"id":"finalizados","label":"Finalizados"},{"id":"cancelados","label":"Cancelados"}]'
+      selected-id="finalizados"
+    ></mnt-tag-selectable-group>
 
-    <!-- <mnt-brand name="yoogaSquare"></mnt-brand>
-    <mnt-brand name="ifoodSquare"></mnt-brand>
-    <mnt-brand name="ifood" color="red"></mnt-brand>
-    <mnt-brand name="zeDeliverySquare"></mnt-brand>
-    <mnt-brand name="foodySquare"></mnt-brand>
-    <mnt-brand name="food99Square"></mnt-brand>
-    <mnt-brand name="keetaSquare  "></mnt-brand> -->
+    <!-- ── Exemplo 2: conteúdo alternado de acordo com a tag selecionada ── -->
+    <mnt-tag-selectable-group
+      id="demo-content"
+      tags='[{"id":"pedidos","label":"Pedidos"},{"id":"finalizados","label":"Finalizados"},{"id":"cancelados","label":"Cancelados"}]'
+      selected-id="pedidos"
+    ></mnt-tag-selectable-group>
+    <div id="demo-content-panel" style="margin-top:8px;padding:12px;border:1px solid #e5e7e8;border-radius:8px;font-size:14px;">
+      Conteúdo de <strong>Pedidos</strong>
+    </div>
 
-    <!-- <mnt-field-text
-      required
-      minLength="3"
-      maxLength="50"
-      placeholder="Ex.: PRIMEIROPEDIDO"
+    <!-- ── Exemplo 3: label atualizado programaticamente (simula polling) ─ -->
+    <mnt-tag-selectable-group
+      id="demo-dynamic"
+      tags='[{"id":"pedidos","label":"Pedidos (...)"},{"id":"finalizados","label":"Finalizados (...)"},{"id":"cancelados","label":"Cancelados (...)"}]'
+    ></mnt-tag-selectable-group>
+    <p style="font-size:12px;color:#818a8f;margin:4px 0 0;">Labels atualizam a cada 5 s simulando um polling.</p>
+
+    <script>
+      (function () {
+        // ── Exemplo 2: conteúdo alternado ──────────────────────────────────
+        var contentGroup = document.getElementById('demo-content');
+        var panel = document.getElementById('demo-content-panel');
+        var contentMap = {
+          pedidos: 'Conteúdo de <strong>Pedidos</strong>',
+          finalizados: 'Conteúdo de <strong>Finalizados</strong>',
+          cancelados: 'Conteúdo de <strong>Cancelados</strong>',
+        };
+        if (contentGroup && panel) {
+          contentGroup.addEventListener('selectedChange', function (e) {
+            var id = e.detail.selectedId;
+            if (id && contentMap[id]) panel.innerHTML = contentMap[id];
+          });
+        }
+
+        // ── Exemplo 3: atualização programática dos labels ─────────────────
+        var dynamicGroup = document.getElementById('demo-dynamic');
+        function fetchCounts() {
+          // ponytail: simula dados vindos de um polling real
+          return {
+            pedidos: Math.floor(Math.random() * 50) + 1,
+            finalizados: Math.floor(Math.random() * 200) + 50,
+            cancelados: Math.floor(Math.random() * 20),
+          };
+        }
+        function updateDynamicLabels() {
+          if (!dynamicGroup) return;
+          var counts = fetchCounts();
+          dynamicGroup.setAttribute('tags', JSON.stringify([
+            { id: 'pedidos', label: 'Pedidos (' + counts.pedidos + ')' },
+            { id: 'finalizados', label: 'Finalizados (' + counts.finalizados + ')' },
+            { id: 'cancelados', label: 'Cancelados (' + counts.cancelados + ')' },
+          ]));
+        }
+        updateDynamicLabels();
+        setInterval(updateDynamicLabels, 5000);
+      })();
+    </script>
+
+    <mnt-tag-selectable-group
+      size="tiny"
+      tags='[{"id":"1","label":"Tag 1","icon":"tag"},{"id":"2","label":"Tag 2","icon":"tag"},{"id":"3","label":"Tag 3","icon":"tag"}]'
+    ></mnt-tag-selectable-group>
+    <mnt-tag-selectable-group
+      size="small"
+      tags='[{"id":"1","label":"Tag 1","icon":"tag"},{"id":"2","label":"Tag 2","icon":"tag"},{"id":"3","label":"Tag 3","icon":"tag"}]'
+    ></mnt-tag-selectable-group>
+    <mnt-tag-selectable-group
       size="medium"
-      has-info-button
-      has-action-button
-      label-text="Cupom"
-      name="cupom"
-    >
-      <mnt-tooltip slot="info-button" text="É o nome utilizado para identificar o cupom na hora de aplicar no pedido" position="top">
-        <mnt-button-icon slot="trigger" size="small" color="neutral" variant="plain" icon="info"></mnt-button-icon>
-      </mnt-tooltip>
-      <mnt-button slot="action-button" label="tiny" variant="emphasis" size="tiny" icon-left="arrow-right"></mnt-button>
-    </mnt-field-text> -->
-
-    <div style="display: flex; gap: 10px; background-color: #f0f0f0; padding: 10px;">
-      <mnt-button label="Regular" color="tertiary" variant="regular" size="large" icon-left="starOutline"></mnt-button>
-      <mnt-button label="Emphasis" color="tertiary" variant="emphasis" size="large" icon-left="starOutline"></mnt-button>
-      <mnt-button label="Plain" color="tertiary" variant="plain" size="large" icon-left="starOutline"></mnt-button>
-      <mnt-button label="Stroke" color="tertiary" variant="stroke" size="large" icon-left="starOutline"></mnt-button>
-      <mnt-button label="Stroke" color="tertiary" variant="link" size="large" icon-left="starOutline"></mnt-button>
-    </div>
-
-    <!-- Progress Bar Examples -->
-    <div style="display: flex; flex-direction: column; gap: 32px; padding: 24px; max-width: 600px;">
-      <mnt-badge label="test"  size="small" size="large" color="tertiary"></mnt-badge>
-      <mnt-badge label="test"  size="small" color="tertiary" tone="highlight"></mnt-badge>
-      <mnt-badge label="test"  size="small" color="tertiary" tone="emphasis"></mnt-badge>
-
-      <h3 style="margin: 0; font-family: sans-serif; font-size: 14px; color: #4B5053;">mnt-progress-bar</h3>
-
-      <!-- type: percent -->
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">type: percent</p>
-        <mnt-progress-bar type="percent" value="25" label="25% concluído" color="primary" full-width></mnt-progress-bar>
-        <mnt-progress-bar type="percent" value="50" label="50% concluído" color="success" full-width></mnt-progress-bar>
-        <mnt-progress-bar type="percent" value="80" label="80% concluído" color="warning" full-width></mnt-progress-bar>
-        <mnt-progress-bar type="percent" value="95" label="95% concluído" color="critical" full-width></mnt-progress-bar>
-      </div>
-
-      <!-- type: steps -->
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">type: steps</p>
-        <mnt-progress-bar id="steps-bar" type="steps" label="Etapa 1 de 4" color="primary" full-width></mnt-progress-bar>
-        <div style="display: flex; gap: 8px;">
-          <button onclick="updateStep(-1)" style="padding: 6px 12px; cursor: pointer;">← Anterior</button>
-          <button onclick="updateStep(1)" style="padding: 6px 12px; cursor: pointer;">Próximo →</button>
-        </div>
-      </div>
-
-      <!-- rounded -->
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">rounded</p>
-        <mnt-progress-bar type="percent" value="60" label="60% — arredondado" color="primary" full-width rounded></mnt-progress-bar>
-        <mnt-progress-bar type="percent" value="35" label="35% — sem arredondamento" color="secondary" full-width></mnt-progress-bar>
-      </div>
-
-      <!-- label-position: below -->
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">label-position: below</p>
-        <mnt-progress-bar type="percent" value="70" label="Etapa 3 de 5" label-position="below" color="secondary" full-width></mnt-progress-bar>
-      </div>
-
-      <!-- cores -->
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">variações de color</p>
-        <mnt-progress-bar type="percent" value="50" label="primary" color="primary" full-width></mnt-progress-bar>
-        <mnt-progress-bar type="percent" value="50" label="secondary" color="secondary" full-width></mnt-progress-bar>
-        <mnt-progress-bar type="percent" value="50" label="success" color="success" full-width></mnt-progress-bar>
-        <mnt-progress-bar type="percent" value="50" label="warning" color="warning" full-width></mnt-progress-bar>
-        <mnt-progress-bar type="percent" value="50" label="critical" color="critical" full-width></mnt-progress-bar>
-        <mnt-progress-bar type="percent" value="50" label="neutral" color="neutral" full-width></mnt-progress-bar>
-      </div>
-
-      <!-- inline (sem full-width) -->
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">inline (sem full-width)</p>
-        <mnt-progress-bar type="percent" value="40" label="40%" color="primary"></mnt-progress-bar>
-      </div>
-
-      <!-- label-position: left e right -->
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">label-position: left / right (label compacto)</p>
-        <mnt-progress-bar type="steps" label="Etapa 1 de 4" label-position="left" color="primary" full-width></mnt-progress-bar>
-        <mnt-progress-bar type="steps" label="Etapa 3 de 5" label-position="right" color="secondary" full-width></mnt-progress-bar>
-        <mnt-progress-bar type="percent" value="72" label-position="left" color="success" full-width></mnt-progress-bar>
-        <mnt-progress-bar type="percent" value="20" label-position="right" color="warning" full-width></mnt-progress-bar>
-      </div>
-
-      <!-- alteração programática de percent -->
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <p style="margin: 0; font-family: sans-serif; font-size: 12px; color: #818A8F;">alteração programática</p>
-        <mnt-progress-bar id="dynamic-bar" type="percent" value="0" label="0%" color="primary" full-width rounded></mnt-progress-bar>
-        <div style="display: flex; gap: 8px;">
-          <button onclick="changePercent(0)"   style="padding: 6px 12px; cursor: pointer;">0%</button>
-          <button onclick="changePercent(25)"  style="padding: 6px 12px; cursor: pointer;">25%</button>
-          <button onclick="changePercent(50)"  style="padding: 6px 12px; cursor: pointer;">50%</button>
-          <button onclick="changePercent(75)"  style="padding: 6px 12px; cursor: pointer;">75%</button>
-          <button onclick="changePercent(100)" style="padding: 6px 12px; cursor: pointer;">100%</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Dropdown Menu Examples -->
-    <div style="display: flex; flex-direction: column; gap: 24px; padding: 24px;">
-      <h3 style="margin: 0; font-family: sans-serif; font-size: 14px; color: #4B5053;">mnt-dropdown-menu</h3>
-
-      <div style="display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap;">
-
-        <!-- Padrão: stroke + neutral -->
-        <mnt-dropdown-menu
-          label="Ações"
-          items='[{"value":"edit","label":"Editar","icon":"pencil"},{"value":"duplicate","label":"Duplicar","icon":"copy"},{"value":"delete","label":"Excluir","icon":"trash","separator":true}]'
-        ></mnt-dropdown-menu>
-
-        <!-- Emphasis primary -->
-        <mnt-dropdown-menu
-          label="Ações"
-          variant="emphasis"
-          color="primary"
-          items='[{"value":"edit","label":"Editar","icon":"pencil"},{"value":"duplicate","label":"Duplicar","icon":"copy"},{"value":"delete","label":"Excluir","icon":"trash","separator":true}]'
-        ></mnt-dropdown-menu>
-
-        <!-- Plain + ícone à esquerda -->
-        <mnt-dropdown-menu
-          label="Configurações"
-          variant="plain"
-          icon-left="gear"
-          items='[{"value":"profile","label":"Perfil","icon":"user"},{"value":"billing","label":"Cobrança","icon":"credit-card"},{"value":"logout","label":"Sair","icon":"sign-out","separator":true}]'
-        ></mnt-dropdown-menu>
-
-        <!-- Small + disabled item -->
-        <mnt-dropdown-menu
-          label="Small"
-          variant="plain"
-          size="small"
-          items='[{"value":"edit","label":"Editar","icon":"pencil"},{"value":"duplicate","label":"Duplicar","icon":"copy","disabled":true},{"value":"delete","label":"Excluir","icon":"trash","separator":true}]'
-        ></mnt-dropdown-menu>
-
-      </div>
-
-      <!-- Full width -->
-      <div style="width: 260px;">
-        <mnt-dropdown-menu
-          label="Full width"
-          full-width
-          items='[{"value":"edit","label":"Editar","icon":"pencil"},{"value":"duplicate","label":"Duplicar","icon":"copy"},{"value":"delete","label":"Excluir","icon":"trash","separator":true}]'
-        ></mnt-dropdown-menu>
-      </div>
-
-      <!-- Trigger customizado (ex: cabeçalho de página tipo KDS/Cozinha) -->
-      <mnt-dropdown-menu
-        id="kds-menu"
-        selected-value="kds1"
-        items='[{"value":"kds1","label":"Cozinha"},{"value":"kds2","label":"Bar"},{"value":"kds3","label":"Expedição"}]'
-      >
-        <div slot="trigger" style="display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none;">
-          <div>
-            <div style="font-size: 11px; font-weight: 500; color: #818A8F; letter-spacing: 0.04em; text-transform: uppercase;">KDS</div>
-            <div id="kds-label" style="font-size: 22px; font-weight: 700; color: #242628; line-height: 1.2;">Cozinha</div>
-          </div>
-          <mnt-icon icon="caret-down" size="small" style="color: #4B5053; margin-top: 10px;"></mnt-icon>
-        </div>
-      </mnt-dropdown-menu>
-    </div>
-
-    <div style="display: flex; gap: 10px;">
-      <!-- <div>
-        <mnt-icon-large icon="crown" size="120"></mnt-icon-large>
-        <mnt-icon-large icon="sparkle" size="120"></mnt-icon-large>
-        <mnt-icon-large icon="files" size="120"></mnt-icon-large>
-        <mnt-icon-large icon="fidelity" size="120"></mnt-icon-large>
-        <mnt-icon-large icon="chart" size="120"></mnt-icon-large>
-        <mnt-icon-large icon="tax" size="120"></mnt-icon-large>
-        <mnt-icon-large icon="gift" size="120"></mnt-icon-large>
-        <mnt-icon-large icon="delivery" size="120"></mnt-icon-large>
-        <mnt-icon-large icon="kds" size="120"></mnt-icon-large>
-        <mnt-icon-large icon="heart" size="120"></mnt-icon-large>
-        <mnt-icon-large icon="cashRegister" size="120"></mnt-icon-large>
-      </div> -->
-      <mnt-field-text
-        label-text="Estado 1"
-        required
-        full-width
-        name="estado-1"
-        placeholder="Selecione um estado"
-      ></mnt-field-text>
-      <mnt-field-text
-        full-width
-        name="estado-1"
-        placeholder="Selecione um estado"
-      ></mnt-field-text>
-    </div>
-    <!-- 
-
-      <mnt-options-list
-        label-text="Estados"
-        required
-        full-width
-        name="estado-1"
-        placeholder="Selecione um estado"
-        items='[{"es":"Espírito Santo"},{"sp":"São Paulo"},{"rj":"Rio de Janeiro"},{"mg":"Minas Gerais"},{"ba":"Bahia"},{"pe":"Pernambuco"},{"al":"Alagoas"},{"se":"Sergipe"},{"to":"Tocantins"},{"am":"Amazonas"},{"ac":"Acre"},{"rr":"Roraima"},{"pa":"Pará"},{"ap":"Amapá"},{"ro":"Rondônia"},{"ms":"Mato Grosso do Sul"},{"mt":"Mato Grosso"},{"go":"Goiás"},{"df":"Distrito Federal"}]'
-      ></mnt-options-list>
-    </div>
-
-    <mnt-options-list
-      label-text="Estados"
-      name="estado-2"
-      placeholder="Selecione um estado"
-      items='[{"es":"Espírito Santo"},{"sp":"São Paulo"},{"rj":"Rio de Janeiro"},{"mg":"Minas Gerais"},{"ba":"Bahia"},{"pe":"Pernambuco"},{"al":"Alagoas"},{"se":"Sergipe"},{"to":"Tocantins"},{"am":"Amazonas"},{"ac":"Acre"},{"rr":"Roraima"},{"pa":"Pará"},{"ap":"Amapá"},{"ro":"Rondônia"},{"ms":"Mato Grosso do Sul"},{"mt":"Mato Grosso"},{"go":"Goiás"},{"df":"Distrito Federal"}]'
-    ></mnt-options-list> -->
+      tags='[{"id":"1","label":"Tag 1","icon":"tag"},{"id":"2","label":"Tag 2","icon":"tag"},{"id":"3","label":"Tag 3","icon":"tag"}]'
+    ></mnt-tag-selectable-group>
+    <mnt-tag-selectable-group
+      size="large"
+      tags='[{"id":"1","label":"Tag 1","icon":"tag"},{"id":"2","label":"Tag 2","icon":"tag"},{"id":"3","label":"Tag 3","icon":"tag"}]'
+    ></mnt-tag-selectable-group>
   </div>
-
-  <script>
-    // Setar value nos exemplos de label left/right (steps)
-    document.querySelectorAll('mnt-progress-bar[label-position="left"][type="steps"], mnt-progress-bar[label-position="right"][type="steps"]').forEach(function (el) {
-      var label = el.getAttribute('label') || '';
-      var match = label.match(/(\d+)\s+de\s+(\d+)/);
-      if (match) el.value = [parseInt(match[1]), parseInt(match[2])];
-    });
-
-    // Steps bar: controle de etapa atual
-    var currentStep = 1;
-    var totalSteps = 4;
-
-    var stepsBar = document.getElementById('steps-bar');
-    if (stepsBar) stepsBar.value = [currentStep, totalSteps];
-
-    function updateStep(delta) {
-      currentStep = Math.min(Math.max(currentStep + delta, 1), totalSteps);
-      var bar = document.getElementById('steps-bar');
-      if (!bar) return;
-      bar.value = [currentStep, totalSteps];
-      bar.label = 'Etapa ' + currentStep + ' de ' + totalSteps;
-    }
-
-    // Alteração programática de percent
-    function changePercent(value) {
-      var bar = document.getElementById('dynamic-bar');
-      if (!bar) return;
-      bar.value = value;
-      bar.label = value + '%';
-    }
-
-    document.querySelectorAll('mnt-dropdown-menu').forEach(function (el) {
-      el.addEventListener('menuSelect', function (event) {
-        console.log('[mnt-dropdown-menu] menuSelect:', event.detail);
-      });
-    });
-
-    // KDS menu: atualiza selected-value e o label do trigger ao selecionar
-    (function () {
-      var kdsMenu = document.getElementById('kds-menu');
-      var kdsLabel = document.getElementById('kds-label');
-      if (!kdsMenu || !kdsLabel) return;
-      kdsMenu.addEventListener('menuSelect', function (event) {
-        kdsMenu.setAttribute('selected-value', event.detail.value);
-        kdsLabel.textContent = event.detail.label;
-      });
-    })();
-
-    document.addEventListener('tagRemoved', function (event) {
-      var id = event.detail.id;
-      var tag = document.querySelector('mnt-tag-removable[id="' + id + '"]');
-      if (tag) tag.remove();
-    });
-  </script>
 </body>
 </html>

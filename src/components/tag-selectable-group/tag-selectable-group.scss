@@ -1,0 +1,28 @@
+.mnt-tag-selectable-group {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #ABB2B5;
+  border-radius: 999px;
+  padding: 1px;
+  gap: 2px; // prevent overlap between tags
+  background: transparent;
+
+  &--full-width {
+    width: 100%;
+    justify-content: space-between;
+
+    mnt-tag-selectable {
+      flex: 0;
+    }
+  }
+
+  mnt-tag-selectable {
+    flex-shrink: 0;
+    display: inline-flex;
+
+    button {
+      border-color: transparent !important;
+    }
+  }
+}

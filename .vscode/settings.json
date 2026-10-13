@@ -27,7 +27,8 @@
     "dropdown",
     "progress-bar",
     "theme",
-    "illustration"
+    "illustration",
+    "tag-selectable-group"
   ],
   // Opcional: desabilite o auto-run se preferir rodar só manualmente
   // "jest.autoRun": false

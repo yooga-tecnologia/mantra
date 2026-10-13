@@ -7,7 +7,7 @@ import { TagProps } from './tag.types';
 type Story = StoryObj;
 
 export default {
-  title: 'Components/Tag/TagRemovable',
+  title: 'Components/Tags/TagRemovable',
   tags: ['autodocs'],
   parameters: {
     layout: 'padded', // ATENÇÃO: full-width não funciona com layout "centered"
@@ -46,7 +46,7 @@ Utilize o componente **mnt-tag-removable** para exibir informações de um conte
   argTypes: {
     label: {
       control: 'text',
-      description: 'O texto exibido no botão',
+      description: 'O texto exibido no elemento',
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: 'undefined' },
@@ -79,7 +79,7 @@ Utilize o componente **mnt-tag-removable** para exibir informações de um conte
       },
     },
   },
-  render: (args) => {
+  render: (args: Partial<TagProps>) => {
     return `
       <mnt-tag-removable ${args}></mnt-tag-removable>
     `;
@@ -109,7 +109,7 @@ const TagTemplate = (props: TagProps) => {
 
 export const Removable: Story = {
   args: {},
-  render: TagTemplate,
+  render: TagTemplate as any,
 };
 
 const getSizeVariants = () => {

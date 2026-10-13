@@ -7,7 +7,7 @@ import { TagProps } from './tag.types';
 type Story = StoryObj;
 
 export default {
-  title: 'Components/Tag/TagSelectable',
+  title: 'Components/Tags/TagSelectable',
   tags: ['autodocs'],
   parameters: {
     layout: 'padded', // ATENÇÃO: full-width não funciona com layout "centered"
@@ -78,7 +78,7 @@ Utilize o componente \`mnt-tag-selectable\` para exibir informações de um cont
       },
     },
   },
-  render: (args) => {
+  render: (args: Partial<TagProps>) => {
     return `
       <mnt-tag-selectable ${args}></mnt-tag-selectable>
     `;
@@ -107,7 +107,7 @@ const TagTemplate = (props: TagProps) => {
 
 export const Removable: Story = {
   args: {},
-  render: TagTemplate,
+  render: TagTemplate as any,
 };
 
 const getSizeVariants = () => {
