@@ -5,6 +5,13 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 eção de event handlers
 
+## [2.11.14] - 2026-10-14
+
+### 🐛 Corrigido
+
+- **TagSelectableGroup**:
+  - Ajuste de dimensionamento de tags quando há propriedade full-width definida
+
 ## [2.11.13] - 2026-10-13
 
 ### 🚀 Adicionado
