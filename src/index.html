@@ -13,88 +13,17 @@
 
 <body>
   <div class="page">
-    <!-- ── Exemplo 1: seleção inicial via selected-id ────────────────────── -->
-    <mnt-tag-selectable-group
-      id="demo-preselected"
-      tags='[{"id":"pedidos","label":"Pedidos"},{"id":"finalizados","label":"Finalizados"},{"id":"cancelados","label":"Cancelados"}]'
-      selected-id="finalizados"
-      full-width
-    ></mnt-tag-selectable-group>
-
-    <!-- ── Exemplo 2: conteúdo alternado de acordo com a tag selecionada ── -->
-    <mnt-tag-selectable-group
-      id="demo-content"
-      tags='[{"id":"pedidos","label":"Pedidos"},{"id":"finalizados","label":"Finalizados"},{"id":"cancelados","label":"Cancelados"}]'
-      selected-id="pedidos"
-    ></mnt-tag-selectable-group>
-    <div id="demo-content-panel" style="margin-top:8px;padding:12px;border:1px solid #e5e7e8;border-radius:8px;font-size:14px;">
-      Conteúdo de <strong>Pedidos</strong>
-    </div>
-
-    <!-- ── Exemplo 3: label atualizado programaticamente (simula polling) ─ -->
-    <mnt-tag-selectable-group
-      id="demo-dynamic"
-      tags='[{"id":"pedidos","label":"Pedidos (...)"},{"id":"finalizados","label":"Finalizados (...)"},{"id":"cancelados","label":"Cancelados (...)"}]'
-    ></mnt-tag-selectable-group>
-    <p style="font-size:12px;color:#818a8f;margin:4px 0 0;">Labels atualizam a cada 5 s simulando um polling.</p>
+    <mnt-field-text input-name="teste" label-text="Teste" placeholder="Teste" disabled id="field-text"></mnt-field-text>
+    <mnt-button variant="emphasis" label="Habilitar" color="primary" size="tiny" id="enable-field-text"></mnt-button>
 
     <script>
-      (function () {
-        // ── Exemplo 2: conteúdo alternado ──────────────────────────────────
-        var contentGroup = document.getElementById('demo-content');
-        var panel = document.getElementById('demo-content-panel');
-        var contentMap = {
-          pedidos: 'Conteúdo de <strong>Pedidos</strong>',
-          finalizados: 'Conteúdo de <strong>Finalizados</strong>',
-          cancelados: 'Conteúdo de <strong>Cancelados</strong>',
-        };
-        if (contentGroup && panel) {
-          contentGroup.addEventListener('selectedChange', function (e) {
-            var id = e.detail.selectedId;
-            if (id && contentMap[id]) panel.innerHTML = contentMap[id];
-          });
-        }
+      const fieldText = document.getElementById('field-text');
+      const enableFieldText = document.getElementById('enable-field-text');
 
-        // ── Exemplo 3: atualização programática dos labels ─────────────────
-        var dynamicGroup = document.getElementById('demo-dynamic');
-        function fetchCounts() {
-          // ponytail: simula dados vindos de um polling real
-          return {
-            pedidos: Math.floor(Math.random() * 50) + 1,
-            finalizados: Math.floor(Math.random() * 200) + 50,
-            cancelados: Math.floor(Math.random() * 20),
-          };
-        }
-        function updateDynamicLabels() {
-          if (!dynamicGroup) return;
-          var counts = fetchCounts();
-          dynamicGroup.setAttribute('tags', JSON.stringify([
-            { id: 'pedidos', label: 'Pedidos (' + counts.pedidos + ')' },
-            { id: 'finalizados', label: 'Finalizados (' + counts.finalizados + ')' },
-            { id: 'cancelados', label: 'Cancelados (' + counts.cancelados + ')' },
-          ]));
-        }
-        updateDynamicLabels();
-        setInterval(updateDynamicLabels, 5000);
-      })();
+      enableFieldText.addEventListener('click', () => {
+        fieldText.disabled = !fieldText.disabled;
+      });
     </script>
-
-    <mnt-tag-selectable-group
-      size="tiny"
-      tags='[{"id":"1","label":"Tag 1","icon":"tag"},{"id":"2","label":"Tag 2","icon":"tag"},{"id":"3","label":"Tag 3","icon":"tag"}]'
-    ></mnt-tag-selectable-group>
-    <mnt-tag-selectable-group
-      size="small"
-      tags='[{"id":"1","label":"Tag 1","icon":"tag"},{"id":"2","label":"Tag 2","icon":"tag"},{"id":"3","label":"Tag 3","icon":"tag"}]'
-    ></mnt-tag-selectable-group>
-    <mnt-tag-selectable-group
-      size="medium"
-      tags='[{"id":"1","label":"Tag 1","icon":"tag"},{"id":"2","label":"Tag 2","icon":"tag"},{"id":"3","label":"Tag 3","icon":"tag"}]'
-    ></mnt-tag-selectable-group>
-    <mnt-tag-selectable-group
-      size="large"
-      tags='[{"id":"1","label":"Tag 1","icon":"tag"},{"id":"2","label":"Tag 2","icon":"tag"},{"id":"3","label":"Tag 3","icon":"tag"}]'
-    ></mnt-tag-selectable-group>
   </div>
 </body>
 </html>

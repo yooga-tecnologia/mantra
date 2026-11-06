@@ -312,6 +312,10 @@ export namespace Components {
         /**
           * @default false
          */
+        "disabled"?: FieldTextProps['disabled'];
+        /**
+          * @default false
+         */
         "fullWidth"?: FieldTextProps['fullWidth'];
         "hasActionButton"?: FieldTextProps['hasActionButton'];
         "hasInfoButton"?: FieldTextProps['hasInfoButton'];
@@ -1371,9 +1375,9 @@ declare namespace LocalJSX {
     interface MntFieldText {
         "customMask"?: (value: string) => string;
         /**
-          * If `true`, the user cannot interact with the element.
+          * @default false
          */
-        "disabled"?: boolean;
+        "disabled"?: FieldTextProps['disabled'];
         /**
           * The `id` of a `<form>` element to associate this element with.
          */
@@ -1389,7 +1393,7 @@ declare namespace LocalJSX {
         "inlineMessage"?: FieldTextProps['inlineMessage'];
         "labelText"?: FieldTextProps['labelText'];
         "mask"?: 'currency' | 'custom' | null;
-        "name"?: FieldTextProps['inputName'];
+        "name": FieldTextProps['inputName'];
         "onValueChange"?: (event: MntFieldTextCustomEvent<{ formattedValue: string; rawValue?: string }>) => void;
         "placeholder"?: FieldTextProps['placeholder'];
         /**
@@ -1817,6 +1821,7 @@ declare namespace LocalJSX {
         "size": FieldTextProps['size'];
         "placeholder": FieldTextProps['placeholder'];
         "state": FieldTextProps['state'];
+        "disabled": FieldTextProps['disabled'];
         "mask": 'currency' | 'custom' | null;
         "value": string;
         "iconLeft": FieldTextProps['iconLeft'];
@@ -1965,7 +1970,7 @@ declare namespace LocalJSX {
         "mnt-dropdown-menu": Omit<MntDropdownMenu, keyof MntDropdownMenuAttributes> & { [K in keyof MntDropdownMenu & keyof MntDropdownMenuAttributes]?: MntDropdownMenu[K] } & { [K in keyof MntDropdownMenu & keyof MntDropdownMenuAttributes as `attr:${K}`]?: MntDropdownMenuAttributes[K] } & { [K in keyof MntDropdownMenu & keyof MntDropdownMenuAttributes as `prop:${K}`]?: MntDropdownMenu[K] };
         "mnt-field-date": Omit<MntFieldDate, keyof MntFieldDateAttributes> & { [K in keyof MntFieldDate & keyof MntFieldDateAttributes]?: MntFieldDate[K] } & { [K in keyof MntFieldDate & keyof MntFieldDateAttributes as `attr:${K}`]?: MntFieldDateAttributes[K] } & { [K in keyof MntFieldDate & keyof MntFieldDateAttributes as `prop:${K}`]?: MntFieldDate[K] };
         "mnt-field-number": Omit<MntFieldNumber, keyof MntFieldNumberAttributes> & { [K in keyof MntFieldNumber & keyof MntFieldNumberAttributes]?: MntFieldNumber[K] } & { [K in keyof MntFieldNumber & keyof MntFieldNumberAttributes as `attr:${K}`]?: MntFieldNumberAttributes[K] } & { [K in keyof MntFieldNumber & keyof MntFieldNumberAttributes as `prop:${K}`]?: MntFieldNumber[K] } & OneOf<"inputName", MntFieldNumber["inputName"]>;
-        "mnt-field-text": Omit<MntFieldText, keyof MntFieldTextAttributes> & { [K in keyof MntFieldText & keyof MntFieldTextAttributes]?: MntFieldText[K] } & { [K in keyof MntFieldText & keyof MntFieldTextAttributes as `attr:${K}`]?: MntFieldTextAttributes[K] } & { [K in keyof MntFieldText & keyof MntFieldTextAttributes as `prop:${K}`]?: MntFieldText[K] };
+        "mnt-field-text": Omit<MntFieldText, keyof MntFieldTextAttributes> & { [K in keyof MntFieldText & keyof MntFieldTextAttributes]?: MntFieldText[K] } & { [K in keyof MntFieldText & keyof MntFieldTextAttributes as `attr:${K}`]?: MntFieldTextAttributes[K] } & { [K in keyof MntFieldText & keyof MntFieldTextAttributes as `prop:${K}`]?: MntFieldText[K] } & OneOf<"name", MntFieldText["name"]>;
         "mnt-filter-search": Omit<MntFilterSearch, keyof MntFilterSearchAttributes> & { [K in keyof MntFilterSearch & keyof MntFilterSearchAttributes]?: MntFilterSearch[K] } & { [K in keyof MntFilterSearch & keyof MntFilterSearchAttributes as `attr:${K}`]?: MntFilterSearchAttributes[K] } & { [K in keyof MntFilterSearch & keyof MntFilterSearchAttributes as `prop:${K}`]?: MntFilterSearch[K] };
         "mnt-icon": Omit<MntIcon, keyof MntIconAttributes> & { [K in keyof MntIcon & keyof MntIconAttributes]?: MntIcon[K] } & { [K in keyof MntIcon & keyof MntIconAttributes as `attr:${K}`]?: MntIconAttributes[K] } & { [K in keyof MntIcon & keyof MntIconAttributes as `prop:${K}`]?: MntIcon[K] } & OneOf<"icon", MntIcon["icon"]>;
         "mnt-icon-large": Omit<MntIconLarge, keyof MntIconLargeAttributes> & { [K in keyof MntIconLarge & keyof MntIconLargeAttributes]?: MntIconLarge[K] } & { [K in keyof MntIconLarge & keyof MntIconLargeAttributes as `attr:${K}`]?: MntIconLargeAttributes[K] } & { [K in keyof MntIconLarge & keyof MntIconLargeAttributes as `prop:${K}`]?: MntIconLarge[K] } & OneOf<"icon", MntIconLarge["icon"]>;

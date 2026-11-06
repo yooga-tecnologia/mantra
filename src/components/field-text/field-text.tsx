@@ -11,14 +11,15 @@ import { renderFieldLabel } from 'src/shared/form-field/form-field-label';
   formAssociated: true,
 })
 export class FieldText {
-  @Element() host: HTMLElement;
+  @Element() host!: HTMLElement;
 
   // Base styles
-  @Prop() name: FieldTextProps['inputName'];
+  @Prop() name!: FieldTextProps['inputName'];
   @Prop() fullWidth?: FieldTextProps['fullWidth'] = false;
   @Prop() size?: FieldTextProps['size'] = 'medium';
   @Prop() placeholder?: FieldTextProps['placeholder'];
   @Prop({ mutable: true, reflect: true }) state?: FieldTextProps['state'] = 'default';
+  @Prop({ mutable: true, reflect: true }) disabled?: FieldTextProps['disabled'] = false;
 
   // Input Props
   @Prop() mask?: 'currency' | 'custom' | null;
@@ -50,7 +51,7 @@ export class FieldText {
   @Prop() customMask?: (value: string) => string;
 
   // Events
-  @Event() valueChange: EventEmitter<{ formattedValue: string; rawValue?: string }>;
+  @Event() valueChange!: EventEmitter<{ formattedValue: string; rawValue?: string }>;
 
   private readonly componentPrefix = setComponentClass('field-text', '');
   private readonly iconSizeMap = { small: 16, medium: 20, large: 24 };
@@ -327,7 +328,7 @@ export class FieldText {
           <mnt-icon
             class="icon-left"
             icon={this.iconLeft}
-            size={this.iconSizeMap[this.size]}
+            size={this.iconSizeMap[this.size || 'medium']}
           ></mnt-icon>
         )}
 
@@ -341,7 +342,7 @@ export class FieldText {
           min={Number(this.host.getAttribute('min')) || undefined}
           max={Number(this.host.getAttribute('max')) || undefined}
           placeholder={this.host.getAttribute('placeholder') || undefined}
-          disabled={this.host.hasAttribute('disabled')}
+          disabled={this.disabled}
           required={this.host.hasAttribute('required')}
           autocomplete={this.host.getAttribute('autocomplete') || 'off'}
           autoFocus={this.host.hasAttribute('autofocus') || false}
@@ -353,14 +354,14 @@ export class FieldText {
           <mnt-icon
             class="icon-state"
             icon="signalingErrorCircle"
-            size={this.iconSizeMap[this.size]}
+            size={this.iconSizeMap[this.size || 'medium']}
           ></mnt-icon>
         )}
         {this.state === 'success' && (
           <mnt-icon
             class="icon-state"
             icon="signalingCheckCircle"
-            size={this.iconSizeMap[this.size]}
+            size={this.iconSizeMap[this.size || 'medium']}
           ></mnt-icon>
         )}
 
@@ -368,7 +369,7 @@ export class FieldText {
           <mnt-icon
             class="icon-right"
             icon={this.iconRight}
-            size={this.iconSizeMap[this.size]}
+            size={this.iconSizeMap[this.size || 'medium']}
           ></mnt-icon>
         )}
       </div>
