@@ -12,4 +12,6 @@ export interface FormFieldBaseProps {
   placeholder?: string;
   /** When true, the field expands to 100% of its container width. */
   fullWidth?: boolean;
+  /** When true, the field is disabled. */
+  disabled?: boolean;
 }

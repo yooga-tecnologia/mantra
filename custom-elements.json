@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-14T13:00:16",
+  "timestamp": "2026-11-05T22:33:20",
   "compiler": {
     "name": "@stencil/core",
     "version": "4.42.0",
@@ -3252,6 +3252,42 @@
           "setter": false
         },
         {
+          "name": "disabled",
+          "type": "boolean",
+          "complexType": {
+            "original": "FieldTextProps['disabled']",
+            "resolved": "boolean",
+            "references": {
+              "FieldTextProps": {
+                "location": "import",
+                "path": "./field-text.types",
+                "id": "src/components/field-text/field-text.types.ts::FieldTextProps",
+                "referenceLocation": "FieldTextProps"
+              }
+            }
+          },
+          "mutable": true,
+          "attr": "disabled",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
           "name": "fullWidth",
           "type": "boolean",
           "complexType": {
@@ -3521,7 +3557,7 @@
             }
           ],
           "optional": false,
-          "required": false,
+          "required": true,
           "getter": false,
           "setter": false
         },
