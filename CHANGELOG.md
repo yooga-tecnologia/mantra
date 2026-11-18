@@ -5,6 +5,22 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 eção de event handlers
 
+## [2.11.16] - 2026-11-18
+
+### 🚀 Adicionado
+
+- **Icon**: filterAlt, sortAscending, sortDescending, bookmark,
+  bookmarkSimple, bookmarkGroup, thumbsUp, thumbsDown, dockToRight,
+  lightbulb, heartFilled, userMagic, microphone, file, restaurantMenu
+- **IconLarge**: menuSimple, menuRestaurant, deviceQrCode
+
+### 🐛 Corrigido
+
+- **Documentação**:
+  - Remove duplicação de entradas de YOOGA_ICONS em ICON_OPTIONS
+  - Categoria renomeada: "Yooga Icons" => "Yooga | Produtos"
+  - Remove debug console.log em `mnt-steps`
+
 ## [2.11.15] - 2026-11-06
 
 ### 🐛 Corrigido
