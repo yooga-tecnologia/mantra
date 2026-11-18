@@ -211,7 +211,7 @@ Directions.parameters = disableArgs;
 
 const IconsByCategory = [
   {
-    label: 'Yooga Icons',
+    label: 'Yooga | Produtos',
     icons: ICONS.YOOGA_ICONS,
   },
   {
@@ -253,10 +253,6 @@ const IconsByCategory = [
   {
     label: 'Brands and Media',
     icons: ICONS.BRANDS_AND_MEDIA_ICONS,
-  },
-  {
-    label: 'Products',
-    icons: ICONS.YOOGA_ICONS,
   },
 ];
 
