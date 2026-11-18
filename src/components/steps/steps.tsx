@@ -67,8 +67,6 @@ export class Steps {
   }
 
   private handleStepClick(step: StepItem, index: number) {
-    console.log('handleStepClick:', { stepId: step.id, index, maxAccessedIndex: this.maxAccessedIndex });
-
     // Só permite clique se não estiver desabilitado (índice maior que o máximo acessado)
     if (index > this.maxAccessedIndex) {
       return;

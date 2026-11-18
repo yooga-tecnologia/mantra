@@ -31,6 +31,7 @@ export const ICON_CATEGORIES = [
 
 export const ICON_OPTIONS = [
   ...Object.keys(YOOGA_ICONS),
+  ...Object.keys(BRANDS_AND_MEDIA_ICONS),
   ...Object.keys(UI_ACTIONS_ICONS),
   ...Object.keys(COMMUNICATION_AND_SOCIAL_ICONS),
   ...Object.keys(COMMON_ACTIONS_ICONS),
@@ -40,8 +41,6 @@ export const ICON_OPTIONS = [
   ...Object.keys(PRIVACY_AND_SECURITY_ICONS),
   ...Object.keys(HARDWARE_AND_SOFTWARE_ICONS),
   ...Object.keys(MAPS_AND_TRANSPORTATION_ICONS),
-  ...Object.keys(BRANDS_AND_MEDIA_ICONS),
-  ...Object.keys(YOOGA_ICONS),
 ];
 export const ICON_LARGE_OPTIONS = [...Object.keys(ICON_LARGE)];
 
