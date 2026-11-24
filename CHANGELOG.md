@@ -5,6 +5,13 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 eção de event handlers
 
+## [2.11.17] - 2026-11-24
+
+### 🚀 Adicionado
+
+- **YoogaOrb**: Adiciona componente utilizado pela Maya (IA interna)
+- **Icon**: Variante `pushPin`
+
 ## [2.11.16] - 2026-11-18
 
 ### 🚀 Adicionado
