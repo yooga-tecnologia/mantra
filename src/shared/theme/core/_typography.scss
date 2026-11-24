@@ -19,15 +19,15 @@ $base-grid: primitives.$base-grid;
 /// @return {Number|null} - The calculated font size in pixels, or null if not found.
 @function get-font-size($variant, $device, $size) {
   $variant-map: map.get(primitives.$typography-variants-list, $variant);
-  $device-map: if($variant-map, map.get($variant-map, $device), null);
-  $font-size: if($device-map, map.get($device-map, $size), null);
+  $device-map: if($variant-map != null, map.get($variant-map, $device), null);
+  $font-size: if($device-map != null, map.get($device-map, $size), null);
 
   @if($device == null) {
     $device-map: map.get($variant-map, 'desktop');
   } @else {
     $device-map: map.get($variant-map, $device);
   }
-  @return if($font-size, $font-size * primitives.$base-font-size, null);
+  @return if($font-size != null, $font-size * primitives.$base-font-size, null);
 }
 
 /// Ensures the font size meets the minimum threshold of 14px.
