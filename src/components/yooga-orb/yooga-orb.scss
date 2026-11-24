@@ -1,0 +1,188 @@
+@use 'sass:map';
+@use '../../shared/theme/core/theme' as theme;
+
+$component-prefix: theme.get-prefix('yooga-orb');
+
+$gradient-stops: (
+  start: #9bd8f9,
+  middle: #4ba8e0,
+  end: theme.get-tone-from-palette(700, primary),
+);
+
+$flow-durations: (
+  idle: 5.5s,
+  thinking: 2.9s,
+);
+
+$halo-duration: 1.44s;
+$bloom-duration: 1s;
+$breathe-duration: 2s;
+$dim-opacity: 0.2;
+
+#{$component-prefix} {
+  --#{$component-prefix}-flow: #{map.get($flow-durations, idle)};
+
+  position: relative;
+  display: inline-block;
+  flex: none;
+  line-height: 0;
+  isolation: isolate;
+  filter: drop-shadow(0 6px 16px rgba(map.get($gradient-stops, end), 0.28));
+
+  &[data-state='thinking'] {
+    --#{$component-prefix}-flow: #{map.get($flow-durations, thinking)};
+  }
+
+  svg {
+    display: block;
+    overflow: visible;
+  }
+
+  @each $stop, $color in $gradient-stops {
+    .#{$component-prefix}-stop-#{$stop} {
+      stop-color: $color;
+    }
+  }
+
+  .#{$component-prefix}-base {
+    opacity: 0.22;
+  }
+
+  .#{$component-prefix}-halo {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: #{$component-prefix}-halo $halo-duration cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+  }
+
+  // Teardown is strictly sequenced (link cd -> d -> link bc -> c -> link ab -> b -> a):
+  // a link must finish retracting before an endpoint fades, or the thick mask stroke caps leave lit residue.
+  .#{$component-prefix}-core {
+    fill: #fff;
+    opacity: $dim-opacity;
+  }
+
+  @each $molecule in (a, b, c, d) {
+    .#{$component-prefix}-core-#{$molecule} {
+      animation: #{$component-prefix}-fill-#{$molecule} var(--#{$component-prefix}-flow) ease-in-out infinite;
+    }
+  }
+
+  // dasharray "1 2" keeps the gap longer than the path, avoiding a lit dot at the end of each link.
+  .#{$component-prefix}-link {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1;
+  }
+
+  @each $index, $name in (1: ab, 2: bc, 3: cd) {
+    .#{$component-prefix}-link-#{$index} {
+      animation: #{$component-prefix}-draw-#{$name} var(--#{$component-prefix}-flow) ease-in-out infinite;
+    }
+  }
+
+  &[data-state='settled'] {
+    .#{$component-prefix}-core,
+    .#{$component-prefix}-link {
+      animation: none;
+    }
+
+    .#{$component-prefix}-core {
+      opacity: 1;
+    }
+
+    .#{$component-prefix}-link {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .#{$component-prefix}-bloom {
+    fill: #fff;
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: #{$component-prefix}-bloom $bloom-duration ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .#{$component-prefix}-halo,
+    .#{$component-prefix}-core,
+    .#{$component-prefix}-link,
+    .#{$component-prefix}-bloom {
+      animation: none !important;
+    }
+
+    .#{$component-prefix}-core {
+      opacity: 1;
+    }
+
+    .#{$component-prefix}-link {
+      stroke-dashoffset: 0;
+    }
+
+    &[data-state='thinking'] svg {
+      animation: #{$component-prefix}-breathe $breathe-duration ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes #{$component-prefix}-halo {
+  0% { transform: scale(1); opacity: 0.5; }
+  70%, 100% { transform: scale(1.35); opacity: 0; }
+}
+
+@keyframes #{$component-prefix}-fill-a {
+  0% { opacity: $dim-opacity; }
+  8%, 80% { opacity: 1; }
+  88%, 100% { opacity: $dim-opacity; }
+}
+
+@keyframes #{$component-prefix}-fill-b {
+  0%, 14% { opacity: $dim-opacity; }
+  20%, 74% { opacity: 1; }
+  80%, 100% { opacity: $dim-opacity; }
+}
+
+@keyframes #{$component-prefix}-fill-c {
+  0%, 28% { opacity: $dim-opacity; }
+  34%, 67% { opacity: 1; }
+  73%, 100% { opacity: $dim-opacity; }
+}
+
+@keyframes #{$component-prefix}-fill-d {
+  0%, 42% { opacity: $dim-opacity; }
+  48%, 60% { opacity: 1; }
+  66%, 100% { opacity: $dim-opacity; }
+}
+
+@keyframes #{$component-prefix}-draw-ab {
+  0%, 6% { stroke-dashoffset: 1; }
+  16%, 72% { stroke-dashoffset: 0; }
+  79%, 100% { stroke-dashoffset: 1; }
+}
+
+@keyframes #{$component-prefix}-draw-bc {
+  0%, 20% { stroke-dashoffset: 1; }
+  30%, 65% { stroke-dashoffset: 0; }
+  72%, 100% { stroke-dashoffset: 1; }
+}
+
+@keyframes #{$component-prefix}-draw-cd {
+  0%, 34% { stroke-dashoffset: 1; }
+  44%, 58% { stroke-dashoffset: 0; }
+  65%, 100% { stroke-dashoffset: 1; }
+}
+
+@keyframes #{$component-prefix}-bloom {
+  0% { opacity: 0.72; transform: scale(0.82); }
+  100% { opacity: 0; transform: scale(1.18); }
+}
+
+@keyframes #{$component-prefix}-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}

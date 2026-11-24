@@ -32,6 +32,7 @@ import { TagProps, TagRemovedEvent } from "./components/tag/tag.types";
 import { SelectionMode, TagGroupChangeEvent, TagItem } from "./components/tag-selectable-group/tag-selectable-group.types";
 import { TagProps as TagProps1 } from "./components.d";
 import { TooltipProps } from "./components/tooltip/tooltip.types";
+import { YoogaOrbProps, YoogaOrbState } from "./components/yooga-orb/yooga-orb.types";
 export { BadgeBaseProps } from "./components/badge/badge.types";
 export { BrandProps } from "./components/brand/brand.types";
 export { ButtonIconProps, ButtonProps, ButtonStateVariants, ButtonStyle } from "./components/button/button.types";
@@ -59,6 +60,7 @@ export { TagProps, TagRemovedEvent } from "./components/tag/tag.types";
 export { SelectionMode, TagGroupChangeEvent, TagItem } from "./components/tag-selectable-group/tag-selectable-group.types";
 export { TagProps as TagProps1 } from "./components.d";
 export { TooltipProps } from "./components/tooltip/tooltip.types";
+export { YoogaOrbProps, YoogaOrbState } from "./components/yooga-orb/yooga-orb.types";
 export namespace Components {
     interface MntBadge {
         /**
@@ -618,6 +620,25 @@ export namespace Components {
         "position": TooltipProps['position'];
         "text": TooltipProps['text'];
     }
+    interface MntYoogaOrb {
+        /**
+          * @default false
+         */
+        "bloom": boolean;
+        /**
+          * @default false
+         */
+        "decorative": boolean;
+        "label"?: YoogaOrbProps['label'];
+        /**
+          * @default 'sm'
+         */
+        "size": YoogaOrbProps['size'];
+        /**
+          * @default 'idle'
+         */
+        "state": YoogaOrbState;
+    }
 }
 export interface MntButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1061,6 +1082,12 @@ declare global {
         prototype: HTMLMntTooltipElement;
         new (): HTMLMntTooltipElement;
     };
+    interface HTMLMntYoogaOrbElement extends Components.MntYoogaOrb, HTMLStencilElement {
+    }
+    var HTMLMntYoogaOrbElement: {
+        prototype: HTMLMntYoogaOrbElement;
+        new (): HTMLMntYoogaOrbElement;
+    };
     interface HTMLElementTagNameMap {
         "mnt-badge": HTMLMntBadgeElement;
         "mnt-badge-icon": HTMLMntBadgeIconElement;
@@ -1092,6 +1119,7 @@ declare global {
         "mnt-tag-selectable": HTMLMntTagSelectableElement;
         "mnt-tag-selectable-group": HTMLMntTagSelectableGroupElement;
         "mnt-tooltip": HTMLMntTooltipElement;
+        "mnt-yooga-orb": HTMLMntYoogaOrbElement;
     }
 }
 declare namespace LocalJSX {
@@ -1721,6 +1749,25 @@ declare namespace LocalJSX {
         "position"?: TooltipProps['position'];
         "text"?: TooltipProps['text'];
     }
+    interface MntYoogaOrb {
+        /**
+          * @default false
+         */
+        "bloom"?: boolean;
+        /**
+          * @default false
+         */
+        "decorative"?: boolean;
+        "label"?: YoogaOrbProps['label'];
+        /**
+          * @default 'sm'
+         */
+        "size"?: YoogaOrbProps['size'];
+        /**
+          * @default 'idle'
+         */
+        "state"?: YoogaOrbState;
+    }
 
     interface MntBadgeAttributes {
         "size": BadgeBaseProps['size'];
@@ -1958,6 +2005,13 @@ declare namespace LocalJSX {
         "text": TooltipProps['text'];
         "position": TooltipProps['position'];
     }
+    interface MntYoogaOrbAttributes {
+        "state": YoogaOrbState;
+        "size": string;
+        "bloom": boolean;
+        "decorative": boolean;
+        "label": YoogaOrbProps['label'];
+    }
 
     interface IntrinsicElements {
         "mnt-badge": Omit<MntBadge, keyof MntBadgeAttributes> & { [K in keyof MntBadge & keyof MntBadgeAttributes]?: MntBadge[K] } & { [K in keyof MntBadge & keyof MntBadgeAttributes as `attr:${K}`]?: MntBadgeAttributes[K] } & { [K in keyof MntBadge & keyof MntBadgeAttributes as `prop:${K}`]?: MntBadge[K] };
@@ -1990,6 +2044,7 @@ declare namespace LocalJSX {
         "mnt-tag-selectable": Omit<MntTagSelectable, keyof MntTagSelectableAttributes> & { [K in keyof MntTagSelectable & keyof MntTagSelectableAttributes]?: MntTagSelectable[K] } & { [K in keyof MntTagSelectable & keyof MntTagSelectableAttributes as `attr:${K}`]?: MntTagSelectableAttributes[K] } & { [K in keyof MntTagSelectable & keyof MntTagSelectableAttributes as `prop:${K}`]?: MntTagSelectable[K] } & OneOf<"label", MntTagSelectable["label"]>;
         "mnt-tag-selectable-group": Omit<MntTagSelectableGroup, keyof MntTagSelectableGroupAttributes> & { [K in keyof MntTagSelectableGroup & keyof MntTagSelectableGroupAttributes]?: MntTagSelectableGroup[K] } & { [K in keyof MntTagSelectableGroup & keyof MntTagSelectableGroupAttributes as `attr:${K}`]?: MntTagSelectableGroupAttributes[K] } & { [K in keyof MntTagSelectableGroup & keyof MntTagSelectableGroupAttributes as `prop:${K}`]?: MntTagSelectableGroup[K] };
         "mnt-tooltip": Omit<MntTooltip, keyof MntTooltipAttributes> & { [K in keyof MntTooltip & keyof MntTooltipAttributes]?: MntTooltip[K] } & { [K in keyof MntTooltip & keyof MntTooltipAttributes as `attr:${K}`]?: MntTooltipAttributes[K] } & { [K in keyof MntTooltip & keyof MntTooltipAttributes as `prop:${K}`]?: MntTooltip[K] };
+        "mnt-yooga-orb": Omit<MntYoogaOrb, keyof MntYoogaOrbAttributes> & { [K in keyof MntYoogaOrb & keyof MntYoogaOrbAttributes]?: MntYoogaOrb[K] } & { [K in keyof MntYoogaOrb & keyof MntYoogaOrbAttributes as `attr:${K}`]?: MntYoogaOrbAttributes[K] } & { [K in keyof MntYoogaOrb & keyof MntYoogaOrbAttributes as `prop:${K}`]?: MntYoogaOrb[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -2026,6 +2081,7 @@ declare module "@stencil/core" {
             "mnt-tag-selectable": LocalJSX.IntrinsicElements["mnt-tag-selectable"] & JSXBase.HTMLAttributes<HTMLMntTagSelectableElement>;
             "mnt-tag-selectable-group": LocalJSX.IntrinsicElements["mnt-tag-selectable-group"] & JSXBase.HTMLAttributes<HTMLMntTagSelectableGroupElement>;
             "mnt-tooltip": LocalJSX.IntrinsicElements["mnt-tooltip"] & JSXBase.HTMLAttributes<HTMLMntTooltipElement>;
+            "mnt-yooga-orb": LocalJSX.IntrinsicElements["mnt-yooga-orb"] & JSXBase.HTMLAttributes<HTMLMntYoogaOrbElement>;
         }
     }
 }
