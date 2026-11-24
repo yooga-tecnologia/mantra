@@ -1,9 +1,14 @@
 import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
+import { readFileSync } from 'fs';
+
+const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
 
 export const config: Config = {
   namespace: 'mantra',
   globalStyle: './src/_common-variables.scss',
+  globalScript: './src/global/version-comment.ts',
+  env: { version: pkg.version },
   hydratedFlag: null,
   outputTargets: [
     /**

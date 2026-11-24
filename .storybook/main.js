@@ -7,7 +7,6 @@ const __dirname = path.dirname(__filename);
 
 const config = {
   stories: [
-    '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: [
@@ -37,6 +36,9 @@ const config = {
     if (configType === 'PRODUCTION') {
       config.base = '/mantra/';
     }
+
+    // ponytail: chunks grandes vêm do runtime do Storybook (DocsRenderer/iframe), não da lib; site de docs estático, sem ganho em dividir
+    config.build = { ...config.build, chunkSizeWarningLimit: 2000 };
 
     return config;
   },
