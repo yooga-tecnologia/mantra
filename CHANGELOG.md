@@ -5,6 +5,12 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 Este projeto segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 eção de event handlers
 
+## [2.11.18] - 2026-11-25
+
+### 🚀 Adicionado
+
+- **Icon**: Variantes: doubleCheck, drag, hyperlink, link, linkBreak, linkSimple, linkSimpleBreak, image, imageFilled, imageSquare
+
 ## [2.11.17] - 2026-11-24
 
 ### 🚀 Adicionado
